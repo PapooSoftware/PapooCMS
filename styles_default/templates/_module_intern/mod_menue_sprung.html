@@ -1,0 +1,18 @@
+<!-- MODUL: menue_sprung (intern) -->
+<div id="menue_sprung">
+	<ul id="skiplinks">
+		{*<!--  direkt zum Inhalt-->*}
+		<li><a href="#artikel" class="skip" accesskey="8" >{$message_2120}</a><span class="ignore">. </span></li>
+		{*<!-- zur Navigation -->
+		<li><a href="#menux" class="skip">{$message_2121}</a><span class="ignore">. </span></li>*}
+		{if $suchbox}
+			{*<!-- direkt zur Suche -->*}
+			<li><a href="#suchen" class="skip" accesskey="6">{$message_2122}</a><span class="ignore">. </span></li>
+		{/if}
+		{if $module_aktiv.mod_loginform}
+			{*<!-- direkt zum einloggen -->*}
+			<li><a href="#einloggen" class="skip">{$message_2123}</a><span class="ignore">. </span></li>
+		{/if}
+	</ul>
+</div>
+<!-- ENDE MODUL: menue_sprung (intern) -->

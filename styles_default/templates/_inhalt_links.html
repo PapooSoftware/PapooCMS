@@ -1,0 +1,7 @@
+<!-- TEMPLATE: _inhalt_links.html -->
+{foreach item=modul from=$module.2}
+	{* <!-- Modul: {$modul.modlang_name}<br /> --> *}
+	{* include file=$modul.mod_template  tvar=$modul.mod_echt_id *}
+	{include file=$modul.mod_template tvar=$modul.mod_id}
+{/foreach}
+<!-- TEMPLATE: _inhalt_links.html -->

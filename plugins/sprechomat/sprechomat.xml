@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<plugin version="3.5">
+
+<name>Sprechomat</name>
+
+<beschreibung_de><![CDATA[Dieses Plugin bindet die Sprachausgabe per Sprechomat.de ein.]]></beschreibung_de>
+
+<version>1.96</version>
+<papooid>4</papooid>
+
+<link>http://www.papoo.de</link> 
+
+<datum>29.04.2009</datum>
+
+<autor>
+	<name>Stephan Bergmann</name>
+	<kontakt><![CDATA[Stephan Bergmann
+Rembrandtstr. 10/1
+72768 Reutlingen]]></kontakt>
+	<email>S.Bergmann@XiMiX.de</email>
+	<telefon>07121 / 60 39 88</telefon>
+</autor>
+
+<menue>
+	<eintrag_de>Sprechomat</eintrag_de>
+	<icon>sprechomat/bilder/sprechomat_backend_icon.gif</icon>
+	<link>plugin:sprechomat/templates/sprechomat_backend.html</link>
+	<submenue>
+		<eintrag_de>Daten</eintrag_de>
+		<icon>sprechomat/bilder/sprechomat_backend_icon.gif</icon>
+		<link>plugin:sprechomat/templates/sprechomat_backdata.html</link>
+	</submenue>
+	<submenue>
+		<eintrag_de>Einstellungen</eintrag_de>
+		<icon>sprechomat/bilder/sprechomat_backend_icon.gif</icon>
+		<link>plugin:sprechomat/templates/sprechomat_backset.html</link>
+	</submenue>
+	<submenue>
+		<eintrag_de>Artikel-Ausschluss</eintrag_de>
+		<icon>sprechomat/bilder/sprechomat_backend_icon.gif</icon>
+		<link>plugin:sprechomat/templates/sprechomat_backausschluss.html</link>
+	</submenue>
+</menue>
+
+<klasse>
+	<name>sprechomat</name>
+	<datei>sprechomat/lib/sprechomat_class.php</datei>
+</klasse>
+
+<css>sprechomat/css/sprechomat.css</css>
+
+<datenbank>
+	<installation>sprechomat/sql/sprechomat_install.sql</installation>
+	<deinstallation>sprechomat/sql/sprechomat_deinstall.sql</deinstallation>
+</datenbank>
+
+<messages>sprechomat/messages</messages>
+
+</plugin>

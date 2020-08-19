@@ -1,0 +1,77 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+	
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+
+	{if $message_text}
+		<div class="message">
+			{$message_text}
+		</div>
+	{/if}
+	
+	<div class="artikel">
+		{if $artikel_start}
+			{$message_738}
+		{/if}
+
+		{if $text!="ok"}
+			{$text}
+		{/if}
+
+		{if $artikel}
+			<form name="artikel"  action="" method="post" id="formi">
+				<input type="hidden" name ="unique_id" value="{$unique_id}" />
+				<input type="hidden" name ="from_aktiv" value="{$from_aktiv}" />
+				<h1>{$message_153}</h1>
+				<!-- Komplett-->
+				{if $user_list_artikel==1}
+					{if NOT $loeschen}
+						{include file=artikel_inhalt.html}
+						{include file=artikel_teaser.html}
+						{include file=artikel_rechte.html}
+						{include file=artikel_einstellung.html}
+					{/if}
+					{include file=artikel_save.html}
+				{else}
+					{if isset($reporeid) && $reporeid}
+						<input class="inputnav_zwischen vtip"  type="submit" title="{$message_458a}" value="1" name="inhalt_ar[Submit_zwischen]" />
+						<!-- <input class="inputnav_zwischen"  type="submit" title="{$message_458}" value="{$message_458a}" name="submit_en" />  -->
+					{/if}
+					<div class="tabbable">
+						<ul class="nav nav-tabs">
+							<li  class="active"><a href="#tabs-1" data-toggle="tab">{$message_452}</a></li>
+							<li><a href="#tabs-2" data-toggle="tab">{$message_453}</a></li>
+							<li><a href="#tabs-3" data-toggle="tab">{$message_454}</a></li>
+							<li><a href="#tabs-4" data-toggle="tab">{$message_455}</a></li>
+							<li><a href="#tabs-6" data-toggle="tab">{$message_457}</a></li>
+							<!--<li><a href="#tabs-7" data-toggle="tab">{$message_458}</a></li>-->
+						</ul>
+						<div class="tab-content">
+						<div  class="tab-pane active" id="tabs-1">{include file=artikel_inhalt.html}</div>
+						<div  class="tab-pane" id="tabs-2">{include file=artikel_teaser.html}</div>
+						<div class="tab-pane"  id="tabs-3">{include file=artikel_rechte.html}</div>
+						<div  class="tab-pane" id="tabs-4">{include file=artikel_einstellung.html}</div>
+						<div  class="tab-pane" id="tabs-6">{include file=artikel_version.html}</div>
+						<!--<div  class="tab-pane" id="tabs-7">{include file=artikel_save.html}</div>-->
+						</div>
+					</div>
+					{include file=artikel_save.html}
+				{/if}
+			</form>
+		{/if}
+		
+		{if $templateweiche == "REORDER"}
+			{include file=artikel_reorder.html}
+		{/if}
+		
+		{*<!-- Artikel werden bearbeitet-->*}
+		{if $artikelliste}
+			{$message_450}
+			{include file=artikel_liste.html}
+		{/if}
+		
+		<div class="clear">&nbsp;</div>
+	</div>
+	{*<!-- Hier kommt der Fuss rein-->*}
+	{include file=foot.inc.html}
+{/if}

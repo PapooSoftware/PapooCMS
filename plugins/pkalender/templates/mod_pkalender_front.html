@@ -1,0 +1,94 @@
+{if $module_aktiv.mod_pkalender_front}
+	<!-- MODUL: Kalender_front -->
+{foreach item=cal from=$kalender_result}
+{if $tvar>10}
+{if $cal.kalender_modul_id==$tvar}
+	<div id="kalender_{$cal.kalender_id}" class="modul">
+	<div class="kalender_modul">
+	<h3>{$cal.kalender_bezeichnung_des_kalenders}</h3>
+	{literal}
+<script language="JavaScript"> 
+<!-- 
+
+function gox{/literal}{$cal.kalender_id}{literal}(){
+ document.monatformx{/literal}{$cal.kalender_id}{literal}.submit();
+
+}
+//-->
+</script>
+{/literal}
+		<div class="Kalender" >
+		 <form action="" name="monatformx{$cal.kalender_id}" method="POST">
+		<input type="hidden" name="date_time" value="" />
+			<div class="monat_select">
+		
+		  <select onchange="gox{$cal.kalender_id}()" name="monats_id" size="1" id="monats_id">
+		
+		   {foreach item=mon from=$monat_array_kal}
+		
+		   <option value="{$mon.mon_id}" {if $monats_id==$mon.mon_id}
+		    selected="selected"{/if}>{$mon.name} - {$mon.jahr}</option>
+		
+		   {/foreach}
+		
+		  </select>
+		 
+		<noscript>
+				<input type="submit" name="submit" value="{$message_160}" />
+				</noscript>
+		</div>
+			</form>
+		<table class="kalender_table">
+		
+		 <tr>
+		  <th>{$message_paket_mo}</th>
+		  <th>{$message_paket_di}</th>
+		  <th>{$message_paket_mi}</th>
+		  <th>{$message_paket_do}</th>
+		  <th>{$message_paket_fr}</th>
+		  <th>{$message_paket_sa}</th>
+		  <th>{$message_paket_so}</th>
+		 </tr>
+		 <tr>
+		  {foreach item=ptag from=$tagderwoche_a}
+		  <td></td>
+		  {/foreach} 
+			{foreach item=ptag from=$cal.calender_dat} 
+			{if $ptag.1 != "Mon"}
+		  <td {if $ptag.link=="ok"}class="cal_set" {/if}>{if $ptag.link=="ok"}<a title="{$ptag.termin_name}" class="cal_set" 
+		   {if $url_cal_modrewrite}
+		   href="{$url_cal_modrewrite[$cal.kalender_id]}{$cal.kalender_id}-{$ptag.pkal_date_id}-{$ptag.termin_name_url}-date-{$ptag.termin_time}.html"
+		   {else}
+			 href="{$url_cal[$cal.kalender_id]}{$cal.kalender_id}&amp;monats_id={$monats_id}&amp;date_id={$ptag.pkal_date_id}&date_time={$ptag.termin_time}#{$ptag.pkal_date_id}"
+			 {/if}
+			 >{$ptag.0}</a>
+		  {else}{$ptag.0}
+			{/if}</td>
+		  {else}
+		
+		 </tr>
+		 <tr>
+		  <td {if $ptag.link=="ok"}class="cal_set" {/if}>{if $ptag.link=="ok"} <a title="{$ptag.termin_name}" class="cal_set" 
+		    {if $url_cal_modrewrite}
+		   href="{$url_cal_modrewrite[$cal.kalender_id]}{$cal.kalender_id}-{$ptag.pkal_date_id}-{$ptag.termin_name_url}-date-{$ptag.termin_time}.html"
+		   {else}
+			 href="{$url_cal[$cal.kalender_id]}{$cal.kalender_id}&amp;monats_id={$monats_id}&amp;date_id={$ptag.pkal_date_id}&date_time={$ptag.termin_time}#{$ptag.pkal_date_id}"
+			 {/if}
+			 >{$ptag.0}</a>
+		  {else} {$ptag.0}
+			 {/if}</td>
+		  {/if} 
+			{/foreach}
+		 </tr>
+		</table>
+
+		</div>
+
+
+</div>
+	</div>
+{/if}
+{/if}
+{/foreach}
+	<!-- ENDE MODUL: Kalender_front -->
+{/if}

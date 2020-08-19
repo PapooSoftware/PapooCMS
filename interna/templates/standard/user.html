@@ -1,0 +1,448 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	{if $text_error}
+		<div class="error">
+			{$text_error}
+		</div>
+	{/if}
+	{if $user_message_text}
+		<div class="message">
+			{$user_message_text}
+		</div>
+	{/if}
+	<div class="artikel" >
+		<div class="aktuell" id="aktuell_{$menuid_aktuell}"></div>
+		{$text}
+		{$logindaten}
+		{if $loeschgruppe}
+			<form method="post" action="./user.php?menuid=9" name="suche" id="formi" style="width:100%"><p>
+				{*<!-- Diese Gruppe l�schen?? -->*}
+				<h3>{$message_108}</h3>
+				<fieldset>
+					<legend>{$message_108}</legend>
+					{foreach item=gruppe from=$gruppelesen_data}
+						{*<!-- Gruppenname -->*}
+						<p>{$message_109}: {$gruppe.gruppenname}</p>
+
+						<input type="hidden" name="gruppeid" value="{$gruppe.gruppeid}" />
+					{/foreach}
+				</fieldset>
+				<fieldset>
+					<legend>{$message_362}</legend>
+					{*<!-- L�schen -->*}
+					<input type="submit" style="float: left;;" class="submit_back_red" value="{$message_362}" name="loeschenecht" />
+				</fieldset>
+			</form>
+		{/if}
+		{if $altgruppe}
+			{*<!-- Verf�gbare Gruppen -->*}
+			<h1>{$message_110}</h1>
+			{*<!-- Um die Eigenschaften der Gruppen zu �ndern einfach darauf klicken -->*}
+			<p>{$message_111}</p>
+			{*<!-- Diese Tabelle listet alle User des CMS auf, inkl. Guppenzugeh�rigkeit, Eintrittsdatum und Anzahl der Beitr�ge im Forum -->*}
+			
+			{*<!-- Gruppenname -->*}
+			<h2>{$message_113a}</h2>
+			<table summary="{$message_143}" class=" table table-striped table-hover">
+				<tr>
+					<th id="Spalte1">
+						 {$system_user_gruppenname}
+						 </th>
+					<th id="Spalte2">
+						 {$system_user_beschreibung}
+					</th>
+					<th id="Spalte3">
+						{$system_user_anzahl_der_user}
+						</th>
+					<th id="Spalte4">
+						{$system_user_darf_inhalte_verffentlichen}
+					</th>
+					<th id"Spalte5">
+						{$system_user_zugriff_auf_admin}
+					</th>
+				</tr>
+				{foreach item=gruppe from=$gruppelesen_data}
+					<tr>
+						<td headers="Spalte1">
+								<a href="./user.php?menuid=9&amp;gruppeid={$gruppe.gruppeid}">{$gruppe.gruppenname}</a>
+						</td>
+						<td headers="Spalte2" style="width:30%;">
+							{$gruppe.gruppen_beschreibung}
+						</td>
+						<td headers="Spalte3">
+							{$gruppe.count}
+						</td>
+						<td headers="Spalte4">
+						{if $gruppe.allow_internet==1}<img src="./bilder/check.png" width="20" height="20" alt="OK" title="OK" />{/if}
+						</td>
+						<td headers="Spalte5">
+								{if $gruppe.admin_zugriff==1}<img src="./bilder/check.png" width="20" height="20" alt="OK" title="OK" />{/if}
+						</td>
+					</tr>
+				{/foreach}
+			</table>
+		{/if}
+		{if $is_dev}
+			<span class="ignore"></span>
+			#start#
+			<!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+			<div class="rapid_form">
+				<form action="" name="" method="POST">
+					<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+					<input type="hidden" name="tb_name" value="papoo_user" />
+					<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+					<input type="hidden" name="php_datei_name" value="image_class" />
+
+					<input type="hidden" name="system_template" value="user.html" />
+					<!-- Ist System -->
+					<input type="hidden" name="is_system" value="1" />
+					<!-- Das Standarpr�fix f�r die Ids -->
+					<input type="hidden" name="praefix" value="user" />
+					<!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+					<input type="hidden" name="praefix_spezial" value="user" />
+					<!-- Das Tool einbinden -->
+					{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+				</form>
+			</div>
+		{/if}
+		{*<!-- weitere Seiten -->*}
+		{include file=weiter.inc.html}
+		{*<!-- Formular f�r das anlegen einer neuen Gruppe-->*}
+		{if $neugroup}
+			{*<!-- Neue Gruppe anlegen -->*}
+			<h1>{$message_114}</h1>
+			<form method="post" action="./user.php?menuid={$menuid_form}" name="suche" id="formi" style="width:100%">
+				<fieldset>
+					{*<!-- Gruppenname und Gruppenleiter angeben: -->*}
+					<legend>{$message_115}</legend>
+					{*<!-- Gruppenname -->*}
+					<label for="groupname">{$message_109}:</label><br />
+					<input type="text" name="groupname" id="groupname" value="{$gruppenname}" size="40" maxlength="254" /><br />
+					{*<!-- Gruppenleiter - -->*}
+					<label for="gruppenleiter">{$message_117}:</label><br />
+					<select name="gruppenleiter" id="gruppenleiter" size="1">
+						<option value="none">({$message_160})</option>
+						{foreach item=gruppe from=$userlesen_data}
+							<option {$gruppe.selected} value="{$gruppe.userlesen_value}" >{$gruppe.userlesen_name}</option>
+						{/foreach}
+					</select><br />
+				</fieldset>
+				<fieldset>
+					{*<!-- D�rfen User dieser Gruppe Artikel f�r das Internet ver�ffentlichen -->*}
+					<legend>{$message_120}:</legend>
+					{*<!-- Internet ja? -->*}
+					<input type="checkbox" {$checked_internet} name="allow_internet" id="allow_internet" value="1" />
+					<label class="haken" for="allow_internet">{$message_121}: </label><br />
+					{*<!-- Wenn hier kein H�ckchen gesetzt wird, wird der Artikel automatisch zur Freigabe an die Elterngruppe weitergegeben.-->*}
+					{*<!-- Gruppenleiter - -->*}<br />
+					<label for="userleiter">{$message_638}</label><br />
+					<select name="userleiter" id="userleiter" size="1">
+						<option value="none">({$message_160})</option>
+						{foreach item=gruppe from=$userschreiben_data}
+							<option {$gruppe.selected} value="{$gruppe.userlesen_value}" >{$gruppe.userlesen_name}</option>
+						{/foreach}
+					</select>
+				</fieldset>
+				<fieldset>
+					{*<!--D�rfen User dieser Gruppe auf die Administration zugreifen?:-->*}
+					<legend>{$message_124}</legend>
+					{*<!-- Zugriff auf die Administration -->*}
+					<input type="checkbox" {$admin_checked} name="admin_zugriff" id="admin_zugriff" value="1" />
+					<label class="haken" for="admin_zugriff">{$message_125}: </label><br />
+					{*<!-- Welcher der einzelnen Men�punkte im Backend an welche Gruppen freigegeben wird, wird in den Stammdaten eingestellt. -->*}
+					<p>{$message_126}</p>
+				</fieldset>
+				<fieldset>
+					<legend>{$system_user_tinymce_konfiguration}</legend>
+					{$system_user_hier_knnen_sie_die_konfigurationseinstellungen_des_tinymce_editors_}
+					<a href="http://wiki.moxiecode.com/index.php/TinyMCE:Configuration" id="user_informationen_zur_konfiguration" target="blank" class="132link" >
+						{$system_user_informationen_zur_konfiguration}
+					</a>
+					<label for="user_konfiguration_des_tinymce">{$system_user_konfiguration_des_tinymce}{$system_error.user_konfiguration_des_tinymce} </label>
+					<br />
+					<textarea name="user_konfiguration_des_tinymce" rows="10" cols="50" style="width:90%;" class="user_konfiguration_des_tinymce" id="user_konfiguration_des_tinymce"/>{$user_konfiguration_des_tinymce|escape:"html"}</textarea>
+					<br />
+				</fieldset><br />
+				<fieldset>
+					{*<!-- Einf�gen in die Hirarchie und Beschreibung: -->*}
+					<legend>{$message_127}</legend>
+					{*<!-- Untergruppe von -->*}
+					<label for="kategorie">{$message_128}:</label> <br />
+					<select name="kategorie" id="kategorie" size="1" >
+						<option value="none">({$message_160})</option>
+						{foreach item=gruppe from=$gruppelesen_data}
+							<option {$gruppe.selected2} value="{$gruppe.gruppelesen_value}">{$gruppe.gruppelesen_name}</option>
+						{/foreach}
+					</select><br />
+					{*<!-- Beschreibung -->*}
+					<label for="text">{$message_89}:</label><br />
+					{*<!-- Hier bitte die Beschreibung der Gruppe eingeben -->*}
+					<textarea id="text" name="beschreibung" rows="10" cols="20" title="{$message_129}" onfocus="this.value=onFocusClearDefault( this.value, '{$message_129}' );" >{$beschreibung}</textarea><br />
+					<br />
+					<input type="hidden" name="update" value="{$update}" />
+					<input type="hidden" name="gruppeid" value="{$gruppeid}" />
+				</fieldset>
+				<fieldset>
+					{*<!-- Einf�gen in die Hirarchie und Beschreibung: -->*}
+					<legend>{$message_130}</legend>
+					{*<!-- Gruppe anlegen -->*}
+					<input type="submit" style="float: left;;" class="submit_back_green" value="{$message_130}" name="formSubmit" />
+					{if $gruppeid and $gruppeid != 10 and $gruppeid!=1}
+						{*<!-- Nur anzeigen wenn beareitet wird -->*}
+						<input type="submit" style="float: right;;" class="submit_back_red" value="{$message_106}" name="loeschen" />
+					{/if}
+				</fieldset>
+			</form>
+		{/if}
+		{*<!-- ENDE neue Gruppe anlegen -->*}
+		{*<!-- Hier werden die User bearbeitet-->*}
+		{if $userlist}
+			{*<!-- Alle User -->*}
+			<h1>{$message_138}.</h1>
+			<form method="post" action="./user.php?menuid=8" name="suche">
+				<fieldset>
+					{*<!-- Suche nach einem Benutzer -->*}
+					<legend>{$message_139}:</legend>
+					<label for="search">{$message_139}</label>
+					<input type="text" name="search" id="search" value="{$search}" size="40" maxlength="50" />
+					<input type="hidden" value="Finden" name="formSubmit" />
+					<input type="submit" class="submit_back" value="Finden" name="formSubmit" />
+				</fieldset>
+			</form>
+			{*<!-- Anzahl der Benutzer -->*}
+			<p>{$message_140}:{$anzahl_user} </p>
+			{*<!-- Um die Eigenschaften der User zu �ndern einfach darauf klicken -->*}
+			<p>{$message_141}</p>
+			<table style="border:none;">
+				<tr>
+					<td style="border:none;">
+						{*<!-- Benutzer nach Gruppen ausw�hlen -->*}
+						<form method="post" action="" >
+							<fieldset>
+								<legend>{$message_527}</legend>
+								<label for="groupselect">{$message_639}</label><br />
+								<select id="groupselect" name="groupselect" size="1">
+									<option value="none">({$message_640})</option>
+									{foreach item=gruppe from=$gruppenliste}
+										<option value="{$gruppe.gruppenid}" {$gruppe.selected}>{$gruppe.gruppenname}</option>
+									{/foreach}
+								</select>
+								<input type="submit" class="submit_back" value="aussuchen" name="selectgroup" />
+							</fieldset>
+						</form>
+					</td>
+					<td style="border:none;">
+						<form method="post" action="" >
+							<fieldset>
+								<legend>{$message_528}</legend>
+								<input type="hidden" name="search" value="{$search}" />
+								<input type="hidden" name="groupselect" value="{$groupselect_form}" /><br />
+								<input type="submit" class="submit_back" value="{$message_529}" name="exportlist" /><br />
+							</fieldset>
+						</form>
+					</td>
+				</tr>
+			</table>
+			{if $nouser}
+				{*<!-- Es wurde leider kein Benutzer im System gefunden, bitte versuchen Sie ein anderes Suchwort. -->*}
+				<h3>{$message_142}.</h3>
+			{else}
+				<div id="usertab">
+					{*<!-- Diese Tabell listet alle User des CMS auf, inkl. Guppenzugeh�rigkeit, Eintrittsdatum und Anzahl der Beitr�ge im Forum-->*}
+					<table summary="{$message_143}" class="table table-striped table-hover">
+						<tr>
+							<th id="Spalte1">
+								<a href="./user.php?menuid=8&amp;order=username&amp;richtung={$richtung}&amp;page={$pagex}&amp;search={$search}">{$message_641}</a>
+							</th>
+							<th id="Spalte2">
+								{*<!-- Gruppenzugeh�rikeit -->*}
+								{$message_144}
+							</th>
+							<th id="Spalte3">
+								{*<!-- Eintrittsdatum -->*}
+								<a href="./user.php?menuid=8&amp;order=beitritt&amp;richtung={$richtung}&amp;page={$pagex}&amp;search={$search}">{$message_145}</a>
+							</th>
+							<th id="Spalte4">
+								{*<!-- Anzahl der Beitr�ge -->*}{$message_146}
+							</th>
+							<th id"Spalte5">
+								{$system_user_letzter_login}
+							</th>
+						</tr>
+						{foreach item=gruppe from=$gruppelesen_data}
+							<tr>
+								<td headers="Spalte1">
+									<a href="./user.php?menuid=8&amp;userid={$gruppe.userid}">{$gruppe.formusername}</a>
+								</td>
+								<td headers="Spalte2">
+									{$gruppe.gruppe_zu}
+								</td>
+								<td headers="Spalte3">
+									{$gruppe.eintritt|date_format:$lang_dateformat}
+								</td>
+								<td headers="Spalte4">
+									{$gruppe.beitraege}
+								</td>
+								<td headers="Spalte5">
+									{$gruppe.user_last_login|date_format:$lang_dateformat}
+								</td>
+							</tr>
+						{/foreach}
+					</table>
+				</div>
+				{*<!-- weitere Seiten -->*}
+				{include file=weiter.inc.html}
+			{/if}
+		{/if}
+		{if $loeschen}
+			<form method="post" action="./user.php?menuid=8" name="suche" id="formi" style="width:100%">
+				<fieldset>
+					{*<!-- Diesen User l�schen?? -->*}
+					<legend>{$message_147}</legend>
+					{foreach item=gruppe from=$gruppelesen_data}
+						{*<!-- Username -->*}
+						<p>{$message_61}: {$gruppe.formusername}</p>
+						<input type="hidden" name="userid" value="{$gruppe.userid}" />
+					{/foreach}
+					{*<!-- L�schen -->*}
+					<input type="submit" style="float: right;" class="submit_back_red" value="{$message_106}" name="loeschenecht" />
+				</fieldset>
+			</form>
+		{/if}
+		{if $userbearb or $neuuser}
+			{foreach item=table from=$table_data}
+				{*<!-- User bearbeiten-->*}
+				<h1>{$message_148}.</h1>
+				<form method="post" {if $userbearb}action="./user.php?menuid=8"{/if}{if $neuuser} action="./user.php?menuid=7" {/if} name="suche" id="formi" style="width:100%">
+					<input type="hidden" name="userid" value="{$table.userid}" />
+					<input type="hidden" name="gruppemax" value="{$gruppemax}" />
+					<fieldset>
+						{*<!-- Gruppenname und Password -->*}
+						<legend>{$message_132}:</legend>
+						 {*<!-- Vorname: -->*}
+						<label for="neuvorname" class="left">{$message_530} {$table.fehltvorname}:</label><br />
+						<input type="text" class="inputtext" name="neuvorname" id="neuvorname" value="{$table.vorname}" size="35" maxlength="50" /><br />
+						{*<!-- Nachname: -->*}
+						<label for="neunachname" class="left">{$message_531} {$table.fehltnachname}:</label><br />
+						<input type="text" class="inputtext" name="neunachname" id="neunachname" value="{$table.nachname}" size="35" maxlength="50" /><br />
+						{*<!-- Strasse und Hausnummer: -->*}
+						<label for="neustrnr" class="left">{$message_532} {$table.fehltstrnr}:</label><br />
+						<input type="text" class="inputtext" name="neustrnr" id="neustrnr" value="{$table.strnrname}" size="35" maxlength="50" /><br />
+						{*<!-- Postleitzahl: -->*}
+						<label for="neuplz" class="left">{$message_533} {$table.fehltplz}:</label><br />
+						<input type="text" class="inputtext" name="neuplz" id="neuplz" value="{$table.plzname}" size="35" maxlength="50" /><br />
+						{*<!-- Ort: -->*}
+						<label for="neuort" class="left">{$message_534} {$table.fehltort}:</label><br />
+						<input type="text" class="inputtext" id="neuort" name="neuort" value="{$table.ortname}" size="35" maxlength="50" /><br />
+						{*<!-- Antwortmail? -->*}
+						<label for="antwortmail">{$message_2104}</label>
+						<input type="checkbox" {$table.checked} id="antwortmail" name="antwortmail" value="ok" /><br />
+						
+						<label for="groupname">{$message_83}: </label><br />
+						<input id="groupname" name="email" value="{$table.mailname}" size="40" maxlength="254" type="text" /><br />
+						{if $manageprofil}
+							<br />
+							{*<!-- Benutzername: -->*}
+							{$message_535}: <strong>{$table.username}</strong>
+						{else}
+							{*<!-- Username: -->*}
+							<label for="neuusername" class="left">{$message_535} * {$table.fehltusername}:</label><br />
+							<input type="text" class="inputtext" name="neuusername" id="neuusername" value="{$table.username}" size="35" maxlength="50" /><br />
+						{/if}
+						<label for="formpassword">{$message_62}: </label><br />
+						<input name="formpassword" value="{if isset($formpassword)}{$formpassword}{/if}" id="formpassword" type="password" size="40" maxlength="254" /><br />
+						{$message_signatur}:<br />
+						{$table.signatur}<br />
+					</fieldset>
+					<fieldset>
+						<legend>{$message_149}:</legend>
+						{*<!-- Damit werden Lese und Schreibrechte, genauso wie der Zugriff auf den Admin Bereich geregelt.-->*}
+						<p>{$message_134}</p>
+						{*<!-- Gruppe -->*}
+						<p>{$message_95}:</p>
+						{foreach item=gruppe from=$gruppelesen_data}
+							<input type="checkbox" {$gruppe.checked} id="{$gruppe.gruppelesen_name}" name="gruppelesen[{$gruppe.gruppelesen_value}]" value="{$gruppe.gruppelesen_value}" />
+							<label for="{$gruppe.gruppelesen_name}">{$gruppe.gruppelesen_name}</label><br />
+						{/foreach}
+					</fieldset>
+					<fieldset>
+						<legend>{$message_536}</legend>
+						<input type="radio" name="forum_board" id="forum_board" {$table.checked_board1} value="0" />
+						<label for="forum_board">{$message_537}</label><br />
+						<input type="radio" name="forum_board" id="forum_board2" {$table.checked_board2} value="1" />
+						<label for="forum_board2">{$message_538}</label><br />
+					</fieldset>
+					<fieldset>
+						<legend>{$message_800}</legend>
+						<input type="checkbox" name="active" id="active" {if isset($table.active) && $table.active==1}checked="checked"{/if} value="1" />
+						<label for="active">{$message_800}</label>
+					</fieldset>
+					<fieldset>
+						<legend>{$message_801}</legend>
+						<input type="checkbox" name="user_newsletter" id="user_newsletter"{if isset($table.user_newsletter) && $table.user_newsletter=='ok'}checked="checked"{/if}{if isset($table.user_newsletter) && $table.user_newsletter==1}checked="checked"{/if} value="ok" />
+						<label for="user_newsletter">{$message_801}</label>
+					</fieldset>
+					{if $module_aktiv.mod_styleswitcher OR 1}
+						<fieldset>
+							{*<!-- Styleswitcher-->*}
+							<legend>{$message_2139}:</legend>
+							<p>{$message_539}</p>
+							<label for="stylepost">{$message_2139}</label><br />
+							<select id="stylepost" name="stylepost" size="1">
+								{*<!-- (waehlen)-->*}
+								<option value="none" >({$message_160})</option>
+								{foreach item=style from=$style_data}
+									<option value="{$style.stylevalue}" {if $table.style_selected==$style.stylevalue} selected {/if} >
+										{$style.style_name}
+									</option>
+								{/foreach}
+							</select>
+							<br />
+						</fieldset>
+					{/if}
+					<fieldset>
+						{*<!-- Sprachwahl -->*}
+						<legend>{$message_2140}:</legend>
+						<p>{$message_2141}</p>
+						{*<!-- Sprache Frontend -->*}
+						<label for="lang_front">{$message_2140} {$message_2142}:</label>
+						<select id="lang_front" name="lang_front" size="1">
+							<option value="">({$message_160})</option>
+							{foreach item=lang from=$languageget}
+								<option value="{$lang.lang_short}" {if $table.lang_front==$lang.lang_short} selected="selected" {/if} >
+									{$lang.language}
+								</option>
+							{/foreach}
+						</select><br />
+						{*<!-- Sprache Backend -->*}
+						<label for="lang_back">{$message_2140} {$message_2143}:</label>
+						<select id="lang_back" name="lang_back" size="1">
+							<option value="" >({$message_160})</option>
+							<option value="de" {if $table.lang_back=='de'} selected="selected" {/if}>Deutsch</option>
+							<option value="en" {if $table.lang_back=='en'} selected="selected" {/if}>English</option>
+							<option value="fr" {if $table.lang_back=='fr'} selected="selected" {/if}>Francaise</option>
+						</select><br />
+					</fieldset>
+					<fieldset>
+						<legend>{$message_89}</legend>
+						<label for="beschreibung">{$message_89}: </label><br />
+						{*<!-- Hier bitte die Beschreibung der Gruppe eingeben -->*}
+						<textarea id="beschreibung" name="beschreibung" rows="10" cols="40" title="{$message_129}">{$table.beschreibung}</textarea>
+					</fieldset>
+					{*<!-- User eintragen -->*}
+					<fieldset>
+						<legend>{$message_137}</legend>
+						<input type="submit" style="float: left;;" class="submit_back_green" value="{$message_70}" name="formSubmit" />
+						{if !$neuuser AND $table.userid != 10}
+							<input style="float: right;;" type="submit" class="submit_back_red" value="{$message_106}" name="loeschen" /><br />
+						{/if}
+					</fieldset>
+				</form>
+			{/foreach}
+		{/if}
+		<div class="clear">&nbsp;</div>
+	</div>
+	{*<!-- Hier kommt der Fuss rein-->*}
+	{include file=foot.inc.html}
+{/if}

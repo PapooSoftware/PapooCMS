@@ -1,0 +1,98 @@
+{if $IS_ADMIN}
+<h2>{$message_540}</h2>
+	{* <!-- unsichtbares Sprung-Men� zu den einzelnen Bereichen --> *}
+	<div class="ignore">
+		<ul>
+			{foreach key=nummer item=name from=$bereiche_liste}
+				<li><a href="#bereich_{$nummer}">{$message_650} &quot;{$name}&quot;</a></li>
+			{/foreach}
+		</ul>
+	</div>
+	{* <!-- ENDE unsichtbares Sprung-Men� zu den einzelnen Bereichen --> *}
+
+	{* <!-- Schleife �ber Alle Bereiche --> *}
+	{foreach key=nummer item=name from=$bereiche_liste}
+		<div class="modulmanager">
+			<a name="bereich_{$nummer}"></a>
+			<h3>{$message_543} &quot;{$name}&quot; <small>({$message_542}: {$nummer})</small></h3>
+			{if $module.$nummer}
+				<table class="outside table table-striped table-hover" style="width: 98%;">
+					<caption>{$message_541}</caption>
+					<tbody>
+						{* <!-- Schleife f�r aktive Module dieses Bereichs --> *}
+						{foreach name=module item=modul from=$module.$nummer}
+							<tr>
+								<td style="width: 85%;">
+									{$modul.modlang_name} <small>({$modul.modlang_beschreibung}; {$message_653} {$modul.mod_datei})</small>
+								</td>
+								<td style="width: 5%;">
+									{if NOT $smarty.foreach.module.last}
+										<form action="" method="post">
+											<input type="hidden" name="mod_bereich_id" value="{$nummer}" />
+											<input type="hidden" name="mod_style_id" value="{$mod_style_id}" />
+											<input type="hidden" name="mod_id" value="{$modul.mod_id}" />
+											<input type="hidden" name="module_aktion" value="REORDER_RUNTER" />
+											<label for="modul_reorder_action_minus_{$modul.mod_id}" class="ignore">Modul nach unten verschieben</label>
+											<input type="image" title="{$message_654}" alt="{$message_654}"
+												id="modul_reorder_action_minus_{$modul.mod_id}" name="modul_reorder_action_minus_{$modul.mod_id}" value="runter"
+												src="bilder/pfeil_runter.gif" class="modul_reorder_knopf" />
+										</form>
+									{/if}
+								</td>
+								<td style="width: 5%;">
+									{if NOT $smarty.foreach.module.first}
+										<form action="" method="post">
+											<input type="hidden" name="mod_bereich_id" value="{$nummer}" />
+											<input type="hidden" name="mod_id" value="{$modul.mod_id}" />
+											<input type="hidden" name="mod_style_id" value="{$mod_style_id}" />
+											<input type="hidden" name="module_aktion" value="REORDER_HOCH" />
+											<label for="modul_reorder_action_plus_{$modul.mod_id}" class="ignore">Modul nach oben verschieben</label>
+											<input type="image" title="{$message_655}" alt="{$message_655}"
+												id="modul_reorder_action_plus_{$modul.mod_id}" name="modul_reorder_action_plus_{$modul.mod_id}" value="hoch"
+												src="bilder/pfeil_hoch.gif" class="modul_reorder_knopf" />
+										</form>
+									{/if}
+								</td>
+								<td style="width: 5%;">
+									<form action="" method="post">
+										<input type="hidden" name="mod_bereich_id" value="{$nummer}" />
+										<input type="hidden" name="mod_id" value="{$modul.mod_id}" />
+										<input type="hidden" name="mod_style_id" value="{$mod_style_id}" />
+										<input type="hidden" name="module_aktion" value="DEAKTIVIEREN" />
+										<label for="modul_loeschen_{$modul.mod_id}" class="ignore">Modul aus diesem Bereich entfernen</label>
+										<input type="image" title="{$message_656}" alt="{$message_656}"
+											id="modul_loeschen_{$modul.mod_id}" name="modul_loeschen_{$modul.mod_id}" value="hoch"
+											src="bilder/knopf_loeschen.gif" class="modul_loeschen_knopf" />
+									</form>
+								</td>
+							</tr>
+						{/foreach}
+						{* <!-- ENDE Schleife f�r aktive Module dieses Bereichs --> *}
+					</tbody>
+				</table>
+			{else}
+				{$message_544}<br />
+				<br />
+			{/if}
+			{if $module_inaktiv}
+				<form action="" method="post">
+					<input type="hidden" name="mod_bereich_id" value="{$nummer}" />
+					<input type="hidden" name="mod_style_id" value="{$mod_style_id}" />
+					<input type="hidden" name="module_aktion" value="AKTIVIEREN" />
+					<label for="mod_id{$nummer}">{$message_545}</label><br />
+					<select name="mod_id" id="mod_id{$nummer}">
+						{* <!-- Schleife f�r noch nicht aktivierte Module --> *}
+						{foreach item=modul from=$module_inaktiv}
+							<option value="{$modul.mod_id}">{$modul.modlang_name}</option>
+						{/foreach}
+						{* <!-- ENDE Schleife f�r noch nicht aktivierte Module --> *}
+					</select>
+					<input type="submit" class="submit_back_white btn btn-info" value="{$message_546}" />
+				</form>
+			{else}
+				{$message_544}<br />
+			{/if}
+		</div>
+	{/foreach}
+	{* <!-- ENDE Schleife f�r Alle Bereiche --> *}
+{/if}

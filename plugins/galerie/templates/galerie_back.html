@@ -1,0 +1,374 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		<h1>{$GALMSGB.BACK_NAME}</h1>
+		
+		{if $zugrifsrechte_galerien_nicht_ok}
+			<div class="error">{$zugrifsrechte_galerien_nicht_ok}</div><br />
+		{/if}
+		
+		{if $fehler1}<div class="error">{$plugin.galerie_back.errmsg.invalid_id}</div>
+		{elseif $galerie_message}<h2>{$galerie_message}</h2>{/if}
+		
+		
+		{if $galerie_weiche == "GALERIE_LISTE"}
+			{if $galerie_safemode}
+				<p>{$GALMSGB.BACK_SAFEMODE}</p>
+			{else}
+				<form action="" method="post">
+					<input type="hidden" name="galerie_switch" value="GALERIE_NEU">
+					<input type="submit" class="submit_back_xl_white" value="{$GALMSGB.BACK_GALERIE_NEU_FORM_SUBMIT}">
+				</form>
+			{/if}
+			
+			{if NOT $galerie_liste}
+				<p>{$GALMSGB.BACK_LISTE_LEER}</p>
+			{else}
+				<form action="" method="post">
+					<label for="cat_new_sel">{$plugin.galerie_back.formtext.option_cat_edit_maincat}</label>
+					<select name="cat_new_sel_id" size="1" id="cat_new_sel" >
+						<option value="0">{$plugin.galerie_back.formtext.option_cat_new_maincat}</option>
+						{foreach item=catopt from=$galerie_cat_data}
+							{if $catopt.parent_id==0}
+								<option value="{$catopt.gallang_gal_id}" {if $catopt.gallang_gal_id==$galerie_data.parent_id} selected="selected" {/if} class="lvl_{$catopt.level}">
+									{$catopt.gallang_name}
+								</option>
+							{/if}
+						{/foreach}
+					</select>
+					<input type="submit" class="submit_back_xl_white" name="cat_selection" value="{$plugin.galerie_back.formtext.option_cat_new_maincat}" />
+				</form>
+				{$GALMSGB.BACK_LISTE}
+
+                {include file=weiter.inc.html}
+
+				<form action="" method="post" class="galerie_form_reorder" style="display: inline;">
+					<input type="hidden" name="galerie_switch" value="GALERIE_REORDER" />
+					
+					<table>
+						{foreach item=galerie from=$galerie_liste name=galerie_liste}
+							<tr>
+								<td>
+									<a 	href="./plugin.php?menuid={$aktive_menuid}&amp;template=galerie/templates/galerie_back.html&amp;galerie_switch=GALERIE_DETAILS&amp;galerie_id={$galerie.gal_id}"
+										>
+										<h3>{$galerie.gallang_name} (ID: {$galerie.gal_id})</h3>
+										<p>
+											<img src="../plugins/galerie/galerien/{$galerie.gal_verzeichnis}/thumbs/{$galerie.bild_datei}"
+												width="{$galerie.bild_breite_thumb}"
+												height="{$galerie.bild_hoehe_thumb}"
+												title="{$GALMSGB.BACK_LISTE_FORM_LABEL} {$galerie.gallang_name}"
+												alt="{$GALMSGB.BACK_LISTE_FORM_LABEL} {$galerie.gallang_name}"
+												style="float: left; margin-right: 20px"
+												/>
+											{$GALMSGB.AKTIV}
+											{if $galerie.gal_aktiv_janein} {$GALMSGB.JA} {else} {$GALMSGB.NEIN} {/if}<br />
+											{$galerie.gallang_beschreibung}
+										</p>
+									</a>
+								</td>
+								<td>
+									<input type="text" name="galerie_order_ids[{$galerie.gal_id}]" value='{$galerie.gal_order_id}' style="text-align: right;" />
+								</td>
+							</td>
+						{/foreach}
+					</table>
+
+                    {include file=weiter.inc.html}
+
+                    <input type="submit" class="btn btn-info" name="galerie_reorder" value="{$message_70}" />
+				</form>
+			{/if}
+		{/if}
+		
+		
+		{if $galerie_weiche == "GALERIE_DETAILS"}
+			<p>
+				<img src="../plugins/galerie/galerien/{$galerie_data.gal_verzeichnis}/thumbs/{$galerie_data.bild_datei}" title="{$galerie_data.bildlang_name}" alt="{$galerie_data.bildlang_name}" width="{$galerie_data.bild_breite_thumb}" height="{$galerie_data.bild_hoehe_thumb}" style="float:right" />
+				<h2>{$GALMSGB.GALERIE_DATEN}</h2>
+				{$GALMSGB.NAME} {$galerie_data.gallang_name}
+				<br />
+				{$GALMSGB.AKTIV}
+				{if $galerie_data.gal_aktiv_janein} {$GALMSGB.JA} {else} {$GALMSGB.NEIN} {/if}
+				<br />
+				{$GALMSGB.BESCHREIBUNG}
+				<br />
+				{$galerie_data.gallang_beschreibung}
+				<br />
+				<br />
+				<form action="" method="post" class="galerie_form" style="display: inline;">
+					<input type="hidden" name="galerie_switch" value="GALERIE_EDIT" />
+					<input type="hidden" name="galerie_id" value="{$galerie_data.gal_id}" />
+					<input type="submit" class="submit_back_xl_white" name="galerie_edit" value="{$GALMSGB.BACK_GALDET_FORMEDIT_SUBMIT}" />
+				</form>
+				<form action="" method="post" class="galerie_form" style="display: inline;">
+					<input type="hidden" name="galerie_switch" value="GALERIE_DELETE" />
+					<input type="hidden" name="galerie_id" value="{$galerie_data.gal_id}" />
+					<input type="submit" class="submit_back_red_white" style="float:right;" name="galerie_edit" value="{$GALMSGB.BACK_GALDET_FORMDEL_SUBMIT}" />
+				</form>
+			</p>
+			<p>
+				<h2>{$GALMSGB.BILDER}</h2>
+				<form action="" method="post" class="galerie_form">
+					<input type="hidden" name="galerie_switch" value="GALERIE_BILD_NEU" />
+					<input type="hidden" name="galerie_id" value="{$galerie_data.gal_id}" />
+					<input type="submit" class="submit_back_big_white" name="galerie_edit" value="{$GALMSGB.BACK_GALDET_BILD_FORM_NEU}" />
+				</form>
+				{if NOT $galerie_bilder_liste}
+					{$GALMSGB.BACK_GALDET_BILD_LISTE_LEER}
+					<br />
+				{else}
+					{$GALMSGB.BILDER_ANZAHL} {$galerie_data.gal_bilderanzahl}
+					<br />
+					{$GALMSGB.BACK_GALDET_BILD_LISTE}
+					<br />
+
+					{include file=weiter.inc.html}
+
+					<form action="" method="post" class="galerie_form_reorder" style="display: inline;">
+						<input type="hidden" name="galerie_switch" value="GALERIE_BILD_REORDER" />
+						<input type="hidden" name="galerie_id" value="{$galerie_data.gal_id}" />
+						
+						<table class="back_galerie_bilder_liste">
+							{foreach item=bild from=$galerie_bilder_liste}
+								<tr><td>{$bild.bild_nummer}.</td>
+									<td>
+										<a href="./plugin.php?menuid={$aktive_menuid}&amp;template=galerie/templates/galerie_back.html&amp;galerie_switch=GALERIE_BILD_EDIT&amp;galerie_id={$galerie_data.gal_id}&amp;galerie_bild_id={$bild.bild_id}">
+											<img src="../plugins/galerie/galerien/{$bild.gal_verzeichnis}/thumbs/{$bild.bild_datei}" />
+										</a>
+										<div class="clearfix"></div>{$bild.bildlang_name} <small>({$bild.gal_verzeichnis}/{$bild.bild_datei}; {$GALMSGB.STANDZEIT_LABEL} {$bild.bild_diashow_timeout} {$GALMSGB.STANDZEIT_EINHEIT})</small>
+									</td>
+									<td style="white-space: nowrap">
+										<a 	href="./plugin.php?menuid={$aktive_menuid}&amp;template=galerie/templates/galerie_back.html&amp;galerie_switch=GALERIE_BILD_EDIT&amp;galerie_id={$galerie_data.gal_id}&amp;galerie_bild_id={$bild.bild_id}"
+											class="btn btn-info"
+											>{$GALMSGB.BACK_GALDET_BILD_FORM_EDIT}</a>
+										<a 	href="./plugin.php?menuid={$aktive_menuid}&amp;template=galerie/templates/galerie_back.html&amp;galerie_switch=GALERIE_BILD_DELETE&amp;galerie_id={$galerie_data.gal_id}&amp;galerie_bild_id={$bild.bild_id}"
+											class="btn btn-danger"
+											>{$GALMSGB.BACK_GALDET_BILD_FORM_DEL}</a>
+									</td>
+									<td>
+										<input type="text" name="galerie_bild_order_ids[{$bild.bild_id}]" value='{math equation="x * 10" x=$bild.bild_nummer}' style="text-align: right;" />
+									</td>
+								</tr>
+							{/foreach}
+						</table>
+						<input type="submit" class="btn btn-info" name="galerie_reorder" value="{$message_70}" />
+					</form>
+
+					{include file=weiter.inc.html}
+
+				{/if}
+			</p>
+		{/if}
+		
+		
+		{if $galerie_weiche == "GALERIE_NEU_EDIT"}
+			<form action="" method="post">
+				<input type="hidden" name="galerie_switch" value="GALERIE_SAVE">
+				<input type="hidden" name="galerie_modus" value="{$galerie_modus}">
+				<input type="hidden" name="galerie_id" value="{$galerie_data.gal_id}">
+				<fieldset>
+					{if $galerie_modus == "NEU"}
+						<legend>{$GALMSGB.BACK_GALNE_LEGEND_NEU}</legend>
+					{else}
+						<legend>{$GALMSGB.BACK_GALNE_LEGEND_EDIT}</legend>
+					{/if}
+					{if NOT $galerie_bilder_liste}
+						{$GALMSGB.BACK_GALNE_KEINBILD}<br />
+					{else}
+						<label for="galerie_aktiv_janein">{$GALMSGB.AKTIV}</label>
+						<select name="galerie_aktiv_janein">
+							<option value="1" {if $galerie_data.gal_aktiv_janein=="1"} selected="selected"{/if}>{$GALMSGB.JA}</option>
+							<option value="0" {if $galerie_data.gal_aktiv_janein=="0"} selected="selected"{/if}>{$GALMSGB.NEIN}</option>
+						</select><br />
+						<label for="galerie_bild_id">{$GALMSGB.BACK_GALNE_BILD}</label>
+						<select name="galerie_bild_id" id="galerie_bild_id">
+							{foreach item=bild from=$galerie_bilder_liste}
+								<option value="{$bild.bild_id}" {if $bild.bild_id == $galerie_data.gal_bild_id} selected="selected" {/if}>
+									{$bild.bildlang_name} ({$GALMSGB.NUMMER} {$bild.bild_nummer}; {$GALMSGB.ID} {$bild.bild_id})
+								</option>
+							{/foreach}
+						</select>
+						<br />
+						<label for="cat_new_sel">{$plugin.galerie_back.formtext.option_cat_edit_maincat}</label>
+						<select name="cat_new_sel_id" size="1" id="cat_new_sel" >
+							<option value="0">{$plugin.galerie_back.formtext.option_cat_new_maincat}</option>
+							{foreach item=catopt from=$galerie_cat_data}
+								{if $catopt.parent_id==0}
+									<option value="{$catopt.gallang_gal_id}" {if $catopt.gallang_gal_id==$galerie_data.parent_id} selected="selected" {/if} class="lvl_{$catopt.level}">
+										{$catopt.gallang_name}
+									</option>
+								{/if}
+							{/foreach}
+						</select>
+						<input type="hidden" value="{$galerie_data.parent_id}" name="old_parent_id" />
+						<br />
+						<br />
+						<fieldset>
+							<legend>{$GALMSGB.BACK_GALNE_STANDZEIT}</legend>
+							{$GALMSGB.BACK_GALNE_STANDZEIT_TEXT}<br />
+							<br />
+							<label for="galerie_standzeit">{$GALMSGB.STANDZEIT_LABEL}</label>
+							<select name="galerie_standzeit" id="galerie_standzeit">
+								<option value="0" selected="selected">{$GALMSGB.STANDZEIT_BELASSEN}</option>
+								<option value="5">5 {$GALMSGB.STANDZEIT_EINHEIT}</option>
+								<option value="10">10 {$GALMSGB.STANDZEIT_EINHEIT}</option>
+								<option value="20">20 {$GALMSGB.STANDZEIT_EINHEIT}</option>
+							</select>
+						</fieldset>
+					</fieldset>
+					{/if}
+					{foreach item=text from=$galerie_texte}
+						<fieldset>
+							<legend>{$GALMSGB.SPRACHE} {$text.sprache}</legend>
+							<input type="hidden" name="galerie_texte[{$text.lang_id}][lang_id]" value="{$text.lang_id}" />
+							<p><strong>{$GALMSGB.SPRACHE_TEXT}</strong></p>
+							
+							{*<!-- Name: -->*}
+							<label for="galerie_texte[{$text.lang_id}][name]">{$GALMSGB.NAME}</label><br />
+							<input type="text" id="galerie_texte[{$text.lang_id}][name]" name="galerie_texte[{$text.lang_id}][name]" value='{$text.name|escape:"html"}' size="30" /><br />
+							<br />
+							{*<!-- Beschreibung: -->*}
+							<label for="galerie_texte[{$text.lang_id}][beschreibung]">{$GALMSGB.BESCHREIBUNG}</label><br />
+							<textarea rows="5" cols="40" id="galerie_texte[{$text.lang_id}][beschreibung]" name="galerie_texte[{$text.lang_id}][beschreibung]">{$text.beschreibung}</textarea><br />
+						</fieldset>
+					{/foreach}
+					<br />
+					{if $galerie_modus == "NEU"}
+						<input class="submit_back_green_big" type="submit" value="{$GALMSGB.BACK_GALNE_SUBMIT_NEU}">
+					{else}
+						<input type="submit" class="submit_back_green_big_white" value="{$GALMSGB.BACK_GALNE_SUBMIT_EDIT}">
+					{/if}
+				</fieldset>
+			</form>
+		{/if}
+		
+		
+		{if $galerie_weiche == "GALERIE_DELETE"}
+			<p>
+				<h2>{$GALMSGB.BACK_GALDEL_NAME}</h2>
+				{$GALMSGB.BACK_GALDEL_TEXT}
+				<br />
+				<form action="" method="post" class="galerie_form" style="display: inline;">
+					<input type="hidden" name="galerie_switch" value="GALERIE_DETAILS" />
+					<input type="hidden" name="galerie_id" value="{$galerie_data.gal_id}" />
+					<input type="submit" class="submit_back_green_xl_white" name="galerie_edit" value="{$GALMSGB.BACK_GALDEL_FORM_NEIN}" />
+				</form>
+				<form action="" method="post" class="galerie_form" style="display: inline;">
+					<input type="hidden" name="galerie_switch" value="GALERIE_DO_DELETE" />
+					<input type="hidden" name="galerie_id" value="{$galerie_data.gal_id}" />
+					<input type="submit" class="submit_back_red_xl_white" name="galerie_edit" value="{$GALMSGB.BACK_GALDEL_FORM_JA}" />
+				</form>
+			</p>
+			<p>
+				<img src="../plugins/galerie/galerien/{$galerie_data.gal_verzeichnis}/thumbs/{$galerie_data.bild_datei}" title="{$galerie_data.bildlang_name}" alt="{$galerie_data.bildlang_name}" width="{$galerie_data.bild_breite_thumb}" height="{$galerie_data.bild_hoehe_thumb}" style="float: right" />
+				<h2>{$GALMSGB.GALERIE_DATEN}</h2>
+				{$GALMSGB.NAME} {$galerie_data.gallang_name}
+				<br />
+				{$GALMSGB.AKTIV} {if $galerie_data.gal_aktiv_janein} {$GALMSGB.JA} {else} {$GALMSGB.NEIN} {/if}
+				<br />
+				{$GALMSGB.BESCHREIBUNG}
+				<br />
+				{$galerie_data.gallang_beschreibung}
+				<br />
+				<br />
+				{$GALMSGB.BILDER_ANZAHL} {$galerie_data.gal_bilderanzahl}
+			</p>
+		{/if}
+		
+		
+		{if $galerie_weiche == "GALERIE_BILD_NEU"}
+			{*<h1>{$GALMSGB.MULTI_UPLOAD_IN_GALLERY} {$galerie_name}</h1>*}
+			<script type="text/javascript" src="./js/plupload/plupload.full.min.js"></script>
+			<script type="text/javascript" src="./js/plupload//jquery.plupload.queue/jquery.plupload.queue.min.js" charset="UTF-8"></script>
+			<link type="text/css" rel="stylesheet" href="./js/plupload/jquery.plupload.queue/css/jquery.plupload.queue.css" media="screen" />
+			<script type="text/javascript" src="./js/plupload/i18n/de.js"></script>
+			<h2>{$GALMSGB.BACK_BILDNEU_NAME}</h2>
+			<div id="uploader">
+				<p>Ihr Browser unterstützt kein Flash, Silverlight or HTML5.</p>
+			</div>
+			<form id="multi_upload" action="" method="POST">
+				<input type="hidden" name="galerie_switch" value="GALERIE_BILD_SAVE_NEU">
+				<input type="hidden" name="galerie_id" value="{$galerie_data.gal_id}">
+			</form>
+			<script type="text/javascript">
+				{literal}
+				$(function() {
+					// Setup html5 version
+					$("#uploader").pluploadQueue({
+						// General settings
+						runtimes : 'html5,flash,silverlight,html4',
+						url : "./plupload.php",
+						chunk_size : '1mb',
+						rename : true,
+						dragdrop: true,
+						filters : {
+							// Maximum file size
+							max_file_size : '10mb',
+							// Specify what files to browse for
+							mime_types: [
+								{title : "Image files", extensions : "jpg,gif,png,JPG,GIF,PNG"}
+							]
+						},
+						// Flash settings
+						flash_swf_url : './js/plupload/Moxie.swf',
+						// Silverlight settings
+						silverlight_xap_url : './js/plupload/Moxie.xap'
+					});{/literal}{* script: Fertiger upload triggert den Button der unten wäre automatisch *}{literal}
+						var uploader = $('#uploader').pluploadQueue();
+						uploader.bind('UploadComplete', function() {
+							document.getElementById('multi_upload').submit();
+						});
+					});{/literal}
+			</script>
+		{/if}
+		
+		
+		{if $galerie_weiche == "GALERIE_BILD_EDIT"}
+			<form action="" method="post">
+				<input type="hidden" name="galerie_switch" value="GALERIE_BILD_SAVE_EDIT">
+				<input type="hidden" name="galerie_modus" value="EDIT">
+				<input type="hidden" name="galerie_id" value="{$galerie_data.gal_id}">
+				<input type="hidden" name="galerie_bild_id" value="{$galerie_bild_id}">
+				<fieldset>
+					<legend>{$GALMSGB.BACK_BILDEDIT_NAME}</legend>
+					{if $galerie_bild_data}
+						<img title="{$galerie_bild_data.bildlang_name}" alt="{$galerie_bild_data.bildlang_name}" src="../plugins/galerie/galerien/{$galerie_data.gal_verzeichnis}/thumbs/{$galerie_bild_data.bild_datei}" width="{$galerie_bild_data.bild_breite_thumb}" height="{$galerie_bild_data.bild_hoehe_thumb}" />
+						{$GALMSGB.DATEI} {$galerie_data.gal_verzeichnis}/{$galerie_bild_data.bild_datei}
+						<br />
+					{/if}
+					{foreach item=text from=$galerie_bild_texte}
+						<fieldset>
+							<legend>{$GALMSGB.SPRACHE} {$text.sprache}</legend>
+							<input type="hidden" name="galerie_bild_texte[{$text.lang_id}][lang_id]" value="{$text.lang_id}" />
+							<p><strong>{$GALMSGB.SPRACHE_TEXT}</strong></p>
+							{*<!-- Name: -->*}
+							<label for="galerie_bild_texte[{$text.lang_id}][name]">{$GALMSGB.NAME}</label>
+							<br />
+							<input type="text" id="galerie_bild_texte[{$text.lang_id}][name]" name="galerie_bild_texte[{$text.lang_id}][name]" value='{$text.name|escape:"html"}' size="30" />
+							<br />
+							<br />
+							{*<!-- Beschreibung: -->*}
+							<label for="galerie_bild_texte[{$text.lang_id}][beschreibung]">{$GALMSGB.BESCHREIBUNG}</label>
+							<br />
+							<textarea rows="5" cols="40" id="galerie_bild_texte[{$text.lang_id}][beschreibung]" name="galerie_bild_texte[{$text.lang_id}][beschreibung]">{$text.beschreibung}</textarea>
+							<br />
+						</fieldset>
+					{/foreach}
+					<fieldset>
+						<legend>{$GALMSGB.BACK_BILDEDIT_STANDZEIT}</legend>
+						<p>{$GALMSGB.BACK_BILDEDIT_STANDZEIT_TEXT}</p>
+						<label for="galerie_standzeit">{$GALMSGB.STANDZEIT_LABEL}</label>
+						<select name="galerie_standzeit" id="galerie_standzeit">
+							<option value="5" {if 5 == $galerie_bild_data.bild_diashow_timeout}selected="selected"{/if}>5 {$GALMSGB.STANDZEIT_EINHEIT}</option>
+							<option value="10" {if 10 == $galerie_bild_data.bild_diashow_timeout}selected="selected"{/if}>10 {$GALMSGB.STANDZEIT_EINHEIT}</option>
+							<option value="20" {if 20 == $galerie_bild_data.bild_diashow_timeout}selected="selected"{/if}>20 {$GALMSGB.STANDZEIT_EINHEIT}</option>
+						</select>
+					</fieldset>
+					<br />
+					<input class="submit_back_green_big" type="submit" value="{$GALMSGB.BACK_BILDEDIT_SUBMIT}">
+			</form>
+		{/if}
+	</div>
+	{include file=foot.inc.html}
+{/if}

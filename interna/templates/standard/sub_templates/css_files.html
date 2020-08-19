@@ -1,0 +1,70 @@
+{if $IS_ADMIN}
+	{*<!-- Wenn eine Liste von Dateien vorhanden ist -->*}
+	{if $file_list}
+		<h1>{$message_549} {$style_name}</h1>
+		<p>{$message_550}</p>
+		<ul>
+			{foreach item=file from=$file_list}
+				<li>
+					<a href="./styles.php?menuid=22&amp;style_id={$style_id}&amp;file={$file.name}&amp;action=style_select">
+						{$file.name}
+					</a>
+					{if !$file.schreib}{$message_551}{/if}
+				</li>
+			{/foreach}
+		</ul>
+	{/if}
+	{if isset($xinhalt) && $xinhalt}
+		<h1>{$message_194}</h1>
+		{*<!-- Damit Ihre �nderungen auch in die Datei geschreiben werden kann, mu� diese die Dateirechte 646 haben.-->*}
+		<p>{$message_195}</p>
+		{if isset($not_writeable) && $not_writeable}
+			<div class="error">
+				{$not_writeable_message} {$not_writeable_file}
+			</div>
+		{/if}
+		<a style="float:right;display:block;" href="./styles.php?menuid=22&amp;style_id={$style_id}&amp;action=style_select&amp;tab=1">
+			{$system_styles_zurck_zur_bersichtcss}
+		</a>
+		{if isset($eingetragen) && $eingetragen}
+			<div class="message">
+				{$system_styles_die_daten_wurden_gespeichert}
+			</div>
+			<br/>
+		{/if}
+		<form name="artikel" action="" method="post" id="formi" accept-charset="UTF-8">
+			<input type="hidden" name="style_id" value="{$style_id|escape:"html"}"/>
+			<input type="hidden" name="form_file" value="{$style_file_form|escape:"html"}"/>
+			<input type="hidden" name="tab" value="1"/>
+			<input type="hidden" name="action" value="style_select"/>
+			<fieldset>
+				<!-- Eingabe/Bearbeitung der CSS Datei: -->
+				<legend>{$message_196}</legend>
+				<!-- Css Datei: -->
+				<label for="css_inhalt">{$message_197}</label>
+				<div style="border: 1px solid #333;background:#fff;;">
+					<textarea type="text" name="inhalt" id="css_inhalt" rows="30" cols="70"
+							 style="width:99%;background:#fff;">{$xinhalt|escape:"html"}</textarea>
+				</div>
+			</fieldset>
+
+			<fieldset>
+				<!-- Eingabe: -->
+				<legend>{$message_70}</legend>
+				<input type="submit" class="submit_back" value="{$message_70}" name="submit"/>
+			</fieldset>
+		</form>
+	{literal}
+		<script type="text/javascript">
+			var editor = CodeMirror.fromTextArea('css_inhalt', {
+				height: "450px",
+				width: "100%",
+				//lineNumbers: "on",
+				parserfile: "parsecss.js",
+				stylesheet: "css/csscolors.css",
+				path: "js/"
+			});
+		</script>
+	{/literal}
+	{/if}
+{/if}

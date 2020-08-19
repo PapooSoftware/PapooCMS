@@ -1,0 +1,36 @@
+{if $IS_ADMIN}
+	<!-- Wir nur in der Admin angezeigt -->
+	<div class="weiter pagination">
+		{* Wenn weitere Seiten existieren, Auswahl anzeigen. *}
+		{if $weiter}
+			<ul>
+			{if $hrefruck}
+			{* Eine Seite zur�ck *}
+			{* Dieser Link f�hrt eine Seite zur�ck.*}
+				<li>
+				<a href="{$hrefruck}" title="{$message_636}">{$message_73}</a>
+				</li>
+			{/if}
+			{* Alle Seiten durchloopen*}
+			{foreach item=weiter from=$weiter_array}
+				{if $weiter.aktivhref}
+					{* Die aktuell angezeigte Seite.*}
+					<li class="disabled" ><span title="{$message_637}">{$weiter.linknummer}</span> </li>
+				{else}
+					{* Dieser Link führt zur*}
+					{* Seite.*}
+					<li>
+						<a href="{$weiter.linkname}" title="{$message_633} {$weiter.linknummer}. {$message_635}. ">{$weiter.linknummer}</a>
+					</li>
+				{/if}
+			{/foreach}
+			{if $hrefweiter}
+				{* Eine Seite weiter. *}
+				{* Dieser Link f�hrt eine Seite weiter.*}
+				<li><a href="{$hrefweiter}" title="{$message_634}">{$message_86}</a> </li>
+			{/if}
+			</ul>
+		{/if}
+		{* ENDE Wenn weitere Seiten existieren, Auswahl anzeigen. *}
+	</div>
+{/if}

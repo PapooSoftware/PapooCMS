@@ -1,0 +1,17 @@
+{if $IS_ADMIN}
+	<fieldset>
+		{*<!-- �berschrift -->*}
+		<legend>{$message_66}</legend>
+		<label for="uberschrift">{$message_66}:</label>
+		{*<!-- Hier bitte Ihre �berschrift eingeben -->*}
+		<input type="text" id="uberschrift" name="inhalt_ar[uberschrift]" size="50" value="{$uberschrift}" title="{$message_154}" />
+		<div class="clearfix"></div>
+		<input type="checkbox" value="1" {if isset($hynchecked)}{$hynchecked}{/if} name="inhalt_ar[hyn]" id="hyn" /><label for="hyn">{$message_459}</label>
+	</fieldset>
+	{*<!-- Editor Bereich: Der Inhalt wird in das Textarea "inhalt" geschrieben -->*}
+	<fieldset class="formatierung">
+		{*<!-- Eingabe und Formatierung der Inhalte -->*}
+		<legend>{$message_166}</legend>
+		{include file=artikel_editor.inc.html}
+	</fieldset>
+{/if}

@@ -1,0 +1,15 @@
+body {
+	background:#fff;
+	color:#000;
+}
+.insert_flex,
+.insert_gal {
+	display:block;
+	border:1px solid black;
+	width:400px;
+	height:40px;
+	overflow:auto;
+	background:#eee;
+	color:#000;
+	padding:5px;
+}

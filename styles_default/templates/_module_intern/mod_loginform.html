@@ -1,0 +1,32 @@
+{*<!-- MODUL: mod_loginform (intern) -->*}
+<h3>{$message_2128}</h3>
+<div class="inner_mod">
+<form method="post" action="">
+	{*<!-- Einloggen-->*}
+	<fieldset>
+		<legend>{$message_2128}</legend>
+		{if $sperre}
+			<p>{$message_2156}</p>
+		{/if}
+		{*<!-- Username-->*}
+		<label for="username">{$message_2129}</label>
+		<input type="text" class="input" id="username" name="username" size="20" maxlength="50" value="{$message_2174}"
+			onblur="if(this.value=='')this.value='{$message_2174}';" onfocus="if(this.value=='{$message_2174}')this.value='';" />
+		{*<!-- Passwort-->*}
+		<label for="password">{$message_2130}</label>
+		<input type="password" class="input" id="password" name="password" size="20" maxlength="50" value="" />
+		<input type="submit" class="senden btn btn-info" value="{$message_2131}" name="login" />
+		<div class="clearfix"></div>
+		{*<!-- Neuen Account anlegen -->*}
+		<a class="loginlink" href="{$slash}account.php?menuid=2" title="{$message_2132}">{$message_2067}</a><br /><span class="ignore">.</span><div class="clearfix"></div>
+		{*<!-- Passwort vergessen -->*}
+		<a class="loginlink" href="{$slash}login.php?forgot=1&menuid=2">{$message_passwort_vergessen}</a><br /><span class="ignore">.</span>
+		{if $logfalse}
+			<h2 class="ignore">{$message_2127}</h2>
+			{*<!-- <p>Bitte �berpr�fen Sie Ihre Eingaben</p> -->*}
+			<p style="background:#fff;">{$message_2141}  {if $loggedin_false_pass==1}{$message_2141a}{/if}</p>
+		{/if}
+	</fieldset>
+</form>
+</div>
+{*<!-- ENDE MODUL: mod_loginform (intern) -->*}

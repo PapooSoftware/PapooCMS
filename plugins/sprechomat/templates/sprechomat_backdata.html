@@ -1,0 +1,60 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+	<h1>{$plugin.sprechomat.daten}</h1>
+{if $sprechomat_backendmessage neq ""}
+	<h3>{$sprechomat_backendmessage}</h3>
+{/if}
+	<form name="sprechomat_daten" method="post" action="">
+		<fieldset>
+			<legend>{$plugin.sprechomat.aktivieren}</legend>
+			<label for="sprechomat_aktiv">{$plugin.sprechomat.aktivieren}</label>
+			<input type="checkbox" name="sprechomat_aktiv_yn" id="sprechomat_aktiv_yn" value="1" {if $sprechomat_einstellungen.sprechomat_aktiv_yn}checked="checked"{/if} />
+		</fieldset>
+		<fieldset>
+			<legend>{$plugin.sprechomat.server_adresse}</legend>
+			<label for="sprechomat_serverurl">{$plugin.sprechomat.server_url}</label>
+			<input type="text" name="sprechomat_lokalurl" id="sprechomat_lokalurl" value="{$sprechomat_einstellungen.sprechomat_lokalurl}" size="40" />
+		</fieldset>
+		
+		<p>
+			<br />
+			Die folgenden Daten m&uuml;ssen Sie im Normalfall nicht &auml;ndern. Diese Daten m&uuml;ssen nur unter ganz betsimmten Umst&auml;nden angegeben werden.
+		</p>
+		<small>
+			<fieldset>
+				<legend>{$plugin.sprechomat.sprechomat_adresse}</legend>
+				<label for="sprechomat_serverurl">
+					{$plugin.sprechomat.sprechomat_url} <a href="{$sprechomat_einstellungen.sprechomat_registerlink}">{$sprechomat_einstellungen.sprechomat_registerlink}</a>
+					{$plugin.sprechomat.sprechomat_url2}
+				</label>
+				<input type="text" name="sprechomat_serverurl" id="sprechomat_serverurl" value="{$sprechomat_einstellungen.sprechomat_serverurl}" size="40" />
+			</fieldset>
+			<fieldset>
+				{$plugin.sprechomat.zugangskennung}
+				<label for="sprechomat_devloginid">{$plugin.sprechomat.entwicklerkennung}</label>
+				<input type="text" name="sprechomat_devloginid" id="sprechomat_devloginid" value="{$sprechomat_einstellungen.sprechomat_devloginid}" size="10"/><br />
+				<label for="sprechomat_domainid">{$plugin.sprechomat.domainkennung}</label>
+				<input type="text" name="sprechomat_domainid" id="sprechomat_domainid" value="{$sprechomat_einstellungen.sprechomat_domainid}" size="10"/><br />
+			</fieldset>
+		</small>
+		
+		<br />
+		<br />
+		<fieldset>
+			<legend>{$plugin.sprechomat.aendern}</legend>
+			<input type="submit" class="submit_back_green" value="{$plugin.sprechomat.aendern}" name="sprechomat_submit_data" />
+		</fieldset>
+	</form>
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

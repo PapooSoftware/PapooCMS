@@ -1,0 +1,42 @@
+{if $module_aktiv.mod_bildwechsler}
+<!-- MODUL: bildwechsler -->
+<div class="modul" id="mod_bildwechsler">
+
+    {*<!-- Einstellungen -->*}
+    {*<!-- documentation : http://foundation.zurb.com/docs/components/orbit.html -->*}
+    <ul data-orbit data-options =  "timer_speed: 6000;
+                                    animation: slide;
+                                    animation_speed: 1000;
+                                    bullets: false;
+                                    circular: true;
+                                    pause_on_hover: true;
+									resume_on_mouseout: true;
+									next_on_click: false;
+                                    slide_number_text: von;
+                                    ">
+        {*<!-- Ende Einstellungen -->*}
+
+        {foreach item=wechselbild from=$plugins.bildwechsler name=wechselbilder key=bkey}
+        <li {if $bkey==0}style="z-index:10;"{/if}>
+            {if $wechselbild.has_iframe}
+            {$wechselbild.bw_bild}
+            {else}
+            <img {$wechselbild.bw_bild} />
+            {/if}
+            <div class="orbit-caption">
+                {*<strong>{$wechselbild.bw_noch_mehr_text}</strong>*}
+                {if $wechselbild.bw_ueberschrift}
+                <h1><a href="{$wechselbild.bw_extra_link_url}">{$wechselbild.bw_ueberschrift}</a></h1><br />
+                {/if}
+                {if $wechselbild.bw_text}
+                    <h2><a href="{$wechselbild.bw_extra_link_url}">{$wechselbild.bw_text}</a></h2>
+                {/if}
+            </div>
+        </li>
+        {/foreach}
+    </ul>
+</div>
+<!-- ENDE MODUL: bildwechsler -->
+{/if}
+
+

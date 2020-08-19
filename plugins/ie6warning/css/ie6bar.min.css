@@ -1,0 +1,181 @@
+/*
+ * Internet Explorer 6 Upgrade Warning (CSS)
+ * Version:	1.3 (September 24, 2010)
+ * Author:	Erik van Paassen (http://www.evpwebdesign.nl)
+ * 
+ * THIS PROJECT IS LICENSED UNDER THE MIT LICENSE:
+ * http://www.opensource.org/licenses/mit-license.php
+ * 
+ * Copyright (c) 2010 Erik van Paassen
+ */
+ 
+
+ 
+#ie6-warning-wrapper {
+    width: 100%;
+    height: 0;
+    position: relative;
+    text-align: left;
+}
+#ie6-warning {
+    height: 94px;
+    margin-bottom: 12px;
+    padding-top: 16px;
+    padding-bottom: 12px;
+    padding-left: 18px;
+    padding-right: 18px;
+    background-color: #830000;
+    background-image: url('../img/background.gif');
+    background-position: top left;
+    background-repeat: repeat-x;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #6A0000;
+    display: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #FFFFFF;
+    position: relative;
+}
+#ie6-warning-wrapper.ie6-warning-overlay {
+    z-index: 99999
+}
+#ie6-warning-wrapper.ie6-warning-overlay #ie6-warning {
+    position: absolute
+}
+#ie6-warning.ie6-warning-expanded {
+    height: auto
+}
+a#ie6-warning-close {
+    width: 17px;
+    height: 17px;
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-image: url('../img/close.gif');
+    background-position: top;
+    border-width: 0;
+    cursor: pointer;
+}
+a:hover#ie6-warning-close {
+    background-position: bottom
+}
+#ie6-warning-container {
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 13px;
+    cursor: pointer;
+    position: relative;
+}
+#ie6-warning.ie6-warning-expanded #ie6-warning-container {
+    cursor: auto
+}
+#ie6-warning-logo {
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-width: 0;
+    background-image: url('../img/ie6-logo.gif');
+}
+#ie6-warning-text {
+    display: block;
+    margin-bottom: 25px;
+    margin-left: 79px;
+    text-align: center;
+}
+#ie6-warning-title {
+    display: block;
+    margin-bottom: 3px;
+    font-size: 16px;
+    font-weight: bold;
+}
+#ie6-warning-moreinfo,
+#ie6-warning-explanation {
+    font-size: 11px;
+    text-transform: uppercase;
+    text-align: center;
+}
+#ie6-warning-moreinfo {
+    font-weight: bold
+}
+#ie6-warning-explanation {
+    display: none
+}
+#ie6-warning-details {
+    height: 120px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    text-align: center;
+    display: none;
+}
+#ie6-warning-text a
+{
+    color:white;
+}
+#ie6-warning-text a:hover
+{
+    text-decoration: none;
+}
+a.ie6-warning-browserbutton {
+    width: 120px;
+    height: 120px;
+    display: inline-block;
+    margin-left: 8px;
+    margin-right: 8px;
+    border-width: 0;
+    cursor: pointer;
+    text-decoration: none;
+}
+span.ie6-warning-browserbutton {
+    width: 118px;
+    height: 118px;
+    display: none;
+    position: relative;
+    background-color: #F5F5F5;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #CCCCCC;
+    cursor: pointer;
+}
+.ie6-warning-browserbutton-title {
+    width: 104px;
+    display: block;
+    position: absolute;
+    top: 101px;
+    left: 8px;
+    color: #666666;
+    font-size: 11px;
+    text-align: center;
+    border-top-width: 1px;
+    border-top-style: dashed;
+    border-top-color: #CCCCCC;
+    background-color: #F5F5F5;
+}
+span.ie6-warning-browserbutton a span {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    position: absolute;
+    top: 1px;
+    left: 10px;
+    cursor: pointer;
+}
+span#ie6bar-warning-browserbutton-ie {
+    background-image: url('../img/browsers/browser_ie.gif')
+}
+span#ie6bar-warning-browserbutton-firefox {
+    background-image: url('../img/browsers/browser_firefox.gif')
+}
+span#ie6bar-warning-browserbutton-chrome {
+    background-image: url('../img/browsers/browser_chrome.gif')
+}
+span#ie6bar-warning-browserbutton-safari {
+    background-image: url('../img/browsers/browser_safari.gif')
+}
+span#ie6bar-warning-browserbutton-opera {
+    background-image: url('../img/browsers/browser_opera.gif')
+}

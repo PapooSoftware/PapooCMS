@@ -1,0 +1,41 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+	<h3>{$plugin.devtools.version_clean}</h3>
+
+	{if $plugin.devtools.switch_deleted}
+		<p>{$plugin.devtools.version_deleted}</p>
+	{else}
+		<p>
+			{$plugin.devtools.text1}<br />
+			<br />
+			<strong style="color: #FF3333;">
+				{$plugin.devtools.warnung}
+			</strong>
+		</p>
+		<form name="versioncleaner" action="" method="post">
+			<input type="hidden" name="versioncleaner_action" value="clean">
+			<input type="submit" class="submit_back_red_white" value="{$plugin.devtools.version_delete}">
+		</form>
+		<p>
+			{$plugin.devtools.text1_b}<br />
+		</p>
+		<form name="versioncleaner" action="" method="post">
+			<input type="hidden" name="versioncleaner_action" value="clean_aktu">
+			<input type="submit" class="submit_back_red_white" value="{$plugin.devtools.version_delete}">
+		</form>
+
+	{/if}
+
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

@@ -1,0 +1,31 @@
+{if $IS_ADMIN}
+		<fieldset>
+			{*<!-- Sprache/Language Frontend:-->*}
+			<legend>{$message_295}</legend>
+			{*<!--Hier wird die Standard Sprache festgelegt-->*}
+			<p>{$message_366}</p>
+			{*<!-- Sprache/Language Frontend: -->*}
+			<label for="lang_frontend" >{$message_295}</label>
+			{*<!-- Hier kann eine Sprache ausgew�hlt werden.-->*}
+			<select name="lang_frontend" id="lang_frontend" title="{$message_363}" style="width:40%;" size="1">
+				<option value="">({$message_294})</option>
+				{foreach item=lang from=$languageget}
+					<option value="{$lang.lang_short}" {if $lang.lang_short==$lang_front_default} selected="selected" {/if} >
+						{$lang.language}
+					</option>
+				{/foreach}
+			</select>
+		</fieldset>
+
+		<fieldset>
+			{*<!-- Weitere Sprachen im Frontend:-->*}
+			<legend>{$message_364}</legend>
+			{*<!-- Hier werden weitere Sprachen f�r das Frontend ausgew�hlt. Bedenken Sie, das Sie f�r jede Sprache eigene Men�punkte und Artikel eingeben m�ssen!-->*}
+			<p>{$message_367}</p>
+			{foreach item=lang from=$language}
+				<input type="checkbox" {$lang.selected} name ="lang[]" id="lang{$lang.lang_id}" value="{$lang.lang_id}" />
+				<label for="lang{$lang.lang_id}">{$lang.language}</label>
+				<br />
+			{/foreach}
+		</fieldset>
+{/if}

@@ -1,0 +1,36 @@
+<div class="artikel">
+{* Anzeige der Kategorien *}
+	<div>{$plugin.galerie_front.text.cat_count} {$anzahl}</div>
+	<script src='{$slash}plugins/galerie/js/confirm.js' type='text/javascript'></script>
+	<ul class="cat_main_ul ul_no_style_pl5">
+		{foreach item=cat from=$galerie_cat_data}
+{* Link Erweitern/Reduzieren für parent *}
+			<li class="float_left" style="list-style-type:none;">
+				{if $cat.parent}
+					<a href="#" title="{$plugin.galerie_front.linktext.cat_collapse}" onclick="HideShowCat('Catid_{$cat.gallang_gal_id}');">±</a>
+				{else}
+					<span class="ml_11">&nbsp;</span>
+				{/if}
+			</li>
+{* Kategorie-/Galerienname *}
+			<li style="list-style-type:none;">
+				{if !$cat.parent}
+					<a href="{$slash}plugin.php?menuid={$aktive_menuid}&amp;template={$template}&amp;galerie_switch=GALERIE_START&amp;galerie_id={$cat.gal_id}">{$cat.gallang_name}</a>
+				{else}
+					<a href="{$slash}plugin.php?menuid={$aktive_menuid}&amp;template={$template}&amp;cat_id={$cat.gal_id}">{$cat.gallang_name}</a>
+				{/if}
+{* Listensteuerung: neue Unterkategorie und End-Tags *}
+			{if $cat.parent}
+				<ul id="Catid_{$cat.gallang_gal_id}" class="ul_no_style_pl13">
+			{else}
+				</li>
+			{/if}
+{* End-Tags-Steuerung. Zahl der End-Tags lt. Variable einfügen *}
+			{if $cat.close_tags}
+				{section name=ende loop=$cat.close_tags step=-1}
+					</ul></li>
+				{/section}
+			{/if}
+		{/foreach}
+	</ul>
+</div>

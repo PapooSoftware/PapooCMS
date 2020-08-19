@@ -1,0 +1,249 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+{if $rss_fehler_feedtitle neq ""}
+	<div class="error">
+                  Fehler im Formular:{$rss_fehler_feedtitle}<br/>
+ </div>
+              {/if}
+	          {if $rss_fehler_feeddesc neq ""}<div class="error">
+                  Fehler im Formular:{$rss_fehler_feeddesc}<br/></div>
+              {/if}
+	          {if $rss_fehler_feedcount neq ""}<div class="error">
+                  Fehler im Formular:{$rss_fehler_feedcount}<br/></div>
+              {/if}
+	          {if $rss_fehler_feedlang neq ""}<div class="error">
+                  Fehler im Formular:{$rss_fehler_feedlang}<br/></div>
+              {/if}
+<div class="artikel">
+
+	<h1>{$message_5019}</h1>
+	<p> {$message_5020}</p>
+	<ul>
+	<li>{$message_5021}</li>
+	<li>{$message_5022}</li>
+	<li>{$message_5023}</li>
+	<li>{$message_5024}</li>
+	<li>{$message_5025}</li>
+	</ul>
+	<p>
+	
+	
+	<div class="floatbox">
+	          
+		<form id="test_daten" action="" method="post">
+			<fieldset>
+				<legend>{$message_5026}</legend>
+				<div class="innerform">
+					<label for="feedtitle">{$message_5027}</label><br />
+					<input type="text" class="inpt" id="feedtitle" name="feedtitle" value="{$rss_feedtitle}" size="80" tabindex="2" title="{$message_5028}" /><br />
+					<label for="feeddesc">{$message_5029}</label><br />
+					<input type="text" class="inpt" id="feeddesc" name="feeddesc" value="{$rss_feeddesc}" size="80" tabindex="3" title="{$message_5030}" /><br />
+					<label for="feedcount">{$message_5031}</label><br />
+					<input type="text" class="inpt" id="feedcount" name="feedcount" value="{$rss_feedcount}" size="3" tabindex="4" title="{$message_5032}" /><br />
+					<label for="feedcount">{$message_5033}</label><br />
+					<input type="text" class="inpt" id="feedlang" name="feedlang" size="1" value="{$rss_feedlang}" tabindex="5" title="{$message_5034}" /><br />
+					<label for="feedcount">{$message_5035}</label><br />
+					<input type="text" class="inpt" id="feedprefix" name="feedprefix" tabindex="6" value="{$rss_feedprefix}" title="{$message_5036}" /><br />
+					<input type="hidden" name="sendvalue" value="config">
+					<input type="submit" class="submit_back_green" name="submit" value="eintragen" tabindex="5" accesskey="9" />
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	<br />	<br />
+	<hr>
+		<br />	<br />
+	<h1>{$message_5049}</h1>
+	<p>{$message_5037}</p>
+	<h2>{$message_5038} 1</h2>
+	<p>{$message_5039}</p>
+	<div class="floatbox">
+	          {if $rss_fehler_url1 neq ""}
+                  {$message_5040}{$rss_fehler_url1}<br/>
+              {/if}
+		<form id="feed1" action="" method="post">
+			<fieldset>
+				<legend>{$message_5043}</legend>
+				<div class="innerform">
+					<label for="feedtitle">{$message_5041}</label><br />
+					<input type="text" class="inpt" id="feedurl1" name="feedurl1" value="{$rss_feed_url_FEED1}" size="80"maxlength="255" tabindex="7" title="{$message_5042} 1" /><br />
+					<input type="hidden" name="sendvalue" value="FEED1">
+					<input type="submit" class="submit_back_green" name="submit" value="eintragen" tabindex="8" accesskey="9" />
+				</div>
+			</fieldset>
+		</form>
+	</div>
+	
+		<hr>
+	<h2>{$message_5038} 2</h2>
+	<p> {$message_5039}</p>
+	<div class="floatbox">
+	          {if $rss_fehler_url2 neq ""}
+                  {$message_5040}{$rss_fehler_url2}<br/>
+              {/if}
+		<form id="feed2" action="" method="post">
+			<fieldset>
+				<legend>{$message_5043}</legend>
+				<div class="innerform">
+					<label for="feedtitle">{$message_5041}</label><br />
+					<input type="text" class="inpt" id="feedurl2" name="feedurl2" value="{$rss_feed_url_FEED2}" size="80"maxlength="255" tabindex="15" title="{$message_5042} 2" /><br />
+					<input type="hidden" name="sendvalue" value="FEED2">
+					<input type="submit" class="submit_back_green" name="submit" value="eintragen" tabindex="16" accesskey="9" />
+				</div>
+			</fieldset>
+		</form>
+		<hr>
+	<h2>{$message_5038} 3</h2>
+	<p> {$message_5039}</p>
+	<div class="floatbox">
+	          {if $rss_fehler_url3 neq ""}
+                  {$message_5040}{$rss_fehler_url3}<br/>
+              {/if}
+		<form id="feed3" action="" method="post">
+			<fieldset>
+				<legend>{$message_5043}</legend>
+				<div class="innerform">
+					<label for="feedtitle">{$message_5041}</label><br />
+					<input type="text" class="inpt" id="feedurl3" name="feedurl3" value="{$rss_feed_url_FEED3}" size="80"maxlength="255" tabindex="25" title="{$message_5042} 3" /><br />
+					<input type="hidden" name="sendvalue" value="FEED3">
+					<input type="submit" class="submit_back_green" name="submit" value="eintragen" tabindex="26" accesskey="9" />
+				</div>
+			</fieldset>
+		</form>
+		<hr>
+	<h2>{$message_5038} 4</h2>
+	<p> {$message_5039}</p>
+	<div class="floatbox">
+	          {if $rss_fehler_url4 neq ""}
+                  {$message_5040}{$rss_fehler_url4}<br/>
+              {/if}
+		<form id="feed4" action="" method="post">
+			<fieldset>
+				<legend>{$message_5043}</legend>
+				<div class="innerform">
+					<label for="feedtitle">{$message_5041}</label><br />
+					<input type="text" class="inpt" id="feedurl4" name="feedurl4" value="{$rss_feed_url_FEED4}" size="80"maxlength="255" tabindex="35" title="{$message_5042} 4" /><br />
+					<input type="hidden" name="sendvalue" value="FEED4">
+					<input type="submit" class="submit_back_green" name="submit" value="eintragen" tabindex="36" accesskey="9" />
+				</div>
+			</fieldset>
+		</form>
+		<hr>
+	<h2>{$message_5038} 5</h2>
+	<p> {$message_5039}</p>
+	<div class="floatbox">
+	          {if $rss_fehler_url5 neq ""}
+                  {$message_5040}{$rss_fehler_url5}<br/>
+              {/if}
+		<form id="feed5" action="" method="post">
+			<fieldset>
+				<legend>{$message_5043}</legend>
+				<div class="innerform">
+					<label for="feedtitle">{$message_5041}</label><br />
+					<input type="text" class="inpt" id="feedurl5" name="feedurl5" value="{$rss_feed_url_FEED5}" size="80"maxlength="255" tabindex="45" title="{$message_5042} 5" /><br />
+					<input type="hidden" name="sendvalue" value="FEED5">
+					<input type="submit" class="submit_back_green" name="submit" value="eintragen" tabindex="46" accesskey="9" />
+				</div>
+			</fieldset>
+		</form>
+		<hr>
+	<h2>{$message_5038} 6</h2>
+	<p> {$message_5039}</p>
+	<div class="floatbox">
+	          {if $rss_fehler_url6 neq ""}
+                  {$message_5040}{$rss_fehler_url6}<br/>
+              {/if}
+		<form id="feed6" action="" method="post">
+			<fieldset>
+				<legend>{$message_5043}</legend>
+				<div class="innerform">
+					<label for="feedtitle">{$message_5041}</label><br />
+					<input type="text" class="inpt" id="feedurl6" name="feedurl6" value="{$rss_feed_url_FEED6}" size="80"maxlength="255" tabindex="55" title="{$message_5042} 6" /><br />
+					<input type="hidden" name="sendvalue" value="FEED6">
+					<input type="submit" class="submit_back_green" name="submit" value="eintragen" tabindex="56" accesskey="9" />
+				</div>
+			</fieldset>
+		</form>
+		<hr>
+	<h2>{$message_5038} 7</h2>
+	<p> {$message_5039}</p>
+	<div class="floatbox">
+	          {if $rss_fehler_url7 neq ""}
+                  {$message_5040}{$rss_fehler_url7}<br/>
+              {/if}
+		<form id="feed7" action="" method="post">
+			<fieldset>
+				<legend>{$message_5043}</legend>
+				<div class="innerform">
+					<label for="feedtitle">{$message_5041}</label><br />
+					<input type="text" class="inpt" id="feedurl7" name="feedurl7" value="{$rss_feed_url_FEED7}" size="80"maxlength="255" tabindex="65" title="{$message_5042} 7" /><br />
+					<input type="hidden" name="sendvalue" value="FEED7">
+					<input type="submit" class="submit_back_green" name="submit" value="eintragen" tabindex="66" accesskey="9" />
+				</div>
+			</fieldset>
+		</form>
+		<hr>
+	<h2>{$message_5038} 8</h2>
+	<p> {$message_5039}</p>
+	<div class="floatbox">
+	          {if $rss_fehler_url8 neq ""}
+                  {$message_5040}{$rss_fehler_url8}<br/>
+              {/if}
+		<form id="feed1" action="" method="post">
+			<fieldset>
+				<legend>{$message_5043}</legend>
+				<div class="innerform">
+					<label for="feedtitle">{$message_5041}</label><br />
+					<input type="text" class="inpt" id="feedurl8" name="feedurl8" value="{$rss_feed_url_FEED8}" size="80"maxlength="255" tabindex="75" title="{$message_5042} 8" /><br />
+					<input type="hidden" name="sendvalue" value="FEED8">
+					<input type="submit" class="submit_back_green" name="submit" value="eintragen" tabindex="76" accesskey="9" />
+				</div>
+			</fieldset>
+		</form>
+		<hr>
+	<h2>{$message_5038} 9</h2>
+	<p> {$message_5039}</p>
+	<div class="floatbox">
+	          {if $rss_fehler_url9 neq ""}
+                  {$message_5040}{$rss_fehler_url9}<br/>
+              {/if}
+		<form id="feed1" action="" method="post">
+			<fieldset>
+				<legend>{$message_5043}</legend>
+				<div class="innerform">
+					<label for="feedtitle">{$message_5041}</label><br />
+					<input type="text" class="inpt" id="feedurl9" name="feedurl9" value="{$rss_feed_url_FEED9}" size="80"maxlength="255" tabindex="85" title="{$message_5042} 9" /><br />
+					<input type="hidden" name="sendvalue" value="FEED9">
+					<input type="submit" class="submit_back_green" name="submit" value="eintragen" tabindex="86" accesskey="9" />
+				</div>
+			</fieldset>
+		</form>
+		<hr>
+	<h2>{$message_5038} 10</h2>
+	<p> {$message_5039}</p>
+	<div class="floatbox">
+	          {if $rss_fehler_url10 neq ""}
+                  {$message_5040}{$rss_fehler_url10}<br/>
+              {/if}
+		<form id="feed1" action="" method="post">
+			<fieldset>
+				<legend>{$message_5043}</legend>
+				<div class="innerform">
+					<label for="feedtitle">{$message_5041}</label><br />
+					<input type="text" class="inpt" id="feedurl10" name="feedurl10" value="{$rss_feed_url_FEED10}" size="80"maxlength="255" tabindex="95" title="{$message_5042} 10" /><br />
+					<input type="hidden" name="sendvalue" value="FEED10">
+					<input type="submit" class="submit_back_green" name="submit" value="eintragen" tabindex="96" accesskey="9" />
+				</div>
+			</fieldset>
+		</form>
+		
+	</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

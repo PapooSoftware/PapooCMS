@@ -1,0 +1,27 @@
+{if $module_aktiv.mod_menue_ebene1}
+	<!-- MODUL: menue_ebene1 -->
+	{if $menu_level.1}
+		<div class="modul" id="mod_menue_ebene1">
+			{* <!--
+			<h2 class="ignore">{$message_2184}</h2>
+			<a name="menu" id="menu"></a>
+			--> *}
+			{foreach item=kat from=$catlist_data.1}
+			<!-- -->
+				{if $kat.cat_id>=1}<h4 class="menucat">{$kat.cat_text}</h4>{/if}
+				<ul>
+					{foreach item=menu from=$menu_data}
+						{if $kat.cat_id==$menu.cat_cid  or $no_categories==1}
+							{if $menu.level==1}
+								<li>
+									{include file="_module/mod_menue_ebenen_links.inc.html"}
+								</li>
+							{/if}
+						{/if}
+					{/foreach}
+				</ul>
+			{/foreach}
+		</div>
+	{/if}
+	<!-- ENDE MODUL: menue_ebene1 -->
+{/if}

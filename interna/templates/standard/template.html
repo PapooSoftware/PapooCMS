@@ -1,0 +1,36 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+
+	{if $insertok=="ok"}
+		<div class="message">
+			{$message_775}
+		</div>
+	{/if}
+
+	{if $delok=="ok"}
+		<div class="error">
+			{$message_776}
+		</div>
+	{/if}
+	<div class="artikel">
+		{if $template_start=="ok"}
+			{$message_785}
+		{/if}
+
+		{if $template_sys_start=="ok"}
+			{include file=site_template.html}
+		{/if}
+
+		{if $template_cont_start=="ok"}
+			{include file=content_template.html}
+		{/if}
+
+		{if $template_news_start=="ok"}
+			{include file=new_template.html}
+		{/if}
+		<div class="clear">&nbsp;</div>
+	</div>
+	{*<!-- Hier kommt der Fuss rein-->*}
+	{include file=foot.inc.html}
+{/if}

@@ -1,0 +1,118 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		<h1>{$message_540} {if $mod_style_name}- {$mod_style_name}{/if}</h1>
+		{* <!-- unsichtbares Sprung-Men� zu den einzelnen Bereichen --> *}
+		<div class="ignore">
+			<ul>
+				{foreach key=nummer item=name from=$bereiche_liste}
+					<li><a href="#bereich_{$nummer}">{$message_650} &quot;{$name}&quot;</a></li>
+				{/foreach}
+			</ul>
+		</div>
+		{*<!--Liste der Styles table_data-->*}
+		{if $table_data}
+		<strong>{$intmod_staend}</strong>
+		<div id="inhalt_sitemap" >
+			<ul style="margin-left:0px;padding-left:0px;">
+				{foreach item=table from=$table_data}
+					{*<!-- �ndern-->*}
+					<li style="margin-left:0px;padding-left:0px;"><div style="font-weight:bold;{if $table.standard_style}background:#FFC975;{else}background:#eee;{/if}border-bottom:1px solid #999;margin-bottom:5px;"><a href="./module.php?menuid=60&mod_style_id={$table.style_id}" style="display:block; font-weight:bold; padding: 5px 0px 5px 5px; margin-bottom:5px;">{$table.style_name} -- {$message_726} {$message_357} {if $table.standard_style} -- {$message_551}{/if}</a> </div></li>
+				{/foreach}
+			</ul>
+		</div>
+		{/if}
+		{* <!-- ENDE unsichtbares Sprung-Men� zu den einzelnen Bereichen --> *}
+		{if $mod_style_name}
+			<div style="float:right;"><strong>{$message_651}</strong> <a href="./templates_c/css.xml">{$message_652}</a></div><br />
+		{/if}
+		{* <!-- Schleife �ber Alle Bereiche --> *}
+		{foreach key=nummer item=name from=$bereiche_liste}
+			<div>
+				<a name="bereich_{$nummer}"></a>
+				<h2>{$message_543} &quot;{$name}&quot; <small>({$message_542}: {$nummer})</small></h2>
+				{if $module.$nummer}
+					<table class="modul_tabelle" style="width: 98%;">
+						<caption>{$message_541}</caption>
+						<tbody>
+							{* <!-- Schleife f�r aktive Module dieses Bereichs --> *}
+							{foreach name=module item=modul from=$module.$nummer}
+								<tr>
+									<td headers="beschreibung" style="width: 85%;">
+										{$modul.modlang_name} <small>({$modul.modlang_beschreibung}; {$message_653} {$modul.mod_datei})</small>
+									</td>
+									<td headers="runter" style="width: 5%;">
+										{if NOT $smarty.foreach.module.last}
+											<form action="" method="post">
+												<input type="hidden" name="mod_bereich_id" value="{$nummer}" />
+												<input type="hidden" name="mod_style_id" value="{$mod_style_id}" />
+												<input type="hidden" name="mod_id" value="{$modul.mod_id}" />
+												<input type="hidden" name="module_aktion" value="REORDER_RUNTER" />
+												<label for="menuorder_action_minus{$modul.mod_id}" class="ignore">Modul nach unten verschieben</label>
+												<input type="image" title="{$message_654}" alt="{$message_654}"
+													id="modul_reorder_action_minus{$modul.mod_id}" name="modul_reorder_action_minus{$modul.mod_id}" value="runter"
+													src="bilder/pfeil_runter.gif" class="modul_reorder_knopf" />
+											</form>
+										{/if}
+									</td>
+									<td headers="hoch" style="width: 5%;">
+										{if NOT $smarty.foreach.module.first}
+											<form action="" method="post">
+												<input type="hidden" name="mod_bereich_id" value="{$nummer}" />
+												<input type="hidden" name="mod_id" value="{$modul.mod_id}" />
+												<input type="hidden" name="mod_style_id" value="{$mod_style_id}" />
+												<input type="hidden" name="module_aktion" value="REORDER_HOCH" />
+												<label for="modul_reorder_action_plus{$modul.mod_id}" class="ignore">Modul nach oben verschieben</label>
+												<input type="image" title="{$message_655}" alt="{$message_655}"
+													id="modul_reorder_action_plus{$modul.mod_id}" name="modul_reorder_action_plus{$modul.mod_id}" value="hoch"
+													src="bilder/pfeil_hoch.gif" class="modul_reorder_knopf" />
+											</form>
+										{/if}
+									</td>
+									<td headers="loeschen" style="width: 5%;">
+										<form action="" method="post">
+											<input type="hidden" name="mod_bereich_id" value="{$nummer}" />
+											<input type="hidden" name="mod_id" value="{$modul.mod_id}" />
+											<input type="hidden" name="mod_style_id" value="{$mod_style_id}" />
+											<input type="hidden" name="module_aktion" value="DEAKTIVIEREN" />
+											<label for="modul_loeschen{$modul.mod_id}" class="ignore">Modul aus diesem Bereich entfernen</label>
+											<input type="image" title="{$message_656}" alt="{$message_656}"
+												id="modul_loeschen{$modul.mod_id}" name="modul_loeschen{$modul.mod_id}" value="hoch"
+												src="bilder/knopf_loeschen.gif" class="modul_loeschen_knopf" />
+										</form>
+									</td>
+								</tr>
+							{/foreach}
+							{* <!-- ENDE Schleife f�r aktive Module dieses Bereichs --> *}
+						</tbody>
+					</table>
+				{else}
+					{$message_544}<br />
+				{/if}
+				{if $module_inaktiv.$nummer}
+					<form action="" method="post">
+						<input type="hidden" name="mod_bereich_id" value="{$nummer}" />
+						<input type="hidden" name="mod_style_id" value="{$mod_style_id}" />
+						<input type="hidden" name="module_aktion" value="AKTIVIEREN" />
+						<label for="mod_id{$nummer}">{$message_545}</label><br />
+						<select name="mod_id" id="mod_id{$nummer}">
+							{* <!-- Schleife f�r verf�gbare Module dieses Bereichs --> *}
+							{foreach item=modul from=$module_inaktiv.$nummer}
+								<option value="{$modul.mod_id}">{$modul.modlang_name}</option>
+							{/foreach}
+							{* <!-- Schleife f�r verf�gbare Module dieses Bereichs --> *}
+						</select>
+						<input type="submit" class="submit_back" value="{$message_546}" />
+					</form>
+				{else}
+					{$message_544}<br />
+				{/if}
+			</div>
+		{/foreach}
+		{* <!-- ENDE Schleife f�r Alle Bereiche --> *}
+		</div>
+	</div>
+	{*<!-- Hier kommt der Fuss rein-->*}
+	{include file=foot.inc.html}
+{/if}

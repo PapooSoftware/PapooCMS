@@ -1,0 +1,164 @@
+<div class="artikel ">
+    <div class="kalender_front_content artikel_details">
+        {if $is_eingetragen=="ok"}
+            <div class="message">{$plugin_pkalender_wurde_eingetragen}</div>
+        {/if}
+        {if $plugin_calender_view=="new" && $kalender_eintrge_von_aussen}
+            <h1>{$kalender_daten.kalender_bezeichnung_des_kalenders}</h1>
+            <div class="kalendertext">{$kalender_daten.kalender_text_oberhalb}</div>
+
+            <div class="kalender_liste_links">
+			<a href="{$url_cal2[$kal_id]}{$kal_id}&monats_id={$monats_id}&cal_view=&getlang={$lang_short}">{$plugin_kal_liste}</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="{$url_cal2[$kal_id]}{$kal_id}&monats_id={$monats_id}&cal_view=cal&getlang={$lang_short}">{$plugin_kal_kalender}</a>&nbsp;&nbsp;&nbsp;&nbsp;{$plugin_kal_new}
+			</div>
+            {include file="../../plugins/pkalender/templates/pkalender_front_form.html"}
+        {else}
+
+            {if $plugin_calender_view=="cal"}
+                {literal}
+                    <script language="JavaScript">
+                    <!--
+                    function go2x{/literal}{$kalender_daten.kalender_id}{literal}(){
+                        document.monatform2x{/literal}{$kalender_daten.kalender_id}{literal}.submit();
+                    }
+                    //-->
+                    </script>
+	            {/literal}
+		        <h1>{$kalender_daten.kalender_bezeichnung_des_kalenders}</h1>
+		        <div class="kalendertext">{$kalender_daten.kalender_text_oberhalb}</div>
+		        <div class="span3">
+	                <h2>{if $plugin_kalender_aktu_datum_monat}{$plugin_termine_des_monats}{$plugin_kalender_aktu_datum_monat_monat} {$plugin_kalender_aktu_datum_monat|date_format:"%Y"}{else}{$plugin_termine_des_datums} {$plugin_kalender_aktu_datum|date_format:"%d.%m.%Y"}{/if}</h2>
+                    <div class="kalender_liste_links">
+                        <a href="{$url_cal2[$kal_id]}{$kal_id}&amp;monats_id={$monats_id}&cal_view=&getlang={$lang_short}">{$plugin_kal_liste}</a>&nbsp;&nbsp;&nbsp;&nbsp;{$plugin_kal_kalender} {if $kalender_eintrge_von_aussen}| <a href="{$url_cal2[$kal_id]}{$kal_id}&amp;monats_id={$monats_id}&amp;date_id={$date_id}&date_time={$date_time}&cal_view=new&getlang={$lang_short}">{$plugin_kal_new}</a>{/if}
+                    </div>
+                </div>
+                <div class="kalender_in" >
+                    <div class="span4">
+                        <form action="" name="monatform2x{$kalender_daten.kalender_id}" method="post">
+                            <input type="hidden" name="date_time" value="" />
+
+                            <div class="monat_select">
+                                <h3>{$plugin_kal_monatsauswahl}</h3>
+                                <select onchange="go2x{$kalender_daten.kalender_id}()" name="monats_id" size="1" id="monats_id">
+
+                                    {foreach item=mon from=$monat_array_kal}
+
+                                    <option value="{$mon.mon_id}" {if $monats_id==$mon.mon_id}
+                                    selected="selected"{/if}>{$mon.name} - {$mon.jahr}</option>
+
+                                    {/foreach}
+                                </select>
+                                <noscript><input type="submit" name="submit" value="{$message_160}" /></noscript>
+                            </div>
+				        </form>
+			        </div>
+			        <div class="clearfix"></div>
+				    <br />
+				    <h2>{$plugin_kal_alle_termine}</h2>
+
+                    <table class="kalender_table outside  table table-striped table-hover">
+
+                     <tr>
+                      <th>{$message_paket_mo}</th>
+                      <th>{$message_paket_di}</th>
+                      <th>{$message_paket_mi}</th>
+                      <th>{$message_paket_do}</th>
+                      <th>{$message_paket_fr}</th>
+                      <th>{$message_paket_sa}</th>
+                      <th>{$message_paket_so}</th>
+                     </tr>
+                     <tr>
+                         {foreach item=ptag from=$tagderwoche_a}
+                            <td></td>
+                         {/foreach}
+
+                         {foreach item=ptag from=$plugin_calender_view_data.0.calender_dat}
+                             {if $ptag.1 != "Mon"}
+                             <td {if $ptag.link=="ok"}class="cal_set" {/if}>{if $ptag.link=="ok"}{if $ptag.alle_termine}
+                             <ul>
+                                 {foreach item=all from=$ptag.alle_termine}
+                                 <li class="cal_date cat_{$all.pkal_date_kategorie_im_kalender}"><a class="cal_set" title="{$all.pkal_date_titel_des_termins}"
+                                     {if $url_cal_modrewrite}
+                                        href="{$url_cal_modrewrite[$kal_id]}{$kal_id}-{$ptag.pkal_date_id}-{$ptag.termin_name_url}-date-{$ptag.termin_time}.html"
+                                     {else}
+                                        href="{$url_cal2[$kal_id]}{$kalender_daten.kalender_id}&amp;monats_id={$monats_id}&amp;date_id={$all.pkal_date_id}&date_time={$ptag.termin_time}&getlang={$lang_short}#{$all.pkal_date_id}"
+                                     {/if}
+                                     >{$ptag.0}</a>
+                                 </li>
+                                 {/foreach}
+                             </ul>
+                             {/if}
+                             {else}{$ptag.0}
+                                {/if}</td>
+                             {else}
+                     </tr>
+                        <tr>
+                          <td {if $ptag.link=="ok"}class="set" {/if}>{if $ptag.link=="ok"}
+                            {if $ptag.alle_termine}
+                              <ul>
+                              {foreach item=all from=$ptag.alle_termine}
+                                  <li class="cal_date cat_{$all.pkal_date_kategorie_im_kalender}"><a class="cal_set" title="{$all.pkal_date_titel_des_termins}"
+                                    {if $url_cal_modrewrite}
+                                        href="{$url_cal_modrewrite[$kal_id]}{$kal_id}-{$ptag.pkal_date_id}-{$ptag.termin_name_url}-date-{$ptag.termin_time}.html"
+                                    {else}
+                                        href="{$url_cal2[$kal_id]}{$kalender_daten.kalender_id}&amp;monats_id={$monats_id}&amp;date_id={$all.pkal_date_id}&date_time={$ptag.termin_time}&getlang={$lang_short}#{$all.pkal_date_id}"
+                                    {/if}
+                                    >{$ptag.0}</a>
+                                  </li>
+                              {/foreach}
+                              </ul>{else}{$ptag.0}
+                            {/if}
+                            {else}{$ptag.0}
+                            {/if}</td>
+                            {/if}
+                              {/foreach}
+                            {foreach item=ptag from=$tagderwoche_last}
+                              <td></td>
+                            {/foreach}
+                         </tr>
+                    </table>
+			    </div>
+
+        {else}
+
+            <h1>{$kalender_daten.kalender_bezeichnung_des_kalenders}</h1>
+            <div class="kalendertext">{$kalender_daten.kalender_text_oberhalb}</div>
+            <div class="kalender_liste_links">
+                {$plugin_kal_liste}&nbsp;&nbsp;&nbsp;&nbsp;<a href="{$url_cal2[$kal_id]}{$kal_id}&amp;monats_id={$monats_id}&cal_view=cal&getlang={$lang_short}">{$plugin_kal_kalender}</a>
+                {if $kalender_eintrge_von_aussen}&nbsp;&nbsp;&nbsp;&nbsp;<a href="{$url_cal2[$kal_id]}{$kal_id}&amp;monats_id={$monats_id}&amp;date_id={$date_id}&date_time={$date_time}&cal_view=new&getlang={$lang_short}">{$plugin_kal_new}</a>{/if}
+                <br/>
+                <h5>{$plugin_kal_liste_jahr}</h5>
+                <a href="{$url_cal2[$kal_id]}{$kal_id}&amp;monats_id={$monats_id}&amp;wy=&cal_view=&getlang={$lang_short}">Alle</a>&nbsp;&nbsp;&nbsp;&nbsp;{foreach item=uebersicht_jahr from=$uebersicht_jahr_liste}
+                {if $uebersicht_jahr==$aktives_jahr}
+                        <!-- {$plugin_kal_liste_jahr} -->{$uebersicht_jahr}&nbsp;&nbsp;&nbsp;&nbsp;{else}
+                    <a href="{$url_cal2[$kal_id]}{$kal_id}&amp;monats_id={$monats_id}&amp;wy={$uebersicht_jahr}&cal_view=&getlang={$lang_short}"><!-- {$plugin_kal_liste_jahr} -->{$uebersicht_jahr}</a>&nbsp;&nbsp;&nbsp;&nbsp;{/if}
+                {/foreach}
+                <br/>
+                <br/>
+                <h5>{$plugin_kal_liste_kat}</h5>
+                <a href="{$url_cal2[$kal_id]}{$kal_id}&amp;monats_id={$smarty.get.monats_id}&amp;wy={$smarty.get.wy}&cal_view=&getlang={$lang_short}&amp;pkal_cat_id=">Alle</a>&nbsp;&nbsp;&nbsp;&nbsp;{foreach item=kategorie from=$sort_pcal_kategorien}
+                {if $pkal_cat_id != $kategorie.cat_id}
+                    <a href="{$url_cal2[$kal_id]}{$kal_id}&amp;monats_id={$smarty.get.monats_id}&amp;wy={$smarty.get.wy}&cal_view=&getlang={$lang_short}&amp;pkal_cat_id={$kategorie.cat_id}">{$kategorie.cat_name}</a>&nbsp;&nbsp;&nbsp;&nbsp;{else}
+                    {$kategorie.cat_name}&nbsp;&nbsp;&nbsp;&nbsp;{/if}
+                {/foreach}
+            </div>
+				
+            {foreach item=date name=datename from=$termine_des_jahres}
+                <div class="termin_item">
+                    <div class="termin_head">
+                        <h2>{$date.pkal_date_titel_des_termins}</h2>
+                        <a name="{$date.pkal_date_id}" id=""></a>
+                        <strong>{$date.pkal_date_start_datum|date_format:"%d.%m.%Y"} {$date.pkal_date_uhrzeit_beginn} - {$date.pkal_date_end_datum|date_format:"%d.%m.%Y"} {$date.pkal_date_uhrzeit_ende}</strong>
+                    </div>
+                    <div class="termin_body">
+                        {$date.pkal_date_terminbeschreibung}
+                        <br />
+                        {if $date.pkal_date_link_zu_terminfeld}
+                        <a href="{$date.pkal_date_link_zu_terminfeld}">{$plugin_weitere_infos_des_datums}</a>{/if}
+                    </div>
+                </div>
+            {/foreach}
+            <!-- ENDE Termine des Datum -->
+        {/if}
+    {/if}
+    </div>
+</div>

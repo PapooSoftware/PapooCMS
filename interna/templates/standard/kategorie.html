@@ -1,0 +1,97 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		{if $katsort}
+			<h1>{$message_598}</h1>
+			<form action="" method="post">
+				<table class=" table table-striped table-hover">
+					<tr>
+						<th>{$message_498}</th>
+						<th>Order-ID</th>
+					</tr>
+					{foreach item=kat from=$kat_n}
+						<tr>
+							<td>
+								<label for="orderid_{$kat.cat_id}">{if $kat.cat_text_intern}{$kat.cat_text_intern}{else}{$kat.cat_id}{/if}</label>
+							</td>
+							<td>
+								Order-ID: <input id="orderid_{$kat.cat_id}" name="cat_order[{$kat.cat_id}]" type="text" value="{$kat.cat_order_id}" size="2" />
+							</td>
+						</tr>
+					{/foreach}
+				</table>
+				<fieldset>
+					<legend>{$message_458}</legend>
+					<input type="submit" class="submit_back_green" name="submitorder" value="{$message_458}" />
+				</fieldset>
+			</form>
+		{/if}
+		{if $fragloesch}
+			<form action="" method="post">
+				<input type="hidden" name="cat_id" value="{$cat_id}" />
+				
+				<fieldset>
+					<legend>{$message_600}</legend>
+					{$message_601}{$fragloesch_name} {$message_602}<br />
+					<input name="realloeschen" value="{$message_603}" type="submit" class="submit_back_red" />
+				</fieldset>
+			</form>
+		{else}
+			{if $kat_change}
+				{if $tcat_text=='del'}
+					<h2>{$message_604}</h2>
+				{/if}
+				{if $tcat_text=='drin'}
+					<h2>{$message_605}</h2>
+				{else}
+					{if $tcat_text=='error1'}
+					<h2>{$message_606}</h2>
+					{/if}
+				{/if}
+				{if $kat_alt}
+					<h2>{$message_607}</h2>
+					{include file=kategorie_form.html} 
+				{else}
+					<h1>{$message_608}</h1>
+					<p>{$message_609}</p>
+					{if $kat_n}
+						<ul>
+							{foreach item=kat from=$kat_n}
+								<li>
+									<a href="{$kurl}&cat_id={$kat.cat_id}">{if $kat.cat_text_intern}{$kat.cat_text_intern}{else}{$kat.cat_id}{/if}</a> {$message_610}
+								</li>
+							{/foreach}
+						</ul>
+					{/if}
+				{/if}
+			{/if}
+			{if $kat_start}
+				<h1>{$message_595}</h1>
+				<p>{$message_611}</p>
+				{if !$category_set}
+					<p>{$message_categories_inactive}</p>
+				{/if}
+			{/if}
+			{if $tcat_text=='drin'}
+				<h1>{$message_612}</h1>
+				{else}
+				{if $tcat_text=='error1'}
+					<h1>{$message_613}</h1>
+				{/if}
+				{if $kat_edit}
+					{if $kat_neu}
+						<h1>{$message_614}</h1>
+					{/if}
+					{if $kat_alt}
+						<h1>{$message_607}</h1>
+					{/if}
+					{include file=kategorie_form.html}
+				{/if}
+			{/if}
+		{/if}
+		<div class="clear">&nbsp;</div>
+	</div>
+	{*<!-- Hier kommt der Fuss rein-->*}
+	{include file=foot.inc.html}
+{/if}

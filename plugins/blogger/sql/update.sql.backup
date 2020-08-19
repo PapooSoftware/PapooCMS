@@ -1,0 +1,22 @@
+ CREATE TABLE `XXX_blogger_config` (`blogger_plugin_id` int(11) NOT NULL auto_increment, 
+				  							PRIMARY KEY (`blogger_plugin_id`)) ENGINE=MyISAM; ##b_dump##
+
+ALTER TABLE `XXX_blogger_config` ADD `blogger_plugin_ping_service_aktivieren` VARCHAR( 255 ) NOT NULL; ##b_dump##
+
+ALTER TABLE `XXX_blogger_config` ADD `blogger_plugin_trackback_aktivieren` VARCHAR( 255 ) NOT NULL; ##b_dump##
+
+ALTER TABLE `XXX_blogger_config` ADD `blogger_plugin_mail_an_admin_wenn_neuer_tb_erstellt_wurde` VARCHAR( 255 ) NOT NULL; ##b_dump##
+
+CREATE TABLE `XXX_blogger_import` (`blogger_import_id` int(11) NOT NULL auto_increment, 
+				  							PRIMARY KEY (`blogger_import_id`)) ENGINE=MyISAM; ##b_dump##
+
+ALTER TABLE `XXX_blogger_import` ADD `blogger_import_db_server` TEXT; ##b_dump##
+
+ALTER TABLE `XXX_blogger_import` ADD `blogger_import_db_name` TEXT; ##b_dump##
+
+ALTER TABLE `XXX_blogger_import` ADD `blogger_import_db_user` TEXT; ##b_dump##
+
+ALTER TABLE `XXX_blogger_import` ADD `blogger_import_db_passwort` TEXT; ##b_dump##
+
+ALTER TABLE `XXX_blogger_import` ADD `blogger_import_prfix` TEXT; ##b_dump##
+

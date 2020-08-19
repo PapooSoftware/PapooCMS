@@ -1,0 +1,74 @@
+table.shopping_cart {
+	border: 4px solid #DCDEE0;
+	padding: 4px;
+}
+
+table.shopping_cart td {
+	text-align: center;
+	padding: 3px;
+	font-size: 90%;
+	vertical-align: middle;
+}
+
+table.shopping_cart tr:nth-child(odd) {
+	background: #F2F2F2;
+}
+
+table.shopping_cart tr:nth-child(even) {
+	background: #fff;
+}
+
+table.shopping_cart tr:first-of-type {
+	background: #fff;
+	border-bottom: 1px solid #DCDEE0
+}
+
+table.shopping_cart td:first-of-type {
+	text-align: left;
+	border-right: 1px solid #DCDEE0;
+}
+
+table.shopping_cart td:nth-Child(6) {
+	background-color: #D0E2B6;
+	width: 100px;
+}
+
+.product {
+	border-bottom: 2px dotted #BEC2C6;
+	padding-bottom: 50px;
+	margin-bottom: 20px;
+	float: left;
+}
+
+.checkout_zahl label {
+	font-weight: 300;
+	width: 90%;
+	float: left;
+	padding: 20px;
+	display: block;
+}
+
+.checkout_zahl label[for]:focus,
+.checkout_zahl label[for]:active,
+.checkout_zahl input:active + label,
+.checkout_zahl input:focus + label {
+	background: #efefef;
+}
+
+.checkout_bestaetigen #formk legend {
+	display: block;
+}
+
+.checkout_bestaetigen fieldset {
+	line-height: 1.4rem;
+}
+
+.checkout_bestaetigen #formk label {
+	width: 90%;
+	font-weight: 300;
+}
+
+input[type="checkbox"].checkout_zustimmung_digital {
+	float: left;
+	margin-top: 4px;
+}

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- version: Papoo-Versions-Nummer für die das Plugin gedacht ist / funktioniert -->
+<plugin version="3.5">
+
+<!-- ALLGEMEINE-INFORMATIONEN -->
+<!-- ************************ -->
+<!-- name: Name des Plugins -->
+<name>Plugin Creator</name>
+
+<!-- beschreibung_de: Kurz-Beschreibung des Plugins auf deutsch (wird im Plugin-Manager angezeigt) -->
+<beschreibung_de><![CDATA[Ein Plugin zur Erstellung und Bearbeitung von Plugins.]]></beschreibung_de>
+
+<!-- beschreibung_en: Kurz-Beschreibung des Plugins auf englisch (wird im Plugin-Manager angezeigt) -->
+<beschreibung_en><![CDATA[Plugin for creating and editing other plugins.]]></beschreibung_en>
+
+<!-- version: Versions-Nummer des Plugins -->
+<version>1.1</version>
+
+<!-- papooid: Eindeutige Nummer offizieller papoo-Plugins -->
+<papooid>56</papooid>
+
+<!-- link: z.Z. noch ohne Funktion -->
+<link>http://www.papoo.de</link> 
+
+<!-- datum: Erscheinungs-Datum bzw. Stand des Plugins -->
+<datum>10.9.2015</datum>
+
+
+<!-- AUTOR-INFORMATIONEN -->
+<!-- ******************* -->
+<!-- autor: Informationen zum Autor (Programmierer) des Plugins -->
+<autor>
+	<!-- autor.name: Name des Authors -->
+	<name>Andreas Gritzan</name>
+
+    <!-- autor.email: eMail-Adresse des Autors -->
+    <email>ag@papoo.de</email>
+</autor>
+
+
+<!-- MENÜ-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- menue: Informationen für den Menü-Eintrag im Backend (papoo/interna) -->
+<menue>
+	<!-- menue.eintrag_de: Name des Menü-Punktes im Backend auf deutsch -->
+	<eintrag_de>Plugin Creator</eintrag_de>
+	<!-- menue.eintrag_en: Name des Menü-Punktes im Backend auf englisch -->
+	<eintrag_en>Plugin Creator</eintrag_en>
+	<!-- menue.icon: Pfad zum Menü-Icon des Menü-Punktes im Backend (relativ zum Plugin-Verzeichnis) -->
+	<icon></icon>
+	<!-- menue.link: Name der Seite auf welche der Menü-Punkt im Backend verweisen soll -->
+	<link>plugin:plugincreator/templates/plugincreator_backend.html</link>
+
+    <submenue>
+        <eintrag_de>Plugin erstellen</eintrag_de>
+        <eintrag_en>Create plugin</eintrag_en>
+        <icon></icon>
+        <link>plugin:plugincreator/templates/plugincreator_create_backend.html</link>
+    </submenue>
+
+    <submenue>
+        <eintrag_de>Plugin bearbeiten</eintrag_de>
+        <eintrag_en>Edit plugin</eintrag_en>
+        <icon></icon>
+        <link>plugin:plugincreator/templates/plugincreator_plugins_backend.html</link>
+    </submenue>
+
+    <submenue>
+        <eintrag_de>Plugin löschen</eintrag_de>
+        <eintrag_en>Delete plugin</eintrag_en>
+        <icon></icon>
+        <link>plugin:plugincreator/templates/plugincreator_delete_backend.html</link>
+    </submenue>
+
+</menue>
+
+<!-- KLASSEN-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- klasse: Informationen der Plugin-Klasse welche eingebunden werden sollen -->
+<klasse>
+	<!-- klasse.name: Name der Klassen-Instanz / des Objekts (also der Name des Dings, das mit $name = new xx_class(); erzeugt wird) -->
+	<name>plugincreator</name>
+	<!-- klasse.datei: Pfad zur Klassen-Datei (relativ zum Plugin-Verzeichnis) -->
+	<datei>plugincreator/lib/plugincreator_class.php</datei>
+</klasse>
+
+<!-- CSS-INFORMATIONEN -->
+<!-- ***************** -->
+<!-- css: Pfad zur CSS-Datei (relativ zum Plugin-Verzeichnis) -->
+<css>plugincreator/css/frontend.css</css>
+
+<!-- DATENBANK-INFORMATIONEN -->
+<!-- ****************** -->
+<datenbank>
+    <!-- datenbank.installation: Pfad zur SQL-Installations-Datei (relativ zum Plugin-Verzeichnis) -->
+    <installation>plugincreator/sql/plugincreator_install.sql</installation>
+    <!-- datenbank.deinstallation: Pfad zur SQL-Deinstallations-Datei (relativ zum Plugin-Verzeichnis) -->
+    <deinstallation>plugincreator/sql/plugincreator_deinstall.sql</deinstallation>
+</datenbank>
+
+<!-- Einbindung der Sprach-Dateien.
+	In dem hier angegebenen Verzeichnis sollten Dateien mit folgenden Namen liegen:
+	- messages_backend_[de|en|fr| .. etc.].inc.php
+	- messages_frontend_[de|en|fr| .. etc.].inc.php
+-->
+<messages>plugincreator/messages</messages>
+
+</plugin>

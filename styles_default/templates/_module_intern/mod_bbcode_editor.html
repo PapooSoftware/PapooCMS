@@ -1,0 +1,68 @@
+<!-- MODUL (intern): mod_bbcode_editor  -->
+<div id="buttonlist" class="floatbox">
+	<div class="bbeditor_element">
+		<label for="schriftart">{$Schriftart}:</label><br />
+		<select onchange="bbcode(this.options[this.selectedIndex].value);this.options.selectedIndex = 0;" name="schriftart" id="schriftart" title="Hier kann die Schriftart ausgewählt werden."size="1">
+			<option value="">({$auswaehlen})</option>
+			<option value="verdana" >Verdana</option>
+			<option value="arial" >Arial</option>
+			<option value="times" >Times New Roman</option>
+			<option value="courier" >Courier</option>
+			<option value="sans" >sansserif</option>
+		</select>
+	</div>
+	<div class="bbeditor_element">
+		<label for="schriftfarbe">{$Schriftfarbe}:</label><br />
+		<select onchange="bbcode(this.options[this.selectedIndex].value);this.options.selectedIndex = 0;" name="schriftfarbe" id="schriftfarbe" title="Hier kann die Schriftfarbe ausgewählt werden"  size="1">
+			<option value="">({$auswaehlen})</option>
+			<option value="rot">rot</option>
+			<option value="gruen" >gr&uuml;n</option>
+			<option value="blau" >blau</option>
+			<option value="#" >frei</option>
+			</select>
+	</div>
+	<div class="bbeditor_element">
+		<label for="ueberschriften">{$ueberschriften}:</label><br />
+		<select onchange="bbcode(this.options[this.selectedIndex].value);this.options.selectedIndex = 0;" name="ueberschriften" id ="ueberschriften" title="{$message_2170}"  size="1">
+			<option value="">({$auswaehlen})</option>
+			<option value="ha">{$ueberschrift} 1</option>
+			<option value="hb">{$ueberschrift} 2</option>
+			<option value="hc">{$ueberschrift} 3</option>
+			<option value="hd">{$ueberschrift} 4</option>
+			<option value="he">{$ueberschrift} 5</option>
+		</select>
+	</div>
+	<div class="bbeditor_element">
+		<label for="zusatz">{$Auszeichnungen}:</label><br />
+		<select onchange="bbcodeabk(this.options[this.selectedIndex].value);this.options.selectedIndex = 0;" name="zusatz" id="zusatz" title="{$message_2171}"  size="1">
+			<option value="">({$auswaehlen})</option>
+			<option value="abk">{$abk_von}:</option>
+			<option value="acr">{$acr_von}:</option>
+			<option value="zit">{$zit_von}:</option>
+		</select>
+	</div>
+	<!--<div class="bbeditor_element">
+		<label for="sprachen">Sprachen:</label><br />
+		<select onchange="bbcode(this.options[this.selectedIndex].value);this.options.selectedIndex = 0;" name="sprachen" id="sprachen" title="Welche Sprache gerade verwendet wird (Wort oder ganzer Satz)"  size="1">
+			<option value="">(auswählen)</option>
+			<option value="engl">Englisch</option>
+			<option value="fran">Französisch</option>
+			<option value="span">Spanisch</option>
+		</select>
+	</div>
+	-->
+<div class="clearfix"></div>
+	{if $intern}
+		{include file="../../templates/module_fix/mod_bbcode_editor_bild.html"}
+	{/if}
+
+	<div class="bbeditor_element" style="clear: left;width:80%;">
+		<a   onmouseover="style.backgroundColor='#CDD3ED'" onmouseout="style.backgroundColor='transparent'" onclick="bbcode('b');"><img src="{$slash}editorbild/button.bold.gif" width="21" height="21" alt="fett" title="fett" /></a>
+		<a onmouseover="style.backgroundColor='#CDD3ED'" onmouseout="style.backgroundColor='transparent'"  onclick="bbcode('i');" ><img src="{$slash}editorbild/button.italic.gif" width="21" height="21" alt="kursiv" title="kursiv" /></a>
+		<a  onmouseover="style.backgroundColor='#CDD3ED'" onmouseout="style.backgroundColor='transparent'"  onclick="bbcodeurl('url');" ><img src="{$slash}editorbild/button.link.gif" width="21" height="21" alt="Link eingeben" title="Link eingeben"  /></a>
+		<a  onmouseover="style.backgroundColor='#CDD3ED'" onmouseout="style.backgroundColor='transparent'"  onclick="bbcodeimg('img');"><img src="{$slash}editorbild/button.image.gif" width="21" height="21" alt="Externes Bild eingeben" title="Externes Bild eingeben" /></a>
+		<a  onmouseover="style.backgroundColor='#CDD3ED'" onmouseout="style.backgroundColor='transparent'" onclick="bbcode('oliste');" ><img src="{$slash}editorbild/button.insertorderedlist.gif" width="21" height="21" alt="geordnetete Liste" title="geordnetete Liste"  /></a>
+		<a  onmouseover="style.backgroundColor='#CDD3ED'" onmouseout="style.backgroundColor='transparent'" onclick="bbcodeliste('uliste');"><img src="{$slash}editorbild/buttoninsertunorderedlist.gif" width="21" height="21" alt="ungeordnetete Liste" title="ungeordnetete Liste"  /></a>
+	</div>
+</div>
+<!-- ENDE MODUL (intern): mod_bbcode_editor  -->

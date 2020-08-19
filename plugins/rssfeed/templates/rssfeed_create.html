@@ -1,0 +1,28 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+	<h1>{$message_5044}</h1>
+	<p>{$message_5045}</p>
+	<p>{$message_5046}</p>
+	<p>
+		<form id="create_feed" action="" method="post">
+			<fieldset>
+				<legend>{$message_5047}</legend>
+				<div class="innerform">
+					<input type="hidden" name="dofeed" value="config">
+					<input type="submit" class="submit_back_green" name="submit" value="{$message_5048}" tabindex="5" accesskey="9" />
+				</div>
+			</fieldset>
+		</form>
+	</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

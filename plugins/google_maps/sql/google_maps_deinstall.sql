@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS `XXX_papoo_google_maps_tabelle`; ##b_dump##

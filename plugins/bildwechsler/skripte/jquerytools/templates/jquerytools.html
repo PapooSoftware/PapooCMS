@@ -1,0 +1,58 @@
+<div class="scrollable">
+			<div class="items">
+				{foreach item=wechselbild from=$plugins.bildwechsler name=wechselbilder}
+					<div class="item">
+						
+						
+						{if $wechselbild.bw_link}
+							<a {$wechselbild.bw_link}><img {$wechselbild.bw_bild} /></a>
+						{else}
+							<img {$wechselbild.bw_bild} />
+						{/if}
+						
+						{if $wechselbild.bw_text || $wechselbild.bw_ueberschrift}
+							<div class ="bw_text_wrapper">
+                <h4 class="bw_ueberschrift">{$wechselbild.bw_ueberschrift}</h4>
+								<div class="bw_text">{$wechselbild.bw_text}</div>
+							</div>
+						{/if}
+						
+					</div>
+				{/foreach}
+			</div>
+		</div>
+		
+		{if $smarty.foreach.wechselbilder.total > 1}
+			
+			<script src="{$slash}plugins/bildwechsler/skripte/jquerytools/js/jquery.tools.min.js"></script>
+			<script>
+				
+				var $autowechsler_timeout = 0;
+				var $autowechsler_wechselt = 1000;
+				var $autowechsler_standzeit = 8000;
+				var $autowechsler_standzeit_nach_manuellem_wechsel = 20000;
+				
+				{literal}
+					$(function()
+					{
+						$(".scrollable").append('<div class="navi"><'+'/div>');
+						$(".scrollable").scrollable({speed: $autowechsler_wechselt, circular: "true"}).navigator({indexed: "true"});
+						
+						$autowechsler_timeout = window.setTimeout("weiter()", $autowechsler_standzeit);
+						$(".scrollable .navi").click(function (){
+							//alert('..lala');
+							window.clearTimeout($autowechsler_timeout);
+							$autowechsler_timeout = window.setTimeout("weiter()", $autowechsler_standzeit_nach_manuellem_wechsel);
+						});
+						
+					});
+					
+					
+					function weiter()
+					{
+						$(".scrollable").scrollable().next();
+						$autowechsler_timeout = window.setTimeout("weiter()", $autowechsler_standzeit);
+					}
+				{/literal}
+			</script>
+		{/if}

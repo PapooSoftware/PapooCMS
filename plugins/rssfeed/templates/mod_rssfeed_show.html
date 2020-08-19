@@ -1,0 +1,25 @@
+{if $module_aktiv.mod_rssfeed_show}
+	<!-- MODUL: test_front -->
+	<div class="modul" id="mod_rssfeed_show">
+        {if $rss_channel_error neq ''}
+
+		 <h1>{$rss_channel_error}</h1>
+
+		{else}
+		<div class="mod_title">
+			<h3><a href="{$rss_channel_linkFEED1}">{$rss_channelFEED1}</a></h3>
+		</div>
+		<div class="inner_mod">
+            <ul>
+			{foreach item=table from=$rss_datenFEED1}
+					<li>
+				      <a href="{$table.link}" target="_blank" title="{$table.title}">{$table.title}</a>
+			          <span class="ignore">. </span>
+				   </li>
+			{/foreach}
+			</ul>
+		</div>
+		{/if}
+	</div>
+	<!-- ENDE MODUL: rss_feed_show -->
+{/if}

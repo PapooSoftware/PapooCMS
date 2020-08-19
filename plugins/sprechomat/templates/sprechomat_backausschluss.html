@@ -1,0 +1,54 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+	<h1>{$plugin.sprechomat.ausschliessen}</h1>
+{if $sprechomat_backendmessage neq ""}
+	<h3>{$sprechomat_backendmessage}</h3>
+{/if}
+	<form name="sprechomat_daten" method="post" action="">
+		<fieldset>
+			{$plugin.sprechomat.deaktivieren}
+
+			<div class="sprechomat_ausschluss_liste">
+				{foreach item=menue from=$table_data}
+					{$menue.shift_anfang}
+
+					<small>{$menue.text}</small>
+
+					{if $menue.artikel_enthalten}
+						<ul class="ul_artikel">
+							{foreach item=artikel from=$menue.artikel}
+								<li>
+									<input type="checkbox" name="sprechomat_artikelausschluss[]" id="sprechomat_artikelausschluss_{$artikel.reporeid}"
+											value="{$artikel.reporeid}"
+											{foreach item=ausschluss from=$sprechomat_artikelausschluss}
+												{if $ausschluss == $artikel.reporeid}checked="checked"{/if}
+											{/foreach}
+											/>
+									{$artikel.text} <small>({$plugin.sprechomat.nummer} {$artikel.reporeid})</small>
+								</li>
+							{/foreach}
+						</ul>
+					{/if}
+
+					{$menue.shift_ende}
+				{/foreach}
+			</div>
+		</fieldset>
+		<fieldset>
+			<legend>{$plugin.sprechomat.ausschuss_aendern}</legend>
+			<input class="submit_back_green" type="submit" value="{$plugin.sprechomat.aendern2}" name="sprechomat_submit_ausschluss" />
+		</fieldset>
+	</form>
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

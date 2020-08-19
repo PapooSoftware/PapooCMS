@@ -1,0 +1,20 @@
+{if $IS_ADMIN}
+	<div class="oben">
+		<div class="container">
+			<div class="oben_innen"></div>
+		</div>
+	</div>
+	<div class="navbar ">
+		<div class="navbar-inner">
+			<div class="container">
+			<div id="menue_sprung">
+				<h2 class="ignore">{$sprung_menu} .</h2>
+				<ul>
+					{*<!--  direkt zum Inhalt-->*}
+					<li><a class="sprung_artikel" href="#artikel" accesskey="8" >{$message_2120}</a><span class="ignore">. </span></li>
+				</ul>
+			</div>
+			<div class="oben_innen2">
+				<h1>{$head_inc.title} {$site_name}</h1>
+			</div>
+{/if}

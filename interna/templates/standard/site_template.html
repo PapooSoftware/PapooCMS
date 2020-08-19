@@ -1,0 +1,115 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+	<h1>{$message_786}</h1>
+	{if $template_sys_file_one=="ok"}
+		{$message_787}
+		<a href="{$self}&template_dir={$template_dir}">{$message_788}</a>
+		<h2>{$message_789}{$template_file} {$message_790}</h2>
+		<form action="" method="post">
+			<fieldset>
+				<legend>{$message_791}</legend>
+				<textarea name="template_content" cols="50" rows="20" style="width:90%;">{$template_content}</textarea>
+			</fieldset>
+			
+			<fieldset>
+				<legend>{$message_792}</legend>
+				<input type="submit" class="submit_back" name="save_template" value="{$message_793}" />
+			</fieldset>
+		</form>
+	{/if}
+	{if $template_sys_file=="ok"}
+		{$message_794}
+		<ul>
+			{foreach item=dat from=$root_files}
+				<li>
+					{if $dat.name=="_module_var" or $dat.name=="_module_fix" or $dat.name=="_module_intern"}
+						<strong>{$dat.name}</strong>
+						
+						{if $dat.name=="_module_var"}
+							<ul>
+								{foreach item=dat2 from=$var_files}
+									<li>
+										<a href="{$self}&template_sub={$dat.name}&template_dir={$template_dir}&template_file={$dat2.name}&schreib={$dat2.schreib}">{$dat2.name}</a>
+										<em>
+											{if $dat2.schreib!=1}
+												<strong style="color:red;">{$message_795}</strong>
+											{else}
+												{$message_796}
+											{/if}
+										</em>
+									</li>
+								{/foreach}
+							</ul>
+						{/if}
+						{if $dat.name=="_module_fix"}
+							<ul>
+								{foreach item=dat2 from=$fix_files}
+									<li>
+										<a href="{$self}&template_sub={$dat.name}&template_dir={$template_dir}&template_file={$dat2.name}&schreib={$dat2.schreib}">{$dat2.name}</a>
+										<em>
+											{if $dat2.schreib!=1}
+												<strong style="color:red;">{$message_795}</strong>
+											{else}
+												{$message_796}
+											{/if}
+										</em>
+									</li>
+								{/foreach}
+							</ul>
+						{/if}
+						{if $dat.name=="_module_intern"}
+							<ul>
+								{foreach item=dat2 from=$intern_files}
+									<li>
+										<a href="{$self}&template_sub={$dat.name}&template_dir={$template_dir}&template_file={$dat2.name}&schreib={$dat2.schreib}">{$dat2.name}</a>
+										<em>
+											{if $dat2.schreib!=1}
+												<strong style="color:red;">{$message_795}</strong>
+											{else}
+												{$message_796}
+											{/if}
+										</em>
+									</li>
+								{/foreach}
+							</ul>
+						{/if}
+					{else}
+						<a href="{$self}&template_dir={$template_dir}&template_file={$dat.name}&schreib={$dat.schreib}">{$dat.name}</a>
+						<em>
+							{if $dat.schreib!=1}
+								<strong style="color:red;">{$message_795}</strong>
+							{else}
+								{$message_796}
+							{/if}
+						</em>
+					{/if}
+				</li>
+			{/foreach}
+		</ul>
+	{/if}
+	{if $template_sys_start_text==ok}
+		{$message_797}
+		<table>
+			{foreach item=dat from=$template_sys_liste}
+				<tr {if $dat==$standard}style="background:#ccc;"{/if} >
+					<td>
+						<a href="{$self}&template_dir={$dat.dir}">{$dat.dir}</a> 
+					</td>
+					<td>
+						{if $dat.css}
+							{foreach item=css from=$dat.css}
+								{$css}<br />
+							{/foreach}
+						{else}
+							{$message_798}
+						{/if}
+					</td>
+					<td>
+						{if $dat.standard}
+							{$message_799}
+						{/if} 
+					</td>
+				</tr>
+			{/foreach}
+		</table>
+	{/if}
+{/if}

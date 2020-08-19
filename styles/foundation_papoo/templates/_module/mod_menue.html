@@ -1,0 +1,21 @@
+{if $module_aktiv.mod_menue}
+
+	<nav id="mod_menue" class="side-nav">
+		<a name="menux" id="menux"></a>
+		{foreach item=kat from=$catlist_data.0}
+		<div id="cat_{$kat.cat_id}" {if $aktumenu_cat==$kat.cat_id}class="cat_aktiv"{else}class="cat_inaktiv"{/if} >	
+			{if $kat.cat_id>=1}<h4 class="menucat">{$kat.cat_text}</h4>	{/if}	
+				<ul class="side-nav">
+					{foreach item=menu from=$menu_data}
+						{if $kat.cat_id==$menu.cat_cid  or $no_categories==1}
+							{$menu.shift_anfang}
+							{include file="_module/mod_menue_ebenen_links.inc.html"}
+							{$menu.shift_ende}
+						{/if}
+					{/foreach}
+				</ul>
+			</div>
+		{/foreach}
+	</nav>
+
+{/if}

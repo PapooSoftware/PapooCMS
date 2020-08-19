@@ -1,0 +1,123 @@
+<!-- TEMPLATE: _kopf.utf8.html -->
+{*
+Entfernen dieses Copyrights ist gemäß unserer Lizenzbedingungen
+nicht erlaubt! 
+*}
+<!--
+Ihre barrierefreie Internetseite wurde ermöglicht durch
+das barrierefreie CMS Papoo Version {$papoo_version}.
+Information  unter http://www.papoo.de
+-->
+<title>{$site_title_shop|strip_tags}{if $site_title_shop} - {/if}{$site_title|strip_tags} - {$site_name}</title>
+<meta charset="utf-8"/>
+
+{include file="_open_graph_meta_tags.html"}
+
+<meta name="dcterms.publisher"     content="{$seite_autor}" />
+<meta name="dcterms.subject"       content="{$site_title_shop|escape:"html"}{if $site_title_shop} - {/if}{$site_title} - {$site_name}" />
+<meta name="dcterms.creator"       content="{$seite_autor}" />
+<meta name="dcterms.language"       content="{$lang_short}" />
+<meta name="dcterms.title"       content="{$site_title_shop|escape:"html"}{if $site_title_shop} - {/if}{$site_title} - {$site_name}" />
+<meta name="dcterms.description"       content="{$description_shop|strip_tags}{if $description_shop} - {/if}{$description|strip_tags}" />
+{* <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> *}
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- Standard Metatags -->
+<meta name="description" content="{$description_shop|strip_tags}{if $description_shop} - {/if}{$description|strip_tags}" />
+<meta name="keywords" content="{$keywords_shop|strip_tags} {$keywords|strip_tags}" />
+<meta name="robots" content="INDEX,FOLLOW" />
+
+<!-- Favicon  -->
+<link rel="apple-touch-icon-precomposed" href="{$slash}favicon.png">
+<link rel="icon" type="image/png" href="{$slash}favicon.png" />
+<!--[if lt IE 11]><link rel="icon" type="image/x-icon" href="favicon.ico" /><![endif]-->
+
+{if $extra_meta_front}
+    <!--  Extra Meta Tags aus der Konfiguration -->
+    {$extra_meta_front}
+{/if}
+
+{if $refresh}<!-- Refresh Meta Tags bei Download -->{$refresh}{/if}
+
+{if $config_jquery_aktivieren_label}
+    <!-- Einbindung Javascripte -->
+    <script type="text/javascript" src="{$slash}js/jquery.js"></script>
+    <script type="text/javascript" src="{$slash}js/modernizr.js"></script>
+    {*<script type="text/javascript" src="{$slash}js/_jq_papoopopupimage.js"></script>*}
+{/if}
+
+{if $config_basis_js_funktionen_frontend}
+    <script type="text/javascript" src="{$slash}js/function_front.js"></script>
+{/if}
+
+{if $config_jquery_colorbox_aktivieren}
+    <script type="text/javascript" src="{$slash}js/jquery.colorbox-min.js"></script>
+    <link type="text/css" media="screen" rel="stylesheet" href="{$webverzeichnis}styles_default/css/colorbox.css" />
+    <script type="text/javascript">
+    {literal}
+        $(document).ready(function(){
+            $("a[rel='lightbox']").colorbox({
+                transition: "elastic",
+                maxWidth: "100%",
+                maxHeight: "100%",
+                current: "Bild {current} von {total}"
+            });
+            $("header").css("overflow","visible");
+        });
+    {/literal}
+    </script>
+{/if}
+
+{foreach item=lang from=$languageget}
+    <!-- Sprach rel alternate bei Mehrsprachigkeit -->
+    <link rel="alternate" href="http://{$site_name}{$lang.lang_link}" xml:lang="{$lang.lang_short}" lang="{$lang.lang_short}" hreflang="{$lang.lang_short}" title="{$lang.language}" />
+{/foreach}
+
+{if $rssfeed}
+<!--  URL des RSS Feeds -->
+<link rel='alternate' type='application/rss+xml' title='Nachrichten als RSS 2.0 Feed' href='http://{$site_name}{$webverzeichnis}plugins/rssfeed/feed{$rss_lang_id}.xml' />
+{/if}
+
+{if $aktiv_canonical}{include file="_module_intern/mod_canonical.html"}{/if}
+
+<!-- CSS Einbindung -->
+<link rel="stylesheet" type="text/css" href="{$slash}{$pluginscss}" />
+<link rel="stylesheet" type="text/css" href="{$slash}styles/{$style_dir}/css/_index.css" />
+{if $extra_css}{*<!--ENDE Pagination SEO -->*}<link rel="stylesheet" type="text/css" href="{$slash}styles/{$style_dir}/css/{$extra_css}" />{/if}
+
+{*
+<!-- CSS Einbindung - extras für alte INternetexplorer -->
+<!--[if IE 9]>
+<link rel="stylesheet" type="text/css" href="{$slash}styles/{$style_dir}/css/IEFixes_9_index.css" />
+<![endif]-->
+<!--[if IE 8]>
+<link rel="stylesheet" type="text/css" href="{$slash}styles/{$style_dir}/css/IEFixes_8_index.css" />
+<![endif]-->
+<!--[if IE 7]>
+<link rel="stylesheet" type="text/css" href="{$slash}styles/{$style_dir}/css/IEFixes_7_index.css" />
+<![endif]-->
+<!--[if lte IE 6]>
+<link rel="stylesheet" type="text/css" href="{$slash}styles/{$style_dir}/css/IEFixes_6_index.css" />
+<![endif]-->
+<!--[if lt IE 6]>
+<link rel="stylesheet" type="text/css" href="{$slash}styles/{$style_dir}/css/IEFixes_5_5_index.css" />
+<![endif]-->
+*}
+
+<!-- Extra Ausgaben aus den Plugins im Kopf -->
+{foreach item=plug from=$plugin_header}
+	 {$plug}
+{/foreach}
+
+{if $spamschutz_modus == 4}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+{/if}
+
+
+{if $hrefruck}<!--Pagination SEO -->
+<link rel="prev" href="{$slash}{$hrefruck}">{/if}
+{if $hrefweiter}<link rel="next" href="{$slash}{$hrefweiter}">
+<!--ENDE Pagination SEO -->{/if}
+
+
+<!-- ENDE TEMPLATE: _kopf.utf8.html -->

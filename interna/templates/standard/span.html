@@ -1,0 +1,273 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		<div class="aktuell" id="aktuell_{$menuid_aktuell}"></div>
+		{$text}
+		{$logindaten}
+		{if $abkerstellen}
+			<!-- Abk�rzung erstellen -->
+			{if $erstellen}
+				<!-- Daten neu eintragen-->
+				{if $neuerstellen}
+					<!-- Eingabe neuer Abk�rzungsdaten -->
+					<h1>{$message_272}</h1>
+					<!-- <p>Hier k�nnen Sie neue Ersetzungsdaten f�r Abk�rzungen in die Datenbank eingeben.</p>
+					<p>Unter Abk�rzungen fallen auch die Akronyme.</p>
+					<p>Die Abk�rzung mu� mindestens 3 Zeichen lang sein.</p> -->
+					{$message_273}
+					<form method="POST" id="formi" action="./span.php?menuid=27&obermenuid=26&untermenuid=27">
+						<fieldset>
+							<!-- Eingabe der Abk�rzungsdaten: -->
+							<legend>{$message_274}</legend>
+							<!-- Abk�rzung -->
+							<label for="linkname">{$message_275}:</label><br />
+							<input type="text" id="linkname" name="linkname" size="30" value="{$linkname}" /><br />
+							<!-- Bedeutung der Abk�rzung:-->
+							<label for="linktitel">{$message_276}</label><br />
+							<input type="text" id="linktitel" name="linktitel" size="50" value="{$linktitel}" /><br />
+							<!-- Eintragen-->
+							<input type="submit" class="submit_back_green" value="{$message_70}" name="formSubmit" />
+						</fieldset>
+					</form>
+				{/if}
+				<!-- ENDE Daten neu eintragen-->
+				{if $falsch}
+					<!-- Daten berichtigen>-->
+					<!-- Eingabe neuer Abk�rzungsdaten -->
+					<h1>{$message_277}</h1>
+					<!-- Etwas stimmt nicht, bitte �berpr�fen Sie ihre Daten, vermutlich ist die L�nge der Abk�rzung zu kurz (mindestens 3 Buchstaben).-->
+					<p style="font-weight:600;color:red;">{$message_278}</p>
+					{foreach item=table from=$table_data}
+						<form method="POST" id="formi" action="./span.php?menuid=27&obermenuid=26&untermenuid=27&id={$table.linkid}">
+						<fieldset>
+						<!-- �nderung der Abk�rzungsdaten:-->
+						<legend>{$message_279}</legend>
+						<!-- Abk�rzung-->
+						<label for="linkname">{$message_275}:</label>
+						<br />
+						<input type="text" id="linkname" name="linkname" size="30" value="{$tablelinkname}" /><br />
+						<!-- Bedeutung der ABk�rzung:-->
+						<label for="linktitel">{$message_276}</label><br />
+						<input type="text" id="linktitel" name="linktitel" size="50" value="{$tablelinktitel}" /><br />
+					{/foreach}
+					<!-- Eintragen -->
+					<input type="submit" class="submit_back_green" value="{$message_70}" name="formSubmit" />
+					</fieldset>
+					</form>
+					<!-- ENDE Daten berichtigen>-->
+				{/if}
+			{/if}
+			<!-- ENDE ABK erstellen -->
+			<!-- ABK ändern -->
+			{if $aendern}
+				{if $suchen}
+					<form method="post" action="./span.php?menuid=28&obermenuid=26&untermenuid=28" name="suche"><p>
+						<fieldset>
+						<!-- Suche nach einem Abk�rzungs-Eintrag: -->
+						<legend>{$message_280}</legend>
+							<label for="search">{$message_290}</label>
+							<input id="search" name="search" value="{$search}" onblur="if(this.value=='')this.value='Ihr Suchbegriff';" onfocus="if(this.value=='Ihr Suchbegriff')this.value='';" size="40" maxlength="50" />
+							<input type="hidden" value="Finden" name="formSubmit" />
+							<!-- Finden-->
+							<input type="submit" class="submit_back" value="{$message_233}" name="formSubmit" /></p>
+						</fieldset>
+					</form>
+				{/if}
+				{if $gefunden}
+					<ul>
+					{foreach item=table from=$table_data}
+						<li>
+							<a href="./span.php?menuid=28&obermenuid=26&untermenuid=28&id={$table.linkid}">
+								{$table.linkname} --{$table.linkbody} -- {$message_644}
+							</a>
+						</li>
+					{/foreach}
+					</ul>
+					<!-- weitere Seiten -->
+					{include file=weiter.inc.html}
+				{/if}
+				{if $falsch}
+					<!-- Daten berichtigen>-->
+					<!-- Eingabe neuer Abk�rzungsdaten -->
+					<h1>{$message_277}</h1>
+					<!-- Etwas stimmt nicht, bitte �berpr�fen Sie ihre Daten, vermutlich ist die L�nge der Abk�rzung zu kurz(mindestens 3 Buchstaben). -->
+					<p style="font-weight:600;color:red;">{$message_278}</p>
+					{foreach item=table from=$table_data}
+						<form method="POST" id="formi" action="./span.php?menuid=28&obermenuid=26&untermenuid=28&id={$table.linkid}">
+						<fieldset>
+						<!-- �nderung der Abk�rzungsdaten: -->
+						<legend>{$message_279}</legend>
+						<!-- Abk�rzung -->
+						<label for="linkname">{$message_275}:</label><br />
+						<input type="text" id="linkname" name="linkname" size="40" value="{$table.linkname}" /><br />
+						<!-- Bedeutung der Abk�rzung:-->
+						<label for="linktitel">{$message_276}</label><br />
+						<input type="text" id="linktitel" name="linktitel" size="50" value="{$table.linktitel}" /><br />
+					{/foreach}
+					<!-- Eintragen-->
+					<input type="submit" class="submit_back_green" value="{$message_70}" name="formSubmit" />
+					</fieldset>
+					</form>
+					<!-- ENDE Daten berichtigen>-->
+				{/if}
+				{if $aendern_now}
+					<!-- �nderung der Abk�rzungen-->
+					<h1>{$message_279}</h1>
+					<!-- <p>Hier k�nnen Sie neue Ersetzungsdaten f�r Abk�rzungen in die Datenbank eingeben.</p>
+					<p>Unter Abk�rzungen fallen auch die Akronyme.</p>
+					<p>Die Abk�rzung mu� mindestens 2 Zeichen lang sein.</p> -->
+					{$message_273}
+					{foreach item=table from=$table_data}
+					<form method="POST" id="formi" action="./span.php?menuid=28&obermenuid=26&untermenuid=28&id={$table.linkid}">
+					<!-- �nderung der Abk�rzungsdaten:-->
+					<fieldset><legend>{$message_279}</legend>
+					<!-- Abk�rzung-->
+					<label for="linkname">{$message_275}:</label><br />
+						<input type="text" id="linkname" name="linkname" size="40" value="{$table.linkname}" /><br />
+					<!-- Bedeutung der Abk�rzung:-->
+					<label for="linktitel">{$message_276}</label><br />
+						<input type="text" id="linktitel" name="linktitel" size="50" value="{$table.linktitel}" /><br />
+					{/foreach}
+					<!-- Entfernen-->
+					<input type="submit" class="submit_back_red" value="{$message_247}" name="formSubmitentf" style="float:left;background-color:red;margin-right:5em;margin-top:30px;" />
+					<!-- Eintragen-->
+					<input type="submit" class="submit_back_green" value="{$message_70}" name="formSubmit" style="margin-top:30px;"/>
+					</fieldset>
+					</form>
+				{/if}
+			{/if}
+			<!-- ENDE Link �ndern -->
+		{/if}
+		<!-- ENDE Abk�rzujng erstellen-->
+		{if $spanerstellen}
+			<!-- Sprachauszeichnung erstellen-->
+			{if $erstellen}
+				<!-- Daten neu eintragen-->
+				{if $neuerstellen}
+					<!-- Eingabe neuer Sprachauszeichnungen -->
+					<h1>{$message_282}</h1>
+					<!-- <p>Hier k�nnen Sie neue Ersetzungsdaten f�r Sprachauszeichnung in die Datenbank eingeben.</p>
+					<p>Bitte nur Sprachauszeichnung aus der englischen Sprache auszeichnen.</p>
+					<p>Die Sprachauszeichnung mu� mindestens 3 Zeichen lang sein.</p> -->
+					{$message_283}
+					<form method="POST" id="formi" action="./span.php?menuid=29&obermenuid=26&untermenuid=29">
+					<fieldset>
+						<!-- Eingabe der Sprachauszeichnung:-->
+						<legend>{$message_284}</legend>
+						<!-- Sprachauszeichnung-->
+						<label for="linkname">{$message_285}:</label><br />
+						<input type="text" id="linkname" name="linkname" size="40" value="{$linkname}" /><br />
+						<!-- Eintragen-->
+						<input type="submit" class="submit_back_green" value="{$message_70}" name="formSubmit" />
+					</fieldset>
+					</form>
+				{/if}
+				<!-- ENDE Daten neu eintragen-->
+				{if $falsch}
+					<!-- Daten berichtigen>-->
+					<!-- Eingabe neuer Sprachauszeichnung-->
+					<h1>{$message_286}</h1>
+					<!-- Etwas stimmt nicht, bitte �berpr�fen Sie ihre Daten, vermutlich ist die L�nge der Sprachauszeichnung zu kurz (mindestens 3 Buchstaben).-->
+					<p style="font-weight:600;color:red;">{$message_287}</p>
+					{foreach item=table from=$table_data}
+					<form method="POST" id="formi" action="./span.php?menuid=29&obermenuid=26&untermenuid=29&id={$linkid}">
+					<fieldset>
+					<!-- �nderung der Sprachauszeichnung:-->
+					<legend>{$message_288}</legend>
+					<!-- Sprachauszeichnung-->
+					<label for="linkname">{$message_289}</label><br />
+						<input type="text" id="linkname" name="linkname" size="40" value="{$table.linkname}" /><br />
+					{/foreach}
+					<!-- Eintragen -->
+					<input type="submit" class="submit_back_green" value="{$message_70}" name="formSubmit" />
+					</fieldset>
+					</form>
+					<!-- ENDE Daten berichtigen>-->
+				{/if}
+				{if $erstellt}
+					<!-- Daten eingetragen-->
+					<!-- ENDE Daten eingetragen-->
+				{/if}
+			{/if}
+			<!-- ENDE Link erstellen -->
+			<!-- Link �ndern-->
+			{if $aendern}
+				{if $suchen}
+					<form method="post" action="./span.php?menuid=30" name="suche"><p>
+						<fieldset>
+							<!-- Suche nach einem Sprachauszeichnung-Eintrag: -->
+							<legend>{$message_290}</legend>
+							<label for="search">{$message_290}</label>
+							<input id="search" name="search" value="{$search}" onblur="if(this.value=='')this.value='Ihr Suchbegriff';"
+									onfocus="if(this.value=='Ihr Suchbegriff')this.value='';" size="40" />
+							<input type="hidden" value="Finden" name="formSubmit" />
+							<!-- Finden -->
+							<input type="submit" class="submit_back" value="{$message_233}" name="formSubmit" /></p>
+						</fieldset>
+					</form>
+				{/if}
+				{if $gefunden}
+					<ul>
+						{foreach item=table from=$table_data}
+							<li>
+								<a href="./span.php?menuid=30&obermenuid=26&untermenuid=30&id={$table.linkid}">
+									{$table.linkname} --{$table.linkbody} -- {$message_644}
+								</a>
+							</li>
+						{/foreach}
+					</ul>
+					<!-- weitere Seiten -->
+					{include file=weiter.inc.html}
+				{/if}
+				{if $falsch}
+					<!-- Daten berichtigen>-->
+					<!-- �berpr�fung der Sprachauszeichnung-->
+					<h1>{$message_291}</h1>
+					<!-- Etwas stimmt nicht, bitte �berpr�fen Sie ihre Daten, vermutlich ist die L�nge der Sprachauszeichnung zu kurz(mindestens 3 Buchstaben). -->
+					<p style="font-weight:600;color:red;">{$message_287}</p>
+					{foreach item=table from=$table_data}
+						<form method="POST" id="formi" action="./span.php?menuid=30&obermenuid=26&untermenuid=30&id={$table.linkid}">
+						<fieldset>
+						<!-- �nderung der Sprachauszeichnung: -->
+						<legend>{$message_288}</legend>
+						<!-- Sprachauszeichnung -->
+						<label for="linkname">Sprachauszeichnung:</label><br />
+						<input type="text" id="linkname" name="linkname" size="40" value="{$table.linkname}" /><br />
+					{/foreach}
+					<!-- Eintragen-->
+					<input type="submit" class="submit_back_green" value="{$message_70}" name="formSubmit" />
+					</fieldset>
+					</form>
+					<!-- ENDE Daten berichtigen>-->
+				{/if}
+				{if $aendern_now}
+					<!-- �nderung der Sprachauszeichnung-->
+					<h1>{$message_288}</h1>
+					<!-- Hier k�nnen Sie neue Ersetzungsdaten f�r Sprachauszeichnung in die Datenbank eingeben. --><!-- Die Sprachauszeichnung mu� mindestens 2 Zeichen lang sein.-->
+					{$message_283}
+					{foreach item=table from=$table_data}
+						<form method="POST" id="formi" action="./span.php?menuid=30&obermenuid=26&untermenuid=30&id={$table.linkid}">
+						<!-- �nderung der Sprachauszeichnung:-->
+						<fieldset>
+						<legend>{$message_288}</legend>
+						<!-- Sprachauszeichnung-->
+						<label for="linkname">{$message_289}:</label><br />
+						<input type="text" id="linkname" name="linkname" size="40" value="{$table.linkname}" /><br />
+					{/foreach}<br /><br />
+					<!-- Entfernen -->
+					<input type="submit" class="submit_back_red" value="{$message_247}" name="formSubmitentf" style="float:left;background-color:red;" />
+					<!-- Eintragen-->
+					<input type="submit" class="submit_back_green" value="{$message_70}" name="formSubmit" />
+					</fieldset>
+					</form>
+				{/if}
+			{/if}
+			<!-- ENDE Link �ndern -->
+		{/if}
+		<!-- ENDE Sprachauszeichnung erstellen-->
+	</div>
+	</div>
+	{*<!-- Hier kommt der Fuss rein-->*}
+	{include file=foot.inc.html}
+{/if}

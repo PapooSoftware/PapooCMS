@@ -1,0 +1,54 @@
+{if $IS_ADMIN}
+	<div class="image_folder_container_complete">
+		<div class="image_folder_container_left">
+			<strong>{$system_image_image_ordner}</strong>
+			<br />
+			<a class="bilder_verzeichnis_top" href="./flash_liste.php?reiter_active=mp3&menuid=33"> {$system_image_alle_dateien} <span style="color: #333;">({$dateien_cat_id_count.0})</span> </a>
+			{foreach item=dir from=$dirlist}
+				{$dir.vor_ul}
+					<a {if $bilder_active_cat_id==$dir.dateien_cat_id} class="active_cat" {/if} href="./flash_liste.php?reiter_active=mp3&menuid=33&downloadkategorie={$dir.dateien_cat_id}">{$dir.dateien_cat_name}{$dir.dateien_cat_name}{$dir.video_cat_name} <span style="color: #333;">({if $dateien_cat_id_count[$dir.dateien_cat_id]}{$dateien_cat_id_count[$dir.dateien_cat_id]}{else}0{/if})</span></a>
+				{$dir.nach_ul}
+			{/foreach}
+		</div>
+		<div class="image_folder_container_out">
+			<div class="image_folder_container">
+				{if $downloadkategorie}
+					<div style="width: 90px; padding: 5px;float:left;">
+						<a href="./flash_liste.php?reiter_active=mp3&menuid=33&downloadkategorie={$dateien_cat_id}" class="image_link"><img src="bilder/folder.png" style="border:none;background:#fff;" alt="{$message_395}" title="{$message_395}" /><br />
+
+						<div style="text-align:center;width:60%;">{$message_395}</div></a>
+					</div>
+				{/if}
+				{foreach item=cat from=$result_cat}
+					<div class="image_folder">
+						<a href="./flash_liste.php?reiter_active=mp3&menuid=33&downloadkategorie={$cat.dateien_cat_id}">{$cat.dateien_cat_name}</a>
+					</div>
+				{/foreach}
+			</div>
+			<br />
+			<div class="image_images">
+				{if $gefunden}
+					<ul class="die_image_liste2">
+						{foreach item=table from=$table_data_files}
+							{*<!-- �ndern-->*}
+							<li>
+							<div>
+								<a href="#"
+									onClick="FileBrowserDialogue.mySubmit('{$webverzeichnis}{$table.downloadlink}','','{$table.linkname}'); "
+									class="image_link" style="width: 100px; text-align: center;
+											background-image: url(./bilder/{$table.typ}); background-repeat: no-repeat; background-position: center top;" title='{$image.image_name|escape:"html"}'>
+									<span style="background-color: #FFFFFF;">{$table.linkname}</span>
+								</a>
+							</div>
+							</li>
+						{/foreach}
+					</ul>
+					{*<!-- weitere Seiten -->*}
+					{include file=weiter.inc.html}
+				{elseif $kat_error_text}
+					<p>{$kat_error_text}</p>
+				{/if}
+			</div>
+		</div>
+	</div>
+{/if}

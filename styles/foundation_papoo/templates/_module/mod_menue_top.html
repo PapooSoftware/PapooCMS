@@ -1,0 +1,19 @@
+{if $module_aktiv.mod_menue_top}
+	<!-- MODUL: menue_top -->
+	<div class="large-4 medium-4 columns" id="mod_menue_top">
+        <h2><i class="fa fa-info-circle"></i> {$weitere_informationen}</h2>
+		<ul class=" left">
+			{foreach item=menutop from=$menutop name=mod_menutop}{$nl}
+				<li>
+					<a {$menutop.mtlang_class} href="{if $menutop.mtlang_link}{$menutop.mtlang_link}{else}{$menutop.menutop_link}{/if}" title="{$menutop.mtlang_title|escape:"html"}" id="mod_menue_top_link_{$menutop.menutop_id}" {if $menutop.menutop_extern} target="_blank"{/if}>
+						<span class="ignore">{$smarty.foreach.mod_menutop.iteration}.: </span>
+						{$menutop.mtlang_name|escape:"html"}<span class="ignore">.</span>
+					</a>
+					{$nl}
+				</li>
+			{/foreach}{$nl}
+		</ul>
+	</div>
+
+	<!-- ENDE MODUL: menue_top -->
+{/if}

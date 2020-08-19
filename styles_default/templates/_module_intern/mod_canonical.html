@@ -1,0 +1,5 @@
+{if !canonical}{if $sp_urls=="ok"}{foreach item=menu from=$menu_data}{if $menu.menuklasse=="menuxaktiv_back"}{if $reporeid_print AND $menu.menuname_url == $menu.menuname_url|replace:".html":""}
+<link rel="canonical" href="http://{$site_name}{$webverzeichnis}{$menu.menuname_url}{$table_data.0.url_header}.html" />
+{else}
+<link rel="canonical" href="http://{$site_name}{$webverzeichnis}{$menu.menuname_url}" />
+{/if}{/if}{/foreach}{/if}{else}<link rel="canonical" href="http://{$site_name}{$canonical|escape:"htmlall"}" />{/if}

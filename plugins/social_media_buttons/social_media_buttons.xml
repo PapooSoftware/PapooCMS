@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin version="4">
+
+<name>Social Media Buttons</name>
+<beschreibung_de><![CDATA[Mit diesem Plugin können Sie einige datenschutzkonforme Social-Media-Buttons per Modul einbinden. Hierfür wird das Open-Source-Tool <a href="http://ct.de/-2467514">Shariff</a> der <a href="http://www.heise.de">Heise Medien GmbH & Co. KG</a> benutzt.]]></beschreibung_de>
+<beschreibung_en><![CDATA[This plugin provides some social media buttons that respect the site visitor's privacy. For this, the open source tool <a href="http://ct.de/-2467514">Shariff</a> of the <a href="http://www.heise.de">Heise Medien GmbH & Co. KG</a> is used.]]></beschreibung_en>
+<version>2.0</version>
+<papooid>3</papooid>
+<link>http://www.papoo.de</link>
+<datum>14.03.2016</datum>
+
+<autor>
+	<name>Martin Güthler</name>
+	<kontakt><![CDATA[]]></kontakt>
+	<email>mg@papoo.de</email>
+	<telefon><![CDATA[]]></telefon>
+</autor>
+
+<menue>
+	<eintrag_de>Social Media Buttons</eintrag_de>
+	<eintrag_en>Social Media Buttons</eintrag_en>
+	<icon></icon>
+	<link>plugin:social_media_buttons/templates/social_media_buttons_back.html</link>
+</menue>
+
+<klasse>
+	<name>social_media_buttons</name>
+	<datei>social_media_buttons/lib/social_media_buttons_class.php</datei>
+</klasse>
+
+<css></css>
+
+<datenbank>
+	<installation>social_media_buttons/sql/social_media_buttons_install.sql</installation>
+	<deinstallation>social_media_buttons/sql/social_media_buttons_deinstall.sql</deinstallation>
+</datenbank>
+
+<modul>
+	<datei>plugin:social_media_buttons/templates/mod_social_media_buttons_front.html</datei>
+	<name_de>Social Media Buttons</name_de>
+	<beschreibung_de><![CDATA[Social Media Buttons]]></beschreibung_de>
+	<name_en>Social Media Buttons</name_en>
+	<beschreibung_en><![CDATA[Social Media Buttons]]></beschreibung_en>
+</modul>
+
+<messages>social_media_buttons/messages</messages>
+
+</plugin>

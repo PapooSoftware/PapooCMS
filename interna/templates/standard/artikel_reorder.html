@@ -1,0 +1,42 @@
+{if $IS_ADMIN}
+	<h1>{$message_396}</h1>
+	<form method="post" action="" id="formi" style="width: 100%;">
+		<fieldset>
+			<!-- Men�-Punkt ausw�hlen:-->
+			<legend>{$message_480}</legend>
+			<p>{$message_481}</p>
+			<!-- Untermenupunkt zu:-->
+			<label for="formmenuid">{$message_480} </label>
+			<select id="formmenuid" name="formmenuid" size=1>
+				{foreach item=menu from=$menulist_data}
+				{if $menu.nummer}
+					<option value="{$menu.menuid}" class="levelshift_{$menu.level}" {if $menu.menuid == $formmenuid}selected="selected"{/if} >
+						{$menu.nummer}: {$menu.menuname}
+					</option>
+					{/if}
+				{/foreach}
+			</select>
+			<input type="submit" class="submit_back" value="{$message_482}" name="formsubmit" />
+		</fieldset>
+	</form>
+	<!-- Alle Artikel deren Reihenfolge ver�ndert werden k�nnen. -->
+	<form action="" method="post">
+		<input type="hidden" name="formmenuid" value="{$formmenuid}" />
+		<table class="outside table table-striped table-hover" >
+			{foreach name=artikel item=artikel from=$artikellist_data}
+				{if $artikel.reporeID}
+					<tr>
+					<td>ID: {$artikel.reporeID}</td>
+					<td>{$artikel.header}</td>
+					<td><input type="text" size="2" id="formartikelid_{$artikel.reporeID}" name="formartikelid[{$artikel.reporeID}]" value="{if $formmenuid == 1}{$artikel.order_id_start}{else}{$artikel.lart_order_id}{/if}" /></td>
+				
+					</tr>
+				{/if}
+			{/foreach}
+		</table>
+		<fieldset>
+			<legend>{$message_70}</legend>
+			<input type="submit" class="submit_back" name="saveorder_artikel" value="{$message_70}" />
+		</fieldset>
+	</form>
+{/if}

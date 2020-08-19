@@ -1,0 +1,24 @@
+{if $IS_ADMIN}
+	<h1>{$plugin.galerie_back.pageheader.cat_main}</h1>
+{* Linkbutton neue Kategorie *}
+	<div class="height_60" style="height: 60px;">
+		<script src='../plugins/galerie/js/confirm.js' type='text/javascript'></script>
+		<div class="cat_tool">
+			<a class="cat_tool_edit" href="./plugin.php?menuid={$menuid_aktuell}&amp;template=galerie/templates/cat_back_new.html" title="{$plugin.galerie_back.linktext.cat_create}"><img src="../plugins/galerie/bilder/cat_new.gif" width="28" height="22" alt="{$plugin.galerie_back.linktext.cat_create}" title="{$plugin.galerie_back.linktext.cat_create}" border="0" align="middle" />
+			<br />
+			{$plugin.galerie_back.text.cat_new}</a>
+		</div>
+{* Linkbutton Kategorie Edit *}
+		<div class="cat_tool">
+			<a class="cat_tool_edit" href="./plugin.php?menuid={$menuid_aktuell}&amp;template=galerie/templates/cat_back_edit.html" title="{$plugin.galerie_back.linktext.cats_edit}"><img src="../plugins/galerie/bilder/cat_edit.gif" width="28" height="22" alt="{$plugin.galerie_back.linktext.cats_edit}" title="{$plugin.galerie_back.linktext.cats_edit}" border="0" align="middle" />
+			<br />
+			{$plugin.galerie_back.text.cat_edit}</a>
+		</div>
+{* Linkbutton Kategorie l�schen *}
+		<div class="cat_tool">
+			<a class="cat_tool_edit" href="./plugin.php?menuid={$menuid_aktuell}&amp;template=galerie/templates/cat_back_del.html" title="{$plugin.galerie_back.linktext.cats_delete}"><img src="../plugins/galerie/bilder/cat_delete.gif" width="28" height="22" alt="{$plugin.galerie_back.linktext.cats_delete}" title="{$plugin.galerie_back.linktext.cats_delete}" border="0" align="middle" />
+			<br />
+			{$plugin.galerie_back.text.cat_delete}</a>
+		</div>
+	</div>
+{/if}

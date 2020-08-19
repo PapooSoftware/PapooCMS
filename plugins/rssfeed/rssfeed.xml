@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- version: Versions-Nummer papoo für die das Plugin gedacht ist / funktioniert -->
+<plugin version="3.0">
+	<!-- ALLGEMEINE-INFORMATIONEN -->
+	<!-- ************************ -->
+	<!-- name: Name des Plugins -->
+	<name>RSS-Feed</name> 
+	<!-- beschreibung_de: Kurz-Beschreibung des Plugins auf deutsch (wird im Plugin-Manager angezeigt) -->
+	<beschreibung_de><![CDATA[Erstellt einen RSS-Feed aus Papoo-Artikeln und kann bis zu 10 RSS-Feeds als Seiten in Papoo anzeigen]]></beschreibung_de>
+	<!-- beschreibung_en: Kurz-Beschreibung des Plugins auf englisch (wird im Plugin-Manager angezeigt) -->
+	<beschreibung_en><![CDATA[Creates a RSS-Feed from Papoo-Articles and shows upto 10 RSS-Feeds as pages in Papoo]]></beschreibung_en>
+	<!-- version: Versions-Nummer des Plugins -->
+	<version>0.9.6</version>
+	<!-- papooid: Eindeutige Nummer offizieller papoo-Plugins -->
+	<papooid>99</papooid>
+	<!-- link: z.Z. noch ohne Funktion -->
+	<link>http://www.tschoessow.org</link>
+	<!-- datum: Erscheinungs-Datum bzw. Stand des Plugins -->
+	<datum>20.05.2006</datum>
+	<!-- AUTOR-INFORMATIONEN -->
+	<!-- ******************* -->
+	<!-- autor: Informationen zum Autor (Programmierer) des Plugins -->
+	<autor>
+		<!-- autor.name: Name des Authors -->
+		<name>Thomas Schoessow</name>
+		<!-- autor.kontakt: postalische Kontakt-Informationen des Autors -->
+		<kontakt><![CDATA[Thomas Schoessow]]></kontakt>
+		<!-- autor.email: eMail-Adresse des Autors -->
+		<email>posteingang@tschoessow.org</email>
+		<!-- autor.telefon: Telefon-Nummer des Autors -->
+		<telefon>1111111</telefon>
+	</autor>
+	<!-- MENÜ-INFORMATIONEN -->
+	<!-- ****************** -->
+	<!-- menue: Informationen für den Menü-Eintrag im Backend (papoo/interna) -->
+	<menue>
+		<!-- menue.eintrag_de: Name des Menü-Punktes im Backend auf deutsch -->
+		<eintrag_de>RSS-Feed</eintrag_de>
+		<!-- menue.eintrag_en: Name des Menü-Punktes im Backend auf englisch -->
+		<eintrag_en>RSS-Feed</eintrag_en>
+		<!-- menue.icon: Pfad zum Menü-Icon des Menü-Punktes im Backend (relativ zum Plugin-Verzeichnis) -->
+		<icon>rssfeed/bilder/logo_klein.gif</icon>
+		<!-- menue.link: Name der Seite auf welche der Menü-Punkt im Backend verweisen soll -->
+		<link>plugin:rssfeed/templates/rssfeed_start.html</link>
+		<submenue>
+			<eintrag_de>Konfiguration</eintrag_de>
+			<eintrag_en>Configuration</eintrag_en>
+			<icon>rssfeed/bilder/logo_klein.gif</icon>
+			<link>plugin:rssfeed/templates/rssfeed_config.html</link>
+		</submenue>
+		<submenue>
+			<eintrag_de>Feed erstellen</eintrag_de>
+			<eintrag_en>Create Feed</eintrag_en>
+			<icon>rssfeed/bilder/logo_klein.gif</icon>
+			<link>plugin:rssfeed/templates/rssfeed_create.html</link>
+		</submenue>
+	</menue>
+	<!-- menue.submenue: Untermenü-Punkt für diesen Menü-Punkt im Backend, Struktur wie menue -->
+	<!-- KLASSEN-INFORMATIONEN -->
+	<!-- ****************** -->
+	<!-- klasse: Informationen der Plugin-Klasse welche eingebunden werden sollen -->
+	<klasse>
+		<!-- klasse.name: Name der Klassen-Instanz / des Objekts (also der Name des Dings, das mit $name = new xx_class(); erzeugt wird) -->
+		<name>rssfeed</name>
+		<!-- klasse.datei: Pfad zur Klassen-Datei (relativ zum Plugin-Verzeichnis) -->
+		<datei>rssfeed/lib/rssfeed_class.php</datei>
+	</klasse>
+	<!-- klasse: Es können auch weitere Plugin-Klassen eingebunden werden -->
+	<!-- CSS-INFORMATIONEN -->
+	<!-- ***************** -->
+	<!-- css: Pfad zur CSS-Datei (relativ zum Plugin-Verzeichnis) -->
+	<css>rssfeed/css/rssfeed.css</css>
+	<!-- DATENBANK-INFORMATIONEN -->
+	<!-- ****************** -->
+	<datenbank>
+		<!-- datenbank.installation: Pfad zur SQL-Installations-Datei (relativ zum Plugin-Verzeichnis) -->
+		<installation>rssfeed/sql/test_install.sql</installation>
+		<!-- datenbank.deinstallation: Pfad zur SQL-Deinstallations-Datei (relativ zum Plugin-Verzeichnis) -->
+		<deinstallation>rssfeed/sql/test_deinstall.sql</deinstallation>
+	</datenbank>
+<!-- MODUL-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- modul: Informationen des Frontend-Moduls -->
+<modul>
+	<!-- modul.datei: Datei-Name des Modul-Templates (relativ zum Plugin-Verzeichnis) -->
+	<datei>plugin:rssfeed/templates/mod_rssfeed_show.html</datei>
+	
+	<!-- modul.name_de: Der deutsche Name des Moduls -->
+	<name_de>RSS-Feed1</name_de>
+	<!-- modul.beschreibung_de: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_de>Zeigt die Daten des RSS-Feed1 als Modul an</beschreibung_de>
+	
+	<!-- modul.name_en: Der deutsche Name des Moduls -->
+	<name_en>RSS-Feed1</name_en>
+	<!-- modul.beschreibung_en: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_en>Shows the captions of RSS-Feed1 as a module</beschreibung_en>
+</modul>	
+<modul>
+	<!-- modul.datei: Datei-Name des Modul-Templates (relativ zum Plugin-Verzeichnis) -->
+	<datei>plugin:rssfeed/templates/mod_rssfeed_show1.html</datei>
+	
+	<!-- modul.name_de: Der deutsche Name des Moduls -->
+	<name_de>RSS-Feed2</name_de>
+	<!-- modul.beschreibung_de: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_de>Zeigt die Daten des RSS-Feed2 als Modul an</beschreibung_de>
+	
+	<!-- modul.name_en: Der deutsche Name des Moduls -->
+	<name_en>RSS-Feed2</name_en>
+	<!-- modul.beschreibung_en: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_en>Shows the captions of RSS-Feed2 as a module</beschreibung_en>
+</modul>
+<modul>
+	<!-- modul.datei: Datei-Name des Modul-Templates (relativ zum Plugin-Verzeichnis) -->
+	<datei>plugin:rssfeed/templates/mod_rssfeed_show2.html</datei>
+	
+	<!-- modul.name_de: Der deutsche Name des Moduls -->
+	<name_de>RSS-Feed3</name_de>
+	<!-- modul.beschreibung_de: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_de>Zeigt die Daten des RSS-Feed3 als Modul an</beschreibung_de>
+	
+	<!-- modul.name_en: Der deutsche Name des Moduls -->
+	<name_en>RSS-Feed3</name_en>
+	<!-- modul.beschreibung_en: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_en>Shows the captions of RSS-Feed3 as a module</beschreibung_en>
+</modul>	
+<messages>rssfeed/messages</messages>
+</plugin>

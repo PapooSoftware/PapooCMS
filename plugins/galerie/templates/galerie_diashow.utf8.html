@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>{$galerie_data.gallang_name}</title>
+	<meta name="generator" content="handmade by b." />
+	<script type="text/javascript" language="javascript" charset="iso-8859-1" src="{$slash}plugins/galerie/js/reflection.js"></script>
+	<script type="text/javascript" language="javascript" charset="iso-8859-1" src="{$slash}plugins/galerie/js/jquery_min.js"></script>
+	<script type="text/javascript" language="javascript" charset="iso-8859-1" src="{$slash}plugins/galerie/js/jq_easing.js"></script>
+	<script type="text/javascript" language="javascript" charset="iso-8859-1" src="{$slash}plugins/galerie/js/my_jqs.js"></script>
+	
+	<style type="text/css" title="text/css" media="all">
+	/* <![CDATA[ */
+	
+		body {ldelim}overflow: hidden; color: #FFFFFF; background-color: #000000;{rdelim}
+		a, a:visited {ldelim}color: #FFFFFF; {rdelim}
+		a:hover {ldelim}color: #FFFFFF; {rdelim}
+		
+		#image_box{ldelim}position: absolute; top: 0px; left: 50px; z-index: 100;{rdelim}
+		#image_box img {ldelim}background-color: #000000; padding-bottom: 3px;{rdelim}
+		#image_text{ldelim}position: absolute; right: 0px; bottom: 0px; z-index: 200; width: 240px; padding: 0px 10px 5px 10px; background-color: #000000; font-size: 80%; {rdelim}
+		
+		#image_leiste {ldelim}overflow: hidden; width: 100%; height: {$galerie_max_dimensions.hoehe_leiste}px; position: absolute; left: 0px; top: 0px; z-index: 300; background-color: #000000; border-bottom: 1px solid #CCCCCC; {rdelim}
+		#image_leiste_content {ldelim}overflow: hidden; height: {$galerie_max_dimensions.hoehe_leiste}px; position: relative; left: 2%;{rdelim}
+		.image_box_leiste {ldelim}height: 120px; position: absolute; left: 0px; top: 0px; border-width: 4px 0px 0px 0px; border-style: solid; border-color: #000000;{rdelim}
+		.image_box_leiste:hover {ldelim}cursor: pointer;{rdelim}
+		#image_leiste .reflected {ldelim}background-color: #000000; padding-bottom: 1px;{rdelim}
+		#scroll_left {ldelim}width: 50px; height: {$galerie_max_dimensions.hoehe_leiste}px; position: absolute; left: 0px; top: 0px; z-index: 310; display: none; background-image: url({$slash}plugins/galerie/bilder/pfeil_links.gif); {rdelim}
+		#scroll_right {ldelim}width: 50px; height: {$galerie_max_dimensions.hoehe_leiste}px; position: absolute; right: 0px; top: 0px; z-index: 320; display: none; background-image: url({$slash}plugins/galerie/bilder/pfeil_rechts.gif); {rdelim}
+		#scroll_left, #scroll_right {ldelim}background-position: center center; background-repeat: no-repeat;{rdelim}
+		
+		#leiste_toggle {ldelim} display: none; position: absolute; left: 0px; top: 0px; z-index: 500; {rdelim}
+		#leiste_toggle a {ldelim} display: block; padding: 0px 50px 0px 50px; background-color: #CCCCCC; color: #000000; {rdelim}
+		
+		#controll {ldelim}position: absolute; left: 20px; bottom: 20px; z-index: 400; {rdelim}
+		#debug {ldelim}position: absolute; left: 0px; bottom: 50px; z-index: 1000; {rdelim}
+	/* ]]> */
+	</style>
+</head>
+<body>
+
+	<div id="image_box"></div>
+	
+	<div id="image_text">
+		<h2></h2>
+		<p></p>
+	</div>
+	
+	<div id="image_leiste">
+		<div id="scroll_left"></div>
+		<div id="scroll_right"></div>
+		
+		<div id="image_leiste_content" >
+			{assign var="left_offset" value=25}
+			{foreach item=bild from=$galerie_bilder name=bilder}
+				<div class="image_box_leiste" id="image_box_leiste_id_{$smarty.foreach.bilder.iteration}" style='left: {$left_offset}px;'>
+					<img src="{$slash}plugins/galerie/galerien/{$galerie_data.gal_verzeichnis}/thumbs/{$bild.bild_datei}"
+						width="{$bild.bild_breite_thumb}"
+						height="{$bild.bild_hoehe_thumb}"
+						alt=""
+						title='{$bild.bildlang_name|escape:"html"}'
+						class="reflect"
+						style='padding-top: {math equation="max_hoehe - bild_hoehe + 5" bild_hoehe=$bild.bild_hoehe_thumb max_hoehe=$galerie_max_dimensions.hoehe}px;'
+						id="image_leiste_id_{$smarty.foreach.bilder.iteration}"
+						onclick="image_leiste_click({$smarty.foreach.bilder.iteration});"
+						/>
+				</div>
+				
+				{math equation="offset + breite + 25" offset=$left_offset breite=$bild.bild_breite_thumb assign="left_offset"}
+			
+				<script type="text/javascript" language="javascript">
+					add_image(	{$smarty.foreach.bilder.iteration},
+								'{$slash}plugins/galerie/galerien/{$galerie_data.gal_verzeichnis}/{$bild.bild_datei}',
+								{$bild.bild_breite},
+								{$bild.bild_hoehe},
+								'{$bild.bildlang_name_nodec|escape:"quotes"}',
+								'{$bild.bildlang_beschreibung_nodec|escape:"quotes"}',
+								{$bild.bild_diashow_timeout},
+								{$left_offset}
+							);
+				</script>
+			{/foreach}
+			<script type="text/javascript" language="javascript">
+				$leiste_toggle_auto = true;
+				leiste_init({$galerie_max_dimensions.hoehe_leiste}, "{$GALMSGF.DIA_KNOPF_WEITER_TITLE}");
+			</script>
+		</div>
+	</div>
+	
+	<div id="controll">
+		<span id="start_stop"><a href="javascript:slide_show_toggle()">{$GALMSGF.DIA_KNOPF_PAUSE_TITLE}</a></span>
+		<span id="close"><a href="javascript:diashow_close()">{$GALMSGF.DIA_KNOPF_ENDE_TITLE}</a></span>
+	</div>
+	<div id="leiste_toggle"><a href="javascript:leiste_toggle_do()">.. Leiste ausblenden</a></div>
+	<div id="debug"></div>
+	
+</body>

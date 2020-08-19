@@ -1,0 +1,23 @@
+<!-- MODUL (intern): mod_extended_user  -->
+{if $extended_user_menu}
+ <h1 id="shop_waehrungen_hre_rofil_und_elegdaten" class="h1" >{$plugin_shop_waehrungen_hre_rofil_und_elegdaten}</h1>
+
+ <p id="shop_waehrungen_ier_finden_ie_hre_elege" class="h1" >{$plugin_shop_waehrungen_ier_finden_ie_hre_elege}</p>
+
+ <p id="shop_waehrungen_licken_ie_auf_die_jeweiligen_eiter_" class="h1" >{$plugin_shop_waehrungen_licken_ie_auf_die_jeweiligen_eiter_}</p>
+<br />
+<div class="ext_user_menu">
+	<ul>
+		{foreach item=menu from=$extended_user_menu}
+			<li>
+				<a {if $is_extended_user_act==$menu.act} class="ext_user_aktiv" {else} class="ext_user_inaktiv" {/if} id="extuserid_{$menu.act}" href="{$menu.link}?menuid={$menuid}&amp;account_extuser={$menu.act}">{$menu.name}</a>
+			</li>
+		{/foreach}
+	</ul>
+</div>
+
+<div class="ext_user_bereich">
+	{include file=$ext_user_template}
+</div>
+{/if}
+<!-- ENDE MODUL (intern): mod_extended_user  -->

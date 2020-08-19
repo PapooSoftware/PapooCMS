@@ -1,0 +1,61 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	{if $drin=="ok"}
+		<div class="message">{$message_605}</div>
+	{/if}
+	{if $drin=="del"}
+		<div class="error">{$message_700}</div>	
+	{/if}
+	<div class="artikel">
+		<h1>{$message_699}</h1>
+		{if $formstart=="ok"}
+			<p>{$message_701}</p>
+
+			<h2>{$message_702}</h2>
+			<p>{$message_703} <a href="{$url}&amp;df=new">{$message_704}</a>.</p>
+
+			<h2>{$message_705}</h2>
+			<p>{$message_706}</p>
+
+			<form method="post" action="" >
+				<input type="hidden" name="cform_id" value="{$feld.cform_id}" />
+				{if $feld_list}
+					<table summary="{$message_707}" class="table table-striped table-hover">
+						{foreach item=feld from=$feld_list}
+							<tr >
+								<td>
+									<a href="./kontaktform.php?menuid=73&amp;df=edit&amp;cform_id={$feld.cform_id}">{$feld.cform_text} {$message_708}</a>
+								</td>
+								<td>
+									{$feld.cform_type}
+								</td>
+								<td>
+									<label for="cform_order_{$feld.cform_id}">{$message_690} {$feld.cform_name}</label>
+								</td>
+								<td>
+									<input id="cform_order_{$feld.cform_id}" name="cform_order[{$feld.cform_id}]" type="text" value="{$feld.cform_order_id}" size="5" />
+								</td>
+							</tr>
+						{/foreach}
+					</table>
+				{/if}
+				<fieldset>
+					<legend>{$message_458}</legend>
+					<input type="submit" class="submit_back" name="submitorder" value="{$message_458}" />
+				</fieldset>
+			</form>
+		{/if}
+		{if $formstart=="new"}
+			<p>{$message_709}</p>
+			{include file=kontaktform_form.html}
+		{/if}
+		{if $formstart=="edit"}
+			<p>{$message_710}</p>
+			{include file=kontaktform_form.html}
+		{/if}
+		<div class="clear">&nbsp;</div>
+	</div>
+	{*<!-- Hier kommt der Fuss rein-->*}
+	{include file=foot.inc.html}
+{/if}

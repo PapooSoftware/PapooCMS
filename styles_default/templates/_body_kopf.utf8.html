@@ -1,0 +1,9 @@
+<!-- TEMPLATE: _body_kopf.utf8.html -->
+{if $noload=="ok" OR NOT $pluginload}
+<body class="frontend menulevel-{$aktueller_menulevel} menuid-{$aktive_menuid} url-{$url_class_name} php-file-{$php_file} {$is_search} {$is_shopping_cart} extra-css-file-{$extra_css_file} lang-{$lang_short} {$browser_class_string} {$repore_id_string} {$mv_content_id_string} {$is_search}">
+{else}
+<body class="frontend menulevel-{$aktueller_menulevel} menuid-{$aktive_menuid} url-{$url_class_name} php-file-{$php_file} {$is_search} {$is_shopping_cart} extra-css-file-{$extra_css_file} lang-{$lang_short} {$browser_class_string} {$repore_id_string} {$mv_content_id_string} {$is_search}" onload="{$pluginload}">
+{/if}
+<a  id="top"></a>
+<div id="top_space"></div>
+<!-- ENDE TEMPLATE: _body_kopf.utf8.html -->

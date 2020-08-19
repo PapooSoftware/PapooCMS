@@ -1,0 +1,117 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		<h1>{$message_728}</h1>
+		{if !$update_templateweiche_ok}
+			{$message_727}
+		{/if}
+		{if isset($update_templateweiche_new) && $update_templateweiche_new == "NEU"}
+			<h2>{$message_729}</h2>
+			{if !$fehler_update}
+				{$message_730}
+				{if $fertig_update}
+					{$message_731}
+				{else}
+					<h3>{$message_732}</h3>
+					<div style="height:150px;width:95%;border:1px solid #ddd;padding:10px;overflow:auto;background:#eee;">
+						{$update_content_text}
+					</div>
+					
+					<h3>{$message_733}</h3>
+					<div style="height:150px;width:95%;border:1px solid #ddd;padding:10px;overflow:auto;background:#eee;">
+						{$update_content}
+					</div>
+					{$message_734}
+				{/if}
+			{else}
+				<h2>Update Datei ist nicht vorhanden.</h2>
+			{/if}
+		{/if}
+		{if $update_templateweiche_alt == "ALT"}
+			<h2>{$message_643}</h2>
+			{if $update_templateweiche == "START"}
+				<form action="" method="post">
+					<input type="hidden" name="update_action" value="PARAMETER_SET" />
+					<fieldset>
+						<legend> {$message_569}</legend>
+						{if $update_fehler_praefix}
+							<p style="color: #FF0000; font-weight: bold">
+								{$update_fehler_praefix}
+							</p>
+						{/if}
+						<p>{$message_570}</p>
+						<label for="update_praefix_alt">{$message_589}</label><br />
+						<input type="text" name="update_praefix_alt" id="update_praefix_alt" value="{$update_db_alt_parameter.praefix}" />
+					</fieldset>
+
+					<fieldset>
+						<legend>{$message_571}</legend>
+						{if $update_fehler_parameter}
+							<p style="color: #FF0000; font-weight: bold">
+								{$update_fehler_parameter}
+							</p>
+						{/if}
+						<p>
+							{$message_572}
+						</p>
+						<label for="update_dbserver_alt">{$message_573}</label><br />
+						<input type="text" name="update_dbserver_alt" id="update_dbserver_alt" value="{$update_db_alt_parameter.dbserver}" /><br />
+						<br />
+						<label for="update_dbname_alt">{$message_574}</label><br />
+						<input type="text" name="update_dbname_alt" id="update_dbname_alt" value="{$update_db_alt_parameter.dbname}" /><br />
+						<br />
+						<label for="update_dbuser_alt">{$message_575}</label><br />
+						<input type="text" name="update_dbuser_alt" id="update_dbuser_alt" value="{$update_db_alt_parameter.dbuser}" /><br />
+						<br />
+						<label for="update_dbpass_alt">{$message_576}</label><br />
+						<input type="password" name="update_dbpass_alt" id="update_dbpass_alt" value="{$update_db_alt_parameter.dbpass}" /><br />
+						<p>{$message_577}</p>
+					</fieldset>
+
+					<fieldset>
+						<legend>{$message_578}</legend>
+						<p>{$message_579}</p>
+						<label for="update_nicht_css_alt">{$message_580}</label>
+						<input type="checkbox" name="update_nicht_css_alt" id="update_nicht_css_alt" {if $update_db_alt_parameter.nicht_css}checked="checked"{/if} />
+					</fieldset>
+
+					<fieldset>
+						<legend>{$message_581}</legend>
+						<input type="submit" class="submit_back_big" name="update" value="{$message_582}" />
+					</fieldset>
+				</form>
+			{/if}
+			{if $update_templateweiche == "HINWEIS"}
+				{if $update_db_alt_tabellen_nicht_vorhanden}
+					<p>{$message_583}</p>
+					<ul>
+						{foreach item=tabelle from=$update_db_alt_tabellen_nicht_vorhanden}
+							<li>{$tabelle}</li>
+						{/foreach}
+					</ul>
+					<p><strong>{$message_584}</strong></p>
+					<p>{$message_585}</p>
+				{/if}
+				<form action="" method="post">
+					<input type="hidden" name="update_action" value="UPDATE" />
+					<fieldset>
+						<legend>{$message_586}</legend>
+						<input type="submit" class="submit_back" name="update" value="{$message_587}" />
+					</fieldset>
+				</form>
+			{/if}
+			{if $update_templateweiche == "UPDATE"}
+				<p>{$message_588}</p>
+				<ul>
+					{foreach item=tabelle from=$update_db_alt_tabellen}
+						<li>{$tabelle}</li>
+					{/foreach}
+				</ul>
+			{/if}
+		{/if}
+		<div class="clear">&nbsp;</div>
+	</div>
+	{*<!-- Hier kommt der Fuss rein-->*}
+	{include file=foot.inc.html}
+{/if}

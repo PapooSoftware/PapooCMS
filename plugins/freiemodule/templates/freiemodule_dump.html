@@ -1,0 +1,51 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+{*<!-- Datenbank sicherungen erstellen und einspielen -->*}
+
+{$plugin.freiemodule.sicherung}
+
+<br />
+{*<!-- Um eine Sicherung zu erstellen klicken Sie bitte hier -->*}
+<ul>
+<li>
+<a href="./plugin.php?menuid={$formmenuid}&template=freiemodule/templates/freiemodule_dump.html&msgid={$ander.news_user_id}&makedump=1">{$plugin.freiemodule.make_dump}</a>
+</li>
+</ul>
+{*<!-- Um eine Sicherung einzuspielen klicken Sie hier -->*}
+<br />
+<h3>{$plugin.freiemodule.sicherung_einspielen}</h3>
+{if $is_uploaded}
+<strong style="color:red;">{$plugin.freiemodule.sicherung_ready}</strong>
+{/if}
+<p>{$plugin.freiemodule.hinweis}</p>
+<p><strong style="color:red;">{$plugin.freiemodule.warnung}</strong></p>
+
+<form method="POST" id="formi" action="./plugin.php?menuid={$formmenuid}&template=freiemodule/templates/freiemodule_dump.html&msgid={$ander.news_user_id}&backdump=1" enctype="multipart/form-data">
+  <fieldset>
+{*<!-- Eingabe der Datei:-->*}
+  <legend>{$plugin.freiemodule.eingabe_datei}</legend>
+{*<!-- Das Dokument:-->*}
+  <label>{$plugin.freiemodule.dokument}</label>
+  <input type="file" name="myfile" value="{$myfilename}" />
+  </fieldset>
+
+  <fieldset>
+{*<!-- Datei hochladen:-->*}
+  <legend>{$plugin.freiemodule.datei_upload}</legend>
+{*<!-- hochladen-->*}
+  <input type="submit" class="submit_back" "value="{$plugin.freiemodule.upload}" name="restore" />
+  </fieldset>
+</form>
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

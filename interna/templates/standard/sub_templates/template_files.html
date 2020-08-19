@@ -1,0 +1,127 @@
+{if $IS_ADMIN}
+	<h1>{$message_786}</h1>
+	{if isset($template_sys_file_one) && $template_sys_file_one=="ok"}
+		{$message_787}
+		{if isset($eingetragen) && $eingetragen}
+			<div class="message">
+				{$system_styles_die_daten_wurden_gespeichert}
+			</div><br />
+		{/if}
+		<a href="./styles.php?menuid=22&amp;style_id={$style_id}&amp;template_dir=_module&amp;template_file={if isset($dat2.name)}{$dat2.name}{/if}&amp;get_file=1&amp;action=style_select&amp;tab=2">
+			{$message_788}
+		</a>
+		<h2>{$message_789}{$template_file} {$message_790}</h2>
+		<form action="" method="post">
+			<fieldset>
+				<legend>{$message_791}</legend>
+				<div style="border: 1px solid #333;background:#fff;;">
+					<textarea name="template_content" cols="50" id="template_content" rows="20" style="width:90%;">{$template_content}</textarea>
+				</div>
+			</fieldset>
+			
+			{literal}
+				<script type="text/javascript">
+					var editor = CodeMirror.fromTextArea('template_content', {
+						height: "450px",
+						width: "100%",
+						//lineNumbers: "on",
+						parserfile: "parsecss.js",
+						stylesheet: "css/csscolors.css",
+						path: "js/"
+					});
+				</script>
+			{/literal}
+			
+			<fieldset>
+				<legend>{$message_792}</legend>
+				<input type="submit" class="submit_back" name="save_template" value="{$message_793}" />
+			</fieldset>
+		</form>
+	{/if}
+	{if isset($template_sys_file) && $template_sys_file=="ok"}
+		{$message_794}
+		<ul>
+			{foreach item=dat from=$root_files}
+				<li>
+					{if $dat.name=="_module" or $dat.name=="_module_intern"}
+						<strong>{$dat.name}</strong>
+						{if $dat.name=="_module"}
+							<ul>
+								{foreach item=dat2 from=$var_files}
+									<li>
+										{if isset($dat2.def) && $dat2.def==1}
+											<span style="color:#666;">{$dat2.name}</span>
+											<em>
+												{if $dat2.schreib!=1}
+													<strong style="color:red;">{$message_795}</strong>
+												{else}
+													- <a href="./styles.php?menuid=22&amp;style_id={$style_id}&amp;template_dir=_module&amp;template_file={$dat2.name}&amp;get_file=1&amp;action=style_select&amp;tab=2">{$system_styles_datei_aus_default_bernehmen} ({$dat2.name})</a>
+												{/if}
+											</em>
+										{else}
+											<a href="./styles.php?menuid=22&amp;style_id={$style_id}&amp;template_dir=_module&amp;template_file={$dat2.name}&amp;schreib={$dat2.schreib}&amp;action=style_select&amp;tab=2">{$dat2.name}</a>
+											<em>
+												{if $dat2.schreib!=1}
+													<strong style="color:red;">{$message_795}</strong>
+												{else}
+													{$message_796}
+												{/if}
+											</em>
+										{/if}
+									</li>
+								{/foreach}
+							</ul>
+						{/if}
+						{if $dat.name=="_module_intern"}
+							<ul>
+								{foreach item=dat2 from=$intern_files}
+									<li>
+										{if isset($dat2.def) && $dat2.def==1}
+											<span style="color:#666;">{$dat2.name}</span>
+											<em>
+												{if $dat2.schreib!=1}
+													<strong style="color:red;">{$message_795}</strong>
+												{else}
+													- <a href="./styles.php?menuid=22&amp;style_id={$style_id}&amp;template_dir=_module_intern&amp;template_file={$dat2.name}&amp;get_file=1&amp;action=style_select&amp;tab=2">{$system_styles_datei_aus_default_bernehmen} ({$dat2.name})</a>
+												{/if}
+											</em>
+										{else}
+											<a href="./styles.php?menuid=22&amp;style_id={$style_id}&amp;template_dir=_module_intern&amp;template_file={$dat2.name}&amp;schreib={$dat2.schreib}&amp;action=style_select&amp;tab=2">{$dat2.name}</a>
+											<em>
+												{if $dat2.schreib!=1}
+													<strong style="color:red;">{$message_795}</strong>
+												{else}
+													{$message_796}
+												{/if}
+											</em>
+										{/if}
+									</li>
+								{/foreach}
+							</ul>
+						{/if}
+					{else}
+						{if isset($dat2.def) && $dat.def==1}
+							<span style="color:#666;">{$dat.name}</span>
+							<em>
+								{if $dat.schreib!=1}
+									<strong style="color:red;">{$message_795}</strong>
+								{else}
+									- <a href="./styles.php?menuid=22&amp;style_id={$style_id}&amp;template_file={$dat.name}&amp;get_file=1&amp;action=style_select&amp;tab=2">{$system_styles_datei_aus_default_bernehmen} ({$dat.name})</a>
+								{/if}
+							</em>
+						{else}
+							<a href="./styles.php?menuid=22&amp;style_id={$style_id}&amp;template_file={$dat.name}&amp;schreib={$dat.schreib}&amp;action=style_select&amp;tab=2">{$dat.name}</a>
+							<em>
+								{if $dat.schreib!=1}
+									<strong style="color:red;">{$message_795}</strong>
+								{else}
+									{$message_796}
+								{/if}
+							</em>
+						{/if}
+					{/if}
+				</li>
+			{/foreach}
+		</ul>
+	{/if}
+{/if}

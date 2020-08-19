@@ -1,0 +1,166 @@
+{if $IS_ADMIN}
+	{include file="head.inc.utf8.html"}
+	{include file="menu.inc.html"}
+	<div class="artikel">
+		{if $video_error}
+			<div class="error">{$video_error}</div>
+		{/if}
+		{if $drin}
+			<div class="message">{$message_605}</div>
+		{/if}
+		{if $startvid}
+			<h1>{$message_619}</h1>
+			<p>{$message_620}</p>
+			<p>{$message_621}</p>
+		{/if}
+		{if $bindvid}
+			<h1>{$message_622}</h1>
+			{$message_623}
+			<h2>{$message_829}</h2>
+			<p>{$message_831}</p>
+				<form method="POST" id="formi" action="" enctype="multipart/form-data">
+					<fieldset>
+						{*<!-- Eingabe der Datei:-->*}
+						<legend>{$message_337}</legend>
+						{*<!-- Das Dokument:-->*}
+						<label for="myfile">{$message_338}</label>
+						{* <!-- ung�ltige Anweisung: Dateiname darf nicht gesetz werden !!
+						<input type="file" name="myfile" id="myfile" value="{$myfilename}" />
+						--> *}
+						<input type="file" name="myfile" id="myfile" value="" />
+					</fieldset>
+
+					<fieldset>
+						{*<!-- Datei hochladen:-->*}
+						<legend>{$message_344}</legend>
+						{*<!-- hochladen-->*}
+						<input type="submit" class="submit_back_green" value="{$message_356}" name="formSubmit" />
+					</fieldset>
+				</form>
+			<h2>{$message_626}</h2>
+			<p>{$message_830}</p>
+			<p>{$message_627}</p>
+			<ul>
+			{foreach item=file from=$file_list}
+				<li><a href="./video.php?menuid=88&amp;file={$file}">{$file}</a> </li>
+			{/foreach}
+			</ul>
+		{/if}
+		{if $changevid}
+			<h1>{$message_622}</h1>
+			{$message_623}
+			<h2>{$message_624}</h2>
+			<p>{$message_625}</p>
+			<div class="image_folder_container_complete">
+				<div class="image_folder_container_left span3">
+					<strong>{$system_image_image_ordner}</strong>
+					<br />
+					<a class="video_verzeichnis_top" href="video.php?menuid=71"> {$system_image_alle_videoverzeichnisse} <span style="color: #333;">({$video_cat_id_count.0})</span> </a>
+					{foreach item=dir from=$dirlist}
+						{$dir.vor_ul}
+						<a {if $video_active_cat_id==$dir.video_cat_id} class="active_cat" {/if} href="video.php?menuid=71&cat={$dir.video_cat_id}">
+							{$dir.video_cat_name} <span style="color: #333;">({if isset($video_cat_id_count[$dir.video_cat_id]) && $video_cat_id_count[$dir.video_cat_id]}{$video_cat_id_count[$dir.video_cat_id]}{else}0{/if})</span>
+						</a>
+						{$dir.nach_ul}
+					{/foreach}
+				</div>
+				<br />
+				<div class="image_images span8">
+					{if $file_list_drin}
+						<ul class="file_list">
+							{foreach item=image from=$file_list_drin}
+								<li>
+									<div>
+										<a href="video.php?menuid=71&amp;video_id={$image.video_id}&amp;action=EDIT"
+											class="image_link"
+											title='{$image.video_alt|escape:"html"}'
+											><img src="./bilder/videos.png" alt="" title="" />
+											<span>{$image.video_alt}</span>
+										</a>
+									</div>
+								</li>
+							{/foreach}
+						</ul>
+					{else}
+						{$message_493_videos}
+					{/if}
+				</div>
+			</div>
+		{/if}
+		{if $newvid}
+			<h2>{$message_628}</h2>
+			<p>{$message_629}</p>
+			<form action="" method="post" name="video" >
+				<input type="hidden" name="filename" value="{$dateiname}" />
+				<input type="hidden" name="exist" value="{$video_id}" />
+				<fieldset>
+					<legend>{$message_630}</legend>
+					<a href="{$dateiname_web}" target="{$dateiname_web}" onclick="anzeig('{$dateiname_web}', '{$dateiname_web}', 400, 300)"
+						alt="{$message_374}" title="{$message_374}" style="display: block;">{$dateiname}
+					</a><br />
+					{if strstr($dateiname, '.flv')}
+						<object type="application/x-shockwave-flash" data="../js/player_flv_multi.swf" width="320" height="240">
+							<param name="data" value="../js/player_flv_multi.swf" />
+							<param name="allowFullScreen" value="true" />
+							<param name="FlashVars" value="flv=../video/{$dateiname|escape}&amp;width=320&amp;height=240&amp;showstop=1&amp;showvolume=1&amp;showtime=1&amp;showplayer=always&amp;showopen=0&amp;showfullscreen=1&amp;showswitchsubtitles=0&amp;bgcolor1=2A2B49&amp;startimage=../bilder/playnow.gif&amp;bgcolor2=494A63&amp;playercolor=494A63" />
+							<param name="src" value="../js/player_flv_multi.swf" />
+						</object>
+					{else}
+					<video width="320" height="240" controls="controls">
+						<source src="../video/{$dateiname|escape}" />
+						<object type="application/x-shockwave-flash" data="../js/player_flv_multi.swf" width="320" height="240">
+							<param name="data" value="../js/player_flv_multi.swf" />
+							<param name="allowFullScreen" value="true" />
+							<param name="FlashVars" value="flv=../video/{$dateiname|escape}&amp;width=320&amp;height=240&amp;showstop=1&amp;showvolume=1&amp;showtime=1&amp;showplayer=always&amp;showopen=0&amp;showfullscreen=1&amp;showswitchsubtitles=0&amp;bgcolor1=2A2B49&amp;startimage=../bilder/playnow.gif&amp;bgcolor2=494A63&amp;playercolor=494A63" />
+							<param name="src" value="../js/player_flv_multi.swf" />
+						</object>
+					</video>
+					{/if}
+				</fieldset>
+
+				<fieldset>
+					{*<!-- Kategorie.-->*}
+					<legend>{$message_492a}</legend>
+					<label for="image_dir ">{$message_492a}</label><br />
+					<select name="image_dir" size="1">
+						<option value="0" {$checked1}>{$message_489} (default)</option>
+						{foreach item=cat from=$dirlist}
+							<option value="{$cat.video_cat_id}"{if isset($video_kat) && $video_kat==$cat.video_cat_id} selected="selected" {/if}>
+								{$cat.nbsp} {$cat.video_cat_name}
+							</option>
+						{/foreach}
+					</select>
+				</fieldset>
+				{foreach item=lang from=$menlang}
+					<fieldset>
+						{*<!-- Bitte geben Sie hier die n�tigen Daten f�r das Bild ein: -->*}
+						<legend>Beschreibende Daten (Sprache: {$lang.sprache})</legend>
+						{*<!-- Alternativtext -->*}
+						<label for="texte[{$lang.lang_id}][alt]">{$message_631}</label><br />
+						<input type="text" id="texte[{$lang.lang_id}][alt]" name="texte[{$lang.lang_id}][alt]" value="{$lang.alt}" size="30" /><br />
+						<br />
+						{*<!-- Beschreibung (Was passiert auf dem Bild, bitte in genauen Beschreibungen angeben ...): -->*}
+						<label for="texte[{$lang.lang_id}][longdesc]">{$message_632}:</label><br />
+						<textarea rows="10" cols="40" id="texte[{$lang.lang_id}][longdesc]" name="texte[{$lang.lang_id}][longdesc]">{$lang.longdesc}</textarea><br />
+						<input type="hidden" name="texte[{$lang.lang_id}][lang_id]" value="{$lang.lang_id}" size="40" maxlength="100" />
+					</fieldset>
+				{/foreach}
+				<fieldset>
+					{*<!-- Eintragen: -->*}
+					<legend>{$message_224}:</legend>
+					{*<!-- In die Datenbank eintragen -->*}
+					<input type="submit" class="submit_back_green" name="eintrag" value="{$message_70}" />
+				</fieldset>
+				{* <!-- In Modus "EDIT" Knopf zum L�schen anbieten --> *}
+				{if $video_id}
+					<fieldset>
+						{*<!-- Eintragen: -->*}
+						<legend>{$message_686}</legend>
+						<input type="submit" class="submit_back_alert" name="loeschen" style="" value="{$message_686}"><br />
+					</fieldset>
+				{/if}
+			</form>
+		{/if}
+	</div><div class="clear">&nbsp;</div></div>
+	{include file="foot.inc.html"}
+{/if}

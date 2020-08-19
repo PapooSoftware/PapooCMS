@@ -1,0 +1,606 @@
+/* ######################################################################################################
+** ### Formatierung der Module ##########################################################################
+** ######################################################################################################
+*/
+/* Modul Klasse */
+
+/* Modul Klasse */
+ .modul h3,  .modul h3,
+ .modul h2,  .modul h2
+{
+	width:100%;
+	margin: 0px 10px 10px -5px;
+	padding: 5px 0px 3px 10px;
+	color: #000;
+	font-weight: bold;
+	font-size: 130%;
+	background-color:#efefef;
+}
+ 
+.modul h4
+{
+	width:100%;
+	margin: 10px 5px 10px 0px;
+	padding: 5px 0px 3px 10px;
+	color: #333;
+	font-weight: bold;
+	font-size: 130%;
+}
+.modul
+{
+	width:100%;
+}
+ .modul legend,  .modul label,  .modul h2.ignoresuch
+{
+	display:none;
+}
+#mod_umfrage_plugin label,
+#mod_newsletter label {
+	display:inline;
+	}
+#mod_newsletter inupt {
+width:150px;
+overflow:hidden;
+}
+/* Modul Umfrage */
+.umfrage_auswahl
+{
+	overflow:hidden;
+	padding:5px;
+}
+
+/* Modul Veranstaltungen */
+#inner_mod_event
+{
+	padding:5px;
+}
+/* Modul Schnellnavi */
+#mod_quicknavi
+{
+	padding:5px;
+}
+#mod_quicknavi select
+{
+	margin-top:-10px;
+}
+/* Modul Umfrage */
+#mod_umfrage_plugin
+{
+width: 150px;
+padding:0px 5px 10px 5px;
+margin:0px;
+}
+/* Modul Kalender */
+#mod_kalender
+{
+	padding:5px;
+}
+/* Modul Suchbox */
+#mod_suchbox
+{
+width: 150px;
+padding:0px 5px 10px 5px;
+margin:0px;
+margin-top:30px;
+}
+
+#mod_suchbox .senden
+{
+	font-size:90%;
+	float:right;
+}
+#mod_suchbox input
+{
+	width:110px;
+	margin: 0 0 10px 0;
+}
+
+/* Modul Styleswitcher */
+#mod_styleswitcher
+{
+width: 150px;
+padding:0px 5px 10px 5px;
+margin:0px;
+
+}
+
+#mod_styleswitcher select
+{
+	width:110px;
+	margin: -5px 0 10px 0;
+}
+
+#mod_styleswitcher .senden
+{
+
+	font-size:90%;
+	float:right;
+
+}
+/* Modul Veranstaltungen */
+#mod_event
+{
+	width: 150px;
+	padding:0px 5px 10px 5px;
+	margin:0px;
+}
+/* Modul Login */
+#mod_login
+{
+width: 160px;
+margin:0px;
+}
+
+#mod_login .input
+{
+	margin:0px;
+	padding:0px;
+	margin-left:5px;
+}
+#mod_login .senden
+{
+	padding-left:12px;
+	margin-top:20px;
+	font-size:90%;
+	float:right;
+	margin-right:30px;
+
+}
+#mod_login a.loginlink:focus
+{
+
+}
+#mod_login h3
+{
+	margin-left:0px;
+}
+#mod_login  a
+{
+	font-weight:600;
+	font-size:90%;
+	text-decoration:none;
+}
+#col2 #mod_login  a.loginlink
+{
+	clear:both;
+	padding-right:7px;
+	font-weight:600;
+	padding-left:5px;
+}
+
+/* Modul Kopftext */
+#mod_kopftext
+{
+
+
+}
+#mod_kopftext h4, .toph1
+{
+
+}
+#mod_kopftext a
+{
+
+}
+#kopftext h1
+{
+	border:none;
+	text-decoration:none;
+}
+
+/* Modul Sprachwahl */
+#mod_sprachwahl img
+{
+	margin-right:5px;
+	margin-right:5px;
+}
+#mod_sprachwahl li
+{
+	display:inline;
+	list-style-type:none;
+	padding:0px;
+	margin:0px;
+}
+#mod_sprachwahl
+{
+	position:absolute;
+	text-align:left;
+	width:100%;
+	color:#fff;
+	
+}
+#mod_sprachwahl  a
+{
+
+}
+#mod_sprachwahl  a:hover
+{
+	
+}
+#mod_sprachwahl a:focus
+{
+	
+}
+/* Modul efa Fontsize */
+#mod_efa_fontsize
+{
+	float:right;
+	margin-top:70px;
+
+}
+#mod_efa_fontsize ul,#mod_efa_fontsize li
+{
+	float:left;
+	display:inline;
+	margin:0px;
+	margin-right:5px;
+	padding:0px;
+
+	color:#fff;
+}
+#mod_efa_fontsize a
+{
+	font-size:120%;
+	color:#000;
+}
+/* Modul Breadcrump */
+#mod_breadcrump {
+
+}
+
+/* Modul Kopf-Menü */
+#mod_menue_top
+{
+
+}
+#mod_menue_top li
+{
+	display:inline;
+	list-style-type:none;
+	padding:0px;
+	margin:0px;
+}
+#mod_menue_top a
+{
+
+}
+#mod_menue_top a:hover
+{
+
+}
+/* ######################################################################################################
+** ### Unsichtbare Elemente            ##################################################################
+** ######################################################################################################
+*/
+
+
+/* Unsichtbare Objekte  */
+#menue_sprung a, .breadtext, .ignore, .ignoreornot, dfn, .mod_efa_fontsize_text
+{
+	position:absolute;
+	display:inline;
+	height:0px;
+	width:0px;
+
+	overflow:hidden;
+	left:-2000px;
+	top:-2000px;
+}
+/* Rechte Spalte */
+.loginh2
+{
+	display:none;
+}
+/* ######################################################################################################
+** ### Navigations-Menü #################################################################################
+** ######################################################################################################
+*/
+
+#mod_menue
+{
+
+}
+#mod_menue ul
+{
+	
+}
+#mod_menue li
+{
+
+}
+
+#mod_menue li a
+{
+
+}
+#mod_menue li a:hover
+{
+
+}
+#mod_menue li a:active,
+#mod_menue li a:focus
+{
+
+}
+#mod_menue .menuy_aktiv
+{
+
+}
+#mod_menue li a.menuxaktiv_back
+{
+
+}
+
+
+#mod_menue  .untermenu1 li a
+{
+	
+}
+#mod_menue  .untermenu1 li a:hover
+{
+	
+}
+#mod_menue li a.menuxaktiv_back:focus,
+#mod_menue li a.menuxaktiv_back:active,
+#mod_menue  .untermenu1 li a:focus,
+#mod_menue  .untermenu1 li a:active
+{
+
+}
+
+#mod_menue  .untermenu1
+{
+
+	
+}
+#mod_menue  .untermenu2
+{
+
+}
+#mod_menue .untermenu1 li a.menuxaktiv_back
+{
+	
+}
+#mod_menue  .untermenu1 a, #mod_menue  .untermenu1 span
+{
+}
+#mod_menue  .untermenu2 a, #mod_menue  .untermenu2 span
+{
+}
+#mod_menue .untermenu3 a, #mod_menue  .untermenu3 span
+{
+}
+#mod_menue_ebene1  li a, #mod_menue  li span
+{
+
+}
+#mod_menue  li a:visited
+{
+}
+#mod_menue_ebene1  .untermenu1 li a
+{
+
+}
+#mod_menue  .untermenu1 li a:visited
+{
+
+}
+#mod_menue  .untermenu1 li
+{
+
+}
+#mod_menue  .untermenu1 li a
+{
+
+
+}
+#mod_menue  .untermenu1 li a:focus
+{
+
+
+}
+#mod_menue_ebene1  li a:hover
+{
+
+}
+#mod_menue  li a:focus
+{
+
+}
+#mod_menue  .menuxaktiv
+{
+
+}
+
+#mod_menue_ebene1 li a.menuxaktiv_back
+{
+
+}
+#mod_menue .untermenu1 li a.menuxaktiv
+{
+
+}
+#mod_menue  .untermenu1 li a.menuxaktiv_back
+{
+
+}
+.artikelbox_left
+{
+	display:block;
+	float:left;
+	padding:5px;
+	margin-right:20px;
+	border:1px solid #eee;
+
+}
+.artikelbox_right
+{
+	float:right;
+	padding:5px;
+	margin-left:20px;
+	border:1px solid #eee;
+}
+.artikelbox_right_ohne_border
+{
+	overflow:hidden;
+	float:right;
+	margin-left:20px;
+}
+.artikelbox_left_ohne_border
+{
+	overflow:hidden;
+	float:left;
+	margin-right:20px;
+}
+#weiter li
+{
+	display:inline;
+	list-style-type:none;
+	padding:0px;
+	margin:0px;
+}
+#menue_sprung a:focus,
+#menue_sprung a:active
+{
+	position:absolute;
+	display:block;
+	padding:10px;
+	height:30px;
+	width:200px;
+	color	:#004268;
+	background-color:#fff;
+	font-weight:bold;
+	left:300px;
+	top:20px;
+	overflow:visible;
+	font-size:150%;
+	border:2px solid #004268;
+	text-decoration:none;
+}
+/* ######################################################################################################
+** ### Formulare allgemein                               ################################################
+** ######################################################################################################
+*/
+input:focus,
+textarea:focus{
+	
+	}
+.formwrap
+{
+	background-color:transparent;
+	margin:20px 0px 20px 0px;
+	width:90%;
+}
+.formwrap_guest
+{
+	background-color:transparent;
+	margin:20px 0px 20px 0px;
+	width:90%;
+}
+#mod_login label {
+display:block;
+margin-bottom:-12px;
+margin-top:5px;
+}
+#formk fieldset, .form fieldset, .form_newsletter fieldset
+{
+	background-color:#F6F6F6;
+	border:1px solid #939A9D;
+	margin:20px 0px 20px 0px;
+	padding:10px;
+}
+#formk legend, .form legend , .form_newsletter legend
+{
+	background-color:#EDEDED;
+	margin:0px 0px 10px 0px;
+	padding:2px 10px 2px 10px;
+	border:1px solid #939A9D;
+}
+.label {
+
+	}
+.bbeditor_element
+{
+	float: left;
+}
+
+/* Foreneinträge */
+.messagedata h2, .messageh4
+{
+	background:#fff;
+	padding:5px;
+	margin-right:0px;
+	margin-top:5px;
+	color:#1074B0;
+	border:1px solid #ccc;
+	position:relative;
+}
+.messagedatap, .messagebot
+{
+	background:#F0F0F0;
+	padding:10px;
+	margin-left:0px;
+	margin-top:-1px;
+	padding-top:20px;
+	overflow:hidden;
+}
+.messagefoot
+{
+	background:#E4E4E4;
+	margin-left:0px;
+	padding:10px;
+	margin-top:-1px;
+}
+.messageul li, .messageul ul, ul.messageul
+{
+	margin-left:7px;
+}
+.forumliste a
+{
+	font-size:100%;
+	font-weight:400;
+}
+.hierforum
+{
+	background:#F8F182;
+}
+img  {
+border:none;
+}
+.labdiv {
+	float:left;
+	width:100%;
+	}
+.labdiv label {
+	width:30%;
+	float:left;
+	}
+	
+.forumlistex,
+.forenlist
+{
+	font-size:110%;
+}
+.forumlistex ul
+{
+	list-style-type:none;
+}
+
+.headerfor
+{
+	background:#DAD9DF;
+	padding:5px;
+}
+
+/* Darstellung der Kommentare */
+.comment_inhalt
+{
+	background:#efefef;
+	border:1px solid #999;
+	color:inherit;
+	font-size:90%;
+	padding:10px;
+	width:90%;
+	margin:5px;
+	margin-left:0px;
+}

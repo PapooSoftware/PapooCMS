@@ -1,0 +1,6 @@
+{*<!-- Gab es �rger mit den rechten, dann entsprechende Ausgabe -->*}
+{if $rights_error=="admin"}
+	{$plugin.mv.no_admin}
+{elseif $rights_error=="write"}
+	{$plugin.mv.no_write_rights}
+{/if}

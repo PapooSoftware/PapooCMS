@@ -1,0 +1,81 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Login</title>
+	<link rel="stylesheet" type="text/css" href="css/metro-bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
+	<link rel="stylesheet" type="text/css" href="css/metro-bootstrap_papoo.css" />
+	<link rel="stylesheet" type="text/css" href="css/login.css" />
+	{$xpcss}
+	<!--[if IE]>
+	<style type="text/css">
+		@import url(./css/IEFixes.css);
+	</style>
+	<![endif]-->
+</head>
+<body class="login">
+	<div class="account-container login stacked">
+		<header id="logo">
+			<img src="css/images/logo_bigv6.png" alt="Papoo Content-Management-System" role="presentation" />
+		</header>
+		<main class="content clearfix">
+			<h1>{$message_657}</h1>
+			<a class="frontendlink" rel="up" href="../index.php">{$message_368}</a>
+			{*<!-- Neuer Login -->*}
+			{if $logfalse}<div class="error" role="alert">{$message_60}</div>{/if}
+			{if $sperre}<div class="error" role="alert">{$message_426}</div>{/if}
+			{if $diskspacelow}<div class="error" role="alert">{$message_diskspacelow}</div>{/if}
+			<form method="POST" id="loginform" class="form-vertical" action="">
+				<fieldset>
+					<div class="login-fields">
+						<div class="control-group controls">
+							<p class="field">
+								<span class="add-on">
+									<i class="fa fa-user"></i>
+									<label style="display:none;" for="username">{$message_61}:</label>
+								</span>
+								<input autofocus="autofocus" class="login username-field" type="text" id="username" name="username" size="20" maxlength="250" title="{$message_839}" placeholder="{$message_61}" value="{$username}" />
+							</p>
+						</div>
+						<div class="control-group controls">
+							<p class="field">
+								<span class="add-on">
+									<i class="fa fa-key"></i>
+									<label style="display:none;" for="password">{$message_62}:</label>
+								</span>
+								<input class="login password-field" type="password" id="password" name="password" size="20" maxlength="250" title="{$message_840}" placeholder="{$message_62}" value="{$password}" />
+							</p>
+						</div>
+						<div class="control-group controls">
+							<p class="field">
+								{*<!-- Sprache/Language Backend: -->*}
+								<label for="language" >Sprache</label><br />
+								{*<!-- Hier kann eine Sprache ausgewaehlt werden. -->*}
+								<select title="{$message_841}" name="language" id="language" size="1">
+									{*<!-- auswaehlen/select -->*}
+									<!-- {foreach item=lang from=$language}
+										<option value="{$lang.lang_short}">
+											{$lang.language}
+										</option>
+									{/foreach} -->
+									<option value="de">
+										Deutsch
+									</option>
+									<option value="en">
+										English
+									</option>
+								</select>
+							</p>
+						</div>
+					</div>
+					<p><button type="submit" class="submit_back pull-right btn btn-success" value="1" name="login">{$message_einloggen}</button></p>
+				</fieldset>
+			</form>
+		</main>
+	</div>
+</body>
+</html>
+{/if}

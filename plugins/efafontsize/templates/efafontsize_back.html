@@ -1,0 +1,86 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+{if $is_eingetragen=="ok"}
+    <div class="message">
+      {$plugin_efa_fontsize_die_daten_wurden_gespeichert}
+ </div>
+{/if}
+{if $is_eingetragen=="no"}
+	<div class="error">{$plugin_efa_fontsize_bitte_korrigieren_sie_die_eintrge_die_fehlenden_eintrge_wurden_markiert}</div>
+{/if}
+<div class="artikel">
+	<h1 id="ext_search_das_efa__fontsize_modul" class="h1" >{$plugin_ext_search_das_efa__fontsize_modul}</h1>
+	<p id="ext_search_das_efa__fontsize_modul_wurde" class="h1" >{$plugin_ext_search_das_efa__fontsize_modul_wurde}</p>
+	<p id="ext_search_diese_plugin_installiert_das_modul_nach_und_sie_knnen_es_wie_gewohnt_im_modulmanager_installieren" class="h1" >
+		{$plugin_ext_search_diese_plugin_installiert_das_modul_nach_und_sie_knnen_es_wie_gewohnt_im_modulmanager_installieren}
+	</p>
+	<p id="efa_fontsize_sie_aktivieren_das_modul_ber_den" class="h1" >{$plugin_efa_fontsize_sie_aktivieren_das_modul_ber_den}</p>
+	<h1 id="ext_search_konfiguration_efafontsize" class="h1" >{$plugin_ext_search_konfiguration_efafontsize}</h1>
+	<form action="" name="" id="formk" method="POST" enctype="multipart/form-data">
+		<fieldset>
+			<legend>{$plugin_ext_search_konfiguration_efafontsize_field}</legend>
+
+<label for="efa_fontsize_spez_schriftgre_default_wert">{$plugin_efa_fontsize_schriftgre_default_wert}{$plugin_error.efa_fontsize_spez_schriftgre_default_wert} </label>
+<br />
+<input type="text" name="efa_fontsize_spez_schriftgre_default_wert" value="{$efa_fontsize_spez.0.efa_fontsize_spez_schriftgre_default_wert|escape:"html"}" class="efa_fontsize_spez_schriftgre_default_wert" id="efa_fontsize_spez_schriftgre_default_wert"/>
+<br />
+
+			<label for="efa_fontsize_spez_steigerung_pro_schritt_in_">
+				{$plugin_efa_fontsize_steigerung_pro_schritt_in_}{$plugin_error.efa_fontsize_spez_steigerung_pro_schritt_in_}
+			</label>
+			<br />
+			<input type="text" name="efa_fontsize_spez_steigerung_pro_schritt_in_" value="{$efa_fontsize_spez.0.efa_fontsize_spez_steigerung_pro_schritt_in_|escape:"html"}" class="efa_fontsize_spez_steigerung_pro_schritt_in_" id="efa_fontsize_spez_steigerung_pro_schritt_in_"/>
+			<br />
+
+			<label for="efa_fontsize_spez_maximale_schriftgre_in_">
+				{$plugin_efa_fontsize_maximale_schriftgre_in_}{$plugin_error.efa_fontsize_spez_maximale_schriftgre_in_}
+			</label>
+			<br />
+			<input type="text" name="efa_fontsize_spez_maximale_schriftgre_in_" value="{$efa_fontsize_spez.0.efa_fontsize_spez_maximale_schriftgre_in_|escape:"html"}" class="efa_fontsize_spez_maximale_schriftgre_in_" id="efa_fontsize_spez_maximale_schriftgre_in_"/>
+			<br />
+			<label for="efa_fontsize_spez_minimale_schriftgre_in_">
+				{$plugin_efa_fontsize_minimale_schriftgre_in_}{$plugin_error.efa_fontsize_spez_minimale_schriftgre_in_}
+			</label>
+			<br />
+			<input type="text" name="efa_fontsize_spez_minimale_schriftgre_in_" value="{$efa_fontsize_spez.0.efa_fontsize_spez_minimale_schriftgre_in_|escape:"html"}" class="efa_fontsize_spez_minimale_schriftgre_in_" id="efa_fontsize_spez_minimale_schriftgre_in_"/>
+			<br />
+		</fieldset>
+			<fieldset>
+				<legend> {$plugin_efa_fontsize_speichern}</legend>
+				<!-- Speichern -->
+				<input  type="submit" class="submit_back" value=" {$plugin_efa_fontsize_speichern}" name="formSubmit_efa_fontsize" />
+			</fieldset>
+</form>
+
+
+
+
+{if $is_dev}
+ #start#
+ <span class="ignore"></span>
+  <!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+	 <div class="rapid_form">
+		<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="plugin_efa_fontsize" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="efa_fontsize" />
+		<!-- Das Standarpr�fix f�r die Ids -->
+		<input type="hidden" name="praefix" value="efa_fontsize" />
+		<!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="efa_fontsize_spez" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div>
+{/if}
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

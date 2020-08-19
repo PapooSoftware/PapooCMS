@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de">
+<head>
+	<meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8" />
+	<title>{$plugin.sprechomat.sprachausgabe}</title>
+	<meta name="generator" content="handmade by b." />
+	<meta name="robots" content="noindex, follow" />
+	<style type="text/css">
+	/* <![CDATA[ */
+		@import url({$slash}{$standard_style});
+	/* ]]> */
+	</style>
+</head>
+<body style="margin: 0px; padding: 0px; width: 100%; color: #000000;">
+	<form name="sprechomat_form" id="sprechomat_form" method="post" action="{$sprechomat_einstellungen.sprechomat_serverurl}">
+		{if $sprechomat_einstellungen.sprechomat_devloginid eq "" }
+			<input type="hidden" name="texturl" value="{$texturl}" />
+			<img src="{$slash}plugins/sprechomat/bilder/sprechomat.gif" width="25" height="22" />
+			{$plugin.sprechomat.geduld}<br />
+			<input type="submit" name="knopf" id="knopf" value="{$plugin.sprechomat.sprich}" /><br />
+			<script type="text/javascript" language="javascript">
+			// <![CDATA[
+				document.sprechomat_form.submit();
+				document.sprechomat_form.knopf.style.display = "none";
+			// ]]>
+			</script>
+		{else}
+			{*<!--<input type="hidden" name="text2say" value='{$sprechomat_text}' />-->*}
+			<input type="hidden" name="devloginid" value="{$sprechomat_einstellungen.sprechomat_devloginid}" />
+			<input type="hidden" name="domainid" value="{$sprechomat_einstellungen.sprechomat_domainid}" />
+			<small style="color: #660000;">
+				{$plugin.sprechomat.warnung}<br />
+			</small>
+			<input type="submit" value="{$plugin.sprechomat.sprich}" /><br />
+			<textarea name="text2say" style="display: none">{$sprechomat_text}</textarea>
+		{/if}
+	</form>
+</body>
+</html>

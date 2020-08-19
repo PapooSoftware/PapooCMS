@@ -1,0 +1,52 @@
+
+{if $is_eingetragen=="ok"}
+<div class="message">{$plugin_fb_plugin_die_daten_wurden_gespeichert}</div>
+{/if}
+
+<h2 id="blogger_plugin_blog_plugin" class="h2" >{$plugin_blogger_plugin_blog_plugin}</h2>
+
+<p id="blogger_plugin_hiermit_knnen_einige_blog_funktionen" class="h1" >{$plugin_blogger_plugin_hiermit_knnen_einige_blog_funktionen}</p>
+
+<h3 id="blogger_plugin_einstellungen_des_blog_plugins" class="h3" >{$plugin_blogger_plugin_einstellungen_des_blog_plugins}</h3>
+<form action="" method="post"  enctype="multipart/form-data">
+<fieldset>
+  <legend>{$plugin_blogger_plugin_einstellungen_blog}</legend>
+
+  <field class="labdiv">
+
+    <input type="checkbox" name="blogger_plugin_ping_service_aktivieren" value="1" {if $blogger_plugin.0.blogger_plugin_ping_service_aktivieren==1}checked="checked"{/if} class="blogger_plugin_ping_service_aktivieren" id="blogger_plugin_ping_service_aktivieren"/><label for="blogger_plugin_ping_service_aktivieren">{$plugin_blogger_plugin_ping_service_aktivieren}{$plugin_error.blogger_plugin_ping_service_aktivieren}</label>
+  </field>
+<!--
+  <field class="labdiv">
+    <label for="blogger_plugin_trackback_aktivieren">{$plugin_blogger_plugin_trackback_aktivieren}{$plugin_error.blogger_plugin_trackback_aktivieren}</label>
+    <input type="checkbox" name="blogger_plugin_trackback_aktivieren" value="1" {if $blogger_plugin.0.blogger_plugin_trackback_aktivieren==1}checked="checked"{/if} class="blogger_plugin_trackback_aktivieren" id="blogger_plugin_trackback_aktivieren"/>
+  </field>
+
+  <field class="labdiv">
+    <label for="blogger_plugin_mail_an_admin_wenn_neuer_tb_erstellt_wurde">{$plugin_blogger_plugin_mail_an_admin_wenn_neuer_tb_erstellt_wurde}{$plugin_error.blogger_plugin_mail_an_admin_wenn_neuer_tb_erstellt_wurde}</label>
+    <input type="checkbox" name="blogger_plugin_mail_an_admin_wenn_neuer_tb_erstellt_wurde" value="1" {if $blogger_plugin.0.blogger_plugin_mail_an_admin_wenn_neuer_tb_erstellt_wurde==1}checked="checked"{/if} class="blogger_plugin_mail_an_admin_wenn_neuer_tb_erstellt_wurde" id="blogger_plugin_mail_an_admin_wenn_neuer_tb_erstellt_wurde"/>
+  </field>-->
+</fieldset>
+<input  type="submit" class="submit_img_shop btn btn-success" name="save_config" value="{$plugin_blogger_plugin_einstellungen_speichern_blogsdfsdf}" />
+
+</form>
+<br />
+{if $is_dev}
+#start#
+<span class="ignore"></span>
+<!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+<div class="rapid_form">
+  <form action="" name="" method="POST">
+    <!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+    <input type="hidden" name="tb_name" value="blogger_config" />
+    <!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+    <input type="hidden" name="php_datei_name" value="blogger_class" />
+    <!-- Das Standarpr�fix f�r die Ids -->
+    <input type="hidden" name="praefix" value="blogger_plugin" />
+    <!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+    <input type="hidden" name="praefix_spezial" value="blogger_plugin" />
+    <!-- Das Tool einbinden -->
+    {include file=../../../plugins/devtools/templates/rapid_felder.htm}
+  </form>
+    {/if}
+</div>

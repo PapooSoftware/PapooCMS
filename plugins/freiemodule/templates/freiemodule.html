@@ -1,0 +1,19 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+{$plugin.freiemodule.bearbeiten3}
+{*<!--<p>Sie können die Verwaltung so einstellen, dass die Banner zufällig oder in der eingetragenen Reihenfolge durchlaufen werden.<br />SIe können außerdem festlegen ob Daten exportiert werden oder importiert werden sollen. Die Aktualisierung erfolgt alle 2 Stunden.</p>-->*}
+{$plugin.freiemodule.bearbeiten2}
+   
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

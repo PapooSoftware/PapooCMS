@@ -1,0 +1,114 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+	<h1>{$plugin.devtools.debug_optionen}</h1>
+
+	{if isset($debug_message) && $debug_message}
+		<p>{$debug_message}</p>
+	{else}
+
+		{$plugin.devtools.text6}
+		
+		{$plugin.devtools.text6a}
+
+		<form name="debug" action="" method="post">
+
+			<input type="hidden" name="debug_action" value="set_debug_install" />
+
+			<input type="checkbox" name="debug_install" id="debug_install" value="ja" {if isset($debug_install) && $debug_install}checked="checked"{/if} />
+
+			<label for="debug_install">{$plugin.devtools.weiterleitung_de}</label>
+
+			<input type="submit" class="submit_back_green_big_white" value="{$plugin.devtools.einstellung_speichern}">
+
+		</form>
+
+		{$plugin.devtools.text7}
+
+		<form name="debug" action="" method="post">
+
+			<input type="hidden" name="debug_action" value="delete_all_plugin_entrys" />
+
+			<input type="submit" class="submit_back_red_big_white" value="{$plugin.devtools.eintrag_entfernen}">
+
+		</form>
+
+		{$plugin.devtools.text8}
+
+		<form name="debug" action="" method="post">
+
+			<input type="hidden" name="debug_action" value="set_debug_stopallredirect" />
+
+			<input type="checkbox" name="debug_stopallredirect" id="debug_stopallredirect"
+			       value="ja" {if isset($debug_stopallredirect) && $debug_stopallredirect}checked="checked"{/if} />
+
+			<label for="debug_stopallredirect">{$plugin.devtools.alle_weiterleitung_de}</label>
+
+			<input type="submit" class="submit_back_green_big_white" value="{$plugin.devtools.einstellung_speichern}">
+
+		</form>
+
+		{$plugin.devtools.text9}
+
+		<form name="debug" action="" method="post">
+
+			<input type="hidden" name="debug_action" value="set_artikel_admin_rechte" />
+
+			<input type="submit" class="submit_back_white" value="{$plugin.devtools.rechte_setzen}">
+
+		</form>
+
+		{$plugin.devtools.text_db_charset_setzen}
+
+		<form name="debug" action="" method="post">
+
+			<input type="hidden" name="debug_action" value="set_db_charset_collation" />
+
+			<input type="submit" class="submit_back_big_white" value="{$plugin.devtools.db_charset_setzen}">
+
+		</form>
+
+		{$plugin.devtools.text_article_searchfield}
+
+		<form name="debug" action="" method="post">
+
+			<input type="hidden" name="debug_action" value="set_article_searchfield" />
+
+			<input type="submit" class="submit_back_xl_white" value="{$plugin.devtools.set_article_searchfield}">
+
+		</form>
+
+		{$plugin.devtools.text_article_seitenbaum}
+
+		<form name="debug" action="" method="post">
+
+			<input type="hidden" name="debug_action" value="set_article_seitenbaum" />
+
+			<input type="submit" class="submit_back_xl_white" value="{$plugin.devtools.set_article_seitenbaum}">
+
+		</form>
+
+		{$plugin.devtools.gen_article_language_entries_msg}
+
+		<form name="debug" action="" method="post">
+
+			<input type="hidden" name="debug_action" value="gen_article_language_entries" />
+
+			<input type="submit" class="submit_back_xl_white" value="{$plugin.devtools.gen_article_language_entries_btn}">
+
+		</form>
+
+	{/if}
+
+</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+
+{/if}

@@ -1,0 +1,40 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+
+
+ <h1 id="kalender_der_papoo_kalender" class="h1" >{$plugin_kalender_der_papoo_kalender}</h1>
+
+ <p id="kalender_das_papoo_kalender_plugin" class="h1" >{$plugin_kalender_das_papoo_kalender_plugin}</p>
+ <img src="../plugins/pkalender/bilder/content.gif" alt="" /> 
+{if $is_dev}
+ #start#<span class="ignore"></span>
+<br />
+
+  <!-- Der Start Button ist notwendig damit sich das System daran aufhängen kann. -->
+	 <div class="rapid_form">
+		<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="plugin_kalender" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="plugin_kalender_class" />
+		<!-- Das Standarpräfix für die Ids -->
+		<input type="hidden" name="praefix" value="kalender" />
+		<!-- Das Standarpräfix für die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="kalender" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div> {/if}
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

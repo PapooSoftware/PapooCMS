@@ -1,0 +1,60 @@
+{if $IS_ADMIN}{*<!-- Wird nur in der Admin angezeigt -->*}{if $error_ok}{if $error}<div style="background:#fff;border:2px solid red;"><ul>{foreach item=error from=$error}<li><strong>ERROR:</strong> {$error.number} - [{$error.data}] | <strong>class:</strong> [{$error.class}] | <strong>function</strong> [{$error.function}]</li>{/foreach}</ul><br /><br /></div>{/if}{/if}<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.9" />
+	<title>{$aktumenuname_admin} - Papoo {$head_inc.title} {$site_name}</title>
+	<script src="js/quicktags.js" type="text/javascript"></script>
+	<script src='js/jquery.js' type='text/javascript'></script>
+	<script src='js/jquery.cookie.js' type='text/javascript'></script>
+	<script src="js/codemirror.js" type="text/javascript"></script>
+	<script src='js/jstorage.min.js' type='text/javascript'></script>
+	<script src="js/bootstrap.min.js" type="text/javascript" ></script>
+	<script src="js/jquery-ui.min.js" type="text/javascript" ></script>
+	<script src="js/function_back.js" type="text/javascript" ></script>
+	<script src="js/papoo-api.js"></script>
+	<!--
+	<style type="text/css">
+		/* Einbinden der dynamischen Men-CSS */
+		@import url({$menuintcss});
+		@import url(../{$pluginscss});
+		@import url(./css/papoo.css);
+	</style>
+	-->
+	<link rel="stylesheet" type="text/css" href="css/smoothness.css" />
+	<link rel="stylesheet" type="text/css" href="css/metro-bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
+	<link rel="stylesheet" type="text/css" href="css/metro-bootstrap_papoo.css" />
+	{$xpcss}
+	<script type="text/javascript" src="../js/lightbox.js"></script>
+	<script type="text/javascript" src="../js/lightbox_localisation.js"></script>
+	<link rel="stylesheet" type="text/css" href="../styles_default/css/lightbox.css" />
+	<link rel="stylesheet" type="text/css" href="./css/vtip.css" />
+	<script type="text/javascript" >
+		var loadingImage = '../styles_default/css/bilder/loading.gif';
+		var closeButton = '../styles_default/css/bilder/close.gif';
+	</script>
+	<!--[if lte IE 6]>
+		<style type="text/css">
+			@import url(./css/IEFixes.css);
+		</style>
+	<![endif]-->
+	<!--[if lte IE 7]>
+		<style type="text/css">
+			@import url(./css/IE7Fixes.css);
+		</style>
+	<![endif]-->
+	<!--[if lte IE 8]>
+		<style type="text/css">
+			@import url(./css/IE8Fixes.css);
+		</style>
+	<![endif]-->
+	<!--[if lte IE 9]>
+		<style type="text/css">
+			@import url(./css/IE9Fixes.css);
+		</style>
+	<![endif]-->
+</head>
+<body data-spy="scroll" data-target=".subnav" data-offset="50" screen_capture_injected="true" onload="initLightbox();">
+	{include file=oben.inc.html}
+{/if}

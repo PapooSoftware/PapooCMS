@@ -1,0 +1,1 @@
+$("select.chosen").chosen();

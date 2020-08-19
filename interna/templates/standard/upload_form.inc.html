@@ -1,0 +1,36 @@
+<fieldset>
+	{*<!-- Name der Datei, wie sie im Text bezeichnet werden soll.-->*}
+	<legend>{$message_339}</legend>
+	{foreach item=lang from=$menlang}
+		{*<!-- Bezeichnung -->*}
+		<label for="linkname_{$lang.lang_id}">{$message_340} {$lang.language}: </label><br />
+		<input type="text" id="linkname_{$lang.lang_id}" name="lang[{$lang.lang_id}][name]" size="30" value="{$lang.linkname}" />
+		<br />
+	{/foreach}
+</fieldset>
+
+<fieldset>
+	{*<!-- Kategorie.-->*}
+	<legend>{$message_492a}</legend>
+	<label for="downloadkategorie ">{$message_492a}</label><br />
+	<select name="downloadkategorie" size="1">
+		<option value="0" {$checked1}>{$message_642}</option>
+		
+		{foreach item=dir from=$dirlist}
+			<option value="{$dir.dateien_cat_id}"
+			{if isset($downloadkategorie) && $downloadkategorie==$dir.dateien_cat_id} selected="selected" {/if}
+			>{$dir.nbsp} {$dir.bilder_cat_name}{$dir.dateien_cat_name}{$dir.video_cat_name}</option>
+		{/foreach}
+	</select>
+</fieldset>
+
+{*<!-- Wer darf downloaden.-->*}
+<fieldset>
+	<legend>{$message_401}</legend>
+	{*<!-- Welche Gruppen dürfen downloaden:-->*}
+	<label for="ckeckbox">{$message_95}:</label> <br />
+	{foreach item=gruppe from=$gruppelesen_data}
+		<input type="checkbox" id="{$gruppe.gruppenname}" name="gruppelesen[]" value="{$gruppe.gruppeid}" {if isset($gruppe.checked) && $gruppe.checked}checked="checked"{/if} />
+		<label for="{$gruppe.gruppenname}">{$gruppe.gruppenname}</label><br />
+	{/foreach}
+</fieldset>

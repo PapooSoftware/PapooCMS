@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin version="3.7">
+<name>Bilder-Galerie</name>
+<beschreibung_de><![CDATA[Die Papoo Bilder-Galerie. Hiermit können Sie typische Bildergalerie Funktionen realisieren.]]></beschreibung_de>
+<beschreibung_en><![CDATA[Picture-galerie.
+ATTENTION !!!
+This Plugin needs at least Papoo Version 3.7 !!!]]></beschreibung_en>
+<version>3.8</version>
+<papooid></papooid>
+<link>http://www.papoo.de</link>
+<datum>30.09.2015</datum>
+<autor>
+	<!-- autor.name: Name des Authors -->
+	<name>Stephan Bergmann und www.khmweb.de</name>
+	<!-- autor.kontakt: postalische Kontakt-Informationen des Autors -->
+	<kontakt><![CDATA[Stephan Bergmann
+Rembrandtstr. 10/1
+72768 Reutlingen]]></kontakt>
+	<!-- autor.email: eMail-Adresse des Autors -->
+	<email>S.Bergmann@XiMiX.de</email>
+	<!-- autor.telefon: Telefon-Nummer des Autors -->
+	<telefon>07121 / 60 33 10</telefon>
+</autor>
+<menue>
+	<eintrag_de>Bilder-Galerie</eintrag_de>
+	<eintrag_en>picture-Galerie</eintrag_en>
+	<icon>galerie/bilder/menu_icon.gif</icon>
+	<link>plugin:galerie/templates/galerie_back.html</link>
+	<submenue>
+		<eintrag_de>Kategorien</eintrag_de>
+		<eintrag_en>Categories</eintrag_en>
+		<icon>galerie/bilder/menu_icon.gif</icon>
+		<link>plugin:galerie/templates/cat_back_main.html</link>
+	</submenue>
+	<submenue>
+		<eintrag_de>Einbindung</eintrag_de>
+		<eintrag_en>integration</eintrag_en>
+		<icon>galerie/bilder/menu_icon.gif</icon>
+		<link>plugin:galerie/templates/galerie_back_install.html</link>
+	</submenue>
+	<submenue>
+		<eintrag_de>Werkzeuge</eintrag_de>
+		<eintrag_en>tools</eintrag_en>
+		<icon>galerie/bilder/menu_icon.gif</icon>
+		<link>plugin:galerie/templates/galerie_back_tools.html</link>
+	</submenue>
+	<submenue>
+		<eintrag_de>Einstellungen</eintrag_de>
+		<eintrag_en>settings</eintrag_en>
+		<icon>galerie/bilder/menu_icon.gif</icon>
+		<link>plugin:galerie/templates/galerie_back_set.html</link>
+	</submenue>
+</menue>
+<klasse>
+	<name>galerie</name>
+	<datei>galerie/lib/galerie_class.php</datei>
+</klasse>
+<css>galerie/css/galerie.css</css>
+<datenbank>
+	<installation>galerie/sql/galerie_install.sql</installation>
+	<deinstallation>galerie/sql/galerie_deinstall.sql</deinstallation>
+</datenbank>
+<messages>galerie/messages</messages>
+</plugin>

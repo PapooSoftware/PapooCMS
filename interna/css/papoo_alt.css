@@ -1,0 +1,262 @@
+body, html {
+	margin:0;
+	padding:0;
+	font: 85%  Verdana, Geneva, Arial, Helvetica, sans-serif;
+	background:url(bilder/backx1.jpg) #fff  repeat-y;
+}
+dfn, .ignore {
+	display:none;
+}
+fieldset {
+	border:1px solid #C4D1D9;
+	background:#eee;
+	margin-top:5px;
+	padding:5px;
+}
+legend {
+	border:1px solid black;
+	background:url(bilder/legend_back2.png) #fff  repeat-x;
+	color:#000;
+	padding:5px;
+	margin-left:-20px;
+}
+h1 {
+	font-size:140%;
+	display:block;
+	background: #BCC1A1;
+	padding:5px;
+}
+h2 {
+	font-size:130%;
+	display:block;
+	background:url(bilder/legend_back2.png) ;
+	padding:5px;
+}
+h3 {
+	font-size:120%;
+	display:block;
+	background:url(bilder/legend_back2.png) ;
+	padding:5px;
+}
+h4 {
+	font-size:110%;
+	display:block;
+	background:#E4EAC3;
+	padding:5px;
+}
+label {
+	padding:3px;
+	padding-top:0;
+	margin-top:0;
+}
+
+input[type=text],input[type=password] {
+	margin:0 0 2px 10px;
+	border:1px solid black;
+}
+input:focus {
+	background:#D3FB9B;
+}
+textarea {
+	border:1px solid black;
+}
+textarea:focus{
+	background:#EBFDD2;
+}
+form br {
+	line-height:17px;
+}
+/* Artikel - Inhalt */
+.artikel {
+	margin:0 0 0 200px;
+	background:#fff;
+	padding:20px 20% 100px 20px;
+}
+/* Men� verwalten */
+.artikel_liste {
+	list-style-type:none;
+	margin:0;
+	padding:0;
+}
+.artikel_liste h3{
+	margin-left:-30px;
+}
+.artikel_link_teaser {
+	float:right;
+	color:#000;
+}
+.artikel_list_teaser {
+	margin-left:10px;
+	padding-left:20px;
+	padding-bottom:10px;
+	background:#eee;
+	border-bottom:1px solid #aaa;
+}
+.art_nav ul,.art_nav li {
+	display:inline;
+}
+/*Navi im Artikel Bereich aus Inputs*/
+.inputnav {
+	border:1px solid black;
+	background:#0074B9;
+	color:#fff;
+	z-index:1;
+}
+.inputnav:hover {
+	border:1px solid black;
+	background:#ddd;
+	color:#000;
+	cursor:pointer;
+}
+.inputnav_aktiv {
+	border:1px solid black;
+	background:#FB7821;
+	border-bottom:#fff;
+}
+.form_inhalt {
+
+	display:block;
+	border-top:1px solid black;
+	margin-top:-1px;
+	z-index:0;
+}
+.menu {
+	position:absolute;
+	top:5em;
+	left:220px;
+	width:45em;
+	color:#000;
+
+}
+.menu ul, .menu li {
+	display:inline;
+	float:left;
+}
+.menu a {
+	border:1px solid black;
+	margin-left:20px;
+	padding:4px 10px 7px 24px;
+	float:left;
+	text-decoration:none;
+	color:#222;
+	background:#eee;
+}
+.menu a:hover {
+	background:#FCB75E;
+}
+.menu a:visited {
+	color:#222;
+}
+.menu .untermenu1 {
+	position:absolute;
+	top:5em;
+	left:-250px;
+	width:200px;
+
+	padding:0;
+}
+.menu .untermenu1 a {
+	display:block;
+	width:145px;
+	margin-top:0;
+	background:#fff;
+	border:none;
+	line-height:15px;
+	border-bottom:1px outset black;
+	background-position:left center;
+}
+.menu .untermenu1 a:hover {
+	background:#FCB75E;
+	border-bottom:1px inset black;
+	color:#000;
+}
+.menu .untermenu1 ul, .menu .untermenu1 li {
+	margin:0 0 0 5px;
+	padding:0;
+}
+/*aktiv*/
+.menu .menuxaktiv_back, .menu .menuy_aktiv {
+	border-bottom:1px solid #fff;
+	background:#fff;
+	color:#000;
+}
+.menu .untermenu1 .menuxaktiv_back  {
+
+	background:#FB7821;
+	color:#000;
+}
+.menu .untermenu2 a {
+	width:134px;
+	background:#FFEFA4;
+	font-weight:600;
+	color:#000;
+	border-left:1px solid black;
+}
+
+.menu .untermenu3 a {
+	width:125px;
+	background:#FEE1A8;
+	font-weight:400;
+}
+.oben {
+	background: url(bilder/topx1.jpg) #0074B9  no-repeat;
+	height: 8.2em;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	border: 0 solid #eee;
+	border-bottom:1px solid #333;
+	width:100%;
+}
+/*�berschrift im Kopf*/
+.oben h1 {
+	margin: 0;
+	padding-top: 0;
+	margin-left: 17em;
+	font-size: 140%;
+	letter-spacing:1px;
+	color: #fff;
+	font-family:Times;
+	display:none;
+}
+.toplink {
+	top:0;
+	right:5em;
+	position:absolute;
+	padding:3px;
+	color:#fff;
+}
+.toplink a {
+	color:#fff;
+	font-size:120%;
+}
+.toplink a:hover {
+	color:#000;
+	background:#FB7821;
+}
+/* CSS f�r �nderungen Reihenfolge Artikel bzw. Men�-Punkte */
+
+.menu_order_baum li, .artikel_order_liste li
+{
+	list-style-type: none;
+	padding: 0.5EM;
+}
+.menu_order_baum_form, .artikel_order_liste_form
+{
+	display: inline;
+	border: 0 solid #999999;
+}
+.menu_order_baum_li:hover, .artikel_order_liste_li:hover
+{
+	background-color: #DDDDDD;
+}
+.menu_order_baum_knopf:hover, .artikel_order_liste_knopf:hover
+{
+	background-color: #33DD33;
+}
+
+.levelshift_0 {margin-left: 0.5EM}
+.levelshift_1 {margin-left: 2.5EM}
+.levelshift_2 {margin-left: 4.5EM}
+.levelshift_3 {margin-left: 6.5EM}
+.levelshift_4 {margin-left: 8.5EM}
+/* CSS f�r �nderungen Reihenfolge Artikel bzw. Men�-Punkte */

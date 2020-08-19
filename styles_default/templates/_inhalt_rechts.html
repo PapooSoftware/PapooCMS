@@ -1,0 +1,7 @@
+<!-- TEMPLATE: _inhalt_rechts.html -->
+{foreach item=modul from=$module.4}
+	{* <!-- Modul: {$modul.modlang_name}<br /> --> *}
+	{* include file=$modul.mod_template  tvar=$modul.mod_echt_id *}
+	{include file=$modul.mod_template  tvar=$modul.mod_id}
+{/foreach}
+<!-- ENDE TEMPLATE: _inhalt_rechts.html -->

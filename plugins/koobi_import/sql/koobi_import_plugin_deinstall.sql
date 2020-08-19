@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS `XXX_plugin_301_config`; ##b_dump##

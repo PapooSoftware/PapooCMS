@@ -1,0 +1,213 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+	<div id="inhalt_sitemap">
+	<div class="sitemapheader">
+	<div style="float:left;">{$message_168}</div>
+	<div style="float:right;"> {$leserechte} </div>
+	<div style="float:right;margin-right:20px;">{$veroeffen} </div></div>
+	<div style="clear:both;"></div>
+		{foreach item=kat from=$catlist_data.0}
+			{if $kat.cat_id>=1}<h1 class="sitemap_menucat">{$kat.cat_text}</h1>{/if}
+			<ul class="artikel_sitemap">
+				{foreach item=table from=$table_data_site}
+					{if $kat.cat_id==$table.cat_cid  or $no_categories==1}
+						{$table.shift_anfang}
+						<div style="">
+							{if $table.has_rights}
+								<div class="content-tree-node">
+									<div class="content-tree-node-permissions">
+										<input id="read-perms-menu-{$table.menuid|intval}" type="checkbox" {if $table.leserechte}checked="checked"{/if} class="content-tree-checkbox" data-papoo-api="menu/{$table.menuid|intval}/read-permission-all"/>
+										<label for="read-perms-menu-{$table.menuid|intval}"></label>
+
+										<input id="publish-menu-{$table.menuid|intval}" type="checkbox" {if $table.publish_yn_lang_men==1}checked="checked"{/if} class="content-tree-checkbox" data-papoo-api="menu/{$table.menuid|intval}/publish"/>
+										<label for="publish-menu-{$table.menuid|intval}"></label>
+									</div>
+									<a href="menu.php?menuid=44&amp;selmenuid={$table.menuid}" menuid="{$table.menuid}" title="{$message_676}: {$table.text|escape:"html"}">
+										<div class="content-tree-node-title">
+											{if $table.menulink=="shop.php" or $table.menulink=="shop"}
+											<i class="fa fa-shopping-cart"></i>
+											{else}
+											{if $table.extern}
+												<i class="fa fa-share"></i>
+													{elseif $table.template}
+														<i class="fa fa-cog"></i>
+													{else}
+													<i class="fa fa-folder-open"></i>
+													{/if}
+											{/if}
+											{$table.text}
+										</div>
+									</a>
+								</div>
+								{else}
+								<a class="no_active_link" href="javascript:;" menuid="{$table.menuid}"title="{$message_676}: {$table.text|escape:"html"}">{if $table.menulink=="shop.php" or $table.menulink=="shop"}
+									<i class="fa fa-shopping-cart"></i>
+									{else}
+									{if $table.extern}
+										<i class="icon-share"></i>
+											{elseif $table.template}
+												<i class="fa fa-cog"></i>
+											{else}
+											<i class="fa fa-folder-open"></i>
+											{/if}
+									{/if}
+									{$table.text}
+									{if $table.leserechte}
+										<img src="./bilder/check.png" width="20" height="20" title="{$leserechte}" alt="{$leserechte}"/>
+									{else}
+										<img src="./bilder/cancel.png" width="20" height="20" title="{$leserechte_no}" alt="{$leserechte_no}"/>
+									{/if}
+									{if $table.publish_yn_lang_men==1}
+										<img src="./bilder/check.png" width="20" height="20" title="{$veroeffen}" alt="{$veroeffen}"/>
+									{else}
+										<img src="./bilder/cancel.png" width="20" height="20" title="{$veroeffen_no}" alt="{$veroeffen_no}"/>
+									{/if}
+								</a>
+							{/if}
+						</div>
+						{if $table.artikel or isset($table.produkte) && $table.produkte}
+							<ul class="ul_artikel">
+								{foreach item=artikel from=$table.artikel}
+									<li>
+										<div class="content-tree-node">
+											<div class="content-tree-node-permissions">
+												<input id="read-perms-article-{$artikel.reporeid|intval}" type="checkbox" {if $artikel.leserechte}checked="checked"{/if} class="content-tree-checkbox" data-papoo-api="article/{$artikel.reporeid|intval}/read-permission-all"/>
+												<label for="read-perms-article-{$artikel.reporeid|intval}"></label>
+
+												<input id="publish-article-{$artikel.reporeid|intval}" type="checkbox" {if $artikel.publish_yn}checked="checked"{/if} class="content-tree-checkbox" data-papoo-api="article/{$artikel.reporeid|intval}/publish"/>
+												<label for="publish-article-{$artikel.reporeid|intval}"></label>
+											</div>
+											<a href="./artikel.php?menuid=11&amp;reporeid={$artikel.reporeid}&submitlang={$artikel.lang_id}" class="sitemap_artikel" title="{$message_677}: {$artikel.text|escape:"html"}">
+												<div class="content-tree-node-title">
+													<i class="fa fa-font"></i> {$artikel.text}
+												</div>
+											</a>
+										</div>
+									</li>
+								{/foreach}
+								{if isset($table.produkte) && $table.produkte}
+									{foreach item=produkte from=$table.produkte}
+										<li>
+											<div class="sitemap_shop content-tree-node">
+												<a href="plugin.php?menuid={$shop_produkt_menuid}&template=papoo_shop/templates/papoo_shop_produkte.html&produkt_id={$produkte.produkte_lang_id}"
+													title="{$produkte.produkte_lang_produktename|escape:"html"}"
+													class="shop_item"
+													>
+													{$produkte.produkte_lang_produktename|escape:"html"}
+												</a>
+											</div>
+										</li>
+									{/foreach}
+								{/if}
+							</ul>
+						{/if}
+						
+						{$table.shift_ende}
+					{/if}
+				{/foreach}
+			</ul>
+		{/foreach}
+
+		{if isset($categories) && $categories == 1 && $orphanedMenuItemsExist == true}
+		<h2>Unkategorisiert</h2>
+		<ul class="artikel_sitemap">
+			{foreach item=table from=$table_data_site}
+			{if $table.categoryFound == false}
+			<li>
+				<div style="">
+					{if $table.has_rights}
+					<div class="content-tree-node">
+						<div class="content-tree-node-permissions">
+							<input id="read-perms-menu-{$table.menuid|intval}" type="checkbox" {if $table.leserechte}checked="checked"{/if} class="content-tree-checkbox" data-papoo-api="menu/{$table.menuid|intval}/read-permission-all"/>
+							<label for="read-perms-menu-{$table.menuid|intval}"></label>
+
+							<input id="publish-menu-{$table.menuid|intval}" type="checkbox" {if $table.publish_yn_lang_men==1}checked="checked"{/if} class="content-tree-checkbox" data-papoo-api="menu/{$table.menuid|intval}/publish"/>
+							<label for="publish-menu-{$table.menuid|intval}"></label>
+						</div>
+						<a href="menu.php?menuid=44&amp;selmenuid={$table.menuid}" menuid="{$table.menuid}" title="{$message_676}: {$table.text|escape:"html"}">
+						<div class="content-tree-node-title">
+							{if $table.menulink=="shop.php" or $table.menulink=="shop"}
+							<i class="fa fa-shopping-cart"></i>
+							{else}
+							{if $table.extern}
+							<i class="fa fa-share"></i>
+							{elseif $table.template}
+							<i class="fa fa-cog"></i>
+							{else}
+							<i class="fa fa-folder-open"></i>
+							{/if}
+							{/if}
+							{$table.text}
+						</div>
+						</a>
+					</div>
+					{else}
+
+					<a class="no_active_link" href="javascript:;" menuid="{$table.menuid}"title="{$message_676}: {$table.text|escape:"html"}">{if $table.menulink=="shop.php" or $table.menulink=="shop"}
+					<i class="fa fa-shopping-cart"></i>
+					{else}
+					{if $table.extern}
+					<i class="icon-share"></i>
+					{elseif $table.template}
+					<i class="fa fa-cog"></i>
+					{else}
+					<i class="fa fa-folder-open"></i>
+					{/if}
+					{/if}
+					{$table.text}
+					{if $table.leserechte}
+					<img src="./bilder/check.png" width="20" height="20" title="{$leserechte}" alt="{$leserechte}"/>
+					{else}
+					<img src="./bilder/cancel.png" width="20" height="20" title="{$leserechte_no}" alt="{$leserechte_no}"/>
+					{/if}
+					{if $table.publish_yn_lang_men==1}
+					<img src="./bilder/check.png" width="20" height="20" title="{$veroeffen}" alt="{$veroeffen}"/>
+					{else}
+					<img src="./bilder/cancel.png" width="20" height="20" title="{$veroeffen_no}" alt="{$veroeffen_no}"/>
+					{/if}
+					</a>
+					{/if}
+				</div>
+				{if $table.artikel or $table.produkte}
+				<ul class="ul_artikel">
+					{if $table.artikel}
+						{foreach item=artikel from=$table.artikel}
+						<li>
+							<div class="content-tree-node">
+								<div class="content-tree-node-permissions">
+									<input id="read-perms-article-{$artikel.reporeid|intval}" type="checkbox" {if $artikel.leserechte}checked="checked"{/if} class="content-tree-checkbox" data-papoo-api="article/{$artikel.reporeid|intval}/read-permission-all"/>
+									<label for="read-perms-article-{$artikel.reporeid|intval}"></label>
+
+									<input id="publish-article-{$artikel.reporeid|intval}" type="checkbox" {if $artikel.publish_yn}checked="checked"{/if} class="content-tree-checkbox" data-papoo-api="article/{$artikel.reporeid|intval}/publish"/>
+									<label for="publish-article-{$artikel.reporeid|intval}"></label>
+								</div>
+								<a href="./artikel.php?menuid=11&amp;reporeid={$artikel.reporeid}&submitlang={$artikel.lang_id}" class="sitemap_artikel" title="{$message_677}: {$artikel.text|escape:"html"}">
+								<div class="content-tree-node-title">
+									<i class="fa fa-font"></i> {$artikel.text}
+								</div>
+								</a>
+							</div>
+						</li>
+						{/foreach}
+					{/if}
+					{if isset($table.produkte) && $table.produkte}
+						{foreach item=produkte from=$table.produkte}
+						<li>
+							<div class="sitemap_shop content-tree-node">
+								<a href="plugin.php?menuid={$shop_produkt_menuid}&template=papoo_shop/templates/papoo_shop_produkte.html&produkt_id={$produkte.produkte_lang_id}" title="{$produkte.produkte_lang_produktename|escape:"html"}"
+								class="shop_item"
+								>
+								{$produkte.produkte_lang_produktename|escape:"html"}
+								</a>
+							</div>
+						</li>
+						{/foreach}
+					{/if}
+				</ul>
+				{/if}
+			</li>
+			{/if}
+			{/foreach}
+		</ul>
+		{/if}
+	</div>
+{/if}

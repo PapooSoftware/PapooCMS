@@ -1,0 +1,589 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+	{include file="head.inc.utf8.html"}
+	{include file="menu.inc.html"}
+	<div class="artikel">
+		{if isset($text_error) && $text_error}
+			<div class="alert alert-error">{$process_canceled}</div>
+		{elseif isset($text_success) && $text_success}
+			<div class="alert alert-success">{$content_deleted}</div>
+		{/if}
+		<div class="aktuell" id="aktuell_{$menuid_aktuell}"></div>
+		{if $multiupload}
+			{include file=./image_multi_upload.html}
+		{/if}
+		{$text}
+		{if $import_export}
+			{if $start}
+				<form action="#" method="post">
+					<fieldset>
+						<legend>{$message_658}</legend>
+						<p>{$message_659}</p>
+						<label for="image_export">{$message_660}</label>
+						<input type="checkbox" {if $xml_result.0.image_export==1}checked="checked"{/if} name="image_export" id="image_export"
+						       value="1"/><br/>
+                        {$message_661}<br/>
+						<br/>
+						<label for="image_import">{$message_662}</label>
+						<input type="checkbox" {if $xml_result.0.image_import==1}checked="checked"{/if} name="image_import" id="image_import"
+						       value="1"/><br/>
+					</fieldset>
+					<fieldset>
+						<legend>{$message_458}</legend>
+						<input type="submit" class="submit_back_big" name="submitglossar" value="{$message_458}"/>
+					</fieldset>
+				</form>
+			{/if}
+		{/if}
+		{*<!-- Hochladen-Formular -->*}
+		{if $template_weiche == "HOCHLADEN"}
+			<h1>{$message_491}</h1>
+			<form action="" method="post" name="frmImage" enctype="multipart/form-data">
+				<fieldset>
+					<legend>{$message_491}</legend>
+					<input type="hidden" name="action" value="EDIT"/>
+					{*<!-- Lade bitte das Bild hoch. Es wird zusaetzlich ein Thumbnail erzeugt. -->*}
+					<p>{$message_209}</p>
+					{*<!-- Maximale Dateigr��e ist 100 kbyte und 800x800px! -->*}
+					<p>{$message_210}</p>
+					{*<!-- Unterstuetzte Formate: jpeg, jpg, pjpeg-->*}
+					<p>{$message_211}</p>
+					{*<!-- Das Bild:-->*}
+					<label>{$message_212}:</label>
+					<input type="file" name="strFile" accept="image/jpeg,image/png,image/gif,image/svg+xml"/>
+					<input type="hidden" name="MAX_FILE_SIZE" value="250000"/>
+					{*<!-- abschicken -->*}
+					<input type="submit" class="submit_back_big" name="strSubmit" value="{$message_213}"/>
+				</fieldset>
+			</form>
+			<form action="" method="post" name="frmImage" enctype="multipart/form-data">
+				<fieldset>
+					<input type="hidden" name="action" value="MULTI"/>
+					<legend>{$system_image_whlen_sie_fr_den_mehrfach_upload_bitte_das_gewnschte_verzeichnis_aus}</legend>
+					<label for="image_dir ">{$message_492a}</label><br/>
+					<select name="image_dir" size="1" style="margin-right:20px;">
+						<option value="" {$checked1}>{$message_489} (default)</option>
+						{foreach item=dir from=$dirlist}
+							<option value="{$dir.bilder_cat_id}"
+								{if $image_dir==$dir.cat_id} selected="selected" {/if}
+							>{$dir.nbsp} {$dir.bilder_cat_name}{$dir.dateien_cat_name}{$dir.video_cat_name}</option>
+						{/foreach}
+					</select><input type="submit" class="submit_back_big" name="selkatmultiupload" value="{$message_213}"/>
+				</fieldset>
+				<br/>
+			</form>
+		{/if}
+		{*<!-- Ende Hochladen-Formular -->*}
+		{*<!-- Liste der Bilder mit Such-Formular und Kategorie-Auswahl -->*}
+		{if $template_weiche == "LISTE"}
+			{$message_232a}
+			<form action="" method="post" name="suche">
+				<input type="hidden" name="action" value="SUCHE"/>
+				<fieldset>
+					{*<!-- Suche nach einem Bild:-->*}
+					<legend>{$message_232}</legend>
+					<label for="search">{$message_232}</label>
+					<input id="search" name="search" value="" type="text" size="40" maxlength="30"/>
+					<input type="hidden" value="Finden" name="formSubmit"/>
+					{*<!-- Finden -->*}
+					<input type="submit" class="btn  btn-info" value="{$message_233}" name="formSubmit"/>
+				</fieldset>
+			</form>
+			<h2>{$message_492} {$bilder_cat_name}</h2>
+			<div class="image_folder_container_complete">
+				<div class="image_folder_container_left span3">
+					<strong>{$system_image_image_ordner}</strong>
+					<br/><br/>
+					<a class="bilder_verzeichnis_top" href="image.php?menuid=21"> {$system_image_alle_bilderverzeichnisse} <span style="color: #333;">({$bilder_cat_id_count.0})</span>
+					</a>
+					{foreach item=dir from=$dirlist}
+						{$dir.vor_ul}
+						<a {if $bilder_active_cat_id==$dir.bilder_cat_id} class="active_cat" {/if}
+								href="image.php?menuid=21&amp;image_dir={$dir.bilder_cat_id}">{$dir.bilder_cat_name} <span
+									style="color: #333;">({if $bilder_cat_id_count[$dir.bilder_cat_id]}{$bilder_cat_id_count[$dir.bilder_cat_id]}{else}0{/if})</span></a>
+						{$dir.nach_ul}
+					{/foreach}
+				</div>
+				<div class="image_folder_container_out2 ">
+					<div class="sortbar">
+						{if $show=="list"}
+							<a class="sort_alpha" href="image.php?menuid=21&image_dir={$bilder_active_cat_id}&show=pictures"><i class="fa fa-th"></i></a>
+						{else}
+							<a class="sort_alpha" href="image.php?menuid=21&image_dir={$bilder_active_cat_id}&show=list"><i class="fa fa-th-list"></i></a>
+						{/if}
+
+						{if $sort=='alpha_desc'}
+							<a class="sort_alpha"
+							   href="image.php?menuid=21&image_dir={$bilder_active_cat_id}&sort=alpha_asc&show={$show|escape:"htmlall"}"><i
+										class="fa fa-sort-alpha-desc"></i> </a>
+						{else}
+							<a class="sort_alpha"
+							   href="image.php?menuid=21&image_dir={$bilder_active_cat_id}&sort=alpha_desc&show={$show|escape:"htmlall"}"><i
+										class="fa fa-sort-alpha-asc"></i> </a>
+						{/if}
+
+						{if $sort=='date_desc'}
+							<a class="sort_date"
+							   href="image.php?menuid=21&image_dir={$bilder_active_cat_id}&sort=date_asc&show={$show|escape:"htmlall"}"><i
+										class="fa fa-sort-numeric-desc"></i></a>
+						{else}
+							<a class="sort_date"
+							   href="image.php?menuid=21&image_dir={$bilder_active_cat_id}&sort=date_desc&show={$show|escape:"htmlall"}"><i
+										class="fa fa-sort-numeric-asc"></i></a>
+						{/if}
+					</div>
+					<br/>
+					{if $show=="list"}
+						<form name="images_form" id="images_form_id" action="" method="post">
+							<div class="image_images ">
+								<table class="filetable" style="margin-top:0px;">
+									<thead>
+									<tr style="text-align:left;">
+										<th style="width:100px;">Bild</th>
+										<th>Name</th>
+										<th>Datum</th>
+										<th><input type="checkbox" onClick="check_tablelist()" id="select_all_img"/></th>
+									</tr>
+									</thead>
+									<tbody>
+									{foreach item=image from=$image_data}
+										<tr>
+											<td><a href="image.php?menuid=21&amp;image_id={$image.image_id}&amp;action=EDIT"
+											       class=""
+											       title='{$image.image_name|escape:"html"}'
+												><img src="../images/thumbs/{$image.image_name}?{$timestamp}" alt="{$image.image_alt}"
+											          title="{$image.image_title}" style="height:40px;"/>
+
+												</a></td>
+
+											<td>
+												{$image.image_title}<!--{$image.image_alt} --><br/>
+												<i class="fa fa-arrows-h"></i> {$image.image_width} x {$image.image_height} px
+											</td>
+											<td><i class="fa fa-clock-o"></i> {$image.image_last_date}</td>
+											<td>
+												<input type="checkbox" name="img_box[]" id="{$image.image_alt}_id" value="{$image.image_id}"/>
+											</td>
+										</tr>
+									{/foreach}
+									</tbody>
+								</table>
+							</div>
+							<fieldset>
+								<input id="del_btn_confirm" disabled="true" type="button" onClick="confirm_del()" class="btn btn-danger"
+								       value="{$delete_selection}" style="float:right; margin-right:10px;"/>
+								<input id="del_btn" name="multi_image_delete_confirmed" type="submit" class="hidden" value="{$message_780}"
+								       style="float:right; margin-right:10px;"/>
+								<input id="del_btn_abort" type="button" onClick="abort_del()" class="hidden" value="{$message_649}"
+								       style="float:right; margin-right:10px;"/>
+							</fieldset>
+						</form>
+						<script>
+							{literal}
+							function confirm_del() {
+								document.getElementById("del_btn_abort").setAttribute("class", "btn btn-info");
+								document.getElementById("del_btn").setAttribute("class", "btn btn-danger");
+								document.getElementById("del_btn_confirm").setAttribute("class", "hidden");
+							}
+
+							function abort_del() {
+								document.getElementById("del_btn_abort").setAttribute("class", "hidden");
+								document.getElementById("del_btn").setAttribute("class", "hidden");
+								document.getElementById("del_btn_confirm").setAttribute("class", "btn btn-danger");
+							}
+
+							var checkboxes = document.getElementById("images_form_id").getElementsByTagName("TBODY")[0].getElementsByTagName("INPUT");
+
+							function check_checkboxen() {
+								var check = false;
+								var check_all = true;
+								for (var i = 0; i < checkboxes.length; i++) {
+									if (checkboxes[i].checked) {
+										check = true;
+									} else {
+										check_all = false;
+										abort_del();
+									}
+								}
+								document.getElementById("select_all_img").checked = check;
+								document.getElementById("select_all_img").indeterminate = check && !check_all;
+								document.getElementById("del_btn_confirm").disabled = !check;
+							}
+
+							for (var i = 0; i < checkboxes.length; i++) {
+								checkboxes[i].addEventListener("click", check_checkboxen);
+							}
+							document.getElementById("select_all_img").onclick = function () {
+								for (var i = 0; i < checkboxes.length; i++) {
+									checkboxes[i].checked = this.checked;
+								}
+								document.getElementById("del_btn_confirm").disabled = !document.getElementById("del_btn_confirm").disabled;
+								abort_del();
+							};
+							{/literal}
+						</script>
+					{else}
+						<div class="image_images">
+							{if $image_data}
+								<div id="wrapper">
+									<div id="columns">
+										{foreach item=image from=$image_data}
+											<div class="pin">
+
+												<a href="image.php?menuid=21&amp;image_id={$image.image_id}&amp;action=EDIT"
+												   class=""
+												   title='{$image.image_name|escape:"html"}'
+												><img src="../images/thumbs/{$image.image_name}?{$timestamp}" alt="{$image.image_alt}"
+												      title="{$image.image_title}"/>
+
+												</a>
+												<p>{$image.image_title}<!--{$image.image_alt} --><br/>
+													<i class="fa fa-arrows-h"></i> {$image.image_width} x {$image.image_height} px<br/>
+													<i class="fa fa-clock-o"></i> {$image.image_last_date}</p>
+
+											</div>
+										{/foreach}
+									</div>
+								</div>
+							{else}
+								{$message_493}
+							{/if}
+						</div>
+                    {/if}
+				</div>
+			</div>
+		{/if}
+		{*<!-- Ende Liste der Bilder mit Suchformular -->*}
+		{*<!-- Wenn ein Bild hochgeladen wurde, oder ein Bild zum bearbeiten ausgew�hlt wurde, passiert das hier -->*}
+		{if $template_weiche == "NEU_EDIT"}
+		{if !isset($image_type) || isset($image_type) && $image_type !== "SVG"}
+			<script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
+			<script type="text/javascript" src="js/jquery.cropzoom.js"></script>
+		{literal}
+			<script type="text/javascript">
+				$(document).ready(function () {
+					var cropzoom = $('#crop_container').cropzoom({
+						width: 400,
+						height: 300,
+						bgColor: '#CCC',
+						enableRotation: true,
+						enableZoom: true,
+						zoomSteps: 5,
+						rotationSteps: 1,
+						selector: {
+							centered: true,
+							aspectRatio: false,
+							startWithOverlay: true,
+							borderColor: 'blue',
+							borderColorHover: 'red',
+							w: 100,
+							h: 100,
+						},
+						image: {
+							{/literal}
+							source: '{$dateiname_web}',
+							width:{$image_breite},
+							height:{$image_hoehe},
+							{literal}
+							minZoom: 10,
+							maxZoom: 150
+						}
+					});
+					cropzoom.setSelector(45, 45, 200, 200, true);
+					$('#crop').click(function () {
+						cropzoom.send({/literal}'./resize_and_crop{$imagick}.php'{literal}, 'POST', {}, function (rta) {
+							$('.result').find('img').remove();
+							var img = $('<img />').attr('src', rta);
+							$('.result').find('.txt').hide().end().append(img);
+							var input = $('<input type="hidden" name="new_img_src" />').attr('value', rta);
+							$('.result').append(input);
+						});
+					});
+					$('#restore').click(function () {
+						$('.result').find('img').remove();
+						$('.result').find('.txt').show()
+						cropzoom.restore();
+					})
+				})
+				{/literal}
+			</script>
+		{/if}
+			<form action="" method="post" name="frmImage" enctype="multipart/form-data">
+				<input type="hidden" name="image_modus" value="{$image_modus}"/>
+				<input type="hidden" name="image_name" value="{$image_name}"/>
+				<input type="hidden" name="image_breite" value="{$image_breite}"/>
+				<input type="hidden" name="image_hoehe" value="{$image_hoehe}"/>
+				<input type="hidden" name="exist" value="{$exist}"/>
+
+				{if isset($image_modus) && $image_modus == "NEU"}
+					<h1>{$message_198}</h1>
+					<input type="hidden" name="action" value="SPEICHERN"/>
+				{else}
+					<h1>{$message_214}</h1>
+					<input type="hidden" name="action" value="SPEICHERN_DIALOG"/>
+					<input type="hidden" name="image_id" value="{$image_id}"/>
+					<input type="hidden" name="image_name_org" value="{$image_name_org}"/>
+				{/if}
+
+				<fieldset>
+					{if isset($image_modus) && $image_modus == "NEU"}
+						{*<!-- Diese Daten wurden hochgeladen. -->*}
+						<legend>{$message_199}:</legend>
+					{else}
+						{*<!-- Dieses Bild wird bearbeitet. -->*}
+						<legend>{$image_name_org}</legend>
+					{/if}
+					<a href="{$dateiname_web}"
+					   target="{$image_name_org}"
+					   onclick="anzeig('{$dateiname_web}', '{$image_name_org}', {$image_breite}, {$image_hoehe})"
+					   alt="{$message_374}"
+					   title="{$message_374}"
+					   style="display: block;">
+
+						<div style="width: 60%; float: right;">
+							{$message_372}: {$image_breite} px<br/>
+							{$message_373}: {$image_hoehe} px
+						</div>
+						{if isset($image_type) && $image_type !== "SVG"}
+							<img src="{$dateiname_thumbnail_web}?{$timestamp}" alt="{$image_alt}" style="margin-right:30px;float:left"
+							     title="{$image_title}"/>
+						{/if}
+						<img src="{$dateiname_web}" alt="{$image_alt}" style="max-width:300px;" title="{$image_title}"/>
+					</a>
+				</fieldset>
+
+				{if isset($image_type) && $image_type !== "SVG"}
+					<fieldset>
+						<legend>Thumbnail skalieren</legend>
+						<div class="Post">
+							<div class="Post-body">
+								<div class="Post-inner">
+									<div class="PostContent">
+										<div class="boxes">
+											<div id="crop_container"></div>
+											<div class="result">
+												<div class="txt">Skaliertes Thumbnail</div>
+											</div>
+										</div>
+										<div class="clearfix"></div>
+										<br/><br/>
+										<div class="clearfix"></div>
+										<span class="button-wrapper" id="crop">
+											<span class="l"> </span>
+											<span class="r"> </span>
+											<a class="btn btn-info" href="javascript:void(0)">Ausschneiden</a>
+										</span>
+										&nbsp;
+										<span class="button-wrapper" id="restore">
+											<span class="l"> </span>
+											<span class="r"> </span>
+											<a class="btn btn-danger" href="javascript:void(0)">Zurücksetzen</a>
+										</span>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+				{/if}
+
+				{if isset($image_modus) && $image_modus == "EDIT" && isset($image_type) && $image_type !== "SVG"}
+					<fieldset>
+						{*<!-- Dieses Bild verkleinern.-->*}
+						<legend>{$message_215}</legend>
+						{*<!-- Verkleinern in Prozent (z.B. 80 f�r 80%): -->*}
+						<label for="zoom_faktor">{$message_216}:</label><br/>
+						<input type="text" id="zoom_faktor" name="zoom_faktor" value="{if isset($zoom_faktor)}{$zoom_faktor}{/if}" size="4"/>%
+						{*<!-- verkleinern -->*}
+						<input type="submit" class="submit_back_big" name="zoom" value="{$message_215}"/>
+					</fieldset>
+				{/if}
+
+				<fieldset>
+					{*<!-- Kategorie.-->*}
+					<legend>{$message_492a}</legend>
+					<label for="image_dir ">{$message_492a}</label><br/>
+					<select name="image_dir" size="1">
+						<option value="0" {$checked1}>{$message_489} (default)</option>
+						{foreach item=dir from=$dirlist}
+							<option value="{$dir.bilder_cat_id}"{if $image_dir==$dir.cat_id} selected="selected" {/if}>
+								{$dir.nbsp} {$dir.bilder_cat_name}{$dir.dateien_cat_name}{$dir.video_cat_name}
+							</option>
+						{/foreach}
+						<!--
+						{foreach item=cat from=$result_cat}
+							<option value="{$cat.bilder_cat_id}" {if $image_dir==$cat.bilder_cat_id} selected="selected" {/if}>
+								{$cat.bilder_cat_name}
+							</option>
+						{/foreach}
+						-->
+					</select>
+				</fieldset>
+
+				{foreach item=lang from=$menlang}
+					<fieldset>
+						{*<!-- Bitte geben Sie hier die n�tigen Daten f�r das Bild ein: -->*}
+						<legend>{$message_203} ({$message_663}: {if isset($lang.sprache)}{$lang.sprache}{/if})</legend>
+
+						{*<!-- Alternativtext und Titel m�ssen unbedingt angegeben werden, da ansonsten kein Eintrag in die Datenbank erfolgt! -->*}
+						<p><strong>{$message_204}</strong></p>
+
+						{*<!-- Alternativtext -->*}
+						<label for="texte[{$lang.lang_id}][alt]">{$message_205}: ({$message_206})</label><br/>
+						<input type="text" id="texte[{$lang.lang_id}][alt]" name="texte[{$lang.lang_id}][alt]" value="{$lang.alt}" size="30"/><br/>
+						<br/>
+						<label for="texte[{$lang.lang_id}][title]">{$message_664}: ({$message_207})</label><br/>
+						<input type="text" id="texte[{$lang.lang_id}][title]" name="texte[{$lang.lang_id}][title]" value="{$lang.title}"
+						       size="50"/><br/>
+						{*<!-- kurze Beschreibung -->*}
+						<br/>
+						{*<!-- Beschreibung (Was passiert auf dem Bild, bitte in genauen Beschreibungen angeben ...):
+						<label for="texte[{$lang.lang_id}][longdesc]">{$message_208}:</label><br />
+						<textarea rows="10" cols="40" id="texte[{$lang.lang_id}][longdesc]" name="texte[{$lang.lang_id}][longdesc]">{$lang.longdesc}</textarea><br />-->*}
+						<input type="hidden" name="texte[{$lang.lang_id}][lang_id]" value="{$lang.lang_id}" size="40" maxlength="100"/>
+					</fieldset>
+				{/foreach}
+
+				<fieldset>
+					{*<!-- Eintragen: -->*}
+					<legend>{$message_224}:</legend>
+					{*<!-- In die Datenbank eintragen -->*}
+					<input type="submit" class="submit_back_green" name="eintrag" value="{$message_70}"/>
+				</fieldset>
+			</form>
+		{if isset($image_modus) && $image_modus == "EDIT"} {*<!-- Hier "Schalter Tausche Bild-Datei erlauben ja/nein" unterbringen -->*}
+			<form action="" method="post" name="frmImage" enctype="multipart/form-data">
+				<input type="hidden" name="action" value="CHANGE_IMAGEFILE"/>
+				<input type="hidden" name="image_name_org" value="{$image_name_org}"/>
+
+				<fieldset>
+					<legend>{$message_image_change_imagefile_legend}</legend>
+					<p>
+						{$message_image_change_imagefile_text}
+					</p>
+					<label for="change_imagefile">{$message_image_change_imagefile_label}:</label><br/>
+					<input type="file" name="change_imagefile" id="change_imagefile" accept="image/*"/>
+					<input type="submit" class="submit_back" value="{$message_image_change_imagefile_submit}"/>
+				</fieldset>
+			</form>
+		{/if}
+		{* <!-- In Modus "EDIT" Knopf zum L�schen anbieten --> *}
+		{if isset($image_modus) && $image_modus == "EDIT"}
+			<form action="" method="post" name="frmImagedel" id="formidel">
+				<input type="hidden" name="action" value="LOESCHEN"/>
+				<input type="hidden" name="image_id" value="{$image_id}"/>
+				<input type="hidden" name="image_name_org" value="{$image_name}"/>
+				<fieldset>
+					{*<!-- Eintragen: -->*}
+					<legend>{$message_223}</legend>
+					<input type="submit" class="submit_back_alert_big" name="loeschen" style="background-color:red;float:left;"
+					       value="{$message_223}"><br/>
+				</fieldset>
+			</form>
+		{/if}
+		{/if}
+		{if $template_weiche == "SPEICHERN_DIALOG"}
+			<form action="" method="post" name="anders_pic">
+				<input type="hidden" name="action" value="SPEICHERN"/>
+				<input type="hidden" name="image_id" value="{$image_id}"/>
+				<input type="hidden" name="image_name" value="{$image_name}"/>
+				<input type="hidden" name="image_name_org" value="{$image_name_org}"/>
+				<input type="hidden" name="image_dir" value="{$image_dir}"/>
+				{foreach item=lang from=$menlang}
+					<!-- {$lang.language} -->
+					<input type="hidden" name="texte[{$lang.lang_id}][lang_id]" value="{$lang.lang_id}"/>
+					<input type="hidden" name="texte[{$lang.lang_id}][alt]" value="{$lang.alt}"/>
+					<input type="hidden" name="texte[{$lang.lang_id}][title]" value="{$lang.title}"/>
+					<input type="hidden" name="texte[{$lang.lang_id}][longdesc]" value="{$lang.longdesc}"/>
+				{/foreach}
+				<input type="hidden" name="new_img_src" value="{$new_img_src}"/>
+				<input type="hidden" name="image_breite" value="{$image_breite}"/>
+				<input type="hidden" name="image_hoehe" value="{$image_hoehe}"/>
+				<input type="hidden" name="exist" value="{$exist}"/>
+				<input type="hidden" name="eintragalt" value="1"/>
+				{*<!-- Sie haben die Informationen dieses Bilds ver�ndert.-->*}
+				<h2>{$message_225}</h2>
+				<fieldset>
+					{if isset($image_modus) && $image_modus == "NEU"}
+						{*<!-- Diese Daten wurden hochgeladen. -->*}
+						<legend>{$message_199}:</legend>
+					{else}
+					    {*<!-- Dieses Bild wird bearbeitet. -->*}
+						<legend>{$image_name_org}</legend>
+					{/if}
+					<a href="{$dateiname_web}"
+					   target="{$image_name_org}"
+					   onclick="anzeig('{$dateiname_web}', '{$image_name_org}', {$image_breite}, {$image_hoehe})"
+					   alt="{$message_374}"
+					   title="{$message_374}"
+					   style="display: block;">
+
+						<div style="width: 60%; float: right;">
+							{$message_372}: {$image_breite} px<br/>
+							{$message_373}: {$image_hoehe} px
+						</div>
+						<img src="{$dateiname_thumbnail_web}" alt="{$image_alt}" title="{$image_title}"/>
+					</a>
+				</fieldset>
+				{if isset($artikel_drin) && $artikel_drin}
+					<fieldset>
+						{*<!-- Dieses Bild wird in diesem(n) Artikel(n) verwendet. -->*}
+						<legend>{$message_226}</legend>
+						<ul>
+							{foreach item=table from=$table_data2}
+								<li>
+									<a href="artikel.php?menuid=11&amp;obermenuid=5&amp;untermenuid=11&amp;reportage={$table.reporeid}">{$table.uberschrift}</a>
+								</li>
+							{/foreach}
+						</ul>
+					</fieldset>
+				{/if}
+
+				<fieldset>
+					{*<!-- M�chten Sie die �nderungen -->*}
+					<legend>{$message_227} </legend>
+					{*<!-- im Original speichern?-->*}
+					<p>
+						<input type="submit" class="submit_back_big" name="original" value="{$message_228}"/>
+					</p>
+				</fieldset>
+
+				<fieldset>
+					{*<!-- oder m�chten Sie dieses Bild lieber-->*}
+					<legend>{$message_229}</legend>
+					{*<!-- unter dem Namen: -->*}
+					<p>
+						<label for="image_name_kopie">{$message_230}</label>
+						<input type="text" name="image_name_kopie" id="image_name_kopie" value="{$image_name_kopie}" size="40"/>
+						{*<!-- als Kopie speichern?-->*}
+						<input type="submit" class="submit_back_big" name="kopie" value="{$message_231}"/>
+					</p>
+				</fieldset>
+			</form>
+		{/if}
+		{if $is_dev}
+			<span class="ignore">#start#
+			</span>
+			<!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+			<div class="rapid_form">
+				<form action="" name="" method="POST">
+					<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+					<input type="hidden" name="tb_name" value="papoo_bilder"/>
+					<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+					<input type="hidden" name="php_datei_name" value="image_class"/>
+
+					<input type="hidden" name="system_template" value="image.html"/>
+					<!-- Ist System -->
+					<input type="hidden" name="is_system" value="1"/>
+					<!-- Das Standarpr�fix f�r die Ids -->
+					<input type="hidden" name="praefix" value="image"/>
+					<!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+					<input type="hidden" name="praefix_spezial" value="image"/>
+					<!-- Das Tool einbinden -->
+					{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+				</form>
+			</div>
+		{/if}
+		<div class="clear">&nbsp;</div>
+	</div>
+	{include file="foot.inc.html"}
+{/if}

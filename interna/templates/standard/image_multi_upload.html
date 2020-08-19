@@ -1,0 +1,112 @@
+{if isset($multiupload_fin) && $multiupload_fin}
+	<div class="message"> {$system_image_die_bilder_wurden_in_die_datenbank_eingetragen}</div>
+{else}
+	{if $create_image_data}
+	<h1 id="image_daten_der_bilder_eintragen" class="h1" >{$system_image_daten_der_bilder_eintragen}</h1>
+	<p>{$system_image_alternativ_text_required}</p>
+	<div id="multiimageformdiv">
+		<form action="" name="" method="POST">
+			<table>
+				<tr>
+					<th> {$message_485}</th>
+					<th> {$system_image_das_bild}</th>
+					<th> {$system_image_alternativ_text_alt}</th>
+					{*<th> {$system_image_title_attribut_title}</th>*}
+				</tr>
+				{foreach item=img key=counter from=$image_liste}
+					<tr>
+						<td>{$img}</td>
+						<td><img src="{$img}" style="max-width:200px;" /></td>
+						<td><input type="text" required="required" value="" name="alt[{$counter}]"></td>
+						{*<td><input type="text" required="required" value="" name="title[{$counter}]"></td>*}
+					</tr>
+				{/foreach}
+			</table>
+			<fieldset>
+				<legend>{$system_image_hochgeladene_bilder_in_der_datenbank_abspeichern}</legend>
+				<input type="hidden" value="MULTI_UPLOAD" name="action" />
+				<input type="hidden" value="{$image_dir}" name="image_dir" />
+				<input type="submit" class="submit_back_big" name="strSubmit_multiimages_data" value="{$system_image_in_datenbank_speichern}" />
+			</fieldset>
+		</form>
+		<fieldset>
+			<legend>{$abort_process}</legend>
+			<form action="" name="" method="POST" style="margin:0">
+				<input type="hidden" value="MULTI_UPLOAD_ABORT" name="action" />
+				<input type="submit" class="btn btn-danger" name="abort_multiimages_upload" value="{$message_649}" />
+			</form>
+		</fieldset>
+	</div>
+	{else}
+		<script type="text/javascript" src="./js/plupload/plupload.full.min.js"></script>
+		<script type="text/javascript" src="./js/plupload//jquery.plupload.queue/jquery.plupload.queue.min.js" charset="UTF-8"></script>
+		<link type="text/css" rel="stylesheet" href="./js/plupload/jquery.plupload.queue/css/jquery.plupload.queue.css" media="screen" />
+		<script type="text/javascript" src="./js/plupload/i18n/de.js"></script>
+		<div id="uploader"><p>Ihr Browser unterstützt kein Flash, Silverlight or HTML5.</p></div>
+		<br />
+		<form id="image_upload_submit_form_without_button_by_script" action="" name="" method="POST">
+			<input type="hidden" value="{$image_dir}" name="image_dir" />
+			<input type="hidden" value="MULTI_UPLOAD" name="action" />
+		</form>
+		<script type="text/javascript">
+			{literal}
+				$(function() {
+					// Setup html5 version
+					$("#uploader").pluploadQueue({
+						// General settings
+						runtimes : 'html5,flash,silverlight,html4',
+						url : "./plupload.php",
+						chunk_size : '1mb',
+						rename : true,
+						dragdrop: true,
+						filters : {
+							// Maximum file size
+							max_file_size : '10mb',
+							// Specify what files to browse for
+							mime_types: [
+								{
+									title : "Image files",
+									extensions : "jpg,jpeg,gif,png,svg",
+								},
+							],
+						},
+						// Flash settings
+						flash_swf_url : './js/plupload/Moxie.swf',
+						// Silverlight settings
+						silverlight_xap_url : './js/plupload/Moxie.xap'
+					});
+			{/literal}
+				{* script: Fertiger upload triggert den Button der unten wäre automatisch *}
+			{literal}
+					var uploader = $('#uploader').pluploadQueue();
+					uploader.bind('UploadComplete', function() {
+						document.getElementById('image_upload_submit_form_without_button_by_script').submit();
+					});
+				});
+			{/literal}
+		</script>
+	{/if}
+{/if}
+{if $is_dev}
+	<span class="ignore"> #start#
+	</span>
+	<!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+	<div class="rapid_form">
+		<form action="" name="" method="POST">
+			<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+			<input type="hidden" name="tb_name" value="papoo_bilder" />
+			<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+			<input type="hidden" name="php_datei_name" value="image_class" />
+
+			<input type="hidden" name="system_template" value="image_multi_upload.html" />
+			<!-- Ist System -->
+			<input type="hidden" name="is_system" value="1" />
+			<!-- Das Standarpr�fix f�r die Ids -->
+			<input type="hidden" name="praefix" value="image" />
+			<!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+			<input type="hidden" name="praefix_spezial" value="image" />
+			<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+		</form>
+	</div>
+{/if}

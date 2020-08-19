@@ -1,0 +1,51 @@
+{if $IS_ADMIN}
+	<fieldset>
+		<legend>{$system_config_zusaetzliche_metatags}</legend>
+		<p id="config_frei_eintragen" class="h1" >
+			{$system_config_frei_eintragen}
+		</p>
+		<label for="config_metatagszusatz">{$system_config_metatagszusatz}{$system_error.config_metatagszusatz}</label>
+		<br />
+		<textarea cols="30" rows="6" style="width: 99%;" name="config_metatagszusatz" class="config_metatagszusatz" id="config_metatagszusatz">{$config.0.config_metatagszusatz}</textarea>
+		<br />
+	</fieldset>
+
+	<fieldset>
+		{*<!-- �berschrift ganz oben, oberhalb des Textes.-->*}
+		<legend>{$message_427}</legend>
+		 {*<!-- Seitenname -->*}
+		<label for="seitentitle">{$message_427}</label><br />
+		{*<!-- Hier bitte den Seitennamen eingeben-->*}
+		<input type="text" id="seitentitle" name="seitentitle" size="60" value="{$meta_texte_standard.0.seitentitle}" /><br />
+	</fieldset>
+
+	<fieldset>
+		{*<!-- �berschrift ganz oben, oberhalb des Textes.-->*}
+		<legend>{$message_300}</legend>
+
+		{*<!-- Kopf Titel :-->*}
+		<label for ="top_title">{$message_301}</label><br />
+		<textarea type="text" id="top_title" name="head_title" rows="2" cols="30" style="width: 99%;" >{$meta_texte_standard.0.head_title}</textarea>
+	</fieldset>
+
+	<fieldset>
+		{*<!-- Meta Daten Ihrer Seite-->*}
+		<legend>{$message_302}</legend>
+
+		{*<!-- Beschreibung-->*}
+		<label for ="Beschreibung">{$message_303} :</label><br />
+		<textarea type="text" name="beschreibung" id="Beschreibung" rows="5" cols="30" style="width: 99%;" >{$meta_texte_standard.0.beschreibung}</textarea>
+		<br />
+		{*<!-- Stichw�rter-->*}
+		<label for ="stichwort">{$message_304}:</label><br />
+		<textarea type="text" name="stichwort" rows="5" id="stichwort" cols="30" style="width: 99%;" >{$meta_texte_standard.0.stichwort}</textarea>
+	</fieldset>
+
+	<fieldset>
+		<legend>{$system_twitter_card_tags|escape}</legend>
+		<label>{$system_twitter_handle_description|escape}
+			<input type="text" name="twitter_handle" value="{$menuinput_data[0].twitter_handle|escape}" size="16" placeholder="@twitterhandle" />
+		</label>
+	</fieldset>
+	<br />
+{/if}

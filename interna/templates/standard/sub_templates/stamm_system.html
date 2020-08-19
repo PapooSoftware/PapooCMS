@@ -1,0 +1,77 @@
+{if $IS_ADMIN}
+	<fieldset>
+		<legend>{$system_config_paginierung__anzahl_der_eintrge_pro_seitenumbrich}</legend>
+		<label for="config_paginierung">{$system_config_paginierung}{$system_error.config_paginierung} </label>
+		<br />
+		<input type="text" name="config_paginierung" value="{$config.0.config_paginierung}" class="config_paginierung" id="config_paginierung"/>
+		<br />
+	</fieldset>
+
+	<fieldset>
+	<legend>{$system_config_404_benutzen}</legend>
+		<input type="checkbox" name="config_404_benutzen_check" value="1" {if $config.0.config_404_benutzen_check==1}checked="checked"{/if} class="config_404_benutzen_check" id="config_404_benutzen_check"/>
+		<label for="config_404_benutzen_check">{$system_config_404_benutzen_check}{$system_error.config_404_benutzen_check} </label>
+		<br /><br />
+		<label for="config_adresse_der_404_seite">{$system_config_adresse_der_404_seite}{$system_error.config_adresse_der_404_seite} </label>
+		<br />
+		<input type="text" name="config_adresse_der_404_seite" size="60" value="{$config.0.config_adresse_der_404_seite}" class="config_adresse_der_404_seite" id="config_adresse_der_404_seite"/>
+		<br />
+	</fieldset>
+
+	<fieldset>
+		<legend>{$system_config_session_lifetimef}</legend>
+		<label for="config_session_lifetime">{$system_config_session_lifetime}{$system_error.config_session_lifetime} </label>
+		<br />
+		<input type="text" name="config_session_lifetime" value="{$config.0.config_session_lifetime}" class="config_session_lifetime" id="config_session_lifetime"/>
+		<br />
+	</fieldset>
+
+	<fieldset>
+		<legend>{$system_config_memory_limit}</legend>
+		<label for="config_memory_limit_feld">{$system_config_memory_limit_feld}{$system_error.config_memory_limit_feld} </label>
+		<br />
+		<input type="text" name="config_memory_limit_feld" value="{$config.0.config_memory_limit_feld}" class="config_memory_limit_feld" id="config_memory_limit_feld"/>
+		<br />
+	</fieldset>
+
+	<fieldset>
+		<legend>{$system_config_skriptlaufzeit}</legend>
+		<label for="config_skriptlaufzeit_feld">{$system_config_skriptlaufzeit_feld}{$system_error.config_skriptlaufzeit_feld} </label>
+		<br />
+		<input type="text" name="config_skriptlaufzeit_feld" value="{$config.0.config_skriptlaufzeit_feld}" class="config_skriptlaufzeit_feld" id="config_skriptlaufzeit_feld"/>
+		<br />
+	</fieldset>
+
+	<fieldset>
+		<legend>{$system_config_upload_dateigre}</legend>
+		<label for="config_upload_dateigre_feld">{$system_config_upload_dateigre_feld}{$system_error.config_upload_dateigre_feld} </label>
+		<br />
+		<input type="text" name="config_upload_dateigre_feld" value="{$config.0.config_upload_dateigre_feld}" class="config_upload_dateigre_feld" id="config_upload_dateigre_feld"/>
+		<br />
+	</fieldset>
+
+	<fieldset>
+		<legend>{$system_config_jquery_aktivieren2}</legend>
+		<input type="checkbox" name="config_jquery_aktivieren_label" value="1" {if $config.0.config_jquery_aktivieren_label==1}checked="checked"{/if} class="config_jquery_aktivieren_label" id="config_jquery_aktivieren_label"/>
+		<label for="config_jquery_aktivieren_label">{$system_config_jquery_aktivieren_label}{$system_error.config_jquery_aktivieren_label} </label>
+		<br />
+		<input type="checkbox" name="config_jquery_colorbox_aktivieren" value="1" {if $config.0.config_jquery_colorbox_aktivieren==1}checked="checked"{/if} class="config_jquery_colorbox_aktivieren" id="config_jquery_colorbox_aktivieren"/>
+		<label for="config_jquery_colorbox_aktivieren">{$system_config_jquery_colorbox_aktivieren}{$system_error.config_jquery_colorbox_aktivieren} </label>
+		<br />
+		<input type="checkbox" name="config_basis_js_funktionen_frontend" value="1" {if $config.0.config_basis_js_funktionen_frontend==1}checked="checked"{/if} class="config_basis_js_funktionen_frontend" id="config_basis_js_funktionen_frontend"/>
+		<label for="config_basis_js_funktionen_frontend">{$system_config_basis_js_funktionen_frontend}{$system_error.config_basis_js_funktionen_frontend} </label>
+		<br />
+	</fieldset>
+
+	<fieldset>
+		<legend>{$system_config_html_tidy_funktionf}</legend>
+		{if isset($smarty.session.abc) && $tidy_is_vorhanden}
+		{else}
+		{$system_config_html_tidy_funktion}<br />
+		{/if}
+		<input type="checkbox" name="config_html_tidy_funktionaktivieren" value="1" {if $config.0.config_html_tidy_funktionaktivieren==1}checked="checked"{/if} class="config_html_tidy_funktionaktivieren" id="config_html_tidy_funktionaktivieren"/>
+		<label for="config_html_tidy_funktionaktivieren">{$system_config_html_tidy_funktionaktivieren}{$system_error.config_html_tidy_funktionaktivieren} </label>
+		<br />
+	</fieldset>
+	<br />
+{/if}

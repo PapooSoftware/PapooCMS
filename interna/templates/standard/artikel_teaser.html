@@ -1,0 +1,20 @@
+{if $IS_ADMIN}
+	{*<!-- Teaser/Anreisser -->*}
+	<fieldset>
+		<legend>{$message_155}:</legend>
+		{*<!-- Der Teaser oder auch Anreisser wird auf der Startseite oder auch auf den Unterseiten zusammen mit der �berschrift angezeigt. -->*}
+		<p>{$message_156}</p>
+		<textarea name="inhalt_ar[teaser]" id="teaser" style="width:100%" rows="25" cols="80">{if isset($teaser)}{$teaser}{/if}</textarea><br />
+		<br />
+		<input type="checkbox" {if isset($atynchecked)}{$atynchecked}{/if} value="1" name="inhalt_ar[atyn]" id="atyn" />
+		<label for="atyn">{$message_460}</label>
+	</fieldset>
+	{*<!-- Teaser Link -->*}
+	<fieldset>
+		<legend>{$message_163}:</legend>
+		{*<!-- mehr �ber -->*}
+		<label for="teaser_link">{$message_164}:</label>
+		{*<!-- Hier bitte den Link zum Artikel eingeben -->*}
+		<input type="text" id="teaser_link" name="inhalt_ar[teaser_link]" size="50" value="{if isset($teaser_link)}{$teaser_link}{/if}" title="{$message_165}" /><br />
+	</fieldset>
+{/if}

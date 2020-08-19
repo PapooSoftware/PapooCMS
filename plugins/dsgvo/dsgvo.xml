@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin version="17.12">
+<name>DSGVO</name>
+<beschreibung_de><![CDATA[Dieses Plugin ist die Steuerzentrale, um Einstellungen für diverse Module des CMS vorzunehmen. Es dient u. a. der Einhaltung der Datenschutz-Grundverordnung.]]></beschreibung_de>
+<beschreibung_en><![CDATA[This plugin is the control center to make settings for various modules of the CMS. Among other things, it serves to comply with the General Data Protection Regulation.]]></beschreibung_en>
+<version>1.0</version>
+<papooid>95101</papooid>
+<link>https://www.papoo.de</link>
+<datum>28.02.2018</datum>
+<autor>
+	<!-- autor.name: Name des Authors -->
+	<name>Christoph Zimmer</name>
+	<!-- autor.kontakt: postalische Kontakt-Informationen des Autors -->
+	<kontakt><![CDATA[Papoo Software & Media GmbH
+Auguststr. 4
+53229 Bonn]]></kontakt>
+	<!-- autor.email: eMail-Adresse des Autors -->
+	<email>support@papoo.de</email>
+	<!-- autor.telefon: Telefon-Nummer des Autors -->
+	<telefon>0228 / 280 56 68</telefon>
+</autor>
+<menue>
+	<eintrag_de>DSGVO</eintrag_de>
+	<eintrag_en>GDPR</eintrag_en>
+	<icon>dsgvo/images/dsgvo.png</icon>
+	<link>plugin:dsgvo/templates/back/index.html</link>
+</menue>
+<klasse>
+	<name>DSGVO</name>
+	<datei>dsgvo/lib/DSGVO.php</datei>
+</klasse>
+<datenbank>
+	<installation>dsgvo/sql/install.sql</installation>
+	<deinstallation>dsgvo/sql/uninstall.sql</deinstallation>
+</datenbank>
+<messages>dsgvo/messages</messages>
+</plugin>

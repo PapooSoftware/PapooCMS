@@ -1,0 +1,14 @@
+{if $module_aktiv.mod_dritte_spalte}
+	<!-- MODUL: dritte_spalte -->
+	<div class="modul" id="mod_dritte_spalte">
+		{foreach item=right from=$right_data}
+			<div class="rightitem">
+				{$right.inhalt_right}
+				{if $has_collum_write_rights}
+					<a href="{$webverzeichnis}interna/spalte.php?menuid=17&amp;col3_id={$right.column_id}&amp;action_edit=1&amp;extern={$menuid_aktuell}" style="float: right;">{$message_2061}</a>
+				{/if}
+			</div>
+		{/foreach}
+	</div>
+	<!-- ENDE MODUL: dritte_spalte -->
+{/if}

@@ -1,0 +1,150 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>{#flv_dlg.description}</title>
+	<script language="javascript" type="text/javascript" src="../../tiny_mce_popup.js"></script>
+	<script language="javascript" type="text/javascript" src="js/flvplayer.js"></script>
+	<script language="javascript" type="text/javascript" src="../../utils/mctabs.js"></script>
+	<script type="text/javascript" src="../../utils/validate.js"></script>
+	<script language="javascript" type="text/javascript" src="../../utils/form_utils.js"></script>
+	<link href="css/flvplayer.css" rel="stylesheet" type="text/css" />
+	<link href="../../../css/button.css" rel="stylesheet" type="text/css" />
+	<base target="_self" />
+</head>
+<body onload="tinyMCEPopup.executeOnLoad('init();'); self.focus();document.loginform.src.focus()" style="display: none">
+    <form onsubmit="insertFlash();return false;" action="#" name="loginform">
+		<div class="tabs">
+			<ul>
+				<li id="general_tab" class="current"><span><a href="javascript:mcTabs.displayTab('general_tab','general_panel');" onmousedown="return false;">{#flv_dlg.general}</a></span></li>
+				<li id="appearance_tab"><span><a href="javascript:mcTabs.displayTab('appearance_tab','appearance_panel');" onmousedown="return false;">{#flv_dlg.tab_appearance}</a></span></li>
+			</ul>
+		</div>
+
+		<div class="panel_wrapper">
+			<div id="general_panel" class="panel current">
+				<fieldset>
+					<legend>{#flv_dlg.general}</legend>
+
+					<table border="0" cellpadding="4" cellspacing="0">
+							<tr>
+							<td nowrap="nowrap"><label for="src">{#flv_dlg.file}</label></td>
+							  <td nowrap="nowrap">
+									<table border="0" cellspacing="0" cellpadding="0">
+									  <tr>
+										<td><input size="50" id="src" name="src" type="text" value=""  /></td>
+										<span id="filebrowser" title="Durchsuchen">&nbsp;</span>
+									  </tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+							<td nowrap="nowrap"><label for="src_img">Video Startbild</label></td>
+							  <td nowrap="nowrap">
+									<table border="0" cellspacing="0" cellpadding="0">
+									  <tr>
+										<td><input size="50" id="src_img" onchange="updatePreview();" name="src_img" type="text" value=""  />
+										<input type="hidden" id="alt" name="alt" type="text" value="" />
+										<input type="hidden"  id="title" name="title" type="text" value="" />
+										 <span id="filebrowser2" title="Durchsuchen">&nbsp;</span>
+										 </td>
+										
+									  </tr>
+									</table>
+								</td>
+							</tr>
+							<!--	<tr id="linklistrow">
+								<td><label for="linklist">{#flv_dlg.list}</label></td>
+								<td id="linklistcontainer">&nbsp;</td>
+							</tr>-->
+						<tr>
+						<td><label for="bgcolor">{#flv_dlg.bgcolor}</label></td>
+							<td>
+								<table border="0" cellpadding="0" cellspacing="0">
+									<tr>
+										<td><input id="bgcolor" name="bgcolor" type="text" value="" size="9" onchange="generatePreview();" /></td>
+										<td id="color_pickcontainer">&nbsp;</td>
+
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+						<td><label for="margin">{#flv_dlg.margin}</label></td>
+							<td>
+								<table border="0" cellpadding="0" cellspacing="0">
+									<tr>
+										<td><input id="margin" name="margin" type="text" value="" size="9" onchange="generatePreview();" /></td>
+										
+									</tr>
+								</table>
+							</td>
+						</tr>						
+						
+                            <!--
+							<tr>
+							<td><label for="class_list">{#class_name}</label></td>
+							<td><select id="class_list" name="class_list"></select></td>
+						</tr>-->
+							<tr>
+								<td nowrap="nowrap"><label>{#flv_dlg.size}</label></td>
+								<td nowrap="nowrap">
+									<input type="text" id="width" name="width" value="320" onfocus="this.select();" />
+									<select name="width2" id="width2" style="width: 50px">
+										<option value="">px</option>
+										<option value="%">%</option>
+									</select>&nbsp;x&nbsp;<input id="height" name="height" type="text"  value="240" onfocus="this.select();" />
+									<select name="height2" id="height2" style="width: 50px">
+										<option value="">px</option>
+										<option value="%">%</option>
+									</select>
+								</td>
+							</tr>
+					</table>
+				</fieldset>
+				 <fieldset><legend>Papoo Flash Videos</legend>
+			<div class="center"><a id="hrefbrowser_link" href="javascript:openBrowser('filebrowser','src', 'flash','advlink_file_browser_callback');" onmousedown="return false;" class="large awesome">Videos /Mp3s ausw&auml;hlen </a></div>
+
+		<!-- /Link list -->
+		</fieldset>
+		 <fieldset><legend>Startbild ausw&auml;hlen</legend>
+		<div class="center"><a id="hrefbrowser_link" href="javascript:openBrowser('filebrowser','src_img', 'image','theme_advanced_image_image_browser_callback');" onmousedown="return false;" class="large awesome">Video Startbild ausw&auml;hlen </a></div>
+
+		<!-- /Link list -->
+		</fieldset>
+				<fieldset>
+					<legend>{#flv_dlg.fpreview}</legend>
+					<div id="prev"></div>
+				</fieldset>
+
+			</div>
+			<div id="appearance_panel" class="panel">
+				<fieldset>
+					<legend>{#flv_dlg.youtube}</legend>
+					
+							<label for="ytcode">{#flv_dlg.ytcode}</label><br />
+							 
+								
+										<textarea cols="80" rows="8" id="ytcode" name="ytcode"  onkeypress="generatePreview2();" /></textarea>
+									
+									
+							
+				</fieldset>
+				<fieldset>
+					<legend>{#flv_dlg.fpreview}</legend>
+					<div id="prevyt"></div>
+				</fieldset>
+		</div>
+		</div>
+		
+		
+		<div class="mceActionPanel">
+			<div style="float: left">
+				<input type="button" id="insert" name="insert" value="{#insert}" onclick="flvDialog.update();" />
+			</div>
+
+			<div style="float: right">
+				<input type="button" id="cancel" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" />
+			</div>
+		</div>
+	</form>
+</body>
+</html>

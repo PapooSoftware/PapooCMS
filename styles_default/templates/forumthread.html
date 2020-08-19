@@ -1,0 +1,253 @@
+<!-- TEMPLATE: forumthread.html -->
+<div class="forumthread artikel_details">
+<a  id="artikel"></a>
+<div class="forumlistediv">
+<ul class="forumliste" style="display:inline;">
+	{*<!--zur�ck zur �bersicht-->*}
+	<li style="display:inline;">
+		{if $sp_urls=="ok"  or $free_sp_urls}
+			<a href="{$slash}{$forum_menu_surl}{$forum_surl}">{$message_2038}</a> |
+		{else}
+			<a href="{$slash}forum.php?menuid={$formmenuid}">{$message_2050}</a> |
+		{/if}
+	</li>
+	{foreach item=table from=$table_data}
+		<li style="display:inline;">
+			{if $sp_urls=="ok"  or $free_sp_urls}
+				<a href="{$slash}{$forum_menu_surl}{$forum_surl}forumid-{$table.forumid}-{$table.forumname_surl}.html">
+			{else}
+				<a href="{$slash}{$forum}{$frag_connect}forumid{$gleich_connect}{$table.forumid}{$plus_connect}menuid{$gleich_connect}{$table.menuid}">
+			{/if}{$table.forumname}</a> |
+		</li>
+	{/foreach}
+</ul>
+</div>
+<h2>{$tplforum_forum} {$forumnameh2}</h2>
+<div class="formwrap_guest">
+<div class="form">
+	<form id="suchefor" method="post" action="{$slash}forum.php?menuid={$formmenuid}">
+		<fieldset>
+			 {*<!--Suchbegriff hier eingeben-->*}
+			<input type="text" name="search" id="searchtr" size="20" value="{$search|escape:"html"}"
+				onblur="if(this.value=='')this.value='{$search|escape:"html"}';"
+				onfocus="if(this.value=='{$search}')this.value='';"
+				title="{$message_2051}"
+				{$searchneu} />
+			 {*<!-- Im Forum-->*}
+			<label for="searchtr">{$message_2052}</label>
+			 {*<!--Finden-->*}
+			<input type="submit"  class="btn btn-info" name="find" value="{$message_2053}" />
+		</fieldset>
+	</form>
+</div>
+</div>
+
+
+{if $editeintrag}
+	{*<!-- Eintrag editieren -->*}
+
+	{if $einloggok}
+		<hr />
+		{*<!--Eintrag �ndern:-->*}
+		<h3>{$message_2054}: {$themaalt}</h3>
+		<div class="floatbox">
+			<div class="formwrap_guest">
+				<div class="form">
+					<form method="post"  name="artikel" action="{$slash}forumthread.php?rootid={$rootid}&amp;msgid={$msgid}&amp;forumid={$forumid_tmpl}&amp;menuid={$formmenuid}">
+						<fieldset>
+							{*<!--Hier wird der Eintrag ge�ndert.-->*}
+							<legend>{$message_2055}</legend>
+							{*<!--Autor -->*}
+							<p>{$message_2056}: {$usernameid}</p>
+							{*<!--Thema -->*}
+							<label>{$message_2057}:</label>
+							<input name="formthema" type="text" size="60" maxlength="78" value="{$themaneu|escape:"html"}" />
+
+							<fieldset class="formatierung">
+								{*<!--Eingabe und Formatierung der Inhalte:-->*}
+								<legend>{$message_2058}:</legend>
+								<br />
+
+								{include file="_module_intern/mod_bbcode_editor.html"}
+
+								{*<!--Beitrag-->*}
+								<br /><br />
+								<label>{$message_2059}:</label>
+								<textarea  name="inhalt"  rows="20" cols="50">{$textneu|escape:"html"}</textarea>
+								<script type="text/javascript" charset="iso-8859-1">
+									bbcode_textfeld_set(document.forms['artikel'].elements['inhalt']);
+								</script>
+								<br /><br /><br />
+								{*<!--eintragen-->*}
+								<input type="submit" class="btn btn-info"  value="{$message_2060}" name="uebermittelformular" />
+								<input type="hidden" name="formforumid" value="{$forumid_tmpl|escape:"html"}" />
+								<input type="hidden" name="formmsgid" value="{$msgid|escape:"html"}" />
+								<input type="hidden" name="msgid" value="{$msgid|escape:"html"}" />
+								<input type="hidden" name="rootid" value="{$rootid|escape:"html"}" />
+								<input type="hidden" name="reporeid" value="{$reporeid|escape:"html"}" />
+								<input type="hidden" name="editeintrag" value="{$editeintrag|escape:"html"}" />
+							</fieldset>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+		{*<!--ENDE Eintrag editieren -->*}
+	{/if}
+{else}
+	{if $message_data}
+		<div class="messagedata">
+			{foreach item=message from=$message_data}
+				<h4 class="messageh4">{$message.thema}{$message.sprechomatlink}</h4>
+				<p class="messagedatap">{$message.text}</p>
+				{if $message.signatur}
+					<div class="messagefoot">
+						{$message.signatur}
+					</div><br />
+				{/if}
+				{*<!--
+				<p class="messagefoot"><i> {$message.username}</i> {$message.zeitstempel} [{$message.counten} Hits]
+				-->*}
+				<p class="messagefoot"><i> {$message.username}</i> {$message.zeitstempel|date_format:$lang_dateformat} [{$message.counten} Hits]
+				{if $bildgruppe}
+					<img src="{$slash}bilder/{$bildgruppe}" />
+				{else}
+					{$forgruppenname}
+				{/if}
+				</p>
+				{if $edit}
+					{*<!--Diesen Beitrag editieren-->*}
+					<a href="{$slash}{$link_form_edit}&amp;edit=1" style="text-align:right;margin-left:20%;">{$message_2061}</a>
+				{/if}
+			{/foreach}
+			<hr />
+		</div>
+	{/if}
+
+	{if $messagefor_data}
+		{if $messageboard != "ja"}
+			<ul class="messageul">
+		{/if}
+
+		{foreach item=message  from=$messagefor_data}
+			{*<!-- wenn Boardansicht ausgew�hlt ist -->*}
+			{if $message.board}
+				<div class="forumboard">
+					<a name="{$message.msgid}" ></a>
+					<h4 class="messageh4">{$message.thema}{$message.sprechomatlink}</h4>
+					<p class="messagebot">{$message.text}</p>
+					<hr />
+					{if $message.signatur}
+				<div class="messagefoot">
+					 {$message.signatur}
+					</div><br />
+					{/if}
+					<p class="messagefoot">
+						{*<!--
+						Von <i> {$message.username}</i> am <em>{$message.zeitstempel}</em>  [{$message.counten} {$message_2062}]
+						-->*}
+						Von <i> {$message.username}</i> am <em>{$message.zeitstempel|date_format:$lang_dateformat}</em>  [{$message.counten} {$message_2062}]
+						{if $message.gruppebild}
+							<img class="bildgruppe" src="{$slash}bilder/{$message.gruppebild}" alt=""/>
+						{else}
+							{$message.gruppename}
+						{/if}
+					</p>
+					{if $message.edit==1}
+						{*<!--Diesen Beitrag editieren-->*}
+						<hr />
+						{*<!--
+						<a href="{$slash}{$link_form_edit}&amp;edit=1" style="text-align:right;margin-left:20%;">{$message_2061}</a>
+						-->*}
+						<a href="{$slash}{$message.edit_link}&amp;edit=1" style="text-align:right;margin-left:20%;">{$message_2061}</a>
+					{/if}
+				</div>
+			{else}
+				{$message.ulvor}
+
+				{if $message.msgid}
+					<li>
+					{if $message.hier}
+						<div class="hierforum"><img src="{$slash}bilder/hier.gif" alt="Sie sind hier:"/>
+						{/if}
+							{if $sp_urls=="ok"  or $free_sp_urls}
+					<a href="{$slash}{$forum_menu_surl}{$forum_surl}forumid-{$message.forumid}-thread-{$message.msgid}-{$message.thema_surl}.html" style="font-weight:{$message.weight};">
+						
+						{else}
+						<a href="{$slash}{$forumthread}{$frag_connect}forumid{$gleich_connect}{$message.forumid}{$plus_connect}menuid{$gleich_connect}{$message.menuid}{$plus_connect}rootid{$gleich_connect}{$message.rootid}{$plus_connect}msgid{$gleich_connect}{$message.msgid}">{/if}
+							{$message.thema}
+						</a>
+						{if $message.hier}
+						</div>
+						{/if}
+						{*<!--Hits -->*}
+						{*<!--
+						<small><i> {$message.username}</i> {$message.zeitstempel} [{$message.counten} {$message_2062}]</small>
+						-->*}
+						<small><i> {$message.username}</i> {$message.zeitstempel|date_format:$lang_dateformat} [{$message.counten} {$message_2062}]</small>
+					</li>
+				{/if}
+				<!-- <span class="ignore">.</span> -->
+			{/if}
+		{/foreach}
+		{$close_all_ulvor}
+		{if $messageboard != "ja"}</ul>{/if}
+
+		{if $schreiben}<h2>{$schreiben}</h2>{/if}
+
+	{/if}
+	{if $schreiben2}<h2>{$schreiben2}</h2>{/if}
+	{if $einloggok}
+		<hr />
+		<div class="floatbox">
+			<div class="formwrap_guest">
+				<div class="form">
+					{*<!--Beitrag-->*}{*<!--als Antwort auf:-->*}{*<!--schreiben?-->*}
+					<!--<h3>{$message_2059} {if $themaalt} {$message_2064}:{$themaalt}{/if} {$message_2065}</h3>-->
+					<form method="post" name="artikel" action="{$slash}forumthread.php?rootid={$rootid}&amp;msgid={$msgid}&amp;forumid={$forumid_tmpl}&amp;menuid={$formmenuid}">
+						<fieldset>
+							{*<!--Hier kann eine Eintrag in das Forum gemacht werden -->*}
+							<legend>{$message_2066} {$forumnameh2}</legend>
+							{*<!--Autor-->*}
+							<p>{$message_2056}: {$usernameid}</p>
+							{*<!--Thema-->*}
+							<label>{$message_2057}:</label>
+							<input name="formthema"  type="text"  size="40" maxlength="78" value="{$themaneu|escape:"html"}" />
+							</fieldset>
+							<fieldset class="formatierung">
+								{*<!--Eingabe und Formatierung der Inhalte:-->*}
+								<legend>{$message_2058}</legend>
+
+								{include file="_module_intern/mod_bbcode_editor.html"}
+
+								<div style="clear: left"></div>
+									<br />
+									{*<!--Beitrag-->*}
+									<label>{$message_2059}:</label>
+									<br />
+									<textarea  name="inhalt" id="inhalt"  rows="20" cols="30" style="width:95%;">{$textneu|escape:"html"}</textarea>
+									<script type="text/javascript" charset="iso-8859-1">
+										bbcode_textfeld_set(document.forms['artikel'].elements['inhalt']);
+									</script>
+									</fieldset>
+									<fieldset>
+									<legend>{$message_2060}</legend>
+									{*<!--eintragen-->*}
+									<input type="submit"  class="btn btn-info" value="{$message_2060}" name="uebermittelformular" />
+									<input type="hidden" name="formforumid" value="{$forumid_tmpl|escape:"html"}" />
+									<input type="hidden" name="formmsgid" value="{$msgid|escape:"html"}" />
+									<input type="hidden" name="msgid" value="{$msgid|escape:"html"}" />
+									<input type="hidden" name="rootid" value="{$rootid|escape:"html"}" />
+									<input type="hidden" name="reporeid" value="{$reporeid|escape:"html"}" />
+									<input type="hidden" name="editeintrag" value="{$editeintrag|escape:"html"}" />
+								
+							</fieldset>
+						
+					</form>
+				</div>
+			</div>
+		</div>
+	{/if}
+{/if}
+</div>
+<!-- ENDE TEMPLATE: forumthread.html -->

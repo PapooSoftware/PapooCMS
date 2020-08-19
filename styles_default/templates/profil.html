@@ -1,0 +1,197 @@
+<!-- TEMPLATE: profil.html -->
+{if $is_extended_user_system}
+<!-- Hier die extended Userverwaltung -->
+{include file="_module_intern/mod_extended_user.html"}
+
+{else}
+<!-- Hier Standard User Cerwaltung -->
+<h2 class="ignore">{$message_2199}</h2>
+<a  id="artikel"></a>
+{if $userdel}
+<div class="error">
+<h2>Account wurde gel&ouml;scht</h2>
+</div>
+{else}
+
+{if $userfertig}
+<h2>{$message_2235}</h2>
+<p>{$message_2263}</p>
+{else}
+{if $vergessen}
+	{include file="_module_intern/mod_vergessen.html"}
+{else}
+	{if $neu_fertig != ""}
+		{$message_12}
+	{else}
+		{if $nichtfertig}
+			{if $loginfirst}
+				{foreach item=table from=$table_data}
+					{if $manageprofil}
+						<h1>{$message_2200}</h1> 
+						<p>{$message_2201}</p>
+					{else}
+						{*<!--
+							<h2>Login</h2>
+							<p>Sie k�nnen hier einen Account f�r sich erstellen. S�mtliche Daten die in die Datenbank eingetragen werden, werden Ihnen auch per Email zugestellt.</p>
+							<p>Felder die mit einem * gekennzeichnet sind, m�ssen ausgef�llt werden.</p>
+						-->*} 
+						{$message_2097}
+					{/if}
+					<br />
+					<div class="floatbox">
+					{if $error_nochmal_user}
+					<div class="alert alert-error error">{$db_abs_fehlt_eintrag}</div>
+					{/if}
+						<form id="formk" action="" method="post">
+							<h2>{$message_2202}</h2>
+								<fieldset>
+									{*<!-- Hier k�nnen Sie die Daten f�r Ihren Account eintragen.   -->*}
+									<legend>{$message_2203}</legend>
+									
+									{if $manageprofil}
+										{*<!--   Benutzername:  -->*}
+										{$message_2204}: <strong>{$table.username}</strong><br /><br />
+									{else}
+										{*<!--  Username:   -->*}
+										<label for="neuusername">{$message_2204} * {$table.fehltusername}</label><br />
+										<input type="text" class="inpt" id="neuusername" name="neuusername" value="{$table.username|escape:"html"}" size="35" maxlength="50" /><br />
+									{/if}
+									
+									{*<!--  Passwort:   -->*}
+									{$table.nomatch}
+									<br />
+									<label for="neupassword1" class="left">{$message_2101} * {$table.fehltpass1}</label><br />
+									<input type="password" class="inpt" id="neupassword1" name="neupassword1" value="{$table.password1|escape:"html"}" size="35" maxlength="50" /><br />
+									{*<!--  Passwort (zur �berpr�fung):  -->*}
+									<label for="neupassword2" class="left">{$message_2102} * {$table.fehltpass2}</label><br />
+									<input type="password" class="inpt" id="neupassword2" name="neupassword2" value="{$table.password2|escape:"html"}" size="35" maxlength="50" /><br />
+									{*<!--  Emailadresse:  -->*}
+									<label for="neuemail"> {$message_2100} * {$table.fehltemail}</label><br />
+									<input type="text" class="inpt" id="neuemail" name="neuemail" value="{$table.mailname|escape:"html"}" size="35" maxlength="50" />
+								</fieldset>
+
+
+								<!-- 	
+								<fieldset>
+									 {*<!-- Hier k�nnen Sie die Daten f�r Ihren Account eintragen.   -->*}
+									<legend>{$message_2205}</legend>
+									 {*<!--  Vorname:   -->*}
+									<label for="neuvorname">{$message_2206} * {$table.fehltvorname}</label><br />
+									<input type="text" class="inpt" id="neuvorname" name="neuvorname" value="{$table.vorname|escape:"html"}" size="35" maxlength="50" /><br />
+									 {*<!--  Nachname:   -->*}
+									<label for="neunachname" class="left">{$message_2207} * {$table.fehltnachname}</label><br />
+									<input type="text" class="inpt" id="neunachname" name="neunachname" value="{$table.nachname|escape:"html"}" size="35" maxlength="50" /><br />
+									{*<!--  Wohnanlage:   -->*}
+									<label for="neustrnr">{$message_2208} * {$table.fehltstrnr}</label><br />
+									<input type="text" class="inpt" id="neustrnr" name="neustrnr" value="{$table.strnrname|escape:"html"}" size="35" maxlength="50" /><br />
+									
+								
+									 {*<!--  Strasse und Hausnummer:   -->*}
+									<label for="neustrnr">{$message_2208}  {$table.fehltstrnr}</label><br />
+									<input type="text" class="inpt" id="neustrnr" name="neustrnr" value="{$table.strnrname|escape:"html"}" size="35" maxlength="50" /><br />
+									 {*<!--  Postleitzahl:   -->*}
+									<label for="neuplz">{$message_2209}  {$table.fehltplz}</label><br />
+									<input type="text" class="inpt" id="neuplz" name="neuplz" value="{$table.plzname|escape:"html"}" size="35" maxlength="50" /><br />
+									 {*<!--  Ort:   -->*}
+									<label for="neuort">{$message_2210}  {$table.fehltort}</label><br />
+									<input type="text" class="inpt" id="neuort" name="neuort" value="{$table.ortname|escape:"html"}" size="35" maxlength="50" /><br />
+								-->
+									
+								</fieldset>
+								
+								
+								
+								
+								<fieldset>
+									<legend>{$message_2211}</legend>
+									{$message_2212}<br />
+									<div class="clearfix"></div>
+									<input type="radio" id="forum_board" name="forum_board" {$table.checked_board1} value="0" />
+									<label for="forum_board"><span class="label">{$message_2213}</span></label><br />
+									<input type="radio" id="forum_board1" name="forum_board" {$table.checked_board2} value="1" />
+									<label for="forum_board1"><span class="label">{$message_2214}</span></label><br />
+
+									 {*<!--  M�chten Sie eine Mail erhalten wenn auf Ihren Beitrag im Forum geantwortet wurde?  -->*}
+									<p>{$message_2103}</p>
+									 {*<!--  Antwortmail?  -->*}
+									<input type="checkbox" id="antwortmail" name="antwortmail" {$table.checked} value="ok" />   <label for="antwortmail"><span class="label">{$message_2104}</span></label><br />
+									{*<!--  M�chten Sie den Papoo Newsletter?  -->*}
+									<p>{$message_2159}</p>
+									 {*<!--  Newsletter?  -->*}
+									<input type="checkbox" id="newsletter" name="newsletter" {$table.checked_newsletter} value="ok" />   <label for="newsletter"><span class="label">{$message_2158}</span></label><br />
+									<input type="checkbox" id="user_agb_ok" name="user_agb_ok" {$table.checked_user_agb_ok} value="1" />   <label for="user_agb_ok"><span class="label">* {$message_2282} {$agbfalsch}</span></label><br />
+									<p></p>
+								</fieldset>
+								
+								<!-- <fieldset>
+									<legend>{$message_2216}</legend>
+									{*<!--  M�chten Sie dauerhaft eingeloggt bleiben (erfordert Cookies)?  -->*}
+									<p>{$message_2217}</p>
+									{*<!--  Dauerhaft einloggen?  -->*}
+									<input type="checkbox" id="dauer_einlogg" name="dauer_einlogg" {$table.checked_logg} value="ok" />   <label for="dauer_einlogg"><span class="label">{$message_2218}</span></label><br />
+									
+									{if $styleswitcher}
+										{*<!-- Styleswitcher-->*}
+										<p>{$message_2219}</p>
+										<label for="styleswitch">{$message_2139}</label><br />
+										<select id="styleswitch" name="style" size="1">
+											{*<!-- (w&auml;hlen)-->*}
+											<option value="none" >({$message_2140})</option>
+											{foreach item=style  from=$style_data}
+												<option value="{$style.stylevalue|escape:"html"}" {$style.selected} >{$style.style_name}</option>
+											{/foreach}
+										</select><br />
+									{/if}
+								</fieldset>
+								-->
+								<fieldset>
+								<legend>{$message_signatur}</legend>
+								<label for="signatur">{$message_signatur_text}</label><br />
+								<br />
+								{include file="_module_intern/mod_bbcode_editor.html"}
+								<br />
+								<textarea name="signatur" id="signatur" style="width:80%;height:200px;">{$table.signatur|escape:"html"}</textarea>
+								<script type="text/javascript">
+									bbcode_textfeld_set(document.forms['formk'].elements['signatur']);
+								</script>
+								</fieldset>
+								{if $table.loeschen}
+									<fieldset>
+										{*<!--Bearbeiten.   -->*}
+										<legend>{$message_2220} / {$message_2221}</legend>
+										{*<!-- speichern   -->*}
+									
+										<input type="submit" class="senden btn btn-info" value="{$message_2222}" name="loginnow2" />
+									</fieldset>
+									
+									<fieldset>
+										<legend>{$message_2223}</legend>
+										{*<!--L�schen.   -->*}
+										<!--{$message_2224}<br />-->
+										<input type="submit" class="senden btn btn-danger" value="{$message_2225}" name="loeschenecht" />   
+									</fieldset>
+								{else}
+									{if $spamschutz_modus}
+										{include file="_module_intern/mod_spamschutz.html}
+										<br />
+									{/if}
+									<fieldset>
+										{*<!-- erstellen   -->*}
+										<legend>Account {$message_2105}</legend>
+										{*<!-- erstellen   -->*}
+										<br />
+										<input type="submit" class="senden btn btn-info" value="{$message_2105}" name="loginnow" />
+									</fieldset>  
+								{/if}
+							
+						</form>
+					</div>
+				{/foreach}
+			{/if} 
+		{/if} 
+	{/if}
+{/if}
+{/if}
+{/if}
+{/if}
+<!-- ENDE TEMPLATE: profil.html -->

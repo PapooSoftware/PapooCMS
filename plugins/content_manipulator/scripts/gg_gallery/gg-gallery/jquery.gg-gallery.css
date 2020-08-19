@@ -1,0 +1,174 @@
+.gg-gallery {
+  width: 380px;
+  
+}
+#gallery {
+   
+
+}
+.gg-gallery, .gg-gallery * {
+  margin: 0;
+  padding: 0;
+}
+  .gg-gallery .gg-image-wrapper {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+    .gg-gallery .gg-image-wrapper .gg-loader {
+      position: absolute;
+      z-index: 10;
+      top: 48%;
+      left: 48%;
+      border: 1px solid #CCC;
+    }
+    .gg-gallery .gg-image-wrapper .gg-next {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 25%;
+      height: 100%;
+      cursor: pointer;
+      display: block;
+      z-index: 100;
+    }
+    .gg-gallery .gg-image-wrapper .gg-prev {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 25%;
+      height: 100%;
+      cursor: pointer;
+      display: block;
+      z-index: 100;
+    }
+    .gg-gallery .gg-image-wrapper .gg-prev, .gg-gallery .gg-image-wrapper .gg-next {
+      /* Or else IE will hide it */
+      background: url(non-existing.jpg)\9
+    }
+      .gg-gallery .gg-image-wrapper .gg-prev .gg-prev-image, .gg-gallery .gg-image-wrapper .gg-next .gg-next-image {
+        background: url(gg_prev.png);
+        width: 30px;
+        height: 30px;
+        display: none;
+        position: absolute;
+        top: 47%;
+        left: 0;
+        z-index: 101;
+      }
+      .gg-gallery .gg-image-wrapper .gg-next .gg-next-image {
+        background: url(gg_next.png);
+        width: 30px;
+        height: 30px;
+        right: 0;
+        left: auto;
+      }
+    .gg-gallery .gg-image-wrapper .gg-image {
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      z-index: 9;
+    }
+      .gg-gallery .gg-image-wrapper .gg-image .gg-image-description {
+        position: absolute;
+        top: 0px;
+        left: 50%;
+        padding: 7px;
+        text-align: left;
+        width: 20%;
+		height:100%;
+        z-index: 2;
+        background: url(opa75.png);
+        color: #000;
+      }
+      * html .gg-gallery .gg-image-wrapper .gg-image .gg-image-description {
+        background: none;
+        filter:progid:DXImageTransform.Microsoft.AlphaImageLoader (enabled=true, sizingMethod=scale, src='opa75.png');
+      }
+        .gg-gallery .gg-image-wrapper .gg-image .gg-image-description .gg-description-title {
+          display: block;
+        }
+  .gg-gallery .gg-controls {
+    display:none;
+  }
+    .gg-gallery .gg-info {
+      float: left;
+    }
+    .gg-gallery .gg-slideshow-controls {
+      float: right;
+    }
+      .gg-gallery .gg-slideshow-controls .gg-slideshow-start, .gg-gallery .gg-slideshow-controls .gg-slideshow-stop {
+        padding-left: 5px;
+        cursor: pointer;
+      }
+      .gg-gallery .gg-slideshow-controls .gg-slideshow-countdown {
+        padding-left: 5px;
+        font-size: 0.9em;
+      }
+    .gg-gallery .gg-slideshow-running .gg-slideshow-start {
+      cursor: default;
+      font-style: italic;
+    }
+  .gg-gallery .gg-nav {
+    width: 100%;
+    position: relative;
+    display:none;
+  }
+    .gg-gallery .gg-forward, .gg-gallery .gg-back {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      z-index: 10;
+    }
+    /* IE 6 doesn't like height: 100% */
+    * html .gg-gallery .gg-forward, .gg-gallery .gg-back {
+      height: 100px;
+    }
+    .gg-gallery .gg-back {
+      cursor: pointer;
+      left: -20px;
+      width: 13px;
+      display: block;
+      background: url(gg_scroll_back.png) 0px 22px no-repeat;
+    }
+    .gg-gallery .gg-forward {
+      cursor: pointer;
+      display: block;
+      right: -20px;
+      width: 13px;
+      background: url(gg_scroll_forward.png) 0px 22px no-repeat;
+    }
+    .gg-gallery .gg-nav .gg-thumbs {
+      overflow: hidden;
+      
+    }
+      .gg-gallery .gg-thumbs .gg-thumb-list {
+        float: left;
+        width: 9000px;
+        list-style: none;
+      }
+        .gg-gallery .gg-thumbs li {
+          float: left;
+          padding-right: 5px;
+        }
+          .gg-gallery .gg-thumbs li a {
+            display: block;
+          }
+            .gg-gallery .gg-thumbs li a img {
+              border: 3px solid #CCC;
+              display: block;
+              max-width:120px;
+              max-height:80px;
+            }
+            .gg-gallery .gg-thumbs li a.gg-active img {
+              border: 3px solid #616161;
+            }
+/* Can't do display none, since Opera won't load the images then */
+.gg-preloads {
+  position: absolute;
+  left: -9000px;
+  top: -9000px;
+}

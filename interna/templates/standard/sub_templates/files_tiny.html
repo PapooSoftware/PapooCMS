@@ -1,0 +1,77 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+	<div class="image_folder_container_complete">
+		<div class="image_folder_container_left">
+			<strong>{$system_image_image_ordner}</strong>
+			<br />
+			<a class="bilder_verzeichnis_top" href="./file_liste.php?reiter_active=files&menuid=33">
+				{$system_image_alle_dateien}
+				<span style="color: #333;">({if isset($dateien_cat_id_count.0)}{$dateien_cat_id_count.0}{/if})</span>
+			</a>
+			{foreach item=dir from=$dirlist}
+				{$dir.vor_ul}
+					<a {if $bilder_active_cat_id==$dir.dateien_cat_id} class="active_cat" {/if} href="./file_liste.php?reiter_active=files&menuid=33&downloadkategorie={$dir.dateien_cat_id}">
+						{$dir.dateien_cat_name}{$dir.video_cat_name}
+						<span style="color: #333;">
+							({if isset($dateien_cat_id_count[$dir.dateien_cat_id]) && $dateien_cat_id_count[$dir.dateien_cat_id]}{$dateien_cat_id_count[$dir.dateien_cat_id]}{else}0{/if})
+						</span>
+					</a>
+				{$dir.nach_ul}
+			{/foreach}
+		</div>
+		<div class="image_folder_container_out">
+			<br />
+			<div class="image_images">
+				{if $gefunden}
+					<p><strong>{$system_link_files}:</strong></p><br />
+					{if $config_tiny_advimg_filelist}
+						<ul class="die_file_liste">
+							{foreach item=file from=$table_data_files}
+								<li>
+									<a href="#"
+										onClick="FileBrowserDialogue.mySubmit('index.php?menuid=xxmenuidxx&downloadid={$file.linkid}&reporeid=xxreporeidxx','','{$file.linkname}'); "
+										class="file_link" title='{$file.downloadlink|escape:"html"}'
+										>
+										<img src="./bilder/{$file.typ}" height="20px" />
+										{$file.linkname}
+									</a>
+								</li>
+							{/foreach}
+						</ul>
+					{else}
+						<table style="width:100%;">
+							<tr style="text-align:left;">
+							<th style="width:100px;">Typ</th>
+							<th>Name</th>
+							<th>Anz. Downloads</th>
+							<th>Datum</th>
+							</tr>
+							{foreach item=file from=$table_data_files}
+								<tr>
+									<td><img src="./bilder/{$file.typ}" alt="" title="" style="width:16px;height:16px;" /></td>
+									{*<!-- �ndern-->*}
+									<td>
+										<div class="">
+											<a href="#"
+												onClick="FileBrowserDialogue.mySubmit('index.php?menuid=xxmenuidxx&downloadid={$file.linkid}&reporeid=xxreporeidxx','','{$file.linkname}'); "
+												class="image_link"
+												style=""
+												title='{if isset($image.image_name)}{$image.image_name|escape:"html"}{/if}'>
+												<span>{$file.linkname}</span>
+											</a>
+										</div>
+									</td>
+									<td>{$file.wieoft|strip_tags}</td>
+									<td>{$file.zeitpunkt|strip_tags}</td>
+								</tr>
+							{/foreach}
+						</table>
+					{/if}
+					{*<!-- weitere Seiten -->*}
+					{include file=weiter.inc.html}
+				{elseif $kat_error_text}
+					<p>{$kat_error_text}</p>
+				{/if}
+			</div>
+		</div>
+	</div>
+{/if}

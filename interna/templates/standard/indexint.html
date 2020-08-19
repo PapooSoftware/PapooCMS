@@ -1,0 +1,240 @@
+{if $IS_ADMIN}
+	{include file="head.inc.utf8.html"}
+	{if $loggedin}
+		{include file="menu.inc.html"}
+		<div class="artikel">
+			{*<!-- Pers�nliche Daten bearbeiten und in Ihrem Account arbeiten -->*}
+			<div class="account row">
+				{if $writemail}
+					{*<!-- Hier kann eine Mail geschrieben werden ...-->*}
+					{if $mail_data}
+						<div id="mail">
+							<table class="outside table table-striped table-hover" summary="?" style="border:0px;">
+								{foreach item=mail from=$mail_data}
+									<tr class="inside">
+										<td class="mailtext"><a href="./index.php?menuid=1&amp;obermenuid=&amp;untermenuid=&amp;myhome=1&amp;mail_id={$mail_id}">{$mail.mail_head}</a></td>
+										<td class="mailfrom">{$mail.mail_from_user}</td>
+										<td class="maildate">{$mail.mail_date}</td>
+										<td class="mailread">{$mail.mail_read}</td>
+									</tr>
+								{/foreach}
+							</table>
+						</div>
+					{/if}
+					<form action="" method="post" id="formi">
+						<fieldset>
+							{*<!-- Empf�nger der Nachricht. -->*}
+							<legend>{$message_65} </legend>
+							{*<!-- An User -->*}
+							<label for="formiusername">{$message_361}:</label><br />
+							<select name="formiusername" id="formiusername" size="1">
+								{*<!-- auswaehlen-->*}
+								<option value="none">{$message_160}</option>
+								{foreach item=mail from=$user_data}
+									{if $mail.username_id != 11}
+									<option {$mail.selected} value="{$mail.username_id}" >{$mail.username_name}</option>
+									{/if}
+								{/foreach}
+							</select><br />
+						</fieldset>
+
+						<fieldset>
+							{*<!-- �berschrift -->*}
+							<legend>{$message_66}:</legend>
+							<label for="uberschrift">{$message_67}:</label>
+							<br />
+							{*<!-- Hier bitte Ihre �berschrift eingeben -->*}
+							<input type="text" id="uberschrift" name="uberschrift" size="30" value="{$uberschrift}" title="{$message_67}" onfocus="this.value=onFocusClearDefault( this.value, '{$uberschrift}' );" />
+						</fieldset>
+
+						<fieldset class="formatierung">
+							{*<!-- Texteingabe -->*}
+							<legend>{$message_68}.</legend>
+							<br />
+							<textarea name="inhalt" rows="20" cols="50">{$Beschreibung}</textarea>
+							<br /><br /><br />
+						</fieldset>
+
+						<fieldset>
+							{*<!-- �bermitteln -->*}
+							<legend>{$message_69}</legend>
+							{*<!-- Eintragen -->*}
+							<input type="submit" class="submit_back" value="{$message_70}" name="{$input}" />
+						</fieldset>
+					</form>
+				{/if}
+				{if $mailen}
+					<h1>Mails</h1>
+					{if $mail_data}
+						{*<!-- Hier werden pers�nliche Mails geschrieben und gelesen innerhalb des CMS -->*}
+						<div id="mail">
+							<table class="outside table table-striped table-hover" summary="mails user recived">
+								{foreach item=mail from=$mail_data}
+									<tr class="inside">
+									<td class="mailtext"><a href="./index.php?menuid=34&amp;myhome=1&amp;mail_id={$mail.mail_id}">{$mail.mail_head}</a></td>
+									<td class="mailfrom">{$mail.mail_from_user}</td>
+									<td class="maildate">{$mail.mail_date}</td>
+									<td class="mailread">{$mail.mail_read}</td>
+									</tr>
+								{/foreach}
+							</table>
+						</div>
+					{/if}
+					{if $mail_ok}
+						<hr />
+						{if isset($mailhead) && $mailhead}
+							<div id="mailinhalt">
+								<h1>{$mailhead}</h1>
+								{$mailtext}
+							</div>
+							<br /><br />
+							<form method="post" action="">
+								<input type="hidden" name="mail_id" value="{$mail_id}" />
+								<input type="submit" class="submit_back_white" name="delete" value="{$message_106}" />
+							</form>
+						{/if}
+					{/if}
+				{/if}
+				{if $artikel_alle}
+					{*<!-- Artikel die Sie geschrieben und ver�ffentlicht haben. -->*}
+					<h1>{$message_71}</h1>
+					{*<!-- Sie k�nnen die Artikel erneut bearbeiten und ver�ffentlichen wenn Sie auf den entsprechenden Link klicken: -->*}
+					<div class="alert alert-success">
+					<p>{$message_72}</p>
+				</div>
+					<div class="artikel_liste">
+						{foreach item=link from=$link_data}
+							{* <!--<div class="artikel_list_teaser"><li>{$link.textart}</li></div>--> *}
+							<div class="artikel_list_teaser">
+								<h2>{$link.ueberschrift}</h2>
+								<div class="artikel_list_teaser_innen">
+									{*<!-- <p>{$link.timestamp}</p> --> *}
+									<div class="authormessage">{$letzte_aenderung}{$link.date_time|date_format:$lang_dateformat}</div>
+									<div class="teaserdat">
+										{$link.teaser}
+									</div>
+									<p>
+										<a class="artikel_link_teaser" href="artikel.php?menuid=11&amp;reporeid={$link.reporeID}">{$link.ueberschrift} {$message_47}</a><br />
+									</p>
+								</div>
+							</div>
+						{/foreach}
+					</div>
+					{*<!-- weitere Seiten -->*}
+					{include file="weiter.inc.html"}
+				{/if}
+				{if $artikel_offen}
+					{*<!-- Artikel die zu ver�ffentlichen sind. -->*}
+					<h1>{$message_74}</h1>
+					<div class="alert alert-success">
+					{*<!-- Sie k�nnen die Artikel bearbeiten und ver�ffentlichen wenn Sie auf den Link klicken: -->*}
+					<p>{$message_75}</p>
+				</div>
+					<div class="artikel_liste">
+						{foreach item=link from=$link_data}
+							{* <!--<div class="artikel_list_teaser"><li>{$link.textart}</li></div>--> *}
+							<div class="artikel_list_teaser row">
+								<h2>{$link.ueberschrift}</h2>
+								<div class="artikel_list_teaser_innen">
+									{*<!-- <p>{$link.timestamp}</p> --> *}
+									<div class="authormessage">
+										{$letzte_aenderung}{$link.date_time|date_format:$lang_dateformat}
+									</div>
+									<div class="teaserdat">
+										{$link.teaser}
+									</div>
+									<p>
+										<a class="artikel_link_teaser" href="artikel.php?menuid=11&amp;reporeid={$link.reporeID}">{$link.ueberschrift} {$message_47}</a><br />
+									</p>
+								</div>
+							</div>
+						{/foreach}
+					</div>
+					{*<!-- weitere Seiten -->*}
+					{include file="weiter.inc.html"}
+				{/if}
+				{if $case0}
+					{$textx}
+					<div {if $papoo_news}class="span6"{/if}>
+						{$message_556b}
+						{$message_556c}
+						{if $papoo_news}
+							{$message_556c2}
+						{/if}
+						{$message_556c3}
+						{$message_556}
+					</div>
+					{if $papoo_news}
+						<div id="backend-news-container" class="span6 newsclass">
+							<h1>{$message_556a}</h1>
+							<div class="startaktuell" id="aktuell_{$menuid_aktuell}">
+								{$papoo_news}
+							</div>
+						</div>
+					{/if}
+				{/if}
+				{if $persdaten}
+					{*<!-- Hier k�nnen Sie die Daten Ihres Accounts bearbeiten -->*}
+					<h1>{$message_82}</h1>
+					<form name="artikel" action="./index.php?menuid=38" method="post" id="formi">
+						<fieldset>
+							{*<!-- Ihre pers�nlichen Daten: -->*}
+							<legend>{$message_455}</legend>
+
+							<input type="checkbox" name="user_list_artikel" {if $user_list_artikel==1} checked="checked"{/if}id="user_list_artikel" value="1"/>
+							<label for="user_list_artikel">{$message_561}</label><br />
+
+							<input type="checkbox" id="user_club_stufe" name ="user_club_stufe" value="1" {if $user_club_stufe}checked="checked" {/if} />
+							<label for="user_club_stufe">{$message_562}</label><br />
+
+							<input type="checkbox" id="user_content_tree_show_all" name ="user_content_tree_show_all" value="1" {if $user_content_tree_show_all}checked="checked" {/if} />
+							<label for="user_content_tree_show_all">{$message_562a}</label><br />
+						</fieldset>
+
+						<fieldset>
+							{*<!-- Welcher Editor soll f�r die Eingabe benutzt werden?-->*}
+							<legend>{$message_358}</legend>
+							<br />
+							{foreach item=menu from=$menuinput_data}
+								{*<!-- TinyMCE: -->*}
+								<input type="radio" id="editor3" name ="editor" value="3" {$menu.checkededitor_tiny} /><label for="editor3">TinyMCE (Standard)</label>
+								<br />
+								{*<!-- Quicktags: -->*}
+								<input type="radio" id="editor2" name ="editor" value="2" {$menu.checkededitor_quick} /><label for="editor2">{$message_415}</label>
+								<br />
+								{*<!-- markdown: 
+								<input type="radio" id="editor1" name ="editor" value="1" {$menu.checkededitor_markdown} /><label for="editor1">{$message_416}</label>
+								<br />
+								-->*}
+								
+								{*<!-- Fremdeditor: 
+								<input type="radio" id="editor99" name ="editor" value="99" {$menu.checkededitor_fremd} /><label for="editor99">{$message_318}</label>
+								-->*}
+							{/foreach}
+						</fieldset>
+						<fieldset>
+							<legend>{$message_70}:</legend>
+							{*<!-- Eintragen -->*}
+							<input type="submit" class="submit_back_green" value="{$message_69}" name="submithome" />
+						</fieldset>
+					</form>
+				{/if}
+				{*<!-- Ende des pers�nlichen Account Bereiches -->*}
+			</div>
+			<div class="clear"></div>
+		</div>
+	{/if}
+	{if $loggedin_false}
+		<div class="einlogg">
+			{*<!-- Sie haben keine Berechtigung. -->*}
+			<h1>{$message_84}.</h1>
+			<p>
+				{*<!-- Erneut versuchen -->*}
+				<a href="index.php?logoff=1" >{$message_85} ...</a>
+			</p>
+			<div class="clear"></div>
+		</div>
+	{/if}
+	{*<!-- Hier kommt der Fuss rein-->*}
+	{include file="foot.inc.html"}
+{/if}

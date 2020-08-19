@@ -1,0 +1,13 @@
+<ul>
+	{foreach item=message from=$message_data}
+		<li>
+		{if $sp_urls=="ok"}
+				<a href="{$slash}{$forum_menu_surl}{$forum_surl}forumid-{$message.forumid}-thread-{$message.msgid}-{$message.thema_surl}/#{$message.msgid}" style="font-weight:{$message.weight};">
+					{else}
+			<a href="{$slash}{$forumthread}{$frag_connect}forumid{$gleich_connect}{$message.forumid}{$plus_connect}menuid{$gleich_connect}{$formmenuid}{$plus_connect}rootid{$gleich_connect}{$message.rootid}{$plus_connect}msgid{$gleich_connect}{$message.msgid}#{$message.msgid}">{/if}
+				{$message.thema}
+			</a>
+			<small><strong> {$message.username}</strong> {$message.zeitstempel|date_format:$lang_dateformat} [{$message.counten} Hits]</small>
+		</li><span class="ignore">.</span>
+	{/foreach}
+</ul>

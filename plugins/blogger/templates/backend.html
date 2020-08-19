@@ -1,0 +1,16 @@
+{if $IS_ADMIN}
+  {include file=head.inc.html}
+  {include file=menu.inc.html}
+  <div class="artikel">
+    <link type="text/css" href="{$web_pfad}/plugins/blogger/css/backend.css" rel="stylesheet"></link>
+
+    {if $submenu == 'trackback'}
+      {include file=../../../plugins/blogger/templates/backend_trackback.html}
+    {elseif $submenu == 'shortcut'}
+      {include file=../../../plugins/blogger/templates/backend_shortcut.html}
+    {else}
+      {include file=../../../plugins/blogger/templates/backend_info.html}
+    {/if}
+  </div>
+  {include file=foot.inc.html}
+{/if}

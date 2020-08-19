@@ -1,0 +1,56 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+	<form action="{$xlink}" method="post" name="verzeichnis">
+		{foreach item=lang from=$catlang}
+			<fieldset>
+				<!-- Kategorie Name : -->
+				<legend>{$message_498} {$lang.language}</legend>
+				{if $kat_alt}
+					<input name="action" value="EDIT" type="hidden" />
+					<input name="cat_id" value="{$cat_id}" type="hidden" />
+				{/if}
+					<label for="cat_text[{$lang.lang_id}]">{$message_615}</label><br />
+				<input name="cat_text[{$lang.lang_id}]" id="cat_text[{$lang.lang_id}]" accept="" type="text" size="30" value="{$catdatlang[$lang.lang_id].cat_text}" /><br />
+				<label for="cat_text_intern[{$lang.lang_id}]">{$message_616}</label><br />
+				<input name="cat_text_intern[{$lang.lang_id}]" id="cat_text_intern[{$lang.lang_id}]" accept="" type="text" size="30" value="{$catdatlang[$lang.lang_id].cat_text_intern}" /><br />
+			
+			</fieldset>
+		{/foreach}
+		<fieldset>
+			<legend>{$message_617}</legend>
+			{foreach item=table from=$table_data}
+				<input type="checkbox" {$table.checkedw} id="{$table.gruppename}"name="cat_write_ar[]" value="{$table.gruppeid}" />
+				<label for="{$table.gruppename}">{$table.gruppename}: </label><br />
+			{/foreach}
+		</fieldset>
+
+		<fieldset>
+			<legend>{$message_618}</legend>
+			{foreach item=table from=$table_data}
+				<input type="checkbox" {$table.checkedr} id="{$table.gruppename}r"name="cat_read_ar[]" value="{$table.gruppeid}" />
+				<label for="{$table.gruppename}r">{$table.gruppename}: </label><br />
+			{/foreach}
+		</fieldset>
+
+		<fieldset>
+			<legend>{$message_802}</legend>
+			<input type="checkbox" id="cat_startseite_ok" name="cat_startseite_ok" {if $kat_one.0.cat_startseite_ok==1}checked="checked"{/if} value="1" />
+			<label for="cat_startseite_ok">{$message_803} </label><br />
+			<label for="cat_startseite_anzahl">{$message_804} </label><br />
+			<input type="text" size="5" id="cat_startseite_anzahl" name="cat_startseite_anzahl" value="{$kat_one.0.cat_startseite_anzahl}" />
+			<br />
+		</fieldset>
+
+		<fieldset>
+			<legend>{$message_490}</legend>
+			{if $kat_alt}
+				<input type="hidden" name="cat_id" value="{$cat_id}" />
+				<input name="submit" style="float: left;" value="{$kat_form_change}" type="submit" class="submit_back_green" /><br />
+				{if $cat_id>1}
+					<input style="float: right;margin-top:-10px;" name="loeschen" value="{$message_603}" type="submit" class="submit_back_red" />
+				{/if}
+			{else}
+				<input style="float: left;" name="strSubmit" value="{$message_458}" type="submit" class="submit_back_green" />
+			{/if}
+		</fieldset>
+	</form>
+{/if}

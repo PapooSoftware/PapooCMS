@@ -1,0 +1,21 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		{$message_722}
+		<form action="" method="post" id="formi">
+			<fieldset>
+				<legend>{$message_723}</legend>
+				<textarea rows="15" cols="40" name="blacklist">{foreach item=black from=$blblack}{$black.black_name}
+{/foreach}</textarea>
+			</fieldset>
+			<fieldset>
+				<legend>{$message_724}</legend>
+				<input type="submit" class="submit_back_green" name="save_black" id="save_black" value="{$message_725}"/>
+			</fieldset>
+		</form>
+		<div class="clear">&nbsp;</div>
+	</div>
+	{*<!-- Hier kommt der Fuss rein-->*}
+	{include file=foot.inc.html}
+{/if}

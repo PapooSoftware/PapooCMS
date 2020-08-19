@@ -1,0 +1,68 @@
+{if $IS_ADMIN}
+	{*<!-- Menue-->*}
+	<div id="backend-header-links" class="toplink pull-right">
+		{*<!-- Frontend -->*}
+		<a class="frontend" href="../index.php">{$message_368} ({$site_name})</a> |
+		{*<!-- ausloggen-->*}
+		<a class="frontend2" href="./index.php?logoff=1">{$message_369} ({$username})</a>
+		|
+		<a href="./hilfe.php?hilfe={$hilfe_key}{$extra_key}" accesskey="0" target="hilfe" onclick="anzeig('./hilfe.php?hilfe={$hilfe_key}','hilfe','550','550')">{$message_667}</a>
+	</div>
+	<div id="backend-header-language-switch" class="artikel2 pull-right">
+		{if $aktulanglong}
+			<br />
+			<ul>
+				{foreach from="$languageget" item="lang" }<!-- onclick='document.artikel.submit();return false;' -->
+					<li {if $lang.language == $aktulanglong}class="aktu_lang"{/if}>
+						<a href="{$self_lang}&amp;submitlang={$lang.language}"><img width="20" class="vtip" height="14" style="border:none;" src="../bilder/{$lang.lang_bild}" alt="{$lang.language}" title="{$aendert_nuur}{$lang.language}"/></a>
+					</li>
+				{/foreach}
+			</ul>
+			<strong style="display: none;">{$message_591b} {$aktulanglong}</strong>
+		{/if}
+	</div>
+	<div id="backend-top-navigation-hamburger-wrapper">
+		<a id="backend-top-navigation-hamburger" data-toggle="collapse" data-target=".nav-collapse"></a>
+	</div>
+	<div id="backend-top-navigation" class="nav-collapse collapse">
+		{*<!-- Sprungmoeglichkeit zum Artikel Bereich f�r Screenreader Nutzer-->*}
+		{*<!-- Men� �berspringen -->*}
+		<ul class="nav">
+			{foreach item=menu from=$menu_data}
+				{if $menu.level<1}
+					<li>
+						<a href="{$menu.menulink}?menuid={$menu.menuid}{$menu.template}" class="{$menu.menuklasse}" title="{$menu.menutitel}"><span class="menuspan" id="{$menu.htmltag_id}"></span>	{$menu.menuname}
+						</a>
+						<span class="ignore">&nbsp;</span>
+					</li>
+				{/if}
+			{/foreach}
+		</ul>
+	</div>
+	{if $not_verified}
+	<div class="verify">{$aktivieren}<a href="{if $aktivieren_link}{$aktivieren_link}{else}#{/if}">{$aktivieren1}</a>{$aktivieren2}</div>
+	{/if}
+</div>
+	</div>
+	</div>
+	<div id="backend-content-wrapper" class="row content_full">
+	<div class="container">
+	<div id="backend-sidebar" class="span3 sidebar">
+		<div class="nav nav-tabs bs-docs-sidenav nav-collapse ">
+			{*<!-- Sprungmoeglichkeit zum Artikel Bereich f�r Screenreader Nutzer-->*}
+			{*<!-- Men� �berspringen -->*}
+			{foreach item=menu from=$menu_data}
+				{if $menu.level>=1}
+					{$menu.shift_anfang_sub}
+					
+					<a href="{$menu.menulink}?menuid={$menu.menuid}{$menu.template}" class="{$menu.menuklasse}" title="{$menu.menutitel}"><span class="menuspan" id="{$menu.htmltag_id}"></span>
+					{$menu.menuname} {if $menu.has_sub}<i class="fa fa-chevron-down">&nbsp;</i>	{else}<i class="fa fa-chevron-right">&nbsp;</i>{/if}
+					</a>
+					{$menu.shift_ende_sub}
+				{/if}
+			{/foreach}
+		</div>
+		{include file=bookmarks.html}
+	</div>
+	<a id="artikel"></a>
+{/if}

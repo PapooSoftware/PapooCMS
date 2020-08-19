@@ -1,0 +1,23 @@
+/*Hier werden die Grundeinstellungen getroffen für den body*/
+
+body {
+	text-align:left;
+	font: 100% verdana, sans-serif;
+}
+
+.artikel {
+	padding-left:7%;
+	padding-right:17%;
+}
+
+h1 {font-size:140%;}
+
+h2 {font-size:130%;}
+
+h3 {font-size:120%;}
+
+h4 {font-size:110%;}
+
+h5 {font-size:110%;}
+
+h6 {font-size:110%;}

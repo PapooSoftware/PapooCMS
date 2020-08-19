@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<plugin version="4">
+
+<name>Bildwechsler</name> 
+
+<beschreibung_de><![CDATA[ Plugin zur Verwaltung eines, oder mehrerer, sich wechselnder Bilder. Diese können für jeden Menüpunkt separat angegeben und jeweils mit einem Link versehen werden.
+Die Platzierung im Frontend erfolgt durch Einfügen eines Moduls an der gewünschten Stelle.]]>
+</beschreibung_de>
+
+<version>2.0</version>
+<datum>18.07.2013</datum>
+
+<autor>
+	<name>Stephan Bergmann</name>
+	<email>S.Bergmann@XiMiX.de</email>
+</autor>
+
+<menue>
+	<eintrag_de>Bildwechsler</eintrag_de>
+	<icon>bildwechsler/bilder/menue_icon.gif</icon>
+	<link>plugin:bildwechsler/templates/back.html</link>
+</menue>
+
+<klasse>
+	<name>bildwechsler</name>
+	<datei>bildwechsler/lib/bildwechsler_class.php</datei>
+</klasse>
+
+<modul>
+	<datei>plugin:bildwechsler/templates/mod_bildwechsler.html</datei>
+	<name_de>Plugin: Bildwechsler</name_de>
+	<beschreibung_de>Modul zur Platzierung des Bildwechslers.</beschreibung_de>
+</modul>
+
+<datenbank>
+	<installation>bildwechsler/sql/bildwechsler_install.sql</installation>
+	<deinstallation>bildwechsler/sql/bildwechsler_deinstall.sql</deinstallation>
+</datenbank>
+
+<messages>bildwechsler/messages</messages>
+
+</plugin>

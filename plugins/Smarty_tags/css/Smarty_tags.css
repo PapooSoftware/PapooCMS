@@ -1,0 +1,242 @@
+CODE,
+TT {
+	font-size:1.3em;
+	}
+
+.Smarty_tags {
+	margin:0;
+	width:100%;
+	}
+
+.cat_row A:HOVER,
+.cat_row A:ACTIVE,
+.cat_row A:LINK,
+.cat_row A:VISITED,
+.cat_row A:FOCUS {
+	background-color:transparent;
+	color:#22599a;
+	}
+
+.cat_row TD {
+	padding:4px;
+	margin:0;
+	height:22px !important;
+	}
+
+.php_textarea {
+	width:99%;
+	}
+
+.error,
+.message {
+	border:1px solid black;
+	padding:10px;
+	font-weight:600;
+	font-size:140%;
+	}
+
+.message {
+	background:#FCB75E;
+	}
+
+.error {
+	background:red;
+	}
+
+.SmartyTagsRSSFeed {
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px !important;
+	text-align:left;
+	border:1px #EAEAEA solid;
+	/*background-color:#FDFDFF;*/
+	color:#585858 !important;
+	padding:4px;
+	margin:4px;
+	}
+
+.SmartyTagsRSSFeed .favicon {
+	vertical-align:bottom;
+	margin-bottom:2px;
+	}
+
+.SmartyTagsRSSFeed P {
+	background-color:transparent;
+	color:#585858;
+	font-weight:normal;
+	margin:1px;
+	padding:2px;
+	display:inline-block;
+	}
+
+.SmartyTagsRSSFeed .item {
+	border-top:1px #9090e0 dashed;
+	}
+
+.SmartyTagsRSSFeed .item_over,
+.SmartyTagsRSSFeed .item_over_cursor_ctrl {
+	cursor:pointer;
+	border-top:1px #9090e0 dashed;
+	background-color:#ebebf0;
+	color:inherit;
+	}
+
+/* keinen Link-Cursor, wenn nicht $link */
+.SmartyTagsRSSFeed .item_over_cursor_ctrl {
+	cursor:default;
+	}
+
+.SmartyTagsRSSFeed A {
+	background-color:transparent;
+	color:#FF3300 !important;
+	text-decoration:none !important;
+	}
+
+.SmartyTagsRSSFeed A:HOVER {
+	text-decoration:underline !important;
+	}
+
+.SmartyTagsRSSFeed UL {
+	margin-top:.5em;
+	}
+
+.SmartyTagsRSSFeed LI {
+	background-color:transparent;
+	color:#FF3300;
+	font-weight:bold;
+	list-style-image:url(../plugins/Smarty_tags/css/images/arrow.gif) !important;
+	list-style-position:outside;
+	padding:5px;
+	clear:left;
+	}
+
+.SmartyTagsRSSFeed LI A,
+LI A:HOVER {
+	text-decoration:none !important;
+	}
+
+.SmartyTagsRSSFeed H2 {
+	font-size:14px;
+	border-bottom:1px #9090e0 solid;
+	margin: 5px 2px 2px 2px;
+	}
+
+.motto_links,
+.motto_rechts {
+	margin-bottom:.8em;
+	border:1px solid #f5fafd;
+	background-color:#fff;
+	width:15.7em;
+	}
+
+.motto_links {
+	width:14em;
+	}
+
+.motto_mitte {
+	margin-bottom:.8em;
+	border:1px solid #f5fafd;
+	background-color:#fff;
+	margin-top: 10px;
+	/*width:15.7em;*/
+	}
+
+.mottoboxinner {
+	background-color:#f5fafd;
+	margin:2px;
+	padding:5px;
+	border:1px solid #00447E;
+	}
+
+.mottoboxinner img {
+	border:0 none;
+	margin-bottom:4px;
+	margin-top:2px;
+	}
+
+.mottoboxitem {
+	background-color:#fff;
+	margin-bottom:0;
+	margin-top:0;
+	padding:4px;
+	font-size:12px;
+	/*color:#4444cb;*/
+	}
+
+.mottoboxitem A {
+	/*color:#4444cb;*/
+	font-weight:bold;
+	}
+
+.topten_ol,
+.newest_ol {
+	margin:0 0 0 3px;
+	padding:0;
+	}
+
+.topten_li {
+	margin-bottom:.6em;
+	}
+
+.newest_li {
+	border:1px solid #BABABA;
+	height:140px;
+	width:270px;
+	float: left;
+	}
+
+.newest_a {
+	height: 40px;
+	font-size:12px;
+	}
+
+.last_newest_li {
+	border:1px solid #BABABA;
+	height:140px;
+	width:270px;
+	}
+
+.newest_logo {
+    float:left;
+    margin-right:10px;
+    margin-left: 5px;
+    height: 80px;
+}
+
+.newest_preis {
+    background-color:#F67D0A;
+    float:right;
+    color:#FFFFFF;
+    font-size:16px;
+    font-weight:bold;
+    text-align:right;
+    margin-right:10px;
+    margin-top:15px;
+    width:90px;
+    height:20px;
+    padding-top:3px;
+}
+
+.newest_mwst {
+	font-size: 10px;
+	color: #004181;
+	}
+
+.newest_rabatt {
+	padding-left: 5px;
+	padding-top: 5px;
+	background-color: #00447E;
+	color: #FFF;
+	/*font-size:120%;*/
+	font-size:12px;
+	font-weight:bold;
+}
+
+.notes_hl {
+	font-size:1.3em;
+	/*color:#4444cb;*/
+	padding:0 !important;
+	margin:0;
+	}
+#topten_mv_1_bg {
+padding-left:28px;
+}

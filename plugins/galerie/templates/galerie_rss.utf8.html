@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+ <rss version="2.0" 
+          xmlns:media="http://search.yahoo.com/mrss"
+          xmlns:atom="http://www.w3.org/2005/Atom">
+ <channel>
+{foreach item=bild from=$galerie_bilder name=bilder}
+<item>
+ <title>{$bild.bildlang_name|escape:"html"}</title>
+ <link>{$slash}plugins/galerie/galerien/{$galerie_data.gal_verzeichnis}/thumbs/{$bild.bild_datei}</link>
+ <media:thumbnail url="{$slash}plugins/galerie/galerien/{$galerie_data.gal_verzeichnis}/thumbs/{$bild.bild_datei}"/>
+       <media:content url="{$slash}plugins/galerie/galerien/{$galerie_data.gal_verzeichnis}/{$bild.bild_datei}"/>
+ </item>
+{/foreach}
+</channel>
+</rss>

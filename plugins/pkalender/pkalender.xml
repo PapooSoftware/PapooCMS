@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- version: Versions-Nummer papoo für die das Plugin gedacht ist / funktioniert -->
+<plugin version="3.6">
+
+<!-- ALLGEMEINE-INFORMATIONEN -->
+<!-- ************************ -->
+<!-- name: Name des Plugins -->
+<name>Kalender-Plugin</name> 
+
+<!-- beschreibung_de: Kurz-Beschreibung des Plugins auf deutsch (wird im Plugin-Manager angezeigt) -->
+<beschreibung_de><![CDATA[Das Plugin enthält den neuen Papoo Kalender...]]></beschreibung_de>
+
+<!-- beschreibung_en: Kurz-Beschreibung des Plugins auf englisch (wird im Plugin-Manager angezeigt) -->
+<beschreibung_en><![CDATA[This Plugin is the new Papoo Calendar.]]></beschreibung_en>
+
+<!-- version: Versions-Nummer des Plugins -->
+<version>3.6</version>
+
+<!-- papooid: Eindeutige Nummer offizieller papoo-Plugins -->
+<papooid>45</papooid>
+
+<!-- link: z.Z. noch ohne Funktion -->
+<link>http://www.papoo.de</link> 
+
+<!-- datum: Erscheinungs-Datum bzw. Stand des Plugins -->
+<datum>22.06.2016</datum>
+
+
+<!-- AUTOR-INFORMATIONEN -->
+<!-- ******************* -->
+<!-- autor: Informationen zum Autor (Programmierer) des Plugins -->
+<autor>
+	<!-- autor.name: Name des Authors -->
+	<name>Dr. Carsten Euwens</name>
+	
+	<!-- autor.kontakt: postalische Kontakt-Informationen des Autors -->
+	<kontakt><![CDATA[
+    Papoo Software
+    Dr. Carsten Euwens
+Ellerstr. 9
+53129 Bonn]]></kontakt>
+	
+	<!-- autor.email: eMail-Adresse des Autors -->
+	<email>info@papoo.de</email>
+	
+	<!-- autor.telefon: Telefon-Nummer des Autors -->
+	<telefon>0228 / 280 56 68</telefon>
+</autor>
+
+
+<!-- MENÜ-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- menue: Informationen für den Menü-Eintrag im Backend (papoo/interna) -->
+<menue>
+	<!-- menue.eintrag_de: Name des Menü-Punktes im Backend auf deutsch -->
+	<eintrag_de>Kalender</eintrag_de>
+	<!-- menue.eintrag_en: Name des Menü-Punktes im Backend auf englisch -->
+	<eintrag_en>Calendar</eintrag_en>
+	<!-- menue.icon: Pfad zum Menü-Icon des Menü-Punktes im Backend (relativ zum Plugin-Verzeichnis) -->
+	<icon>pkalender/bilder/cal.png</icon>
+	<!-- menue.link: Name der Seite auf welche der Menü-Punkt im Backend verweisen soll -->
+	<link>plugin:pkalender/templates/pkalender_back.html</link>
+	
+	<!-- menue.submenue: Untermenü-Punkt für diesen Menü-Punkt im Backend, Struktur wie menue -->
+	<submenue>
+		<eintrag_de>Kalender bearbeiten</eintrag_de>
+		<eintrag_en>Update Calendar</eintrag_en>
+		<icon>pkalender/bilder/cal2.png</icon>
+		<link>plugin:pkalender/templates/pkalender_back_cal.html</link>
+	</submenue>
+	
+	<submenue>
+		<eintrag_de>Datum bearbeiten</eintrag_de>
+		<eintrag_en>Manage Dates</eintrag_en>
+		<icon>pkalender/bilder/date.png</icon>
+		<link>plugin:pkalender/templates/pkalender_back_date.html</link>
+	</submenue>
+<!--
+	<submenue>
+		<eintrag_de>Administration</eintrag_de>
+		<eintrag_en>Administration</eintrag_en>
+		<icon>pkalender/bilder/config.png</icon>
+		<link>plugin:pkalender/templates/pkalender_back_config.html</link>
+	</submenue>-->
+</menue>
+
+
+
+
+<!-- KLASSEN-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- klasse: Informationen der Plugin-Klasse welche eingebunden werden sollen -->
+<klasse>
+	<!-- klasse.name: Name der Klassen-Instanz / des Objekts (also der Name des Dings, das mit $name = new xx_class(); erzeugt wird) -->
+	<name>pkalenderplugin</name>
+	<!-- klasse.datei: Pfad zur Klassen-Datei (relativ zum Plugin-Verzeichnis) -->
+	<datei>pkalender/lib/pkalenderplugin_class.php</datei>
+</klasse>
+
+
+<!-- CSS-INFORMATIONEN -->
+<!-- ***************** -->
+<!-- css: Pfad zur CSS-Datei (relativ zum Plugin-Verzeichnis) -->
+<css>pkalender/css/pkalender.css</css>
+
+
+<!-- DATENBANK-INFORMATIONEN -->
+<!-- ****************** -->
+<datenbank>
+	<!-- datenbank.installation: Pfad zur SQL-Installations-Datei (relativ zum Plugin-Verzeichnis) -->
+	<installation>pkalender/sql/pkalender_install.sql</installation>
+	<!-- datenbank.deinstallation: Pfad zur SQL-Deinstallations-Datei (relativ zum Plugin-Verzeichnis) -->
+	<deinstallation>pkalender/sql/pkalender_deinstall.sql</deinstallation>
+</datenbank>
+
+<!-- Einbindung der Sprach-Dateien.
+	In dem hier angegebenen Verzeichnis sollten Dateien mit folgenden Namen liegen:
+	- messages_backend_[de|en|fr| .. etc.].inc.php
+	- messages_frontend_[de|en|fr| .. etc.].inc.php
+-->
+<messages>pkalender/messages</messages>
+
+</plugin>

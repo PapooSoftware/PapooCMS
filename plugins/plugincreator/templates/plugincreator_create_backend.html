@@ -1,0 +1,143 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+<link rel="stylesheet" type="text/css" href="{$css_path}/backend.css" />
+
+<script src="../plugins/plugincreator/js/create_backend.js" type="text/javascript"></script>
+
+<div class="artikel">
+
+    <h1>Plugin Creator</h1>
+
+    {$message.plugin.plugincreator.create_backend_expl}
+
+    <br><br>
+
+    {if $plugin.plugincreator.edit_return_code > 0}
+        <div class="message">Plugin bearbeitet!</div>
+    {elseif $plugin.plugincreator.edit_return_code == -4}
+        <div class="error">Fehler! Das Plugin hat nicht die nötigen Rechte um das gewählte Plugin zu bearbeiten! Bitte
+        setzen Sie die Rechte der Dateien und Order des gewählten Plugins auf 0777 um fortzufahren.</div>
+    {elseif $plugin.plugincreator.edit_return_code == -8}
+        <div class="error">Fehler! Ein Plugin mit diesem Ordnernamen existiert schon!</div>
+    {elseif $plugin.plugincreator.edit_return_code < 0}
+        <div class="error">Unbekannter Fehler!</div>
+    {elseif $plugin.plugincreator.plugin_dir_not_writeable}
+        <div class="error">Warnung: Der /plugins -Ordner ist schreibgeschützt. Wenn Sie jetzt ein Plugin erstellen könnte das unerwartete Konsequenzen haben.</div>
+    {elseif isset($smarty.post.creator_name)}
+        <div class="message">Plugin erfolgreich erstellt!</div>
+    {/if}
+
+    {include file=../../../plugins/plugincreator/templates/all_header.inc.html}
+
+    <form method="post" action="" class="" name="create_plugin">
+
+        {if $smarty.session.plugin.plugincreator.menuid_create_plugins eq $smarty.get.menuid}
+        <input type="hidden" value="{$smarty.session.plugin.plugincreator.editplugin_info.pluginid}" name="creator_pluginid">
+        <input type="hidden" value="{$smarty.session.plugin.plugincreator.editplugin_info.plugin_identifier}" name="creator_plugin_identifier">
+        <input type="hidden" value="{$smarty.session.plugin.plugincreator.editplugin_info.plugin_dir}" name="creator_plugindir">
+        {/if}
+
+        <fieldset>
+            <legend>Plugin</legend>
+
+            <label>Name</label>
+            <input type="text" id="creator_name" onkeypress="AdjustPluginName('creator_name');" oninput="AdjustPluginName('creator_name');" onpaste="AdjustPluginName('creator_name');" onchange="AdjustPluginName('creator_name');" title="Muss mindestens 3 folgende Buchstaben enthalten." required="required" {literal}pattern=".*[a-zA-Z]{3,}.*"{/literal} name="creator_name" value="{if $smarty.session.plugin.plugincreator.menuid_create_plugins eq $smarty.get.menuid}{$smarty.session.plugin.plugincreator.editplugin_info.name}{/if}">
+            <label>Beschreibung</label>
+            <input type="text" name="creator_desc" value="{if $smarty.session.plugin.plugincreator.menuid_create_plugins eq $smarty.get.menuid}{$smarty.session.plugin.plugincreator.editplugin_info.description}{/if}">
+        </fieldset>
+
+        <fieldset>
+            <legend>Autor</legend>
+
+            <label>Name</label>
+            <input type="text" name="creator_autor_name" value="{if $smarty.session.plugin.plugincreator.menuid_create_plugins eq $smarty.get.menuid}{$smarty.session.plugin.plugincreator.editplugin_info.autor.name}{/if}">
+            <label>Email</label>
+            <input type="text" pattern=".+@.+\.[a-zA-Z]+" name="creator_autor_email" value="{if $smarty.session.plugin.plugincreator.menuid_create_plugins eq $smarty.get.menuid}{$smarty.session.plugin.plugincreator.editplugin_info.autor.email}{/if}">
+        </fieldset>
+
+        <fieldset>
+            <legend>Menüpunkte</legend>
+
+            {*<!--
+            <ul id="menupunkt">
+                {foreach item=menupunkt from=$smarty.session.plugin.plugincreator.editplugin_info.menu}
+                <li id="{$menupunkt.rid}_li"><input name="" style="width: 15vh;" type="text" id="{$menupunkt.rid}_text" value="{$menupunkt.name}"><button type="button" class="fancy-minus btn-info" onclick="delSegment('{$menupunkt.rid}_li');">-</button><ul id="{$menupunkt.rid}">
+                    {foreach item=submenupunkt from=$menupunkt.submenu}
+                    <li id="{$submenupunkt.rid}_li"><input name="" style="width: 15vh;" type="text" id="{$submenupunkt.rid}_text" value="{$submenupunkt.name}"><button type="button" class="fancy-minus btn-info" onclick="delSegment('{$submenupunkt.rid}_li');">-</button><ul id="{$submenupunkt.rid}"></ul><button type="button" class="fancy-plus btn-info" onclick="addSegment('{$submenupunkt.rid}', 'menupunkt', 'menupunkt');">+</button></li>
+                    {/foreach}
+                </ul><button type="button" class="fancy-plus btn-info" onclick="addSegment('{$menupunkt.rid}', 'menupunkt', 'menupunkt');">+</button></li>
+                {/foreach}
+            </ul>
+            <button type="button" class="fancy-plus btn-info" onclick="addSegment('menupunkt', 'menupunkt', 'menupunkt');">+</button>
+            -->*}
+
+            {$message.plugin.plugincreator.create_backend_menu_annotation}
+
+            <label>Neuen Untermenüpunkt</label>
+            <button type="button" class="btn btn-info" onclick="addToList('menupunkt');">Hinzufügen</button>
+
+            <ul id="menupunkt">
+                {if $smarty.session.plugin.plugincreator.menuid_create_plugins eq $smarty.get.menuid}
+                {foreach item=tabelle from=$smarty.session.plugin.plugincreator.editplugin_info.menu}
+                <li id="{$tabelle.rid}"><input name="menupunkt[{$tabelle.hash}]" value="{$tabelle.name}" style="width: 25vh;" type="text"><button type="button" class="btn-danger btn" style="margin-bottom: 5px; margin-left: 5px;" onclick="delSegment('{$tabelle.rid}');">Entfernen</button></li>
+                {/foreach}
+                {/if}
+            </ul>
+
+        </fieldset>
+
+        <fieldset>
+            <legend>Datenbank</legend>
+
+            <label>Neue Tabelle</label>
+            <button type="button" class="btn btn-info" onclick="addToList('datenbank', true);">Hinzufügen</button>
+
+            <ul id="datenbank">
+                {if $smarty.session.plugin.plugincreator.menuid_create_plugins eq $smarty.get.menuid}
+                {foreach item=tabelle from=$smarty.session.plugin.plugincreator.editplugin_info.datenbank}
+                <li id="{$tabelle.rid}"><input onchange="checkTableExists('{$tabelle.hash}_input');" id="{$tabelle.hash}_input" name="datenbank[{$tabelle.hash}]" value="{$tabelle.name}" style="width: 25vh;" type="text"><button type="button" class="btn-danger btn" style="margin-bottom: 5px; margin-left: 5px;" onclick="delSegment('{$tabelle.rid}');">Entfernen</button></li>
+                {/foreach}
+                {/if}
+            </ul>
+        </fieldset>
+
+        <fieldset>
+            <legend>Module</legend>
+
+            <fieldset>
+                <legend>Neues Modul</legend>
+                <button type="button" style="float: right; margin-right: 20px" class="btn btn-info" onclick="addToModuleList('module');">Hinzufügen</button>
+            </fieldset>
+
+            <div id="module">
+                {if $smarty.session.plugin.plugincreator.menuid_create_plugins eq $smarty.get.menuid}
+                {foreach item=modul from=$smarty.session.plugin.plugincreator.editplugin_info.modul}
+                <fieldset id="{$modul.rid}" style="padding-top: 20px;">
+                    <label>Name</label>
+                    <input name="module[{$modul.hash}][name]" value="{$modul.name}" style="width: 25vh;" type="text">
+                    <label>Beschreibung</label>
+                    <input name="module[{$modul.hash}][desc]" value="{$modul.desc}" style="width: 40vh;" type="text">
+
+                    <button type="button" style="float:right; margin-right: 20px;" class="btn btn-danger" onclick="delSegment('{$modul.rid}');">Entfernen</button>
+                </fieldset>
+                {/foreach}
+                {/if}
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Speichern</legend>
+
+            <input type="submit" class="btn btn-info" value="Speichern">
+        </fieldset>
+    </form>
+</div>
+
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

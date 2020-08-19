@@ -1,0 +1,37 @@
+{if $module_aktiv.mod_breadcrump}
+	<!-- MODUL: breadcrump -->
+	<div class="modul" id="mod_breadcrump">
+
+		<a class="breadlink1" href="{if $slash}{$slash}{else}{$webverzeichnis}{/if}{if $lang_short}{if $lang_short !="de"}{$lang_short}/{/if}{/if}" title="{$message_2000} {$link}">{$link}</a>
+		{foreach item=menu from=$menu_data_breadcrump}
+		{if $menu.menuid>1}
+
+
+		{if $sp_urls=="ok" or $free_sp_urls}
+		
+		{if !$menu.extern && !$menu.extern_bread}
+		<span class="breadslash">/ </span>
+		<a href="{$slash}{if $free_sp_urls=="ok"}{$menu.menuname_free_url}{else}{$menu.menuname_url}{/if}" class="breadlink" id="breadcrump_{$menu.htmltag_id}" title="{$menu.lang_title}">
+		<dfn class="insert"></dfn><dfn>{$menu.nummer}: </dfn>{$menu.menuname}{if !$menu.extern}</a>{/if}
+		{else}
+		{if !$menu.extern}
+		<span class="breadslash">/ </span>
+		<dfn class="insert"></dfn><dfn>{$menu.nummer}: </dfn>{$menu.menuname}{if !$menu.extern}</a>{/if}
+		{/if}
+		{if !$menu.extern_bread}
+		<span class="breadslash">/ </span>
+		<a href="{$menu.menulink}" class="breadlink" id="breadcrump_{$menu.htmltag_id}" title="{$menu.lang_title}">
+		<dfn class="insert"></dfn><dfn>{$menu.nummer}: </dfn>{$menu.menuname}{if !$menu.extern_bread}</a>{/if}
+		{/if}
+		{/if}
+				
+				
+		{else}
+<span class="breadslash">/ </span>{if NOT $menu.link_aktiv AND NOT 1} {* "AND NOT 1" deaktiviert die Deaktivierung des aktuellen Links *}<strong><span class="breadlink_span" id="breadcrumpsp_{$menu.htmltag_id}">{$menu.menuname}</span></strong>{else}<a class="breadlink" href="{$slash}{$menu.menulink}{$frag_connect}menuid{$gleich_connect}{$menu.menuid}{$menu.template}" id="breadcrump_{$menu.htmltag_id}" title="{$menu.lang_title}">{$menu.menuname}</a>
+			{/if}
+		{/if}
+		{/if}
+		{/foreach}
+	</div>
+	<!-- ENDE MODUL: breadcrump -->
+{/if}

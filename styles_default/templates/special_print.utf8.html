@@ -1,0 +1,99 @@
+﻿<!-- TEMPLATE: special_print.utf8.html -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{$lang_short}" lang="{$lang_short}" dir="{$lang_dir}">
+<head>
+ {*
+
+  *}
+<!--
+
+-->
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta http-equiv="imagetoolbar" content="no" />
+	<meta name="Author" content="{$seite_autor}" />
+	<meta name="Publisher" content="{$seite_autor}" />
+	<meta name="Copyright" content="{$seite_autor}" />
+	<meta name="Page-topic" content="{$site_title} - {$site_name}" />
+	<meta name="Audience" content="Alle" />
+	<meta name="Content-language" content="DE" />
+	<meta name="Page-type" content="Produktinfo" />
+	<meta name="Robots" content="NOINDEX,FOLLOW" />
+	<meta name="description" content=" {$description}" />
+	<meta name="keywords" content="{$keywords}" />
+	<meta name="Creator" content="Papoo" />
+	<meta name="Papoo-version" content="{$papoo_version}" />
+	{$refresh}
+	<title>{$site_title} - {$site_name}</title>
+
+	<link rel="home" href="{$slash}{$index}{$frag_connect}menuid{$gleich_connect}1{$plus_connect}getlang{$gleich_connect}de" lang="de" title="Deutsche Startseite" />
+	<link rel="alternate" href="{$slash}{$index}{$frag_connect}menuid{$gleich_connect}1{$plus_connect}getlang{$gleich_connect}en" lang="en" title="English homepage" />
+	<link rel="contents" href="{$slash}inhalt.php" title="{$message_2148}" />
+	<link rel="copyright" href="{$slash}{$index}{$frag_connect}menuid{$gleich_connect}1{$plus_connect}reporeid{$gleich_connect}2" title="{$message_2149}" />
+	<link rel="author" href="{$slash}kontakt.php" title="{$message_2150}" />
+	<link rel="top" href="#top" title="{$message_2024}" />
+
+	<link rel="stylesheet" href="{$slash}css/papoons4.css" type="text/css" />
+	<style type="text/css">
+		
+		@import url({$slash}{$standard_style});
+        
+        @import url({$slash}{$standard_print_style});
+	</style>
+
+	<!--[if lte IE 7]>
+		<style type="text/css">@import url({$slash}{$iefixes});</style>
+	<![endif]-->
+  <!--[if lte IE 7]>
+    <script type="text/javascript" src="{$slash}js/minmax.js"></script>
+  <![endif]-->
+	<link rel="stylesheet" type="text/x-opera-css;charset=utf-8" href="{$slash}css/opera.css" />
+	{if $extra_css}
+		<link rel="stylesheet" type="text/css" href="{$slash}{$extra_css}" />
+	{/if}
+	{if $module_aktiv.mod_papoo_fontsize}
+		<style type="text/css">
+		body {ldelim}
+			{$css_size}
+		{rdelim}
+		</style>
+	{/if}
+
+</head>
+
+<body onload="window.print()">
+{*<!-- Artikelbereich, hier kommt der Inhalt hinein-->*}
+<a id="backlink" href="{$referrer}">Zur&uuml;ck | Back</a>
+<div class="print">
+
+
+<div id="mitte">
+		{foreach item=modul from=$module.3}
+		{* <!-- Modul: {$modul.modlang_name}<br /> --> *}
+		{* <!-- Template-Datei: {$modul.mod_datei}<br /> --> *}
+		{include file=$modul.mod_template}
+	{/foreach}
+	<br />
+	<strong>URL: {$referrer}</strong>
+	<br />
+</div>	
+
+<div id="printtop1"><img src="./bilder/logo.jpg"  />
+<br />
+<div id="printleft1"></div>
+
+<div id="printlink">
+ <strong>Firma</strong><br />
+ Name<br />
+ 
+Straße<br /><br />
+PLZ Ort<br /><br />
+
+Telefon:<br /> <br />
+Fax:<br /> <br />
+<br />
+Internet:<br /> <br />
+E-Mail:<br /><br /></div></div></div>
+
+</body>
+</html>
+<!-- TEMPLATE: special_print.utf8.html -->

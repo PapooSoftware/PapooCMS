@@ -1,0 +1,19 @@
+/* @import url(module.css); */
+@import url(../foundation/css/foundation.min.css);
+@import url(style.css);
+@import url(print.css);
+
+/*
+  Die folgenden Klassen sind lediglich "Platzhalter" fuer CSS-Klassen welche im TinyMCE verwendet werden koennen.
+  Die Definition der Klasse muss innerhalb der oben eingebundenen Dateien erfolgen.
+  Damit diese auch korrekt angezeigt werden, wenn man neue eingebunden hat, bitte den Cache loeschen!
+  Diese Platzhalter duerfen nur NACH obigen @import-Befehlen erfolgen, da sonst die CSS-Datei nicht mehr valide ist
+  und von manchen Browsern dann auch nicht mehr sauber geladen wird.
+*/
+
+.artikelbox_left {}
+.artikelbox_right {}
+.artikelbox_left_ohne_border{}
+.artikelbox_right_ohne_border{}
+
+

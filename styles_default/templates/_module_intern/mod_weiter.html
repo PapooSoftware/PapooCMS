@@ -1,0 +1,43 @@
+<!-- MODUL: weiter -->
+{if $weiter}
+	{*<!--Wenn weitere Seiten existieren, Auswahl anzeigen. -->*}
+    {if $weiter_array|is_array}
+	<div id="weiter" class="weiter pagination-left">
+		<ul class="weiterul pagination" role="menubar" aria-label="Pagination">
+			{if $hrefruck}
+				{*<!--Eine Seite zurück -->*}
+				{*<!--Dieser Link führt eine Seite zurück.-->*}
+				<li class="weiterli">
+					<a href="{$slash}{$hrefruck}" class="arrow" rel="prev" title="{$message_2114}">{$message_73}</a><span class="ignore">. |</span>
+				</li>
+			{/if}
+			{*<!--Alle Seiten durchloopen-->*}
+
+			{foreach item=weiter from=$weiter_array}
+				{if @$weiter.aktivhref}
+					{*<!--Die aktuell angezeigte Seite.-->*}
+					<li class="current" rel="self" aria-disabled="true">
+						<a title="{$message_2115}" href="" >{$weiter.linknummer}</a><span class="ignore">. |</span>
+					</li>
+				{else}
+					{*<!--Dieser Link führt zur-->*}
+					{*<!--Seite.-->*}
+					<li class="weiterli">
+						<a href="{$slash}{$weiter.linkname}" title="{$message_2116} {$weiter.linknummer}. {$message_2117} ">{if @$weiter.last=="ok"}...{/if} {$weiter.linknummer} {if @$weiter.first=="ok"}...{/if}</a>
+					</li>
+				{/if}
+			{/foreach}
+
+			{if $hrefweiter}
+				{*<!--Eine Seite weiter. -->*}
+				{*<!--Dieser Link führt eine Seite weiter.-->*}
+				<li class="weiterli">
+					<a class="current" href="{$slash}{$hrefweiter}" rel="next" title="{$message_2119}">{$message_86}</a><span class="ignore">. </span>
+				</li>
+			{/if}
+		</ul>
+	</div>
+{/if}
+{*<!--ENDE Wenn weitere Seiten existieren, Auswahl anzeigen. -->*}
+{/if}
+<!-- ENDE MODUL: weiter (intern) -->

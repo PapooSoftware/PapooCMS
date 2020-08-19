@@ -1,0 +1,13 @@
+{if $easyeditok=="ok" }
+	<!-- MODUL (intern): mod_easyedit  -->
+	{if $smarty.foreach.artikel.iteration <2}
+		<div class="modulint" id="mod_easyedit" style="float:right;width:100px;padding:5px;{if $smarty.foreach.artikel.total <= 1}margin-top:30px;{/if}">
+			{*<!--Easyedit :--> *}
+			<a href="{$slash}index.php?menuid={$menuid_aktuell}&amp;edit=new&getlang={$lang_short}"><img src="{$slash}plugins/easyedit/bilder/new.gif" alt="{$plugin.easyedit.neueasy}" title="{$plugin.easyedit.neueasy}"/></a>
+			{if $reporeid_print}
+				<a href="{$slash}index.php?menuid={$menuid_aktuell}&amp;easyid={$reporeid_print}&amp;edit=easy&getlang={$lang_short}"><img src="{$slash}plugins/easyedit/bilder/edit.gif" alt="{$plugin.easyedit.easyedit}" title="{$plugin.easyedit.easyedit}"/></a>
+			{/if}
+		</div>
+	{/if}
+	<!-- ENDE MODUL (intern): mod_easyedit  -->
+{/if}

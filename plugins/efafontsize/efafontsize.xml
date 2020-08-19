@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- version: Versions-Nummer papoo für die das Plugin gedacht ist / funktioniert -->
+<plugin version="3.5">
+
+<!-- ALLGEMEINE-INFORMATIONEN -->
+<!-- ************************ -->
+<!-- name: Name des Plugins -->
+<name>Efa-fontsize Plugin</name> 
+
+<!-- beschreibung_de: Kurz-Beschreibung des Plugins auf deutsch (wird im Plugin-Manager angezeigt) -->
+<beschreibung_de><![CDATA[Mit diesem Plugin kann man die Efa Fontsize Funktion A+AA- als Modul einbinden.]]></beschreibung_de>
+
+<!-- beschreibung_en: Kurz-Beschreibung des Plugins auf englisch (wird im Plugin-Manager angezeigt) -->
+<beschreibung_en><![CDATA[Mit diesem Plugin kann man die Efa Fontsize Funktion A+AA- als Modul einbinden.]]></beschreibung_en>
+
+<!-- version: Versions-Nummer des Plugins -->
+<version>1.0</version>
+
+<!-- papooid: Eindeutige Nummer offizieller papoo-Plugins -->
+<papooid>59</papooid>
+
+<!-- link: z.Z. noch ohne Funktion -->
+<link>http://www.papoo.de</link> 
+
+<!-- datum: Erscheinungs-Datum bzw. Stand des Plugins -->
+<datum>02.08.2010</datum>
+
+
+<!-- AUTOR-INFORMATIONEN -->
+<!-- ******************* -->
+<!-- autor: Informationen zum Autor (Programmierer) des Plugins -->
+<autor>
+	<!-- autor.name: Name des Authors -->
+	<name>Dr. Carsten Euwens</name>
+	
+	<!-- autor.kontakt: postalische Kontakt-Informationen des Autors -->
+	<kontakt><![CDATA[Dr. Carsten Euwens
+Burbacherstr. 231
+53129 Bonn]]></kontakt>
+	
+	<!-- autor.email: eMail-Adresse des Autors -->
+	<email>info@papoo.de</email>
+	
+	<!-- autor.telefon: Telefon-Nummer des Autors -->
+	<telefon>0228 280 56 68</telefon>
+</autor>
+
+
+<!-- MENÜ-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- menue: Informationen für den Menü-Eintrag im Backend (papoo/interna) -->
+<menue>
+	<!-- menue.eintrag_de: Name des Menü-Punktes im Backend auf deutsch -->
+	<eintrag_de>Efafontsize</eintrag_de>
+	<!-- menue.eintrag_en: Name des Menü-Punktes im Backend auf englisch -->
+	<eintrag_en>Efafontsize</eintrag_en>
+	<!-- menue.icon: Pfad zum Menü-Icon des Menü-Punktes im Backend (relativ zum Plugin-Verzeichnis) -->
+	<icon>efafontsize/bilder/fontsizeup.png</icon>
+	<!-- menue.link: Name der Seite auf welche der Menü-Punkt im Backend verweisen soll -->
+	<link>plugin:efafontsize/templates/efafontsize_back.html</link>
+</menue>
+
+<!-- KLASSEN-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- klasse: Informationen der Plugin-Klasse welche eingebunden werden sollen -->
+<klasse>
+	<!-- klasse.name: Name der Klassen-Instanz / des Objekts (also der Name des Dings, das mit $name = new xx_class(); erzeugt wird) -->
+	<name>efafontsize</name>
+	<!-- klasse.datei: Pfad zur Klassen-Datei (relativ zum Plugin-Verzeichnis) -->
+	<datei>efafontsize/lib/efafontsize_class.php</datei>
+</klasse>
+
+
+<!-- CSS-INFORMATIONEN -->
+<!-- ***************** -->
+<!-- css: Pfad zur CSS-Datei (relativ zum Plugin-Verzeichnis) -->
+<css>efafontsize/css/efafontsize.css</css>
+
+
+<!-- DATENBANK-INFORMATIONEN -->
+<!-- ****************** -->
+<datenbank>
+	<!-- datenbank.installation: Pfad zur SQL-Installations-Datei (relativ zum Plugin-Verzeichnis) -->
+	<installation>efafontsize/sql/efafontsize_install.sql</installation>
+	<!-- datenbank.deinstallation: Pfad zur SQL-Deinstallations-Datei (relativ zum Plugin-Verzeichnis) -->
+	<deinstallation>efafontsize/sql/efafontsize_deinstall.sql</deinstallation>
+</datenbank>
+
+<!-- MODUL-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- modul: Informationen des Frontend-Moduls -->
+<modul>
+	<!-- modul.datei: Datei-Name des Modul-Templates (relativ zum Plugin-Verzeichnis) -->
+	<datei>plugin:efafontsize/templates/mod_efafontsize_front.html</datei>
+	
+	<!-- modul.name_de: Der deutsche Name des Moduls -->
+	<name_de>Efafontsize-Modul</name_de>
+	<!-- modul.beschreibung_de: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_de>Die ist das efafontsize-Modul (A+AA-) des efafontsize-Plugins.</beschreibung_de>
+	
+	<!-- modul.name_en: Der englische Name des Moduls -->
+	<name_en>efafontsize-modul</name_en>
+	<!-- modul.beschreibung_en: Die englische Beschreibung des Moduls -->
+	<beschreibung_en>this is a efafontsize-modul of the efafontsize-plugin.</beschreibung_en>
+</modul>
+
+<!-- Einbindung der Sprach-Dateien.
+	In dem hier angegebenen Verzeichnis sollten Dateien mit folgenden Namen liegen:
+	- messages_backend_[de|en|fr| .. etc.].inc.php
+	- messages_frontend_[de|en|fr| .. etc.].inc.php
+-->
+<messages>efafontsize/messages</messages>
+
+</plugin>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Die Daten fuer den Modulmanager -->
+<modul_liste>
+
+	<modul>
+		<bereich_id>1</bereich_id>
+		<mod_datei>plugin:freiemodule/templates/freiemodule_front.html</mod_datei>
+	</modul>
+
+	<modul>
+		<bereich_id>1</bereich_id>
+		<mod_datei>_module/mod_suchbox.html</mod_datei>
+	</modul>
+
+	<modul>
+		<bereich_id>1</bereich_id>
+		<mod_datei>plugin:bootstrapdropdown/templates/mod_menue.html</mod_datei>
+	</modul>
+
+	<modul>
+		<bereich_id>2</bereich_id>
+		<mod_datei>plugin:bildwechsler/templates/mod_bildwechsler.html</mod_datei>
+	</modul>
+
+	<modul>
+		<bereich_id>3</bereich_id>
+		<mod_datei>[template]</mod_datei>
+	</modul>
+
+	<modul>
+		<bereich_id>4</bereich_id>
+		<mod_datei>_module/mod_menue_sub.html</mod_datei>
+	</modul>
+
+	<modul>
+		<bereich_id>4</bereich_id>
+		<mod_datei>_module/mod_dritte_spalte.html</mod_datei>
+	</modul>
+
+	<modul>
+		<bereich_id>4</bereich_id>
+		<mod_datei>plugin:pkalender/templates/mod_pkalender_front.html</mod_datei>
+	</modul>
+
+	<modul>
+		<bereich_id>4</bereich_id>
+		<mod_datei>plugin:blogger/templates/mod_blogger_wordcloud.html</mod_datei>
+	</modul>
+
+	<modul>
+		<bereich_id>4</bereich_id>
+		<mod_datei>plugin:blogger/templates/mod_blogger_monate.html</mod_datei>
+	</modul>
+
+	<modul>
+		<bereich_id>4</bereich_id>
+		<mod_datei>_module/mod_styleswitcher.html</mod_datei>
+	</modul>
+
+	<modul>
+		<bereich_id>4</bereich_id>
+		<mod_datei>plugin:google_plus/templates/mod_google_plus_front.html</mod_datei>
+	</modul>
+
+	<modul>
+		<bereich_id>4</bereich_id>
+		<mod_datei>_module/mod_login.html</mod_datei>
+	</modul>
+
+	<modul>
+		<bereich_id>5</bereich_id>
+		<mod_datei>_module/mod_menue_top.html</mod_datei>
+	</modul>
+
+	<modul>
+		<bereich_id>5</bereich_id>
+		<mod_datei>plugin:freiemodule/templates/freiemodule_front.html</mod_datei>
+	</modul>
+
+</modul_liste>

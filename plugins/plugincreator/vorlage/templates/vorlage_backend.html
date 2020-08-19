@@ -1,0 +1,68 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+	{*<!-- Hier kommt der Kopf rein-->*}
+	{include file=head.inc.utf8.html}
+
+	<!-- Men� kommt hier rein-->
+	{include file=menu.inc.html}
+
+	<link rel="stylesheet" type="text/css" href="{$css_path}/backend.css" />
+	<link rel="stylesheet" type="text/css" href="{$css_path}/../../plugincreator/css/backend.css" />
+
+	<div class="artikel">
+		<form action="" method="post">
+			#start#<!-- END DIV --><br />
+		</form>
+
+		{if $plugin_creator_is_dev}
+			<span class="ignore"></span>
+			<!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+			<div id="rapid_form_slot">
+				<div class="rapid_form">
+					{include file=../../../plugins/plugincreator/templates/help_icon.html}
+					<form action="" name="" method="POST">
+						<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+						{assign var="tb_name_tpl" value="plugin_{__PREFIX__}_{__TEMPLATE_NAME__}_form"}
+						<input type="hidden" name="tb_name" value="{$tb_name_tpl}" />
+						<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+						<input type="hidden" name="php_datei_name" value="vorlage_class" />
+						<!-- Das Standarpr�fix f�r die Ids -->
+						<input type="hidden" name="praefix" value="{__PREFIX__}" />
+						<!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+						<input type="hidden" name="praefix_spezial" value="{__PREFIX__}" />
+						<!-- Das Tool einbinden -->
+						{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+					</form>
+				</div>
+			</div>
+
+			<table class="demo_table">
+				<legend class="demo_label">Demo Data</legend>
+				<tr class="demo_row_labels">
+					{foreach item=label from=$plugin.{__PREFIX__}.rapid_dev.$tb_name_tpl.labels}
+						<td class="demo_cell_labels">
+							<b>{$label.COLUMN_NAME}</b>
+						</td>
+					{/foreach}
+				</tr>
+				{foreach item=row from=$plugin.{__PREFIX__}.rapid_dev.$tb_name_tpl.data}
+					<tr class="demo_row">
+						{foreach item=column from=$row}
+								<td class="demo_cell">
+									{$column|var_dump}
+								</td>
+						{/foreach}
+					</tr>
+				{/foreach}
+			</table>
+
+			<div class="hide popup-info-slot">
+				<div class="popup-info-content">
+					{$message.plugin.plugincreator.rapid_dev_popup_info}
+				</div>
+			</div>
+		{/if}
+	</div>
+
+	{*<!-- Hier kommt der Fuss rein-->*}
+	{include file=foot.inc.html}
+{/if}

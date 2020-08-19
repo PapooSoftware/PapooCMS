@@ -1,0 +1,43 @@
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+<div class="artikel">
+	
+{if $IS_ADMIN}
+		<h1>{$message.plugin.Smarty_tags.backtitel}</h1>
+		{if $ok == "addok"}<div class="message">{$plugin.smarty_tags.msg.addok}</div>{/if}
+		{if $ok == "editok"}<div class="message">{$plugin.smarty_tags.msg.editok}</div>{/if}
+		{if $ok == "deleted"}<div class="message">{$plugin.smarty_tags.msg.delok}</div>{/if}
+		{if $error8}<div class="error">{$plugin.smarty_tags.errmsg.error8}</div>{/if}
+		<h2>{$plugin.smarty_tags.header.005}</h2>
+		<p>{$plugin.smarty_tags.text.num_of_papoo_vars} {$smartytags_papoo_vars_count}</p>
+		<table class="Smarty_tags">
+			<tr>
+				<th valign="bottom" id="TagName">{$plugin.smarty_tags.table_header.008}</th>
+				<th valign="bottom" id="show" style="text-align:center">{$plugin.smarty_tags.table_header.009}</th>
+				<th valign="bottom" id="creatdate">{$plugin.smarty_tags.table_header.002}</th>
+				<th valign="bottom" id="moddate">{$plugin.smarty_tags.table_header.003}</th>
+				{if $permission}<th valign="bottom" id="delete" style="text-align:center">{$plugin.smarty_tags.table_header.006}</th>{/if}
+			</tr>
+			{foreach item=papoo_var from=$smartytags_papoo_vars}
+				<tr class="cat_row">
+					<td headers="TagName">{if $permission}<a href="?menuid={$menuid_aktuell}&amp;template=Smarty_tags/templates/Smarty_tags_edit_papoo_vars_back.html&amp;papoo_var_id={$papoo_var.papoo_var_id}" title="{$plugin.smarty_tags.linktext.Smarty_user_tag_edit}">{/if}{$papoo_var.papoo_var_name}{if $permission}</a>{/if}</td>
+					<td headers="show" style="text-align:center"><a href="?menuid={$menuid_aktuell}&amp;template=Smarty_tags/templates/Smarty_tags_show2_papoo_var_back.html&amp;papoo_var_id={$papoo_var.papoo_var_id}" title="{$plugin.smarty_tags.linktext.papoo_var_show}">X</a></td>
+					<td headers="creatdate">{$papoo_var.creat_date}</td>
+					<td headers="moddate">{$papoo_var.mod_date}</td>
+					{if $permission}<td headers="delete" style="text-align:center"><a href="?menuid={$menuid_aktuell}&amp;template=Smarty_tags/templates/Smarty_tags_list_papoo_vars_back.html&amp;delete=1&amp;papoo_var_id={$papoo_var.papoo_var_id}" title="{$plugin.smarty_tags.linktext.user_tag_delete}" style="color:red">X</a></td>{/if}
+				</tr>
+			{/foreach}
+		</table>
+		{if $permission}
+			<p><a href="./plugin.php?menuid={$menuid_aktuell}&amp;template=Smarty_tags/templates/Smarty_tags_add_papoo_vars_back.html" title="{$plugin.smarty_tags.linktext.papoo_var_new}">{$plugin.smarty_tags.linktext.papoo_var_new}</a></p>
+		{/if}
+	
+{else}
+	{if $IS_ADMIN}
+		{include file=../../../plugins/Smarty_Tags/templates/Smarty_tags_show_papoo_vars_back.html}
+	{/if}
+{/if}
+</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}

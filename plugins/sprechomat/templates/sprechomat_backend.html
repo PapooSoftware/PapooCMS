@@ -1,0 +1,21 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+	{$plugin.sprechomat.text}
+		<a href="{$sprechomat_einstellungen.sprechomat_registerlink}">{$plugin.sprechomat.sprechomatde}</a>
+	</p>
+	<p>
+		{$plugin.sprechomat.text2}
+	</p>
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

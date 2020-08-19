@@ -1,0 +1,15 @@
+{if isset($openGraphMetaTags) && $openGraphMetaTags}
+<meta property="og:title" content="{$openGraphMetaTags.title|escape}">
+<meta property="og:description" content="{$openGraphMetaTags.description|escape}">
+<meta property="og:type" content="{$openGraphMetaTags.type|escape}">
+<meta property="og:url" content="{$openGraphMetaTags.url|escape}">
+<meta property="og:image" content="{$openGraphMetaTags.image|escape}">
+{/if}
+{if isset($openGraphMetaTags) && isset($twitterHandle) && $openGraphMetaTags && $twitterHandle}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="{$twitterHandle|escape}">
+<meta name="twitter:url" content="{$openGraphMetaTags.url|escape}">
+<meta name="twitter:title" content="{$openGraphMetaTags.title|escape}">
+<meta name="twitter:description" content="{$openGraphMetaTags.description|escape}">
+<meta name="twitter:image" content="{$openGraphMetaTags.image|escape}">
+{/if}

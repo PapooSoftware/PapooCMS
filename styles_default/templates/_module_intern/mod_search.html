@@ -1,0 +1,80 @@
+<!-- MODUL: search (intern) -->
+<div class="floatbox artikel_details">
+  {if $is_extended_search}
+    {include file=../../plugins/extended_search/templates/search_front.html}
+  {else}
+		<h1>{$templ_serg}</h1>
+    
+    <form id="suche_erw" method="get" action="{$slash}index.php" class="form">
+      <fieldset>
+        <legend>{$templ_Erweiterte} {$message_2135}</legend>
+        {*<!-- Suche-->*}
+        <div style="width:99%;float:left;">
+            <div style="width:150px;float:left;margin-right:10px;">
+              <label for="search_erw" >{$message_2135}</label><br />
+              <input type="text" id="search_erw" name="search" size="20" value="{$search|escape:"html"}" title="{$message_2136}" {$searchneu} /> <!-- -->
+            </div>
+        
+          <!-- wird angezeigt wenn Shop vorhanden ist -->  
+          {if $is_shop_system}
+            <div style="width:160px;float:left;margin-right:10px;">
+              <label for="erw_suchbereich">{$Suchbereich_auswaehlen}</label><br />
+                <select  name="erw_suchbereich" size="1">
+                  <option {if $erw_suchbereich==1}selected="selected"{/if} value="1">{$Suchbereich_text}</option>
+                  <option  {if $erw_suchbereich==2}selected="selected"{/if} value="2">{$Suchbereich_shop}</option>
+                </select>
+            </div>
+          {/if}
+        
+            <!-- Submit-Button -->
+            <input type="submit" class="submitsearch" name="find" style=""  value="{$message_2138}" title="{$templ_susst|escape:"html"}" /> <!-- -->
+        </div>
+      </fieldset>
+    </form>
+    
+  {if $erw_suchbereich==2}
+    {include file=../../plugins/papoo_shop/templates/papoo_shop_mod_search_shop.html}
+  {else}
+		<p>{$templ_ergbn} <strong>"{$suchworte}"</strong></p>
+		<p>{$templ_res}
+		{foreach item=weiter from=$weiter_array}
+			{if $weiter.aktivhref}
+				{$weiter.olstart} {$templ_bis} {$weiter.olend}
+				{$templ_insg} {$matches} ({$weiter.page_result} {$templ_seiten}).
+				</p>
+				<div class="floatbox artikel_details"><br />
+					<ol class="search" start="{$weiter.olstart}">
+			{/if}
+		{/foreach}
+			{if !$weiter}
+				{if $matches+$startseite!=0}1 {$templ_bis} {$matches} {$templ_insg} {$matches} (1 {$templ_seite}).
+				{else} 0.
+				{/if}
+				</p>
+				<div class="floatbox artikel_details"><br />
+					<ol class="searchol" start="1">
+			{/if}
+		{foreach item=table from=$table_data }
+			<li>
+				{if $sp_urls=="ok" or $free_sp_urls}
+					{if $table.islink != "Startseite/Homepage"}
+						<h3><a href="{$slash}{if $free_sp_urls=="ok"}{$table.url_header}{else}{$sulrstrenner}{$table.url_header}{/if}" title="{$message_2012} &quot;{$table.islink}&quot; {$message_2013}">{$table.islink}</a></h3>
+					{else}
+						<h3><a href="{$slash}" title="{$message_2012} &quot;{$table.islink}&quot; {$message_2013}">{$table.islink}</a></h3>
+					{/if}
+				{else}
+					<h3 class="searchh3"><a title="{$table.uberschrift|escape:"html"}" href="{$slash}{$table.linktext}{$frag_connect}menuid{$gleich_connect}{$table.cattextid}{$plus_connect}reporeid{$gleich_connect}{$table.reporeid}">{$table.uberschrift}</a></h3>
+				{/if}
+				<div class="searchtext">{$table.metadescrip}<br />
+					{if $table.stamptime}{$templ_Stand}: {$table.stamptime}<br />{/if}
+					{if $table.creationdate}{$templ_erst}: {$table.creationdate}{/if}
+				</div>
+			</li>
+		{/foreach}
+	    </ol>
+	    </div>
+  		
+  		{/if}
+    {/if}
+</div>
+ <!-- ENDE MODUL: search (intern) -->

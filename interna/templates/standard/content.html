@@ -1,0 +1,46 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+	{*<!-- Hier kommt der Kopf rein-->*}
+	{include file=head.inc.utf8.html}
+	<!-- Menue kommt hier rein-->
+	{include file=menu.inc.html}
+	<div class="artikel">
+		{if $inhalte}
+			<h1>{$message_441}</h1>
+			{$message_442}
+			{if $table_data_site}
+				<script type="text/javascript" src="./js/jq_content_tree.js"></script>
+				{if $user_content_tree_show_all}<script type="text/javascript"> jq_content_tree_show_all(); </script>{/if}
+				
+				{include file=artikel_sitemap.html}
+			{/if}
+		{/if}
+
+		{if $system}
+			<h1>{$message_444}</h1>
+			{$message_444}
+		{/if}
+
+		{if $plugin}
+			<h1>{$message_443a}</h1>
+			{$message_444a}
+		{/if}
+
+		{if $medien}
+			<h1>{$message_446}</h1>
+			{$message_447}
+		{/if}
+
+		{if $gruppen}
+			<h1>{$message_449}</h1>
+			{$message_449}
+		{/if}
+
+		{if $layout}
+			{$message_739}
+		{/if}
+
+		<div class="clear">&nbsp;</div>
+	</div>
+	{*<!-- Hier kommt der Fuss rein-->*}
+	{include file=foot.inc.html}
+{/if}

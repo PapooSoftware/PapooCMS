@@ -1,0 +1,31 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+	<h1>{$plugin.devtools.dbcleanup.h1}</h1>
+
+	{if $plugin.devtools.template_weiche=="START"}
+
+	{$plugin.devtools.dbcleanup.explain}
+
+		<form action="" method="post">
+			<input type="hidden" name="dbcleanup_action" value="run">
+			<input type="submit" class="submit_back_red" value="GO!">
+		</form>
+	{/if}
+	
+	{if $plugin.devtools.template_weiche=="RUN"}
+		{$plugin.devtools.dbcleanup.success}
+	{/if}
+	
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

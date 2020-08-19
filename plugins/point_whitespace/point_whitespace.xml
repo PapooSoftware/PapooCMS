@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<plugin name="point_whitespace" version="6.0">
+
+    <name>Point Whitespace</name>
+
+    <beschreibung_de><![CDATA[Dieses Plugin fügt ein Leerzeichen hinter (Doppel-)punkten ein, wo keins vorhanden ist.]]></beschreibung_de>
+    <beschreibung_en><![CDATA[This plugin adds whitespace after points without.]]></beschreibung_en>
+
+    <version>1.0</version>
+
+    <papooid>2307</papooid>
+
+    <datum>12.11.2014</datum>
+
+    <autor>
+        <name>Christoph Zimmer</name>
+        <email>cz@papoo.de</email>
+    </autor>
+
+    <klasse>
+        <name>point_whitespace</name>
+        <datei>point_whitespace/lib/point_whitespace_class.php</datei>
+    </klasse>
+
+    <menue>
+        <eintrag_de>Point Whitespace</eintrag_de>
+        <eintrag_en>Point Whitespace</eintrag_en>
+        <link>plugin:point_whitespace/templates/backend.html</link>
+    </menue>
+
+    <messages>point_whitespace/messages</messages>
+
+</plugin>

@@ -1,0 +1,5 @@
+input[type="image"][name*="bild_bearbeiten_"] {
+    width:100%;
+    max-width:100%;
+    height:auto;
+}

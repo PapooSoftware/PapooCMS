@@ -1,0 +1,262 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	{if $alerts}
+		{foreach from=$alerts item=alert}
+			<div role="alert" class="{$alert.type}">{$alert.content}</div>
+		{/foreach}
+	{/if}
+	<div class="artikel">
+		{if $sysinfo}
+			<fieldset class="storageinfo">
+				<legend>Festplatten-Speicherplatz</legend>
+				<table>
+					<tbody>
+						<tr>
+							<th>Verfügbar für Dokumente und Bilder:</th>
+							<td>
+								<span class="overlayed-meter">
+									<span>{$files_free_space_f} von {$files_total_space_f}</span>
+									<meter min="0" high="{$files_high_space}" max="{$files_total_space}" value="{$files_used_space}" role="presentation"></meter>
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<th>Verfügbar für PHP-Sessions:</th>
+							<td>
+								<span class="overlayed-meter">
+									<span>{$sess_free_space_f} von {$sess_total_space_f}</span>
+									<meter min="0" high="{$sess_high_space}" max="{$sess_total_space}" value="{$sess_used_space}" role="presentation"></meter>
+								</span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</fieldset>
+			<section class="phpinfo">
+				{$sysinfo}
+			</section>
+		{/if}
+		<div class="aktuell" id="aktuell_{$menuid_aktuell}"></div>
+		{if $info}{include file=info_stamm.html}{/if}
+		{$text}
+		{$logindaten}
+		{*<!-- Stammdaten bearbeiten -->*}
+		{if $case0}
+			{$textx}
+			{*<!-- Hier k�nnen Sie die Stammdaten Ihrer Seite bearbeiten {$message_277}-->*}
+			<h1>{$message_292}</h1>
+			<form name="artikel" action="./stamm.php?menuid=18" method="post" id="formi">
+				<div class="tabbable">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#tabs-1" data-toggle="tab">{$system_image_cat_basis}</a></li>
+						<li><a href="#tabs-2" data-toggle="tab">{$system_image_cat_email}</a></li>
+						<li><a href="#tabs-3" data-toggle="tab">{$system_image_cat_bilder}</a></li>
+						<li><a href="#tabs-4" data-toggle="tab">{$system_image_cat_sprachen}</a></li>
+						<li><a href="#tabs-5" data-toggle="tab">{$system_image_cat_metatags}</a></li>
+						<li><a href="#tabs-6" data-toggle="tab">{$system_config_seo}</a></li>
+						<li><a href="#tabs-7" data-toggle="tab">{$system_config_systemlink}</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="tabs-1">{include file=sub_templates/stamm_start.html}</div>
+						<div class="tab-pane" id="tabs-2">{include file=sub_templates/stamm_email.html}</div>
+						<div class="tab-pane" id="tabs-3">{include file=sub_templates/stamm_bilder.html}</div>
+						<div class="tab-pane" id="tabs-4">{include file=sub_templates/stamm_sprachen.html}</div>
+						<div class="tab-pane" id="tabs-5">{include file=sub_templates/stamm_meta.html}</div>
+						<div class="tab-pane" id="tabs-6">{include file=sub_templates/stamm_seo.html}</div>
+						<div class="tab-pane" id="tabs-7">{include file=sub_templates/stamm_system.html}</div>
+					</div>
+				</div>
+				<fieldset>
+					<legend>{$message_70}:</legend>
+					{*<!-- Eintragen-->*}
+					<input type="submit" class="submit_back_green" value="{$message_70}" name="submitecht" accesskey="9" />
+				</fieldset>
+			</form>
+		{/if}
+		{*<!-- Metadaten und andere Daten bearbeiten -->*}
+		{if $case1}
+			{$textx}
+			{*<!-- Hier k�nnen Sie die Stammdaten Ihrer Seite bearbeiten {$message_277}-->*}
+			<h1>{$message_292} ({$article})</h1>
+			{*<!-- alternative Sprachen -->*}
+			<form name="language" action="" method="post" id="formi">
+				<!--<ul class="art_nav_ul">
+					{foreach item=lang from=$menlang}
+						<li style="display:inline;" >
+							<input class="inputnav{$lang.aktiv}" type="submit" value="{$lang.language}" name="submitlang" />
+						</li>
+					{/foreach}
+				</ul>
+			</form>-->
+			<div class="alert alert-success">
+			<strong>{$message_451}</strong>
+			</div>
+			{*<!-- Daten auf Sprache
+			<h1>{$message_379} </h1>-->*}
+			<form name="artikel" action="./stamm.php?menuid=49&amp;lang_idx={$active_language} " method="post" id="formi">
+				<input type="hidden" name="active_language" value="{$active_language}"; />
+				{foreach item=menu from=$menuinput_data}
+					<fieldset>
+						{*<!-- Kopftext -->*}
+						<legend>{$message_319}</legend>
+						{*<!-- <p>Sie k�nnen hier eingeben welcher Text auf der Startseite immer oben als erstes stehen soll. Dieser Text rutscht niemals nach. Wenn dort nichts stehen soll, einfach nichts eintragen (auch kein Leerzeichen).<p>-->*}
+						{$message_320}
+						<br />	<br />
+						{*<!-- Editor je nach Wahl einbinden -->*}
+						{include file=artikel_editor.inc.html}
+					</fieldset>
+				{/foreach}
+				<fieldset>
+					<legend>{$message_70}:</legend>
+					{*<!-- Eintragen-->*}
+					<input type="submit" class="submit_back btn btn-info" value="{$message_70}" name="submitecht" accesskey="9" />
+				</fieldset>
+			</form>
+		{/if}
+		{if $case2}
+			<!-- Rechteverwaltung -->
+			<h1>{$message_384}</h1>
+			{$message_385}
+			<form name="rechte" action="./stamm.php?menuid=50&amp;lang_id={$active_language}" method="post" id="formi2">
+				{*<!-- Diese Tabelle listet Men�punkte der Administrattion auf f�r die Rechtezuweisung -->*}
+				<table summary="{$message_418}" class="table table-striped table-hover">
+					{*<!-- Men�name -->*}
+					<tr>
+						<th id="spalte_0">{$message_386}</th>
+						{foreach item=name from=$menu_rechte_data name=gruppen}
+							{*<!-- Gruppenname -->*}
+							<th id="spalte_{$smarty.foreach.gruppen.iteration}">
+								{$name.gruppename}
+								<input type="hidden" name="gruppe_read[]" value="{$name.gruppeid}" />
+							</th>
+						{/foreach}
+					</tr>
+					{foreach item=menu from=$menu_data_rights}
+						<tr >
+							<td headers="spalte_0">
+								<span class="levelshift_{$menu.level}">{$menu.menuname}</span>
+							</td>
+							{foreach item=name from=$menu.gruppe name=gruppen}
+								<td headers="spalte_{$smarty.foreach.gruppen.iteration}" style="text-align:center;">
+									<input type="checkbox" {$name.checked} name ="rechte[{$name.inputid}][gruppenid]" value="{$name.gruppenid}" />
+									<input type="hidden" {$name.checked} name ="rechte[{$name.inputid}][menuid]" value="{$menu.menuid}" />
+								</td>
+							{/foreach}
+						</tr>
+					{/foreach}
+				</table>
+				<fieldset>
+					<!-- Eingabe/Bearbeitung der Rechteverwaltung: -->
+					<legend>{$message_383}</legend>
+					<input type="submit" class="submit_back_green" value="{$message_70}" name="submit" />
+				</fieldset>
+			</form>
+		{/if}
+		{*<!-- weitere Seiten -->*}
+		{include file=weiter.inc.html}
+		{*<!-- Upload-Fehler -->*}
+		{if $upload_error}
+			<div class="error">{$upload_error_message}</div>
+		{/if}
+		{*<!-- Datenbank sichern -->*}
+		{if $casedump}
+			<h3>{$message_521}</h3>
+			<p>{$message_522}</p>
+			{*<!-- Um eine Sicherung zu erstellen klicken Sie bitte hier -->*}
+			<ul>
+				<li><a href="./plugin.php?menuid=1014&template=devtools/templates/newdump_backend.html">{$message_523}</a></li>
+				<!--<li><a href="./stamm.php?menuid=53&amp;makedump=1">{$message_523a}</a></li>-->
+			</ul>
+			{if $redirect}
+				<h3>{$message_522c}</h3>
+				<div style="border:1px solid black;padding:10px; background:#ddd;">
+					<ul>
+						<li><a href="./stamm.php?menuid=53&amp;deldump={$redirect}">{$message_522b}</a></li>
+						<li><a href="{$redirect}">{$message_522a}</a></li>
+					</ul>
+				</div>
+			{/if}
+			<!-- Eine Sicherung hochladen und einspielen -->
+			<h3>{$message_524a}</h3>
+			{if $is_uploaded}
+				<strong style="color:red;">{$message_525}</strong>
+			{/if}
+			<p>{$message_526}</p>
+			<form method="post" id="formi" action="./stamm.php?menuid=53" enctype="multipart/form-data">
+				<fieldset>
+					{*<!-- Eingabe der Datei:-->*}
+					<legend>{$message_337}</legend>
+					{*<!-- Das Dokument:-->*}
+					<label for="myfile">{$message_338}</label>
+					<input type="file" id="myfile" name="myfile" value="{$myfilename}" /> {$max_file_size} {$max_upload_size}
+				</fieldset>
+				<!--<fieldset>
+					{*&lt;!&ndash; Eingabe der Datei:&ndash;&gt;*}
+					<legend>{$message_819}</legend>
+					<input type="checkbox" name="updateit" id="updateit" value="1" />
+					<label for="updateit">{$message_819}</label>
+				</fieldset>-->
+				<fieldset>
+					{*<!-- Datei hochladen:-->*}
+					<legend>{$message_344}</legend>
+					{*<!-- hochladen-->*}
+					<input type="submit" class="submit_back" value="{$message_356}" name="restore" />
+				</fieldset>
+			</form>
+			{*<!-- eine Sicherung per FTP zurückspielen -->*}
+			<h3>{$message_524}</h3>
+			<p>{$message_522d}</p>
+			<fieldset>
+				<a style="margin-top: 1rem;" class="submit_back" href="./stamm.php?menuid=53&amp;backdump=1">{$message_522e}</a>
+				<!--<li>
+					<a href="./stamm.php?menuid=53&amp;backdump=1&amp;updateit=1">{$message_820}</a>
+				</li>-->
+			</fieldset>
+		{/if}
+	{*<!-- Text im Kontakt-Formular -->*}
+	{if $template_weiche == "KONTAKT-TEXT"}
+		{*<!-- Hier k�nnen Sie den Text des Kontakt-Formulars bearbeiten -->*}
+		<h1>{$message_kontakttext_h1}</h1>
+		<form name="artikel" action="./stamm.php?menuid=48&amp;lang_idx={$active_language}" method="post" id="formi">
+			<fieldset>
+				<legend>{$message_379} {$article}</legend>
+				{*<!-- Editor je nach Wahl einbinden -->*}
+				{include file=artikel_editor.inc.html}
+			</fieldset>
+			<fieldset>
+				<legend>{$message_70}:</legend>
+				<input type="hidden" name="active_language" value="{$active_language}" />
+				{*<!-- Eintragen-->*}
+				<input type="submit" class="submit_back_green" value="{$message_70}" name="submitecht" accesskey="9" />
+			</fieldset>
+		</form>
+	{/if}
+	{if $is_dev}
+		#start#
+		<span class="ignore"> </span>
+		<!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+		<div class="rapid_form">
+			<form action="" name="" method="POST">
+				<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+				<input type="hidden" name="tb_name" value="papoo_config" />
+				<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+				<input type="hidden" name="php_datei_name" value="image_class" />
+				
+				<input type="hidden" name="system_template" value="sub_templates/stamm_system.html" />
+				<!-- Ist System -->
+				<input type="hidden" name="is_system" value="1" />
+				<input type="hidden" name="plugin_name" value="system" />
+				<!-- Das Standarpr�fix f�r die Ids -->
+				<input type="hidden" name="praefix" value="config" />
+				<!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+				<input type="hidden" name="praefix_spezial" value="config" />
+				<!-- Das Tool einbinden -->
+				{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+			</form>
+		</div>
+	{/if}
+	</div><div class="clear">&nbsp;</div></div>
+	{*<!-- Hier kommt der Fuss rein-->*}
+	{include file=foot.inc.html}
+{/if}

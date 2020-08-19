@@ -1,0 +1,55 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+	<h1>{$plugin.dev_messages.sprhinz}</h1>
+	
+{$plugin.dev_messages.sprhinztext}
+		
+{if !$fertig}
+	<form name="trans" action="" method="POST">
+		<fieldset>
+	 <legend>{$plugin.dev_messages.sprsel}</legend>
+	 <label for="lang_long">{$plugin.dev_messages.namespr}</label><br />
+	 <input type="text" id="lang_long" name="lang_long" value="{$lang_long}" />
+	 </fieldset>
+	 <fieldset>
+	 <legend>{$plugin.dev_messages.intkuerz}</legend>
+	 <label for="lang_short">{$plugin.dev_messages.iku}</label><br />
+	 <input type="text" id="lang_short" name="lang_short" value="{$lang_short}" />
+	 </fieldset>
+	 <fieldset>
+	 <legend>{$plugin.dev_messages.namebild}</legend>
+	 <label for="lang_img">{$plugin.dev_messages.fahnbild}</label><br />
+	 <input type="text" id="lang_img" name="lang_img" value="{$lang_img}" />
+	 </fieldset>
+	 <fieldset>
+	 <legend>{$plugin.dev_messages.schrverl}</legend>
+	 <label for="lang_dir">{$plugin.dev_messages.schr}</label><br />
+    <select name="lang_dir" id="lang_dir" title="" style="width: 40%;" size="1">
+
+		<option value="ltr" >
+					{$plugin.dev_messages.ltr}
+				</option>
+							<option value="rtl">
+					{$plugin.dev_messages.rtl}
+				</option>
+					
+
+			    </select>
+	 </fieldset>
+	 <fieldset>
+  <legend>{$plugin.dev_messages.spreint}</legend>
+ <input type="submit" class="submit_back_green_big" name="insertlangnow" value="{$plugin.dev_messages.spreint}" />
+  </fieldset>
+	 </form>
+	 {else}
+	 <h2>{$plugin.dev_messages.wspreint}</h2>
+	 {/if}
+</div>
+  
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

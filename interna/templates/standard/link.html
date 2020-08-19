@@ -1,0 +1,156 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+<!-- {$message_228} -->
+<div class="artikel">
+<div class="aktuell" id="aktuell_{$menuid_aktuell}"></div>
+{$text}
+{$logindaten}
+<!-- Link erstellen -->
+{if $erstellen}
+	<!-- Daten neu eintragen-->
+	{if $neuerstellen}
+		<!-- Eingabe neuer Linkdaten -->
+		<h1> {$message_234}</h1>
+		<!-- Hier k�nnen Sie neue Ersetzungsdaten f�r Links in die Datenbank eingeben. -->
+		<p> {$message_235}</p>
+		<!-- Es sind nur http://www. Adressen erlaubt.-->
+		<p>{$message_236}</p>
+		{foreach item=table from=$table_data}
+			<form method="POST" id="formi" action="./link.php?menuid=24&obermenuid=23&untermenuid=24">
+			<fieldset>
+			<!-- Eingabe der Linkdaten: -->
+			<legend>{$message_237}</legend>
+			<!-- Ersetzungstext -->
+			<label for="linkname">{$message_238}:</label><br />
+			<input type="text" id="linkname" name="linkname" size="30" maxlength="255" value="{$table.linkname}" /><br />
+			<!-- Link -->
+			<label for="linkbody">{$message_239}:</label><br />
+			<input type="text" id="linkbody" name="linkbody" size="30" maxlength="255" value="{$table.linkbody}" /><br />
+			<!-- Titel des Links -->
+			<label for="linktitel">{$message_240}:</label><br />
+			<input type="text" id="linktitel" name="linktitel" size="30" maxlength="255" value="{$table.linktitel}" /><br />
+			<!-- Eintragen -->
+			<br /><br />
+			<input type="submit" class="submit_back_green" value="{$message_70}" name="formSubmit" />
+			</fieldset>
+			</form>
+		{/foreach}
+	{/if}
+	<!-- ENDE Daten neu eintragen-->
+	{if $falsch}
+		<!-- Daten berichtigen>-->
+		<!-- Eingabe neuer Linkdaten -->
+		<h1>{$message_234}</h1>
+		<!-- Etwas stimmt nicht, bitte �berpr�fen Sie ihre Daten, vermutlich ist der Link falsch eingegeben. -->
+		<p style="font-weight:600;color:red;">{$message_242}</p>
+		{foreach item=table from=$table_data}
+			<form method="POST" id="formi" action="./link.php?menuid=24&obermenuid=23&untermenuid=24&id={$table.linkid}">
+			<!--- �nderung der Linkdaten: -->
+			<fieldset><legend>{$message_243}</legend>
+			<!-- Ersetzungstext -->
+			<label for="linkname">{$message_238}:</label><br />
+			<input type="text" id="linkname" name="linkname" size="30" maxlength="255" value="{$table.linkname}" /><br />
+			<!-- Link -->
+			<label for="linkbody">{$message_239}:</label><br />
+			<input type="text" id="linkbody" name="linkbody" size="30" maxlength="255" value="{$table.linkbody}" /><br />
+			<!-- Titel des Links -->
+			<label for="linktitel" >{$message_240}</label><br />
+			<input type="text" id="linktitel" name="linktitel" size="30" maxlength="255" value="{$table.linktitel}" /><br />
+		{/foreach}<br /><br />
+		<!-- Eintragen -->
+		<input type="submit" class="submit_back_green" value="{$message_70}" name="formSubmit" />
+		</fieldset>
+		</form>
+		<!-- ENDE Daten berichtigen>-->
+	{/if}
+	{if $erstellt}
+		<!-- Daten eingetragen-->
+		<!-- ENDE Daten eingetragen-->
+	{/if}
+{/if}
+<!-- ENDE Link erstellen -->
+<!-- Link �ndern -->
+{if $aendern}
+	{if $suchen}
+		<form method="post" action="./link.php?menuid=25" name="suche"><p>
+			<fieldset>
+				<!-- Suche nach einem Link-Eintrag-->
+				<legend>{$message_244}</legend>
+				<label for="search">{$message_244}</label><input name="search" id="search" value="{$search}" onblur="if(this.value=='')this.value='Ihr Suchbegriff';"
+				onfocus="if(this.value=='Ihr Suchbegriff')this.value='';" size="40" maxlength="30" />
+				<input type="hidden" value="Finden" name="formSubmit" />
+				<input type="submit" class="submit_back" value="{$message_233}" name="formSubmit" /></p>
+			</fieldset>
+		</form>
+	{/if}
+	{if $gefunden}
+		<ul>
+			{foreach item=table from=$table_data}
+				<li><a href="./link.php?menuid=25&id={$table.linkid}">{$table.linkname} -- {$message_644}</a></li>
+			{/foreach}
+		</ul>
+		<!-- weitere Seiten -->
+		{include file=weiter.inc.html}
+	{/if}
+	{if $falsch}
+		<!-- Daten berichtigen>-->
+		<!-- Eingabe neuer Linkdaten -->
+		<h1>{$message_234}</h1>
+		<!-- Etwas stimmt nicht, bitte �berpr�fen Sie ihre Daten, vermutlich ist der Link falsch eingegeben.-->
+		<p style="font-weight:600;color:red;">{$message_242}</p>
+		{foreach item=table from=$table_data}
+			<form method="POST" id="formi" action="./link.php?menuid=25&obermenuid=23&untermenuid=25&id={$table.linkid}">
+			<!-- �nderung der Linkdaten: -->
+			<fieldset><legend>{$message_243}</legend>
+			<!-- Ersetzungstext -->
+			<label for="linkname">{$message_238}:</label><br />
+			<input type="text" id="linkname" name="linkname" size="30" maxlength="255" value="{$table.linkname}" /><br />
+			<!-- Link -->
+			<label for="linkbody">{$message_239}:</label><br />
+			<input type="text" id="linkbody" name="linkbody" size="30" maxlength="255" value="{$table.linkbody}" /><br />
+			<!-- Titel des Links -->
+			<label for="linktitel">{$message_242}:</label><br />
+			<input type="text" id="linktitel" name="linktitel" size="30" maxlength="255" value="{$table.linktitel}" /><br />
+		{/foreach}<br /><br />
+		<!-- Eintragen -->
+		<input type="submit" class="submit_back_green" value="{$message_70}" name="formSubmit" />
+		</fieldset>
+		</form>
+		<!-- ENDE Daten berichtigen>-->
+	{/if}
+	{if $aendern_now}
+		<!-- �nderung der Linkdaten -->
+		<h1>{$message_243}</h1>
+		<!-- Hier k�nnen Sie die bereits in der Datenbank vorhandenen Links �ndern -->
+		<p>{$message_245}</p>
+		<!-- �ndern Sie den folgenden Link. Es sind nur http://www. Adressen erlaubt. -->
+		<p>{$message_246}</p>
+		{foreach item=table from=$table_data}
+			<form method="POST" id="formi" action="./link.php?menuid=25&obermenuid=23&untermenuid=25&id={$table.linkid}">
+			<!-- �nderung der Linkdaten -->
+			<fieldset><legend>{$message_243}</legend>
+			<!-- Ersetzungstext -->
+			<label for="linkname">{$message_238}:</label><br />
+			<input type="text" id="linkname" name="linkname" size="30" maxlength="255" value="{$table.linkname}" /><br />
+			<!-- Link-->
+			<label for="linkbody">{$message_239}:</label><br />
+			<input type="text" id="linkbody" name="linkbody" size="30" maxlength="255" value="{$table.linkbody}" /><br />
+			<!-- Titel des Links -->
+			<label for="linktitel">{$message_240}</label><br />
+			<input type="text" id="linktitel" name="linktitel" size="30" maxlength="255" value="{$table.linktitel}" /><br />
+		{/foreach}<br /><br />
+		<!-- Entfernen -->
+		<input type="submit" class="submit_back_alert" value="{$message_247}" name="loeschen" style="float:left;margin-right:5em;" />
+		<!-- Eintragen -->
+		<input type="submit" class="submit_back_green" value="{$message_70}" name="formSubmit" />
+		</fieldset>
+		</form>
+	{/if}
+{/if}
+<!-- ENDE Link �ndern -->
+</div>
+</div>
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

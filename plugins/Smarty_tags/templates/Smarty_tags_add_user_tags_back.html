@@ -1,0 +1,31 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		
+	  	<h1>{$message.plugin.Smarty_tags.backtitel}</h1>
+	  	{if $error1}<div class="error">{$plugin.smarty_tags.errmsg.error1}</div>{/if}
+		{if $error2}<div class="error">{$plugin.smarty_tags.errmsg.error2}</div>{/if}
+		{if $error3}<div class="error">{$plugin.smarty_tags.errmsg.error3}</div>{/if}
+		{if $error4}<div class="error">{$plugin.smarty_tags.errmsg.error4}</div>{/if}
+		{if $error5}<div class="error">{$plugin.smarty_tags.errmsg.error5}</div>{/if}
+		{if $error6}<div class="error">{$error6}</div>{/if}
+		{if $error7}<div class="error">{$plugin.smarty_tags.errmsg.error7}</div>{/if}
+		{if $error8}<div class="error">{$plugin.smarty_tags.errmsg.error8}</div>{/if}
+	  	<h2>{$plugin.smarty_tags.header.002}</h2>
+	  	<form enctype="multipart/form-data" action="" method="post">
+			<fieldset>
+				<legend>{$plugin.smarty_tags.form_text.001}</legend>
+				<label for="user_plugin_name">{$plugin.smarty_tags.form_text.002}</label><br />
+				<input name="user_plugin_name" maxlength="255" type="text" value="{$user_plugin_name|escape:"html"}" id="user_plugin_name"><br /><br />
+				<label for="php_code">{$plugin.smarty_tags.form_text.003}</label><br />
+				<textarea name="php_code" cols="50" rows="15" id="php_code" class="php_textarea">{$php_code|escape:"html"}</textarea><br /><br />
+				<input value="{$plugin.smarty_tags.form_text.004}" class="submit_back_green" type="submit" title="{$plugin.smarty_tags.form_text.004}" name="submit">
+				<input style="float:right" name="cancel" value="{$plugin.smarty_tags.form_text.005}" class="submit_back_red" type="submit" title="{$plugin.smarty_tags.form_text.005}">
+			</fieldset>
+	  	</form>
+	</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

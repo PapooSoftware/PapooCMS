@@ -1,0 +1,19 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		<h1>{$message_834}</h1>
+		{$message_834a}
+		<h2>{$message_835}</h2>
+		<div style="width:99%;height:150px;overflow:auto;border:1px solid #666;padding:10px;">
+			{$daten_log_login}
+		</div>
+		<br /><br />
+		<h2>{$message_836}</h2>
+		<div style="width:99%;height:150px;overflow:auto;border:1px solid #666;padding:10px;">
+			{$daten_log_email}
+		</div>
+		<div class="clear">&nbsp;</div>
+	</div>
+	{include file=foot.inc.html}
+{/if}

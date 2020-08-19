@@ -1,0 +1,700 @@
+@import url(http://fonts.googleapis.com/css?family=Monda:400,700);
+body {
+    color: #7D7D7D;
+    font-family:"Monda", Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+}
+h1 {
+color: #5D5D5D;
+font-family:"Monda", Arial,Helvetica,sans-serif;
+    font-size: 28px;
+    letter-spacing: -1px;
+    line-height: 32px;
+    font-weight:400;
+}
+h2 {
+color: #5D5D5D;
+font-family:"Monda", Arial,Helvetica,sans-serif;
+    font-size: 26px;
+    letter-spacing: -1px;
+    line-height: 32px;
+    font-weight:400;
+    
+    margin-top:30px;    
+}
+h3 {
+color: #5D5D5D;
+    font-size: 24px;
+    letter-spacing: -1px;
+    line-height: 32px;
+    font-weight:400;
+    margin-top:30px;    
+}
+p {
+    margin: 0px;
+     color: #7D7D7D;
+    font-family: Arial,Helvetica,sans-serif;
+}
+hr {
+  border-bottom: 1px solid rgba(129, 153, 77, 0.3);
+  height:0px;
+}
+a {
+  color:#67711b;
+  
+}
+img {
+}
+  
+fieldset br {
+  display:none;
+}
+#col2 {
+  padding-top:30px;  
+  
+}  
+#col3 {
+  padding-bottom:30px;  
+  min-height:800px;
+  
+}
+#col3 fieldset {
+  padding:0px 0px 0px 20px;
+  background:#efefef;
+  border:1px solid #ccc;
+  margin-bottom:30px;
+  width:90%;
+}
+#col3 legend {
+  margin-bottom:15px;
+  padding-bottom:0px;
+  border-bottom:1px solid #ccc;
+  margin-left:-21px;
+  padding-left:0px;
+  background:#fff;
+  line-height:1.4em;
+  width:105%;
+  margin-right:-1px;
+}  
+
+#main p {
+   margin: 0 0 5px;
+    font-size: 14px;
+    color:#4f4f4f;
+    line-height:1.4em;    
+  
+}
+#mod_freiemodule_1 img{
+height:auto;
+margin-top:10px;
+  
+}
+
+.navbar-fixed-top {
+    margin-top: 0px;
+  position:relative;
+}
+#page {margin-top:-20px;
+  width:100%;
+  overflow: hidden;
+}
+.navbar-fixed-top .navbar-inner, .navbar-static-top .navbar-inner {
+    box-shadow: none;
+}
+.navbar-inner {
+  background:#414141;
+  min-height:80px;
+  }
+
+#mod_kopftext a{
+  display:block;
+  background-image: url(images/logo.jpg);
+  width:400px;
+  height:65px;  
+  background-repeat:no-repeat;
+  color:transparent;
+  margin-top:10px;
+}
+#main-menu > li > a {
+  display:block;
+  height:80px;
+  font-weight:400;
+  
+}
+#mod_menue {
+  text-align:center;
+  float:right;
+}
+#main-menu > li > a {
+  display:block;
+ color: #A2A1A1;
+    display: block;
+    font-size: 16px;
+    line-height: 81px;
+    padding: 0 27px 0 26px;
+    text-decoration: none;
+    text-transform: capitalize;
+       text-shadow:none;    
+   margin-left:-1px;
+}
+#main-menu > li > a.menuy_aktiv,
+#main-menu > li > a.menuxaktiv_back,
+#main-menu > li > a:hover {
+  background:#95a32c;
+  color:#fff;
+}
+.dropdown-menu {
+    background-clip: padding-box;
+    background-color: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0px;
+    box-shadow: none;
+    display: none;
+    float: left;
+    left: 0;
+    list-style: none outside none;
+    margin: 0px;
+    min-width: 160px;
+    padding: 5px 0;
+    position: absolute;
+    top: 100%;
+    z-index: 1000;
+}
+.dropdown-menu > li > a {
+background:#414141;
+color:#fff;
+  padding:5px 5px 5px 20px;
+  text-align:left;
+}
+.dropdown-menu > li > a:hover {
+  background:#95a32c;
+
+} 
+.dropdown-submenu > .dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+ border-radius:0px;
+}
+
+
+
+
+.headline {
+  background:#DCDDDC;
+  padding-top:20px;
+  padding-bottom:20px;
+  width:100%;
+  
+  overflow:hidden;
+}
+
+#main {
+  padding-top:30px;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size:14px;
+}
+.artikel_details ul,
+.artikel_liste ul  {
+  margin-left:0px;
+}
+.artikel_details .span4,
+.artikel_liste .span4 {
+  margin-left:0px;
+  
+}
+.artikel_details li,
+.artikel_liste li {
+   
+    margin-left:20px;
+}
+#col3 {
+  padding-right:0px;
+  
+}
+#footer {
+    background:#DCDDDC;
+  padding-top:50px;
+  padding-bottom:50px;
+  width:100%;
+  overflow:hidden;
+  
+}
+#colfoot {
+  padding-left:30px;
+  overflow:hidden;
+  
+}
+.btn-success {
+   background:#99a730;
+  text-shadow:none;
+  margin-top:4px;
+  border-radius:0px;
+  border:0px;
+  padding:7px;
+  text-align:center;
+}
+.btn-success:hover {
+  background:#798426;
+  
+}
+.btn-info {
+    background:#4683ae;
+  text-shadow:none;
+  margin:0px;
+  margin-top:4px;
+    border-radius:0px;
+  border:0px;
+  padding:7px;
+  
+}
+.btn-info:hover {
+  background:#15496e;
+  
+}
+.btn {
+  margin-bottom:20px;
+  margin-left: 0px;
+}
+#mod_styleswitcher h3,
+#mod_styleswitcher label {
+display:none;
+  
+}
+
+#footer legend {border:0px;margin-bottom:0px;padding-top:5px;}
+#mod_menue_top {text-align:left;margin-left:0px;}
+#mod_menue_top li {
+  display:inline;
+  
+}
+#mod_breadcrump {
+  margin:-10px 0px 20px 0px;
+  
+}
+
+#col3 .floatbox {
+  padding-right:60px;
+  
+}
+.thumbnail   {
+  text-align:center;
+  
+}
+.thumbnail img {
+  width:100%;
+  height:100%;
+  
+}
+.galerie_liste {
+  margin:0px;
+  padding:0px;
+  
+}
+#mod_menue_sub ul
+{
+margin:0px;
+
+}
+#mod_menue_sub {
+
+  margin-bottom: 30px;
+  float:left;
+  min-width:90%;
+}
+#mod_menue_sub li {
+list-style-type: none;
+display:block;
+width:100%;
+float:left;
+overflow:hidden;
+padding-left:0px;
+}
+#mod_menue_sub li a:before   { content: ">>"; }
+#mod_menue_sub li a {
+  
+  display:block;
+width:100%;
+float:left;
+padding:10px;
+border-bottom: 1px solid #ccc;
+padding-left:5px;
+font-family:"Monda", Arial,Helvetica,sans-serif;
+}
+#mod_menue_sub .untermenu2  li a {
+  font-size:90%;
+  padding:7px;
+  margin-left:20px;
+}
+#mod_menue_sub li a:hover,
+#mod_menue_sub li a.menuxaktiv_back,
+#mod_menue_sub li a.menuy_aktiv {
+background:#67711b;
+color:#fff;
+text-decoration: none;
+}
+
+#mod_menue_sub .untermenu2 li a:hover,
+#mod_menue_sub .untermenu2 li a.menuxaktiv_back,
+#mod_menue_sub .untermenu2 li a.menuy_aktiv {
+background:#79851f;
+color:#fff;
+text-decoration: none;
+}
+#mod_login legend {
+display: none;
+
+}
+.kalender_front_content table {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #EFEFF0;
+    border-collapse: collapse;
+    color: #737373;
+    margin: 0 auto;
+    max-width: 100%;
+    width: 100%;
+}
+.kalender_front_content {
+padding-right: 60px;
+
+}
+
+.kalender_front_content table td {
+    border: 1px solid #EFEFF0;
+    min-height: 100px;
+    padding: 20px;
+    text-align: right;
+    vertical-align: top;
+    width: 14%;
+}
+
+.kalender_front_content .span3 {
+  margin-left: 0px;
+}
+.forumthread input[type="text"],
+.forumthread select {
+  width:30%;
+  margin-top:20px;
+}
+.forumthread label {
+  display: none;
+  
+}
+.forumthread input[type="submit"] {
+  float:right;
+  margin-right:20%;
+  margin-top:20px;
+}
+.forumthread hr,
+.forumboard{
+width:93%;
+
+}
+.forumthread .forumboard hr {
+  display:none;
+}
+.forumboard {
+  background:#efefef;
+
+}
+.messageh4,
+.messagebot,
+#main p.messagefoot {
+  padding:10px 20px 0px 20px;
+}
+
+#main p.messagefoot {
+  font-size:90%;
+  padding:7px;
+  background:#ccc;
+  padding-left:20px;
+}
+#buttonlist label {
+    display:none;
+}
+.bbeditor_element {
+  display:inline;
+
+}
+#inhalt_sitemap h1,
+#inhalt_sitemap h2,
+#inhalt_sitemap h3 {
+  margin:0px;
+  padding:0px;
+  font-size:120%;
+}
+#inhalt_sitemap li {
+  list-style-type:none;
+}
+.label {
+  border:none;
+  background:transparent;
+  text-shadow:none;
+  color:#414141;
+  font-weight:400;
+}
+input[type="checkbox"], input[type="radio"] {
+    float: left;
+    margin-right: 5px;
+    padding-top: 3px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =============================================================================================== */
+/* BILDWECHSLER */
+/* =============================================================================================== */
+.scrollable img {border: 0px;}
+
+.scrollable  a:active, .scrollable a:focus {outline: none;}
+
+
+/*
+  root element for the scrollable.
+  when scrolling occurs this element stays still.
+*/
+.scrollable
+{
+  /* required settings */
+  position: relative;
+  overflow: hidden;
+  width: 95%;
+  border:8px solid #fff;
+  /* custom decorations */
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  margin-bottom: 1em;
+  margin-left:30px;
+  height:350px;
+}
+#content li.span3 {
+  background:#F8F8F8;
+  padding:0px;
+    padding:15px;
+  width:240px;
+  min-height:180px;
+  list-style-type:none;
+  margin-bottom:20px;
+}
+/*
+  root element for scrollable items. Must be absolutely positioned
+  and it should have a extremely large width to accomodate scrollable items.
+  it's enough that you set the width and height for the root element and
+  not for this element.
+*/
+.scrollable .items
+{
+  /* this cannot be too large */
+  width: 100%;
+  position: absolute;
+  clear: both;
+}
+
+/* single scrollable item */
+.scrollable div.item
+{
+  z-index: 2;
+  float: left;
+  margin: 0px 100px 0px 0px;
+  
+  width: 100%;
+}
+.scrollable div.item, .scrollable div.item img
+{
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+
+.scrollable div.item img
+{
+  -moz-box-shadow: none;
+  box-shadow:none;
+}
+
+
+.navi
+{
+  z-index: 3;
+  position: absolute;
+  right: 15px;
+  top: 320px;
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}
+.navi a
+{
+  display: block;
+  float: left;
+  margin-right: 4px;
+  width: 14px;
+  font-size: 11px;
+  line-height: 14px;
+  text-align: center;
+  padding: 0px;
+  
+  cursor: pointer;
+  
+  background-color: #FFFFFF;
+  border: 1px solid #333333;
+  
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+}
+
+.navi a.active
+{
+  color: #FFFFFF;
+  background-color: #000000;
+  border: 1px solid #FFFFFF;
+}
+
+.scrollable div.bw_ueberschrift_wrapper
+{
+  position:absolute;
+}
+
+.scrollable h4.bw_ueberschrift
+{
+  
+}
+
+.scrollable div.bw_text_wrapper
+{
+  display:none;
+}
+
+.scrollable div.bw_text
+{
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+.scrollable
+{
+  height: 220px;
+}
+#content li.span3 {
+    background: none repeat scroll 0 0 #F8F8F8;
+    border-bottom: 2px solid #95A32C;
+    margin-bottom: 40px;
+    min-height: 340px;
+    padding: 15px;
+    width: 25%;
+    
+}
+
+}
+
+@media (min-width: 480px) and (max-width: 768px) {
+.scrollable
+{
+
+  height: 170px;
+}
+
+} 
+
+
+@media  (max-width: 480px) {
+.scrollable
+{
+
+  height: 120px;
+}
+#head .span3 {
+  overflow:hidden;
+  
+}
+ul.nav   {
+  width:100%;
+}
+
+#mod_menue {
+    float: none;
+    text-align: left;
+}
+#col3 fieldset {width:100%;}
+
+#col3 .floatbox {
+    padding-right: 10px;
+}
+}  
+    
+    
+
+
+
+
+
+/** Speziell für Groessen */
+@media (min-width: 769px) {
+
+ul.nav li.dropdown:hover ul.dropdown-menu{
+    display: block;    
+    background:#414141;
+}
+ul.nav li.dropdown:hover ul.dropdown-menu .sub-menu{
+    display: none;    
+}
+ul.nav li.dropdown:hover ul.dropdown-menu li:hover .sub-menu {
+    display: block;    
+}
+ul.nav li.dropdown:hover ul.dropdown-menu .dropdown-submenu ul.dropdown-menu .dropdown-submenu ul.dropdown-menu{
+    display: none;    
+}
+ul.nav li.dropdown:hover ul.dropdown-menu .dropdown-submenu ul.dropdown-menu .dropdown-submenu:hover ul.dropdown-menu{
+    display: block;    
+}
+ul.nav li.dropdown:hover ul.dropdown-menu .dropdown-submenu ul.dropdown-menu .dropdown-submenu ul.dropdown-menu .dropdown-submenu ul.dropdown-menu{
+    display: none;    
+}
+ul.nav li.dropdown:hover ul.dropdown-menu .dropdown-submenu ul.dropdown-menu .dropdown-submenu ul.dropdown-menu .dropdown-submenu:hover ul.dropdown-menu{
+    display: block;    
+}
+a.menu:after, .dropdown-toggle:after {
+  content: none;
+}
+}
+
+
+

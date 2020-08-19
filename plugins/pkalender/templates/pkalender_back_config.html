@@ -1,0 +1,52 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+
+
+
+ <h1 id="kalender_administration_des_kalenders" class="h1" >{$plugin_kalender_administration_des_kalenders}</h1>
+
+ <p id="kalender_hier_knnen_sie_administrative_aufgaben_durchfhren" class="h1" >{$plugin_kalender_hier_knnen_sie_administrative_aufgaben_durchfhren}</p>
+
+ <h1 id="kalender_abgelaufene_termine_on_block_lschen" class="h1" >{$plugin_kalender_abgelaufene_termine_on_block_lschen}</h1>
+
+ <p id="kalender_klicken_sie_auf_den_folgenden_link_um_in_allen_kalendern_alle_abgelaufenen_termine_zu_lschen" class="h1" >{$plugin_kalender_klicken_sie_auf_den_folgenden_link_um_in_allen_kalendern_alle_abgelaufenen_termine_zu_lschen}</p>
+
+ <a href="" id="kalender_termine_jetzt_lschen" class="132link" >{$plugin_kalender_termine_jetzt_lschen}</a>
+
+ <h1 id="kalender_unbenutzte_kalender_lschen" class="h1" >{$plugin_kalender_unbenutzte_kalender_lschen}</h1>
+
+ <p id="kalender_mit_klick_auf_den_link_lschen_sie_alle_unbenutzten_kalender_in_allen_sprachen" class="h1" >{$plugin_kalender_mit_klick_auf_den_link_lschen_sie_alle_unbenutzten_kalender_in_allen_sprachen}</p>
+
+ <a href="" id="kalender_unbenutzte_kalender_jetzt_lschen" class="132link" >{$plugin_kalender_unbenutzte_kalender_jetzt_lschen}</a>
+
+ #start#<span class="ignore"></span>
+<br />
+{if $is_dev}
+  <!-- Der Start Button ist notwendig damit sich das System daran aufhängen kann. -->
+	 <div class="rapid_form">
+		<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="plugin_kalender" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="plugin_kalender_class" />
+		<!-- Das Standarpräfix für die Ids -->
+		<input type="hidden" name="praefix" value="kalender" />
+		<!-- Das Standarpräfix für die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="kalender" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div> {/if}
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

@@ -1,0 +1,481 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	{if $is_inserted}
+		<div class="message">{$is_inserted}</div>
+	{/if}
+	{if $text_error}
+		<div class="error">{$text_error}</div>
+	{/if}
+	<div class="artikel">
+	<div class="aktuell" id="aktuell_{$menuid_aktuell}"></div>
+	{$text}
+	{$logindaten}
+	{if $templateweiche == "LISTE"}
+	<script type="text/javascript" src="./js/jq_content_tree.js"></script>
+	{if $user_content_tree_show_all}
+		<script type="text/javascript"> jq_content_tree_show_all(); </script>
+	{/if}
+	<div id="inhalt_menu">
+		<!-- Hier sind alle verf�gbaren Men�punkte -->
+		<h1>{$message_254}</h1>
+		{foreach item=kat from=$catlist_data}
+			{if $kat.cat_id>=1}
+				<h2 class="menucat">{$kat.cat_text}</h2>
+			{/if}
+			<ul class="artikel_sitemap">
+				{foreach item=menu from=$menulist_data}
+				{if $menu.nummer}
+					{if $kat.cat_id==$menu.cat_cid or isset($no_categories) && $no_categories==1}
+						{$menu.shift_anfang}
+						<div>
+							{if $menu.has_rights}
+								{if isset($menu.menutitel.text)}
+									<a href="menu.php?menuid=44&amp;selmenuid={$menu.menuid}" menuid="{$menu.menuid}" title="{$menu.menutitel.text|escape:"html"}">
+								{else}
+									<a href="menu.php?menuid=44&amp;selmenuid={$menu.menuid}" menuid="{$menu.menuid}">
+								{/if}
+								{if $menu.menulink=="shop.php" or $menu.menulink=="shop"}
+									<i class="fa fa-shopping-cart"></i>
+								{else}
+									{if $menu.extern}
+										<i class="fa fa-share"></i>
+									{elseif $menu.template}
+										<i class="fa fa-cog"></i>
+									{else}
+										<i class="fa fa-folder-open"></i>
+									{/if}
+								{/if}
+								{$menu.nummer}: {$menu.menuname}
+								</a>
+							{else}
+								<a class="no_active_link" href="javascript:return false;" menuid="{$menu.menuid}" title="{$menu.menutitel.text|escape:"html"}">
+								{if $menu.menulink=="shop.php" or $menu.menulink=="shop"}
+									<i class="fa fa-shopping-cart"></i>
+								{else}
+									{if $menu.extern}
+										<i class="fa fa-share"></i>
+									{elseif $menu.template}
+										<i class="fa fa-cog"></i>
+									{else}
+										<i class="fa fa-folder-open"></i>
+									{/if}
+								{/if}
+								{$menu.nummer}: {$menu.menuname}</a>
+							{/if}
+						</div>
+						{$menu.shift_ende}
+					{/if}
+				{/if}
+			{/foreach}
+			</ul>
+		{/foreach}
+		{if isset($categories) && $categories == 1 && $orphanedMenuItemsExist == true}
+			<h2>Unkategorisiert</h2>
+			<ul class="artikel_sitemap">
+				{foreach item=menu from=$menulist_data}
+					{if $menu.categoryFound == false}
+						<li>
+							<div>
+								{if $menu.has_rights}
+									{if isset($menu.menutitel.text)}
+										<a href="menu.php?menuid=44&amp;selmenuid={$menu.menuid}" menuid="{$menu.menuid}" title="{$menu.menutitel.text|escape:"html"}">
+										{else}
+										<a href="menu.php?menuid=44&amp;selmenuid={$menu.menuid}" menuid="{$menu.menuid}">
+									{/if}
+									{if $menu.menulink=="shop.php" or $menu.menulink=="shop"}
+										<i class="fa fa-shopping-cart"></i>
+									{else}
+										{if $menu.extern}
+										<i class="fa fa-share"></i>
+										{elseif $menu.template}
+										<i class="fa fa-cog"></i>
+										{else}
+										<i class="fa fa-folder-open"></i>
+										{/if}
+									{/if}
+									{$menu.nummer}: {$menu.menuname}
+									</a>
+								{else}
+									<a class="no_active_link" href="javascript:return false;" menuid="{$menu.menuid}" title="{$menu.menutitel.text|escape:"html"}">
+									{if $menu.menulink=="shop.php" or $menu.menulink=="shop"}
+										<i class="fa fa-shopping-cart"></i>
+									{elseif $menu.extern}
+										<i class="fa fa-share"></i>
+									{elseif $menu.template}
+										<i class="fa fa-cog"></i>
+									{else}
+										<i class="fa fa-folder-open"></i>
+									{/if}
+									{$menu.nummer}: {$menu.menuname}
+									</a>
+								{/if}
+							</div>
+						</li>
+					{/if}
+				{/foreach}
+			</ul>
+		{/if}
+	</div>
+{/if}
+{if $templateweiche == "NEU_EDIT"}
+	{if $zeigemenu=="ok"}
+		<!-- Diesen Menupunkt bearbeiten.-->
+		{if $formmodus == "NEU"}<h1>{$message_265} </h1>{/if}
+		{if $formmodus == "EDIT"}<h1>{$message_255} (ID: {$formmenuid})</h1>{/if}
+		<form method="post" action="" id="formi" style="width:100%">
+			<p class="ignore">
+				<input type="hidden" name="formmodus" value="{$formmodus}" />
+				<input type="hidden" name="formmenuid" value="{$formmenuid}" />
+				<input type="hidden" name="formuntermenuzu_org" value="{$formuntermenuzu_org}" />
+				<input type="hidden" name="formorder_id_org" value="{$formorder_id_org}" />
+			</p>
+			{foreach item=lang from=$menlang}
+				<fieldset>
+					<!-- Menupunkt Name : -->
+					<legend>{$message_250} {$lang.language}</legend>
+					<input type="hidden" name="language[lang_id][]" value="{$lang.lang_id}" />
+					<input type="hidden" name="language[language][]" value="{$lang.language}" />
+					<!-- Name-->
+					<label for="formmenuname_{$lang.lang_id}">{$message_257} : {if $error_menu_leer}<strong>{$error_menu_leer_text}</strong>{/if}</label><br />
+					<input id="formmenuname_{$lang.lang_id}" name="language[formmenuname][]" value="{$lang.formmenuname}" type="text" /><br />
+					<!-- formtitel -->
+					<label for="formtitel_{$lang.lang_id}">{$message_258} :</label><br />
+					<input id="formtitel_{$lang.lang_id}" name="language[formtitel][]" value="{$lang.formtitel}" type="text" /><br />
+					<label for="url_menuname_{$lang.lang_id}">{$message_258b} :</label><br />
+					<input id="url_menuname_{$lang.lang_id}" name="language[url_menuname][]" value="{$lang.url_menuname}" type="text" /><br />
+					<label for="url_metadescrip_{$lang.lang_id}">{$message_258c} :</label><br />
+					<textarea rows="5" cols="40" id="url_metadescrip_{$lang.lang_id}" name="language[url_metadescrip][]" >{$lang.url_metadescrip}</textarea> <br />
+					<label for="url_metakeywords_{$lang.lang_id}">{$message_258d} :</label><br />
+					<textarea rows="5" cols="40" id="url_metakeywords_{$lang.lang_id}" name="language[url_metakeywords][]" >{$lang.url_metakeywords}</textarea>
+					<br />
+				</fieldset>
+			{/foreach}
+			<fieldset>
+				<!-- Untermenupunkt zu:-->
+				<legend>{$message_252}</legend>
+				{if $is_start}
+					<input type="hidden" name="formuntermenuzu" value="0" />
+					<p>{$message_596}</p>
+				{else}
+					<!-- Wenn der Menupunkt ein normaler Punkt der 1. Ordnung ist, dann ist er ein Unterpunkt zur Startseite.-->
+					<p>{$message_260}</p>
+					<!-- Untermenupunkt zu:-->
+					<label for="formuntermenuzu">{$message_252}</label><br />
+					<select id="formuntermenuzu" name="formuntermenuzu" size=1>
+						<!-- ausw&auml;hlen -->
+						<option value="0">({$message_160} )</option>
+						{foreach item=menu from=$menulist_data}
+							{if $menu.menuid != $formmenuid}
+								<option value="{if $menu.has_rights}{$menu.menuid}{/if}" class="levelshift_{$menu.level}" {if !$menu.has_rights}disabled="disabled" style="color:#788191;"{/if} {if $menu.menuid == $formuntermenuzu}selected="selected"{/if} >
+									{$menu.nummer}: {$menu.menuname}
+								</option>
+							{/if}
+						{/foreach}
+					</select>
+				{/if}
+			</fieldset>
+			{if $category_set}
+				<fieldset>
+					<!-- Untermenupunkt zu:-->
+					<legend>{$message_595}</legend>
+					<p>{$message_597}</p>
+					<!-- Untermenupunkt zu:-->
+					<label for="category">{$message_595}</label><br />
+					<select id="category" name="category" size=1>
+						<!-- ausw&auml;hlen -->
+						<option value="0">({$message_160} )</option>
+						{foreach item=kat from=$catlist_data}
+							<option value="{$kat.cat_id}" {if $kat.cat_id == $menukat}selected="selected"{/if} >
+								{$kat.cat_id}: {$kat.cat_text_intern}
+							</option>
+						{/foreach}
+					</select>
+				</fieldset>
+			{/if}
+			<a name="imagelist"></a>
+			{literal}
+				<script type="text/javascript">
+					$(document).ready(function() {
+
+					$('#slideToggle').click(function() {
+					$('.accordion').toggle('slow');
+					return false;
+					});
+
+					$('.image_linkmetro').click(function() {
+					$('#menu_image').val(
+						this.title
+					);
+					$('.show_image').show('slow');
+					$('#show_image_img').attr('src','../images/thumbs/'+this.title);
+					return false;
+					});
+
+					//Input f�llen image_link
+
+					});
+				</script>
+			{/literal}
+			<fieldset>
+				<legend>{$message_158a}:</legend>
+				{if $formmenuid}
+					<div class="show_image" {if !$menu_image} style="display: none;"{/if}>
+					<img id="show_image_img" src="../images/thumbs/{$menu_image}" alt="Image" title="" />
+					</div>
+					{*<!-- Teaser Bild ausw�hlen (klein) -->*}
+					<label for="menu_image" >{$message_159}:</label>
+					{*<!-- Hier kann ein Bild ausgew�hlt werden. -->*}
+					<input type="text" id="menu_image" name="menu_image" value="{$menu_image}" /><br /><br />
+					{*<!-- Bild links anzeigen? -->*}
+					<a href="" id="slideToggle">{$message_492b} {$bilder_cat_name}</a>
+					<div class="accordion" style="{if !$image_dir}display: none;{/if}">
+						<div class="image_folder_container_completemetro">
+							<div class="image_folder_container_leftmetro">
+								<strong>{$system_image_image_ordner}</strong>
+								<br />
+								<a class="bilder_verzeichnis_topmetro" href="menu.php?menuid=44&selmenuid={$formmenuid}#imagelist"> {$system_image_alle_bilderverzeichnisse} <span style="color: #333;">({$bilder_cat_id_count.0})</span> </a>
+								{foreach item=dir from=$dirlist}
+									{$dir.vor_ul}
+									<a {if $bilder_active_cat_id==$dir.bilder_cat_id} class="active_cat" {/if} href="menu.php?menuid=44&selmenuid={$formmenuid}&image_dir={$dir.bilder_cat_id}{$dir.dateien_cat_id}{$dir.video_cat_id}#imagelist">{$dir.bilder_cat_name}{$dir.dateien_cat_name}{$dir.video_cat_name} <span style="color: #333;">({if $bilder_cat_id_count[$dir.bilder_cat_id]}{$bilder_cat_id_count[$dir.bilder_cat_id]}{else}0{/if})</span></a>
+									{$dir.nach_ul}
+								{/foreach}
+							</div>
+							<div class="image_folder_container_outmetro">
+								<div class="image_folder_containermetro">
+									{if $image_dir}
+										<div style="width: 140px; padding: 5px;float:left;">
+											<a href="menu.php?menuid=44&selmenuid={$formmenuid}&image_dir={$bilder_cat_id}#imagelist" class="image_link_activemetro">
+												<img src="bilder/folder.png" style="border:none;background:#fff;" alt="{$message_395}" title="{$message_395}" /><br />
+												<div style="text-align:center;width:60%;">{$message_395}</div>
+											</a>
+										</div>
+									{/if}
+									{foreach item=cat from=$result_cat_images}
+										<div class="image_foldermetro">
+											<a href="menu.php?menuid=44&selmenuid={$formmenuid}&image_dir={$cat.bilder_cat_id}#imagelist">{$cat.bilder_cat_name}</a>
+										</div>
+									{/foreach}
+									</div>
+									<br />
+									<div class="image_images">
+										{if $image_data}
+										<ul class="die_image_listemetro">
+											{foreach item=image from=$image_data}
+												<li>
+													<div>
+														<a href=""
+															class="image_linkmetro"
+															title="{$image.image_name}"
+															style="width: 140px; padding: 100px 5px 5px 5px; text-align: center;
+																	background-image: url(../images/thumbs/{$image.image_name}); background-repeat: no-repeat; background-position: center top;"
+															title='{$image.image_name|escape:"html"}'
+															>
+															<span style="background-color: #FFFFFF;">{$image.image_alt}</span>
+														</a>
+													</div>
+												</li>
+											{/foreach}
+										</ul>
+									{else}
+										{$message_493}
+									{/if}
+									</div>
+								</div>
+						</div>
+					</div>
+					<div class="accordion" style="display: block;">
+					</div>
+				{else}
+					{$nur_bei_bearbeiten_bild_einfuegen}
+				{/if}
+			</fieldset>
+			<fieldset>
+				<!-- Zugriff f�r "Ver�ffentlichen" -->
+				<legend>{$message_263} </legend>
+				<!-- Gruppe-->
+				<label for="ckeckbox">{$message_95} :</label><br />
+				{foreach item=table from=$liste_publish}
+					<input type="checkbox" id="{$table.gruppename}_publish" name="rechte_publish[]" value="{$table.gruppeid}" {$table.checked} />
+					<label for="{$table.gruppename}_publish">{$table.gruppename}: </label>
+					<br />
+				{/foreach}
+			</fieldset>
+			<fieldset>
+				<!-- Zugriff f�r "lesen im Frontend" -->
+				<legend>{$message_403}</legend>
+				<!-- Gruppe-->
+				<label for="ckeckbox">{$message_95} :</label> <br />
+				{foreach item=table from=$liste_lesen}
+					<input type="checkbox" id="{$table.gruppename}_lesen" name="rechte_lesen[]" value="{$table.gruppeid}" {$table.checked} />
+					<label for="{$table.gruppename}_lesen" >{$table.gruppename}: </label>
+					<br />
+				{/foreach}
+			</fieldset>
+			<fieldset>
+				<!-- Menupunkt Name : -->
+				<legend>{$menu_publish_yn}</legend>
+				<p>{$menu_publish_yn_text}</p>
+				{foreach item=lang from=$menlang}
+				<input type="checkbox" id="publish_yn_{$lang.language}" name="publish_yn_lang_men[{$lang.lang_id}]" value="1"
+						{$publish_yn_lang_men_checked[$lang.lang_id]}/>
+				<label for="publish_yn_{$lang.language}">{$menu_publish_yn} ({$lang.language}): </label>
+				{/foreach}
+			</fieldset>
+			<fieldset>
+				<!-- Untermen�punkte anteasern" -->
+				<legend>{$message_822} </legend>
+				<p>{$message_823}</p>
+				<!-- Ja/Nein-->
+					<input type="checkbox" id="menu_subteaser" name="menu_subteaser" {if $menu_subteaser}checked="checked"{/if} value="1" />
+					<label for="menu_subteaser">{$message_822}: </label>
+					<br />
+			</fieldset>
+			<!-- Eigenes Layout -->
+			<fieldset>
+				<!-- Untermenupunkt zu:-->
+				<legend>{$intern_menu_eigenes_layout}</legend>
+					<!-- -->
+					<p>{$intern_menu_eigenes_layout1}</p>
+					<!-- Untermenupunkt zu:-->
+					<label for="menu_spez_layout">{$intern_menu_eigenes_layout}</label><br />
+					<select id="menu_spez_layout" name="menu_spez_layout" size="1">
+						<!-- ausw&auml;hlen -->
+						<option value="0">({$message_160} )</option>
+						{foreach item=layout from=$menu_list_layout}
+							<option value="{$layout.style_id}" {if $layout.style_id == $menu_spez_layout}selected="selected"{/if} >
+								{$layout.style_name}
+							</option>
+						{/foreach}
+					</select>
+			</fieldset>
+			<fieldset>
+				<!-- Untermenupunkt zu:-->
+				<legend>{$intern_menu_artikel_sort}</legend>
+				<!-- -->
+				<p>{$intern_menu_artikel_sort1}</p>
+				<!-- Untermenupunkt zu:-->
+				<label for="intern_menu_artikel_sort2">{$intern_menu_artikel_sort2}</label><br />
+				<select id="intern_menu_artikel_sort2" name="artikel_sort" size="1">
+					<!-- ausw&auml;hlen -->
+					<option value="1" {if $artikel_sort == 1}selected="selected"{/if}>
+					{$intern_menu_artikel_sort_standard}
+					</option>
+					<option value="2" {if $artikel_sort == 2}selected="selected"{/if}>
+					{$intern_menu_artikel_sort_aktuellste_zuerst}
+					</option>
+					<option value="6" {if $artikel_sort == 6}selected="selected"{/if}>
+					{$intern_menu_artikel_sort_create_date}
+					</option>
+					<option value="3" {if $artikel_sort == 3}selected="selected"{/if}>
+					{$intern_menu_artikel_sort_nach_sortierung}
+					</option>
+					<option value="4" {if $artikel_sort== 4}selected="selected"{/if}>
+					{$intern_menu_artikel_sort_zufall}
+					</option>
+					<option value="5" {if $artikel_sort== 5}selected="selected"{/if}>
+					{$intern_menu_artikel_sort_alphabetisch}
+					</option>
+				</select>
+			</fieldset>
+			<fieldset>
+				<!-- Wenn auf eine besondere Seite verwiesen werden soll:-->
+				<legend>{$message_483}</legend>
+				<br />
+				<!-- Link -->
+				<p>{$message_484}</p>
+				<label for="extra_css_file">{$message_485}</label><br />
+				<input type="text" id="extra_css_file" name="extra_css_file" value="{$extra_css_file}" /><br />
+				<br />
+				<div class="clearfix"></div>
+					<input type="checkbox" id="extra_css_sub" name="extra_css_sub" value="1" {$extra_css_sub_checked} /><label for="extra_css_sub">{$message_486}</label><br />
+				<br />
+			</fieldset>
+			<fieldset>
+				<!-- Wenn auf eine besondere Seite verwiesen werden soll:-->
+				<legend>{$message_264}</legend>
+				<br />
+				<!-- Link -->
+				{foreach item=lang from=$menlang}
+					<label for="formlink_{$lang.lang_id}">{$lang.language}: {$message_266}</label>
+					<input type="text" id="formlink_{$lang.lang_id}" size="60" name="language[formlink][]" value='{if $lang.formlink}{$lang.formlink|escape:"html"}{else}index.php{/if}' /><br />
+					<a href="http://www.doku.papoo.de/index.php/Men%C3%BC_erstellen#formlink_Wenn_auf_eine_besondere_Seite_verwiesen_werden_soll:" target="blank">{$message_266a}</a>
+					<br />
+				{/foreach}
+			</fieldset>
+			<fieldset>
+				<!-- Wenn auf eine besondere Seite verwiesen werden soll:-->
+				<legend>{$message_70}</legend>
+				<!-- Speichern -->
+				<p><input style="float: left;" type="submit" class="submit_back_green" value="{$message_70}" name="formSubmit" /></p>
+				{if $formmodus == "EDIT" and not $is_start}
+					<!-- L�schen-->
+					<p><input style="float: right;" type="submit" class="submit_back_red" value="{$message_106} " name="loeschen" /></p>
+				{/if}
+			</fieldset>
+		</form>
+	{/if}
+{/if}
+{if $templateweiche == "LOESCHEN"}
+	{if $zeigemenu=="ok"}
+		<!-- Diesen Menupunkt l�schen?? -->
+		<h2> {$message_248}</h2>
+		<!-- Wenn Sie den L�schen Button dr�cken, wird der Menupunkt unwiderruflich gel�scht und alle Artikel die unter diesem Men�punkt erreichbar
+		waren werden nicht mehr erreichbar sein. Sie k�nnen diese �ber den Artikel Men�punkt anderen Men�punkten zuweisen. -->
+		<p>{$message_249}</p>
+		<form method="post" action="" id="formi" style="width:100%;">
+			<p class="ignore">
+				<input type="hidden" name="delmenuid" value="{$delmenuid}" />
+				<input type="hidden" name="deluntermenuzu_org" value="{$deluntermenuzu_org}" />
+				<input type="hidden" name="delmenuname" value="{$delmenuname}" />
+				<input type="hidden" name="deltitel" value="{$deltitel}" />
+				<input type="hidden" name="dellink" value="{$dellink}" />
+			</p>
+			<ul>
+				<!-- Menupunkt Name: -->
+				<li>{$message_250} {$delmenuname}</li>
+				<!-- Menu formtitel:-->
+				<li>{$message_251} {$deltitel}</li>
+				<!-- formlink -->
+				<li>{$message_266} {$dellink}</li>
+			</ul>
+			<!-- Eintrag l�schen!!! -->
+			<input type="submit" class="submit_back_red" value="{$message_253}" name="do_loeschen" />
+		</form>
+	{/if}
+{/if}
+<!-- �ndern der Men�reihenfolge -->
+{if $templateweiche == "REORDER"}
+	{if $zeigemenu=="ok"}
+		<!-- Hier k�nnen Sie die Men�reihenfolge �ndern-->
+		<h1>{$message_388}</h1>
+		{$message_389}
+		<!-- Alle Men�punkte deren Reihenfolge ver�ndert werden kann. -->
+		<form action="" method="post">
+			{foreach item=kat from=$catlist_data.0}
+				{if $kat.cat_id>=1}<h1 class="sitemap_menucat">{$kat.cat_text}</h1>	{/if}
+				<table class="outside table table-striped table-hover" >
+					{foreach name=menue_punkte item=menu from=$menuorder_data}
+						{if $menu.nummer}
+							{if $kat.cat_id==$menu.cat_cid or $no_categories==1}
+								<tr>
+									<td style="width: 50px;">{$menu.nummer}</td>
+									<td> <label for="menuorder_menuid_{$menu.menuid}">{$menu.menuname}</label></td>
+									<td><input type="text" size="2" id="menuorder_menuid_{$menu.menuid}" name="menuorder_menuid[{$menu.menuid}]" value="{$menu.order_id}" /></td>
+								</tr>
+							{/if}
+						{/if}
+					{/foreach}
+				</table>
+			{/foreach}
+			<fieldset>
+				<legend>{$message_70}</legend>
+				<input type="submit" class="submit_back_green" name="saveorder" value="{$message_70}" />
+			</fieldset>
+		</form>
+	{/if}
+{/if}
+</div>
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

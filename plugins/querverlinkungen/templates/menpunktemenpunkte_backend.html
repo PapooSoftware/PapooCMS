@@ -1,0 +1,28 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+<link rel="stylesheet" type="text/css" href="{$css_path}/backend.css" />
+<link rel="stylesheet" type="text/css" href="{$css_path}/chosen.css"/>
+<link rel="stylesheet" type="text/css" href="{$css_path}/../../plugincreator/css/backend.css" />
+
+<div class="artikel">
+
+    <h1>Zuordnung Menüpunkte &harr; Menüpunkte</h1>
+    <p>Hier können Sie jedem "Quell"-Menüpunkt einen oder mehrere "Ziel"-Menüpunkt zuweisen. Im Frontend steht dann eine Linkliste zur Verfügung.</p>
+    <form action="" method="post" id="querverlinkungen_zuordnungen">
+        {include file=../../../plugins/querverlinkungen/templates/menuepunkte_sitemap.tpl}
+        <input type="hidden" name="click" value="true" />
+        <input class="btn btn-success" type="submit" value="Speichern" />
+    </form>
+
+</div>
+
+    {*<!-- Hier kommt der Fuss rein-->*}
+    {include file=foot.inc.html}
+<script src="{$css_path}/../js/chosen.jquery.js"></script>
+<script src="{$css_path}/../js/script.js"></script>
+{/if}

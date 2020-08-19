@@ -1,0 +1,60 @@
+<!-- TEMPLATE: kontakt.html -->
+{if $system_show_template_comment}<!-- START Template kontakt.html -->{/if}
+<div class="floatbox artikel_details">
+<a  id="artikel"></a>
+{if $fehlerliste}
+		 	<div class="fehlerliste">
+			 <h2>{$plugin.form_manager.bitte_korrek}</h2>
+			 <ul>
+			 {foreach  item=dat from=$fehlerliste }
+			 	<li>{$dat}</li>
+			 {/foreach}
+		
+			 </ul>
+			 </div>
+		 {/if}
+		 {if $__spamschutz__}
+		 <div class="fehlerliste">
+		 {$message_bitte_spam_schutz_korrigieren}
+		 </div>
+		 {/if}
+	<a  id="artikel"></a>
+		
+{if $geschickt}
+	{*<!--  <h2>Ihre Nachricht wurde �bermittelt.</h2>
+	<p>Vielen Dank f�r Ihre Interesse, wir werden uns so bald wie m�glich mit Ihnen in Verbindung setzen.</p>
+	<p>Sie k�nnen �ber das Men� links nun fortfahren.</p>  -->*}
+	{$message_2094}
+	{$text}
+	{else}
+	
+	{if $cxyxyformular=="ok"}
+		{$text_kontakt}
+		<br />
+		
+		{*<!--
+		<form id="formk" action="{$slash}kontakt.php?menuid={$menuid_aktuell}" method="post">
+		-->*}
+		<form id="formk" action="" method="post">
+			<fieldset>
+				{*<!--  Kontakt zu  -->*}
+				<legend>{$message_2086} {$site_name}</legend>
+				{foreach item=feld from=$formdat}
+					{$feld}
+				{/foreach}
+				</fieldset>
+					{if $stamm_kontakt_spamschutz}
+					{include file="_module_intern/mod_spamschutz.html}
+					{/if}
+				
+				<fieldset>
+				<legend>{$message_2008}</legend>
+				<input type="submit" class="cformsenden btn btn-info" value="{$message_2008}" name="kontakt_senden"  />
+			</fieldset>
+		
+		</form>
+	{/if}
+{/if}
+</div>
+{if $system_show_template_comment}<!-- STOP Template kontakt.html -->{/if}
+<!-- ENDE TEMPLATE: kontakt.html -->

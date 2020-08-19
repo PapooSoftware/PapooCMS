@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+<link rel="stylesheet" type="text/css" href="{$css_path}/backend.css" />
+
+<div class="artikel">
+
+    <h1>Cookie Plugin</h1>
+
+    {*<!-- Benutzt das Cookie Consent Plugin von Silktide <a href="www.silktide.com/tools/cookie-consent/">www.silktide.com/tools/cookie-consent/</a>. -->*}
+    {$message.plugin.cookieplugin.001}
+    <br><br>
+
+    <form method="post" action="" class="cookieplugin_noreload" id="cookieplugin_form" name="cookieplugin_settings">
+        <fieldset>
+            <legend>{$message.plugin.cookieplugin.002}</legend>
+            <label for="message_input">{$message.plugin.cookieplugin.002}</label>
+            <input type="text" style="width:80vh;" id="message_input" name="cookieplugin_message" value="{$plugin.cookieplugin.settings.message}"/>
+        </fieldset>
+
+        <fieldset>
+            <legend>{$message.plugin.cookieplugin.003}</legend>
+            <label for="buttontext_input">{$message.plugin.cookieplugin.003}</label>
+            <input type="text" style="width:40vh;" id="buttontext_input" name="cookieplugin_buttontext" value="{$plugin.cookieplugin.settings.buttontext}"/>
+        </fieldset>
+
+        <fieldset>
+            <legend>{$message.plugin.cookieplugin.004}</legend>
+
+            <label for="link_learnmore_input">{$message.plugin.cookieplugin.005}</label>
+            <input type="text" style="width:40vh;" id="link_learnmore_input" name="cookieplugin_learnmore" value="{$plugin.cookieplugin.settings.learnmore}"/>
+            <label for="link_url_input">{$message.plugin.cookieplugin.006}</label>
+            <input type="text" style="width:40vh;" id="link_url_input" name="cookieplugin_link" value="{$plugin.cookieplugin.settings.link}"/>
+        </fieldset>
+
+        <fieldset>
+            <legend>{$message.plugin.cookieplugin.008}</legend>
+            <label for="theme_select">{$message.plugin.cookieplugin.012}</label>
+            <select form="cookieplugin_form" id="theme_select" name="cookieplugin_theme">
+                <option value="dark-bottom" {if $plugin.cookieplugin.settings.theme=='dark-bottom'}selected{/if}>dark-bottom</option>
+                <option value="dark-top" {if $plugin.cookieplugin.settings.theme=='dark-top'}selected{/if}>dark-top</option>
+                <option value="dark-floating" {if $plugin.cookieplugin.settings.theme=='dark-floating'}selected{/if}>dark-floating</option>
+                <option value="light-bottom" {if $plugin.cookieplugin.settings.theme=='light-bottom'}selected{/if}>light-bottom</option>
+                <option value="light-top" {if $plugin.cookieplugin.settings.theme=='light-top'}selected{/if}>light-top</option>
+                <option value="light-floating" {if $plugin.cookieplugin.settings.theme=='light-floating'}selected{/if}>light-floating</option>
+            </select>
+
+            <label for="button_text_color_input">{$message.plugin.cookieplugin.013}</label>
+            <!-- <input type="text" {literal}pattern="#[0-9a-fA-F]{6}"{/literal} title="Geben Sie eine hexadezimal Zahl an, mit allen 6 Ziffern und #." placeholder="#ff0000" style="width: 10vh" id="button_text_color_input" name="style_override[button_text_color]" value="{$plugin.cookieplugin.settings.button_text_color}"> -->
+            <input type=color id="button_text_color_input" name="style_override[button_text_color]" class="form-control" style="width: 10vh" value="{$plugin.cookieplugin.settings.button_text_color}" placeholder="#ff0000" {literal}pattern="#[0-9a-fA-F]{6}"{/literal}>
+
+            <label for="button_back_color_input">{$message.plugin.cookieplugin.014}</label>
+            <!-- <input type="text" {literal}pattern="#[0-9a-fA-F]{6}"{/literal} title="Geben Sie eine hexadezimal Zahl an, mit allen 6 Ziffern und #." placeholder="#ffff00" style="width: 10vh" id="button_back_color_input" name="style_override[button_back_color]" value="{$plugin.cookieplugin.settings.button_back_color}"> -->
+            <input type=color id="button_back_color_input" name="style_override[button_back_color]" class="form-control" style="width: 10vh" value="{$plugin.cookieplugin.settings.button_back_color}" placeholder="#ff0000" {literal}pattern="#[0-9a-fA-F]{6}"{/literal}>
+
+            <label for="button_hover_text_color_input">{$message.plugin.cookieplugin.016}</label>
+            <input type="color" id="button_hover_text_color_input" name="style_override[button_hover_text_color_input]" class="form-control" style="width: 10vh;" value="{$plugin.cookieplugin.settings.button_hover_text_color_input}" placeholder="#ff0000" {literal}pattern="#[0-9a-fA-F]{6}"{/literal}>
+
+            <label for="button_hover_back_color_input">{$message.plugin.cookieplugin.017}</label>
+            <input type="color" id="button_hover_back_color_input" name="style_override[button_hover_back_color_input]" class="form-control" style="width: 10vh;" value="{$plugin.cookieplugin.settings.button_hover_back_color_input}" placeholder="#ff0000" {literal}pattern="#[0-9a-fA-F]{6}"{/literal}>
+
+            <label for="more_info_link_color_input">{$message.plugin.cookieplugin.018}</label>
+            <input type="color" id="more_info_link_color_input" name="style_override[more_info_link_color_input]" class="form-control" style="width: 10vh;" value="{$plugin.cookieplugin.settings.more_info_link_color_input}" placeholder="#ff0000" {literal}pattern="#[0-9a-fA-F]{6}"{/literal}>
+        </fieldset>
+
+        <fieldset>
+            <div class="settings-saved message hidden" name="cookieplugin_settings">{$message.plugin.cookieplugin.009}</div>
+            <div class="settings-saving message hidden" name="cookieplugin_settings">{$message.plugin.cookieplugin.010}</div>
+            <div class="settings-error error hidden" name="cookieplugin_settings">{$message.plugin.cookieplugin.011}</div>
+
+            <legend>{$message.plugin.cookieplugin.007}</legend>
+            <input type="submit" value="{$message.plugin.cookieplugin.007}" class="btn-info btn">
+        </fieldset>
+    </form>
+
+</div>
+
+<script src="../plugins/cookieplugin/lib/form_ajax.js" type="text/javascript"></script>
+
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

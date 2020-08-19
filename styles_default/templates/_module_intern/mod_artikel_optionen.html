@@ -1,0 +1,39 @@
+<!-- MODUL (intern): mod_artikel_optionen  -->
+<div class="modul" id="mod_artikel_optionen">
+	{*<!--Optionen zu diesem Artikel:
+	<h5>{$message_2014}</h5>-->*}
+	
+	<span class="ignore">.</span>
+	
+	<ul class="option">
+		<li class="ignore"></li>
+		{if $anzeig_versende && $reporeid_print}
+			<li>
+				{*<!--Sie können diesen Artikel Versenden/Empfehlen-->*}
+				<a rel="nofollow" href="{$slash}index.php?menuid={$menuid_aktuell}&amp;reporeid_send=1&amp;reporeid_print={$reporeid_print}">{$message_2015}</a>
+			<span class="ignore">.</span></li>
+           
+		{/if}
+		{if $anzeig_drucken && $urldatself}
+			<li>
+				{*<!--DruckVersion dieses Artikels href="{$slash}{$urldatself|escape:"htmlall"}?{$urldatprint|escape:"htmlall"}&amp;print=ok -->*}
+				<a rel="nofollow" href="javascript:window.print()">{$message_2016}</a>
+                <span class="ignore">.</span>
+			</li>
+            <!-- <li>
+             <a target="blank" href="http://www.web2pdfconvert.com/convert.aspx">Mit Web2PDF PDF der Seite erstellen</a>
+             <span class="ignore">.</span></li>-->
+		{/if}
+		
+		{if $plugin.mehrstufige_freigabe.handbuchdruck_aktiv}
+			<li><a rel="nofollow" href="{$slash}plugin.php?menuid={$menuid_aktuell}&amp;template=mehrstufige_freigabe/templates/front_handbuchdruck.html&amp;print=ok">.. Handbuchdruck</a><span class="ignore">.</span></li>
+		{/if}
+		
+		{if $editlink}
+			<li><a rel="nofollow" href="{$editlink}">{$message_2195}</a><span class="ignore">.</span></li>
+		{/if}
+	</ul>
+
+
+</div>
+<!-- ENDE MODUL (intern): mod_artikel_optionen  -->

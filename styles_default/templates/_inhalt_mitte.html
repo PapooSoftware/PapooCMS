@@ -1,0 +1,14 @@
+<!-- TEMPLATE: _inhalt_mitte.html -->
+<!-- ### start_of_content -->
+{foreach item=modul from=$module.3}
+		{* <!-- Modul: {$modul.modlang_name}<br /> --> *}
+		{* <!-- Template-Datei: {$modul.mod_datei}<br /> --> *}
+		{ * include file=$modul.mod_template  tvar=$modul.mod_echt_id *}
+		{include file=$modul.mod_template  tvar=$modul.mod_id}
+{/foreach}
+<!-- ### end_of_content -->
+{if $anzeig_versende OR $anzeig_drucken OR $editlink}
+	{include file="_module_intern/mod_artikel_optionen.html"}
+{/if}
+{include file="_module_intern/mod_back_top.html"}
+<!-- TEMPLATE: _inhalt_mitte.html -->

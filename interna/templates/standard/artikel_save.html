@@ -1,0 +1,54 @@
+{if $IS_ADMIN}
+	{*<!-- Abfrage �ber das L�schen eines Artikels -->*}
+	{if $loeschen}
+		<form action="./artikel.php?menuid=11&obermenuid=5&untermenuid=11" method="post" id="formi">
+			{*<!-- Diesen Artikel l�schen?? -->*}
+			<fieldset>
+				<legend>{$artikel_save.loeschen_legend}</legend>
+				<p>{$uberschrift}</p>
+				{*<!-- L�schen-->*}
+				<input type="submit" class="submit_back_red" style="background-color:red;float:left;margin-right:3em;" value="{$message_182}" name="loeschenecht" /><br />
+			</fieldset>
+		</form>
+	{else}
+		{if $keine_freigabe}
+			<fieldset>
+				<br />
+				{*<!-- Sie haben keine Rechte Artikel zu ver�ffentlichen. -->*}
+				<p>{$message_187} {$message_188}</p>
+				{*<!-- Die <strong>endg�ltige</strong> Freigabe erfolgt durch den Gruppenleiter. Bitte das H�kchen trotzdem setzen wenn Sie das Dokumente ver�ffentlichen wollen.</p> -->*}
+				<p>{$message_172}</p>
+			</fieldset>
+		{/if}
+		{if $darf_schreiben}
+			<fieldset>
+				<legend>{$message_185}</legend>
+				<br />
+				{if $urheber}
+					<fieldset>
+						<legend>{$artikel_save.uebernehmen_legend}</legend>
+						{$artikel_save.uebernehmen_text}:<br />
+						<br />
+						<input type="checkbox" name="ubernahme" id="ubernahme" value="1"/>
+						<label for="ubernahme">{$artikel_save.uebernehmen_checkbox}</label><br />
+					</fieldset>
+				{/if}
+				{*<!-- Eintragen -->*}
+				<input type="submit" class="submit_back_green" value="{$message_70}" name="inhalt_ar[Submit1]" />
+			</fieldset>
+			{if isset($xinput) && $xinput}
+				<fieldset>
+					<legend>{$message_70a}</legend>
+					<input type="submit" class="submit_back_big" value="{$message_70a}" name="inhalt_ar[Submit2]" />
+				</fieldset>
+				{*<!-- Daten l�schen? -->*}
+				<fieldset>
+					<legend>{$message_182}</legend>
+					<input type="submit" class="submit_back_alert" value="{$message_182}" name="inhalt_ar[loeschen]" />
+				</fieldset>
+			{/if}
+		{else}
+			{$message_678}
+		{/if}
+	{/if}
+{/if}

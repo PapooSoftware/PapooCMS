@@ -1,0 +1,92 @@
+{if $module_aktiv.mod_blogger_calendar}
+<!-- MODUL: Kalender_front -->
+{foreach item=cal from=$blog_kalender_result}
+
+<div id="kalender_{$cal.kalender_id}" class="modul">
+    <div class="kalender_modul">
+        <h3><i class="fa fa-archive"></i> Archiv</h3>
+        {literal}
+        <script language="JavaScript">
+            <!--
+
+            function gox{/literal}{$cal.kalender_id}{literal}(){
+                document.monatformx{/literal}{$cal.kalender_id}{literal}.submit();
+
+            }
+            //-->
+        </script>
+        {/literal}
+        <div class="Kalender" >
+            <form action="" name="monatformx{$cal.kalender_id}" method="POST">
+                <input type="hidden" name="date_time" value="" />
+                <div class="monat_select">
+
+                    <select onchange="gox{$cal.kalender_id}()" name="monats_id" size="1" id="monats_id">
+
+                        {foreach item=mon from=$blog_monat_array_kal}
+
+                        <option value="{$mon.mon_id}" {if $blog_monats_id==$mon.mon_id}
+                        selected="selected"{/if}>{$mon.name} - {$mon.jahr}</option>
+
+                        {/foreach}
+
+                    </select>
+
+                    <noscript>
+                        <input type="submit" name="submit" value="{$message_160}" />
+                    </noscript>
+                </div>
+            </form>
+            <table class="kalender_table">
+
+                <tr>
+                    <th>{$message_paket_mo}</th>
+                    <th>{$message_paket_di}</th>
+                    <th>{$message_paket_mi}</th>
+                    <th>{$message_paket_do}</th>
+                    <th>{$message_paket_fr}</th>
+                    <th>{$message_paket_sa}</th>
+                    <th>{$message_paket_so}</th>
+                </tr>
+                <tr>
+                    {foreach item=ptag from=$blog_tagderwoche_a}
+                    <td></td>
+                    {/foreach}
+                    {foreach item=ptag from=$cal.calender_dat}
+                    {if $ptag.1!="Mon"}
+                    <td {if $ptag.link=="ok"}class="cal_set" {/if}>{if $ptag.link=="ok"}<a title="{$ptag.termin_name}" class="cal_set"
+                    {if $url_blog_modrewrite}
+                        href="/date/{$ptag.data.lcat_id}-{$ptag.url_date}/"
+                    {else}
+                     href="index.php?menuid={$ptag.data.lcat_id}&amp;time={$ptag.datum}&amp;widget=blogcal"
+                    {/if}
+                    >{$ptag.0}</a>
+                    {else}{$ptag.0}
+                    {/if}</td>
+                    {else}
+
+                </tr>
+                <tr>
+                    <td {if $ptag.link=="ok"}class="cal_set" {/if}>{if $ptag.link=="ok"} <a title="{$ptag.termin_name}" class="cal_set"
+                    {if $url_blog_modrewrite}
+                        href="/date/{$ptag.data.lcat_id}-{$ptag.url_date}/"
+                    {else}
+                    href="index.php?menuid={$ptag.data.lcat_id}&amp;time={$ptag.datum}&amp;widget=blogcal"
+                    {/if}
+                    >{$ptag.0}</a>
+                    {else} {$ptag.0}
+                    {/if}</td>
+                    {/if}
+                    {/foreach}
+                </tr>
+            </table>
+
+        </div>
+
+
+    </div>
+</div>
+
+{/foreach}
+<!-- ENDE MODUL: Kalender_front -->
+{/if}

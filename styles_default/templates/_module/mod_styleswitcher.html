@@ -1,0 +1,27 @@
+{if $module_aktiv.mod_styleswitcher}
+	<!-- MODUL: styleswitcher -->
+
+	<div class="modul span3" id="mod_styleswitcher">
+		<h3>{$message_2139}</h3>
+		<div class="inner_mod">
+			<form action="" method="post">
+				<fieldset>
+					{*<!-- Styleswitcher-->*}
+					<legend>{$message_2139}</legend>
+					<label for="style">{$message_2139}</label>
+					<select id="style" name="style" size="1">
+						{*<!-- (w&auml;hlen)-->*}
+						<option value="none" >({$message_2140})</option>
+						{foreach item=style  from=$style_data}
+							<option value="{$style.stylevalue|escape:"html"}" {$style.selected} >{$style.style_name}</option>
+						{/foreach}
+					</select>
+					{*<!-- ausprobieren-->*}
+					<input type="submit" class="senden btn btn-info" value="{$message_2126}" />
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+	<!-- ENDE MODUL: styleswitcher -->
+{/if}

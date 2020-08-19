@@ -1,0 +1,66 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file="head.inc.utf8.html"}
+
+<!-- Men� kommt hier rein-->
+{include file="menu.inc.html"}
+
+<div class="artikel">
+
+{if $deleted}
+<div class="alert"><strong>{$plugin.freiemodule.deleted}</strong></div>
+{/if}
+
+{if $eintragmakeartikelfertig}
+<!-- Die Artikel wurden durchgeloopt-->
+<div class="message"><h2>{$plugin.freiemodule.eingetragen}</h2></div>
+{/if}
+{if $exist}
+<!-- Der Eintrag exisitiert schon-->
+<div class="error"><h2 style="color:red;">{$plugin.freiemodule.exist}</h2></div>
+{/if}
+
+{if $list}
+{$plugin.freiemodule.liste}
+<ol>
+{foreach item=dat from=$list_dat}
+
+<li>
+    <a href="{$link_frei}{$dat.freiemodule_id}">{$dat.freiemodule_name} {$plugin.freiemodule.bearbeiten}</a> {$plugin.freiemodule.vom} {$dat.freiemodule_start} {$plugin.freiemodule.bis} {$dat.freiemodule_stop} (ID: <b>{$dat.freiemodule_id}</b>)
+</li>
+
+{/foreach}
+</ol>
+{/if}
+{if $edit}
+<!-- Es soll ein neuer Eintrag erstellt werden -->
+{include file="../../../plugins/freiemodule/templates/freiemoduleformeingabe.html"}
+ {/if}
+
+{if $fragedel}
+<h2>{$plugin.freiemodule.fragedel}</h2>
+<form action="" method="post">
+
+  <fieldset>
+   <legend>{$plugin.freiemodule.fragedel2}
+    </legend>
+<strong>{$freiemodule_name}</strong>
+
+  <input type="hidden" name="freiemodule_id" value="{$freiemodule_id}"/>
+  <br /><br />
+
+  <br />
+  <input style="float:right" type="submit" class="submit_back_red" name="submitdelecht" value="{$plugin.freiemodule.loeschen}"/>
+
+
+
+
+  </fieldset>
+  </form>
+{/if}
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file="foot.inc.html"}
+{/if}

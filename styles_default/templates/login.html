@@ -1,0 +1,24 @@
+<!-- TEMPLATE: login.html -->
+<h2 class="ignore">{$message_2199}</h2>
+<a  id="artikel"></a>
+{if $vergessen}
+	{include file="_module_intern/mod_vergessen.html"}
+{else}
+{if NOT $loggedin}
+			{include file="_module_intern/mod_loginform_content.html"}
+		{else}
+			{*<!-- eingeloggt -->*}
+			{*<!-- Account bearbeiten -->*}
+			<h3>{$message_2128}</h3>
+
+			<div class="loggedin">
+				<ul>
+					<li><a class="loginlink" href="{$slash}account.php">{$message_2133}</a></li>
+					{*<!-- ausloggen -->*}
+					<li><a class="loginlink" href="{$slash}index.php?logoff=1">{$message_2134}</a></li>
+				</ul>
+			</div>
+			{*<!-- Ende eingeloggt -->*}
+		{/if}
+{/if}
+<!-- TEMPLATE: login.html -->

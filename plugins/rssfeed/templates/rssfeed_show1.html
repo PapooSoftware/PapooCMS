@@ -1,0 +1,26 @@
+<div class="artikel">
+		
+        {if $rss_channel_error neq ''}
+		 
+		 <h1>{$rss_channel_error}</h1>  
+		   
+		{else}
+		
+		<h1><a href="{$rss_channel_linkFEED2}">{$rss_channelFEED2}</a></h1>
+		
+			{foreach item=table from=$rss_datenFEED2}
+		
+				<div class="rssitem">
+				<h2><a href="{$table.link}">{$table.title}</a></h2>
+				<p>{$table.description}</p>
+				<br />
+			</div>
+			{/foreach}
+		{/if}	
+</div>
+
+{if $Papooversion eq ""}
+
+{include file="foot.inc.html"}
+
+{/if}

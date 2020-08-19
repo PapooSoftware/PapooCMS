@@ -1,0 +1,30 @@
+{if $module_aktiv.mod_suchbox}
+	<!-- MODUL: suchbox -->
+	<div class="modul" id="mod_suchbox" >
+		<a  id="suchen"></a>
+
+		<div class="inner_mod">
+			<form id="suche" method="get" action="{$slash}index.php">
+
+					{*<!-- Suche-->*}
+
+					{*<!-- Suchbegriff hier eingeben-->*}
+					<input type="text" id="search" name="search" size="20" value="{$search|escape:"html"}"
+						onblur="if(this.value=='')this.value='{$search|escape:"html"}';"
+						onfocus="if(this.value=='{$search}')this.value='';"
+						title="{$message_2136}"
+						{$searchneu} />
+					{*<!-- Finden-->*}
+					<input  type="hidden" name="erw_suchbereich" value="{$is_shop}" />
+                    <input  type="hidden" name="getlang" value="{$lang_short}" />
+                    {if $menu_dat_show_search_aktuell}
+                    <input  type="hidden" name="menuid_search" value="{$menuid_aktuell}" />
+                    {/if}
+                    <input  type="hidden" name="menuid" value="{$menuid_aktuell}" />
+					<input class="senden" type="submit" name="find" value="{$message_2138}" />
+
+			</form>
+		</div>
+	</div>
+	<!-- ENDE MODUL: suchbox -->
+{/if}

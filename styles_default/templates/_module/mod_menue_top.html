@@ -1,0 +1,22 @@
+{if $module_aktiv.mod_menue_top}
+	<!-- MODUL: menue_top -->
+	<div id="mod_menue_top">
+		<ul>
+			{foreach item=menutop from=$menutop name=mod_menutop}
+				<li>
+					<a {$menutop.mtlang_class}
+					href="{if $menutop.mtlang_link}{if $menutop.mtlang_link|@substr:0:1 === "/"}{$smarty.const.PAPOO_WEB_PFAD}{/if}{$menutop.mtlang_link}{else}{if $menutop.menutop_link|@substr:0:1 === "/"}{$smarty.const.PAPOO_WEB_PFAD}{/if}{$menutop.menutop_link}{/if}"
+					title="{$menutop.mtlang_title|escape:"html"}" id="mod_menue_top_link_{$menutop.menutop_id}" {if $menutop.menutop_extern} target="_blank"{/if}>
+					<span class="ignore">{$smarty.foreach.mod_menutop.iteration}.: </span>
+					{$menutop.mtlang_name|escape:"html"}<span class="ignore">.</span>
+					</a>
+					{if not $smarty.foreach.mod_menutop.last}
+						<span class="separator">|</span>
+					{/if}
+				</li>
+			{/foreach}
+		</ul>
+	</div>
+
+	<!-- ENDE MODUL: menue_top -->
+{/if}

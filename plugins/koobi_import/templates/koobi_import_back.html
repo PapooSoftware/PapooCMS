@@ -1,0 +1,122 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+{if $is_eingetragen=="ok"}
+  <div class="message"> {$plugin_fb_plugin_die_daten_wurden_gespeichert}
+
+</div>
+{/if}
+{if $redirect_error}
+<div class="error">{$redirect_error}</div>
+{/if}
+<div class="artikel">
+
+ <h1 id="redirect301_plugin_koobi_import_plugin" class="h1" >{$plugin_redirect301_plugin_koobi_import_plugin}</h1>
+
+ <p id="redirect301_plugin_kopieren" class="h1" >{$plugin_redirect301_plugin_kopieren}</p>
+
+ {if $data_error.import}
+ <div class="error">
+ {if $data_error.import.alle_felder}
+{$plugin_redirectkoobi_plugin_bitte_alle_felder_ausfllen}
+<br />
+ {/if}
+ {if $data_error.import.no_verbindung}
+{$plugin_redirectkoobi_plugin_keine_verbindung_zur_datenbank_mglich}
+  {/if}
+</div>
+{/if}
+
+
+ <h2 id="redirectkoobi_plugin_import_starten" class="h2" >{$plugin_redirectkoobi_plugin_import_starten}</h2>
+<form method="post" action="" id="formi" style="width:99%">
+
+<input type="hidden" name="form_import_step" value="db_eintragen" />
+ <fieldset>
+<legend>{$plugin_redirectkoobi_plugin_db_verbindungsdaten}</legend>
+
+ <div class="labdiv"><label for="redirectkoobi_plugin_benutzername">{$plugin_redirectkoobi_plugin_benutzername}{$plugin_error.redirectkoobi_plugin_benutzername} </label>
+
+<input type="text" name="redirectkoobi_plugin_benutzername" value="{$redirectkoobi_plugin.0.redirectkoobi_plugin_benutzername|escape:"html"}" class="redirectkoobi_plugin_benutzername" id="redirectkoobi_plugin_benutzername"/>
+</div><br />
+
+  <div class="labdiv"><label for="redirectkoobi_plugin_passwort">{$plugin_redirectkoobi_plugin_passwort}{$plugin_error.redirectkoobi_plugin_passwort} </label>
+
+<input type="text" name="redirectkoobi_plugin_passwort" value="{$redirectkoobi_plugin.0.redirectkoobi_plugin_passwort|escape:"html"}" class="redirectkoobi_plugin_passwort" id="redirectkoobi_plugin_passwort"/>
+</div><br />
+
+  <div class="labdiv"><label for="redirectkoobi_plugin_servername">{$plugin_redirectkoobi_plugin_servername}{$plugin_error.redirectkoobi_plugin_servername} </label>
+
+<input type="text" name="redirectkoobi_plugin_servername" value="{$redirectkoobi_plugin.0.redirectkoobi_plugin_servername|escape:"html"}" class="redirectkoobi_plugin_servername" id="redirectkoobi_plugin_servername"/>
+</div><br />
+
+  <div class="labdiv"><label for="redirectkoobi_plugin_datenbankname">{$plugin_redirectkoobi_plugin_datenbankname}{$plugin_error.redirectkoobi_plugin_datenbankname} </label>
+
+<input type="text" name="redirectkoobi_plugin_datenbankname" value="{$redirectkoobi_plugin.0.redirectkoobi_plugin_datenbankname|escape:"html"}" class="redirectkoobi_plugin_datenbankname" id="redirectkoobi_plugin_datenbankname"/>
+</div><br />
+
+ </fieldset><fieldset>
+<legend>{$plugin_redirectkoobi_plugin_einstellungen_fr_import}</legend>
+
+<div class="labdiv"><label for="redirectkoobi_plugin_sprache_auswhlen">{$plugin_redirectkoobi_plugin_sprache_auswhlen}{$plugin_error.redirectkoobi_plugin_sprache_auswhlen} </label>
+
+<select name="redirectkoobi_plugin_sprache_auswhlen" id="redirectkoobi_plugin_sprache_auswhlen" size="1"/><option value="0">{$message_160}</option>{$options_koobi_import_lang}</select>
+</div><br />
+<!--
+ <div class="labdiv"><label for="redirectkoobi_plugin_html_entfernen_beim_import">{$plugin_redirectkoobi_plugin_html_entfernen_beim_import}{$plugin_error.redirectkoobi_plugin_html_entfernen_beim_import} </label> <input type="checkbox" name="redirectkoobi_plugin_html_entfernen_beim_import" value="1" {if $redirectkoobi_plugin.0.redirectkoobi_plugin_html_entfernen_beim_import==1}checked="checked"{/if} class="redirectkoobi_plugin_html_entfernen_beim_import" id="redirectkoobi_plugin_html_entfernen_beim_import"/>
+</div><br />
+-->
+
+</fieldset>
+
+ <fieldset>
+<legend>{$plugin_redirectkoobi_plugin_url_der_seite}</legend>
+
+ <div class="labdiv"><label for="redirectkoobi_plugin_url_der_seite_data">{$plugin_redirectkoobi_plugin_url_der_seite_data}{$plugin_error.redirectkoobi_plugin_url_der_seite_data} </label>
+
+<input type="text" name="redirectkoobi_plugin_url_der_seite_data" value="{$redirectkoobi_plugin.0.redirectkoobi_plugin_url_der_seite_data|escape:"html"}" class="redirectkoobi_plugin_url_der_seite_data" id="redirectkoobi_plugin_url_der_seite_data"/>
+</div></fieldset>
+
+<fieldset>
+ 	<legend>{$message_70}</legend>
+			<!-- Speichern -->
+	<input  type="submit" class="submit_back_green" value="{$message_70}" name="formSubmit_data_settings" />
+			
+		</fieldset>
+    </form>
+     
+
+ 
+<br />
+
+ <br />
+ {if $is_dev} 
+ #start#
+
+ <span class="ignore"></span>
+  <!-- Der Start Button ist notwendig damit sich das System daran aufhängen kann. -->
+	 <div class="rapid_form">
+		<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="plugin_koobi_config" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="redireckoobi_class" />
+		<!-- Das Standarpräfix für die Ids -->
+		<input type="hidden" name="praefix" value="redirectkoobi_plugin" />
+		<!-- Das Standarpräfix für die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="redirectkoobi_plugin" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div>
+
+{/if}
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

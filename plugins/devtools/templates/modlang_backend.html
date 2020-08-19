@@ -1,0 +1,50 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+{*<!-- Menü kommt hier rein -->*}
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+	<h3>{$plugin.devtools.name}</h3>
+	{if $modlang_message}
+		<p>{$modlang_message}</p>
+	{else}
+		<p>
+			{$plugin.devtools.intro}
+		</p>
+		<form name="modlang" action="" method="post">
+			<input type="hidden" name="modlang_action" value="modlang_do">
+			<input type="submit" class="submit_back_xxl_white" value="{$plugin.devtools.submit}">
+		</form>
+	{/if}
+	
+	<h3>{$plugin.devtools.neu_modul_h3}</h3>
+	{if $modlang_message}
+		<p></p>
+	{else}
+		<p>
+			{$plugin.devtools.neu_modul_text}
+		</p>
+		<form name="modnew" action="" method="post">
+		<fieldset><legend>{$plugin.devtools.neu_modul_legend}</legend>
+		<label for="mod_new_name">{$plugin.devtools.neu_modul_name}</label><br />
+		<input type="text" name="mod_new_name" id="mod_new_name" value="{$mod_new_name}"><br />
+		<label for="mod_new_file">{$plugin.devtools.neu_modul_rel}</label><br />
+		<input type="text" name="mod_new_file" id="mod_new_file"  value="{$mod_new_file}"><br />
+		<label for="mod_new_descrip">{$plugin.devtools.neu_modul_des}</label><br />
+		<textarea name="mod_new_descrip" id="mod_new_descrip"   >{$mod_new_descip}</textarea><br />
+		<br />
+			<input type="hidden" name="modlang_action" value="mod_new">
+			<input type="submit" class="submit_back_xxl" value="{$plugin.devtools.submit2}">
+			</fieldset>
+		</form>
+	{/if}
+	
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

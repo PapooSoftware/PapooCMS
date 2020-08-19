@@ -1,0 +1,62 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+	<h1>{$plugin.sprechomat.einstellungen}</h1>
+{if $sprechomat_backendmessage neq ""}
+	<h3>{$sprechomat_backendmessage}</h3>
+{/if}
+	<form name="sprechomat_daten" method="post" action="">
+		<fieldset>
+			<legend>{$plugin.sprechomat.bereiche}</legend>
+			<fieldset>
+				<legend>{$plugin.sprechomat.startseite}</legend>
+				<label for="sprechomat_aktiv_starttext_yn">{$plugin.sprechomat.start_aktiv}</label>
+				<input type="checkbox" name="sprechomat_aktiv_starttext_yn" id="sprechomat_aktiv_starttext_yn" value="1"
+						{if $sprechomat_einstellungen.sprechomat_aktiv_starttext_yn}checked="checked"{/if} />
+			</fieldset>
+			<fieldset>
+				<legend>{$plugin.sprechomat.artikel}</legend>
+				<label for="sprechomat_aktiv_artikel_yn">{$plugin.sprechomat.artikel_aktiv}</label>
+				<input type="checkbox" name="sprechomat_aktiv_artikel_yn" id="sprechomat_aktiv_artikel_yn" value="1"
+						{if $sprechomat_einstellungen.sprechomat_aktiv_artikel_yn}checked="checked"{/if} /><br />
+				<br />
+				<small>
+					{$plugin.sprechomat.hinweis}
+				</small>
+			</fieldset>
+			<fieldset>
+				<legend>{$plugin.sprechomat.kommentare}</legend>
+				<label for="sprechomat_aktiv_kommentare_yn">{$plugin.sprechomat.kommentar_aktiv}</label>
+				<input type="checkbox" name="sprechomat_aktiv_kommentare_yn" id="sprechomat_aktiv_kommentare_yn" value="1"
+						{if $sprechomat_einstellungen.sprechomat_aktiv_kommentare_yn}checked="checked"{/if} />
+			</fieldset>
+			<fieldset>
+				<legend>{$plugin.sprechomat.gaestebuch}</legend>
+				<label for="sprechomat_aktiv_gaestebuch_yn">{$plugin.sprechomat.gaestebuch_aktiv}</label>
+				<input type="checkbox" name="sprechomat_aktiv_gaestebuch_yn" id="sprechomat_aktiv_gaestebuch_yn" value="1"
+						{if $sprechomat_einstellungen.sprechomat_aktiv_gaestebuch_yn}checked="checked"{/if} />
+			</fieldset>
+			<fieldset>
+				<legend>{$plugin.sprechomat.forum}</legend>
+				<label for="sprechomat_aktiv_forum_yn">{$plugin.sprechomat.forum_aktiv}</label>
+				<input type="checkbox" name="sprechomat_aktiv_forum_yn" id="sprechomat_aktiv_forum_yn" value="1"
+						{if $sprechomat_einstellungen.sprechomat_aktiv_forum_yn}checked="checked"{/if} />
+			</fieldset>
+			<fieldset>
+				<legend>{$plugin.sprechomat.speichern}</legend>
+				<input type="submit" class="submit_back_green" value="{$plugin.sprechomat.speichern2}" name="sprechomat_submit_set" />
+			</fieldset>
+		</fieldset>
+	</form>
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

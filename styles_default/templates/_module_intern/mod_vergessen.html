@@ -1,0 +1,24 @@
+<!-- MODUL (intern): mod_vergessen (intern) -->
+<h2 class="ignore">{$message_2243}</h2>
+<h2>{$message_2262}</h2>
+<p>{$message_2258}</p>
+
+{if $notvalide}
+	<strong>{$message_2259}</strong>
+{/if}
+
+{if $valide}
+	<strong>{$message_2260}</strong>
+{else}
+	<div class="floatbox">
+		<form action="{$slash}login.php?forgot=1" method="post" id="formk" >
+			<fieldset>
+				<legend>{$message_2261}</legend>
+				<input type="text" name="uedat"  size="40" maxlength="255"/>
+				
+				<input type="submit" class="btn btn-info" name="submituedat" value="{$message_2261}"/>
+			</fieldset>
+		</form>
+	</div>
+{/if}
+<!-- ENDE MODUL (intern): mod_vergessen (intern) -->

@@ -1,0 +1,76 @@
+<h3>{$GALMSGF.BILDER_GALERIE} &quot;{$galerie_bild.gallang_name}&quot;</h3>
+<div class="galerie_navigation">
+	<div class="galerie_navigation_element" id="galerie_navigation_zurueck">
+		{if $galerie_bild.bild_nummer > 1}
+			<form action="" method="post" class="galerie_bild_form" style="display: inline">
+				<input type="hidden" name="galerie_switch" value="GALERIE" />
+				
+				<input type="hidden" name="galerie_id" value="{$galerie_bild.gal_id}" />
+				<input type="hidden" name="galerie_bild_aktu" value="{$galerie_bild.bild_nummer}" />
+				<input type="hidden" name="galerie_navigation_zurueck" value="1" />
+				<input type="image"  name="galerie_knopf_zurueck" id="galerie_knopf_zurueck" value="1"
+					title="{$GALMSGF.NAV_ZURUECK}" alt="{$GALMSGF.NAV_ZURUECK}"
+					src="{$slash}plugins/galerie/bilder/pfeile/pfeil_links.gif"
+					style="width: 25px; height: 25px;"
+					/>
+			</form>
+		{else}
+			&nbsp;
+		{/if}
+	</div>
+	<div class="galerie_navigation_element" id="galerie_navigation_uebersicht">
+		<form action="" method="post" class="galerie_bild_form" id="galerie_bild_uebersicht" style="display: inline">
+			<input type="hidden" name="galerie_switch" value="" />
+			<input type="submit" name="galerie_uebersicht" value="{$GALMSGF.NAV_UEBERSICHT}">
+		</form>
+	</div>
+	<div class="galerie_navigation_element" id="galerie_navigation_weiter">
+		{if $galerie_bild.bild_nummer < $galerie_bild.gal_bilderanzahl}
+			<form action="" method="post" class="galerie_bild_form" style="display: inline">
+				<input type="hidden" name="galerie_switch" value="GALERIE" />
+				<input type="hidden" name="galerie_id" value="{$galerie_bild.gal_id}" />
+				<input type="hidden" name="galerie_bild_aktu" value="{$galerie_bild.bild_nummer}" />
+				<input type="hidden" name="galerie_navigation_weiter" value="1" />
+				<input type="image"  name="galerie_knopf_weiter" id="galerie_knopf_weiter" value="1"
+					title="{$GALMSGF.NAV_WEITER}" alt="{$GALMSGF.NAV_WEITER}"
+					src="{$slash}plugins/galerie/bilder/pfeile/pfeil_rechts.gif"
+					style="width: 25px; height: 25px;"
+					/>
+			</form>
+		{else}
+			&nbsp;
+		{/if}
+	</div>
+</div>
+<div class="galerie_navigation_clear">&nbsp;</div>
+
+<p class="galerie_bild">
+	<img title='{$galerie_bild.bildlang_name|escape:"html"}' alt=""
+		src="{$slash}plugins/galerie/galerien/{$galerie_bild.gal_verzeichnis}/{$galerie_bild.bild_datei}"
+		style="width: {$galerie_bild.bild_breite}px; height: {$galerie_bild.bild_hoehe}px;"
+	/>
+</p>
+
+<h4>{$galerie_bild.bildlang_name}</h4>
+<p>
+	{$galerie_bild.bildlang_beschreibung}<br />
+	{$GALMSGF.BILDER_BILD} {$galerie_bild.bild_nummer} {$GALMSGF.BILDER_VON} {$galerie_bild.gal_bilderanzahl}
+</p>
+
+<h3>{$GALMSGF.BILDER_UEBERSICHT}</h3>
+<div class="galerie_bilder_auswahl">
+	{foreach item=bild from=$galerie_bilder}
+		<form action="" method="post" class="galerie_bilder_auswahl_form"
+			style="width: {$galerie_max_dimensions.breite}px; height: {$galerie_max_dimensions.hoehe}px; text-align: center;">
+			<input type="hidden" name="galerie_switch" value="GALERIE" />
+			<input type="hidden" name="galerie_id" value="{$galerie_bild.gal_id}" />
+			<input type="hidden" name="galerie_bild_aktu" value="{$bild.bild_nummer}" />
+			<input type="hidden" name="galerie_bild_auswahl" value="1" />
+			<input type="image"  name="galerie_bild_auswahl_{$bild.bild_id}" id="galerie_bild_auswahl_{$bild.bild_id}" value="1"
+				title='{$bild.bild_nummer}. {$bild.bildlang_name|escape:"html"}' alt=""
+				src="{$slash}plugins/galerie/galerien/{$galerie_bild.gal_verzeichnis}/thumbs/{$bild.bild_datei}"
+				style="width: {$bild.bild_breite_thumb}px; height: {$bild.bild_hoehe_thumb}px;"
+			/><br />
+		</form>
+	{/foreach}
+</div>

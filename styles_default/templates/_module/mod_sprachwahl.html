@@ -1,0 +1,19 @@
+{if $module_aktiv.mod_sprachwahl}
+<!-- MODUL: sprachwahl -->
+<div class="modul" id="mod_sprachwahl">
+<ul>
+	{*
+	<!--  verfügbare Sprachen -->
+	*} 
+	{foreach item=lang from=$languageget}
+	<li class="languageli"><a class="toplink"
+		{*<!-- href="{$lang.link_lang}&amp;menuid={$menuid_aktuell|escape:"html"}&amp;reporeid={$reporeid_print}&amp;template={$template}"> -->*}
+		
+		href="{$lang.lang_link}" rel="alternate" hreflang="{$lang.lang_short}" {if $aktulanglong==$lang.language}id="aktulang"{/if}>
+	<img src="{$slash}bilder/{$lang.lang_bild}" width="20" height="14" style="margin-top:0px;" alt="{$lang.lang_title}" /> {$lang.language}</a>
+	<span class="ignore">.</span></li>
+	{/foreach}
+</ul>
+</div>
+<!-- ENDE MODUL: sprachwahl -->
+{/if}

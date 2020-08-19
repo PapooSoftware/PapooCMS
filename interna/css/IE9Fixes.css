@@ -1,0 +1,39 @@
+body {
+
+}
+fieldset {
+	position:relative;
+	margin-top:25px;
+	padding-left:10px;
+
+}
+legend {
+	position:relative;
+	margin-top:-17px;
+	margin-left:-30px;
+}
+input {
+
+}
+.toplink {
+	position:relative;
+}
+.menu {
+
+}
+
+.menu .untermenu1 {
+}
+.untermenu1,
+.artikel,
+#footer {
+
+	filter:progid:DXImageTransform.Microsoft.DropShadow(color=#BBBBBB, offx=6, offy=6);
+}
+.artikel2 {
+	position:absolute;
+	right:20px;
+}
+
+
+

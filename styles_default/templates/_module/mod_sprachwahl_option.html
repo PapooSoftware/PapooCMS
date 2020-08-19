@@ -1,0 +1,18 @@
+{if $module_aktiv.mod_sprachwahl_option}
+<!-- MODUL: sprachwahl_option -->
+<div class="modul" id="mod_sprachwahl_option">
+	<form action="" method="post">
+		<select name="getlang" id="getlang">
+			{foreach item=lang from=$languageget}
+			<option value="{$lang.lang_short|escape:"html"}" {if $lang.lang_short == $lang_short} selected="selected" {/if}
+				style="background: url({$slash}bilder/{$lang.lang_bild}) left center no-repeat; padding-left: 30px;margin-bottom: 3px;"
+				>
+				{$lang.language}
+			</option>
+			{/foreach}
+		</select>
+		<input type="submit" value="{$auswaehlen}" />
+	</form>
+</div>
+<!-- ENDE MODUL: sprachwahl_option -->
+{/if}

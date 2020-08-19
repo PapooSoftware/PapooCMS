@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- version: Versions-Nummer papoo für die das Plugin gedacht ist / funktioniert -->
+<plugin version="4.0">
+
+<!-- ALLGEMEINE-INFORMATIONEN -->
+<!-- ************************ -->
+<!-- name: Name des Plugins -->
+<name>Bootstrap-Dropdown</name> 
+
+<!-- beschreibung_de: Kurz-Beschreibung des Plugins auf deutsch (wird im Plugin-Manager angezeigt) -->
+<beschreibung_de><![CDATA[Einbindung des Bootstrap Menüs um ein Dropdown-Menü zu generieren.]]></beschreibung_de>
+
+<!-- beschreibung_en: Kurz-Beschreibung des Plugins auf englisch (wird im Plugin-Manager angezeigt) -->
+<beschreibung_en><![CDATA[Use the Bootstrap-Script Superfish to generate a dropdown menu]]></beschreibung_en>
+
+<!-- version: Versions-Nummer des Plugins -->
+<version>1.1</version>
+
+<!-- papooid: Eindeutige Nummer offizieller papoo-Plugins -->
+<papooid>97</papooid>
+
+<!-- link: z.Z. noch ohne Funktion -->
+<link>http://www.papoo.de</link> 
+
+<!-- datum: Erscheinungs-Datum bzw. Stand des Plugins -->
+<datum>26.03.2013</datum>
+
+
+<!-- AUTOR-INFORMATIONEN -->
+<!-- ******************* -->
+<!-- autor: Informationen zum Autor (Programmierer) des Plugins -->
+<autor>
+	<!-- autor.name: Name des Authors -->
+	<name>Carsten Euwens</name>
+	
+	<!-- autor.kontakt: postalische Kontakt-Informationen des Autors -->
+	<kontakt><![CDATA[Carsten Euwens
+Papoo Software
+Ellerstr. 9
+53117 Bonn]]></kontakt>
+	
+	<!-- autor.email: eMail-Adresse des Autors -->
+	<email>info@papoo.de</email>
+	
+	<!-- autor.telefon: Telefon-Nummer des Autors -->
+	<telefon>0228 / 280 56 68</telefon>
+</autor>
+
+
+<!-- MENÜ-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- menue: Informationen für den Menü-Eintrag im Backend (papoo/interna) -->
+<menue>
+	<!-- menue.eintrag_de: Name des Menü-Punktes im Backend auf deutsch -->
+	<eintrag_de>Bootstrap Dropdown</eintrag_de>
+	<!-- menue.eintrag_en: Name des Menü-Punktes im Backend auf englisch -->
+	<eintrag_en>Bootstrap-Dropdown</eintrag_en>
+	<!-- menue.icon: Pfad zum Menü-Icon des Menü-Punktes im Backend (relativ zum Plugin-Verzeichnis) -->
+	<icon>bootstrapdropdown/images/dropdown.png</icon>
+	<!-- menue.link: Name der Seite auf welche der Menü-Punkt im Backend verweisen soll -->
+	<link>plugin:bootstrapdropdown/templates/bootstrapdropdown_back.html</link>
+	
+	<!-- menue.submenue: Untermenü-Punkt für diesen Menü-Punkt im Backend, Struktur wie menue -->
+</menue>
+
+<!-- menue: Es können auch weitere Menü-Punkte im Backend eingetragen werden -->
+
+<!-- KLASSEN-INFORMATIONEN -->
+<!-- ****************** -->
+
+<!-- klasse.name: Name der Klassen-Instanz / des Objekts (also der Name des Dings, das mit $name = new xx_class(); erzeugt wird) -->
+
+<klasse>
+	<name>bootstrapdropdown</name>
+	<datei>bootstrapdropdown/lib/bootstrapdropdown_class.php</datei>
+</klasse>
+
+
+<!-- CSS-INFORMATIONEN -->
+<!-- ***************** -->
+<!-- css: Pfad zur CSS-Datei (relativ zum Plugin-Verzeichnis) -->
+<css></css>
+
+
+<!-- DATENBANK-INFORMATIONEN -->
+<!-- ****************** -->
+<datenbank>
+	<!-- datenbank.installation: Pfad zur SQL-Installations-Datei (relativ zum Plugin-Verzeichnis) -->
+	<installation>bootstrapdropdown/sql/bootstrapdropdown_install.sql</installation>
+	<!-- datenbank.deinstallation: Pfad zur SQL-Deinstallations-Datei (relativ zum Plugin-Verzeichnis) -->
+	<deinstallation>bootstrapdropdown/sql/bootstrapdropdown_deinstall.sql</deinstallation>
+</datenbank>
+
+<!-- MODUL-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- modul: Informationen des Frontend-Moduls -->
+<modul>
+	<!-- modul.datei: Datei-Name des Modul-Templates (relativ zum Plugin-Verzeichnis) -->
+	<datei>plugin:bootstrapdropdown/templates/mod_menue.html</datei>
+	
+	<!-- modul.name_de: Der deutsche Name des Moduls -->
+	<name_de>Navigations-Menü komplett (Bootstrap Dropdown)</name_de>
+	<!-- modul.beschreibung_de: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_de>Das Navigations-Menü für das Superfish-Plugin.</beschreibung_de>
+	
+	<!-- modul.name_en: Der englische Name des Moduls -->
+	<name_en>Dropdown menu</name_en>
+	<!-- modul.beschreibung_en: Die englische Beschreibung des Moduls -->
+	<beschreibung_en>The navigation menu for the bootstrapdropdown plugin.</beschreibung_en>
+</modul>
+
+<!-- Einbindung der Sprach-Dateien.
+	In dem hier angegebenen Verzeichnis sollten Dateien mit folgenden Namen liegen:
+	- messages_backend_[de|en|fr| .. etc.].inc.php
+	- messages_frontend_[de|en|fr| .. etc.].inc.php
+-->
+<messages>bootstrapdropdown/messages</messages>
+
+</plugin>

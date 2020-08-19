@@ -1,0 +1,23 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+	{$message.plugin.cm.kopf}<br />
+	
+	{foreach item=entry key=key name=script_name from=$plugin_cm_head.de}
+		<h2>{$smarty.foreach.script_name.iteration}. {$entry}</h2>
+		<div class="cm_message">
+		{if $plugin_cm_img.de[$key]}<a href="../plugins/content_manipulator/scripts/{$plugin_cm_img.de[$key]}" rel="lightbox" ><img src="../plugins/content_manipulator/scripts/{$plugin_cm_img.de[$key]}" alt="" style="float: left;margin: 10px 10px 10px 0px; max-width:120px;max-height:80px;" /></a>{/if}
+		{$plugin_cm_body.de[$key]}
+		</div><br />
+	{/foreach}
+</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

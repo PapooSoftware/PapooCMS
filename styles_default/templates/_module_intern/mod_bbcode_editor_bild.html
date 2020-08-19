@@ -1,0 +1,19 @@
+<!-- MODUL (intern): mod_bbcode_editor_bild  -->
+<div class="bbeditor_element">
+	<label for="bilder">Bilder:</label><br />
+	<select onchange="bbcodeimg(this.options[this.selectedIndex].value);document.artikel.schriftart.options.selectedIndex = 0;" name="schriftart" id="schriftart" title="Hier kann ein Bild ausgewählt werden." tabindex="1010" size="1">
+		<option value="">(auswählen)</option>
+		{foreach item=bild from=$bild_data}
+			<option value="{$bild.image_name}" >{$bild.image_alt}</option>
+		{/foreach}
+	</select>
+</div>
+<div class="bbeditor_element">
+	<label for="positionierung">Positionierung:</label><br />
+	<select onchange="bbcodefloat(this.options[this.selectedIndex].value);document.artikel.schriftart.options.selectedIndex = 0;" name="positionierung" id="positionierung" title="Hier kann die Positionierung ausgewählt werden." tabindex="1020" size="1">
+		<option value="">(auswählen)</option>
+		<option value="links" >Links im Fluss</option>
+		<option value="rechts" >Rechts im Fluss</option>
+	</select>
+</div>
+<!-- ENDE MODUL (intern): mod_bbcode_editor_bild  -->

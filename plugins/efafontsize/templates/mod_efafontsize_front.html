@@ -1,0 +1,25 @@
+{if $module_aktiv.mod_efafontsize_front}
+	<!-- MODUL: efa_fontsize -->
+	<div class="modul" id="mod_efa_fontsize">
+		<span class="mod_efa_fontsize_text">{$mod_efa_fontsize.text}</span>
+		
+		<script type="text/javascript">
+		var efa_default = {$efa_fontsize_spez.0.efa_fontsize_spez_schriftgre_default_wert|escape:"html"};	//default text size as percentage of user default
+		var efa_increment = {$efa_fontsize_spez.0.efa_fontsize_spez_steigerung_pro_schritt_in_|escape:"html"};	//percentage to increase/decrease font size
+		var efa_max_size = {$efa_fontsize_spez.0.efa_fontsize_spez_maximale_schriftgre_in_|escape:"html"};
+		var efa_min_size = {$efa_fontsize_spez.0.efa_fontsize_spez_minimale_schriftgre_in_|escape:"html"}.01;
+		var efa_fontSize = new Efa_Fontsize(efa_increment,efa_bigger,efa_reset,efa_smaller,efa_default);
+
+		if (efa_fontSize) efa_fontSize.efaInit();
+			if (efa_fontSize)
+			{ldelim}
+				efa_bigger[2] = "{$mod_efa_fontsize.bigger}";
+				efa_reset[2] = "{$mod_efa_fontsize.normal}";
+				efa_smaller[2] = "{$mod_efa_fontsize.smaller}";
+				var efa_fontSize_lokalisiert = new Efa_Fontsize(efa_increment,efa_bigger,efa_reset,efa_smaller,efa_default);
+				document.write(efa_fontSize_lokalisiert.allLinks);
+			{rdelim}
+		</script>
+	</div>
+	<!-- ENDE MODUL: efa_fontsize -->
+{/if}

@@ -1,0 +1,22 @@
+{if $article_von|@count > 1}
+<form id="filter_article_panel" action="" method="post">
+	<span>{$filter_news}</span>
+	<div class="von">
+		{$filter_von}
+		<select name="von_article">
+			{foreach item=filter_von from=$article_von name=filter_von}
+			<option value="{$filter_von.1}" {if $von_article == $filter_von.1} selected{/if}>{$filter_von.0}</option>
+			{/foreach}
+		</select>
+	</div>
+	<div class="bis">
+		{$filter_bis}
+		<select name="bis_article">
+			{foreach item=filter_bis from=$article_bis name=filter_bis}
+			<option value="{$filter_bis.1}" {if $bis_article == $filter_bis.1} selected{/if}>{$filter_bis.0}</option>
+			{/foreach}
+		</select>
+	</div>
+	<input type="submit" value="" name="filter_article" />
+</form>
+{/if}

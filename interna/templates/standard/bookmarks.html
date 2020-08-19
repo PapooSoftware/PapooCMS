@@ -1,0 +1,39 @@
+{if $IS_ADMIN}
+	<div class="bookmarks">
+		<h3>{$message_591}</h3>
+		{if $bookmarks}
+			<ul style="text-align:left;">
+				{foreach item="book" from="$bookmarks"}
+					<li><a href="{$book.book_link}">{$book.book_name}</a></li>
+				{/foreach}
+			</ul>
+		{/if}
+		{if $nod_link=="ok"}
+			<a style="color:red;" href="./{$bookmarks_template}&amp;bookmarkdel=ok">{$message_593}</a>
+		{else}
+			<a href="./{$bookmarks_template}&amp;bookmarkit=ok">{$message_592}</a>
+		{/if}
+		{*<!-- Metaebene, wird nur angezeigt, wenn auch das Plugin (genau:Sprachdatei des Plugins) installiert ist -->*}
+		<br />
+		{if $plugin_metaebene=="ok"}
+			<h3>{$plugin.mv.metaebene} </h3>
+			<strong>
+				{if $metaebene_name != ""}
+					{$metaebene_name} [ID = {$metaebene_name_id}]
+				{else}
+					{$plugin.mv.metaebene_keine}
+				{/if}
+			</strong>
+			<br />
+			<br />
+			<a href="{$link_meta}&mv_id={$mv_id}&selected_meta_gruppe=neu">{$plugin.mv.metaebene_neu}</a>
+		{/if}
+	</div>
+		<div class="bookmarks2">
+		<div class="span3 tile">
+		<h3>{$intern_help_text_h3}</h3>
+		{$intern_help_text}
+		</div>
+	</div>
+{/if}
+

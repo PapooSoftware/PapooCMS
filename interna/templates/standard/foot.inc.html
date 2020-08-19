@@ -1,0 +1,30 @@
+{if $IS_ADMIN}
+	</div></div>
+	<div class="container_sub">
+	<div id="footer">
+	<div class="">
+	<div class="span3" style="height: 100px;;"></div>
+	<div class="span4">
+		<h2>{$verwaltetmit}</h2>Version {$papoo_version}<br />
+		&#169; Papoo Software {$smarty.now|date_format:" %Y"} <a href="http://www.papoo.de" target="_blank">www.papoo.de</a>
+	</div>
+	<div class="span4">{$footer_text1}</div>
+	<div class="span4">
+		<h2>{$hierfindensieuns}</h2>
+		<p><i class="fa fa-phone"></i> &nbsp; 0228 / 280 56 68</p>
+		<p><i class="fa fa-envelope-o"></i>&nbsp; <a href="mailto:info@papoo.de">info@papoo.de</a></p>
+		<p><i class="fa fa-facebook-square"></i> &nbsp; <a target="_blank" href="https://www.facebook.com/cms.papoo"> Facebook</a></p>
+		<p><i class="fa fa-home"></i> &nbsp; <a target="_blank" href="http://www.papoo.de">Webseite</a></p>
+	</div>
+	<div class="ignore2">
+		<h2>{$message_670}</h2>
+		{foreach item=menu from=$menuallback}
+			<a href="./{$menu.menulink}?menuid={$menu.menuid}{if $menu.template}&amp;template={$menu.template}{/if}" id="amenu_go{$menu.menuid2}">{$menu.menuname}</a>.
+		{/foreach}
+		<a href="./index.php" accesskey="1">{$message_671}</a>
+		<a href="./index.php?logoff=1" accesskey="2">{$message_672}</a>
+	</div>
+	</div>
+	</div></div>
+	</body></html>
+{/if}

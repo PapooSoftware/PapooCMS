@@ -1,0 +1,30 @@
+@media print {
+	body {
+		margin: 0;
+		padding: 0;
+	}
+	#mod_menue_top,
+	#mod_suchbox,
+	#links,
+	#suchefor,
+	#main > *:not(#content):not(#content_breadcrump),
+	.subfooter,
+	.top-bar,
+	#content > .forumthread.artikel_details > h2,
+	footer {
+		display: none;
+	}
+	a, a:visited {
+		text-decoration: none;
+	}
+	#main a::after {
+		content: none;
+	}
+	#mod_breadcrump {
+		border: none;
+		padding-left: 0.9375rem;
+	}
+	.forumboard {
+		border: none;
+	}
+}

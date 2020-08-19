@@ -1,0 +1,11 @@
+<!-- TEMPLATE: _fuss.html -->
+<div class="large-12 columns">
+			{foreach item=modul from=$module.5}
+				{* <!-- Modul: {$modul.modlang_name}<br /> --> *}
+				{* include file=$modul.mod_template  tvar=$modul.mod_echt_id *}
+				{include file=$modul.mod_template  tvar=$modul.mod_id}
+			{/foreach}
+			{$message_2155}
+</div>
+        <div class="clear_fix break_artikel"></div>
+<!-- ENDE TEMPLATE: _fuss.html -->

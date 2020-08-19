@@ -1,0 +1,229 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+	{if $galerie_weiche == "GALERIE_TOOLS"}
+	<h1>{$GALMSGB.TOOLS_NAME}</h1>
+	{if $galerie_message}<h2>{$galerie_message}</h2>{/if}
+
+	<p>
+		{$GALMSGB.TOOLS_TEXT}
+	</p>
+
+	<form id="galerie_importieren_form" action="" method="post">
+		<input type="hidden" name="galerie_switch" value="GALERIE">
+
+		<fieldset>
+			<legend>{$GALMSGB.TOOLS_VERZEICHNIS_LEGEND}</legend>
+
+			{*<!-- {if NOT $galerie_verzeichnis_liste}
+						{$GALMSGB.TOOLS_VERZEICHNIS_LEER}<br />-->*}
+
+			{if $zugriffsrechte_einzelgalerie_nicht_ok}
+			<br/>
+
+			<div class="error">
+				{$plugin.galerie_back.errmsg.zugriffsrechte_einzelgalerie_hinweis}
+
+				<ul>
+					{foreach item = verzeichnis from=$zugriffsrechte_einzelgalerie_nicht_ok}
+					<li>
+						<pre>{$verzeichnis}</pre>
+					</li>
+					{/foreach}
+				</ul>
+			</div>
+			{/if}
+
+			{if $zugriffsrechte_thumbnailverzeichnis_nicht_ok}
+			<br/>
+
+			<div class="error">
+				{$plugin.galerie_back.errmsg.zugriffsrechte_thumbnailverzeichnis_hinweis}
+				<ul>
+					{foreach item = verzeichnis from=$zugriffsrechte_thumbnailverzeichnis_nicht_ok}
+					<li>
+						<pre>{$verzeichnis}</pre>
+					</li>
+					{/foreach}
+				</ul>
+			</div>
+			{/if}
+
+			<br/>
+
+			{*<!-- {else} -->*}
+
+			{if NOT $galerie_verzeichnis_liste}
+			{$GALMSGB.TOOLS_VERZEICHNIS_LEER}
+			{else}
+			<p>{$GALMSGB.TOOLS_VERZEICHNIS_OK}</p>
+			<label for="galerie_verzeichnis">{$GALMSGB.TOOLS_VERZEICHNIS_LABEL}</label>
+			<select name="galerie_verzeichnis" id="galerie_verzeichnis">
+				{foreach item=verzeichnis from=$galerie_verzeichnis_liste}
+				<option value="{$verzeichnis.name|escape}">{$verzeichnis.name|escape}</option>
+				{/foreach}
+			</select>
+
+			<p>{$GALMSGB.TOOLS_NAMEN_ANPASSEN}</p>
+			<input type="checkbox" name="galerie_namen_anpassen" id="galerie_namen_anpassen" value="1"/>
+			<label for="galerie_namen_anpassen">{$GALMSGB.TOOLS_NAMEN_LABEL}</label>
+			<input type="submit" id="galerie_importieren" class="submit_back_big" value="{$GALMSGB.TOOLS_VERZEICHNIS_SUBMIT}"/>
+			{literal}
+			<script>
+				"use strict";
+				function GalerieImport(formid, selectid, submitid)
+				{
+					if (this === undefined || this === window) {
+						throw Error("GalerieImport: GalerieImport() needs to be called with new");
+					}
+					this.form = document.getElementById(formid);
+					this.gallery = document.getElementById(selectid);
+					this.submit = document.getElementById(submitid);
+					if (this.form === null || this.gallery === null || this.submit === null) {
+						throw Error("GalerieImport: formid, selectid and/or submitid could not be found")
+					}
+					this.createImportBox();
+					this.links = document.getElementsByTagName("A");
+					this.form.addEventListener("submit", this.preventDefault, false);
+					this.submit.addEventListener("click", this.doImport.bind(this), false);
+				}
+				GalerieImport.prototype = {
+					form: null,
+					gallery: null,
+					submit: null,
+					links: {},
+					xhr: {},
+					ajaxurl: "plugin.php?menuid={/literal}{$smarty.get.menuid}{literal}&template=galerie/templates/galerie_back_tools.html",
+					ajaxpost: "",
+					importContainer: null,
+					preventDefault: function (event) {
+						event = event || window.event;
+						event.preventDefault();
+					},
+					ajaxEvent: function () {
+						if (this.xhr.readyState == 4 && this.xhr.status == 200) {
+							var response = JSON.parse(this.xhr.responseText);
+							if (response.done) {
+								document.getElementById("import_container").innerHTML =
+										'<p><i class="fa fa-check"></i> <strong>Galerie ' +
+										this.gallery.options[this.gallery.selectedIndex].value +
+										' erfolgreich importiert!</strong></p>';
+								this.enableAllLinks();
+								this.gallery.remove(this.gallery.selectedIndex);
+								this.gallery.disabled = false;
+								this.submit.disabled = false;
+							}
+							else {
+								this.refreshProgress(response.processedImages, response.imageCount);
+								this.xhr = new XMLHttpRequest();
+								this.xhr.open("POST", this.ajaxurl, true);
+								this.xhr.onreadystatechange = this.ajaxEvent.bind(this);
+								this.xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+								this.buildPostData(false, JSON.stringify({gid:response.gid,pass:response.pass}));
+								this.xhr.send(this.ajaxpost.join("&"));
+							}
+						}
+					},
+					buildPostData: function(firstSend, json) {
+						firstSend = typeof firstSend === "boolean" ? firstSend : true;
+						json = typeof json === "string" ? json : null;
+						this.ajaxpost = [];
+						this.ajaxpost.push("galerie_switch=GALERIE");
+						this.ajaxpost.push("galerie_verzeichnis=" +
+								encodeURIComponent(this.gallery.options[this.gallery.selectedIndex].value));
+						if (this.form.elements.namedItem("galerie_namen_anpassen").checked) {
+							this.ajaxpost.push("galerie_namen_anpassen=1");
+						}
+						this.ajaxpost.push("ajax_import=" + (firstSend ? "start" : "continue"));
+						if (json !== null) {
+							this.ajaxpost.push("json=" + encodeURIComponent(json));
+						}
+					},
+					doImport: function () {
+						if (this.gallery.length > 0) {
+							this.importContainer.innerHTML = '<p><i class="fa fa-refresh fa-spin"></i> ' +
+									'<strong>Importiere Galerie ' + this.gallery.options[this.gallery.selectedIndex].value +
+									', bitte auf keinen Fall die Seite schließen!</strong></p>' +
+									'<p><strong><span id="import_progress">Fortschritt: 0%</span></strong></p>';
+						}
+						else {
+							this.importContainer.innerHTML = '<p><i class="fa fa-exclamation"></i> ' +
+									'<strong>Keine Galerien vorhanden.</strong></p>';
+							return false;
+						}
+						this.disableAllLinks();
+						this.submit.disabled = true;
+						this.gallery.disabled = true;
+						this.xhr = new XMLHttpRequest();
+						this.xhr.open("POST", this.ajaxurl, true);
+						this.xhr.onreadystatechange = this.ajaxEvent.bind(this);
+						this.xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+						this.buildPostData();
+						this.xhr.send(this.ajaxpost.join("&"));
+					},
+					createImportBox: function () {
+						var box = document.getElementById("import_container");
+						if (box === null) {
+							this.importContainer = document.createElement("DIV");
+							this.importContainer.setAttribute("id", "import_container");
+							if (this.submit.nextElementSibling !== null) {
+								this.submit.parentNode.insertBefore(this.importContainer, this.submit.nextElementSibling);
+							}
+							else {
+								this.submit.parentNode.appendChild(this.importContainer);
+							}
+						}
+					},
+					removeImportBox: function () {
+						var box = document.getElementById("import_container");
+						if (box !== null) {
+							box.parentNode.removeChild(box);
+						}
+					},
+					disableAllLinks: function () {
+						for (var i = 0; i < this.links.length; i++) {
+							this.links[i].addEventListener("click", this.preventDefault, false);
+						}
+					},
+					refreshProgress: function (a, b) {
+						document.getElementById("import_progress").innerHTML =
+								'Fortschritt: ' + a + ' von ' + b + ' Bildern importiert. (' + Math.floor((a / b) * 100) + '%)';
+					},
+					enableAllLinks: function () {
+						for (var i = 0; i < this.links.length; i++) {
+							this.links[i].removeEventListener("click", this.preventDefault, false);
+						}
+					}
+				};
+				(function () {
+					"use strict";
+					var galerieImport;
+					window.addEventListener("load", function () {
+						galerieImport = new GalerieImport("galerie_importieren_form", "galerie_verzeichnis", "galerie_importieren");
+					}, false);
+				})();
+			</script>
+			{/literal}
+			{/if}
+
+			{*<!-- {/if} -->*}
+
+		</fieldset>
+	</form>
+	{/if}
+
+
+	{if $galerie_weiche == "GALERIE_OK"}
+	<p>
+		{$GALMSGB.TOOLS_GALERIE_OK_TEXT}
+	</p>
+	{/if}
+</div>
+
+
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

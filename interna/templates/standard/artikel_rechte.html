@@ -1,0 +1,22 @@
+{if $IS_ADMIN}
+	{*<!-- D�rfen andere Benutzer auf diesen Artikel SCHREIBEND zugreifen? -->*}
+	<fieldset>
+		<legend>{$message_179}</legend>
+		<p>{$message_180}</p>
+        {if isset($write_article)}
+			{foreach item=table from=$write_article}
+				<input type="checkbox" {$table.checkedx} id="{$table.gruppename}" name="inhalt_ar[write_article][]" value="{$table.gruppeid}" /><label for="{$table.gruppename}">{$table.gruppename}:</label><br />
+			{/foreach}
+        {/if}
+	</fieldset>
+	{*<!-- D�rfen andere Benutzer auf diesen Artikel LESEND zugreifen? -->*}
+	<fieldset>
+		<legend>{$message_403}</legend>
+		<!-- Gruppe-->
+		{if isset($table_data)}
+			{foreach item=table from=$table_data}
+				<input type="checkbox" {$table.checkedx} id="{$table.gruppename}_r" name="inhalt_ar[gruppe_write][]" value="{$table.gruppeid}" /><label for="{$table.gruppename}_r">{$table.gruppename}:</label><br />
+			{/foreach}
+        {/if}
+	</fieldset>
+{/if}

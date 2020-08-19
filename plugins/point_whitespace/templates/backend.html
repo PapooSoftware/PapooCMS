@@ -1,0 +1,31 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+{if $plugin_point_whitespace_succeeded}
+    <div class="message">{$plugin_point_whitespace_succeeded_message}</div>
+{else}
+    <div class="artikel">
+
+        <h1 id="plugin_point_whitespace_head" class="h1" >{$plugin_point_whitespace_head}</h1>
+
+        <p id="plugin_point_whitespace_description" class="h1" >{$plugin_point_whitespace_description}</p>
+
+        <h2 id="plugin_point_whitespace_warning" class="h2" >{$plugin_point_whitespace_warning}</h2>
+
+        <form method="post" id="formi" action="" >
+
+            <input type="submit" class="submit_back" id="plugin_point_whitespace_start" name="plugin_point_whitespace_start" value=" {$plugin_point_whitespace_start}" />
+
+        </form>
+        <br />
+    </div>
+{/if}
+
+
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

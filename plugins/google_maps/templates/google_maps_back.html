@@ -1,0 +1,61 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+{$message.plugin.test.kopf}<br />
+
+    <form action="#" method="post" >
+        <fieldset>
+            <legend>{$plugin.gmap.api}</legend>
+            <label for="gmap_apikey">{$plugin.gmap.apikey}</label><br /><br />
+            <textarea id="gmap_apikey" name="gmap_apikey" rows="1" cols="20" style="width:99%;" >{$gmap.0.gmap_apikey}</textarea>
+            <br />
+        </fieldset>
+        <!--<fieldset>
+            <legend>{$plugin.gmap.api_2}</legend>
+            <label for="gmap_apikey_2">{$plugin.gmap.apikey_2}</label><br /><br />
+            <textarea id="gmap_apikey_2" name="gmap_apikey_2" rows="1" cols="20" style="width:99%;" />{$gmap.0.gmap_apikey_2}</textarea>
+            <br />
+        </fieldset>-->
+        <fieldset>
+            <legend>{$plugin.gmap.groesse}</legend>
+            <label for="gmap_breite">{$plugin.gmap.breite}</label><br />
+            <input id="gmap_breite" name="gmap_breite" type="text" value="{$gmap.0.gmap_breite}" />
+            <br />
+            <label for="gmap_hoehe">{$plugin.gmap.hoehe}</label><br />
+            <input id="gmap_hoehe" name="gmap_hoehe" type="text" value="{$gmap.0.gmap_hoehe}" />
+            <br />
+        </fieldset>
+        
+        <fieldset>
+			<legend>{$plugin.gmap.zoomfator}</legend>
+			<label for="gmap_zoom">{$plugin.gmap.zoomfator}</label><br />
+			<input id="gmap_zoom" size="3" name="gmap_zoom" type="text" value="{$gmap.0.gmap_zoom}" />
+		</fieldset>
+        
+        <fieldset>
+			<legend>{$plugin.gmap.kartentyp}</legend>
+			<label for="gmap_typ">{$plugin.gmap.kartentyp}</label><br />
+			<select id="gmap_typ" name="gmap_typ" size="1">
+				<option value="ROADMAP" {if $gmap.0.gmap_typ == "ROADMAP"}selected="selected"{/if}> {$plugin.gmap.strasse} </option>
+				<option value="SATELLITE" {if $gmap.0.gmap_typ == "SATELLITE"}selected="selected"{/if}> {$plugin.gmap.satel} </option>
+			</select>
+        </fieldset>
+        
+        <fieldset>
+			<legend>{$plugin.gmap.eintragen}</legend>
+			<input type="submit" class="submit_back_green" name="submit" value="{$plugin.gmap.eintragen}"/>
+        </fieldset>
+    </form>
+
+</div>
+
+
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

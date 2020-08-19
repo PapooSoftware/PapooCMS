@@ -1,0 +1,30 @@
+{if $IS_ADMIN}
+	<!-- Vorchautext ausgeben -->
+	<h2>{$uberschrift}</h2>
+	<p><strong>{$teaser_vorschau}</strong></p>
+	{$Beschreibung_vorschau}
+{/if}
+<p id="image_cat_die_artikelvorschau" class="h1" >{$system_image_cat_die_artikelvorschau}</p>
+{if $is_dev}
+	#start#
+	<span class="ignore"></span>
+	<!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+	<div class="rapid_form">
+		<form action="" name="" method="POST">
+			<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+			<input type="hidden" name="tb_name" value="papoo_kategorie_bilder" />
+			<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+			<input type="hidden" name="php_datei_name" value="image_class" />
+			
+			<input type="hidden" name="system_template" value="artikel_vorschau.html" />
+			<!-- Ist System -->
+			<input type="hidden" name="is_system" value="1" />
+			<!-- Das Standarpr�fix f�r die Ids -->
+			<input type="hidden" name="praefix" value="image_cat" />
+			<!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+			<input type="hidden" name="praefix_spezial" value="image_cat" />
+			<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+		</form>
+	</div>
+{/if}

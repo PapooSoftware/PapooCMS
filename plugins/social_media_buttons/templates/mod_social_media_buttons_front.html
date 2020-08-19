@@ -1,0 +1,13 @@
+{if $module_aktiv.mod_social_media_buttons_front}
+<!-- MODUL: social_media_buttons_front -->
+<div id="mod_social_media_buttons">
+    <div class="shariff"
+         data-services="[{$plugin.social_media_buttons.active_buttons_template_string}]"
+         data-theme="{$plugin.social_media_buttons.config.theme}"
+         data-lang="{$lang_short}"
+         data-backend-url="{$slash}plugins/social_media_buttons/shariff-backend-php"
+         data-orientation="{$plugin.social_media_buttons.config.orientation}"
+         data-mail-url="mailto:"></div>
+</div>
+<!-- ENDE MODUL: social_media_buttons_front -->
+{/if}

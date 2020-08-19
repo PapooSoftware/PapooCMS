@@ -1,0 +1,17 @@
+<!-- START TEMPLATE: plugins/galerie/templates/front/gallery.html -->
+{if $gallery|@count > 0}
+	<div id="wrapper">
+		<div id="columns">
+			{foreach from=$gallery item=image}
+				<div class="pin">
+					<a href="{$galleriesPath}{$image.gal_verzeichnis}/{$image.bild_datei}" title="{$image.bildlang_beschreibung|escape}" rel="lightbox">
+						<img src="{$galleriesPath}{$image.gal_verzeichnis}/thumbs/{$image.bild_datei}" alt="{$image.bildlang_beschreibung|escape}" title="{$image.bildlang_beschreibung|escape}"
+							 width="{$image.bild_breite_thumb}" height="{$image.bild_hoehe_thumb}" />
+					</a>
+					<p>{$image.bildlang_beschreibung|escape}</p>
+				</div>
+			{/foreach}
+		</div>
+	</div><br style="clear: both;">
+{/if}
+<!-- END TEMPLATE: plugins/galerie/templates/front/gallery.html -->

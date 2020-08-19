@@ -1,0 +1,31 @@
+{if $IS_ADMIN}
+	<div class="image_folder_container_complete" style="margin-top:20px;margin-left:20px;">
+		{if $glossarliste}
+			<ul>
+				{foreach item=table from=$glossarliste_org}
+					{*<!-- �ndern-->*}
+					<li>
+						<div>
+							<a href="#"
+							 {if $link_glossar}
+								onClick="FileBrowserDialogue.mySubmit('{$glosspref_menu_pfad_org_webverzeichnis}{$glosspref_menu_pfad_org}&glossar={$table.glossar_id}&template=glossar/templates/wortdefinitionen.html','','{$table.linkname}','glossar_link'); "
+								{elseif !$link_glossar}
+								onClick="FileBrowserDialogue.mySubmit('{$glosspref_menu_pfad_org_webverzeichnis}{$glosspref_menu_pfad_org}{$table.glossar_id}-{$table.glossar_Wort|urlencode}.html','','{$table.linkname}','glossar_link'); "
+								{/if}
+								class="image_link"
+								style="width: 100px; text-align: left;
+									margin-bottom:5px;"
+								title='{$image.image_name|escape:"html"}'>
+								<span style="background-color: #FFFFFF;">{$table.glossar_Wort}</span>
+							</a>
+						</div>
+					</li>
+				{/foreach}
+			</ul>
+			{*<!-- weitere Seiten -->*}
+			{include file=weiter.inc.html}
+		{elseif $kat_error_text}
+			<p>{$kat_error_text}</p>
+		{/if}
+	</div>
+{/if}

@@ -1,0 +1,47 @@
+<div id="slide">
+	<div class="slider">
+		<ul class="items">
+      {foreach item=wechselbild from=$plugins.bildwechsler name=wechselbilder}
+        <li><img {$wechselbild.bw_bild}/>
+        <div class="banner">
+          <strong>{$wechselbild.bw_noch_mehr_text}</strong>
+          <p>
+            <a {$wechselbild.bw_link}>{$wechselbild.bw_ueberschrift}</a>
+            {$wechselbild.bw_text}
+          </p>
+        </div>
+        </li>
+      {/foreach}
+		</ul>
+		<a href="#" class="prev"></a>
+		<a href="#" class="next"></a>
+	</div>
+</div>
+
+{if $smarty.foreach.wechselbilder.total > 1}
+  <script src="{$slash}plugins/bildwechsler/skripte/tm-slider/js/tms-0.4.1.js"></script>
+  {literal}
+  <script type="text/javascript">
+    $(window).load(function(){
+      $('.slider')._TMS({
+        show:0,
+        pauseOnHover:true,
+        prevBu:'.prev',
+        nextBu:'.next',
+        playBu:false,
+        duration:800,
+        preset:'fade',
+        pagination:true,
+        pagNums:false,
+        slideshow:7000,
+        numStatus:false,
+        banners:'fromBottom',
+        waitBannerAnimation:false,
+        progressBar:false
+      })	
+    }) 
+  </script>
+{/literal}
+{/if}
+
+

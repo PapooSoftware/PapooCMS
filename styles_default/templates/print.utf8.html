@@ -1,0 +1,107 @@
+﻿<!-- TEMPLATE: print.utf8.html -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{$lang_short}" lang="{$lang_short}" dir="{$lang_dir}">
+<head>
+
+<!--
+	Ihre barrierefreie Internetseite wurde ermöglicht durch
+	das barrierefreie CMS Papoo. 
+	Information  unter http://www.papoo.de
+-->
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta http-equiv="imagetoolbar" content="no" />
+	<meta name="Author" content="{$seite_autor}" />
+	<meta name="Publisher" content="{$seite_autor}" />
+	<meta name="Copyright" content="{$seite_autor}" />
+	<meta name="Page-topic" content="{$site_title} - {$site_name}" />
+	<meta name="Audience" content="Alle" />
+	<meta name="Content-language" content="DE" />
+	<meta name="Page-type" content="Produktinfo" />
+	<meta name="Robots" content="NOINDEX,FOLLOW" />
+	<meta name="description" content=" {$description}" />
+	<meta name="keywords" content="{$keywords}" />
+	<meta name="Creator" content="Papoo" />
+	<meta name="Papoo-version" content="{$papoo_version}" />
+	{$refresh}
+	<title>{$site_title} - {$site_name}</title>
+
+	
+	<style type="text/css">
+		@import url({$slash}{$pluginscss});
+		@import url({$slash}styles/{$style_dir}/css/_index.css);
+		@import url({$slash}styles/{$style_dir}/css/print.css);
+	</style>
+	
+	<!--[if IE 7]>
+		<style type="text/css">@import url({$slash}styles/{$style_dir}/css/IEFixes_7_index.css);</style>
+	<![endif]-->
+	<!--[if lte IE 6]>
+		<style type="text/css">@import url({$slash}styles/{$style_dir}/css/IEFixes_6_index.css);</style>
+	<![endif]-->
+	<!--[if lt IE 6]>
+		<style type="text/css">@import url({$slash}styles/{$style_dir}/css/IEFixes_5_5_index.css);</style>
+	<![endif]-->
+	
+
+	{if $extra_css}
+		<link rel="stylesheet" type="text/css" href="{$slash}{$extra_css}" />
+	{/if}
+	
+
+</head>
+
+<body onload="window.print()">
+{*<!-- Artikelbereich, hier kommt der Inhalt hinein-->*}
+<a id="backlink" href="{$referrer}">{$message_2196}</a>
+<div id="page_margins">
+		<div id="page" class="hold_floats">
+		
+			<!-- Kopfbereich -->
+			<div id="head">
+				<div id="head_content" class="clearfix">
+					{include file="_head.html"}
+				</div> <!-- ENDE head_content -->
+			</div> <!-- ENDE head -->
+			
+			<!-- Hauptbereich -->
+			<div id="main">
+			
+			<!-- Inhalte in der linken Spalte -->
+			{if $spalte_links OR 1}
+				<div id="col1">
+					<div id="col1_content" class="clearfix">
+						{include file="_inhalt_links.html"}
+					</div> <!-- ENDE col1_content -->
+				</div> <!-- ENDE col1 -->
+			{/if}
+			
+			<!-- Inhalte der rechten Spalte-->
+			{if $spalte_rechts OR 1}
+			<div id="col2">
+				<div id="col2_content" class="clearfix">
+					{include file="_inhalt_rechts.html"}
+				</div> <!-- ENDE col2_content -->
+			</div> <!-- ENDE col2 -->
+			{/if}
+			
+			<!-- Hauptinhaltsbereich in der Mitte - Content !!-->
+			{if $spalte_mitte OR 1}
+			<div id="col3">
+				<div id="col3_content" class="clearfix">
+					{include file="_inhalt_mitte.html"}
+				</div> <!-- ENDE col3_content -->
+				<!-- Clearing fuer IE -->
+				<div id="ie_clearing">.</div>
+			</div> <!-- ENDE col3 -->
+			{/if}
+			
+		</div> <!-- ENDE main -->
+		<div id="footer" class="floatbox">
+			{include file="_fuss.html"}
+			</div> <!-- ENDE footer -->
+		</div> <!-- ENDE page -->
+	</div> <!-- ENDE page_margins -->
+
+</body>
+</html>
+<!-- ENDE TEMPLATE: print.utf8.html -->

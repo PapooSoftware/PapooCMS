@@ -1,0 +1,21 @@
+<form method="post" action="">
+	<fieldset>
+		<legend>{$message_2128}</legend>
+		#sperre#
+	
+		<label for="username">{$message_2129}</label><br />
+		<input type="text" class="input" id="username" name="username" size="20" maxlength="50" value="{$message_2174}"
+			onblur="if(this.value=='')this.value='{$message_2174}';" onfocus="if(this.value=='{$message_2174}')this.value='';" /><br />
+
+		<label for="password">{$message_2130}</label><br />
+		<input type="password" class="input" id="password" name="password" size="20" maxlength="50" value="" /><br />
+		<input type="submit" class="senden" value="{$message_2131}" name="login" /><br />
+
+		<a class="loginlink" href="{$slash}account.php" title="{$message_2132}">{$message_2067}</a><br /><span class="ignore">.</span>
+
+		<a class="loginlink" href="{$slash}login.php?forgot=1">{$message_passwort_vergessen}</a><br /><span class="ignore">.</span>
+		#logfalse#
+		#loggedin_false_pass#
+	</fieldset>
+</form>
+

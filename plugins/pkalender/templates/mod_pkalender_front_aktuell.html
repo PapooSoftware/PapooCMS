@@ -1,0 +1,27 @@
+{if $module_aktiv.mod_pkalender_front_aktuell}
+	<!-- MODUL: Kalender_front -->
+{foreach item=cal from=$kalender_result}
+{if $tvar>10}
+{if $cal.kalender_modul_liste_id==$tvar}
+<div class="termin_liste modul">
+	{foreach item=date name=datename from=$alle_termin_ab_jetzt[$cal.kalender_id]}
+				<div class="termin_item">
+					<div class="termin_head">
+						<h3>{$date.pkal_date_titel_des_termins}</h3>
+
+						<strong>{$date.pkal_date_start_datum|date_format:"%d.%m.%Y"} {$date.pkal_date_uhrzeit_beginn} - {$date.pkal_date_end_datum|date_format:"%d.%m.%Y"} {$date.pkal_date_uhrzeit_ende}</strong>
+					</div>
+					<div class="termin_body">
+						{$date.pkal_date_terminbeschreibung}
+						{if $date.pkal_date_link_zu_terminfeld}
+						<a href="{$date.pkal_date_link_zu_terminfeld}">{$plugin_weitere_infos_des_datums}</a>{/if}
+					</div>
+				</div>
+			{/foreach}
+   </div>
+
+{/if}
+{/if}
+{/foreach}
+	<!-- ENDE MODUL: Kalender_front -->
+{/if}

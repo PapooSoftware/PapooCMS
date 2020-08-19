@@ -1,0 +1,101 @@
+/* =============================================================================================== */
+/* BILDWECHSLER */
+/* =============================================================================================== */
+#mod_bildwechsler .scrollable img {border: 0px;}
+
+#mod_bildwechsler .scrollable  a:active, .scrollable a:focus {outline: none;}
+
+
+/*
+	root element for the scrollable.
+	when scrolling occurs this element stays still.
+*/
+#mod_bildwechsler .scrollable
+{
+	/* required settings */
+	position: relative;
+	overflow: hidden;
+	
+	/* custom decorations */
+	margin-bottom: 1em;
+}
+
+#mod_bildwechsler .navi a.active
+{
+	color: #FFFFFF;
+	background-color: #000000;
+	border: 1px solid #FFFFFF;
+}
+
+#mod_bildwechsler .scrollable div.bw_text_wrapper
+{
+  position: absolute;
+  bottom: 0;
+  width: 490px;
+  padding: 1em;
+  opacity: 0.7;
+  background: #000000;
+  color: white;
+}
+
+/*
+	root element for scrollable items. Must be absolutely positioned
+	and it should have a extremely large width to accomodate scrollable items.
+	it's enough that you set the width and height for the root element and
+	not for this element.
+*/
+#mod_bildwechsler .scrollable .items
+{
+	/* this cannot be too large */
+	width: 999999px;
+	position: absolute;
+	clear: both;
+}
+
+/* single scrollable item */
+#mod_bildwechsler .scrollable div.item
+{
+	z-index: 2;
+	float: left;
+	margin: 0px 100px 0px 0px;
+	width: 960px;
+}
+#mod_bildwechsler .scrollable div.item, .scrollable div.item img
+{
+
+}
+
+#mod_bildwechsler .scrollable div.item img
+{
+
+}
+
+#mod_bildwechsler .navi
+{
+	z-index: 3;
+	position: absolute;
+	left: 15px;
+	top: 15px;
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+}
+#mod_bildwechsler .navi a
+{
+	display: block;
+	float: left;
+	margin-right: 4px;
+	width: 14px;
+	font-size: 11px;
+	line-height: 14px;
+	text-align: center;
+	padding: 0px;
+	
+	cursor: pointer;
+	
+	background-color: #FFFFFF;
+	border: 1px solid #333333;
+	
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}

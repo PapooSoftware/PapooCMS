@@ -1,0 +1,168 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		<div class="aktuell" id="aktuell_{$menuid_aktuell}"></div>
+		{$text}
+		{$logindaten}
+		{if $case0}
+			{$textx}
+		{/if}
+		{if $TEMPLATE_WEICHE == "list"}
+			{$message_687}
+			<form method="post" action="./spalte.php?menuid=17" name="suche"><p>
+				<fieldset>
+					<!-- Suche nach einem Eintrag:-->
+					<legend>{$message_267}</legend>
+					<label for="search">{$message_267}</label>
+					<input id="search" type="text" name="search" value="{$search}" onblur="if(this.value=='')this.value='Ihr Suchbegriff';" onfocus="if(this.value=='Ihr Suchbegriff')this.value='';" size="40" maxlength="30" />
+					<input type="hidden" value="Finden" name="formSubmit" />
+					<!-- Finden -->
+					<input type="submit" class="submit_back" value="{$message_233}" name="formSubmit" /></p>
+				</fieldset>
+			</form>
+			<br /><br />
+			<table style="width:99%;" class=" table table-striped table-hover">
+				<thead>
+					<tr>
+						<th style="text-align:left;">{$message_688}</th>
+						<th>{$message_689}</th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				{foreach item=feld from=$ander_data}
+					<form method="POST" action="" >
+						<input type="hidden" name="col3_id" value="{$feld.inhalt_id}" />
+						<tr>
+							<td>
+								<input type="hidden" name="inhalt_id" value="{$feld.inhalt_id}" />
+								{$feld.name}
+							</td>
+							<td>
+								<label for="col_order_id_{$feld.cform_id}">{$message_690} {$feld.cform_name}</label>
+							</td>
+							<td>
+								<input id="col_order_id_{$feld.inhalt_id}" name="col_order_id" type="text" value="{$feld.col_order_id}" size="1" />
+							</td>
+							<td>
+								<input type="submit" class="submit_back_green_white" name="submitorder" value="{$message_458}" />
+							</td>
+						</tr>
+					</form>
+				{/foreach}
+			</table>
+		{/if}
+		{if $TEMPLATE_WEICHE == "new_edit"}
+			{*<!-- alternative Sprachen -->*}
+			<!--<form name="language" action="" method="post" id="formi">
+				<ul class="art_nav_ul">
+					{foreach item=lang from=$menlang}
+						<li style="display:inline;" >
+							<input class="inputnav{$lang.aktiv}" type="submit" value="{$lang.language}" name="submitlang" />
+						</li>
+					{/foreach}
+				</ul>
+			</form>-->
+			{*<!-- Daten auf Sprache-->*}
+			<h1>{$message_379} {$article}</h1>
+			<div class="alert alert-success">
+			<strong>{$message_451}</strong>
+		</div>
+			<a href="./spalte.php?menuid=17" style="float:right;">{$message_555}</a>
+			<form name="artikel" action="" method="post" id="formi">
+				{if $col3_id}
+					<input type="hidden" name ="col3_id" value="{$col3_id}" />
+					<input type="hidden" name="extern_menuid_collum" value="{if isset($extern_menuid_collum)}{$extern_menuid_collum}{/if}" />
+				{/if}
+				<fieldset>
+					<legend>{$message_691}</legend>
+					<label for="col_name"> {$message_692}</label><br />
+					<input type="text" id="col_name" name="col_name" value="{$name}" size="30" /><br />
+				</fieldset>
+				<fieldset>
+					{*<!-- ARTIKEL BEARBEITEN -->*}
+					<!-- Eingabe/Bearbeitung eines Artikels:-->
+					<legend>{$message_268}</legend>
+					<br />
+					{*<!-- Editor je nach Wahl einbinden -->*}
+					{include file=artikel_editor.inc.html}
+				</fieldset>
+				<fieldset>
+					<a name="tmp_sprung">&nbsp;</a>
+					<legend>{$message_167}</legend>
+					<div class="clearfix"></div>
+					<input type="checkbox" id="col_menuid" name="col_menuid" value="ok" {if $col_menuid=="ok"}checked="checked"{/if} /><label for="col_menuid">{$message_695}.</label>
+					<div class="clearfix"></div><br />
+					<br />
+					<!-- Untermenupunkt zu:-->
+					<strong>{$message_419} {$message_693}</strong><br />
+					<!-- Untermenupunkt zu:-->
+					<label for="untermenuzu">{$message_419}</label>
+					<select id="untermenuzu" name="untermenuzu" size=1>
+						<!-- ausw&auml;hlen -->
+						<option value="none">({$message_160} )</option>
+						{foreach item=menu from=$menulist_data}
+							<!--<option value="{$menu.selectmenuid}" {$menu.selected}>{$menu.selectmenuname}</option>-->
+							<option value="{$menu.menuid}" class="levelshift_{$menu.level}" {if $menu.menuid == $col_menuid}selected="selected"{/if} >
+								{$menu.nummer}: {$menu.menuname} [ID:{$menu.menuid}]
+							</option>
+						{/foreach}
+					</select>
+					<a class="submit_back" href="#tmp_sprung" onclick="createInput('untermenuzu', 'menliste', '{$message_826}');" class="submit_back">{$message_824}</a>
+					<br />
+					<br />
+					<strong>{$message_696}</strong>
+					<ul id="menliste">
+						{foreach item=menu from=$menulist_data}
+							{foreach item=drin from=$menulist_drin_data}
+								{if $drin.menuid==$menu.menuid}
+									<li class="menlistli" id="liid_{$menu.menuid}">
+										<input value="{$menu.menuid}" id="inid_{$menu.menuid}" name="inhalt_ar[cattext_ar][]" type="hidden" />
+										<span>{$menu.nummer}: {$menu.menuname} [ID:{$menu.menuid}]</span>
+										<a href="#tmp_sprung" onclick="delinput('{$menu.menuid}');" class="submit_back_del">{$menu.nummer}: {$menu.menuname} {$message_826}</a>
+									</li>
+								{/if}
+							{/foreach}
+						{/foreach}
+					</ul>
+				</fieldset>
+
+				<fieldset>
+					<legend>{$message_70}</legend>
+					<!-- Eintragen -->
+					<input type="submit" class="submit_back_green" value="{$message_70}" name="action_save" />
+				</fieldset>
+				<br />
+				{if $col3_id}
+					<fieldset>
+						<legend>{$message_70a}</legend>
+						<input type="submit" class="submit_back_big" value="{$message_70a}" name="action_savecopy" />
+					</fieldset>
+					<br />
+					<fieldset>
+						<legend>{$message_106}</legend>
+						<!-- L�schen-->
+						<input type="submit" value="{$message_106}" class="submit_back_red" name="action_delete" />
+					</fieldset>
+					<br />
+				{/if}
+			</form>
+		{/if}
+		{if $TEMPLATE_WEICHE == "delete"}
+			<form action="./spalte.php?menuid=17" method="post" id="formi">
+				{*<!-- Diesen Artikel l�schen?? -->*}
+				<fieldset>
+					<legend>{$message_271}</legend>
+					<p>{$uberschrift}</p>
+					<!-- L�schen -->
+					<input type="submit" value="{$message_106}" name="action_do_delete" /><br />
+					<input type="hidden" name ="col3_id" value="{$col3_id}" />
+				</fieldset>
+			</form>
+		{/if}
+		<div class="clear">&nbsp;</div>
+	</div>
+	{*<!-- Hier kommt der Fuss rein-->*}
+	{include file=foot.inc.html}
+{/if}

@@ -1,0 +1,79 @@
+{if $IS_ADMIN}
+	<form action="./styles.php?menuid=22" method="post">
+		<input type="hidden" name="action" value="style_multi_aktiv" />
+		<fieldset>
+			{*<!-- Eingabe: -->*}
+			<legend>{$message_70}</legend>
+			<input type="submit" class="submit_back_green" style="float:right;" value="{$message_70}" name="submit_all" />
+		</fieldset>
+		<table class="table table-striped table-hover">
+			<tr>
+				<th>{$message_813}</th>
+				<th>{$message_814_bearbeiten}</th>
+				<th>{$message_815}</th>
+				<th>{$message_816}</th>
+			</tr>
+			{foreach item=style from=$styles.liste_aktiv}
+				<tr {if $style.standard_style} style="background-color:#DFF0D8;" {/if}>
+					{*<!-- �ndern-->*}
+					<td {if $style.standard_style} style="background-color:#DFF0D8;" {/if}>
+					{if $style.screenshot_exists}
+						<a href="../styles/{$style.style_pfad}/screenshot.gif" rel="lightbox">
+							<img src="../styles/{$style.style_pfad}/screenshot.gif" width="150" height="100" style="border:none;" alt="" />
+						</a>
+					{/if}
+					</td>
+					<td {if $style.standard_style} style="background-color:#DFF0D8;" {/if}>
+						<p>
+							<a href="./styles.php?menuid=22&amp;style_id={$style.style_id}&amp;action=style_select">
+								{$message_814_bearbeiten2} {$style.style_name} -- {$message_814_bearbeiten3}
+							</a>
+						</p>
+						{if $style.standard_style && $style.dumpnrestore_exists}
+							<p>
+								<a href="./styles.php?menuid=22&amp;style_id={$style.style_id}&amp;action=style_reset" class="danger">
+									<input type="button" value="{$style_reset_text}" class="btn btn-danger">
+								</a>
+							</p>
+						{/if}
+					</td>
+					<td {if $style.standard_style} style="background-color:#DFF0D8;" {/if}>
+						{if $style.standard_style}
+							{$message_551}
+						{else}
+							<a href="./styles.php?menuid=22&amp;style_id={$style.style_id}&amp;action=style_make_standard">{$message_817}</a>
+						{/if}
+					</td>
+					<td {if $style.standard_style} style="background-color:#DFF0D8;" {/if}>
+						{if NOT $style.standard_style}
+							<input type="checkbox" name="styles_aktiv[]" checked="checked" value="{$style.style_id}" />
+						{else}
+							<input type="hidden" name="styles_aktiv[]" checked="checked" value="{$style.style_id}" />
+							&nbsp;
+						{/if}
+					</td>
+				</tr>
+			{/foreach}
+			{foreach item=style from=$styles.liste_deaktiv}
+				<tr>
+					{*<!-- �ndern-->*}
+					<td>
+						{if $style.screenshot_exists}
+							<a href="../styles/{$style.style_pfad}/screenshot.gif" rel="lightbox"><img src="../styles/{$style.style_pfad}/screenshot.gif" width="150" height="100" style="border:none;" alt="" /></a>
+						{else}
+							&nbsp;
+						{/if}
+					</td>
+					<td><a href="./styles.php?menuid=22&amp;style_name={$style.style_pfad}&amp;action=style_add">{$style.style_pfad}</a></td>
+					<td></td>
+					<td><input type="checkbox" name="styles_deaktiv[]" value="{$style.style_pfad}"/></td>
+				</tr>
+			{/foreach}
+		</table>
+		<fieldset>
+			{*<!-- Eingabe: -->*}
+			<legend>{$message_70}</legend>
+			<input type="submit" class="submit_back_green" style="float: right;" value="{$message_70}" name="submit_all" />
+		</fieldset>
+	</form>
+{/if}

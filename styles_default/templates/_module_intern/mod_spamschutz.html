@@ -1,0 +1,49 @@
+<!-- MODUL: spamschutz (intern) -->
+<div id="spamschutz">
+	<fieldset>
+		<legend>{$mensch}</legend>
+		
+		{if $__spamschutz__}
+			<p class="error">
+				{$message_2141}
+			</p>
+		{else}
+			<p>
+				{$message_2177}
+			</p>
+		{/if}
+		
+
+		{if $spamschutz_modus == 1}
+		
+				{$message_2178}
+		
+			<img src="{$slash}images/_spamcode_image.php" width="200" height="50" alt="{$message_2179}" title="{$message_2179}" /><br />
+			<label for="spamcode">{$message_2180}:</label>
+			<input type="text" name="spamcode" id="spamcode" size="10" maxlength="10" value="" /><br />
+		{/if}
+
+		{if $spamschutz_modus == 2}
+			<p>
+				{$message_2181}
+			</p>
+			<label for="spamcode">{$spamschutz_aufgabe}</label>
+			<input type="text" name="spamcode" id="spamcode" size="4" maxlength="10" value="" /><br />
+		{/if}
+
+		{if $spamschutz_modus == 3}
+		
+			{$message_2182}
+			{foreach item=zeichen from=$spamschutz_codearray}
+				 {$zeichen.stelle}. {$spamschutz_zeichen}: {$zeichen.zeichen};
+			{/foreach}
+			<label for="spamcode">{$spamschutz_aufgabe}</label>
+			<input type="text" name="spamcode" id="spamcode" size="4" maxlength="10" value="" /><br />
+		{/if}
+
+		{if $spamschutz_modus == 4}
+		<div class="g-recaptcha" data-sitekey="{$captcha_sitekey}"></div>
+		{/if}
+	</fieldset>
+</div>
+<!-- ENDE MODUL: spamschutz (intern) -->

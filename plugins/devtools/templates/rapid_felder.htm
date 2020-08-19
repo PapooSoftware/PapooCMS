@@ -1,0 +1,73 @@
+
+{if $rapid_error1}
+<div class="error">
+Bitte alles ausf&uuml;llen.
+</div>
+{/if}
+<h1>{$plugin.devtools.Felder_erstellen}</h1>
+	<fieldset>
+<legend>Variablen Name</legend>
+
+<label for="rapid_name">Variablen Name des Feldes (keine Umlaute oder Sonderzeichen) </label><br />
+
+<input  type="text" id="rapid_name" name="rapid_name" value="" size="30" />
+<br />
+</fieldset>
+<fieldset>
+<legend>Label  (Deutsch)</legend>
+<label for="rapid_label">Bezeichnung im Formular (Label)</label><br />
+<input type="text" id="rapid_label" name="rapid_label" value="" size="30" /><br />
+<br />
+</fieldset>
+<fieldset>
+<legend>Typ</legend>
+<label for="rapid_type">W&auml;hlen Sie den Typ aus.</label><br />
+<select name="rapid_type" id="rapid_type" size="1">
+<option value="text" >Text (default)</option>
+	<option value="textarea" >Textarea</option>
+	<option value="email" >E-Mail</option>
+	<option value="select" >Select Box</option>
+	<option value="radio" >Radio Button</option>
+	<option value="check" >Checkbox</option>
+	<option value="hidden" >Hidden</option>
+	<option value="password" >Password</option>
+	<option value="bild" >Bild Upload</option>
+	<option value="file" >File Upload</option>
+	<option value="ueberschrift_h1" >&Uuml;berschrift h1</option>
+	<option value="ueberschrift_h2" >&Uuml;berschrift h2</option>
+	<option value="ueberschrift_h3" >&Uuml;berschrift h3</option>
+	<option value="absatz" >Absatz</option>
+	<option value="link" >Link</option>
+	<option value="fieldset" >Fieldset</option>
+	<option value="divblock" >Div Block</option>
+	<option value="leer" >Leer</option>
+    <option value="submit">Submit Button</option>
+</select>
+</fieldset>
+
+
+
+
+
+<fieldset>
+<legend>Werte bei radio oder selectbox (Deutsch)</legend>
+
+<div class="vwfeld">
+<p>Tragen Sie hier die Werte ein, die im Formular dann zur Auswahl stehen sollen, f&uuml; jeden Eintrag eine neue Zeile. </p>
+
+<label for="rapid_content_list">Auswahlwerte </label><br />
+<textarea name="rapid_content_list" id="rapid_content_list" rows="6" cols="30"></textarea>
+</div>
+</fieldset>
+
+
+
+
+
+
+<fieldset>
+<legend>In die Datenbank eintragen:</legend>
+<input type="submit" class="submit_back_green_xl" name="submit_rapid" value="In die Datenbank eintragen" />
+</fieldset>
+
+

@@ -1,0 +1,27 @@
+Geänderte Dateien
+
+./plugins/advimage/css/advimage.css
+.panel_wrapper div.current {height:405px;}
+
+./plugins/advimage/editor_plugin.js
+height:485+.. => height:530+..
+
+./plugins/advimage/image.htm
+<link href="../../../css/button.css" rel="stylesheet" type="text/css" />
+<fieldset>
+	<legend>{#advimage_dlg.image_list}</legend>
+	<div class="center">
+		<a id="srcbrowser_link" href="javascript:openBrowser('srcbrowser','src', 'image','theme_advanced_image_image_browser_callback');" onmousedown="return false;"  class="large awesome">{#advimage_dlg.image_list} </a>
+	</div>
+	<!-- /Link list -->
+</fieldset>
+
+./plugins/advlink/link.htm
+<link href="../../../css/button.css" rel="stylesheet" type="text/css" />
+<fieldset>
+	<legend>Papoo Links</legend>
+	<div class="center">
+		<a id="hrefbrowser_link" href="javascript:openBrowser('hrefbrowser','href', 'file','advlink_file_browser_callback');" onmousedown="return false;" class="large awesome">Links ausw&auml;hlen </a>
+	</div>
+	<!-- /Link list -->
+</fieldset>

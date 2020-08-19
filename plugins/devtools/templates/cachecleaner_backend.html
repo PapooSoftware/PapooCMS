@@ -1,0 +1,32 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+	<h1>{$plugin.devtools.cache_cleaner}</h1>
+	<p>
+	{if $cachecleaner_message}
+		{$cachecleaner_message}
+		
+		{*<!-- Falls vorhanden Cookie aus lia_toggle-Menue loeschen -->*}
+		<script type="text/javascript"> if ($.cookie("lia_toggle_ids_open")) $.cookie("lia_toggle_ids_open", null); </script>
+		
+	{else}
+		{$plugin.devtools.text10}<br />
+		<br />
+		<form name="cachecleaner" action="" method="post">
+			<input type="hidden" name="cachecleaner_action" value="clean">
+			<input type="submit" class="submit_back_red_big_white" value="{$plugin.devtools.cache_loeschen}">
+		</form>
+	{/if}
+	</p>
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

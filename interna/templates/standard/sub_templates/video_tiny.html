@@ -1,0 +1,57 @@
+{if $IS_ADMIN}
+	<div class="image_folder_container_complete">
+	<div class="image_folder_container_left">
+		<strong>{$system_image_image_ordner}</strong>
+		<br />
+		<a class="video_verzeichnis_top" href="./flash_liste.php?menuid=71"> {$system_image_alle_videoverzeichnisse}
+			<span style="color: #333;">({$video_cat_id_count.0})</span>
+		</a>
+		{foreach item=dir from=$dirlist}
+			{$dir.vor_ul}
+			<a {if $video_active_cat_id==$dir.video_cat_id} class="active_cat" {/if} href="./flash_liste.php?menuid=71&amp;cat={$dir.video_cat_id}">{$dir.video_cat_name}
+				<span style="color: #333;">({if $video_cat_id_count[$dir.video_cat_id]}{$video_cat_id_count[$dir.video_cat_id]}{else}0{/if})</span>
+			</a>
+			{$dir.nach_ul}
+		{/foreach}
+	</div>
+	<div class="image_folder_container_out">
+		<div class="image_folder_container">
+			{if $video_active_cat_id}
+				<div style="width: 140px; padding: 5px;float:left;">
+					<a href="./flash_liste.php?menuid=71&amp;cat={$video_cat_id}" class="image_link"><img src="bilder/folder.png" style="border:none;background:#fff;" alt="{$message_395}" title="{$message_395}" /><br />
+
+					<div style="text-align:center;width:60%;">{$message_395}</div></a>
+				</div>
+			{/if}
+			{foreach item=cat from=$result_cat}
+				<div class="image_folder">
+					<a href="./flash_liste.php?cat={$cat.video_cat_id}">{$cat.video_cat_name}</a>
+				</div>
+			{/foreach}
+		</div>
+		<br />
+		<div class="image_images">
+			{if $file_list_drin}
+				<ul class="die_image_liste">
+					{foreach item=image from=$file_list_drin}
+						<li>
+							<div>
+								<a href="#"
+									onClick="FileBrowserDialogue.mySubmit('{$webverzeichnis}video/{$image.video_file_name}','','{$image.video_alt}'); "
+									class="image_link"
+									style="width: 140px; padding: 100px 5px 5px 5px; text-align: center;
+											background-image: url(./bilder/videos.png); background-repeat: no-repeat; background-position: center top;"
+									title='{$image.video_alt|escape:"html"}'
+									>
+									<span style="background-color: #FFFFFF;">{$image.video_alt}</span>
+								</a>
+							</div>
+						</li>
+					{/foreach}
+				</ul>
+			{else}
+				<strong>{$message_493a}</strong>
+			{/if}
+		</div>
+	</div>
+{/if}

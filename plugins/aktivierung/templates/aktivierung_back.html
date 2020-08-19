@@ -1,0 +1,97 @@
+{if $IS_ADMIN}
+	{*<!-- Wir nur in der Admin angezeigt -->*}
+
+	{*<!-- Hier kommt der Kopf rein-->*}
+	{include file=head.inc.utf8.html}
+
+	<!-- Men� kommt hier rein-->
+	{include file=menu.inc.html}
+	{if $is_eingetragen=="ok"}
+		<div class="message">{$plugin_fb_plugin_die_daten_wurden_gespeichert}</div>
+	{/if}
+	{if $aktiv_error_1}
+		<div class="error">{$plugin_aktiv_plugin_domain_schon_vorhanden_wurde_schon_aktiviert}</div>
+	{/if}
+	{if $aktiv_error_2}
+		<div class="error">{$plugin_aktiv_plugin_domain_schon_vorhanden_aber_mit_anderer_renr}</div>
+	{/if}
+	{if $aktiv_error_3}
+		<div class="error">{$plugin_aktiv_plugin_rechnung_schon_vorhanden_aber_mit_anderer_domain}</div>
+	{/if}
+	{if $aktiv_error_4}
+		<div class="error">{$aktiv_error_4}</div>
+	{/if}
+	{if $saved_aktivierung}
+		<div class="message">{$plugin_aktiv_plugin_die_aktivierung_wurde_gespeichert}</div>
+	{/if}
+	<div class="artikel">
+		<h1 id="fb_plugin_aktivierung_ihres_papoo_systems" class="h1">
+			{$plugin_fb_plugin_aktivierung_ihres_papoo_systems}
+		</h1>
+		<p id="fb_plugin_aktiviern_text_1" class="h1">
+			{$plugin_fb_plugin_aktiviern_text_1}
+		</p>
+		<p id="fb_plugin_fr_die_aktivierung" class="h1">
+			{$plugin_fb_plugin_fr_die_aktivierung}
+		</p>
+		<p id="fb_plugin_die_aktvi" class="h1">
+			{$plugin_fb_plugin_die_aktvi}
+		</p>
+		<p id="fb_plugin_bei_problemen_oder_fragen" class="h1">
+			{$plugin_fb_plugin_bei_problemen_oder_fragen}
+		</p>
+		<h2 id="fb_plugin_papoo_cms_jetzt_aktivieren" class="h2">
+			{$plugin_fb_plugin_papoo_cms_jetzt_aktivieren}
+		</h2>
+		{if $localhost_installation}
+			<p>
+				{$plugin_aktiv_plugin_installationen_auf_localhost}{$plugin_error.aktiv_plugin_installationen_auf_localhost}
+			</p>
+		{else}
+			{if $not_verified}
+				<form method="post" action="" id="formi" style="width:99%">
+					<fieldset>
+						<legend>{$plugin_fb_plugin_aktivierung_beantragen}</legend>
+						<div class="labdiv">
+							<label for="aktiv_plugin_ihre_rechnungsnummer">
+								{$plugin_aktiv_plugin_ihre_rechnungsnummer}{$plugin_error.aktiv_plugin_ihre_rechnungsnummer}
+							</label>
+							<input type="text" name="aktiv_plugin_ihre_rechnungsnummer" value="{$aktiv_plugin.0.aktiv_plugin_ihre_rechnungsnummer|escape:"html"}"
+							       class="aktiv_plugin_ihre_rechnungsnummer" id="aktiv_plugin_ihre_rechnungsnummer"/>
+						</div><br />
+					</fieldset>
+					<fieldset>
+						<legend>{$plugin_aktiv_plugin_daten_speichern_und_aktivierung_starten}</legend>
+						<!-- Speichern -->
+						<input  type="submit" class="submit_back_green_big" value="{$plugin_aktiv_plugin_aktivierung_starten}" name="formSubmit_fb_settings" />
+					</fieldset><br />
+				</form>
+			{else}
+				<div class="message">{$plugin_aktiv_plugin_die_aktivierung_wurde_gespeichert}</div>
+			{/if}
+		{/if}
+		<br />
+		{if $is_dev}
+			#start#
+			<span class="ignore"></span>
+			<!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+			<div class="rapid_form">
+				<form action="" name="" method="POST">
+					<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+					<input type="hidden" name="tb_name" value="plugin_aktivierung_config" />
+					<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+					<input type="hidden" name="php_datei_name" value="aktivierung_class" />
+					<!-- Das Standarpr�fix f�r die Ids -->
+					<input type="hidden" name="praefix" value="aktiv_plugin" />
+					<!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+					<input type="hidden" name="praefix_spezial" value="aktiv_plugin" />
+					<!-- Das Tool einbinden -->
+					{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+				</form>
+			</div>
+		{/if}
+	</div>
+
+	{*<!-- Hier kommt der Fuss rein-->*}
+	{include file=foot.inc.html}
+{/if}

@@ -1,0 +1,222 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+	<a name="tmp_sprung">&nbsp;</a>
+
+	{literal}
+		<script src="./js/tiny_limiter.js"></script>
+		<script>
+			 $(document).ready( function() {
+				var elem = $("#chars_t");
+				$("#metatitel").limiter(100, elem);
+
+				var elem2 = $("#chars_m");
+				$("#metadescrip").limiter(0, elem2, "meta");
+			});
+		</script>
+	{/literal}
+	
+	{*<!-- Meta Informationen -->*}
+	<fieldset>
+		<legend>{$message_435}</legend>
+		<!-- Seitentitle-->
+		<label for="metatitel">{$message_436}</label><br />
+		<input type="text" name="inhalt_ar[metatitel]" id="metatitel" value="{if isset($metatitel)}{$metatitel}{/if}" size="40" maxlength="255" />
+		<div id="chars_t">100</div><br />
+		<!-- Meta Description-->
+		<label for="metadescrip">{$message_437}</label><br />
+		<textarea name="inhalt_ar[metadescrip]" id="metadescrip" rows="3" cols="50" >{if isset($metatitel)}{$metadescrip}{/if}</textarea> <div id="chars_m">156</div><br />
+		<!-- Meta Keywords-->
+		<label for="metakey">{$message_438}</label><br />
+		<textarea name="inhalt_ar[metakey]" id="metakey" rows="2" cols="50" >{if isset($metatitel)}{$metakey}{/if}</textarea>
+	</fieldset>
+	
+	<fieldset>
+		<!-- sprechende URL -->
+		<legend>{$message_258b}</legend>
+		<label for="url_header">{$message_258b} :</label><br />
+		<input id="url_header" type="text" name="inhalt_ar[url_header]" size="60" value="{if isset($metatitel)}{$url_header}{/if}" /><br />
+	</fieldset>
+	
+	{*<!-- Men�punkt ausw�hlen.-->*}
+	<fieldset>
+		<legend>{$message_167}</legend>
+		<div style="overflow: hidden;">
+			<label for="menuinput">{$message_168}<!-- [{$formcattext}]--></label>
+			<select id="menuinput" name="inhalt_ar[cattext]" size="1">
+				<option value="0">({$message_160} )</option>
+				{foreach item=kat from=$catlist_data.0}
+					{if $kat.cat_id>=1}<optgroup label="{$kat.cat_text}">{/if}
+					{foreach item=menu from=$menulist_data}
+						{if $kat.cat_id==$menu.cat_cid or $no_categories==1}
+							<option {if !$menu.has_rights}disabled="disabled" style="color:#788191;"{/if} value="{if $menu.has_rights}{$menu.menuid}{/if}" class="levelshift_{$menu.level}" {if $menu.menuid == $formcattext}selected="selected"{/if} >{$menu.nummer}: {$menu.menuname} </option>
+						{/if}
+					{/foreach}
+					{if $kat.cat_id>=1}</optgroup>{/if}
+				{/foreach}
+			</select>
+			
+			
+			<a href="#tmp_sprung" onclick="createInput('menuinput', 'menliste', '{$message_826}');" class="submit_back btn btn-small btn-info">{$message_824}</a>
+			<br /><br />
+			<strong class="clearfix">{$message_825}</strong>
+			<ul id="menliste">
+				{if isset($menulist_data)}
+					{foreach item=menu from=$menulist_data}
+						{foreach item=dat from=$cattext_ar}
+							{if $dat==$menu.menuid}
+								<li class="menlistli" id="liid_{$dat}">
+									<input value="{$dat}" id="inid_{$menu.menuid}" name="inhalt_ar[cattext_ar][{$menu.nummer}]" type="hidden" />
+									<span>{$menu.nummer}[{$menu.menuid}]: {$menu.menuname}</span>
+									<a href="#tmp_sprung" onclick="delinput('{$menu.menuid}');" class="submit_back_del btn-small btn btn-danger">{$menu.nummer}[{$menu.menuid}]: {$menu.menuname} {$message_826}</a>
+								</li>
+							{/if}
+						{/foreach}
+					{/foreach}
+				{/if}
+			</ul>
+		</div>
+	</fieldset>
+	
+	{if $category_set}
+		{*<!-- Kategorie ausw�hlen.-->*}
+		<fieldset>
+			<legend>{$message_805}.</legend>
+			{*<!-- Menupunkt-->*}
+			<label for="formcatcat">{$message_806}</label>
+			<select id="formcatcat" name="inhalt_ar[formcatcat]" size="1">
+				<!-- ausw&auml;hlen -->
+				<option value="0">({$message_160} )</option>
+				{foreach item=kat from=$kat_n}
+					<option value="{$kat.cat_id}" {if $kat.cat_id == $formcatcat}selected="selected"{/if} >
+						[{$kat.cat_id}]: {$kat.cat_text_intern}
+					</option>
+				{/foreach}
+			</select>
+		</fieldset>
+	{/if}
+	
+	{*<!-- Den Artikel ver�ffentlichen? -->*}
+	<fieldset>
+		<legend>{$message_171}</legend>
+		{*<!-- Diesen Artikel ver�ffentlichen? -->*}
+		<input {$checked_internet} type="checkbox" name="inhalt_ar[freigabe_internet]" id="freigabe_internet" value="1"/><label for="freigabe_internet">{$message_171_checkbox}</label><br/>
+		{if $keine_freigabe}
+			<p>{$message_172}</p>
+		{/if}
+	</fieldset>
+	
+	<fieldset>
+		<legend>{$message_809}</legend>
+		<p>{$message_810}</p>
+		{*<!-- Diesen Artikel fixieren? -->*}
+		<input {if isset($dok_teaserfix) && $dok_teaserfix==1}checked="checked"{/if} type="checkbox" name="inhalt_ar[dok_teaserfix]" id="dok_teaserfix" value="1" /><label for="dok_teaserfix">{$message_809_checkbox}</label><br />
+	</fieldset>
+	
+	<fieldset>
+		<legend>{$message_811}</legend>
+		<p>{$message_812}</p>
+		{*<!-- Diesen Artikel fixieren? -->*}
+		<input {if isset($dok_show_teaser_link) && $dok_show_teaser_link==1}checked="checked"{/if} type="checkbox" name="inhalt_ar[dok_show_teaser_link]" id="dok_show_teaser_link" value="1" /><label for="dok_show_teaser_link">{$message_811_checkbox}</label><br />
+	</fieldset>
+	
+	<fieldset>
+		<legend>{$message_837}</legend>
+		<p>{$message_838}</p>
+		{*<!-- Diesen Artikel anteasern? -->*}
+		<input {if isset($dok_show_teaser_teaser) && $dok_show_teaser_teaser==1}checked="checked"{/if} type="checkbox" name="inhalt_ar[dok_show_teaser_teaser]" id="dok_show_teaser_teaser" value="1" /><label for="dok_show_teaser_teaser">{$message_837_checkbox}</label><br />
+	</fieldset>
+
+	<fieldset>
+		<legend>{$message_404}</legend>
+		<input type="checkbox" {if isset($checked_comment)}{$checked_comment}{/if} name="inhalt_ar[comment_yn]" id="comment_yn" value="1" />
+		<label for="comment_yn">{$message_405}</label>
+	</fieldset>
+	
+	{*<!-- Downloads z�hlen.-->*}
+	<fieldset>
+		<legend>{$message_174}</legend>
+		{*<!-- Geben Sie hier an, ob die eventuell vorhandenen Donwloads gez�hlt werden sollen. -->*}
+		<p>{$message_175}</p>
+		{*<!-- Z�hlen -->*}
+		<input type="checkbox" {if isset($down_checked)}{$down_checked}{/if} name="inhalt_ar[zahlen]" id="zahlen" value="1" />
+		<label for="zahlen">{$message_176}:</label><br />
+	</fieldset>
+	
+	{*<!--Soll der Artikel auf der Startseite gelistet werden?-->*}
+	<fieldset>
+		<legend>{$message_177}</legend>
+		{*<!-- Auf der Startseite listen? -->*}
+		<input {if isset($checked_startseite)}{$checked_startseite}{/if} type="checkbox" id="freigabe_teaser_list" name="inhalt_ar[freigabe_teaser_list]" value="1" />
+		<label for="freigabe_teaser_list">{$message_178}</label>
+		<br />
+		<label for="pub_start_page">{$message_471} 01.01.2010 17:11):</label><br />
+		<input type="text" name="inhalt_ar[pub_start_page]" id="pub_start_page" value="{if isset($pub_start_page)}{$pub_start_page}{/if}" size="14" maxlength="255"/><br />
+		<label for="pub_verfall_page">{$message_472} 01.02.2010 15:12)</label><br />
+		<input type="text" name="inhalt_ar[pub_verfall_page]" id="pub_verfall_page" value="{if isset($pub_verfall_page)}{$pub_verfall_page}{/if}" size="14" maxlength="255"/><br />
+	</fieldset>
+	
+	<!-- lan_rss_yn-->
+	<fieldset>
+		<legend>{$message_465}</legend>
+		<input {if isset($checked_lan_rss_yn)}{$checked_lan_rss_yn}{/if} type="checkbox" id="lan_rss_yn" name="inhalt_ar[lan_rss_yn]" value="1" />
+		<label for="lan_rss_yn">{$message_466}</label>
+	</fieldset>
+	
+	<fieldset>
+		<legend>{$system_artikel_dokument_erstellt_am_heading}</legend>
+		<label for="styles_dokument_erstellt_am">{$system_artikel_dokument_erstellt_am}{$system_error.styles_dokument_erstellt_am}</label>
+		<br />
+		<input type="text" name="erstellungsdatum" value="{if isset($erstellungsdatum)}{$erstellungsdatum|date_format:"%d.%m.%Y %H:%M:%S"}{/if}" class="styles_dokument_erstellt_am" id="styles_dokument_erstellt_am"/>
+		<br />
+	</fieldset>
+	
+	<fieldset>
+		<legend>{$message_467}</legend>
+		<input {if isset($checked_pub_dauerhaft)}{$checked_pub_dauerhaft}{/if} type="checkbox" id="pub_dauerhaft" name="inhalt_ar[pub_dauerhaft]" value="1" />
+		<label for="pub_dauerhaft">{$message_468}</label>
+		<p><strong>{$message_469}</strong></p>
+		{$message_470} - 01.01.2006
+		<label for="pub_start">{$message_471} 01.01.2010 17:11):</label><br />
+		<input type="text" name="inhalt_ar[pub_start]" id="pub_start" value="{if isset($pub_start)}{$pub_start}{/if}" size="14" maxlength="255"/><br />
+		<label for="pub_verfall">{$message_472} 01.02.2010 15:12)</label><br />
+		<input type="text" name="inhalt_ar[pub_verfall]" id="pub_verfall" value="{if isset($pub_verfall)}{$pub_verfall}{/if}" size="14" maxlength="255"/><br />
+		<br />
+		
+		{*<!-- Menupunkt-->*}
+		<label for="pub_wohin">{$message_473}:</label>
+		<select id="pub_wohin" name="inhalt_ar[pub_wohin]" size="1">
+			<!-- ausw&auml;hlen -->
+			<option value="0">{$artikel_einstellung.pub_wohin_standard}</option>
+			{foreach item=menu from=$menulist_data}
+				<option value="{$menu.menuid}" class="levelshift_{$menu.level}" {if $menu.menuid == $pub_wohin}selected="selected"{/if} >
+					{$menu.nummer}[{$menu.menuid}]: {$menu.menuname}
+				</option>
+			{/foreach}
+			<option {if $pub_wohin=="del"}selected="selected"{/if} value="del">{$artikel_einstellung.pub_wohin_loeschn}</option>
+		</select>
+	</fieldset>
+{/if}
+
+{if $is_dev}
+	<span class="ignore">
+		#start#
+	</span>
+	<!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+	<div class="rapid_form">
+		<form action="" name="" method="POST">
+			<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+			<input type="hidden" name="tb_name" value="nixnixnix" />
+			<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+			<input type="hidden" name="php_datei_name" value="styles_class" />
+			
+			<input type="hidden" name="system_template" value="artikel_einstellung.html" />
+			<!-- Ist System -->
+			<input type="hidden" name="is_system" value="1" />
+			<!-- Das Standarpr�fix f�r die Ids -->
+			<input type="hidden" name="praefix" value="artikel" />
+			<!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+			<input type="hidden" name="praefix_spezial" value="styles" />
+			<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+		</form>
+	</div>
+{/if}

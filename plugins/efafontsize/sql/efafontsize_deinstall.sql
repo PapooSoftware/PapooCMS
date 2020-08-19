@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS `XXX_plugin_efa_fontsize`; ##b_dump## 

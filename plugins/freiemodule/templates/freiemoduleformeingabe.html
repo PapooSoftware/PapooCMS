@@ -1,0 +1,173 @@
+{if $neuereintrag}
+<h1>{$plugin.freiemodule.neuereintrag}</h1>
+
+{/if}
+{if $altereintrag}
+<h1>{$plugin.freiemodule.altereintrag}</h1>
+{/if}
+<p>{$plugin.freiemodule.name_code}</p>
+
+
+  <form action="" method="post">
+
+  <fieldset>
+   <legend>{$plugin.freiemodule.bannereintrag}
+    </legend>
+
+  <label for="freiemodule_name">{$plugin.freiemodule.freiemodule_name}</label><br />
+  <input type="text" name="freiemodule_name" id="freiemodule_name" value="{$freiemodule_name}" size="40" maxlength="254"/>
+  <br />
+	<script language="javascript" type="text/javascript" src="./tiny_mce/tiny_mce.js" charset="utf-8"></script>
+	<script language="javascript" type="text/javascript" src="./tiny_mce/FileBrowser.js"></script>
+	
+  <script language="javascript" type="text/javascript" src="./tiny_mce/FileBrowser.js"></script>
+	<script language="javascript" type="text/javascript">
+	tinyMCE.init({ldelim}
+	mode : "exact",
+	language : "de",
+	elements : "freiemodule_code",
+	theme : "advanced",
+	{include file=tiny_inc_conf.html}
+	{rdelim} );
+	//function fileBrowserCallBack(field_name, url, type)
+	//{ldelim}
+	// This is where you insert your custom filebrowser logic
+	//	alert("Filebrowser callback: " + field_name + "," + url + "," + type);
+	//{rdelim}
+	</script>
+
+  <label for="freiemodule_code">{$plugin.freiemodule.freiemodule_code}</label><br />
+  <textarea name="freiemodule_code" id="freiemodule_code" rows="20" cols="70" >{$freiemodule_code}</textarea>
+  <br />
+   <label for="freiemodule_menuid">{$plugin.freiemodule.freiemodule_menuid}</label>
+   <br />
+  <select name="freiemodule_menuid" id="freiemodule_menuid" title="" style="width: 40%;" size="1">
+    <option value="">{$plugin.freiemodule.auswaehlen}</option>
+
+    <option value="all" {if $freiemodule_menuid=="all"}selected="selected"{/if} >{$plugin.freiemodule.immer}</option>
+    {foreach item=menu from=$menulist_data}
+								{if $menu.menuid}
+									<option  value="{$menu.menuid}" class="levelshift_{$menu.level}" {if $menu.menuid == $freiemodule_menuid}selected="selected"{/if} >
+										{$menu.nummer}[{$menu.menuid}]: {$menu.menuname}
+									</option>
+								{/if}
+							{/foreach}
+
+    </select>
+   <a href="#tmp_sprung" onclick="createInput('freiemodule_menuid', 'menliste', '{$message_826}');" class="submit_back">{$message_824}</a>
+			<br />
+			<br />
+			<ul id="menliste">
+				{foreach item=menu from=$menulist_data name="outer"}
+					{foreach item=dat from=$banner_ar}
+                        {if !$menlistli_all && $dat.freiemodule_menu_id == 0}
+                            <li class="menlistli" id="liid_all">
+                                <input value="all" id="iniid_all" name="inhalt_ar[cattext_ar][]" type="hidden">
+                                <span>{$plugin.freiemodule.immer}</span>
+                                <a href="#tmp_sprung" onclick="delinput('all');" class="submit_back_del">{$plugin.freiemodule.immer} entfernen / delete</a>
+                            </li>
+                            {assign var="menlistli_all" value=true}
+						{/if}
+					{/foreach}
+				{/foreach}
+				{foreach item=menu from=$menulist_data}
+					{foreach item=dat from=$banner_ar}
+						{if $dat.freiemodule_menu_id==$menu.menuid}
+							<li class="menlistli" id="liid_{$dat.freiemodule_menu_id}">
+								<input value="{$dat.freiemodule_menu_id}" id="inid_{$menu.menuid}" name="inhalt_ar[cattext_ar][{$menu.nummer}]" type="hidden" />
+								<span>{$menu.nummer}[{$menu.menuid}]: {$menu.menuname}</span>
+								<a href="#tmp_sprung" onclick="delinput('{$menu.menuid}');" class="submit_back_del">{$menu.nummer}[{$menu.menuid}]: {$menu.menuname} {$message_826}</a>
+							</li>
+						{/if}
+					{/foreach}
+				{/foreach}
+			</ul>
+   <br />
+
+
+	<label for="freiemodule_menu_blacklist">{$plugin.freiemodule.freiemodule_menu_blacklist}</label>
+	<br>
+	<select name="freiemodule_menu_blacklist" id="freiemodule_menu_blacklist" style="width:40%;">
+		<option value="">{$plugin.freiemodule.auswaehlen}</option>
+
+		{foreach item=menu from=$menulist_data}
+			{if $menu.menuid}
+				<option value="{$menu.menuid}" class="levelshift_{$menu.level}" {if $menu.menuid == $freiemodule_menu_blacklist}selected="selected"{/if}>
+					{$menu.nummer}[{$menu.menuid}]: {$menu.menuname}
+				</option>
+			{/if}
+		{/foreach}
+	</select>
+	<a href="javascript:;" onclick="createInput('freiemodule_menu_blacklist', 'menu_blacklist_items', '{$message_826}', true);" class="submit_back">{$message_824}</a>
+	<br>
+	<br>
+	<ul id="menu_blacklist_items">
+		{foreach from=$menulist_data item=menu}
+			{foreach from=$module_menu_blacklist item=blacklist_item}
+				{if $blacklist_item.blacklist_menu_id == $menu.menuid}
+					<li class="menlistli" id="liid_{$blacklist_item.blacklist_menu_id}_blacklisted">
+						<input value="{$blacklist_item.blacklist_menu_id}" id="inid_{$menu.menuid}_blacklisted" name="freiemodule_menu_blacklist[]" type="hidden"/>
+						<span>{$menu.nummer}[{$menu.menuid}]: {$menu.menuname}</span>
+						<a href="javascript:;" onclick="delinput('{$menu.menuid}_blacklisted');" class="submit_back_del">{$menu.nummer}[{$menu.menuid}]: {$menu.menuname} {$message_826}</a>
+					</li>
+				{/if}
+			{/foreach}
+		{/foreach}
+	</ul>
+	<br>
+
+
+   <label for="freiemodule_artikelid">{$plugin.freiemodule.freiemodule_artikelid}</label>
+   <br />
+  <select name="freiemodule_artikelid" id="freiemodule_artikelid" title="" style="width: 40%;" size="1">
+    <option value="">{$plugin.freiemodule.auswaehlen}</option>
+    {foreach item=adat from=$artikel_liste}
+
+    <option value="{$adat.reporeID}" {if $adat.reporeID == $freiemodule_artikelid}selected="selected"{/if}>{$adat.header}</option>
+    {/foreach}
+    </select>
+	<br />
+	<label for="banner_lang" >{$plugin.freiemodule.sprache}</label>
+	<br />
+{*<!-- Hier kann eine Sprache ausgew�hlt werden. -->*}
+    <select name="banner_lang" id="banner_lang" title="" style="width:40%;" size="1">
+{*<!-- ausw�hlen/select -->*}
+    <option value="">({$message_294})</option>
+    {foreach item=lang from=$language}
+				<option value="{$lang.lang_short}" {if $lang.lang_short==$freiemodule_lang} selected="selected" {/if} >
+					{$lang.language}
+				</option>
+			{/foreach}
+    </select>
+    <br />
+	<br />
+
+
+	<label for="freiemodule_zeitrahmen">{$plugin.freiemodule.freiemodule_zeitrahmen}</label>
+	<br />
+	{$plugin.freiemodule.format}
+	<label for="freiemodule_start">{$plugin.freiemodule.veroeffentlichen_von}</label><br />
+	 <input type="text" name="freiemodule_start" id="freiemodule_start" value="{$freiemodule_start}" size="8" maxlength="255"/><br />
+	 <label for="freiemodule_stop">{$plugin.freiemodule.veroeffentlichen_bis}</label><br />
+	 <input type="text" name="freiemodule_stop" id="freiemodule_stop" value="{$freiemodule_stop}" size="8" maxlength="255"/><br /><br />
+
+
+  <input type="hidden" name="freiemodule_id" value="{$freiemodule_id}"/>
+  <br /><br />
+
+	<label><input type="checkbox" name="freiemodule_raw_output" value="1"{if $freiemodule_raw_output} checked="checked"{/if}>
+		{$plugin.freiemodule.freiemodule_wrapper}
+	</label>
+
+  </fieldset>
+  <fieldset>
+  <legend>{$plugin.freiemodule.eintragen}
+   </legend>
+{if $altereintrag}
+
+  <input style="float:right" type="submit" class="submit_back_red" name="submitdel" value="{$plugin.freiemodule.loeschen}"/>
+{/if}
+
+   <input type="submit" class="submit_back_green" name="submitentry" value="{$plugin.freiemodule.eintragen}"/>
+   </fieldset>
+  </form>

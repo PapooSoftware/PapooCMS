@@ -1,0 +1,134 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		<div class="aktuell" id="aktuell_{$menuid_aktuell}"></div>
+		<!--<h2>{$message_254}</h2>-->
+		{if $templateweiche == "LISTE"}
+		{$message_topmenu}
+			<table class="outside table table-striped table-hover" >
+				{foreach item=menutop from=$menutop name=menutop_liste}{$nl}
+					<tr>
+						<td>
+							<a href="./menutop.php?menuid=58&amp;menutop_action=edit&amp;menutop_id={$menutop.menutop_id}"
+								title="{$message_2113}"
+								style="display: block; padding: 3px 0px 3px 5px;">
+								{$menutop.mtlang_name|escape:"html"} <small>({$menutop.mtlang_title|escape:"html"})</small>
+							</a>
+						</td>
+						<td style="width: 5%;">
+							{if NOT $smarty.foreach.menutop_liste.last}
+								<form action="" method="post" class="menu_order_baum_form">
+									<input type="hidden" name="menutop_id" value="{$menutop.menutop_id}" />
+									<input type="hidden" name="menutop_order_id" value="{$menutop.menutop_order_id}" />
+									<input type="hidden" name="menutop_action" value="order_runter" />
+									<label for="menutop_order_runter_{$menutop.menutop_id}" class="ignore">{$message_654}</label>
+									<input type="image" title="{$message_654}" alt="{$message_654}"
+										id="menutop_order_runter_{$menutop.menutop_id}" name="menutop_order_runter_{$menutop.menutop_id}" value="runter"
+										src="bilder/pfeil_runter.gif" class="menu_order_baum_knopf" />
+								</form>
+							{/if}
+						</td>
+						<td style="width: 5%;">
+							{if NOT $smarty.foreach.menutop_liste.first}
+								<form action="" method="post" class="menu_order_baum_form">
+									<input type="hidden" name="menutop_id" value="{$menutop.menutop_id}" />
+									<input type="hidden" name="menutop_order_id" value="{$menutop.menutop_order_id}" />
+									<input type="hidden" name="menutop_action" value="order_hoch" />
+									<label for="menutop_order_hoch_{$menutop.menutop_id}" class="ignore">{$message_655}</label>
+									<input type="image" title="{$message_655}" alt="{$message_655}"
+										id="menutop_order_hoch_{$menutop.menutop_id}" name="menutop_order_hoch_{$menutop.menutop_id}" value="hoch"
+										src="bilder/pfeil_hoch.gif" class="menu_order_baum_knopf" />
+								</form>
+							{/if}
+						</td>
+						<td style="width: 5%;">
+							<form action="" method="post" class="menu_order_baum_form">
+								<input type="hidden" name="menutop_action" value="add" />
+								<input type="hidden" name="menutop_order_id" value="{$menutop.menutop_order_id}" />
+								<label for="menutop_add_{$menutop.menutop_id}" class="ignore">{$message_265}</label>
+								<input type="image" title="{$message_265}" alt="{$message_265}"
+									id="menutop_add_{$menutop.menutop_id}" name="menutop_add_{$menutop.menutop_id}" value="add"
+									src="bilder/knopf_add.gif" class="menu_order_baum_knopf" />
+							</form>
+						</td>
+						<td style="width: 5%;">
+							<form action="" method="post" class="menu_order_baum_form">
+								<input type="hidden" name="menutop_id" value="{$menutop.menutop_id}" />
+								<input type="hidden" name="menutop_action" value="delete" />
+								<label for="menutop_delete_{$menutop.menutop_id}" class="ignore">{$message_106}</label>
+								<input type="image" title="{$message_106}" alt="{$message_106}"
+									id="menutop_delete_{$menutop.menutop_id}" name="menutop_delete_{$menutop.menutop_id}" value="hoch"
+									src="bilder/knopf_loeschen.gif" class="menu_order_baum_knopf" />
+							</form>
+						</td>
+					</li>
+				{/foreach}{$nl}
+			</table>
+		{/if}
+		{if $templateweiche == "NEU_EDIT"}
+			{if $menutop_modus == "NEU"}<h1>{$message_265} </h1>{/if}
+			{if $menutop_modus == "EDIT"}<h1>{$message_255} </h1>{/if}
+			<form action="" method="post">
+				<input type="hidden" name="menutop_action" value="save" />
+				<input type="hidden" name="menutop_modus" value="{$menutop_modus}" />
+				<input type="hidden" name="menutop_id" value="{if isset($menutop.menutop_id)}{$menutop.menutop_id}{/if}" />
+				<input type="hidden" name="menutop_order_id" value="{if isset($menutop.menutop_order_id)}{$menutop.menutop_order_id}{/if}" />
+				<fieldset>
+					<legend>{$message.menutop.neu_edit.link_legend}:</legend>
+					{assign var="link_in_select" value="0"}
+					<label for="menutop_link_text">{$message_239}:</label><br />
+					<input type="text" size="50" id="menutop_link_text" name="menutop_link_text" value="{if isset($menutop.menutop_link)}{$menutop.menutop_link|escape:"html"}{/if}" />
+					<br />
+					<input type="hidden" name="menutop_link_selector" id="menutop_link_select_text" value="TEXT" />
+					{* div sorgt dafür, dass die nächste Checkbox in die nächste Zeile rutscht *}
+					<div></div>
+					<input name="menutop_link_extern" id="menutop_link_extern" type="checkbox" value="1" {if isset($menutop.menutop_extern) && $menutop.menutop_extern}checked="checked"{/if} />
+					<label for="menutop_link_extern">{$message.menutop.neu_edit.link_extern}</label><br />
+				</fieldset>
+				{foreach item=lang from=$menutop.sprachen}
+					<input type="hidden" name="sprachen[{$lang.lang_id}][lang_id]" value="{$lang.lang_id}" />
+					<fieldset>
+						<!-- Men�punkt Name : -->
+						<legend>{$message_250} {$lang.language}</legend>
+						<label for="menutop_name_{$lang.lang_id}">{$message_257}:</label><br />
+						<input type="text" id="menutop_name_{$lang.lang_id}" name="sprachen[{$lang.lang_id}][name]" value="{if isset($lang.mtlang_name)}{$lang.mtlang_name|escape:"html"}{/if}" /><br />
+						<!-- Men�punkt Titel -->
+						<label for="menutop_title_{$lang.lang_id}">{$message_258}:</label><br />
+						<input type="text" size="50" id="menutop_title_{$lang.lang_id}" name="sprachen[{$lang.lang_id}][title]" value="{if isset($lang.mtlang_title)}{$lang.mtlang_title|escape:"html"}{/if}" /><br />
+						<!-- Men�punkt Link (Optional) -->
+						<label for="menutop_link_{$lang.lang_id}">{$message_239} (optional):</label><br />
+						<input type="text" size="50" id="menutop_link_{$lang.lang_id}" name="sprachen[{$lang.lang_id}][link]" value="{if isset($lang.mtlang_link)}{$lang.mtlang_link|escape:"html"}{/if}" /><br />
+					</fieldset>
+				{/foreach}
+				<fieldset>
+					<input type="submit" class="submit_back_green" value="{$message_70}" name="save" />
+				</fieldset>
+			</form>
+		{/if}
+		{if $templateweiche == "LOESCHEN"}
+			<h2> {$message_248}</h2>
+			<p>
+				<ul>
+					<li>{$message_250} {$menutop.mtlang_name|escape:"html"}</li>
+					<li>{$message_251} {$menutop.mtlang_title|escape:"html"}</li>
+					<li>{$message_239} {$menutop.menutop_link|escape:"html"}</li>
+				</ul>
+			</p>
+			<form action="" method="post">
+				<input type="hidden" name="menutop_action" value="do_delete" />
+				<input type="hidden" name="menutop_id" value="{$menutop.menutop_id}" />
+				<fieldset>
+					<input type="submit" class="submit_back_red" value="{$message_253}" name="do_delete" />
+				</fieldset>
+			</form>
+
+			<form action="./menutop.php?menuid=58" method="post">
+				<fieldset>
+					<input type="submit" class="submit_back" value="{$message_649}" name="abbrechen" />
+				</fieldset>
+			</form>
+		{/if}
+	</div>
+	{include file=foot.inc.html}
+{/if}

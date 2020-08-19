@@ -1,0 +1,26 @@
+{foreach item=table from=$last_artikel}
+{if $table.uberschrift}
+<div class="last_artikel_liste_dat">
+<div class="dat_start"><span class="start_day">{$table.article_datum_tag}.</span><br /><span class="start_mon">{$table.article_datum_mon}</span></div>
+<div class="dat_start_text">
+	
+	
+	
+
+		{*<!--Dieser Link öffnet den Artikel ... im selben Fenster.-->*}
+		{if $sp_urls=="ok"}
+			<a href="{$slash}{$sulrstrenner}{$table.url_header}"  title="{$message_2012} &quot;{$table.uberschrift|escape:"html"}&quot; {$message_2013}"><h2>{$table.uberschrift}</h2>
+	
+	{$table.lan_teaser_sans} <span class="mehr_lesen">Lesen Sie mehr...</span></a>
+		{else}
+			<a href="{$slash}{$table.linktext}{$frag_connect}menuid{$gleich_connect}{$table.cattextid}{$plus_connect}reporeid{$gleich_connect}{$table.reporeid}"  title="{$message_2012} &quot;{$table.uberschrift|escape:"html"}&quot; {$message_2013}"><h2>{$table.uberschrift}</h2>
+	
+	{$table.lan_teaser_sans}</a>
+		{/if}
+		
+	
+</div>
+</div>
+<br class="break_artikel" />
+{/if}
+{/foreach}

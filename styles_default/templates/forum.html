@@ -1,0 +1,225 @@
+<!-- TEMPLATE: forum.html -->
+<div class="forumthread artikel_details">
+<div class="floatbox">
+<a  id="artikel"></a>
+
+{if $gesucht}
+{$message_2038a}
+	<!--
+	<form id="suchefor" method="post" action="{$slash}forum.php">
+	-->
+	<div class="floatbox">
+		<form id="suchefor" class="form" method="post" action="">
+			<fieldset>
+				{*<!-- Suchbegriff hier eingeben-->*}
+				<input
+					type="text" name="search" id="searchf" size="20" value="{$search|escape:"html"}"
+					onblur="if(this.value=='')this.value='eingeben';"
+					onfocus="if(this.value=='eingeben')this.value='';"
+					title="{$message_2035}"
+					{$searchneu} />
+				<select name="select_forum" id="select_forum">
+				<option value="">In allen Foren suchen</option>
+				{foreach item=table key=var from=$table_data}
+						<option {if $select_forum_id==$table.forumid} selected="selected"{/if} value="{$table.forumid}">{$table.forumname}</option>
+				{/foreach}										
+				</select>
+				{*<!--  Im Forum-->*}
+				<label for="searchf">{$message_2036}</label>
+				{*<!-- Finden -->*}
+				<input type="submit" name="find" value="{$message_2037}" class="btn btn-info"/>
+			</fieldset>
+		</form>
+	</div>
+	<br />
+	{*<!-- Zur�ck zur �bersicht-->*}
+	<a href="{$slash}{$forum}{$frag_connect}menuid{$gleich_connect}{$formmenuid}">{$message_2038}</a>
+	{*<!-- Die Resultate Ihrer Suche:-->*}
+	<p>{$message_2039}</p>
+	<ul>
+		{foreach item=message from=$message_data}
+			<li>
+			{if $sp_urls=="ok"  or $free_sp_urls}
+					<a href="{$slash}{$forum_menu_surl}{$forum_surl}forumid-{$message.forumid}-thread-{$message.msgid}-{$message.thema_surl}/#{$message.msgid}" style="font-weight:{$message.weight};">	
+						{else}
+				<a href="{$slash}{$forumthread}{$frag_connect}forumid{$gleich_connect}{$message.forumid}{$plus_connect}menuid{$gleich_connect}{$formmenuid}{$plus_connect}rootid{$gleich_connect}{$message.rootid}{$plus_connect}msgid{$gleich_connect}{$message.msgid}#{$message.msgid}">{/if}
+					{$message.thema}
+				</a>
+				<small><strong> {$message.username}</strong> {$message.zeitstempel|date_format:$lang_dateformat} [{$message.counten} Hits]</small>
+			</li><span class="ignore">.</span>
+		{/foreach}
+	</ul>
+	<strong>{$text}</strong>
+{else}
+	{if $uebersicht}
+		{* <!--Hier finden Sie alle Foren auf <$link = Seitenname> --> *}
+		<h2>{$message_2040} {$link}.</h2>
+		<h2 class="ignore">{$suche}</h2>
+		<a name="suche" id="suchef"></a>
+		<!--
+		<form id="suchefor" method="post" action="{$slash}forum.php">
+		-->
+		<div class="floatbox">
+    {if $is_extended_search}
+    {include file=../../plugins/extended_search/templates/search_front_form_forum.html}
+    {else}
+			<form id="suchefor" class="form" method="post" action="">
+				<fieldset>
+					{*<!-- Suchbegriff hier eingeben -->*}
+					<input
+						type="text" name="search" id="searchf" size="20" value="{$search|escape:"html"}"
+						
+						{$searchneu} />
+					<label style="display: none;" for="mod_id1">Diesem Bereich ein weiteres Modul hinzuf�gen:</label>
+				<select name="select_forum" id="select_forum">
+				<option value="">In allen Foren suchen</option>
+				{foreach item=table key=var from=$table_data}
+						<option value="{$table.forumid}">{$table.forumname}</option>
+				{/foreach}										
+				</select>
+					{*<!--   Im Forum-->*}
+					<label for="searchf">{$message_2036}</label>
+					{*<!-- Finden-->*}
+					<input type="submit" name="find" value="{$message_2037}" class="btn btn-info" />
+				</fieldset>
+			</form>
+      {/if}
+		</div>
+		
+		<div class="forumlistex">
+			<p><strong>{$message_3} :</strong></p>
+			<ul>
+				{foreach item=message from=$message_data}
+					<li>
+					{if $sp_urls=="ok" or $free_sp_urls}
+							<a href="{$slash}{$forum_menu_surl}{$forum_surl}{$table.forumname_surl}forumid-{$message.forumid}-thread-{$message.msgid}-{$message.thema_surl}.html#{$message.lastid}">
+						{else}
+							<a href="{$slash}{$forumthread}{$frag_connect}forumid{$gleich_connect}{$message.forumid}{$plus_connect}menuid{$gleich_connect}{$formmenuid}{$plus_connect}rootid{$gleich_connect}{$message.rootid}{$plus_connect}msgid{$gleich_connect}{$message.msgid}#{$message.lastid}">
+						{/if}
+							{$message.thema}
+						</a>
+						<small><strong>{$message.username}</strong> {$message.zeitstempel|date_format:$lang_dateformat} [{$message.counten} Hits]<span class="ignore">.</span></small>
+					</li>
+				{/foreach}
+			</ul>
+		</div>
+		
+		<h3>{$message_2}</h3>
+		<table  class="forenliste  table table-striped table-hover">
+			<thead>
+				<tr class="headerfor">
+					<th id="forum" >{$message_2189}</th>
+					<th id="letzter" >{$message_2190}</th>
+					<th id="threads" >{$message_2191}</th>
+					<th id="beitraege" >{$message_2192}</th>
+				</tr>
+			</thead>
+			<tbody>
+				{foreach item=table key=var from=$table_data}
+					<tr {if $var is even }class="tab_highlight"{/if}
+>
+						<td headers="forum" class="colforum">
+						{if $sp_urls=="ok"  or $free_sp_urls}
+							<a href="{$slash}{$forum_menu_surl}{$forum_surl}forumid-{$table.forumid}-{$table.forumname_surl}.html">
+						{else}
+							<a href="{$slash}{$forum}{$frag_connect}forumid{$gleich_connect}{$table.forumid}{$plus_connect}menuid{$gleich_connect}{$formmenuid}">
+							{/if}
+								{$table.forumname}
+							</a><br />
+							{$table.beschreibung}
+						</td>
+						<td headers="letzter" class="colletzter">
+						{if $sp_urls=="ok"  or $free_sp_urls}
+							<a href="{$slash}{$forum_menu_surl}{$forum_surl}forumid-{$table.forumid}-thread-{$table.msgid}-{$table.thema_surl}.html#{$table.lastid}">
+						{else}
+							<a href="{$slash}{$forumthread}{$frag_connect}forumid{$gleich_connect}{$table.forumid}{$plus_connect}menuid{$gleich_connect}{$formmenuid}{$plus_connect}rootid{$gleich_connect}{$table.rootid}{$plus_connect}msgid{$gleich_connect}{$table.msgid}#{$table.msgid}">{/if}
+								{$table.thema}
+							</a><br />
+							{$table.usernamex} - {$table.zeitstempel|date_format:$lang_dateformat}
+						</td>
+						<td headers="threads" class="colthem">
+							{$table.forum_threads}
+						</td>
+						<td headers="beitraege" class="colbeitr">
+							{$table.forum_beitr}
+						</td>
+					</tr>
+				{/foreach}
+			</tbody>
+		</table>
+	{else}
+		{if $forumok}
+			<ul class="forumliste" style="display:inline;">
+				{*<!-- zur�ck zur �bersicht-->*}
+				<li style="display:inline;">
+					{if $sp_urls=="ok"  or $free_sp_urls}
+						<a href="{$slash}{$forum_menu_surl}{$forum_surl}">{$message_2038}</a> |
+					{else}
+						<a href="{$slash}{$forum}{$frag_connect}menuid{$gleich_connect}{$formmenuid}">{$message_2038}</a> |
+					{/if}
+				</li>
+				{foreach item=table from=$table_data}
+					<li style="display:inline;">
+					{if $sp_urls=="ok"  or $free_sp_urls}
+							<a href="{$slash}{$forum_menu_surl}{$forum_surl}forumid-{$table.forumid}-{$table.forumname_surl}.html">
+						{else}
+						<a href="{$slash}{$table.forum}{$frag_connect}forumid{$gleich_connect}{$table.forumid}{$plus_connect}menuid{$gleich_connect}{$formmenuid}">{/if}
+							{$table.forumname}
+						</a> |
+					</li>
+				{/foreach}
+			</ul>
+			<!--
+			<form id="suchefor" method="post" action="{$slash}{$link_form}">
+			-->
+			<div class="floatbox">
+				<form id="suchefor" method="post" action="">
+					<fieldset>
+						{*<!-- Suchbegriff hier eingeben-->*}
+						<input type="text" name="search" id="searchf" size="20" value="{$search|escape:"html"}"
+							onblur="if(this.value=='')this.value='eingeben';"
+							onfocus="if(this.value=='eingeben')this.value='';"
+							title="{$message_2035}"
+							{$searchneu} />
+						{*<!-- Im Forum -->*}
+						<label for="searchf"> {$message_2036}  </label>
+						{*<!-- Finden-->*}
+						<input type="submit" name="find" value="{$message_2037}" class="btn btn-info" />
+					</fieldset>
+				</form>
+			</div>
+			{*<!-- Forum -->*}
+			<h2>{$message_2041} {$forumnameh2}</h2>
+			<p>
+			{if $sp_urls=="ok"  or $free_sp_urls}
+			<a href="{$slash}{$forum_menu_surl}{$forum_surl}forumid-{$forumid}-thread-new.html" class="link_forumthread_new">
+			{else}
+				<a href="{$slash}{$forumthread}{$frag_connect}forumid{$gleich_connect}{$forumid}{$plus_connect}menuid{$gleich_connect}{$formmenuid}" class="link_forumthread_new">{/if}
+					{$message_4}
+				</a>
+			</p>
+			<ul>
+				{foreach item=message from=$messagefor_data}
+					{$message.ulvor}
+					<li>
+					{if $sp_urls=="ok"  or $free_sp_urls}
+					<a href="{$slash}{$forum_menu_surl}{$forum_surl}forumid-{$message.forumid}-thread-{$message.msgid}-{$message.thema_surl}.html" style="font-weight:{$message.weight};">
+						
+						{else}
+						<a href="{$slash}{$forumthread}{$frag_connect}forumid{$gleich_connect}{$message.forumid}{$plus_connect}menuid{$gleich_connect}{$formmenuid}{$plus_connect}rootid{$gleich_connect}{$message.rootid}{$plus_connect}msgid{$gleich_connect}{$message.msgid}" style="font-weight:{$message.weight};">{/if}
+							{$message.thema}
+						</a>
+						<small><strong>{$message.username}</strong> {$message.zeitstempel|date_format:$lang_dateformat} [{$message.counten} Hits]</small>
+					</li>
+				{/foreach}
+				{$close_all_ulvor}
+			</ul>
+			<br />
+			{*<!-- weitere Seiten -->*}
+			{include file="_module_intern/mod_weiter.html}
+		{/if}
+	{/if}
+{/if}
+</div>
+</div>
+<!-- ENDE TEMPLATE: forum.html -->

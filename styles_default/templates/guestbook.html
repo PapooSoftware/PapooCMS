@@ -1,0 +1,81 @@
+<!-- TEMPLATE: guestbook.html -->
+<h2 class="ignore">{$message_2193}</h2>
+<a  id="artikel"></a>
+
+{foreach item=table from=$table_data}
+	{if $table.islink}<h1>{$table.islink}</h1>{/if}
+	{$table.text}
+	{*<!--   Das G�stebuch wurde bereits   -->*}
+	{*<!--    mal angesehen.  -->*}
+	{if $table.author AND 1==0}<p>{$message_2069} {$table.wie_oft} {$message_2070}</p>{/if}
+	{if $table.islinktext}
+		{*<!--   Dieser Link �ffnet den Artikel   -->*}
+		{*<!--   im selben Fenster.   -->*}
+		<a href="{$slash}index.php?menuid={$table.cattextid}&reporeid={$table.reporeid}"  title="{$message_2071}{$table.islink}{$message_2072}">{$table.islinktext}{$table.islink}</a> <br class="break_artikel" /><br />
+	{/if}
+
+{/foreach}
+
+{if $article}
+	{if $comment_ok}
+		{foreach item=comment from=$comment_data}
+			<div class="comment_inhalt">
+				{*<!--  G�stebucheintrag von -->*}
+				{*<!--<p>{$message_2073}   {$comment.username_comment} am {$comment.zeitstempel}</p>-->*}
+				<p>{$message_2073}   {$comment.username_comment} am {$comment.date_time|date_format:$lang_dateformat}</p>
+				<h3>{$comment.thema}{$comment.sprechomatlink}</h3>
+				{$comment.text}
+				<br /><br />
+			</div>
+			<br />
+			<br />
+		{/foreach}
+
+		{*<!--weitere Seiten -->*}
+		{include file="_module_intern/mod_weiter.html}
+		<br />
+	{/if}
+
+	{if $eintrag}
+		<div class="formwrap_guest">
+			<div class="form">
+				{*<!--   Kommentar ins   -->*}
+				<h3>{$message_2074} {$comment_title} {$article.schreiben}</h3>
+				<form method="post" id="formk" action="">
+					<fieldset>
+						{if $fehler}{$fehler}<br />{/if}
+						{*<!--   Hier kann ein Kommentar geschrieben werden.  -->*}
+						<legend>{$message_2075}</legend>
+						{*<!-- Autor:    -->*}
+						{if $usernameid}
+							<p>{$message_2076}:
+							-{$usernameid}-</p>
+							<input type="hidden" name="author" id="author" value="{$usernameid|escape:"html"}" />
+						{else}
+							<label for="author"> {$message_2076}</label><br />
+							<input type="text" class="inpt" name="author" id="author" size="30" maxlength="78" value="{$author|escape:"html"}" /><br />
+						{/if}
+						{*<!-- Thema:    -->*}
+						<label for="thema">{$message_2077}</label><br />
+						<input type="text" class="inpt" name="thema" id="thema" size="30" maxlength="78" value="{$thema|escape:"html"}" /><br />
+						{*<!--   Beitrag:  -->*}
+						<br />
+						<label for="inhalt">{$message_2078}</label><br />
+						<textarea class="txt" id="inhalt"  name="inhalt"  rows="10" cols="30">{$inhalt|escape:"html"}</textarea><br />
+						<br />
+						</fieldset>
+						{if $spamschutz_modus}
+							{include file="_module_intern/mod_spamschutz.html}
+						{/if}
+						<fieldset>
+						<legend>{$message_2079}</legend>
+						{*<!--  eintragen   -->*}
+						<input type="submit" value="{$message_2079}" class="btn btn-info" name="uebermittelformular" />
+						<input type="hidden" name="reporeid" value="{$reporeid_print|escape:"html"}" />
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	{/if}
+{/if}
+<!-- ENDE TEMPLATE: guestbook.html -->

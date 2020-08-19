@@ -1,0 +1,147 @@
+{if $IS_ADMIN}
+	<h1>
+		{$message_742}
+		{if $contentnew_layout_step1=="ok"}
+			{$message_743}
+		{/if}
+		{if $contentnew_layout_step2=="ok"}
+			{$message_743}
+		{/if}
+		{if $contentnew_layout_step3=="ok"}
+			{$message_744}
+		{/if}
+		{if $contentnew_layout_step4=="ok"}
+			{$message_745}
+		{/if}
+		{if $contentnew_layout_step5a=="ok"}
+			{$message_746}
+		{/if}
+		{if $contentnew_layout_step5b=="ok"}
+			{$message_747}
+		{/if}
+	</h1>
+	{if $contentnew_layout_step5b=="ok"}
+		<div class="message">{$message_748}</div>
+		<p>{$message_749}</p>
+		<h2>{$message_750}</h2>
+		{$message_751}
+	{/if}
+	{if $contentnew_layout_step5a=="ok"}
+		{$message_752}
+		<ul>
+			<li>
+				{literal}<strong>{include file="_head.html"}</strong>{/literal}- {$message_7523}
+			</li>
+			<li>
+				{literal}<strong>{include file="_inhalt_links.html"}</strong>{/literal}- {$message_754}
+			</li>
+			<li>
+				{literal}<strong>{include file="_inhalt_rechts.html"}</strong>{/literal}- {$message_755}
+			</li>
+			<li>
+				{literal}<strong>{include file="_inhalt_mitte.html"}</strong>{/literal}- {$message_756}
+			</li>
+			<li>
+				{literal}<strong>{include file="_fuss.html"}</strong> {/literal}- {$message_757}
+			</li>
+		</ul>
+		{$message_758}<br />
+		<form action="" method="post" id="formi">
+			<input type="hidden" name="layout" value="5" />
+
+			<fieldset>
+				<legend>{$message_759}</legend>
+				<textarea rows="15" cols="60" name="html">{$html}</textarea>
+			</fieldset>
+
+			<fieldset>
+				<legend>{$message_724}</legend>
+				<input type="submit" class="submit_back" name="save_html2" id="save_html2" value="{$message_725}"/>
+			</fieldset>
+		</form>
+	{/if}
+	{if $contentnew_layout_step4=="ok"}
+		{$message_760}
+		<form action="" method="post" id="formi">
+			<input type="hidden" name="layout" value="4" />
+
+			<fieldset>
+				<legend>{$message_761}</legend>
+				<textarea rows="15" cols="60" name="html"></textarea>
+			</fieldset>
+
+			<fieldset>
+				<legend>{$message_724}</legend>
+				<input type="submit" class="submit_back" name="save_html" id="save_html" value="{$message_725}"/>
+			</fieldset>
+		</form>
+	{/if}
+	{if $contentnew_layout_step3=="ok"}
+		{if $contentnew_layout_step3ok=="ok"}
+			{$message_762}
+			<form action="" method="post" id="formi">
+				<input type="hidden" name="layout" value="3" />
+
+				<fieldset>
+					<legend>{$message_763}</legend>
+					<textarea rows="15" cols="60" name="css"></textarea>
+				</fieldset>
+
+				<fieldset>
+					<legend>{$message_724}</legend>
+					<input type="submit" class="submit_back" name="save_css" id="save_css" value="{$message_725}"/>
+				</fieldset>
+			</form>
+		{/if}
+		{if $contentnew_layout_step3_fehler=="ok"}
+			{$message_764}
+			<ul>
+				{foreach item=dat key=dir from=$permliste}
+					<li>{$dir}</li>
+				{/foreach}
+			</ul>
+		{/if}
+	{/if}
+	{if $contentnew_layout_step2=="ok"}
+		{if $contentnew_layout_step2_fehler=="ok"}
+			{$message_765}
+			<ul>
+				{foreach item=dat key=dir from=$permliste}
+					<li>{$dir}</li>
+				{/foreach}
+			</ul>
+		{/if}
+	{else}
+		{if $contentnew_layout_step1=="ok"}
+			{if $contentnew_layout_step1_fehler=="ok"}
+				{$message_766}
+			{/if}
+			{$message_767}
+			<form action="" method="post" id="formi">
+				<input type="hidden" name="layout" value="2" />
+
+				<fieldset>
+					<legend>{$message_768}</legend>
+					<input type="text" name="layoutname" id="layoutname" maxlength="15" value=""/>
+				</fieldset>
+
+				<fieldset>
+					<legend>{$message_724}</legend>
+					<input type="submit" class="submit_back" name="save_newlayout" id="save_newlayout" value="{$message_725}"/>
+				</fieldset>
+			</form>
+		{/if}
+		{if $contentnew_layout}
+			{$message_769}
+			<ul>
+				{foreach item=dat from=$dir_perm}
+					<li>
+						{$dat.file} - (<em>{if $dat.perm=="ja"}{$message_770}{else}{$message_771}{/if}</em>)
+					</li>
+				{/foreach}
+			</ul>
+			<h2>{$message_772}</h2>
+			<a href="{$self}&layout=1">{$message_773}</a>
+		{/if}
+	{/if}
+{/if}

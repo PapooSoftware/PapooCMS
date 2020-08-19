@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- version: Versions-Nummer papoo für die das Plugin gedacht ist / funktioniert -->
+<plugin version="3.5">
+
+<!-- ALLGEMEINE-INFORMATIONEN -->
+<!-- ************************ -->
+<!-- name: Name des Plugins -->
+<name>Blog Plugin</name> 
+
+<!-- beschreibung_de: Kurz-Beschreibung des Plugins auf deutsch (wird im Plugin-Manager angezeigt) -->
+<beschreibung_de><![CDATA[Mit diesem Plugin werden einige Blog Funktionen nachgerüstet wie z.B. Trackback, Pingback, Pingservice und ein Timeline Modul.]]></beschreibung_de>
+
+<!-- beschreibung_en: Kurz-Beschreibung des Plugins auf englisch (wird im Plugin-Manager angezeigt) -->
+<beschreibung_en><![CDATA[Mit diesem Plugin werden einige Blog Funktionen nachgerüstet wie z.B. Trackback, Pingback, Pingservice und ein Timeline Modul.]]></beschreibung_en>
+
+<!-- version: Versions-Nummer des Plugins -->
+<version>1.60</version>
+
+<!-- papooid: Eindeutige Nummer offizieller papoo-Plugins -->
+<papooid>82</papooid>
+
+<!-- link: z.Z. noch ohne Funktion -->
+<link>http://www.papoo.de</link> 
+
+<!-- datum: Erscheinungs-Datum bzw. Stand des Plugins -->
+<datum>15.12.2011</datum>
+
+
+<!-- AUTOR-INFORMATIONEN -->
+<!-- ******************* -->
+<!-- autor: Informationen zum Autor (Programmierer) des Plugins -->
+<autor>
+	<!-- autor.name: Name des Authors -->
+	<name>Dr. Carsten Euwens</name>
+	
+	<!-- autor.kontakt: postalische Kontakt-Informationen des Autors -->
+	<kontakt><![CDATA[Dr. Carsten Euwens
+Burbacherstr. 231, 53129 Bonn]]></kontakt>
+	
+	<!-- autor.email: eMail-Adresse des Autors -->
+	<email>info@papoo.de</email>
+	
+	<!-- autor.telefon: Telefon-Nummer des Autors -->
+	<telefon>0228 280 56 68</telefon>
+</autor>
+
+
+<!-- MENÜ-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- menue: Informationen für den Menü-Eintrag im Backend (papoo/interna) -->
+<menue>
+	<!-- menue.eintrag_de: Name des Menü-Punktes im Backend auf deutsch -->
+	<eintrag_de>Blog Plugin</eintrag_de>
+	<!-- menue.eintrag_en: Name des Menü-Punktes im Backend auf englisch -->
+	<eintrag_en>Blog Plugin</eintrag_en>
+	<!-- menue.icon: Pfad zum Menü-Icon des Menü-Punktes im Backend (relativ zum Plugin-Verzeichnis) -->
+	<icon>blogger/bilder/blogger.png</icon>
+	<!-- menue.link: Name der Seite auf welche der Menü-Punkt im Backend verweisen soll -->
+    <link>plugin:blogger/templates/backend.html</link>
+    <submenue>
+        <eintrag_de>Pingservice</eintrag_de>
+        <eintrag_en>Pingservice</eintrag_en>
+        <link>plugin:blogger/templates/backend.html&amp;submenu=trackback</link>
+    </submenue>
+    <submenue>
+        <eintrag_de>Blog Module</eintrag_de>
+        <eintrag_en>Blog modules</eintrag_en>
+        <link>plugin:blogger/templates/backend.html&amp;submenu=shortcut</link>
+    </submenue>
+</menue>
+
+
+<!-- KLASSEN-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- klasse: Informationen der Plugin-Klasse welche eingebunden werden sollen -->
+
+<klasse>
+    <name>blogger_trackback</name>
+    <datei>blogger/lib/blogger_trackback_class.php</datei>
+</klasse>
+<klasse>
+    <name>blogger_shortcut</name>
+    <datei>blogger/lib/blogger_shortcut_class.php</datei>
+</klasse>
+
+<!-- CSS-INFORMATIONEN -->
+<!-- ***************** -->
+<!-- css: Pfad zur CSS-Datei (relativ zum Plugin-Verzeichnis) -->
+<css>blogger/css/blogger.css</css>
+
+
+<!-- DATENBANK-INFORMATIONEN -->
+<!-- ****************** -->
+<datenbank>
+	<!-- datenbank.installation: Pfad zur SQL-Installations-Datei (relativ zum Plugin-Verzeichnis) -->
+	<installation>blogger/sql/blogger_install.sql</installation>
+	<!-- datenbank.deinstallation: Pfad zur SQL-Deinstallations-Datei (relativ zum Plugin-Verzeichnis) -->
+	<deinstallation>blogger/sql/blogger_deinstall.sql</deinstallation>
+</datenbank>
+
+<!-- MODUL-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- modul: Informationen des Frontend-Moduls -->
+
+<modul>
+    <datei>plugin:blogger/templates/mod_blogger_wordcloud.html</datei>
+    <name_de>Plugin: Blog-Wordcloud</name_de>
+    <beschreibung_de>Zeigt eine Wordcloud mit den häufigsten Wörten aus Ihren Artikeln mit Verknüpfung im Frontend.</beschreibung_de>
+</modul>
+
+<modul>
+    <datei>plugin:blogger/templates/mod_blogger_calendar.html</datei>
+    <name_de>Plugin: Blog-Kalender</name_de>
+    <beschreibung_de>Stellt einen Kalender mit Link zu Ihren Artikeln.</beschreibung_de>
+</modul>
+
+<modul>
+    <datei>plugin:blogger/templates/mod_blogger_monate.html</datei>
+    <name_de>Plugin: Blog-Monatsliste</name_de>
+    <beschreibung_de>Erstellt eine Liste der Monate mit Links zu Ihren Artikeln.</beschreibung_de>
+</modul>
+
+<!--<modul>
+	<datei>plugin:blogger/templates/mod_blogger_tackback.html</datei>
+	<name_de>Plugin: Trackback/Pingback</name_de>
+	<beschreibung_de>Stellt eine Trackback/Pingback Funktion Ihren Artikeln zur verfügung.</beschreibung_de>
+</modul>-->
+
+<!-- Einbindung der Sprach-Dateien.
+	In dem hier angegebenen Verzeichnis sollten Dateien mit folgenden Namen liegen:
+	- messages_backend_[de|en|fr| .. etc.].inc.php
+	- messages_frontend_[de|en|fr| .. etc.].inc.php
+-->
+<messages>blogger/messages</messages>
+
+</plugin>

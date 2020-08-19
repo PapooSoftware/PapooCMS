@@ -1,0 +1,18 @@
+{if $module_aktiv.mod_efa_fontsize}
+	<!-- MODUL: efa_fontsize -->
+	<div class="modul" id="mod_efa_fontsize">
+		<span class="mod_efa_fontsize_text">{$mod_efa_fontsize.text}</span>
+		
+		<script type="text/javascript">
+			if (efa_fontSize)
+			{ldelim}
+				efa_bigger[2] = "{$mod_efa_fontsize.bigger}";
+				efa_reset[2] = "{$mod_efa_fontsize.normal}";
+				efa_smaller[2] = "{$mod_efa_fontsize.smaller}";
+				var efa_fontSize_lokalisiert = new Efa_Fontsize(efa_increment,efa_bigger,efa_reset,efa_smaller,efa_default);
+				document.write(efa_fontSize_lokalisiert.allLinks);
+			{rdelim}
+		</script>
+	</div>
+	<!-- ENDE MODUL: efa_fontsize -->
+{/if}

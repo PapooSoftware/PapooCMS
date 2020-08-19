@@ -1,0 +1,65 @@
+div.artikel > div.rapid_form {
+    margin: 5px 5px 5px 5px;
+    border: 1px #EEE solid;
+    border-top:26px #EEE solid;
+    padding: 15px;
+}
+
+div.artikel > div.rapid_form legend {
+    width: calc(100% + 22px);
+}
+
+div.artikel > div.rapid_form .rapid_dev_help_button {
+    float: right;
+    background-color: #095a94;
+    border: 2px solid #095a74;
+    border-radius: 50%;
+    width: 31px;
+    height: 31px;
+    font-weight: bold;
+    font-size: large;
+    color: white;
+    margin: 10px 20px 0 0;
+}
+
+.artikel_sitemap li.article {
+    background: #F3F2F2;
+    padding: 7px 7px 7px 5px;
+    margin-bottom: 2px;
+}
+.artikel_sitemap li.article a {
+    width: auto;
+    background: none;
+    padding: 0;
+}
+.artikel_sitemap a.no_active_link {
+    /*cursor: default;*/
+}
+
+.artikel_sitemap a.no_active_link:hover {
+    /*text-decoration: none;*/
+    background-color: #F3F2F2;
+}
+
+select {
+    float: right;
+    margin: 0;
+}
+
+input[type="submit"] {
+    margin-top: 1rem;
+}
+
+.chosen-container {
+    float: right;
+    width: 400px !important;
+}
+
+.chosen-container li.search-choice {
+    width: auto;
+}
+
+.chosen-container li.search-field {
+    display: inline;
+    width: auto;
+}

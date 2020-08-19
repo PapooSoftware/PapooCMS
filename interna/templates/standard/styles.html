@@ -1,0 +1,161 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		{if $template_news_start=='ok'}
+			{if $template_sys_start=='ok'}
+				{include file=site_template.html}
+			{/if}
+			
+			{if $template_cont_start=='ok'}
+				{include file=content_template.html}
+			{/if}
+			
+			{if $template_news_start=='ok'}
+				{include file=new_template.html}
+			{/if}
+		{else}
+			<div class="aktuell" id="aktuell_{$menuid_aktuell}"></div>
+			{if $styles.template_weiche == "STYLES_LISTE"}
+				{if $css_themessage}
+					<div class="message">{$css_themessage}</div>
+				{/if}
+				{$message_407}
+				<h1 id="styles_neues_layout_erstellen" class="h1" >{$system_styles_neues_layout_erstellen}</h1>
+				<p id="styles_hier_neues_laout_erstellen_link" class="h1" >{$system_styles_hier_neues_laout_erstellen_link}</p>
+				<a href="./styles.php?menuid=22&amp;layout=1" id="styles_neues_layout_erstellen_link" class="132link" >{$system_styles_neues_layout_erstellen_link}</a>
+				<h1 id="styles_bersicht_der_installierten_und_aktiven_layouts" class="h1" >{$system_styles_bersicht_der_installierten_und_aktiven_layouts}</h1>
+				{include file=sub_templates/css_styles_liste.html}
+			{/if}
+			{if $styles.template_weiche == "STYLE_RESET"}
+				{if $css_themessage}
+				<div class="message">{$css_themessage}</div>
+				{/if}
+				{$style_reset_msg_heading}
+				{$style_reset_msg_warning_1} {$styles.style_data.style_name} {$style_reset_msg_warning_2}
+				<form action="" method="post" id="style_reset_form" >
+					<input type="submit" id="style_reset_form_submit" name="style_reset_form_submit" value="{$style_reset}" class="btn btn-danger" disabled />
+				</form>
+				<script>
+					{literal}
+					(function() {
+						"use strict";
+						var wait = 15; // Wie viele Sekunden wird gewartet
+						var value = "";
+						var button = null;
+						var interval = null;
+						window.addEventListener("load", function () {
+							button = document.getElementById("style_reset_form_submit");
+							value = button.value;
+							button.value += " (Noch " + wait + " Sekunden)";
+							interval = setInterval(function () {
+								if(--wait > 0){
+									button.value = value + " (Noch " + wait + " Sekunden)";
+								}
+								else {
+									button.value = value;
+									button.disabled = false;
+									clearInterval(interval);
+								}
+							}, 1000);
+							button.addEventListener("click", function (event) {
+								event = event || window.event;
+								if(!confirm("Dies ist die letzte Warnung. Mit der Bestätigung dieses Dialogs wird der komplette Inhalt Ihrer Datenbank zurückgesetzt und geht somit unwiderruflich verloren.")) {
+									event.preventDefault();
+								}
+							}, false);
+						}, false);
+					})();
+					{/literal}
+				</script>
+			{elseif $styles.template_weiche == "STYLE_RESET_DONE"}
+				{if $css_themessage}
+					<div class="message">{$css_themessage}</div>
+				{/if}
+			{/if}
+			{if ($styles.template_weiche == "BEREICHE_LISTE") OR ($styles.template_weiche == "MODULE_LISTE")}
+				<h1 id="styles_bearbeiten_sie_hier_die_daten_des_layouts" class="h1" >
+					{$system_styles_bearbeiten_sie_hier_die_daten_des_layouts}: "{$styles.style_data.style_name}"
+				</h1>
+				<div style="width: 99%;height:200px;float:right;">
+					<div style="float:left;width:50%;height:200px;">
+						<a rel="lightbox" href="../styles/{$styles.style_data.style_pfad}/screenshot.gif"><img src="../styles/{$styles.style_data.style_pfad}/screenshot.gif" width="250" height="150" style="border:none;" alt="Screenshot" /></a><br />
+						<br />
+						{$system_styles_klicken_zum_vergroessern}
+					</div>
+					<div style="float:left;width:45%;">
+						<form action="" method="post" style="width: 99%;">
+							<input type="hidden" name="action" value="style_edit" />
+							<fieldset>
+								<legend>{$system_styles_basisdaten_des_layouts}</legend>
+								<div style="width: 110px;float:left;">ID: </div>{$styles.style_data.style_id}<br />
+								<div style="width: 110px;float:left;">{$system_styles_standard_css}:</div> {if $styles.style_data.standard_style ==1}{$system_styles_css_ja}{else}{$system_styles_css_nein}{/if}<br />
+								<div style="width: 110px;float:left;">{$system_styles_verzeichnisname}:</div> {$styles.style_data.style_pfad|escape:"html"}<br />
+								<div style="width: 110px;float:left;"><strong>{$message_651}</strong></div>
+								<a href="./styles.php?menuid=22&amp;style_bereich=module&amp;mod_style_id={$styles.style_id}&amp;action=module_get_xml">{$message_652}</a>
+								<br /><br />
+								<label for="style_name">{$message_412}</label><br />
+								<input type="text" id="style_name" name="style_name" value='{$styles.style_data.style_name|escape:"html"}' /><br />
+							</fieldset>
+							<fieldset>
+								<legend>{$message_70}</legend>
+								<input type="submit" class="submit_back_green" value="{$message_70}" />
+							</fieldset>
+						</form>
+					</div>
+				</div>
+			{/if}
+			<div class="clearfix"></div>
+			<br /><br />
+			<div style="margin-top: 50px;width:100%;">
+			{if $styles.template_weiche == "BEREICHE_LISTE"}
+				<div class="tabbable">
+					<ul class="nav nav-tabs">
+						<li {if $css_jquery_first==0}class="active"{/if}><a href="#tabs-1" data-toggle="tab">{$system_styles_modulmanager}</a></li>
+						<li {if $css_jquery_first==1}class="active"{/if}><a href="#tabs-2" data-toggle="tab">{$system_styles_css_dateien_bearbeiten}</a></li>
+						<li {if $css_jquery_first==2}class="active"{/if}><a href="#tabs-3" data-toggle="tab">{$system_styles_template_dateien_bearbeiten}</a></li>
+					</ul>
+					<div class="tab-content">	
+						<div id="tabs-1" class="tab-pane {if $css_jquery_first==0}active{/if}" >
+							{include file=sub_templates/modul_manager.html}
+						</div>
+						<div id="tabs-2" class="tab-pane {if $css_jquery_first==1}active{/if}" >
+							{include file=sub_templates/css_files.html}
+						</div>
+						<div id="tabs-3" class="tab-pane {if $css_jquery_first==2}active{/if}" >
+							{include file=sub_templates/template_files.html}
+						</div>
+						</div>
+					</div>
+				</div>
+			{/if}
+			<div style="margin-bottom: 100px;width:100%;height:100px;float:left;"></div>
+			{if $is_dev}
+				<span class="ignore">
+					#start#
+				</span>
+				<!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+				<div class="rapid_form">
+					<form action="" name="" method="POST">
+						<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+						<input type="hidden" name="tb_name" value="papoo_kategorie_bilder" />
+						<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+						<input type="hidden" name="php_datei_name" value="image_class" />
+						
+						<input type="hidden" name="system_template" value="ordner.html" />
+						<!-- Ist System -->
+						<input type="hidden" name="is_system" value="1" />
+						<!-- Das Standarpr�fix f�r die Ids -->
+						<input type="hidden" name="praefix" value="image_cat" />
+						<!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+						<input type="hidden" name="praefix_spezial" value="image_cat" />
+						<!-- Das Tool einbinden -->
+						{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+					</form>
+				</div>
+			{/if}
+		{/if}
+		<div class="clear">&nbsp;</div>
+	</div>
+	{include file=foot.inc.html}
+{/if}

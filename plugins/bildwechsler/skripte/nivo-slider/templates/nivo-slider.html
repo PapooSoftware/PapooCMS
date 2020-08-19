@@ -1,0 +1,53 @@
+{if $plugins.bildwechsler }
+  <script src="{$slash}plugins/bildwechsler/skripte/nivo-slider/js/jquery.nivo.slider.js"></script>
+
+  {literal}
+    <script type="text/javascript">
+
+      jQuery(window).load(function() {
+        // nivoslider init
+        $('#slider').nivoSlider({
+          /*
+          effect: 'fade',
+          slices:1,
+          boxCols:8,
+          boxRows:8,
+          animSpeed:500,
+          pauseTime:2000,
+          directionNav:false,
+          directionNavHide:false,
+          controlNav:true,
+          captionOpacity:1
+          */
+        });
+      });
+      
+    </script>
+  {/literal}
+  
+  <!-- MODUL: bildwechsler -->
+  <section class="slider-wrapper theme-default">
+    <div class="inner">
+      <div class="container_16 clearfix">
+        <div class="grid_16">
+          
+          <div id="slider" class="nivoSlider">
+            {foreach item=wechselbild from=$plugins.bildwechsler name=wechselbilder}
+              <img {$wechselbild.bw_bild}  title='#sliderCaption{$wechselbild.bw_id}'/>
+            {/foreach}
+          </div>
+          
+          {foreach item=wechselbild from=$plugins.bildwechsler name=wechselbilder}
+            <div id="sliderCaption{$wechselbild.bw_id}" class="nivo-html-caption">
+              <h5>{$wechselbild.bw_ueberschrift}</h5>
+              <p>{$wechselbild.bw_text}</p>
+            </div>
+          {/foreach}
+
+        </div>
+      </div>
+    </div>
+  </section> 
+  <!-- ENDE MODUL: bildwechsler -->
+  
+{/if}

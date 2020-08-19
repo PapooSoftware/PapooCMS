@@ -1,0 +1,141 @@
+{*<!-- TinyMCE Editor -->*}
+{if $editor_default==3}
+	{if $seite_autor == "tiny4"}
+		{include file=tinymce4_inc.html}
+	{else}
+		{include file=tiny_inc.html}
+	{/if}
+	<textarea id="ta" name="inhalt_ar[inhalt]" style="width:90%" rows="20" cols="80">{$Beschreibung|replace:"</textarea>":"&lt;/textarea&gt;"}</textarea>
+	<input type="hidden" name="editor_name" value="tinymce" />
+{/if}
+
+
+{*<!-- Quicktags Editor-->*}
+{if $editor_default==2}
+	<br /><br />
+	<label for="inhalt">{$message_680}</label>
+	<br />
+	<script type="text/javascript">edToolbar();</script>
+	
+	<div style="width: 30%; float: left;">
+		<label for="bb_bilder">{$message_681}:</label><br />
+		<select {if $user_club_stufe==1} onkeypress{else}onchange{/if}="bbcodeimg(this.options[this.selectedIndex].value); this.options.selectedIndex = 0; return false;" name="bb_bilder" id="bb_bilder"  size="1" style="width:150px;">
+		<option value="">({$message_682})</option>
+		{foreach item=bild from=$bild_data}
+			{if $temp_cat_image != $bild.image_dir}
+				{if $temp_not_first_image}
+					</optgroup>
+				{/if}
+				{assign var="temp_cat_image" value=$bild.image_dir}
+				{assign var="temp_not_first_image" value=1}
+				<optgroup label="{$bild.image_dir|escape:"html"}">
+			{/if}
+			<option value="{$bild.image_name}_#_{$bild.image_width}_#_{$bild.image_height}_#_{$bild.image_alt}_#_{$bild.image_title}" title="{$bild.image_title}">{$bild.image_alt}</option>
+		{/foreach}
+		</optgroup>
+		</select>
+	</div>
+	
+	<div style="width: 30%; float: left;">
+		<label for="bb_bilder_lightbox">{$message_681_1}:</label><br />
+		<select {if $user_club_stufe==1} onkeypress{else}onchange{/if}="bbcodeimg_lightbox(this.options[this.selectedIndex].value); this.options.selectedIndex = 0; return false;" name="bb_bilder_lightbox" id="bb_bilder_lightbox"  size="1" style="width:150px;">
+		<option value="">({$message_682})</option>
+		{foreach item=bild from=$bild_data}
+			{if $temp_cat_popup != $bild.image_dir}
+				{if $temp_not_first_popup}
+					</optgroup>
+				{/if}
+				{assign var="temp_cat_popup" value=$bild.image_dir}
+				{assign var="temp_not_first_popup" value=1}
+				<optgroup label="{$bild.image_dir|escape:"html"}">
+			{/if}
+			<option value="{$bild.image_name}_#_{$bild.image_thumb_width}_#_{$bild.image_thumb_height}_#_{$bild.image_alt}_#_{$bild.image_title}" title="{$bild.image_title}">{$bild.image_alt}</option>
+		{/foreach}
+		</optgroup>
+		</select>
+	</div>
+	
+	<div style="width: 30%; float: left;">
+		<label for="bb_artikel">{$message_677}:</label><br />
+		<select {if $user_club_stufe==1} onkeypress{else}onchange{/if}="bbcodeartikel(this.options[this.selectedIndex].value); this.options.selectedIndex = 0; return false;" name="bb_artikel" id="bb_artikel"   style="width:150px;" size="1">
+			<option value="">({$message_682})</option>
+			{foreach item=artikel from=$down_art_data}
+			<option value="{$artikel.menuid}_#_{$artikel.artikelid}_#_{$artikel.artikel_header}" title="{$artikel.artikel_header}" >{$artikel.artikel_header}</option>
+			{/foreach}
+		</select>
+	</div>
+	
+	<div style="width: 30%; float: left;">
+		<label for="bb_downloads">{$message_683}:</label><br />
+		<select {if $user_club_stufe==1} onkeypress{else}onchange{/if}="bbcodedown(this.options[this.selectedIndex].value); this.options.selectedIndex = 0; return false;" name="bb_downloads" id="bb_downloads"  size="1" style="width:150px;">
+		<option value="">({$message_682})</option>
+		{foreach item=download from=$down_data}
+			{if $temp_cat_download != $download.dateien_cat_name}
+				{if $temp_not_first_download}
+					</optgroup>
+				{/if}
+				{assign var="temp_cat_download" value=$download.dateien_cat_name}
+				{assign var="temp_not_first_download" value=1}
+				<optgroup label="{$download.dateien_cat_name|escape:"html"}">
+			{/if}
+			<option value="{$download.downloadid}_#_{$download.downloadname}" title="{$download.downloadname}" >{$download.downloadname}</option>
+		{/foreach}
+		</optgroup>
+		</select>
+	</div>
+	
+	<div style="width: 30%; float: left;">
+		<label for="bb_css">{$message_684}:</label><br />
+		<select {if $user_club_stufe==1} onkeypress{else}onchange{/if}="bbcodecss(this.options[this.selectedIndex].value); this.options.selectedIndex = 0; return false;" name="bb_css" id="bb_css"  size="1" style="width:150px;">
+			<option value="">({$message_682})</option>
+			{foreach item=css_klasse from=$css_data_klassen}
+			<option value="{$css_klasse}" title="CSS-Klasse: {$css_klasse}" >{$css_klasse}</option>
+			{/foreach}
+		</select>
+	</div>
+	
+	<div style="width: 30%; float: left;">
+		<label for="sprachen">{$message_685}:</label><br />
+		<select {if $user_club_stufe==1} onkeypress{else}onchange{/if}="bbcodelang(this.options[this.selectedIndex].value); this.options.selectedIndex = 0; return false;" name="bb_language" id="bb_language" title="Welche Sprache gerade verwendet wird (Wort oder ganzer Satz)" size="1" style="width:150px;">
+			<option value="">({$message_682})</option>
+			<option value="en">Englisch</option>
+			<option value="fr">Franz&ouml;sisch</option>
+			<option value="es">Spanisch</option>
+		</select>
+	</div>
+	
+	<div style="width: 30%; float: left;">
+		<label for="ueberschriften">{$ueberschriften}:</label><br />
+		<select {if $user_club_stufe==1} onkeypress{else}onchange{/if}="bbcode(this.options[this.selectedIndex].value);this.options.selectedIndex = 0; return false;" name="ueberschriften" id ="ueberschriften" title="{$message_2170}"  size="1">
+			<option value="">({$message_160})</option>
+			<option value="<h1></h1>">{$ueberschrift} 1</option>
+			<option value="<h2></h2>">{$ueberschrift} 2</option>
+			<option value="<h3></h3>">{$ueberschrift} 3</option>
+			<option value="<h4></h4>">{$ueberschrift} 4</option>
+			<option value="<h5></h5>">{$ueberschrift} 5</option>
+			<option value="<h6></h6>">{$ueberschrift} 6</option>
+		</select>
+	</div>
+
+	<textarea type="text" name="inhalt_ar[inhalt]" id="inhalt"  rows="40" cols="80" style="width:90%;">{$Beschreibung}</textarea>
+	<input type="hidden" name="editor_name" value="quicktags" />
+	<script type="text/javascript">var edCanvas = document.getElementById('inhalt');</script>
+{/if}
+
+
+{*<!--  Markdown Editor -->*}
+{if $editor_default==1}
+	<br />
+	<label for="ta">{$message_680}</label>
+	<textarea id="ta" name="inhalt_ar[inhalt]" style="width:100%" rows="70" cols="80">{$Beschreibung}</textarea>
+	<input type="hidden" name="editor_name" value="markdown" />
+{/if}
+
+
+{*<!--  Fremd Editor -->*}
+{if $editor_default==99}
+	<br />
+	<label for="ta">{$message_680}</label>
+	<textarea id="ta" name="inhalt_ar[inhalt]" style="width:100%" rows="70" cols="80">{$Beschreibung}</textarea>
+	<input type="hidden" name="editor_name" value="fremdeditor" />
+{/if}

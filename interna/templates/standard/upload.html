@@ -1,0 +1,343 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+	{include file="head.inc.utf8.html"}
+	{include file="menu.inc.html"}
+	<div class="artikel">
+		 <h1 id="image_bearbeiten_sie_hier_die_dateien" class="h1" >{$system_image_bearbeiten_sie_hier_die_dateien}</h1>
+		{if $suchen_error_text}
+			<div class="error">{$suchen_error_text}</div>
+		{/if}
+		{if $multiupload}
+			{include file=./datei_multi_upload.html}
+		{else}
+			{if $text}{$text}{/if}
+			{*<!-- Datei hochladen-->*}
+			{if $erstellen}
+				{*<!-- Daten neu eintragen-->*}
+				{*<!-- Eine neue Datei hochladen {$message_330}-->*}
+				<strong>{$message_335}</strong>
+				<form method="POST" id="formi" action="" enctype="multipart/form-data">
+					<fieldset>
+						{*<!-- Eingabe der Datei:-->*}
+						<legend>{$message_337}</legend>
+						{*<!-- Das Dokument:-->*}
+						{$message_336}
+						<label for="myfile">{$message_338}</label>
+						<input type="file" name="myfile" id="myfile" value="" />
+					</fieldset>
+					{include file="upload_form.inc.html"}
+					<fieldset>
+						{*<!-- Datei hochladen:-->*}
+						<legend>{$message_344}</legend>
+						{*<!-- hochladen-->*}
+						<input type="submit" class="submit_back_green" value="{$message_356}" name="formSubmit" />
+					</fieldset>
+				</form>
+				<form action="" method="post" name="frmImage" enctype="multipart/form-data">
+					<fieldset>
+						<input type="hidden" name="action" value="MULTI_DATEI" />
+						<legend>{$system_image_whlen_sie_fr_den_mehrfach_upload_bitte_das_gewnschte_verzeichnis_aus}</legend>
+						<label for="image_dir">{$message_492a}</label><br />
+						<select id="image_dir" name="image_dir" size="1" style="margin-right:20px;">
+							<option value="" {$checked1}>{$message_489} (default)</option>
+							{foreach item=dir from=$dirlist}
+								<option value="{$dir.dateien_cat_id}"{if $image_dir==$dir.cat_id} selected="selected" {/if}>
+									{$dir.nbsp} {$dir.bilder_cat_name}{$dir.dateien_cat_name}
+								</option>
+							{/foreach}
+						</select><input type="submit" class="submit_back_big" name="selkatmultiupload" value="{$message_213}" />
+					</fieldset><br />
+				</form>
+			{/if}
+			{*<!-- ENDE Link erstellen -->*}
+			{if $aendern}
+				{*<!-- Datei �ndern -->*}
+				{if $suchen}
+					<form method="post" action="./upload.php?menuid=33" name="suche">
+						<fieldset>
+							{*<!-- Suche nach einer Datei in der Datenbank:-->*}
+							<legend>{$message_346}</legend>
+							<label for="search">{$message_346}</label>
+							<input type="text" id="search" name="search" value="{$search}" onblur="if(this.value=='')this.value='Ihr Suchbegriff';" onfocus="if(this.value=='Ihr Suchbegriff')this.value='';" size="40" maxlength="30" />
+							<input type="hidden" value="Finden" name="formSubmit" />
+							{*<!-- Finden-->*}
+							<input type="submit" class="submit_back" value="{$message_233}" name="formSubmit" />
+						</fieldset>
+					</form>
+					<h2>{$system_image_whlen_sie_eine_datei_aus_die_sie_bearbeiten_wollen}</h2>
+					<div class="image_folder_container_complete">
+					<div class="image_folder_container_left span2">
+						<strong>{$system_image_image_ordner}</strong>
+						<br />
+						<a class="bilder_verzeichnis_top" href="upload.php?menuid=33"> {$system_image_alle_dateien} <span style="color: #333;">({$dateien_cat_id_count.0})</span> </a>
+						{foreach item=dir from=$dirlist}
+							{$dir.vor_ul}
+								<a {if $bilder_active_cat_id==$dir.dateien_cat_id} class="active_cat" {/if} href="upload.php?menuid=33&downloadkategorie={$dir.dateien_cat_id}">
+									{$dir.dateien_cat_name} <span style="color: #333;">(
+										{if isset($dateien_cat_id_count[$dir.dateien_cat_id]) && $dateien_cat_id_count[$dir.dateien_cat_id]}
+											{$dateien_cat_id_count[$dir.dateien_cat_id]}
+										{else}
+											0
+										{/if})</span>
+								</a>
+							{$dir.nach_ul}
+						{/foreach}
+					</div>
+				<div>
+			{if $gefunden}
+				<form action="" method="post">
+					<table class="filetable" style="width:auto; width:calc(100% - 300px);">
+						<tr style="text-align:left;">
+							<th style="width:100px;">Typ</th>
+							<th>Name</th>
+							<th>Anz. Downloads</th>
+							<th>Datum</th>
+							<th>ID</th>
+							<th><input type="checkbox" data-trigger-checkboxes="delete_selected_files"></th>
+						</tr>
+						{foreach item=table from=$table_data_files}
+							<tr>
+								<td><img src="./bilder/{$table.typ}" alt="" title="" style="width:16px;height:16px;" /></td>
+								{*<!-- �ndern-->*}
+								<td>
+									<div class="">
+										<a href="./upload.php?menuid=33&id={$table.linkid}"
+											class="image_link " title='{$image.image_name|escape:"html"}'>
+											<span >{$table.linkname}</span>
+										</a>
+									</div>
+								</td>
+								<td>{$table.wieoft|strip_tags}</td>
+								<td>{$table.zeitpunkt|strip_tags}</td>
+								<td>{$table.linkid}</td>
+								<td><input type="checkbox" name="delete_selected_files[]" value="{$table.linkid}"></td>
+							</tr>
+						{/foreach}
+					</table>
+					<fieldset>
+						<button id="init-multi-file-delete" type="button" disabled="disabled" class="btn btn-danger" style="float:right; margin:0;">{$delete_selected_files}</button>
+						<button id="confirm-multi-file-delete" type="submit" name="action" value="delete_selected_files" class="btn btn-danger hidden" style="float:right; margin:0 0 0 10px;">{$message_780}</button>
+						<button id="abort-multi-file-delete" type="button" class="btn btn-success hidden" style="float:right; margin:0;">{$message_649}</button>
+					</fieldset>
+				</form>
+				<script>
+					//<!--{literal}
+					(function () {
+						var deleteButton = null;
+						var deleteConfirmButton = null;
+						var abortButton = null;
+
+						function getCheckboxes(identifier) {
+							return Array.prototype.slice.call(
+								document.querySelectorAll('input[type="checkbox"][name="' + identifier + '[]"]')
+							);
+						}
+						function onTriggerStateChanged() {
+							var identifier = this.dataset.triggerCheckboxes;
+							var checkboxes = getCheckboxes(identifier);
+							var self = this;
+							checkboxes.forEach(function (checkbox) {
+								checkbox.checked = self.checked;
+							});
+							deleteButton.disabled = this.checked == false;
+							abortMultiDelete();
+						}
+						function onCheckboxStateChanged() {
+							// Strip square brackets from name attribute
+							var identifier = this.name.substring(0, this.name.length -2);
+							var checkboxes = getCheckboxes(identifier);
+							var checkedCount = checkboxes.reduce(function (count, checkbox) {
+								return checkbox.checked ? count + 1 : count;
+							}, 0);
+							var triggers = Array.prototype.slice.call(
+								document.querySelectorAll('[data-trigger-checkboxes="' + identifier + '"]')
+							);
+							triggers.forEach(function (trigger) {
+								trigger.checked = checkedCount > 0;
+								trigger.indeterminate = checkedCount > 0 && checkedCount < checkboxes.length;
+							});
+							deleteButton.disabled = checkedCount == 0;
+							abortMultiDelete();
+						}
+						function initMultiDelete() {
+							deleteButton.classList.add('hidden');
+							deleteConfirmButton.classList.remove('hidden');
+							abortButton.classList.remove('hidden');
+						}
+						function abortMultiDelete() {
+							deleteButton.classList.remove('hidden');
+							deleteConfirmButton.classList.add('hidden');
+							abortButton.classList.add('hidden');
+						}
+						window.addEventListener('DOMContentLoaded', function () {
+							var triggers = Array.prototype.slice.call(document.querySelectorAll('input[type="checkbox"][data-trigger-checkboxes]'));
+							var checkboxIdentifiers = [];
+							triggers.forEach(function (trigger) {
+								trigger.addEventListener('change', onTriggerStateChanged);
+								var identifier = trigger.dataset.triggerCheckboxes;
+								checkboxIdentifiers.indexOf(identifier) == -1 && checkboxIdentifiers.push(identifier);
+							});
+							checkboxIdentifiers.forEach(function (identifier) {
+								getCheckboxes(identifier).forEach(function (checkbox) {
+									checkbox.addEventListener('change', onCheckboxStateChanged);
+								});
+							});
+							deleteButton = document.getElementById('init-multi-file-delete');
+							deleteButton.addEventListener('click', initMultiDelete);
+							deleteConfirmButton = document.getElementById('confirm-multi-file-delete');
+							abortButton = document.getElementById('abort-multi-file-delete');
+							abortButton.addEventListener('click', abortMultiDelete);
+						});
+					})();
+					//-->{/literal}
+				</script>
+				{*<!-- weitere Seiten -->*}
+				{include file=weiter.inc.html}
+			{elseif isset($kat_error_text) && $kat_error_text}
+				<div class="error">{$kat_error_text}</div>
+			{/if}
+		</div>
+		</div>
+	</div>
+				{else}
+					{if $gefunden}
+						<form method="post" action="./upload.php?menuid=33" name="suche">
+								<fieldset>
+									{*<!-- Suche nach einer Datei in der Datenbank:-->*}
+									<legend>{$message_346}</legend>
+									<label for="search">{$message_346}</label>
+									<input id="search" name="search" value="{$search}" onblur="if(this.value=='')this.value='Ihr Suchbegriff';" onfocus="if(this.value=='Ihr Suchbegriff')this.value='';" size="40" maxlength="250" />
+									<input type="hidden" value="Finden" name="formSubmit" />
+									{*<!-- Finden-->*}
+									<input type="submit" class="submit_back_green" value="{$message_233}" name="formSubmit" />
+								</fieldset>
+						</form>
+						<h2> {$system_image_whlen_sie_eine_datei_aus_die_sie_bearbeiten_wollen}</h2>
+						<ul >
+							{foreach item=table from=$table_data_files}
+								{*<!-- �ndern-->*}
+								<li>
+									<div>
+										<a href="./upload.php?menuid=33&id={$table.linkid}" title='{$image.image_name|escape:"html"}'>
+											{$table.linkname} ({$table.wieoft}) {$table.zeitpunkt}
+										</a>
+									</div>
+								</li>
+							{/foreach}
+						</ul>
+						{*<!-- weitere Seiten -->*}
+						{include file=weiter.inc.html}
+					{elseif isset($kat_error_text) && $kat_error_text}
+						<div class="error">{$kat_error_text}</div>
+					{/if}
+				{/if}
+				{if $aendern_now}
+			{*<!-- �nderung der Daten zur Datei.-->*}
+			<h1>{$message_352}.</h1>
+			{*<!-- Hier k�nnen Sie die bereits in der Datenbank vorhandenen Daten �ndern oder l�schen. -->*}
+			<p>
+				{$message_353}<br />
+				<br />
+				<a target="blank" href="{$webverzeichnis}index.php?downloadid={$downloadid}">{$linktitel}</a>
+			</p>
+			<h2>{$message_352}: &quot;{$linktitel}&quot;</h2>
+			<form method="POST" id="formi" action="">
+				<input type="hidden" name="linkbody" value="{$linkbody}" />
+				{*<!-- �nderung der Daten zu der Datei:-->*}
+				{include file="upload_form.inc.html"}
+				<fieldset>
+					{*<!-- Daten �bergeben.-->*}
+					<legend>{$message_355}</legend>
+					{*<!-- Eintragen -->*}
+					<input type="submit" class="submit_back_green" value="{$message_70}" name="formSubmit" /><br />
+					<br />
+					{*<!-- Entfernen-->*}
+					<input type="submit" class="submit_back_red" value="{$message_247}" name="formSubmit_del" style="" />
+				</fieldset>
+			</form>
+			<br />
+			<h2>{$message_upload_change_uploadfile_legend}</h2>
+			<form method="POST" id="formi" action="" enctype="multipart/form-data">
+				<input type="hidden" name="action" value="change_file" />
+				<input type="hidden" name="org_filename" value="{$linktitel}" />
+				<fieldset>
+					{*<!-- Datei tauschen:-->*}
+					<legend>{$message_upload_change_uploadfile_legend}</legend>
+					<p>
+						{$message_upload_change_uploadfile_text}
+					</p>
+					<div><label for="myfile">{$message_upload_change_uploadfile_label}:</label></div>
+					<div><input type="file" name="myfile" id="myfile" value="" /></div>
+					<div><label><input type="checkbox" name="renameFile" value="1" checked="checked"> {$label__rename_uploaded_file} &mdash; {$linktitel}</label></div>
+					<div><input type="submit" class="submit_back" value="{$message_upload_change_uploadfile_submit}" /></div>
+				</fieldset>
+			</form>
+			{if $versionen}
+				<h3>{$message_457}:</h3>
+				<ul>
+					{foreach item=version from=$versionen}
+						<li>
+							{$version.dv_zeitpunkt} ({$version.username})
+							<a href="../dokumente/backup/{$version.dv_downloadlink}" target="_blank">
+								.. {$message_693}
+							</a>
+							/
+							<a href="./upload.php?menuid=33&id={$downloadid}&version_id={$version.dv_id}&action=version_restore">
+								.. {$message_restore}
+							</a>
+							/
+							<a href="./upload.php?menuid=33&id={$downloadid}&version_id={$version.dv_id}&action=version_delete">
+								.. {$message_106}
+							</a>
+						</li>
+					{/foreach}
+				</ul>
+			{/if}
+		{/if}
+			{/if}
+			{*<!-- ENDE Link �ndern -->*}
+			{if $template_weiche_upload == "DELETE"}
+				{*<!-- Datei loeschen:-->*}
+				<h1>{$message_106}</h1>
+				<form method="POST" id="formi" action="" enctype="multipart/form-data">
+					<input type="hidden" name="action" value="delete_do" />
+					<input type="hidden" name="id" value="{$upload_data.downloadid}" />
+					<fieldset>
+						<p>
+							{$message_upload_delete_text}<br />
+							<br />
+							{$message_351} {$upload_data.downloadlink}
+						</p>
+						<br />
+						<input type="submit" class="submit_back_red" name="formSubmit_del" value="{$message_106}" />
+					</fieldset>
+				</form>
+			{/if}
+		{/if}
+		{if $is_dev}
+		<span class="ignore">
+			#start#
+		</span>
+		<!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+		<div class="rapid_form">
+			<form action="" name="" method="POST">
+				<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+				<input type="hidden" name="tb_name" value="papoo_kategorie_bilder" />
+				<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+				<input type="hidden" name="php_datei_name" value="image_class" />
+
+				<input type="hidden" name="system_template" value="ordner.html" />
+				<!-- Ist System -->
+				<input type="hidden" name="is_system" value="1" />
+				<!-- Das Standarpr�fix f�r die Ids -->
+				<input type="hidden" name="praefix" value="image_cat" />
+				<!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+				<input type="hidden" name="praefix_spezial" value="image_cat" />
+				<!-- Das Tool einbinden -->
+				{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+			</form>
+		</div>
+	{/if}
+		<div class="clear">&nbsp;</div>
+	</div>
+	{include file="foot.inc.html"}
+{/if}

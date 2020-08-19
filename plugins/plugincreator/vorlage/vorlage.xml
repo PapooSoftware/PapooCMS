@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- version: Papoo-Versions-Nummer für die das Plugin gedacht ist / funktioniert -->
+<plugin version="3.5">
+
+	<!-- ALLGEMEINE-INFORMATIONEN -->
+	<!-- ************************ -->
+	<!-- name: Name des Plugins -->
+	<name><![CDATA[vorlage]]></name>
+
+	<!-- beschreibung_de: Kurz-Beschreibung des Plugins auf deutsch (wird im Plugin-Manager angezeigt) -->
+	<beschreibung_de><![CDATA[]]></beschreibung_de>
+
+	<!-- beschreibung_en: Kurz-Beschreibung des Plugins auf englisch (wird im Plugin-Manager angezeigt) -->
+	<beschreibung_en><![CDATA[]]></beschreibung_en>
+
+	<!-- version: Versions-Nummer des Plugins -->
+	<version>1.0</version>
+
+	<!-- papooid: Eindeutige Nummer offizieller papoo-Plugins -->
+	<papooid>0</papooid>
+
+	<!-- link: z.Z. noch ohne Funktion -->
+	<link>http://www.papoo.de</link>
+
+	<!-- datum: Erscheinungs-Datum bzw. Stand des Plugins -->
+	<datum>01.10.2015</datum>
+
+	<!-- AUTOR-INFORMATIONEN -->
+	<!-- ******************* -->
+	<!-- autor: Informationen zum Autor (Programmierer) des Plugins -->
+	<autor>
+		<!-- autor.name: Name des Authors -->
+		<name></name>
+		<!-- autor.email: Email des Authors -->
+		<email></email>
+		<!-- autor.telefon: Telefon-Nummer des Autors -->
+		<telefon></telefon>
+		<!-- autor.kontakt: postalische Kontakt-Informationen des Autors -->
+		<kontakt><![CDATA[]]></kontakt>
+	</autor>
+
+
+	<!-- MENÜ-INFORMATIONEN -->
+	<!-- ****************** -->
+	<!-- menue: Informationen für den Menü-Eintrag im Backend (papoo/interna) -->
+	<menue>
+		<!-- menue.eintrag_de: Name des Menü-Punktes im Backend auf deutsch -->
+		<eintrag_de>vorlage</eintrag_de>
+		<!-- menue.eintrag_en: Name des Menü-Punktes im Backend auf englisch -->
+		<eintrag_en>vorlage</eintrag_en>
+		<!-- menue.icon: Pfad zum Menü-Icon des Menü-Punktes im Backend (relativ zum Plugin-Verzeichnis) -->
+		<icon></icon>
+		<!-- menue.link: Name der Seite auf welche der Menü-Punkt im Backend verweisen soll -->
+		<link>plugin:vorlage/templates/vorlage_backend.html</link>
+
+	</menue>
+
+	<!-- KLASSEN-INFORMATIONEN -->
+	<!-- ****************** -->
+	<!-- klasse: Informationen der Plugin-Klasse welche eingebunden werden sollen -->
+	<klasse>
+		<!-- klasse.name: Name der Klassen-Instanz / des Objekts (also der Name des Dings, das mit $name = new xx_class(); erzeugt wird) -->
+		<name>vorlage</name>
+		<!-- klasse.datei: Pfad zur Klassen-Datei (relativ zum Plugin-Verzeichnis) -->
+		<datei>vorlage/lib/vorlage_class.php</datei>
+	</klasse>
+
+	<!-- CSS-INFORMATIONEN -->
+	<!-- ***************** -->
+	<!-- css: Pfad zur CSS-Datei (relativ zum Plugin-Verzeichnis) -->
+	<css>vorlage/css/frontend.css</css>
+
+	<!-- DATENBANK-INFORMATIONEN -->
+	<!-- ****************** -->
+	<datenbank>
+		<!-- datenbank.installation: Pfad zur SQL-Installations-Datei (relativ zum Plugin-Verzeichnis) -->
+		<installation>vorlage/sql/install.sql</installation>
+		<!-- datenbank.deinstallation: Pfad zur SQL-Deinstallations-Datei (relativ zum Plugin-Verzeichnis) -->
+		<deinstallation>vorlage/sql/deinstall.sql</deinstallation>
+	</datenbank>
+
+	<!-- Einbindung der Sprach-Dateien.
+	  In dem hier angegebenen Verzeichnis sollten Dateien mit folgenden Namen liegen:
+		- messages_backend_[de|en|fr| .. etc.].inc.php
+	  - messages_frontend_[de|en|fr| .. etc.].inc.php
+	-->
+	<messages>vorlage/messages</messages>
+
+</plugin>

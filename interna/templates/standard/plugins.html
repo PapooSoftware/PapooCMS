@@ -1,0 +1,90 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	{if $memlimit}
+		<div class="error">
+			<h2>{$message_647}</h2>
+			{$message_645} {$memlimit} {$message_646}
+		</div>
+	{/if}
+	<div class="artikel">
+		<div class="aktuell" id="aktuell_{$menuid_aktuell}"></div>
+		{if $plugins_templateweiche == "LISTE"}
+			{*<!-- Hier k�nnen Sie die Plugins verwalten-->*}
+			<h1>{$message_421}</h1>
+			{*<!-- Installierte Plugins-->*}
+			<h2>{$message_424}</h2>
+			{$message_431}
+			<table class="plugins_table table table-striped table-hover">
+				<tr>
+					<th>{$intern_plugin_name}</th>
+					<th>{$intern_plugin_version}</th>
+					<th>{$intern_plugin_bes}</th>
+					{if $userHasAdminRights}<th>{$message_423}</th>{/if}
+				</tr>
+				{foreach item=plugin from=$plugin_data}
+					{*<!-- Plugin deinstallieren-->*}
+					{if $plugin.switch_installed}
+						<tr>
+							<td><strong>{$plugin.name}</strong></td>
+							<td>{$plugin.version}</td>
+							<td>{$plugin.beschreibung}</td>
+							{if $userHasAdminRights}<td>
+								<form action="" method="post">
+									<input type="hidden" name="plugin_action" value="uninstall_fragen" />
+									<input type="hidden" name="plugin_id" value="{$plugin.plugin_id}" />
+
+									<input type="submit" class="submit_back_red_white" name="pluginDeinstall" value="{$message_423}" />
+								</form>
+							</td>{/if}
+						</tr>
+					{/if}
+				{/foreach}
+			</table>
+			<br />
+			{*<!-- Weitere zur Verf�gung stehende Plugins-->*}
+			<h2>{$message_425}</h2>
+			{if $userHasAdminRights !== true}{$message_425_2}{/if}
+			<table class="plugins_table table table-striped table-hover">
+				<tr>
+					<th>{$intern_plugin_name}</th>
+					<th>{$intern_plugin_version}</th>
+					<th>{$intern_plugin_bes}</th>
+					{if $userHasAdminRights}<th>{$message_422}</th>{/if}
+				</tr>
+				{foreach item=plugin from=$plugin_data}
+					{*<!-- Plugin installieren-->*}
+					{if !$plugin.switch_installed}
+						<tr>
+							<td><strong>{$plugin.name}</strong></td>
+							<td>{$plugin.version}</td>
+							<td>{$plugin.beschreibung}</td>
+							{if $userHasAdminRights}<td>
+								<form action="" method="post">
+									<input type="hidden" name="plugin_action" value="install" />
+									<input type="hidden" name="plugin_identifier" value="{$plugin.identifier}" />
+									<input type="submit" class="submit_back_green_white" name="pluginInstall" value="{$message_422}" />
+								</form>
+							</td>{/if}
+						</tr>
+					{/if}
+				{/foreach}
+			</table>
+		{/if}
+		{if $plugins_templateweiche == "LOESCHEN"}
+			<h2>{$message_648}</h2>
+			<form action="" method="post">
+				<input type="hidden" name="plugin_action" value="uninstall" />
+				<input type="hidden" name="plugin_id" value="{$plugin.plugin_id}" />
+				<fieldset>
+					<legend>{$plugin.plugin_name} (Version: {$plugin.plugin_version})</legend>
+					<p>{$plugin.pluginlang_beschreibung}</p>
+					<input type="submit" class="submit_back" name="ABBRECHEN" value="{$message_649}" />
+					<input type="submit" class="submit_back_red" name="LOESCHEN" value="{$message_423}" />
+				</fieldset>
+			</form>
+		{/if}
+	</div>
+	{*<!-- Hier kommt der Fuss rein-->*}
+	{include file=foot.inc.html}
+{/if}

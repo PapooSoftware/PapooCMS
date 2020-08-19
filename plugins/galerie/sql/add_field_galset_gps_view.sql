@@ -1,0 +1,1 @@
+ALTER TABLE `XXX_galerie_einstellungen`  ADD `galset_gps_view` INT(11) NOT NULL DEFAULT '1'; ##b_dump##

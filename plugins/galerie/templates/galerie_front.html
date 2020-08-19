@@ -1,0 +1,129 @@
+{if $galerie_data.galset_diashow_window}
+	<script type="text/javascript" language="javascript">
+		function diashow_window_start(link)
+		{ldelim}
+			var fenster_breite = screen.availWidth;
+			var fenster_hoehe = screen.availHeight;
+			var optionen = 	"location=no, menubar=no, status=no, toolbar=no, screenX=0, screenY=0, top=0, left=0, "
+							+"width="+fenster_breite+", height="+fenster_hoehe+",";
+			window.open(link, "diashow", optionen);
+		{rdelim}
+	</script>
+{/if}
+
+<div class="artikel">
+	{if $galerie_weiche == "LISTE"}
+		<h3>{$GALMSGF.LISTE_GALERIEN}</h3>
+		{if NOT $galerie_liste}
+			{$GALMSGF.LISTE_GALERIEN_LEER}
+		{else}
+			{*<!--
+			<table width="92%" cellpadding="0" cellspacing="0" border="0">
+			{foreach item=galerie from=$galerie_liste}
+				<tr><td>
+					<strong>{$galerie.gallang_name}</strong> ({$galerie.gal_bilderanzahl}
+					{if $galerie.gal_bilderanzahl==1}{$GALMSGF.WORT_BILD}){else}{$GALMSGF.WORT_BILDER}){/if}
+					<hr style="width:99%" />
+				</td></tr>
+				<tr><td>
+					<a href="{$slash}plugin.php?menuid={$aktive_menuid}&amp;template={$template}&amp;galerie_switch=GALERIE_START&amp;galerie_id={$galerie.gal_id}">
+						<img style="float:left; margin-right:0.8em; margin-top:0.3em" src="{$slash}plugins/galerie/galerien/{$galerie.gal_verzeichnis}/thumbs/{$galerie.bild_datei}" title="Galerie {$galerie.gallang_name} anzeigen" alt="Galerie {$galerie.gallang_name} anzeigen" width="{$galerie.bild_breite_thumb}" height="{$galerie.bild_hoehe_thumb}" />
+					</a>
+					{$galerie.gallang_beschreibung}
+				</td></tr>
+				<tr><td>
+					<a href="{$slash}plugin.php?template=galerie/templates/galerie_diashow.utf8.html&amp;galerie_switch=GALERIE_DIASHOW&amp;galerie_id={$galerie.gal_id}" title="{$GALMSGF.DIA_SHOWSTART}">{$GALMSGF.DIA_SHOWSTART_SHORT}</a> |
+					
+					{if $galerie_data.galset_diashow}
+						<script type="text/javascript" language="javascript">
+							<!--
+							var link = "{$slash}plugin.php?template=galerie/templates/galerie_diashow.utf8.html&amp;galerie_switch=GALERIE_DIASHOW&amp;galerie_id={$galerie.gal_id}";
+							document.write('<a href="javascript:diashow_window_start(\''+link+'\')" title="{$GALMSGF.DIA_SHOWSTART_WINDOW}">{$GALMSGF.DIA_SHOWSTART_WINDOW_SHORT}</a>');
+							-->
+						</script>
+					{/if}
+					<br /><br />
+				</td></tr>
+			{/foreach}
+			</table>
+			-->*}
+			<ul class="galerie_liste">
+				{foreach item=galerie from=$galerie_liste}
+					<li class="floatbox">
+						<strong>{$galerie.gallang_name}</strong> ({$galerie.gal_bilderanzahl}
+						{if $galerie.gal_bilderanzahl==1}{$GALMSGF.WORT_BILD}){else}{$GALMSGF.WORT_BILDER}){/if}
+						<hr style="width:99%" />
+						<a href="{$slash}plugin.php?menuid={$aktive_menuid}&amp;template={$template}&amp;galerie_switch=GALERIE_START&amp;galerie_id={$galerie.gal_id}">
+							<img style="float:left; margin-right:0.8em; margin-top:0.3em" src="{$slash}plugins/galerie/galerien/{$galerie.gal_verzeichnis}/thumbs/{$galerie.bild_datei}" title="Galerie {$galerie.gallang_name} anzeigen" alt="Galerie {$galerie.gallang_name} anzeigen" width="{$galerie.bild_breite_thumb}" height="{$galerie.bild_hoehe_thumb}" />
+						</a>
+						{$galerie.gallang_beschreibung}
+						<br style="clear: left;"/>
+						
+						{if $galerie_data.galset_diashow}
+							<script type="text/javascript" language="javascript">
+								<!--
+								document.write('<a href="{$slash}plugin.php?template=galerie/templates/galerie_diashow.utf8.html&amp;galerie_switch=GALERIE_DIASHOW&amp;galerie_id={$galerie.gal_id}" title="{$GALMSGF.DIA_SHOWSTART}">{$GALMSGF.DIA_SHOWSTART_SHORT}</a> |');
+								-->
+							</script>
+						{/if}
+						{if $galerie_data.galset_diashow_window}
+							<script type="text/javascript" language="javascript">
+								<!--
+								var link = "{$slash}plugin.php?template=galerie/templates/galerie_diashow.utf8.html&amp;galerie_switch=GALERIE_DIASHOW&amp;galerie_id={$galerie.gal_id}";
+								document.write('<a href="javascript:diashow_window_start(\''+link+'\')" title="{$GALMSGF.DIA_SHOWSTART_WINDOW}">{$GALMSGF.DIA_SHOWSTART_WINDOW_SHORT}</a>');
+								-->
+							</script>
+						{/if}
+						<br /><br />
+					</li>
+				{/foreach}
+			</ul>
+      
+      {*<!--weitere Seiten -->*}
+      {include file="_module_intern/mod_weiter.html}
+      
+		{/if}
+	{/if}
+	
+	{if $galerie_weiche == "GALERIE"}
+		{if NOT $galerie_bild}
+			{$GALMSGF.LISTE_BILDER_LEER}
+		{else}
+			{if $galerie_data.galset_lightbox}
+				{*<!--
+				<noscript>
+					{include file="../../plugins/galerie/templates/gal_no_script.html"}
+				</noscript>
+				-->*}
+				<h3>{$GALMSGF.BILDER_GALERIE} &quot;{$galerie_bild.gallang_name}&quot;</h3>
+				<div id="wrapper">
+				<div id="columns">
+					{foreach item=bild from=$galerie_bilder}
+						
+						<div class="pin">
+						{*<!-- Trenner | zw. bildlang_name und bildlang_beschreibung im title-tag nicht entfernen!
+							Da lightbox.js einen Zeilenumbruch zw. den beiden Texten aufgrund des Trenners erzeugt. -->*}
+							<a href="{$slash}plugins/galerie/galerien/{$galerie_bild.gal_verzeichnis}/{$bild.bild_datei}" class="galbild" rel="lightbox" title='{$bild.bildlang_name} | {$bild.bildlang_beschreibung|escape:"html"}' >
+								<img src="{$slash}plugins/galerie/galerien/{$galerie_bild.gal_verzeichnis}/thumbs/{$bild.bild_datei}" height="{$bild.bild_hoehe_thumb}" width="{$bild.bild_breite_thumb}" alt='' title='{$bild.bild_nummer}. {$bild.bildlang_name} {$bild.bildlang_beschreibung|escape:"html"}' />
+								
+							</a> <span>{$bild.bildlang_name}</span>
+							{if $bild.GPSLatitudeRef and $galerie_data.galset_gps_view}
+								<div>
+									<a href="https://www.google.de/maps/place/{$bild.lat_degrees}°{$bild.lat_minutes}'{$bild.lat_seconds}%22{$bild.GPSLatitudeRef}+{$bild.lon_degrees}°{$bild.lon_minutes}'{$bild.lon_seconds}%22{$bild.GPSLongitudeRef}/@{$bild.GPSLatitudeRef_dec},{$bild.GPSLongitudeRef_dec},500m/data=!3m1!1e3!4m2!3m1!1s0x0:0x0" target="_blank">Aufnahmestandpunkt</a>
+								</div>
+							{/if}
+							</div>
+						
+					{/foreach}
+				</div></div>
+				<br style="clear: both;"/>
+			{else}
+				{include file="../../plugins/galerie/templates/gal_no_script.html"}
+			{/if}
+		{/if}
+	{/if}
+</div>
+	<br style="clear: both;"/>	<br style="clear: both;"/>	<br style="clear: both;"/>
+{if $PAPOO_VERSION|substr:0:3 < "3"}
+	{include file="foot.inc.html"}
+{/if}

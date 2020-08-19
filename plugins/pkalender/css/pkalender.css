@@ -1,0 +1,103 @@
+.kalender_front_content  table
+{
+	width:100px;
+	max-width:100px;
+	border: 1px solid #EFEFF0;
+	background:#fff;
+	border-collapse:collapse;
+	color:#737373;
+	margin:0 auto;
+}
+.kalender_front_content  ul,
+.kalender_front_content  li
+{
+	margin:0px;
+	padding:0px;
+	list-style-type:none;
+	margin-bottom:10px;
+}
+.kalender_front_content  table td {
+	width:14%;
+	vertical-align:top;
+	min-height:100px;
+	padding:5px;
+	border:1px solid #999;
+	border: 1px solid #EFEFF0;
+	text-align:right;
+}
+.kalender_front_content .kalender_liste_links {
+	padding:2px 0px 10px 0px;
+	margin-bottom:10px;
+}
+.kalender_front_content .kalender_table th
+{
+	text-align:left;
+}
+.kalender_front_content .kalender_table {
+	margin-bottom:100px;
+	margin-top:20px;
+}
+.kalender_front_content .kalendertext {
+	margin-bottom:20px;
+}
+.kalender_front_content li.cal_date {
+	background:#323252;
+	color:#fff;
+	padding:2px;
+	border:1px solid #000;
+	text-align:left;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+.kalender_front_content li.cat_1 {
+	background:#323252;
+}
+.kalender_front_content li.cat_2 {
+	background:#276105;
+}
+#col3 .kalender_front_content li.cal_date a {
+	color:#fff;
+	}
+.termin_liste {
+margin-top:20px;	
+}
+.termin_liste .termin_item {
+	border-bottom:1px solid #ccc;
+	padding-bottom:10px;
+	margin-bottom:10px;
+}
+.kalender_modul table {
+	width:95%;
+	border: 1px solid #EFEFF0;
+	background:#fff;
+	border-collapse:collapse;
+	color:#737373;
+	margin:0 auto;
+}
+.kalender_modul td,
+.kalender_modul tr {
+	border: 1px solid #EFEFF0;
+	padding:1px;
+	text-align:right;
+}
+.monat_select {
+	/*margin-bottom:10px;*/
+	/*padding-left:10%;*/
+}
+#col1 .kalender_modul table a {
+	text-decoration:none;
+	border:none;
+	color:#323252;
+	font-weight:600;
+}
+#col1 .kalender_modul table a:hover {
+	text-decoration:underline;
+	border:none;
+	color:#000;
+	font-weight:600;
+}
+#col1 .kalender_modul td.cal_set {
+background:#ddd;
+	
+}

@@ -1,0 +1,17 @@
+{if $module_aktiv.mod_blogger_monate && $monatsliste_blog}
+<div id="blogger_monate">
+    <h3><i class="fa fa-cloud"></i> Archiv</h3>
+    <ul>
+    {foreach from=$monatsliste_blog item=entry key=thekey}
+  <li><span
+            class="wordlist_weight_{$entry.weight}{if $entry.blogger_wordlist_id === $blogger_word_id} active{/if} wordlistcount">
+       {if !$url_blog_modrewrite}
+        <a href="{$web_pfad}?menuid={$entry.lcat_id}&word_id={$entry.blogger_wordlist_id}&widget=wordcloud">{$thekey}</a>
+      {else}
+      <a href="{$web_pfad}/archiv/{$entry}/">{$thekey}</a>
+      {/if}
+  </span></li>
+    {/foreach}
+    </ul>
+</div>
+{/if}

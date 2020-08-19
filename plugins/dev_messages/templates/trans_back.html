@@ -1,0 +1,119 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+	<h2>{$plugin.dev_messages.name}</h2>
+	{if $nicht_be}
+	<strong>{$plugin.dev_messages.777}</strong>
+	<script type="text/javascript">
+	alert("{$plugin.dev_messages.777}");
+	</script>
+	{/if}
+   {$plugin.dev_messages.wieuebersetz}
+<form name="trans" action="" method="POST">
+		<fieldset>
+	 <legend>{$plugin.dev_messages.refsp}</legend>
+  <label for="referenzsprache">{$plugin.dev_messages.refsp}</label><br />
+  <select name="referenzsprache" id="referenzsprache" title="" style="width: 40%;" size="1">
+    <option value="">{$plugin.dev_messages.ausws}</option>
+   
+  {foreach item=sprach from=$plugin_sprachdatar}
+   <option value="{$sprach.lang_short}" {if $referenzsprache == $sprach.lang_short}selected="selected"{/if}>{$sprach.lang_long}</option>
+  {/foreach}
+  </select>
+  </fieldset>
+  <fieldset>
+  <legend>{$plugin.dev_messages.zuueber}</legend>
+  <label for="neusprach">{$plugin.dev_messages.zuueber}</label><br />
+  <select name="neusprach" id="neusprach" title="" style="width: 40%;" size="1">
+    <option value="">{$plugin.dev_messages.ausws}</option>
+   
+  {foreach item=sprach from=$plugin_sprachdatar}
+   <option value="{$sprach.lang_short}" {if $neusprach == $sprach.lang_short}selected="selected"{/if}>{$sprach.lang_long}</option>
+  {/foreach}
+  </select>
+  </fieldset>
+ <!-- ########################################    -->
+   <fieldset>
+  <legend>{$plugin.dev_messages.datausw}</legend>
+  <label for="dateien">{$plugin.dev_messages.datein}</label><br />
+  <select name="dateien" id="dateien" title="" style="width: 40%;" size="1">
+    <option value="">{$plugin.dev_messages.ausws}</option>
+   
+  {foreach item=sprach from=$plugin_sprachdatar_dat}
+   <option value="{$sprach.name}" {if $dateien == $sprach.name}selected="selected"{/if}>{$sprach.name}</option>
+  {/foreach}
+  </select>
+  </fieldset>
+   <fieldset>
+   <legend>
+   {$plugin.dev_messages.aut}
+   
+   </legend>
+   <input type="checkbox" {if $automat==1}checked="checked"{/if} name="automat" id="autom" value="1" ><label for="autom">{$plugin.dev_messages.autv}</label>
+   
+    </fieldset>
+     <fieldset>
+   <legend>
+   {$plugin.dev_messages.fbdat}
+ 
+   </legend>
+   <input type="radio" {if $frontback==1}checked="checked" {/if} name="frontback" id="frontback1" value="1" ><label for="frontback1"> {$plugin.dev_messages.Frontend}</label>
+    <input type="radio" {if $frontback==2}checked="checked"{/if} name="frontback" id="frontback2" value="2" ><label for="frontback2">{$plugin.dev_messages.Backend}</label>
+   
+    </fieldset>
+  <fieldset>
+  <legend>{$plugin.dev_messages.uebst}</legend>
+ <input type="submit" class="submit_back_green_big" name="uebersetzen" value="{$plugin.dev_messages.uebst}" />
+  </fieldset>
+		</form>
+	 {if $dev_messages.template_weiche == "TRANSLATE"}
+	 <h2>{$plugin.dev_messages.dieueb}</h2>
+		<p>{$plugin.dev_messages.text_trans}</p>
+		
+<form name="trans" action="" method="post">
+		{foreach item=sprach from=$sprachdaten}
+		<a name="ank_{$plugin.dev_messages.Eintrag_Nummer}" id="ank_{$plugin.dev_messages.Eintrag_Nummer}"></a>
+   <fieldset {if $sprach.empty==1}style="border-color:red;background-color:#FFC975;"{/if}>
+   <legend>{$plugin.dev_messages.Eintrag_Nummer} {$sprach.counter}</legend>
+   <input type="hidden" name="variablename[{$sprach.counter}]" value="{$sprach.variable}" />
+   <strong>{$plugin.dev_messages.Referenz}:</strong><br />
+   <div style="background:#ccc;border:1px solid #666; padding:5px;width:50%;">
+   {$sprach.original}
+   </div>
+   <strong>{$plugin.dev_messages.uebbis}</strong><br />
+   <div style="background:{if $sprach.empty==1}#F44F1F{else}#ddd{/if};border:1px solid #666; padding:5px;width:50%;">
+   {$sprach.bisher}
+   </div>
+   <br />
+   <label for="varinhalt_{$sprach.counter}"><strong>{$plugin.dev_messages.uevor}</strong></label><br />
+   <textarea rows="5" cols="50" name="varinhalt[{$sprach.counter}]" id="varinhalt_{$sprach.counter}">{$sprach.vorschlag}</textarea>
+   <br />
+   <a href="{$pluginself_neu}&to_translate={$sprach.original|urlencode}" onclick="anzeig('{$pluginself_neu}&to_translate={$sprach.original|urlencode}','translate','400','400')" style="float: right;" target="translate">{$plugin.dev_messages.google_uebersetzen}</a>
+   <input type="submit" class="submit_back_green_xl" name="uebernehmen[{$sprach.counter}]" value="{$plugin.dev_messages.neuuebb}" />
+</fieldset>
+   <br />
+  {/foreach}
+  <fieldset>
+  {$plugin.dev_messages.alle}
+  
+  <legend>{$plugin.dev_messages.spei}</legend>
+ <input type="submit" class="submit_back_green_xxl" name="uebernehmen_alle" value="{$plugin.dev_messages.spei2}" />
+  </fieldset>
+  <input type="hidden" name="referenzsprache" value="{$referenzsprache}" />
+  <input type="hidden" name="neusprach" value="{$neusprach}" />
+  <input type="hidden" name="dateien" value="{$dateien}" />
+  <input type="hidden" name="automat" value="" />
+  <input type="hidden" name="frontback" value="{$frontback}" />
+  <input type="hidden" name="uebersetzen" value="1" />
+  </form>
+	{/if}
+
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

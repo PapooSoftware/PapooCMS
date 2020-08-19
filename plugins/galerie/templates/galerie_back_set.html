@@ -1,0 +1,155 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+	<h1>{$GALMSGB.SET_NAME}</h1>
+	{if $galerie_message}<h2>{$galerie_message}</h2>{/if}
+	
+	{if $galerie_weiche == "GALERIE_SET"}
+		<p>
+			{$GALMSGB.SET_TEXT}
+		</p>
+		
+		<p>
+			<form action="" method="post">
+				<input type="hidden" name="galerie_switch" value="GALERIE_THUMBS">
+				
+				<fieldset>
+					<legend>{$GALMSGB.SET_THUMB_FORM_LEGEND}</legend>
+					{$GALMSGB.SET_THUMB_FORM_TEXT}<br />
+					<br />
+					<label for="galerie_thumb_breite">{$GALMSGB.SET_THUMB_FORM_BREITE}</label>
+					<input type="text" name="galerie_thumb_breite" id="galerie_thumb_breite" value="{$galerie_daten.galset_thumb_breite}" size="4" /> {$GALMSGB.SET_THUMB_FORM_EINHEIT}<br />
+					<label for="galerie_thumb_hoehe">{$GALMSGB.SET_THUMB_FORM_HOEHE}</label>
+					<input type="text" name="galerie_thumb_hoehe" id="galerie_thumb_hoehe" value="{$galerie_daten.galset_thumb_hoehe}" size="4" /> {$GALMSGB.SET_THUMB_FORM_EINHEIT}<br />
+					<div class="clearfix"></div>
+					<input type="submit" class="submit_back_green_big" value="{$GALMSGB.SET_THUMB_FORM_SUBMIT}">
+				</fieldset>
+			</form>
+		</p>
+		<p>
+			<form action="" method="post">
+				<input type="hidden" name="galerie_switch" value="GALERIE_LIGHTBOX">
+				
+				<fieldset>
+					<legend>{$GALMSGB.SET_DARSTELLUNG_TEXT}</legend>
+					<input type="checkbox" {if $galerie_daten.galset_lightbox=="1"}checked="checked"{/if} name="galset_lightbox" id="galset_lightbox" value="1"  /> 
+					<label for="galset_lightbox">{$GALMSGB.SET_LIGHTBOX_TEXT}</label><br />
+					
+					<input type="checkbox"  {if $galerie_daten.galset_diashow==1}checked="checked"{/if} name="galset_diashow" id="galset_diashow" value="1"  /> 
+					<label for="galset_diashow">{$GALMSGB.SET_DIASHOW_TEXT}</label><br />
+					
+					<input type="checkbox"  {if $galerie_daten.galset_diashow_window==1}checked="checked"{/if} name="galset_diashow_window" id="galset_diashow_window" value="1"  /> 
+					<label for="galset_diashow_window">{$GALMSGB.SET_DIASHOW_WINDOW_TEXT}</label><br />
+					
+					<input type="checkbox"  {if $galerie_daten.galset_gps_view==1}checked="checked"{/if} name="galset_gps_view" id="galset_gps_view" value="1"  /> 
+					<label for="galset_gps_view">{$GALMSGB.SET_GPS_VIEW_TEXT}</label><br />
+					<br />
+					<input type="submit" class="submit_back_green_big" value="{$GALMSGB.SET_DARSTELLUNG_SPEICHERN_TEXT}">
+				</fieldset>
+			</form>
+		</p>
+		{*<!--
+		<p>
+			<form action="" method="post">
+				<input type="hidden" name="galerie_switch" value="GALERIE_DIASHOW">
+				
+				<fieldset>
+					<legend>{$GALMSGB.SET_DIA_FORM_LEGEND}</legend>
+					{$GALMSGB.SET_DIA_FORM_TEXT}<br />
+					<br />
+					<label for="galerie_diashow_thema">{$GALMSGB.SET_DIA_FORM_THEMA_LABEL}</label>
+					<select name="galerie_diashow_thema" id="galerie_diashow_thema">
+						{foreach item=thema from=$galerie_diashows}
+							<option value="{$thema.dia_id}" {if $thema.dia_id == $galerie_daten.galset_diashow_id}selected="selected"{/if}>{$thema.dialang_name}</option>
+						{/foreach}
+					</select><br />
+					<br />
+					<input type="submit" value="{$GALMSGB.SET_DIA_FORM_SUBMIT}">
+				</fieldset>
+			</form>
+		</p>
+		-->*}
+		
+		<p>
+			<form action="" method="post">
+				<input type="hidden" name="galerie_switch" value="GALERIE_STANDZEIT">
+				
+				<fieldset>
+					<legend>{$GALMSGB.SET_STANDZEIT_FORM_LEGEND}</legend>
+					{$GALMSGB.SET_STANDZEIT_FORM_TEXT}<br />
+					<br />
+					<label for="galerie_standzeit">{$GALMSGB.STANDZEIT_LABEL}</label>
+					<select name="galerie_standzeit" id="galerie_standzeit">
+						<option value="5" {if 5 == $galerie_daten.galset_diashow_timeout}selected="selected"{/if}>5 {$GALMSGB.STANDZEIT_EINHEIT}</option>
+						<option value="10" {if 10 == $galerie_daten.galset_diashow_timeout}selected="selected"{/if}>10 {$GALMSGB.STANDZEIT_EINHEIT}</option>
+						<option value="20" {if 20 == $galerie_daten.galset_diashow_timeout}selected="selected"{/if}>20 {$GALMSGB.STANDZEIT_EINHEIT}</option>
+					</select><br />
+					<br />
+					<input type="submit" class="submit_back_green_big" value="{$GALMSGB.SET_STANDZEIT_FORM_SUBMIT}">
+				</fieldset>
+			</form>
+		</p>
+		
+	{/if}
+	
+	{if $galerie_weiche == "GALERIE_THUMBS"}
+		<p>
+			{$GALMSGB.SET_THUMB_EDIT_TEXT}<br />
+			<br />
+			{$GALMSGB.SET_THUMB_FORM_BREITE} {$galerie_daten.galset_thumb_breite} {$GALMSGB.SET_THUMB_FORM_EINHEIT}<br />
+			{$GALMSGB.SET_THUMB_FORM_HOEHE} {$galerie_daten.galset_thumb_hoehe} {$GALMSGB.SET_THUMB_FORM_EINHEIT}<br />
+		</p>
+		<p>
+			<form action="" method="post">
+				<input type="hidden" name="galerie_switch" value="GALERIE_THUMBS_EDIT">
+				
+				<fieldset>
+					<legend>{$GALMSGB.SET_THUMB_EDIT_FORM_LEGEND}</legend>
+					{$GALMSGB.SET_THUMB_EDIT_FORM_TEXT}<br />
+					<br />
+					<input type="submit" value="{$GALMSGB.SET_THUMB_EDIT_FORM_SUBMIT}">
+				</fieldset>
+			</form>
+		</p>
+	{/if}
+
+	{if $galerie_weiche == "GALERIE_THUMBS_EDIT"}
+		<p>
+			{$GALMSGB.SET_THUMB_EDIT_OK_TEXT}<br />
+		</p>
+	{/if}
+	
+	{if $galerie_weiche == "GALERIE_STANDZEIT"}
+		<p>
+			{$GALMSGB.SET_STANDZEIT_EDIT_TEXT} {$galerie_daten.galset_diashow_timeout} {$GALMSGB.STANDZEIT_EINHEIT}.
+		</p>
+		<p>
+			<form action="" method="post">
+				<input type="hidden" name="galerie_switch" value="GALERIE_STANDZEIT_EDIT">
+				<input type="hidden" name="galerie_standzeit" value="{$galerie_daten.galset_diashow_timeout}">
+				
+				<fieldset>
+					<legend>{$GALMSGB.SET_STANDZEIT_EDIT_FORM_LEGEND}</legend>
+					{$GALMSGB.SET_STANDZEIT_EDIT_FORM_TEXT}<br />
+					<br />
+					<input type="submit" value="{$GALMSGB.SET_STANDZEIT_EDIT_FORM_SUBMIT}">
+				</fieldset>
+			</form>
+		</p>
+	{/if}
+
+	{if $galerie_weiche == "GALERIE_STANDZEIT_EDIT"}
+		<p>
+			{$GALMSGB.SET_STANDZEIT_EDIT_OK_TEXT}
+		</p>
+	{/if}
+	
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

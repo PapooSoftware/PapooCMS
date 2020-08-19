@@ -1,0 +1,247 @@
+<!-- TEMPLATE: index.html -->
+{if $easyedit=="edit"}
+    {include file="../../plugins/easyedit/templates/easyedit_front.html"}
+{else}
+    {*<!--Wenn Senden ausgewhlt ist-->*}
+    {if $articlesend}
+        <h1>{$islink_send}</h1>
+        {$text_send}
+        {if $error_comment}
+            <strong class="error">{$error_comment}</strong>
+        {/if}
+
+        <article class="floatbox">
+            <form id="formk" action="" method="post">
+                <fieldset>
+                    {*<!--Den obigen Artikel versenden.-->*}
+                    <legend>{$message_2001}</legend>
+                    {*<!--Empfänger-Email: -->*}
+                    <label for="empfang_mail">{$message_2002}</label><br/>
+                    <input type="text" class="inpt" id="empfang_mail" name="empfang_mail" size="30" maxlength="78" value="{$empfang_mail|escape:"html"}"/><br/>
+                    {*<!--Ihre Email:-->*}
+                    <label for="comment_mail">{$message_2003}</label><br/>
+                    <input type="text" class="inpt" id="comment_mail" name="comment_mail" size="30" maxlength="78" value="{$comment_mail|escape:"html"}"/><br/>
+                    {*<!--Was möchten Sie gerne senden?-->*}
+                    <p>{$message_2004}</p>
+                    {*<!--Nur den Link-->*}
+                    <input type="radio" id="link" name="what" value="link" {$checked_link} />
+                    <label for="link">{$message_2005}</label><br/>
+                    {*<!--Den ganzen Text-->*}
+                    <input type="radio" id="text" name="what" value="text" {$checked_text} />
+                    <label for="text">{$message_2006}</label><br/><br/>
+
+                    {*<!--Kommentar-->*}
+                    <label for="comment_inhalt">{$message_2007}</label><br/>
+                    <textarea class="txt" id="comment_inhalt" name="comment_inhalt" rows="10" cols="40">{$comment_inhalt|escape:"htmlall"}</textarea><br/>
+                    <input type="hidden" name="reporeid" value="{$reporeid_print|escape:"html"}"/>
+                    <input type="hidden" name="reporeid_print" value="{$reporeid_print|escape:"html"}"/>
+                    {*<!--Senden -->*}
+                    {if $spamschutz_modus}
+                        {include file="_module_intern/mod_spamschutz.html"}
+                        <br/>
+                    {/if}
+                    <input type="submit" class="senden" value="{$message_2008}" name="send_artikel"/>
+                </fieldset>
+            </form>
+        </article> <!-- .floatbox -->
+
+    {else} {* !$articlesend *}
+        {* <!-- Senden ist nicht ausgewählt - Normale Artikelausgabe --> *}
+        <a id="artikel"></a><span class="ignore">.</span>
+
+        {if $such}
+            {include file="_module_intern/mod_search.html"}
+        {else}
+            {if !$table_data}
+                {include file="_module_intern/mod_easyedit.html"}
+            {/if}
+            {* <!-- ARTIKEL-FILTER filter einbleinden wenn mehr als 1 artikel oder bereits gefiltert wurde --> *}
+
+            {if $table_data|@count > 1 || $bis_article || $filter_falsch == 'yes'}
+            {include file="_module_intern/filter_article.html"}
+            {if $filter_falsch == 'yes'}
+            {$filter_reset}
+            {/if}
+            {/if}
+            {foreach item=table from=$table_data name=artikel}
+
+                {if $smarty.foreach.artikel.total <= 1}
+                    {*<!-- Nur 1 Artikel -->*}
+                    <article class="floatbox artikel_details{if $table.reporeid} reporeid-{$table.reporeid}{/if}">
+                {else}
+                    {*<!-- Mehrere Artikel oder Teaserlisting -->*}
+                    <article class="floatbox artikel_liste{if $table.reporeid} reporeid-{$table.reporeid}{/if}">
+                {/if}
+
+                        {include file="_module_intern/mod_easyedit.html"}
+
+                        {if $gesendet}
+                            <strong>{$message_2157}</strong>
+                        {/if}
+
+                        {if $table.uberschrift}
+                            {*<!-- Artikel soll mit Überschrift angezeigt werden -->*}
+                            {if $smarty.foreach.artikel.total <= 1}
+                                {*<!-- Nur 1 Artikel - h1 -->*}
+                                <h1>{$table.uberschrift}{$table.sprechomatlink}</h1>
+                            {else}
+                                {*<!-- Teaserlisting - h2 -->*}
+                                <h2>{$table.uberschrift}{$table.sprechomatlink}</h2>
+                            {/if}
+                        {/if}
+
+                        {if $menuid_aktuell>1}
+                            <div class="date_article">
+                                {if $anzeig_autor==1}
+                                    <i class="fa fa-user"></i>{$message_2010} {$table.author}
+                                    <i class="fa fa-clock-o"></i>{$table.erstellungsdatum|date_format:"%d.%m.%Y"}
+                                {/if}
+                            </div> {*.date_article*}
+                        {/if}
+
+                        {$table.lan_teaser_img_fertig}
+
+                        {if $table.lan_teaser}
+                            {$table.lan_teaser}
+                        {else}
+                            {$table.teasertext}
+                            {$table.text}
+                        {/if}
+
+                        {if !$table.linktext && $fb_like_me && $allow_comment2!=1}
+                            {$fb_like_me}
+                        {/if}
+
+                        {*<!--Autor: -->*}
+                        {if $table.author && !$table.linktext}
+                            {if $anzeig_pageviews}
+                                {*<!-- Dieser Artikel wurde bereits ... mal angesehen. --> *}
+                                <p>{$message_2011} {$table.wie_oft} {$message_2025}</p>
+                            {/if}
+                        {/if}
+
+                        {* <!-- Teaserlink --> *}
+                        {if $table.linktext && $table.dok_show_teaser_link!=1}
+                            {if $free_sp_urls=="ok"}
+                                <a class="teaserlink" href="{$slash}{$table.url_header}" title="{$message_2012} &quot;{$table.uberschrift|escape:"html"}&quot; {$message_2013}">{$table.islink}</a>
+                                {if $fb_like_me}
+                                    {$fb_like_me_front}http://{$site_name}{$slash}{$table.url_header}{$fb_like_me_back}
+                                {/if}
+                            {else}
+                                {if $sp_urls=="ok"}
+                                    <a class="teaserlink" href="{$slash}{$sulrstrenner}{$table.url_header}" title="{$message_2012} &quot;{$table.uberschrift|escape:"html"}&quot; {$message_2013}">{$table.islink}</a>
+                                    {if $fb_like_me}
+                                        {$fb_like_me_front}http://{$site_name}{$slash}{$sulrstrenner}{$table.url_header}{$fb_like_me_back}
+                                    {/if}
+                                {else}
+                                    <a class="teaserlink" href="{$slash}{$table.linktext}{$frag_connect}menuid{$gleich_connect}{$table.cattextid}{$plus_connect}reporeid{$gleich_connect}{$table.reporeid}" title="{$message_2012} &quot;{$table.uberschrift|escape:"html"}&quot; {$message_2013}">{$table.islink}</a>
+                                    {if $fb_like_me}
+                                        {$fb_like_me_front}http://{$site_name}{$slash}{$webverzeichnis}{$table.linktext}{$frag_connect}menuid{$gleich_connect}{$table.cattextid}{$plus_connect}reporeid{$gleich_connect}{$table.reporeid}{$fb_like_me_back}
+                                    {/if}
+                                {/if}
+                            {/if}
+                        {/if}
+
+                        {if $table.dok_show_teaser_link!=1}
+                            {if $table.comment_ok}{$table.comment} {$message_kommentare}{/if}
+                        {/if}
+
+                    </article> {*. floatbox *}
+            {/foreach}
+
+            {if $mit_cat=="ok"}
+                {include file="_module_intern/mod_cat_teaser.html"}
+            {/if}
+
+        {/if} {* $such *}
+
+        {*Paginating*}
+        {include file="_module_intern/mod_weiter.html"}
+
+        {if $article}
+            {if $comment_ok}
+                <hr/>
+                {foreach item=comment from=$comment_data}
+                    <div class="comment_inhalt">
+                        {*<!--Kommentar von   -->*}
+                        <h3>{$comment.thema}{$comment.sprechomatlink}</h3>
+                        <p>{$message_2017} {$comment.username_comment} {$message_2142} {$comment.date_time|date_format:$lang_dateformat}</p>
+                        {$comment.text}
+                    </div>
+                    <hr/>
+                {/foreach}
+                <!--weitere Seiten -->
+                {include file="_module_intern/mod_weiter.html"}
+            {/if}
+
+            {if $allow_comment2==1}
+                {if $eintrag}
+                    {if $fb_comments}
+                        {$fb_comments}
+                    {else}
+                        <div class="formwrap_guest">
+                            {*<!--Kommentar zu -->*}
+                            <h3>{$message_2018} {$thema}?</h3>
+                            {if $fehlerliste|@count > 0}
+                            <blockquote id="kommentar_fehlerliste">
+                                <span style="font-weight:bold;color:red;font-size:16px;">{$fehler} :</span><br/><br/>
+                                <ul>
+                                    {foreach item=fehl from=$fehlerliste name=fehler_liste}
+                                    <li>{$fehl}</li>
+                                    {/foreach}
+                                </ul>
+                            </blockquote>
+                            {/if}
+                            {if $success}
+                            <blockquote id="kommentar_abgeschickt">
+                                <span style="color:green;">Ihr Kommentar wurde erfolgreich gespeichert.</span>
+                            </blockquote>
+                            {/if}
+							<div class="form">
+								<form id="artikel_kommentar" action="{$slash}index.php?menuid={$menuid_aktuell}&amp;reporeid={$reporeid_print}" method="post">
+									<fieldset>
+										{*<!--Hier kann ein Kommentar geschrieben werden.-->*}
+										<legend>{$message_2019}</legend>
+										{*<!-- Autor:    -->*}
+										{if $username_neu_comment}
+											<p>{$message_2010} <out>{$username_neu_comment}</out></p>
+										{else}
+											<p>
+												<label for="neuvorname">{$message_2076}</label>
+												<br/>
+												<input type="text" class="inpt" inputmode="latin-name" id="neuvorname" name="neuvorname" size="30" maxlength="78" value="{$author|escape:"html"}" required="required" />
+											</p>
+										{/if}
+										<p>
+											{*<!--Thema:-->*}
+											<label for="formthema">{$message_2020}</label><br/>
+											<input type="text" class="inpt" id="formthema" inputmode="latin" name="formthema" size="30" maxlength="78" value="{$message_2018}{$formthema|escape:"html"}" required="required" />
+										</p>
+										<p>
+											{*<!--- Beitrag:-->*}
+											<label for="inhalt">{$message_2021}</label><br/>
+											<textarea class="txt" id="inhalt" name="inhalt" inputmode="latin-prose" rows="10" cols="30">{$inhalt|escape:"htmlall"}</textarea>
+										</p>
+											{*<!--E-Mail:-->*}
+											<label for="email">{$message_2109}</label><br/>
+											<input type="email" class="inpt" id="email" name="email" size="30" maxlength="78" placeholder="{$message_2109}" value="{$email|escape:"html"}" required="required" />
+										</p>
+										{if $spamschutz_modus}
+											{include file="_module_intern/mod_spamschutz.html"}
+										{/if}
+										<p>
+											<input type="hidden" id="artikelurl" name="artikelurl" value="{$smarty.server.HTTP_HOST}{$smarty.server.REQUEST_URI}" />
+											{*<!--Eintragen-->*}
+											<input type="submit" class="senden" value="{$message_2022}" name="uebermittelformular"/>
+										</p>
+									</fieldset>
+								</form>
+							</div>
+						</div>
+                    {/if}
+                {/if}
+            {/if}
+        {/if}
+    {/if}
+{/if}
+<!-- ENDE TEMPLATE: index.html -->

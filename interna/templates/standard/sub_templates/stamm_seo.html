@@ -1,0 +1,40 @@
+{if $IS_ADMIN}
+	{foreach item=menu from=$menuinput_data}
+		<fieldset>
+			{*<!-- Suchmaschinenfreundliche Adressen (URLs):-->*}
+			<legend>{$message_326}</legend>
+			{*<!-- Suchmaschinenfreundliche URLs k�nnen dann verwendet werden, wenn Ihr Server bestimmte Module installiert hat. Dieses sind entweder "mod_rewrite" oder "mod_mime", wobei "mod_rewrite" zu bevorzugen ist, wenn beides installiert ist.-->*}
+			<p>{$message_327}</p>
+			{*<!-- Adressen mit mod_rewrite und sprechende urls?:-->*}
+			<input type="radio" {$menu.checked_mod_rewrite_url} id="modrmurl" name ="modrm" value="rewriteurl" />
+			<label for="modrmurl" style="width:50%">{$stamm_mod_rewrite_sprech}</label><br />
+			<!-- Adressen mit mod_rewrite verbessern?:-->
+			<input type="radio" {$menu.checked_mod_free} id="mod_free" name ="modrm" value="free" />
+			<label for="mod_free" style="width:50%">{$message_328}</label><br />
+
+			{*<!-- Adressen mit mod_mime verbessern?:
+			<input type="radio" {$menu.checked_mod_mime} id="modrm2" name ="modrm" value="mime" />
+			<label for="modrm2" style="width:50%">{$message_329}</label><br />
+			-->*}
+
+			{*<!-- Kein Modul vorhanden?:-->*}
+			<input type="radio" {$menu.checked_mod_none} id="modrm3" name ="modrm" value="none" />
+			<label for="modrm3" style="width:50%">{$message_330}</label><br />
+			<br />
+			{*<!-- Trenner f�r die sprechenden urls (Achtung wenn im laufenden Betrieb ge�ndert, dann m��en alle Links in Artikel korrigiert werden.)?:-->*}
+			<label for ="stamm_surls_trenner">{$message_808}</label><br />
+			<input type="text" id="stamm_surls_trenner" name="stamm_surls_trenner" size="30" value="{$menu.stamm_surls_trenner}" title="" />
+		</fieldset>
+
+		<fieldset>
+			{*<!-- Cache Einstellungen: -->*}
+			<legend>{$stamm_cache1}</legend>
+			{*<!-- Cache aktivieren? -->*}
+			<input type="checkbox" {$menu.cache_yn} id="cache_yn" name ="cache_yn" value="1" />
+			<label for="cache_yn" style="width:50%"> {$stamm_cache2}</label><br />
+			{*<!-- Soll angezeigt werden, wie oft der Artikel schon besucht wurde? -->*}
+			<label for="cache_life" style="width:50%"> {$stamm_cache3}</label><br />
+			<input type="text" size="6" id="cache_life" name ="cache_life" value="{$menu.cache_life}" />
+		</fieldset>
+	{/foreach}
+{/if}

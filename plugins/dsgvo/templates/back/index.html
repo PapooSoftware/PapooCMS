@@ -1,0 +1,144 @@
+{if $IS_ADMIN}
+	{include file="head.inc.utf8.html"}
+	{include file="menu.inc.html"}
+
+	<section id="plugin--dsgvo" class="artikel">
+		<header>
+			<h1>{$plugin.dsgvo.dsgvo_title}</h1>
+			{if $plugin.dsgvo.isSuccess || $plugin.dsgvo.isError}
+				<div class="alert alert-{if $plugin.dsgvo.isSuccess}success{else}error{/if}">
+					<strong>{$plugin.dsgvo.responseMessage}</strong>
+				</div>
+			{/if}
+		</header>
+
+		<form action="" method="post">
+			<fieldset>
+				<legend>{$plugin.dsgvo.remove_logfiles}</legend>
+				<p>
+					<input type="checkbox" id="logfile-autoremove" name="logfile_autoremove" value="1"{if $plugin.dsgvo.storedSettings.logfile_autoremove == 1} checked="checked"{/if}>
+					<label for="logfile-autoremove">{$plugin.dsgvo.activate_logfile_removal}</label>
+				</p>
+				<div>
+					<label for="logfile-autoremove-interval">{$plugin.dsgvo.enter_logfile_removal_period}</label>
+					<input type="text" id="logfile-autoremove-interval" name="logfile_autoremove_interval" value="{$plugin.dsgvo.storedSettings.logfile_autoremove_interval}" placeholder="z.B. 7, 30 oder 365"{if $plugin.dsgvo.storedSettings.logfile_autoremove == 0} disabled="disabled"{/if}>
+				</div>
+				<script>{literal}
+					document.getElementById("logfile-autoremove").addEventListener("change", function () {
+						document.getElementById("logfile-autoremove-interval").disabled = this.checked == false;
+					});
+				</script>{/literal}
+			</fieldset>
+			<button type="submit" class="btn btn-success" name="action" value="logfileAutoremove">Speichern</button>
+		</form>
+
+		<form action="" method="post">
+			<fieldset>
+				<legend>{$plugin.dsgvo.youtube_nocookie}</legend>
+				<label>
+					<input type="checkbox" name="youtube_nocookie" value="1"{if $plugin.dsgvo.storedSettings.youtube_nocookie == 1} checked="checked"{/if}>
+					{$plugin.dsgvo.youtube_nocookie_replace_videos}
+				</label>
+			</fieldset>
+			<button type="submit" class="btn btn-success" name="action" value="youtubeNoCookie">{$plugin.dsgvo.save}</button>
+		</form>
+
+		{* @see https://www.ccm19.de/
+		<form action="" method="post">
+			<fieldset>
+				<legend>{$plugin.dsgvo.cookie_lifetime}</legend>
+					<label for="cookie-lifetime">{$plugin.dsgvo.enter_cookie_lifetime_period}</label>
+					<input type="text" id="cookie-lifetime" name="cookie_lifetime" value="{$plugin.dsgvo.storedSettings.cookie_lifetime}" placeholder="z.B. 7, 30 oder 365">
+			</fieldset>
+			<button type="submit" class="btn btn-success" name="action" value="cookieLifetime">{$plugin.dsgvo.save}</button>
+		</form>
+		*}
+
+		<form action="" method="post">
+			<fieldset>
+				<legend>{$plugin.dsgvo.remove_formdata}</legend>
+				<p>
+					<input type="checkbox" id="formdata-autoremove" name="formdata_autoremove" value="1"{if $plugin.dsgvo.storedSettings.formdata_autoremove == 1} checked="checked"{/if}{if $plugin.dsgvo.formManagerInstalled == false} disabled="disabled"{/if}>
+					<label for="formdata-autoremove">{$plugin.dsgvo.activate_formdata_removal}</label>
+				</p>
+				<div>
+					<label for="formdata-autoremove-interval">{$plugin.dsgvo.enter_formdata_removal_period}</label>
+					<input type="text" id="formdata-autoremove-interval" name="formdata_autoremove_interval" value="{$plugin.dsgvo.storedSettings.formdata_autoremove_interval}" placeholder="z.B. 7, 30 oder 365"{if $plugin.dsgvo.formManagerInstalled == false || $plugin.dsgvo.storedSettings.formdata_autoremove == 0} disabled="disabled"{/if}>
+				</div>
+				<script>{literal}
+					document.getElementById("formdata-autoremove").addEventListener("change", function () {
+						document.getElementById("formdata-autoremove-interval").disabled = this.checked == false;
+					});
+				</script>{/literal}
+			</fieldset>
+			{if $plugin.dsgvo.formManagerInstalled == false}
+				<div class="message error">
+					{$plugin.dsgvo.form_manager_not_installed}
+				</div>
+			{/if}
+			<button type="submit" class="btn btn-success" name="action" value="formdataAutoremove"{if $plugin.dsgvo.formManagerInstalled == false} disabled="disabled"{/if}>{$plugin.dsgvo.save}</button>
+		</form>
+
+		<fieldset>
+			<legend>{$plugin.dsgvo.cookie_list}</legend>
+
+			{if $plugin.dsgvo.cookieList|@count > 0}
+				<table>
+					<thead>
+					<tr>
+						<th>{$plugin.dsgvo.cookie_name}</th>
+						<th>{$plugin.dsgvo.cookie_value}</th>
+					</tr>
+					</thead>
+					<tbody>
+					{foreach from=$plugin.dsgvo.cookieList item=cookie}
+						<tr>
+							<td>{$cookie.name|escape}</td>
+							<td>{$cookie.value|escape}</td>
+						</tr>
+					{/foreach}
+					</tbody>
+				</table>
+			{else}
+				{$plugin.dsgvo.no_cookies}
+			{/if}
+		</fieldset>
+
+		<fieldset>
+			<legend>{$plugin.dsgvo.external_resources}</legend>
+
+			{if $plugin.dsgvo.externalResources|@count > 0}
+				<table>
+					<thead>
+					<tr>
+						<th>{$plugin.dsgvo.url}</th>
+						<th>{$plugin.dsgvo.last_included}</th>
+					</tr>
+					</thead>
+					<tbody>
+					{foreach from=$plugin.dsgvo.externalResources item=externalResource}
+						<tr>
+							<td>{$externalResource.url|escape}</td>
+							<td>{$externalResource.last_encounter|escape}</td>
+						</tr>
+					{/foreach}
+					</tbody>
+				</table>
+			{else}
+				{$plugin.dsgvo.no_external_resources}
+			{/if}
+		</fieldset>
+
+		<fieldset>
+			<legend>{$plugin.dsgvo.https}</legend>
+
+			{if $plugin.dsgvo.usingHTTPS}
+				<div class="message">{$plugin.dsgvo.page_requested_with_ssl}</div>
+			{else}
+				<div class="error">{$plugin.dsgvo.page_requested_without_ssl}</div>
+			{/if}
+		</fieldset>
+	</section>
+
+	{include file="foot.inc.html"}
+{/if}

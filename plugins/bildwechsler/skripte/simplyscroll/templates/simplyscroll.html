@@ -1,0 +1,35 @@
+<ul id="scroller">
+  {foreach item=wechselbild from=$plugins.bildwechsler name=wechselbilder}
+    <li><img {$wechselbild.bw_bild} /></li>
+  {/foreach}
+</ul>
+
+{if $smarty.foreach.wechselbilder.total > 1}
+  <script src="{$slash}plugins/bildwechsler/skripte/simplyscroll/js/jquery.simplyscroll.min.js"></script>
+  {literal}
+  <script type="text/javascript">
+    (function($) {
+      $(function() {
+        $("#scroller").simplyScroll({
+          /*
+            customClass: 'simply-scroll',
+            frameRate: 60,
+            speed: 1,
+            orientation: 'horizontal',
+            direction: 'forwards',
+            auto: true,
+            autoMode: 'loop',
+            manualMode: 'end',
+            pauseOnHover:	true,
+            pauseOnTouch:	true,
+            pauseButton: false,
+            startOnLoad: false
+          */
+        });
+      });
+    })(jQuery);
+  </script>
+{/literal}
+{/if}
+
+

@@ -1,0 +1,84 @@
+{if $IS_ADMIN}
+	{if $xsuch_echt}
+		{*<!-- Suchformular -->*}
+		<form method="post" action="./artikel.php?menuid=11" name="suche">
+			<fieldset>
+				{*<!-- Suche nach einem Artikel -->*}
+				<legend>{$message_150}:</legend>
+				<label for="search">{$message_150}</label>
+				<input type="text" name="search" value='{$search|escape:"html"}' onblur="if(this.value=='')this.value='Ihr Suchbegriff';" onfocus="if(this.value=='Ihr Suchbegriff')this.value='';"/>
+				<input type="submit" class="submit_back btn btn-info" value="{$message_679}" name="formSubmit" />
+			</fieldset>
+		</form>
+		<div class="tabbable">
+			<ul class="nav nav-tabs">
+				<li {if $sort=='zeit'}class="active"{/if}>	{if $sort=='zeit'}<a href="#">{$message_478}</a>{else}<a href="./artikel.php?menuid={$formmenuid_sort}&amp;sort=zeit" >{$message_478} </a>{/if}</li>
+				<li {if $sort=='alpha'}class="active"{/if}>
+					{if $sort=='alpha'}
+					<a href="">	{$message_477} </a>
+					{else}
+						<a href="./artikel.php?menuid={$formmenuid_sort}&amp;sort=alpha" >{$message_477} </a>
+					{/if}
+				</li>
+				<li {if $sort=='menu'}class="active"{/if}>
+					{if $sort=='menu'}
+					<a href="">	{$message_479}</a>
+					{else}
+						<a href="./artikel.php?menuid={$formmenuid_sort}&amp;sort=menu" >{$message_479} </a>
+					{/if}
+				</li>
+			</ul>
+		</div>
+		<div class="account">
+			{if $eigene}
+				{*<!-- Artikel die Sie geschrieben und ver�ffentlicht haben. -->*}
+				<h2>{$message_71}</h2>
+			{else}
+				{*<!-- Die gesuchten Artikel -->*}
+				<h2>{$message_151}</h2>
+			{/if}
+			{if $sort=='menu'}
+				<form method="post" action="" id="formi" style="width: 100%;">
+					<fieldset>
+						<!-- Men�-Punkt ausw�hlen:-->
+						<legend>{$message_480}</legend>
+						<p>{$message_481}</p>
+						<!-- Untermenupunkt zu:-->
+						<label for="formmenuid">{$message_479}: </label>
+						<select id="formmenuid" name="formmenuid" size=1>
+							{foreach item=menu from=$menulist_data}
+								<option value="{$menu.menuid}" class="levelshift_{$menu.level}" {if $menu.menuid == $formmenuid_cat}selected="selected"{/if} >
+									{$menu.nummer}: {$menu.menuname}
+								</option>
+							{/foreach}
+						</select>
+						<input type="submit" class="submit_back btn btn-info" value="{$message_482}" name="formsubmit" />
+					</fieldset>
+				</form>
+			{/if}
+		</div>
+		{*<!-- Sie k�nnen die Artikel erneut bearbeiten und ver�ffentlichen wenn Sie auf den entsprechenden Link klicken: -->*}
+		<p>{$message_152}</p>
+		<div class="media">
+			{foreach item=link from=$link_data}
+				<div class="media-body">
+					<h2 class="media-heading">{$link.ueberschrift} {if $newsletter_link}<a class="artikel_link_teaser_news" href="{$newsletter_link}&reporeid={$link.reporeID}" title='Artikel - {$link.ueberschrift|escape:"html"} - als Newsletter versenden'><img title='Artikel - {$link.ueberschrift|escape:"html"} - als Newsletter versenden' src="../plugins/newsletter/bilder/pic_01.gif"/></a>{/if}</h2>
+					<div class="artikel_list_teaser_innen">
+						<p>
+							<div class="teaserdat">
+								{$link.teaser}
+							</div>
+							<a class="artikel_link_teaser" href="artikel.php?menuid=11&reporeid={$link.reporeID}&submitlang={$link.lang_id}">{$link.ueberschrift} {$message_47}</a><br />
+						<div class="authormessage ">
+							{$letzte_aenderung}{$link.date_time|date_format:$lang_dateformat} {$letzte_aenderung_von} {$link.username}{$letzte_aenderung_autor} {$link.autor}
+						</div>
+						</p>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			{/foreach}
+		</div>
+		{*<!-- weitere Seiten -->*}
+		{include file=weiter.inc.html}
+	{/if}
+{/if}

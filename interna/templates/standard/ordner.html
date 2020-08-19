@@ -1,0 +1,141 @@
+{if $IS_ADMIN}
+	{include file="head.inc.utf8.html"}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		{if $fragedel}
+			<h1>{$message_494}</h1>
+			<form action="" method="post">
+				<fieldset>
+					<legend>{$message_494}</legend>
+					<strong>{$dir}</strong>
+					<input type="hidden" name="catid" value="{$catid}"/><br/>
+					<br/>
+					<br/>
+					<input style="" type="submit" class="submit_back_alert" name="submitdelecht" value="{$message_106}"/>
+				</fieldset>
+			</form>
+		{else}
+			{if $edit}
+				<h1>{$message_495} "{$catname}" {$message_496}</h1>
+			{else}
+				<h1>{$message_497}</h1>
+			{/if}
+			{if $error1}
+				<br/>
+				<strong style="color:red; font-size:130%;">{$error1}</strong>
+				<br/>
+				<br/>
+			{/if}
+			<form action="{$xlink}" method="post" name="verzeichnis">
+				<fieldset>
+					<legend>{$message_498}</legend>
+					{if $edit}
+						<input name="action" value="EDIT" type="hidden"/>
+						<input name="catid" value="{$catid}" type="hidden"/>
+						<input type="hidden" name="catname_save" value="{$catname}"/>
+					{/if}
+					<label for="dir">{$message_500}</label><br/>
+					<input name="dir" id="dir" accept="" type="text" size="30" value="{$catname}"/><br/>
+				</fieldset>
+				<fieldset>
+					<legend>{$system_image_cat_unterkategorie_zu}</legend>
+					<label for="image_cat_whlen_sie_die_unterkategorie_aus">{$system_image_cat_whlen_sie_die_unterkategorie_aus}{$system_error.image_cat_whlen_sie_die_unterkategorie_aus} </label>
+					<br/>
+					<select name="image_sub_cat_von" id="image_sub_cat_von" size="1"/>
+					<option value="0">{$system_image_cat_keine_kategorie}</option>
+					{foreach item=dir from=$dirlist}
+						{if $dir.is_aktiv!=1}
+							{if isset($dir.bilder_cat_id)}
+								<option value="{$dir.bilder_cat_id}"{if isset($cat_sub) && $cat_sub==$dir.cat_id} selected="selected" {/if}>
+									{$dir.nbsp} {$dir.bilder_cat_name}
+								</option>
+							{/if}
+							{if isset($dir.dateien_cat_id)}
+								<option value="{$dir.dateien_cat_id}"{if isset($cat_sub) && $cat_sub==$dir.cat_id} selected="selected" {/if}>
+									{$dir.nbsp} {$dir.dateien_cat_name}
+								</option>
+							{/if}
+							{if isset($dir.video_cat_id)}
+								<option value="{$dir.video_cat_id}"{if isset($cat_sub) && $cat_sub==$dir.cat_id} selected="selected" {/if}>
+									{$dir.nbsp} {$dir.video_cat_name}
+								</option>
+							{/if}
+						{/if}
+					{/foreach}
+					</select>
+					<br/>
+				</fieldset>
+				<br/>
+				<fieldset>
+					<legend>{$message_501}</legend>
+					<p>{$message_502}</p>
+					<!-- Gruppe-->
+					{foreach item=table from=$table_data}
+						<input type="checkbox" {$table.checkedx} id="{$table.gruppename}" name="inhalt_ar[gruppe_write][]" value="{$table.gruppeid}"/>
+						<label for="{$table.gruppename}">{$table.gruppename}: </label>
+						<br/>
+					{/foreach}
+				</fieldset>
+				<fieldset>
+					<legend>{$message_490}</legend>
+					{if $edit}
+						<input name="submit" value="{$message_47}" type="submit" class="submit_back_green"
+						style="float:left;"/>
+						<br/>
+					{if count($dirlist) > 1}
+						<input name="loeschen" value="{$message_106}" type="submit" class="submit_back_alert" style="float:right;margin-right:20px"/>
+					{else}
+						<input name="loeschen" value="{$message_106}" type="" class="submit_back_alert" style="float:right;margin-right:20px;width:60px;background:#ccc"/>
+					{/if}
+					{else}
+						<input name="strSubmit" value="{$message_70}" type="submit" class="submit_back_green"/>
+					{/if}
+				</fieldset>
+			</form>
+			<br/>
+			<br/>
+			<h2>{$message_503}</h2>
+			{foreach item=dir from=$dirlist}
+				{$dir.vor_ul}
+				{if isset($dir.bilder_cat_id)}
+					<a href="{$xlink}&dirchange={$dir.bilder_cat_id}">{$dir.bilder_cat_name}</a>
+				{/if}
+				{if isset($dir.dateien_cat_id)}
+					<a href="{$xlink}&dirchange={$dir.dateien_cat_id}">{$dir.dateien_cat_name}</a>
+				{/if}
+				{if isset($dir.video_cat_id)}
+					<a href="{$xlink}&dirchange={$dir.video_cat_id}">{$dir.video_cat_name}</a>
+				{/if}
+				{$dir.nach_ul}
+			{/foreach}
+		{/if}
+		{if $is_dev}
+			<span class="ignore">
+			{$system_image_cat_letzter_login}
+			{$system_image_cat_letzter_login}
+			{$system_image_cat_letzter_login}
+			#start#
+			</span>
+			<!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+			<div class="rapid_form">
+			<form action="" name="" method="POST">
+			<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+			<input type="hidden" name="tb_name" value="papoo_kategorie_bilder"/>
+			<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+			<input type="hidden" name="php_datei_name" value="image_class"/>
+
+			<input type="hidden" name="system_template" value="ordner.html"/>
+			<!-- Ist System -->
+			<input type="hidden" name="is_system" value="1"/>
+			<!-- Das Standarpr�fix f�r die Ids -->
+			<input type="hidden" name="praefix" value="image_cat"/>
+			<!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+			<input type="hidden" name="praefix_spezial" value="image_cat"/>
+			<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+			</form>
+			</div>
+		{/if}
+	</div>
+	{include file="foot.inc.html"}
+{/if}

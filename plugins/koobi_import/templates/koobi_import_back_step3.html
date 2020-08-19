@@ -1,0 +1,66 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+{if $is_eingetragen=="ok"}
+  <div class="message"> {$plugin_fb_plugin_die_daten_wurden_gespeichert}
+
+</div>
+{/if}
+{if $redirect_error}
+<div class="error">{$redirect_error}</div>
+{/if}
+<div class="artikel">
+
+
+ {if $data_error.import}
+ <div class="error">
+ {if $data_error.import.alle_felder}
+{$plugin_redirectkoobi_plugin_bitte_alle_felder_ausfllen}
+<br />
+ {/if}
+ {if $data_error.import.no_verbindung}
+{$plugin_redirectkoobi_plugin_keine_verbindung_zur_datenbank_mglich}
+  {/if}
+</div>
+{/if}
+
+
+
+
+ <h1 id="redirectkoobi_plugin_die_daten_wurden_importiert" class="h1" >{$plugin_redirectkoobi_plugin_die_daten_wurden_importiert}</h1>
+
+ <p id="redirectkoobi_plugin_bitte_berprfen_sie_ob_alle_daten_auch_importiert_wurden" class="h1" >{$plugin_redirectkoobi_plugin_bitte_berprfen_sie_ob_alle_daten_auch_importiert_wurden}</p>
+
+ <p id="redirectkoobi_plugin_sie_knnen_den_import_jederzeit_wiederholen" class="h1" >{$plugin_redirectkoobi_plugin_sie_knnen_den_import_jederzeit_wiederholen}</p>
+{if $is_dev}
+ #start#
+ 
+
+
+ <span class="ignore"></span>
+  <!-- Der Start Button ist notwendig damit sich das System daran aufhängen kann. -->
+	 <div class="rapid_form">
+		<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="plugin_koobi_config" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="redireckoobi_class" />
+		<!-- Das Standarpräfix für die Ids -->
+		<input type="hidden" name="praefix" value="redirectkoobi_plugin" />
+		<!-- Das Standarpräfix für die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="redirectkoobi_plugin" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div>
+  
+{/if}
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

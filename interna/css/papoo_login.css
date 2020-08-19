@@ -1,0 +1,113 @@
+body {
+	margin:0;
+	padding:0;
+	font: 90% LucidaGrande, Lucida Grande, Lucida Sans Unicode,Verdana, Geneva, Arial, Helvetica, sans-serif;
+	background:url(./images/admin_back_top_new.gif)  ;
+	background-repeat:repeat-x;
+	background-color:#DBDBDB;
+}
+
+fieldset {
+	border:0 solid #fff;
+	margin-top:5px;
+}
+label {
+	color:#2A2A2A;
+	font-size:95%;
+}
+h2 {
+	font-size:130%;
+	display:block;
+	margin-left:100px;
+	color:#323352;
+	padding:5px;
+	padding-top:0;
+	font-weight:400;
+}
+.frontendlink
+{
+	margin-top:-45px;
+	margin-left:270px;
+	display:block;
+	width:100px;
+	text-decoration:none;
+	color:#323352;
+	position:relative;
+
+}
+.einlogg {
+	background:#fff;
+	width:300px;
+	margin:0 auto;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+
+
+	-moz-box-shadow:3px 3px 6px #999;
+	-webkit-box-shadow:3px 3px 6px #999;
+	box-shadow:3px 3px 6px #999;
+	border: 5px solid #fff;
+	padding: 20px;
+	padding-top:10px;
+	background:url(./images/login_back.gif)  no-repeat ;
+	background-position:top left;
+	background-color:#fff;
+	border-radius: 15px;
+
+}
+.einlogg_out {
+	padding-top:121px;
+	margin:0 auto;
+	width:300px;
+
+}
+.logo {
+	width:300px;
+	height:53px;
+	background:url(./images/top_logo_new2.gif)  no-repeat ;
+	background-position:0;
+}
+#language,
+.input{
+	border:0;
+	background:#ddd;
+	padding:5px;
+	margin-top:3px;
+	width:260px;
+	border:1px solid #ccc;
+}
+
+input:focus,
+input:active {
+	background:#eee;
+
+}
+input {
+	color:#333;
+}
+#username,
+#password,
+#language
+{
+	width:260px;
+	font-size:110%;
+	margin-bottom:-10px;
+
+}
+#language {
+	width:271px;
+	padding:1px;
+}
+.submit_back,
+.submit_back:focus {
+	background:transparent;
+	border:none;
+	color:#fff;
+	background:url(./images/button.gif)  no-repeat ;
+	background-position:5px 7px;
+	width:155px;
+	height:38px;
+	font-size:120%;
+	margin-left:120px;
+	margin-top:5px;
+}

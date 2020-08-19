@@ -1,0 +1,44 @@
+{if $IS_ADMIN}{*<!-- Wird nur in der Admin angezeigt -->*}
+	{*<!-- Hier kommt der Kopf rein-->*}
+	{include file=head.inc.utf8.html}
+	<!-- Menü kommt hier rein-->
+	{include file=menu.inc.html}
+	<div class="artikel">
+		{include file=../../../plugins/galerie/templates/cat_menue.html}
+{* Anzeige der Kategorien *}
+		<div>{$plugin.galerie_back.text.cat_count} {$anzahl}</div>
+		<ul class="cat_main_ul ul_no_style_pl5">
+			{foreach item=cat from=$galerie_cat_data}
+{* Link Erweitern/Reduzieren für parent *}
+				<li class="float_left">
+					{if $cat.parent}
+						<a href="#" title="{$plugin.galerie_back.linktext.cat_collapse}" onclick="HideShowCat('Catid_{$cat.gallang_gal_id}');">&#177;</a>
+					{else}
+						<span class="ml_11">&nbsp;</span>
+					{/if}
+				</li>
+{* Kategoriename mit Link zum direkten Edit *}
+				<li>
+					{if !$cat.parent_id}
+						<a href="./plugin.php?menuid={$menuid}&amp;template=galerie/templates/cat_back_edit.html&amp;cat_edit_id={$cat.gallang_gal_id}" title="{$plugin.galerie_back.linktext.cat_edit}">
+						<strong>{$cat.gallang_name}</strong></a>
+					{else}
+						{$cat.gallang_name}
+					{/if}
+{* Listensteuerung: neue Unterkategorie und End-Tags *}
+				{if $cat.parent}
+					<ul id="Catid_{$cat.gallang_gal_id}" class="ul_no_style_pl13">
+				{else}
+					</li>
+				{/if}
+{* End-Tags-Steuerung. Zahl der End-Tags lt. Variable einfügen *}
+				{if $cat.close_tags}
+					{section name=ende loop=$cat.close_tags step=-1}
+						</ul></li>
+					{/section}
+				{/if}
+			{/foreach}
+		</ul>
+	</div>
+	{include file=foot.inc.html}
+{/if}

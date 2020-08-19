@@ -1,0 +1,57 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		{include file=../../../plugins/galerie/templates/cat_menue.html}
+		<h2>{$plugin.galerie_back.pageheader.cat_delete_select}</h2>
+		{if $fehler1}<div class="error">{$plugin.galerie_back.errmsg.incorrect_cat_id}</div>{/if}
+		{if $cat_is_del}<div class="message">{$plugin.galerie_back.message.cat_is_del}</div>{/if}
+		{if $cat_has_subcats}<div class="error">{$plugin.galerie_back.errmsg.cat_has_subcats}</div>{/if}
+        <p>{$plugin.galerie_back.text.cat_count} {$anzahl}</p>
+{* L�schen Ja / Nein *}
+		{if $delete}
+			<form name="catdel" action="" method="post" id="galerie_back_catdel_form">
+				<fieldset>
+					<legend>{$plugin.galerie_back.formtext.legend_cats_delete}</legend>
+					<label for="galerie_back_meta_title"><strong>{$plugin.galerie_back.formtext.label_question_delete}</strong></label><br />
+					<input type="submit" value="{$plugin.galerie_back.submit.delete_yes}" name="submit" title="{$plugin.galerie_back.submit.delete_yes2}" />
+					<input type="submit" value="{$plugin.galerie_back.submit.delete_no}" name="submit" title="{$plugin.galerie_back.submit.delete_no2}" />
+					{foreach item=cat_del_id from=$cat_delete}
+						<input type="hidden" value="{$cat_del_id}" name="cat_delete[{$cat_del_id}]" />
+					{/foreach}
+				</fieldset>
+			</form>
+		{else}
+{* Formular anzeigen *}
+			{if $galerie_cat_data}
+				<p>{$plugin.galerie_back.text.cat_delete_top}</p>
+				<form name="cat_del" action="" method="post" id="cat_del_form">
+					<fieldset>
+						<legend>{$plugin.galerie_back.formtext.legend_cats_delete}</legend>
+						<ul class="ul_no_style">
+							{foreach item=cats_chkbox from=$galerie_cat_data}
+								{if $cats_chkbox.parent_id==0}
+									<li class="width100">
+										<input type="checkbox" id="cat_delete{$cats_chkbox.gallang_gal_id}" name="cat_delete[{$cats_chkbox.gallang_gal_id}]" value="{$cats_chkbox.gallang_gal_id}" {$checkeddel} />
+										<label class="lvl_{$cats_chkbox.level}" for="cat_delete{$cats_chkbox.gallang_gal_id}">{$cats_chkbox.gallang_name}</label>
+									</li>
+								{/if}
+							{/foreach}
+						</ul>
+						<img src="../plugins/galerie/bilder/arrow.png" width="38" height="22" alt="{$plugin.galerie_back.imgtext.cat_select}" title="{$plugin.galerie_back.imgtext.cat_select}" />
+						<a href="{$self}&amp;checkalldel=1{if $checkedadd}&amp;checkalladd=1{/if}"
+						title="{$plugin.galerie_back.linktext.cat_select_all}">{$plugin.galerie_back.linktext.cat_select_all}</a> /
+						<a href="{$self}{if $checkedadd}&amp;checkalladd=1{/if}"
+						title="{$plugin.galerie_back.linktext.cat_deselect_all}">{$plugin.galerie_back.linktext.cat_deselect_all}</a>
+						<br />
+						<br />
+						<input type="submit" value="{$plugin.galerie_back.submit.cat_delete}" name="submit" title="{$plugin.galerie_back.imgtext.cat_select}" />
+						<input type="hidden" value="catdelete" name="catdelete" />
+					</fieldset>
+				</form>
+			{/if}
+		{/if}
+        <br />
+	</div>
+	{include file=foot.inc.html}
+{/if}

@@ -1,0 +1,229 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		{$text}
+		{$logindaten}
+		{if $case1}
+			{*{*<!-- Und hier die komplette Forenliste -->*}
+			<h1>{$message_360}</h1>
+			{*<!-- Um den Namen oder die Beschreibung eines Forums zu �ndern, einfach auf das Forum klicken, es �ffnet sich die Bearbeitungsmaske des jeweiligen Forums -->*}
+			<p>{$message_359}</p>
+			{if $table_data}
+				<ul class = "forumliste">
+					{foreach item=table from=$table_data}
+						<li><a href="forum.php?menuid=41&amp;forenbearb=1&amp;bearb=1&amp;forumid={$table.forumid}">{$table.forumname}</a><p>{$table.Beschreibung}</p></li>
+					{/foreach}
+				</ul>
+			{/if}
+		{/if}
+		{if $case1b}
+			{*<!-- Bearbeiten der Forumdaten -->*}
+			{*<!-- Wenn ein Forum ausgew�hlt wurde, einen Link zur�ck zur �bersicht anbieten-->*}
+			<form method="post" id="formi" action="./forum.php?forenbearb=1&amp;foruminsert={$insert}&amp;menuid={$menuid_tmpl}&amp;forumid={if isset($forumid_tmpl)}{$forumid_tmpl}{/if}&amp;forneu={if isset($forumneu)}{$forumneu}{/if}" >
+				{foreach item=table from=$table_data}
+					{*<!-- Name des Forums -->*}
+					<fieldset>
+						<legend>{$message_87}:</legend><br />
+						{*<!-- Forumname -->*}
+						<label for="forname">{$message_88}:</label><br />
+						<input type="text" name="forname" id="forname" size="30" maxlength="240" value="{$table.forumname}" />
+					</fieldset>
+					{*<!-- Beschreibung -->*}
+					<fieldset>
+						<legend>{$message_89}:</legend><br />
+						{*<!-- Beschreibung des Forums, max. 200 Zeichen -->*}
+						<label for="metabeschreibung">{$message_90}</label><br />
+						<textarea name="metabeschreibung" id="metabeschreibung" rows="10" cols="50">{$table.Beschreibung}</textarea>
+						<br />
+					</fieldset>
+				{/foreach}
+				{*<!-- Geben Sie hier an, welche Gruppen das Forum lesen d�rfen -->*}
+				<fieldset>
+					<legend>{$message_94}:</legend>
+					{foreach item=group from=$group_data_read}
+						<input type="checkbox" {$group.checked} id="{$group.gruppename}" name="gruppe_read[]" value="{$group.gruppeid}" /><label for="{$group.gruppename}">{$group.gruppename}: </label><br />
+					{/foreach}
+				</fieldset>
+				{*<!-- Geben Sie hier an, welche Gruppen in das Forum schreiben d�rfen. -->*}
+				<fieldset>
+					<legend>{$message_96}:</legend>
+					{foreach item=group from=$group_data_write}
+						<input type="checkbox" {$group.checked} id="{$group.gruppename}2" name="gruppe_write[]" value="{$group.gruppeid}" /><label for="{$group.gruppename}2">{$group.gruppename}: </label><br />
+					{/foreach}
+				</fieldset>
+
+				<fieldset>
+					<legend>{$message_69}:</legend>
+					<input class="submit_back_green" type="submit" name="submitx" value="{$message_458}" style="float:right;" />
+					
+					{if $loeschen}
+						<input class="submit_back_alert" type="submit" name="loeschen" value="{$message_106}" style="float:left;"/>
+					{/if}
+				</fieldset>
+			</form>
+		{/if}
+
+		{if $case2}
+			{$text}
+			{$message_98a}
+			<form method="post" action="./forum.php?menuid=42" name="suche">
+				<fieldset>
+					{*<!-- Suche nach einer Message -->*}
+					<legend>{$message_98}:</legend>
+					<label for="search">{$message_98} </label>
+					<input type="text" name="search" id="search" value="{$search}" onblur="if(this.value=='')this.value='Ihr Suchbegriff';" onfocus="if(this.value=='Ihr Suchbegriff')this.value='';" size="40" maxlength="230" />
+					<input type="submit" class="submit_back" value="Finden" name="formSubmit" />
+				</fieldset>
+			</form>
+			{*<!-- Die letzten 10 Eintr�ge -->*}
+			<h2>{$system_messages_AlleEintrge}</h2>
+			{*<!-- weitere Seiten -->*}
+			{include file=weiter.inc.html}
+			<form action="" method="post" >
+				<input type="hidden" name="mesgid[{$message.msgid}]" value="1"/>
+				<table style="width:100%;" class="table table-striped table-hover">
+					<tr>
+						<th>ID</th>
+						<th>{$system_messages_BetreffdesEintrages}</th>
+						<th> {$system_messages_LinkdesEintrages}</th>
+						<th> {$system_messages_BenutzernamedesEintrages}</th>
+						<th> {$system_messages_EmaildesEintrages}</th>
+						<th> {$system_messages_AnzeigenamedesEintrages}</th>
+						<th> {$system_messages_DatumdesEintrages}</th>
+						<th> {$system_messages_Wieoftangesehen}</th>
+						<th> {$system_messages_Beitragfreigeben}</th>
+						<th> {$system_messages_Beitraglschen}</th>
+					</tr>
+					{foreach item=message from=$tmpl_last_messages}
+						<tr>
+							<td>{$message.msgid}</td>
+							<td style="width:30%;"><p><a href="./forum.php?msgid={$message.msgid}&amp;menuid=42">{$message.thema} {$system_messages_beitragbearbeiten}</a></p><p>{$message.messagetext|substr:0:120}&hellip;</p> </td>
+							<td>{if $message.artikelurl}<a href="http://{$message.artikelurl}" target="_blank">{$message_677}</a>{else}&mdash;{/if}</td>
+							<td><i> {$message.username}</i></td>
+							<td>{$message.email}</td>
+							<td>{$message.username_guest}</td>
+							<td>{$message.zeitstempel}</td>
+							<td>{$message.counten} x </td>
+							<td>
+								<input type="hidden" name="_message_setfree[{$message.msgid}]" value="{if $message.msg_frei==1}1{else}0{/if}"/>
+								<input type="checkbox" name="message_setfree[{$message.msgid}]" id="message_setfree_{$message.msgid}" {if $message.msg_frei==1}checked="checked" {/if} value="1"/>
+								<label class="ignore" for="message_setfree_{$message.msgid}">{$system_messages_Beitragfreigeben}</label>
+							</td>
+							<td>
+								<input type="checkbox" name="message_del[{$message.msgid}]" id="message_del_{$message.msgid}" value="1"/>
+								<label class="ignore" for="message_del_{$message.msgid}">{$system_messages_Beitraglschen}</label>
+							</td>
+						</tr>
+					{/foreach}
+				</table>
+				<fieldset>
+					<legend>{$message_70}</legend>
+					<!-- Speichern -->
+					<input type="submit" class="submit_back" style="float:right;" value="{$message_70}" name="formSubmit_messages" />
+				</fieldset>
+			</form>
+			{if $xsuch}
+				<ul>
+					{foreach item=ander from=$ander_data}
+						<li><a href="./forum.php?msgid={$ander.msgid}&amp;menuid=42">{$ander.thema}</a>
+							<i>{$ander.username}</i> {$ander.zeitstempel} [{$ander.counten} {$message_668}]
+						</li>
+					{/foreach}
+				</ul>
+			{/if}
+			{*<!-- weitere Seiten -->*}
+			{include file=weiter.inc.html}
+		{/if}
+
+		{if $case2b}
+			{foreach item=message from=$message_data}
+				{*<!-- Hier k�nnen die Messagedaten bearbeitet werden. -->*}
+				<h1>{$message_99}.</h1>
+				<span style="color:red;font-size:16px;">{$speichern_nachricht}</span>
+				<form method="POST" id="formi" action="./forum.php?msgid={$message.msgid}&amp;menuid=42">
+					<input type="hidden" name ="messageuser_form" value="{$messageuser}" />
+					<input type="hidden" name ="{$messageupdaten}" value="1" />
+					<input type="hidden" name ="rootid" value="{$message.rootid}" />
+					
+					{*<!-- Messagedaten bearbeiten -->*}
+					<fieldset>
+						<legend>{$message_100}</legend>
+						{*<!-- Username -->*}
+						<label>{$message_61}:</label> {$messageuser}<br />
+						{*<!-- Betreff -->*}
+						<label for="name">{$system_messages_AnzeigenamedesEintrages}:</label><br />
+						<input type="text" id="name" name="name" size="30" maxlength="240" value="{$message.name}" /><br />
+						{*<!-- Betreff -->*}
+						<label for="betreff">{$message_101}:</label><br />
+						<input type="text" id="betreff" name="betreff" size="30" maxlength="240" value="{$message.betreff}" /><br />
+						<label for="message_text">{$message_107}</label><br />
+						<textarea type="text" id="message_text" name="message_text" rows="20" cols="50">{$message.message}</textarea>
+						<br />
+						{*<!-- Mail -->*}
+						<label for="email">{$system_messages_EmaildesEintrages}:</label><br />
+						<input type="text" id="email" name="email" size="30" maxlength="240" value="{$message.email}" /><br />
+					</fieldset>
+
+					<fieldset>
+						<legend>{$message_487}</legend>
+						<label for="forumid ">{$message_488}</label><br />
+						<select name="forumid" id="forumid" size="1">
+							<option value="0" {$checked1}>{$message_489} (default)</option>
+							{foreach item=cat from=$forumliste}
+								<option value="{$cat.forumid}" {if $message.forumid==$cat.forumid} selected="selected" {/if}>{$cat.forumname}</option>
+							{/foreach}
+						</select>
+					</fieldset>
+
+					<fieldset>
+						<legend>Freischalten</legend>
+						<input class="" type="checkbox" {if $message.msg_frei==1}checked="checked"{/if} name="msg_frei" id="msg_frei" value="1" /><label for="msg_frei">{$message_669}</label>
+					</fieldset>
+
+					<fieldset>
+						<legend>{$message_490}</legend>
+						<input class="submit_back_alert" type="submit" name="loesch" value="{$message_106}" style="float:right;"/>
+						<input class="submit_back_green" type="submit" name="submitx" value="{$button}" style="float:left;" />
+					</fieldset>
+				</form>
+			{/foreach}
+		{/if}
+		{if $loeschecht}
+			<form method="post" id="formi" action="./forum.php?msgid={$msgid}&amp;menuid=42">
+				<input type="hidden" name ="formmsgid" value="{$message.msgid}" />
+				<input type="hidden" name ="rootid" value="{$message.rootid}" />
+				{*<!-- Diese Message l�schen -->*}
+				<fieldset>
+					<legend>{$message_102}</legend>
+					{$message_103}
+					{foreach item=message from=$tmpl_last_messages}
+						<p>Nachricht: {$message.betreff} von {$message.messageuser}</p>
+					{/foreach}
+					<input class="right" type="submit" name="loeschenecht" value="{$loeschecht}" />
+				</fieldset>
+			</form>
+		{else}
+			{if $loesch}
+				{*<!-- Forum l�schen ... -->*}
+				<form method="post" id="formi" action="./forum.php?msgid={if isset($msgid)}{$msgid}{/if}&amp;menuid={$menuid_tmpl}">
+					<input type="hidden" name ="forumid" value="{$forumid}" />
+					<input type="hidden" name="loeschenecht" value="{$message_106}" />
+					{*<!-- Dieses Forum l�schen? -->*}
+					<fieldset>
+						<legend>{$message_105}</legend>
+						{foreach item=table from=$table_data}
+							<p>{if isset($table.Beschreibung)}{$table.Beschreibung}{/if}</p>
+							<p><strong>{$table.forumname}</strong> </p>
+						{/foreach}
+						{*<!-- Loeschen -->*}
+						<input class="right" type="submit" name="submit" value="{$message_106}" />
+					</fieldset>
+				</form>
+			{/if}
+		{/if}
+		<div class="clear">&nbsp;</div>
+	</div>
+	{*<!-- Hier kommt der Fuss rein-->*}
+	{include file=foot.inc.html}
+{/if}

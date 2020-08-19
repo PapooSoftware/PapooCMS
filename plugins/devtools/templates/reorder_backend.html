@@ -1,0 +1,180 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+{*<!-- Men� kommt hier rein -->*}
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+	<h1>{$plugin.devtools.neu_ordnung}</h1>
+	{if $reorder_message}
+		<p class="message">{$reorder_message}</p>
+	{else}
+		{if $plugin.devtools.template_weiche == "reorder_plugin"}
+			{$plugin.devtools.reorder_plugin_text}
+			<form action="" method="post">
+				<input type="hidden" name="reorder_action" value="reorder_plugin">
+				<fieldset>
+					<ul>
+						{foreach item=plugin_menue from=$plugin.devtools.plugin_menues}
+							<li>
+								{if $plugin_menue.menuid == 47}
+									{$plugin_menue.menuname}<br />
+									<br />
+								{else}
+									<input type="text" name="menue_order[{$plugin_menue.menuid}]" id="menue_order_{$plugin_menue.menuid}" value="{$plugin_menue.order_id}" size="5" />
+									<label for="menue_order_{$plugin_menue.menuid}"><span class="ignore">Sortier-Nummer </span>{$plugin_menue.menuname}</label><br />
+									<br />
+								{/if}
+							</li>
+						{/foreach}
+					</ul>
+				</fieldset>
+				<br />
+				<input type="submit" class="submit_back_green_xl" value="{$plugin.devtools.reorder_plugin_button}" />
+			</form>
+		{else}
+			<p>
+				{$plugin.devtools.reorder_plugin_text}
+				<form name="reorder" action="" method="post">
+					<input type="hidden" name="reorder_action" value="reorder_plugin"/>
+					<input type="submit" class="submit_back_xl_white" value="{$plugin.devtools.reorder_plugin_button}" />
+				</form>
+			<p>
+
+				<!--
+                                <h2>{$plugin.devtools.bilder_alts} Deutsch</h2>
+                                {$plugin.devtools.bilder_alts2}
+                                <form name="reorder_action_free_urls" action="" method="post">
+                                    <input type="hidden" name="reorder_action" value="reorder_action_alt_images"/>
+                                    <input type="hidden" name="reorder_action_lang_id" value="1"/>
+                                    <input type="submit" class="submit_back_xl_white" value="{$plugin.devtools.bilder_alts3}" />
+                                </form>
+                            </p>
+                            <p>
+                                <h2>{$plugin.devtools.bilder_alts} Englisch</h2>
+                                {$plugin.devtools.bilder_alts2}
+                                <form name="reorder_action_free_urls" action="" method="post">
+                                    <input type="hidden" name="reorder_action" value="reorder_action_alt_images"/>
+                                    <input type="hidden" name="reorder_action_lang_id" value="2"/>
+                                    <input type="submit" class="submit_back_xl_white" value="{$plugin.devtools.bilder_alts3}" />
+                                </form>
+                            </p>
+                            <p>
+                                <h2>{$plugin.devtools.bilder_alts} Franzoesisch</h2>
+                                {$plugin.devtools.bilder_alts2}
+                                <form name="reorder_action_free_urls" action="" method="post">
+                                    <input type="hidden" name="reorder_action" value="reorder_action_alt_images"/>
+                                    <input type="hidden" name="reorder_action_lang_id" value="5"/>
+                                    <input type="submit" class="submit_back_xl_white" value="{$plugin.devtools.bilder_alts3}" />
+                                </form>
+                            </p>
+
+                            <p>
+                                <h2>Bilder ohne Alt EN</h2>
+
+                                <form name="reorder_action_free_urls" action="" method="post">
+                                    <input type="hidden" name="reorder_action" value="reorder_action_no_alt_images"/>
+                                    <input type="hidden" name="reorder_action_lang_id" value="2"/>
+                                    <input type="submit" class="submit_back_xl_white" value="anzeigen" />
+                                </form>
+                            </p>
+                            <p>
+                                <h2>Bilder ohne Alt FR</h2>
+
+                                <form name="reorder_action_free_urls" action="" method="post">
+                                    <input type="hidden" name="reorder_action" value="reorder_action_no_alt_images"/>
+                                    <input type="hidden" name="reorder_action_lang_id" value="5"/>
+                                    <input type="submit" class="submit_back_xl_white" value="anzeigen" />
+                                </form>
+                            </p>
+                            <hr /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                            <hr />
+                    -->
+			
+			
+			<p>
+				{$plugin.devtools.menue_neu}
+				<form name="reorder" action="" method="post">
+					<input type="hidden" name="reorder_action" value="reorder_menu"/>
+					<input type="submit" class="submit_back_xl_white" value="{$plugin.devtools.menue_ordnen}"/>
+				</form>
+			</p>
+			
+			<p>
+				{$plugin.devtools.artikel_neu}
+				<form name="reorder" action="" method="post">
+					<input type="hidden" name="reorder_action" value="reorder_artikel"/>
+					<input type="submit" class="submit_back_big_white" value="{$plugin.devtools.artikel_ordnen}"/>
+				</form>
+			</p>
+			
+			<p>
+				{$plugin.devtools.bilder_neu}
+				<form name="reorder" action="" method="post">
+					<input type="hidden" name="reorder_action" value="reorder_images"/>
+					<input type="submit" class="submit_back_xl_white" value="{$plugin.devtools.bilder_ordnen}"/>
+				</form>
+			</p>
+			
+			<p>
+				<h2>{$plugin.devtools.link_neu}</h2>
+				<form name="reorder_action" action="" method="post">
+					<input type="hidden" name="reorder_action" value="reorder_linkkat"/>
+					<input type="submit" class="submit_back_xl_white" value="{$plugin.devtools.link_ordnen}" />
+				</form>
+			</p>
+			
+			<p>
+				<h2>{$plugin.devtools.surls_neu}</h2>
+				{$plugin.devtools.surls_text}
+				<form name="reorder_action_surls" action="" method="post">
+					<input type="hidden" name="reorder_action" value="reorder_surls"/>
+					<input type="submit" class="submit_back_white" value="{$plugin.devtools.surls}" />
+				</form>
+			</p>
+			
+			<p>
+				<h2>{$plugin.devtools.rechte_neu}</h2>
+				{$plugin.devtools.rechte_text}
+				<form name="reorder_action_surls" action="" method="post">
+					<input type="hidden" name="reorder_action" value="reorder_rights"/>
+					<input type="submit" class="submit_back_xl_white" value="{$plugin.devtools.rechte}" />
+				</form>
+			</p>
+			
+			<p>
+				<h2>{$plugin.devtools.free_urls__sprach_neu}</h2>
+				{$plugin.devtools.free_urls__sprach_neu2}
+				<form name="reorder_action_free_urls" action="" method="post">
+					<input type="hidden" name="reorder_action" value="reorder_action_free_urls"/>
+					<input type="submit" class="submit_back_xl_white" value="{$plugin.devtools.free_urls__sprach_neu}" />
+				</form>
+			</p>
+
+			<p>
+				<h2>{$plugin.devtools.menu_artikel_rechte}</h2>
+				{$plugin.devtools.menu_artikel_rechte2}
+				<form name="reorder_action_artmen_chef" action="" method="post">
+					<input type="hidden" name="reorder_action" value="reorder_action_artmen_chef"/>
+					<input type="submit" class="submit_back_xl_white" value="{$plugin.devtools.menu_artikel_rechte}" />
+				</form>
+			</p>
+
+			<p>
+				<h2>{$plugin.devtools.dl_rechte_jeder}</h2>
+				{$plugin.devtools.dl_rechte_jeder2}
+				<form name="reorder_action_dl_jeder" action="" method="post">
+					<input type="hidden" name="reorder_action" value="reorder_action_dl_jeder"/>
+					<input type="submit" class="submit_back_xl_white" value="{$plugin.devtools.dl_rechte_jeder}" />
+				</form>
+			</p>
+		{/if}
+	{/if}
+</div>
+
+
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

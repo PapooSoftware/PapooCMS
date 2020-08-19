@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<plugin name="break_annihilatorer" version="5.0">
+
+    <name>Break Annihilator</name>
+
+    <beschreibung_de><![CDATA[Dieses Plugin zerstört alle &lt;br&gt;-Tags in sämtlichen Artikeln.]]></beschreibung_de>
+    <beschreibung_en><![CDATA[This plugin will destroy each and every &lt;br&gt;-tags in every article.]]></beschreibung_en>
+
+    <version>1.0</version>
+
+    <papooid>203</papooid>
+
+    <datum>17.09.2014</datum>
+
+    <autor>
+        <name>Christoph Zimmer</name>
+        <email>cz@papoo.de</email>
+    </autor>
+
+    <klasse>
+        <name>break_annihilator</name>
+        <datei>break_annihilator/lib/break_annihilator_class.php</datei>
+    </klasse>
+
+    <menue>
+        <eintrag_de>Break Annihilator</eintrag_de>
+        <eintrag_en>Break Annihilator</eintrag_en>
+        <link>plugin:break_annihilator/templates/backend.html</link>
+    </menue>
+
+    <messages>break_annihilator/messages</messages>
+
+</plugin>

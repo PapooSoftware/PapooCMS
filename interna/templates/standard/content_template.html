@@ -1,0 +1,57 @@
+{if $IS_ADMIN}
+	<h1>{$message_774}</h1>
+	{if $contentnew=="ok"}
+		{$message_777}
+		<br />
+		<form action="" method="post" id="formi">
+			<input type="hidden" name="ctempl_id" value="{$content_ct.0.ctempl_id}" />
+
+			<fieldset>
+				<legend>{$message_778}</legend>
+				<input type="text" name="ctempl_name" id="ctempl_name" value="{$content_ct.0.ctempl_name}"/>
+			</fieldset>
+
+			<fieldset>
+				<legend>{$message_779}</legend>
+				 <div style="border: 1px solid #333;background:#fff;;">
+				<textarea rows="15" cols="60" name="ctempl_content" id="ctempl_content">{$content_ct.0.ctempl_content}</textarea>
+				</div>
+			</fieldset>
+
+			<fieldset>
+				<legend>{$message_724}</legend>
+				<input type="submit" class="submit_back_green" name="save_ctemplate" id="save_ctemplate" value="{$message_725}"/>
+			</fieldset>
+
+			{if $content_ct.0.ctempl_id}
+				<fieldset>
+					<legend>{$message_781}</legend>
+					<input type="submit" class="submit_back_red" name="del_ctemplate" id="del_ctemplate" value="{$message_780}"/>
+				</fieldset>
+			{/if}
+		</form>
+		{literal}
+			<script type="text/javascript">
+				var editor = CodeMirror.fromTextArea('ctempl_content', {
+					height: "450px",
+					width: "100%",
+					//lineNumbers: "on",
+					parserfile: "parsecss.js",
+					stylesheet: "css/csscolors.css",
+					path: "js/"
+				});
+			</script>
+		{/literal}
+	{else}
+		{$message_782}
+		<a href="./template.php?menuid={$aktive_menuid}&amp;makenew_content=ok">{$message_783}</a>
+		<h2>{$message_784}</h2>
+		{if $contentlist}
+			<ul>
+				{foreach item=dat from=$contentlist}
+					<li><a href="./template.php?menuid={$aktive_menuid}&amp;ctempl_id={$dat.ctempl_id}&amp;update_content=ok">{$dat.ctempl_name}</a></li>
+				{/foreach}
+			</ul>
+		{/if}
+	{/if}
+{/if}

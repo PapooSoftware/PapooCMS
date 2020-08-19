@@ -1,0 +1,97 @@
+{if $IS_ADMIN}
+	<h2 >{$message_2197}</h2>
+	<a id="artikel"></a>
+	<script src='js/jquery.js' type='text/javascript'></script>
+	<script src='js/jquery.cookie.js' type='text/javascript'></script>
+	<script src='js/jstorage.min.js' type='text/javascript'></script>
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
+	<link rel="stylesheet" type="text/css" href="css/sitemap.css" />
+	<script type="text/javascript" src="./js/jq_content_tree.js"></script>
+	<script type="text/javascript"> jq_content_tree_show_all(); </script>
+
+	<div id="inhalt_sitemap">
+		{foreach item=kat from=$catlist_data.0}
+			{if $kat.cat_id>=1}<h1 class="sitemap_menucat">{$kat.cat_text}</h1>{/if}
+			<ul class="artikel_sitemap">
+				{foreach item=table from=$table_data}
+					{if $kat.cat_id==$table.cat_cid or $no_categories==1}
+						{$table.shift_anfang}
+						<div>
+							{if $sp_urls=="ok" or $free_sp_urls}
+								<a href="#" title="{$table.lang_title|escape:"html"}" onClick="FileBrowserDialogue.mySubmit('{$slash}{if $free_sp_urls=="ok"}{$table.menuname_free_url}{else}{$table.menuname_url}{/if}','','{$table.text|escape:"html"}'); "
+								menuid="{$table.menuid}" style="">
+							{if $table.menulink=="shop.php" or $table.menulink=="shop"}
+							<i class="fa fa-shopping-cart"></i>
+							{else}
+								{if $table.extern}
+									<i class="fa fa-share"></i>
+								{elseif $table.template}
+									<i class="fa fa-cog"></i>
+								{else}
+									<i class="fa fa-folder-open"></i>
+								{/if}
+							{/if}
+							{$table.extern}{$table.text}</a>
+						{else}
+						<a href="#" title="{$table.lang_title|escape:"html"}" onClick="FileBrowserDialogue.mySubmit('{$slash}{$table.link}{$frag_connect}menuid{$gleich_connect}{$table.menuid}{$table.template}','','{$table.text|escape:"html"}'); "
+						menuid="{$table.menuid}"
+						style="">
+							{if $table.menulink=="shop.php" or $table.menulink=="shop"}
+								<i class="fa fa-shopping-cart"></i>
+							{else}
+								{if $table.extern}
+								<i class="fa fa-share"></i>
+								{elseif $table.template}
+								<i class="fa fa-cog"></i>
+								{else}
+								<i class="fa fa-folder-open"></i>
+								{/if}
+							{/if}
+							{$table.text}</a>
+						{/if}</div>
+					{if $table.artikel_anzahl >= 1 OR isset($table.produkte) && $table.produkte}
+						<ul class="ul_artikel">
+							{foreach item=artikel from=$table.artikel}
+								<li>
+									<div>
+									{if $sp_urls=="ok" or $free_sp_urls}
+										<a href="#" title="{$artikel.text|escape:"html"}" onClick="FileBrowserDialogue.mySubmit('{$slash}{if $free_sp_urls=="ok"}{$artikel.arturl}{else}{$table.menuname_art_url}{$artikel.arturl}{/if}','','{$artikel.text|escape:"html"}'); "
+											style=""><i class="fa fa-font"></i> {$artikel.text}
+										</a>
+									{else}
+										<a href="#" title="{$artikel.text|escape:"html"}" onClick="FileBrowserDialogue.mySubmit('{$slash}{$table.link}{$frag_connect}menuid{$gleich_connect}{$table.menuid}{$plus_connect}reporeid{$gleich_connect}{$artikel.reporeid}','','{$artikel.text|escape:"html"}'); "
+											style=""
+										><i class="fa fa-font"></i>
+										{$artikel.text}
+										</a>
+									{/if}
+									</div>
+								</li>
+							{/foreach}
+							{if isset($table.produkte) && $table.produkte}
+								{foreach item=produkte from=$table.produkte}
+									<li>
+										{if $sp_urls=="ok" or $free_sp_urls}
+											<a href="#" title="{$produkte.produkte_lang_produktename|escape:"html"}" onClick="FileBrowserDialogue.mySubmit('{$slash}{if $free_sp_urls}{$table.menuname_free_url}{else}{$table.menuname_url}{/if}{$produkte.produkte_lang_produkt_surl}.html','','{$produkte.produkte_lang_produktename|escape:"html"}'); "
+												style="display:block; padding: 5px 0px 5px 35px; background-image: url(./bilder/juk.png); background-repeat: no-repeat; background-position: 5px center; margin-bottom:5px;">
+												{$produkte.produkte_lang_produktename}
+											</a>
+										{else}
+											<a href="#" title="{$produkte.produkte_lang_produktename|escape:"html"}"
+											onClick="FileBrowserDialogue.mySubmit('{$slash}shop.php{$frag_connect}menuid{$gleich_connect}{$table.menuid}{$plus_connect}produkt_id{$gleich_connect}{$produkte.produkte_lang_id}','','{$produkte.produkte_lang_produktename|escape:"html"}'); "
+												style="display:block; padding: 5px 0px 5px 35px; background-image: url(./bilder/juk.png); background-repeat: no-repeat; background-position: 5px center; margin-bottom:5px;">
+												{$produkte.produkte_lang_produktename|escape:"html"}
+											</a>
+										{/if}
+									</li>
+								{/foreach}
+							{/if}
+						</ul>
+					{/if}
+					{$table.shift_ende}
+					{/if}
+				{/foreach}
+			</ul>
+		{/foreach}
+	</div>
+{/if}

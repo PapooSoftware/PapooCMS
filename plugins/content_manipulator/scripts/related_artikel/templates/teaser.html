@@ -1,0 +1,24 @@
+{foreach item=table from=$last_artikel}
+<div class="last_artikel_liste">
+	<h2>{$table.uberschrift}</h2>
+	
+	{$table.lan_teaser_img_fertig}
+
+	{$table.lan_teaser}
+	
+	{if $table.linktext}
+
+		{*<!--Dieser Link öffnet den Artikel ... im selben Fenster.-->*}
+		{if $sp_urls=="ok"}
+			<a href="{$slash}{$sulrstrenner}{$table.url_header}"  title="{$message_2012} &quot;{$table.uberschrift|escape:"html"}&quot; {$message_2013}">{$table.islink}</a>
+		{else}
+			<a href="{$slash}{$table.linktext}{$frag_connect}menuid{$gleich_connect}{$table.cattextid}{$plus_connect}reporeid{$gleich_connect}{$table.reporeid}"  title="{$message_2012} &quot;{$table.uberschrift|escape:"html"}&quot; {$message_2013}">{$table.islink}</a>
+		{/if}
+		
+	{/if}
+	
+	{if $table.comment_ok}{$article.coment} ({$table.comment}){/if}
+	
+</div>
+<br class="break_artikel" />
+{/foreach}

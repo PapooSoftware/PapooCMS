@@ -1,0 +1,52 @@
+body {
+
+}
+fieldset {
+	position:relative;
+	margin-top:25px;
+	padding-left:10px;
+
+}
+legend {
+	position:relative;
+	margin-top:-17px;
+	margin-left:-30px;
+}
+input {
+
+}
+.divleft {
+	position:absolute;
+}
+.menu {
+	margin-top:-67px;
+}
+.menu a:hover,
+.menu a:focus,
+.menu a:active {
+	color:#000;
+
+}
+.untermenu1 li{
+	float:left;
+}
+.artikel {
+	height:1%;
+}
+.artikel_link_teaser {
+	text-align:left;
+	float:none;
+	display:inline;
+
+
+}
+.artikel_list_teaser {
+	margin-bottom:20px;
+}
+
+.ignore2 {
+	display:block;
+	position:absolute;
+	top:-2000px;
+	left:-2000px;
+}

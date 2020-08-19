@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<plugin version="3.0">
+
+<name>devtools</name>
+<beschreibung_de><![CDATA[Dieses Plugin enthält einige Werkzeuge für Entwickler.]]></beschreibung_de>
+<beschreibung_en><![CDATA[This Plugin includes some tools for developers.]]></beschreibung_en>
+<version>2.1</version>
+<papooid></papooid>
+<link>http://www.papoo.de</link> 
+<datum>15.12.2009</datum>
+
+<autor>
+	<name>Stephan Bergmann</name>
+	<kontakt><![CDATA[Stephan Bergmann
+Rembrandtstr. 10/1
+72768 Reutlingen]]></kontakt>
+	<email>S.Bergmann@XiMiX.de</email>
+	<telefon>07121 / 60 39 88</telefon>
+</autor>
+
+<menue>
+	<eintrag_de>Entwickler-Werkzeuge</eintrag_de>
+	<eintrag_en>developer-tools</eintrag_en>
+	<icon>devtools/bilder/devtools_icon.gif</icon>
+	<link>plugin:devtools/templates/devtools_backend.html</link>
+	
+	<submenue>
+		<eintrag_de><![CDATA[Neu-Ordnung]]></eintrag_de>
+		<eintrag_en>reorder</eintrag_en>
+		<icon>devtools/bilder/reorder_icon.gif</icon>
+		<link>plugin:devtools/templates/reorder_backend.html</link>
+	</submenue>
+
+	<submenue>
+		<eintrag_de><![CDATA[Debug-Optionen]]></eintrag_de>
+		<eintrag_en>debug-options</eintrag_en>
+		<icon>devtools/bilder/debug_icon.gif</icon>
+		<link>plugin:devtools/templates/debug_backend.html</link>
+	</submenue>
+	
+	<submenue>
+		<eintrag_de><![CDATA[Cache löschen]]></eintrag_de>
+		<eintrag_en>cache-cleaner</eintrag_en>
+		<icon>devtools/bilder/cachecleaner_icon.gif</icon>
+		<link>plugin:devtools/templates/cachecleaner_backend.html</link>
+	</submenue>
+	
+	<submenue>
+		<eintrag_de><![CDATA[Versionen löschen]]></eintrag_de>
+		<eintrag_en>version-cleaner</eintrag_en>
+		<icon>devtools/bilder/versioncleaner_icon.gif</icon>
+		<link>plugin:devtools/templates/versioncleaner_backend.html</link>
+	</submenue>
+	
+	<submenue>
+		<eintrag_de>Datensicherung</eintrag_de>
+		<eintrag_en>backup</eintrag_en>
+		<icon>devtools/bilder/newdump_icon.gif</icon>
+		<link>plugin:devtools/templates/newdump_backend.html</link>
+	</submenue>
+	
+	<submenue>
+		<eintrag_de>Modul-Namen</eintrag_de>
+		<eintrag_en>modul-names</eintrag_en>
+		<icon>devtools/bilder/modlang_icon.gif</icon>
+		<link>plugin:devtools/templates/modlang_backend.html</link>
+	</submenue>
+	
+	<submenue>
+		<eintrag_de>Auto-Inhalte</eintrag_de>
+		<eintrag_en>auto-content</eintrag_en>
+		<icon>devtools/bilder/autocontent_icon.gif</icon>
+		<link>plugin:devtools/templates/autocontent_backend.html</link>
+	</submenue>
+
+	<submenue>
+		<eintrag_de>DB-Cleanup</eintrag_de>
+		<eintrag_en>db-cleanup</eintrag_en>
+		<icon></icon>
+		<link>plugin:devtools/templates/dbcleanup_backend.html</link>
+	</submenue>
+	
+</menue>
+
+<klasse>
+	<name>reorder</name>
+	<datei>devtools/lib/reorder_class.php</datei>
+</klasse>
+
+<klasse>
+	<name>debug</name>
+	<datei>devtools/lib/debug_class.php</datei>
+</klasse>
+
+<klasse>
+	<name>cachecleaner</name>
+	<datei>devtools/lib/cachecleaner_class.php</datei>
+</klasse>
+
+<klasse>
+	<name>versioncleaner</name>
+	<datei>devtools/lib/versioncleaner_class.php</datei>
+</klasse>
+
+<klasse>
+	<name>newdump</name>
+	<datei>devtools/lib/newdump_class.php</datei>
+</klasse>
+
+<klasse>
+	<name>devtool_modlang</name>
+	<datei>devtools/lib/modlang_class.php</datei>
+</klasse>
+
+<klasse>
+	<name>devtool_autocontent</name>
+	<datei>devtools/lib/autocontent_class.php</datei>
+</klasse>
+
+<klasse>
+	<name>rapid_db</name>
+	<datei>devtools/lib/rapid_db_class.php</datei>
+</klasse>
+
+<klasse>
+	<name>dbcleanup</name>
+	<datei>devtools/lib/dbcleanup_class.php</datei>
+</klasse>
+
+
+
+<css>devtools/css/devtools.css</css>
+
+<messages>devtools/messages</messages>
+</plugin>

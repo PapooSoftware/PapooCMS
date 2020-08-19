@@ -1,0 +1,196 @@
+{if $IS_ADMIN}
+	{foreach item=menu from=$menuinput_data}
+		<fieldset>
+			{*<!-- Seitenname und Admin Email:-->*}
+			<legend>{$message_296}</legend>
+			{if isset($menu.xinput) && $menu.xinput}
+				{$menu.text2}
+				<input type="hidden" name ="reportage" value="{$menu.reportage}" />
+				<input type="hidden" name ="reporeid" value="{$menu.reporeid}" />
+			{/if}
+			<br />
+			{*<!-- Seitenurl -->*}
+			<label for="seitenname">{$message_297}</label><br />
+			{*<!-- Hier bitte den Seitennamen eingeben-->*}
+			<input type="text" id="seitenname" name="seitenname" size="30" value="{$menu.seitenname}" title="{$message_298}" /><br />
+			{*<!-- Administrator Email: -->*}
+
+			{*<!-- Autor offiziell:-->*}
+			<label for ="autor_seite">{$message_305}</label><br />
+			<input type="text" id="autor_seite" name="autor_seite" size="30" value="{$menu.autor_seite}" title="" />
+		</fieldset>
+
+		<fieldset>
+			<legend>{$message.stamm.dateformat.legend}:</legend>
+			<input type="radio" name="lang_dateformat" value="0" id="lang_dateformat_short" {if $menu.lang_dateformat == 0} checked="checked" {/if} />
+			<label for="lang_dateformat_short">{$message.stamm.dateformat.label_short} {$smarty.now|date_format:$lang_dateformat_short}</label><br />
+			<input type="radio" name="lang_dateformat" value="1" id="lang_dateformat_long" {if $menu.lang_dateformat == 1} checked="checked" {/if} />
+			<label for="lang_dateformat_long">{$message.stamm.dateformat.label_long} {$smarty.now|date_format:$lang_dateformat_long}</label><br />
+		</fieldset>
+
+		<fieldset>
+			{*<!-- Weitere Einstellungen: -->*}
+			<legend>{$message_321}</legend>
+
+			{*<!-- Sollen neue Artikel automatisch auf der Startseite erscheinen? -->*}
+			<input type="checkbox" {$menu.checkedartikel_yn} id="artikel_yn" name ="artikel_yn" value="1" />
+			<label for="artikel_yn" style="width:50%"> {$message_322}</label><br />
+
+			{*<!-- Sollen Artikel immer komplett dargestellt werden, auch wenn es mehrere zu einem Men�-Punkt gibt? -->*}
+			<input type="checkbox" {$menu.checkedartikel_lang_yn} id="artikel_lang_yn" name ="artikel_lang_yn" value="1" />
+			<label for="artikel_lang_yn" style="width:50%"> {$message_323}</label><br />
+
+			{*<!-- Soll die Anzahl der Kommentare angezeigt werden? -->*}
+			<input type="checkbox" {$menu.checkedcomment_yn} id="comment_yn" name ="comment_yn" value="1" />
+			<label for="comment_yn" style="width:50%"> {$message_325}</label><br />
+
+			{*<!-- Soll die Anzahl der Seiten-Besucher angezeigt werden? -->*}
+			<input type="checkbox" {$menu.checkedanzeig_besucher} id="anzeig_besucher" name ="anzeig_besucher" value="1" />
+			<label for="anzeig_besucher" style="width:50%"> {$message_559}</label><br />
+
+			{*<!-- Soll der Autor angezeigt werden? -->*}
+			<input type="checkbox" {$menu.checkedusability} id="usability" name ="usability" value="1" />
+			<label for="usability" style="width:50%"> {$message_558}</label><br />
+
+			{*<!-- Soll mit Kategorien gearbeitet werden? -->*}
+			<input type="checkbox" {$menu.checkedcategories} id="categories" name ="categories" value="1" />
+			<label for="categories" style="width:50%"> {$message_594}</label><br />
+
+			{*<!-- Soll mit Kategorien f�r Artikel auf der Startseite gearbeitet werden? -->*}
+			<input type="checkbox" {if $menu.stamm_cat_startseite_ok==1}checked="checked"{/if} id="stamm_cat_startseite_ok" name ="stamm_cat_startseite_ok" value="1" />
+			<label for="stamm_cat_startseite_ok" style="width:50%"> {$message_807}</label><br />
+
+			{*<!-- Soll mit Kategorien f�r Artikel auch auf Unterseiten gearbeitet werden? -->*}
+			<input type="checkbox" {if $menu.stamm_cat_sub_ok==1}checked="checked"{/if} id="stamm_cat_sub_ok" name ="stamm_cat_sub_ok" value="1" />
+			<label for="stamm_cat_sub_ok" style="width:50%"> {$message_827}</label><br />
+
+			{*<!-- Sollen Artikel nach Aktualit�t angezeigt werden (Wenn nicht wird die OrderID verwendet)? -->*}
+			<input type="checkbox" {if $menu.stamm_artikel_order==1}checked="checked"{/if} id="stamm_artikel_order" name ="stamm_artikel_order" value="1" />
+			<label for="stamm_artikel_order" style="width:50%"> {$message_828}</label><br />
+
+			<input type="checkbox" {if $menu.gaestebuch_msg_frei==1}checked="checked"{/if} id="gaestebuch_msg_frei" name ="gaestebuch_msg_frei" value="1" />
+			<label for="gaestebuch_msg_frei" style="width:50%"> {$message_807a}</label><br />
+
+			<input type="checkbox" {if $menu.showpapoo==1}checked="checked"{/if} id="showpapoo" name ="showpapoo" value="1" />
+			<label for="showpapoo" style="width:50%"> {$message_807b}</label><br />
+
+			<input type="checkbox" {if $menu.show_menu_all==1}checked="checked"{/if} id="show_menu_all" name ="show_menu_all" value="1" />
+			<label for="show_menu_all" style="width:50%"> {$message_821}</label><br />
+
+			<input type="checkbox" {if $config.0.config_uplaod_hide_praefix==1}checked="checked"{/if} id="config_uplaod_hide_praefix" name ="config_uplaod_hide_praefix" value="1" />
+			<label for="config_uplaod_hide_praefix" style="width:50%">{$message_config_uplaod_hide_praefix}</label><br />
+
+			<input type="checkbox" {if $menu.stamm_documents_change_backup==1}checked="checked"{/if} id="stamm_documents_change_backup" name ="stamm_documents_change_backup" value="1" />
+			<label for="stamm_documents_change_backup" style="width:50%"> {$message_stamm_documents_change_backup}</label><br />
+
+			<!--<input type="checkbox" {if $config.0.config_tiny_advimg_filelist==1}checked="checked"{/if} id="config_tiny_advimg_filelist" name ="config_tiny_advimg_filelist" value="1" />
+			<label for="config_tiny_advimg_filelist" style="width:50%">{$message_config_tiny_advimg_filelist}</label><br />-->
+		</fieldset>
+
+		<fieldset>
+			{*<!-- Einstellungen f�r Artikel: -->*}
+			<legend>{$message_505}</legend>
+
+			{*<!-- Soll der Autor angezeigt werden? -->*}
+			<input type="checkbox" {$menu.checkedanzeig_autor} id="anzeig_autor" name ="anzeig_autor" value="1" />
+			<label for="anzeig_autor" style="width:50%"> {$message_506}</label><br />
+
+			{*<!-- Soll eine Filtermöglichkeit bei Artikeln angezeigt werden? -->*}
+			<input type="checkbox" {$menu.checkedanzeig_filter} id="anzeig_filter" name ="anzeig_filter" value="1" />
+			<label for="anzeig_filter" style="width:50%"> {$message_842}</label><br />
+
+			{*<!-- Soll angezeigt werden, wie oft der Artikel schon besucht wurde? -->*}
+			<input type="checkbox" {$menu.checkedanzeig_pageviews} id="anzeig_pageviews" name ="anzeig_pageviews" value="1" />
+			<label for="anzeig_pageviews" style="width:50%"> {$message_507}</label><br />
+
+			{*<!-- Soll "Artikel versenden/empfehlen" angezeigt werden? -->*}
+			<input type="checkbox" {$menu.checkedanzeig_versende} id="anzeig_versende" name ="anzeig_versende" value="1" />
+			<label for="anzeig_versende" style="width:50%"> {$message_557}</label><br />
+
+			{*<!-- Soll der Link zum Artikel-Drucken angezeigt werden? -->*}
+			<input type="checkbox" {$menu.checkedanzeig_drucken} id="anzeig_drucken" name ="anzeig_drucken" value="1" />
+			<label for="anzeig_drucken" style="width:50%"> {$message_560}</label><br />
+
+			{*<!-- Soll die Ersetzung durchgef�hrt werden? -->*}
+			<input type="checkbox" {if $menu.do_replace==1}checked="checked"{/if} id="do_replace" name ="do_replace" value="1" />
+			<label for="do_replace" style="width:50%"> {$message_560a}</label><br />
+
+			{*<!-- Soll die Benachrichtigung zur Artikel-�berpr�fung bzw. Freigabe auch per E-Mail erfolgen? -->*}
+			<input type="checkbox" {if $menu.stamm_benach_artikelfreigabe_email}checked="checked"{/if} id="stamm_benach_artikelfreigabe_email" name ="stamm_benach_artikelfreigabe_email" value="1" />
+			<label for="stamm_benach_artikelfreigabe_email" style="width:50%"> {$message_560b}</label><br />
+		</fieldset>
+
+		<fieldset>
+			{*<!-- Cache Einstellungen: -->*}
+			<legend>{$message_567}</legend>
+			{*<!-- Voreinstellung ver�ffentlichen auf jeder? -->*}
+			<input type="checkbox" {$menu.checkedstamm_artikel_rechte_jeder} id="stamm_artikel_rechte_jeder" name ="stamm_artikel_rechte_jeder" value="1" />
+			<label for="stamm_artikel_rechte_jeder" style="width:50%"> {$message_563}</label><br />
+
+			{*<!-- Voreinstellung ver�ffentlichen auf jeder? -->*}
+			<input type="checkbox" {$menu.checkedstamm_artikel_rechte_chef} id="stamm_artikel_rechte_chef" name ="stamm_artikel_rechte_chef" value="1" />
+			<label for="stamm_artikel_rechte_chef" style="width:50%"> {$message_568}</label><br />
+
+			{*<!-- Voreinstellung auf ver�ffentlichen? -->*}
+			<input type="checkbox" {$menu.checkedstamm_veroffen_yn} id="stamm_veroffen_yn" name ="stamm_veroffen_yn" value="1" />
+			<label for="stamm_veroffen_yn" style="width:50%"> {$message_564}</label><br />
+
+			{*<!-- Voreinstellung auf Startseite listen? -->*}
+			<input type="checkbox" {$menu.checkedstamm_listen_yn} id="stamm_listen_yn" name ="stamm_listen_yn" value="1" />
+			<label for="stamm_listen_yn" style="width:50%"> {$message_565}</label><br />
+
+			{*<!-- Men�rechte Voreinstellung auf jeder? -->*}
+			<input type="checkbox" {$menu.checkedstamm_menu_rechte_jeder} id="stamm_menu_rechte_jeder" name ="stamm_menu_rechte_jeder" value="1" />
+			<label for="stamm_menu_rechte_jeder" style="width:50%"> {$message_566}</label><br />
+		</fieldset>
+
+		<fieldset>
+			{*<!-- Wartungsarbeiten -->*}
+			<legend>{$message_735}</legend>
+
+			{*<!-- Cache aktivieren? -->*}
+			<input type="checkbox" {if $menu.off_yn==1}checked="checked"{/if} id="off_yn" name ="off_yn" value="1" />
+			<label for="off_yn" style="width:50%">{$message_736}</label><br />
+
+			{*<!-- Soll angezeigt werden, wie oft der Artikel schon besucht wurde? -->*}
+			<label for="wartungstext" style="width:50%"> {$message_737}</label><br />
+			<textarea rows="10" cols="60" id="wartungstext" name ="wartungstext" >{$menu.wartungstext}</textarea>
+		</fieldset>
+
+		<fieldset>
+			<legend>{$message_402}</legend>
+			{*<!-- Soll das Forum als Board angezeigt werden?:-->*}
+			<input type="checkbox" {$menu.checked_forum_board} id="forum_board" name ="forum_board" />
+			<label for="forum_board" style="width:50%">{$message_402_2}</label><br />
+			<div class="clearfix"></div>
+			{*<!-- Wie soll die Liste der letzten Fourms-Beitr�ge angezeigt werden?. -->*}
+			<label for="forum_letzte_modus" >{$message_402_3}</label><br />
+			<select name="forum_letzte_modus" id="forum_letzte_modus" title="">
+				<option value="0" {if $menu.forum_letzte_modus == 0}selected="selected"{/if} >{$message_402_3_1}</option>
+				<option value="1" {if $menu.forum_letzte_modus == 1}selected="selected"{/if} >{$message_402_3_2}</option>
+			</select>
+		</fieldset>
+
+		<fieldset>
+			<legend>Spamschutz</legend>
+			{*<!-- Soll das Forum als Board angezeigt werden?:-->*}
+			<label for="spamschutz_modus">{$message_515}:</label><br />
+			<select name="spamschutz_modus" id="spamschutz_modus" title="">
+				<option value="0" {if $menu.spamschutz_modus == 0}selected="selected"{/if} >{$message_516}</option>
+				<option value="1" {if $menu.spamschutz_modus == 1}selected="selected"{/if} >{$message_517}</option>
+				<option value="2" {if $menu.spamschutz_modus == 2}selected="selected"{/if} >{$message_518}</option>
+				<option value="3" {if $menu.spamschutz_modus == 3}selected="selected"{/if} >{$message_519}</option>
+				<option value="4" {if $menu.spamschutz_modus == 4}selected="selected"{/if} >{$message_520_1}</option>
+				<option value="99" {if $menu.spamschutz_modus == 99}selected="selected"{/if} >{$message_520}</option>
+			</select>
+			{if $menu.spamschutz_modus == 4}<br><label>Websiteschl&uuml;ssel</label><input type="text" value="{if $menu.captcha_sitekey}{$menu.captcha_sitekey}{/if}" length="20" name="captcha_key"><br><label>Geheimer Schl&uuml;ssel</label><input type="text" value="{if $menu.captcha_secret}{$menu.captcha_secret}{/if}" name="captcha_secret">
+			<p>Sie k&ouml;nnen die Schlüssel unter <a href="https://www.google.com/recaptcha/admin/">https://www.google.com/recaptcha/admin/</a> erstellen.</p>
+			{/if}
+			<br />
+			<br />
+			<div class="clearfix"></div>
+			<input type="checkbox" id="kontakt_spamschutz" name ="kontakt_spamschutz" value="1" {if $stamm_kontakt_spamschutz}checked="checked"{/if} />
+			<label for="kontakt_spamschutz">{$message_515_1}</label><br />
+		</fieldset>
+	{/foreach}
+{/if}

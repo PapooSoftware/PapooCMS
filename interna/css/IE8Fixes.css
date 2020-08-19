@@ -1,0 +1,53 @@
+body {
+
+}
+fieldset {
+	position:relative;
+	margin-top:25px;
+	padding-left:10px;
+
+}
+legend {
+	position:relative;
+	margin-top:-17px;
+	margin-left:-30px;
+}
+input {
+
+}
+
+.menu {
+
+}
+.toplink {
+	position:relative;
+}
+.menu .untermenu1 {
+}
+.untermenu1,
+.artikel,
+#footer {
+
+	filter:progid:DXImageTransform.Microsoft.DropShadow(color=#BBBBBB, offx=6, offy=6);
+}
+.artikel2 {
+	position:absolute;
+	right:0;
+}
+.artikel_link_teaser {
+	text-align:left;
+	float:none;
+	display:inline;
+
+
+}
+.artikel_list_teaser {
+	margin-bottom:20px;
+}
+
+.ignore2 {
+	display:block;
+	position:absolute;
+	top:-2000px;
+	left:-2000px;
+}

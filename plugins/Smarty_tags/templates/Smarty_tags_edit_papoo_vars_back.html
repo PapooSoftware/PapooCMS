@@ -1,0 +1,39 @@
+{if $IS_ADMIN AND $permission}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		
+	  	<h1>{$message.plugin.Smarty_tags.backtitel}</h1>
+	  	{if $error1}<div class="error">{$plugin.smarty_tags.errmsg.error1}</div>{/if}
+		{if $error8}<div class="error">{$plugin.smarty_tags.errmsg.error8}</div>{/if}
+		{if $error10}<div class="error">{$plugin.smarty_tags.errmsg.error10}</div>{/if}
+		{if $error11}<div class="error">{$plugin.smarty_tags.errmsg.error11}</div>{/if}
+		{if $error12}<div class="error">{$plugin.smarty_tags.errmsg.error12}</div>{/if}
+	  	<h2>{$plugin.smarty_tags.header.007}</h2>
+	  	<form enctype="multipart/form-data" action="" method="post">
+			<input name="papoo_var_id" type="hidden" value="{$papoo_var_id}">
+			<fieldset>
+				<legend>{$plugin.smarty_tags.form_text.001}</legend>
+				<label for="papoo_var_name">{$plugin.smarty_tags.form_text.006}</label><br />
+				<input name="papoo_var_name" maxlength="255" type="text" value="{$papoo_var_name|escape:"html"}" id="papoo_var_name"><br /><br />
+				<label for="papoo_var_descript">{$plugin.smarty_tags.form_text.007}</label><br />
+				<script language="javascript" type="text/javascript" src="./tiny_mce/tiny_mce.js" charset="utf-8"></script>	
+				<script language="javascript" type="text/javascript" src="./tiny_mce/FileBrowser.js"></script>
+				<script language="javascript" type="text/javascript">
+						tinyMCE.init({ldelim}
+						mode : "exact",
+						language : "{$lang_back_short}",
+						elements : "papoo_var_descript",
+						{include file=tiny_inc_conf.html}
+						{rdelim} );
+				</script>
+				<textarea name="papoo_var_descript" cols="50" rows="15" id="papoo_var_descript" class="papoo_var_textarea">{$papoo_var_descript|escape:"html"}</textarea><br /><br />
+				<input value="{$plugin.smarty_tags.form_text.004}" type="submit" title="{$plugin.smarty_tags.form_text.004}" name="submit">
+				<input name="cancel" value="{$plugin.smarty_tags.form_text.005}" type="submit" title="{$plugin.smarty_tags.form_text.005}">
+			</fieldset>
+	  	</form>
+	</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

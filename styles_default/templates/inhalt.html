@@ -1,0 +1,79 @@
+
+<!-- TEMPLATE: inhalt.html -->
+
+<div id="inhalt_sitemap" class="artikel_details">
+
+    <h1>{$message_2197}</h1>
+    <a  id="artikel"></a>
+{foreach item=kat from=$catlist_data.0}		
+				<!-- -->		
+	{if $kat.cat_id>=1}<h1 class="sitemap_menucat">{$kat.cat_text}</h1>	{/if}	
+	<ul>
+		{foreach item=table from=$table_data}
+		 {if $kat.cat_id==$table.cat_cid  or $no_categories==1}
+			{$table.shift_anfang}
+
+			{if $table.extern}
+				<h2><a href="{$table.link}">{$table.text}</a></h2>
+			{else}
+				<h2>{if $sp_urls=="ok" or $free_sp_urls}<a href="{$slash}{if $free_sp_urls=="ok"}{$table.menuname_free_url}{else}{$table.menuname_url}{/if}" title="{$table.lang_title|escape:"html"}">{$table.text}</a>{else}<a href="{$slash}{$table.link}{$frag_connect}menuid{$gleich_connect}{$table.menuid}{$table.template}" title="{$table.lang_title|escape:"html"}">{$table.text}</a>
+				{/if}</h2>
+			{/if}
+
+			{*<!-- {if $table.artikel_enthalten} -->*}
+			{if $table.artikel_anzahl > 1 OR $table.produkte OR $table.flex}
+				<ul class="ul_artikel">
+					{foreach item=artikel from=$table.artikel}
+						<li>
+							{if $sp_urls=="ok" or $free_sp_urls}
+								<a href="{$slash}{if $free_sp_urls=="ok"}{$artikel.arturl}{else}{$table.menuname_art_url}{$artikel.arturl}{/if}" title="{$artikel.text|escape:"html"}">
+									{$artikel.text}
+								</a>
+							{else}
+								<a href="{$slash}{$table.link}{$frag_connect}menuid{$gleich_connect}{$table.menuid}{$plus_connect}reporeid{$gleich_connect}{$artikel.reporeid}" title="{$artikel.text|escape:"html"}" >
+									{$artikel.text}
+								</a>
+							{/if}
+						</li>
+					{/foreach}
+					{foreach item=produkte from=$table.produkte}
+						<li>
+							{if $sp_urls=="ok" or $free_sp_urls}
+								<a href="{$slash}{$table.menuname_url}{$produkte.produkte_lang_produkt_surl}.html" title="{$produkte.produkte_lang_produktename|escape:"html"}">
+									{$produkte.produkte_lang_produktename}
+								</a>
+							{else}
+								<a href="{$slash}shop.php{$frag_connect}menuid{$gleich_connect}{$table.menuid}{$plus_connect}produkt_id{$gleich_connect}{$produkte.produkte_lang_id}" title="{$produkte.produkte_lang_produktename|escape:"html"}" >
+									{$produkte.produkte_lang_produktename|escape:"html"}
+								</a>
+							{/if}
+						</li>
+					{/foreach}
+
+
+					{foreach item=flex from=$table.flex}
+						{if $sp_urls=="ok" or $free_sp_urls}
+							<li>
+								<a href="{$slash}{$flex.sprechendeurl_feld}" title="{$flex.name_feld|escape:"html"}" >
+								{$flex.name_feld|escape:"html"}
+								</a>
+							</li>
+						{else}
+							<li>
+								<a href="{$slash}plugin.php?menuid={$flex.menuid}&template=mv/templates/mv_show_front.html&mv_id={$flex.mv_id}&mv_content_id={$flex.mv_content_id}" title="{$flex.name_feld|escape:"html"}" >
+								{$flex.name_feld|escape:"html"}
+								</a>
+							</li>
+						{/if}
+					{/foreach}
+				</ul>
+			{/if}
+
+			{$table.shift_ende}
+			{/if}
+		{/foreach}
+		
+	</ul>
+{/foreach}
+</div>
+<!-- ENDE TEMPLATE: inhalt.html -->

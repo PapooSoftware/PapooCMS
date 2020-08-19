@@ -1,0 +1,200 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+<div class="artikel">
+{if $is_eingetragen=="ok"}
+	<div class="message">{$plugin_pkalender_wurde_eingetragen}</div>
+{/if}
+{if $is_eingetragen=="del"}
+	<div class="message">{$plugin_pkalender_wurde_del}</div>
+{/if}
+
+{if $is_eingetragen=="no"}
+	<div class="error">{$plugin_pkalender_wurde_nicht_eingetragen}</div>
+{/if}
+{if $kalender_del}
+	<h1 id="kalender_kalender_lschen" class="h1" >{$plugin_kalender_kalender_lschen}</h1>
+	<p id="kalender_wenn_sie_diesen_kalender_lschen_werden_auch_alle_dazugehrigen_termine_auf_einen_rutsch_gelscht" class="h1" >
+		{$plugin_kalender_wenn_sie_diesen_kalender_lschen_werden_auch_alle_dazugehrigen_termine_auf_einen_rutsch_gelscht}
+	</p>
+	<form method="post" action="" id="formi" style="width:100%">
+	<input type="hidden" name="kalender_id" value="{$kalender.0.kalender_id|escape:"html"}" />
+	<fieldset>
+	<legend>{$plugin_kalender_kalender_lschen_field}</legend>
+	{$kalender.0.kalender_bezeichnung_des_kalenders|escape:"html"}
+	</fieldset>
+	<fieldset>
+		<legend>{$plugin_kalender_kalender_lschen}</legend>
+				<!-- Speichern -->
+		<input  type="submit" class="submit_back_red" value="{$plugin_kalender_kalender_lschen}" name="formSubmit_delete_pcal" />
+
+			</fieldset>
+	</form>
+{else}
+	{if $edit_pcal_entry}
+		 <h1 id="kalender_bearbeiten_sie_hier_einen_kalender" class="h1" >{$plugin_kalender_bearbeiten_sie_hier_einen_kalender}</h1>
+		<form method="post" action="" id="formi" style="width:100%">
+			<input type="hidden" name="kalender_id" value="{$kalender.0.kalender_id|escape:"html"}" />
+			 {if $kalender.0.kalender_id}
+				 <fieldset>
+					<legend>{$plugin_kalender_link_fr_die_einbindung_im_menpunkt}</legend>
+					<input type="text" size="60" value="plugin:pkalender/templates/pkalender_front.html&kal_id={$kalender.0.kalender_id|escape:"html"}" />
+						 <br />
+						 <br />
+					 {$plugin_kalender_zustzlicher_parameter_calview}<br />
+				</fieldset>
+			{/if}
+			<fieldset>
+				<script language="javascript" type="text/javascript" src="./tiny_mce/tiny_mce.js" charset="utf-8"></script>
+				<script language="javascript" type="text/javascript" src="./tiny_mce/FileBrowser.js"></script>
+				<script language="javascript" type="text/javascript">
+					tinyMCE.init({ldelim}
+					mode : "exact",
+					language : "de",
+					elements : "kalender_text_oberhalb",
+					theme : "advanced",
+					{include file=tiny_inc_conf.html}
+					{rdelim} );
+					//function fileBrowserCallBack(field_name, url, type)
+					//{ldelim}
+					// This is where you insert your custom filebrowser logic
+					//	alert("Filebrowser callback: " + field_name + "," + url + "," + type);
+					//{rdelim}
+				</script>
+				<legend>{$plugin_kalender_kalender_basis_daten}</legend>
+				 <label for="kalender_bezeichnung_des_kalenders">{$plugin_kalender_bezeichnung_des_kalenders}{$plugin_error.kalender_bezeichnung_des_kalenders} </label>
+				<br />
+				<input type="text" name="kalender_bezeichnung_des_kalenders" value="{$kalender.0.kalender_bezeichnung_des_kalenders|escape:"html"}" class="kalender_bezeichnung_des_kalenders" id="kalender_bezeichnung_des_kalenders"/>
+				<br />
+				<label for="kalender_text_oberhalb">{$plugin_kalender_text_oberhalb}{$plugin_error.kalender_text_oberhalb} </label>
+				<br />
+				<textarea cols="30" rows="6" name="kalender_text_oberhalb"  class="kalender_text_oberhalb" id="kalender_text_oberhalb">{$kalender.0.kalender_text_oberhalb|escape:"html"}</textarea>
+				<br />
+			</fieldset>
+			<fieldset>
+				<legend>{$plugin_kalender_kategorien}</legend>
+				 <label for="kalender_kategorien_im_kalender_jede_zeile_eine_kategorie">{$plugin_kalender_kategorien_im_kalender_jede_zeile_eine_kategorie}{$plugin_error.kalender_kategorien_im_kalender_jede_zeile_eine_kategorie} </label>
+				<br />
+				<textarea cols="30" rows="6" name="kalender_kategorien_im_kalender_jede_zeile_eine_kategorie"  class="kalender_kategorien_im_kalender_jede_zeile_eine_kategorie" id="kalender_kategorien_im_kalender_jede_zeile_eine_kategorie">{$kalender.0.kalender_kategorien_im_kalender_jede_zeile_eine_kategorie|escape:"html"}</textarea>
+				<br />
+			</fieldset>
+			<fieldset>
+				<legend>{$plugin_kalender_rechte_einstellung}</legend>
+				<input type="checkbox" name="kalender_eintrge_von_aussen" value="1" {if $kalender.0.kalender_eintrge_von_aussen==1}checked="checked"{/if} class="kalender_eintrge_von_aussen" id="kalender_eintrge_von_aussen"/>
+				<label for="kalender_eintrge_von_aussen">{$plugin_kalender_eintrge_von_aussen}{$plugin_error.kalender_eintrge_von_aussen} </label>
+				<br />
+				 <input type="checkbox" name="kalender_direkt_freischalten" value="1" {if $kalender.0.kalender_direkt_freischalten==1}checked="checked"{/if} class="kalender_direkt_freischalten" id="kalender_direkt_freischalten"/>
+				<label for="kalender_direkt_freischalten">{$plugin_kalender_direkt_freischalten}{$plugin_error.kalender_direkt_freischalten} </label>
+				<br />
+				 <input type="checkbox" name="kalender_email_versenden_bei_neuen_eintrag_von_auen" value="1" {if $kalender.0.kalender_email_versenden_bei_neuen_eintrag_von_auen==1}checked="checked"{/if} class="kalender_email_versenden_bei_neuen_eintrag_von_auen" id="kalender_email_versenden_bei_neuen_eintrag_von_auen"/>
+				<label for="kalender_email_versenden_bei_neuen_eintrag_von_auen">{$plugin_kalender_email_versenden_bei_neuen_eintrag_von_auen}{$plugin_error.kalender_email_versenden_bei_neuen_eintrag_von_auen} </label>
+				<br />
+				 <label for="kalender_email_adresse_fr_den_versand_dieser_mail">{$plugin_kalender_email_adresse_fr_den_versand_dieser_mail}{$plugin_error.kalender_email_adresse_fr_den_versand_dieser_mail} </label>
+				<br />
+				<input type="text" name="kalender_email_adresse_fr_den_versand_dieser_mail" value="{$kalender.0.kalender_email_adresse_fr_den_versand_dieser_mail|escape:"html"}" class="kalender_email_adresse_fr_den_versand_dieser_mail" id="kalender_email_adresse_fr_den_versand_dieser_mail"/>
+				<br />
+				<!--<input type="checkbox" name="kalender_kalender_benutzt_kategorien" value="1" {if $kalender.0.kalender_kalender_benutzt_kategorien==1}checked="checked"{/if} class="kalender_kalender_benutzt_kategorien" id="kalender_kalender_benutzt_kategorien"/><label for="kalender_kalender_benutzt_kategorien">{$plugin_kalender_kalender_benutzt_kategorien}{$plugin_error.kalender_kalender_benutzt_kategorien} </label><br />-->
+			</fieldset>
+ 			<fieldset>
+				<legend>{$plugin_kalender_modul_aktuellste_eintrge}</legend>
+				<label for="kalender_anzahl_der_eintrge_im_modul_aktuellste_eintrge">{$plugin_kalender_anzahl_der_eintrge_im_modul_aktuellste_eintrge}{$plugin_error.kalender_anzahl_der_eintrge_im_modul_aktuellste_eintrge} </label>
+				<br />
+				<input type="text" name="kalender_anzahl_der_eintrge_im_modul_aktuellste_eintrge" value="{$kalender.0.kalender_anzahl_der_eintrge_im_modul_aktuellste_eintrge|escape:"html"}" class="kalender_anzahl_der_eintrge_im_modul_aktuellste_eintrge" id="kalender_anzahl_der_eintrge_im_modul_aktuellste_eintrge"/>
+				<br />
+			</fieldset>
+			<fieldset>
+				<legend>{$plugin_kalender_gruppen_mit_leserechten}</legend>
+				{$plugin_kalender_whlen_sie_hier_die_gruppen_aus_die_die_eintrge_sehen_drfen}
+				<div class="clearfix"></div>
+				{foreach item=table from=$pcal_gruppen}
+				<input type="checkbox"  {if $table.lese_rights=="ok"}checked="checked"{/if}   id="g{$table.gruppeid}" name="pcal_gruppe_lese[{$table.gruppeid}]" value="{$table.gruppeid}" />
+				<label for="g{$table.gruppeid}">{$table.gruppenname}:</label>
+				<br />
+				{/foreach}
+			</fieldset>
+			<fieldset>
+				<legend>{$plugin_kalender_gruppen_mit_schreibrechten}</legend>
+				{$plugin_kalender_whlen_sie_hier_die_gruppen_aus_die_die_eintrge_erstellen_drfen}
+				<div class="clearfix"></div>
+				{foreach item=table from=$pcal_gruppen}
+				<input type="checkbox" {if $table.write_rights=="ok"}checked="checked"{/if}  id="gs{$table.gruppeid}" name="pcal_gruppe_write[{$table.gruppeid}]" value="{$table.gruppeid}" /><label for="gs{$table.gruppeid}">{$table.gruppenname}:</label><br />
+				{/foreach}
+			</fieldset>
+			<fieldset>
+				<legend>{$plugin_kalender_mit_google_kalender_verbinden}</legend>
+				<div class="labdiv">
+					<label for="kalender_xml_google">{$plugin_kalender_xml_google}{$plugin_error.kalender_xml_google} </label>
+					<input type="text" name="kalender_xml_google" value="{$kalender.0.kalender_xml_google|escape:"html"}" class="kalender_xml_google" id="kalender_xml_google"/>
+				</div>
+				<br />
+			</fieldset>
+			<fieldset>
+				<legend>{$message_70}</legend>
+				<!-- Speichern -->
+				<input  type="submit" class="submit_back_green" value="{$message_70}" name="formSubmit_save_pcal" />
+			</fieldset>
+		</form>
+	{else}
+		<h1 id="kalender_erstellen__bearbeiten_eines_kalenders2" class="h1" >{$plugin_kalender_erstellen__bearbeiten_eines_kalenders2}</h1>
+		<p id="kalender_hier_knnen_sie_beliebig_viele_kalender_erstellen_und_bearbeiten" class="h1" >{$plugin_kalender_hier_knnen_sie_beliebig_viele_kalender_erstellen_und_bearbeiten}</p>
+		<a href="{$pkal_self1}new" id="kalender_erstellen_sie_hier_einen_neuen_kalender" class="132link" >{$plugin_kalender_erstellen_sie_hier_einen_neuen_kalender}</a>
+		<h1 id="kalender_bersicht_der_vorhandenen_kalender" class="h1" >{$plugin_kalender_bersicht_der_vorhandenen_kalender}</h1>
+		<p id="kalender_klicken_sie_auf_einen_eintrag_um_ihn_zu_bearbeiten" class="h1" >{$plugin_kalender_klicken_sie_auf_einen_eintrag_um_ihn_zu_bearbeiten}</p>
+		<table  class="outside  table table-striped table-hover" >
+			<tr style="vertical-align:top;">
+				<th>{$plugin_kalender_id_des_kalenders}</th>
+				<th>{$plugin_kalender_kalendername}</th>
+				<th>{$plugin_kalender_anzahl_termine}</th>
+				<th>{$plugin_kalender_eintrge_von_auen}</th>
+				<!--<th>{$plugin_kalender_kategorien}</th>-->
+				<th style="width:140px;"> {$plugin_kalender_aktion}</th>
+			</tr>
+			{foreach from=$pcal_liste item=typ name=xtyp}
+			<tr>
+				<td>{$typ.kalender_id|escape:"html"}</td>
+				<td>{$typ.kalender_bezeichnung_des_kalenders|escape:"html"}</td>
+				<td>{$typ.anzahl_termine|escape:"html"}</td>
+				<td>{if $typ.kalender_eintrge_von_aussen==1}<img src="../plugins/pkalender/bilder/check.png" width="20" height="20" alt="OK" title="OK" />{/if}</td>
+				<!--<td>{if $typ.kalender_kalender_benutzt_kategorien==1}<img src="../plugins/pkalender/bilder/check.png" width="20" height="20" alt="OK" title="OK" />{/if}</td>-->
+				<td>
+					<a href="{$pkal_self1}{$typ.kalender_id}&cal_act=show">
+						{$plugin_kalender_bearbeiten}
+					</a> |
+					<a href="{$pkal_self1}{$typ.kalender_id}&cal_act=delete">
+						{$plugin_kalender_lschen}
+					</a>
+				</td>
+			<tr>
+			{/foreach}
+		</table>
+	{/if}
+	{/if}
+	<br />
+	<br />
+	{if $is_dev}
+		#start#
+		<!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+	<div class="rapid_form">
+		<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="plugin_kalender" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="plugin_kalender_class" />
+		<!-- Das Standarpr�fix f�r die Ids -->
+		<input type="hidden" name="praefix" value="kalender" />
+		<!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="kalender" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div>
+	{/if}
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

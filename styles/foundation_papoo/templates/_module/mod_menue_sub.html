@@ -1,0 +1,34 @@
+{if $module_aktiv.mod_menue_sub}
+	<!-- START MODUL: _module/mod_menue_sub.html -->
+	{if $menu_level.$menu_front_sub_aktiv}
+		{counter name=submenucounter start=0 step=1 assign=submenucounter print=false}
+		{foreach item=kat from=$catlist_data.1}
+			{foreach item=menu from=$menu_data}
+				{if $menu.level >= $menu_front_sub_startlevel}
+					{if $kat.cat_id==$menu.cat_cid or $no_categories==1}
+						{counter name=submenucounter assign=submenucounter print=false}
+					{/if}
+				{/if}
+			{/foreach}
+		{/foreach}
+		{if $submenucounter > 0}
+			<div class="modul" id="mod_menue_sub">
+				<h2><i class="fa fa-th"></i> {$submenu_headline}</h2>
+				<a name="menu_sub" id="menu_sub"></a>
+				{foreach item=kat from=$catlist_data.1}
+					{if $kat.cat_id>1}<h2 class="menucat" id="catid_{$kat.cat_id}">{$kat.cat_text}</h2>{/if}
+					{foreach item=menu from=$menu_data}
+						{if $menu.level >= $menu_front_sub_startlevel}
+							{if $kat.cat_id==$menu.cat_cid  or $no_categories==1}
+								{$menu.shift_anfang_sub}
+								{include file="_module/mod_menue_ebenen_links.inc.html"}
+								{$menu.shift_ende_sub}
+							{/if}
+						{/if}
+					{/foreach}
+				{/foreach}
+			</div>
+		{/if}
+	{/if}
+	<!-- END MODUL: _module/mod_menue_sub.html -->
+{/if}

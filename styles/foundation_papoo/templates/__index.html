@@ -1,0 +1,97 @@
+{foreach item=error from=$page_error}{$error}{/foreach}<!doctype html>
+<html class="no-js" lang="de"{if isset($openGraphMetaTags) && $openGraphMetaTags} prefix="og: http://ogp.me/ns#"{/if}>
+<head>
+    {include file="_kopf.utf8.html"}
+</head>
+{include file="_body_kopf.utf8.html"}
+
+<span id="styledir" class="{$slash}styles/{$style_dir}"></span>
+
+<header>
+    <div class="row">
+        <div class="large-12 columns">
+
+            {include file="_head.html"}
+
+        </div>
+    </div>
+</header>
+
+<div id="links" class="row">
+    <article id="content_links" class="large-12 medium-12 columns">
+        {include file="_inhalt_links.html"}
+    </article>
+</div>
+
+<div id="main" class="row">
+    {*<!-- Auf der Startseite ein volle-Breite-Template -->*}
+    {if $aktive_menuid == 1}
+        <article id="content" class="large-12 medium-12 columns">
+            {$fixemodule.testmodul.testfeld}
+            {include file="_inhalt_mitte.html"}
+        </article>
+    {else}
+        <!-- Breadcrump -->
+        <article id="content_breadcrump" class="large-12 medium-12 columns">
+            {include file="_module/mod_breadcrump.html"}
+        </article>
+        <article id="content" class="large-9 medium-9 columns">
+            {include file="_inhalt_mitte.html"}
+        </article>
+        <aside id="sidebar" class="large-3 medium-3 columns">
+            {include file="_inhalt_rechts.html"}
+        </aside>
+    {/if}
+</div>
+
+<footer class="row">
+    {include file="_fuss.html"}
+</footer>
+<div class="row subfooter">
+    <div class="large-12 columns ">
+        <div class="large-8 medium-8 columns">
+            {if $PAPOO_EDITION != "Enterprise" && $PAPOO_EDITION != "Business" }
+                <!-- Copyright - nicht entfernen! -->
+                <!-- Gegen einen Aufpreis ist das Entfernen dieses Copyright Backlinks für jeweils eine
+                     Domain möglich. Für weitere Informationen wenden Sie sich bitte an den Support
+                     von Papoo Software: info@papoo.de -->
+                <a class="link_poweredbypapoo" target="blank" href="http://www.papoo.de">
+                    <img src="{$slash}bilder/poweredbypapoo3.png" style="" alt="Powered by Papoo 2016"/>
+                </a>
+                <!-- Ende Copyright -->
+            {/if}
+
+            {if $anzeig_besucher==1}
+                {*<!--Besucher seit-->*}
+                <div class="anzeig_besucher span3">    {$gesamtcount} {$message_2023}</div>
+            {/if}
+            {if not empty($usefulservices_analytics_key)}
+                {$usefulservices_analytics_key}
+            {/if}
+            {if not empty($usefulservices_snap_key)}
+                <script id="snap_preview_anywhere" type="text/javascript"
+                        src="http://shots.snap.com/ss/{$usefulservices_snap_key}/snap_shots.js"></script>
+            {/if}
+        </div>
+
+        <div class="large-4 medium-4 columns">
+            <!-- Freies Modul - manuell eingebunden - auch das geht -->
+            {foreach item=banner from=$freiemodule_result}
+                {if $banner.freiemodule_id==4}
+                    <div id="mod_freiemodule_{$banner.freiemodule_id}" class="freie_module">
+                        {$banner.freiemodule_code}
+                    </div>
+                {/if}
+            {/foreach}
+        </div>
+    </div>
+</div>
+
+<script src="{$slash}js/imageMapResizer.min.js"></script>
+<script src="{$slash}styles/{$style_dir}/js/script.js"></script>
+<script src="{$slash}styles/{$style_dir}/foundation/js/foundation.min.js"></script>
+
+<script type="text/javascript" src="{$slash}js/main.js" defer="defer"></script>
+
+</body>
+</html>

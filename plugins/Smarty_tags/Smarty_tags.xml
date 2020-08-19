@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<plugin version="3.7">
+	<name>Smarty Tags Plugin</name> 
+	<beschreibung_de><![CDATA[Smarty Tags Erweiterung]]></beschreibung_de>
+	<beschreibung_en><![CDATA[Smarty Tags Plugin]]></beschreibung_en>
+	<version>1.0</version>
+	<papooid>300</papooid>
+	<link>http://www.khmweb.de</link> 
+	<datum>26.08.2009</datum>
+	<autor>
+		<name>khmweb</name>
+		<kontakt><![CDATA[khmweb Sonnleitstrasse 6 83483 Bischofswiesen]]></kontakt>
+		<email>khm@khmweb.de</email>
+		<telefon>+49 8652 978487</telefon>
+	</autor>
+	<menue>
+		<eintrag_de>Smarty Tags</eintrag_de>
+		<eintrag_en>Smarty Tags</eintrag_en>
+		<icon>Smarty_tags/bilder/Smarty_tags_icon.gif</icon>
+		<link>plugin:Smarty_tags/templates/Smarty_tags_back.html</link>
+		<submenue>
+			<eintrag_de>Tags</eintrag_de>
+			<eintrag_en>Tags</eintrag_en>
+			<icon>Smarty_tags/bilder/Smarty_tags_icon.gif</icon>
+			<link>plugin:Smarty_tags/templates/Smarty_tags_listtags_back.html</link>
+		</submenue>
+		<submenue>
+			<eintrag_de>Eigene Tags</eintrag_de>
+			<eintrag_en>Own tags</eintrag_en>
+			<icon>Smarty_tags/bilder/Smarty_tags_icon.gif</icon>
+			<link>plugin:Smarty_tags/templates/Smarty_tags_listtags_user_back.html</link>
+		</submenue>
+		<submenue>
+			<eintrag_de>Papoo Variablen</eintrag_de>
+			<eintrag_en>Papoo variables</eintrag_en>
+			<icon>Smarty_tags/bilder/Smarty_tags_icon.gif</icon>
+			<link>plugin:Smarty_tags/templates/Smarty_tags_list_papoo_vars_back.html</link>
+		</submenue>
+	</menue>
+	<klasse>
+		<name>Smarty_tags</name>
+		<!-- klasse.datei: Pfad zur Klassen-Datei (relativ zum Plugin-Verzeichnis) -->
+		<datei>Smarty_tags/lib/Smarty_tags_class.php</datei>
+	</klasse>
+	<css>Smarty_tags/css/Smarty_tags.css</css>
+	<datenbank>
+		<installation>Smarty_tags/sql/Smarty_tags_install.sql</installation>
+		<deinstallation>Smarty_tags/sql/Smarty_tags_deinstall.sql</deinstallation>
+	</datenbank>
+	<modul>
+		<datei>plugin:Smarty_tags/templates/Smarty_tags_front.html</datei>
+		<name_de>Smarty Tags</name_de>
+		<beschreibung_de>Smarty Tags als Modul nutzen</beschreibung_de>
+		<name_en>Smarty Tags</name_en>
+		<beschreibung_en>Smarty Tags usage as a module</beschreibung_en>
+		<modus>var</modus>
+	</modul>
+<messages>Smarty_tags/messages</messages>
+</plugin>

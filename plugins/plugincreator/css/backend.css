@@ -1,0 +1,277 @@
+@keyframes schrumpfen {
+    0%
+    {
+        max-height: 2em;
+        margin-bottom: 25px;
+        padding: 18px 35px 18px 14px;
+        opacity: 1.0;
+    }
+    75%
+    {
+        max-height: 2em;
+        margin-bottom: 25px;
+        padding: 18px 35px 18px 14px;
+        opacity: 1.0;
+    }
+    85% {
+        opacity: 0.0;
+    }
+    98%
+    {
+        max-height: 0em; margin-bottom: 0px;
+        padding: 0px 0px 0px 0px;
+        opacity: 0.0;
+    }
+    99%
+    {
+        max-height: 0em; margin-bottom: 0px;
+        padding: 0px 0px 0px 0px;
+        opacity: 0.0;
+        display: none;
+    }
+    100%
+    {
+        max-height: 0em; margin-bottom: 0px;
+        padding: 0px 0px 0px 0px;
+        opacity: 0.0;
+        display: none;
+    }
+}
+
+.vishidden {
+    visibility: hidden;
+}
+div.settings-saved {
+    animation-duration: 4s;
+    animation-name: schrumpfen;
+}
+
+div.settings-saved:before {
+    content: "✓";
+    margin-left: 1em;
+    margin-right: 1ex;
+}
+
+div.settings-error:before {
+    content: "✗";
+    margin-left: 1em;
+    margin-right: 1ex;
+}
+
+div.settings-saving:before {
+    content: url(../bilder/loader.gif);
+    margin-left: 1em;
+    margin-right: 1ex;
+}
+
+.submit_editplugin {
+    background-color: #efcd00;
+    display: inline-flex;
+    margin-bottom: 0;
+}
+
+.submit_reinstallplugin {
+    background-color: #00a0dc;
+    display: inline-flex;
+    margin-bottom: 0;
+    margin-left: 5px;
+}
+
+.submit_installplugin {
+    background-color: #00a0dc;
+    display: inline-flex;
+    margin-bottom: 0;
+    margin-left: 5px;
+}
+
+.submit_deinstall {
+    background-color: #da4f49;
+    display: inline-flex;
+    margin-bottom: 0;
+    margin-left: 5px;
+}
+
+.submit_deleteplugin {
+    background-color: #da4f49;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+    color: #f5f5f5;
+    display: inline-flex;
+    margin-bottom: 0;
+    margin-left: 5px;
+}
+
+.delete_button {
+    background-color: #da4f49;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+    color: #f5f5f5;
+    display: inline;
+    margin-bottom: 0;
+    margin-left: 5px;
+}
+
+.no_delete_button {
+    background-color: #78A228;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+    color: #f5f5f5;
+    display: inline;
+    margin-bottom: 0;
+    margin-left: 5px;
+}
+
+.submit_editplugin:hover {
+    background-color: #ffff20;
+    display: inline-flex;
+}
+
+.submit_reinstallplugin:hover {
+    background-color: #20eFFF;
+    display: inline-flex;
+}
+
+.submit_deinstall:hover {
+    background-color: #ff5751;
+    display: inline-flex;
+}
+
+.submit_install:hover {
+    background-color: #ff5751;
+    display: inline-flex;
+}
+
+.submit_deleteplugin:hover {
+    background-color: #ff5751;
+    color: white;
+    display: inline-flex;
+}
+
+.delete_button:hover {
+    background-color: #ff5751;
+    color: white;
+    display: inline;
+}
+
+.no_delete_button:hover {
+    background-color: #5c8224;
+    color: white;
+    display: inline;
+}
+
+.buttons_inline {
+    display: flex;
+}
+
+.fancy-plus {
+    color: #f5f5f5;
+    background-color: #78A228;
+    -moz-border-radius: 70px;
+    -webkit-border-radius: 70px;
+    border-radius: 70px;
+    width: 2em;
+    height: 2em;
+    text-align: center;
+    opacity: 0.8;
+    margin-bottom: 1ex;
+    margin-top: -1ex;
+}
+
+.fancy-minus {
+    color: #f5f5f5 !important;
+    background-color: red !important;
+    -moz-border-radius: 70px;
+    -webkit-border-radius: 70px;
+    border-radius: 70px;
+    width: 2em;
+    height: 2em;
+    text-align: center;
+    opacity: 0.8;
+    margin-bottom: 2ex;
+    margin-left: 1ex;
+}
+
+.keep_plugin_name {
+    font-size: 120%;
+    margin-right: 1px;
+}
+
+.submit_reinstallplugin {
+    transition: background-color 3s;
+}
+.reinstall-button-reinstalled {
+    background-color: #20eFFF;
+}
+
+.reinstall-button-reinstalled:before {
+    content: "✓";
+}
+
+.demo_table {
+    border: 1px solid #CCC;
+    border-top: 24px solid #EEE;
+}
+/*.demo_row_labels {*/
+    /*border: 1px solid #CCC;*/
+/*}*/
+/*.demo_row {*/
+    /*border: 1px solid #CCC;*/
+/*}*/
+.demo_cell_labels {
+    border: 1px solid #CCC;
+}
+.demo_cell {
+    border: 1px solid #CCC;
+}
+
+.demo_label {
+    margin-bottom: 0;
+    margin-left: 0;
+    width: 99%;
+}
+
+div.artikel div.rapid_form {
+    margin: 5px 5px 5px 5px;
+    border: 1px #EEE solid;
+    border-top:26px #EEE solid;
+    padding: 15px;
+}
+
+div.artikel div.rapid_form legend {
+    width: calc(100% + 22px);
+}
+
+div.artikel div.rapid_form .rapid_dev_ablosen {
+    overflow: hidden;
+    float: right;
+    background-color: #095a94;
+    border: 2px solid #095a74;
+    border-radius: 50%;
+    width: 31px;
+    height: 31px;
+    font-weight: bold;
+    font-size: large;
+    color: white;
+    margin: 10px 20px 0 0;
+    padding-left: 4px;
+}
+
+div.artikel div.rapid_form .rapid_dev_help_button {
+    float: right;
+    background-color: #095a94;
+    border: 2px solid #095a74;
+    border-radius: 50%;
+    width: 31px;
+    height: 31px;
+    font-weight: bold;
+    font-size: large;
+    color: white;
+    margin: 10px 20px 0 0;
+}
+
+div.ui-dialog div.rapid_form .rapid_dev_ablosen,
+div.ui-dialog div.rapid_form .rapid_dev_help_button {
+    display: none;
+}
+
+/* Knopf erstmal ausblenden bis er richtig funktioniert. */
+.rapid_dev_ablosen {
+    display: none;
+}

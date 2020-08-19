@@ -1,0 +1,13 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		
+		<h1>{$message.plugin.Smarty_tags.backtitel} {$tag}</h1>
+		{$helptext}
+		<p><a href="?menuid={$menuid_aktuell}&amp;template=Smarty_tags/templates/Smarty_tags_listtags_back.html" title="{$plugin.smarty_tags.linktext.back_to_list}">{$plugin.smarty_tags.linktext.back_to_list}</a></p>
+	</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

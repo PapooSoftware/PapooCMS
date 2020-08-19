@@ -1,0 +1,24 @@
+#blogger_wordcloud .wordlist_weight_1 {
+/*   font-weight: 200; */
+  font-size: 90%;
+}
+#blogger_wordcloud .wordlist_weight_2 {
+  font-weight: 400;
+  font-size: 120%;
+}
+#blogger_wordcloud .wordlist_weight_3 {
+  font-weight: 600;
+  font-size: 140%;
+}
+#blogger_wordcloud .wordlist_weight_4 {
+  font-size: 180%;
+  font-weight: 600;
+}
+#blogger_wordcloud .wordlist_weight_5 {
+  font-size: 200%;
+  font-weight: 600;
+}
+
+#blogger_wordcloud .active {
+  text-decoration: underline;
+}

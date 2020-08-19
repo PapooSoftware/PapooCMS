@@ -1,0 +1,15 @@
+{if $blogger_wordlist}
+<div id="blogger_wordcloud">
+    <h3><i class="fa fa-cloud"></i> {$blog_wortschlagwolke}</h3>
+  <link type="text/css" href="{$web_pfad}/plugins/blogger/css/wordcloud.css" rel="stylesheet"></link>
+  {foreach from=$blogger_wordlist item=entry}
+  <span class="wordlist_weight_{$entry.weight}{if $entry.blogger_wordlist_id === $blogger_word_id} active{/if} wordlistcount">
+       {if !$url_blog_modrewrite}
+        <a href="{$web_pfad}?menuid={$entry.lcat_id}&word_id={$entry.blogger_wordlist_id}&widget=wordcloud">{$entry.blogger_wordlist_word}</a>
+      {else}
+      <a href="{$entry.surl}">{$entry.blogger_wordlist_word}</a>
+      {/if}
+  </span>
+  {/foreach}
+</div>
+{/if}

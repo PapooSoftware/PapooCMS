@@ -1,0 +1,20 @@
+{if $module_aktiv.mod_news}
+	<!-- MODUL: news -->
+	<div class="modul" id="mod_news">
+		{*<!-- Die News Daten durchgehen -->*}
+		{foreach item=news from=$news_data}
+			<div class="newsitem{$news.nummer} abstand-unten">
+				<h3>{$news.header}</h3>
+				{$news.img}{$news.lan_teaser}
+					{if $sp_urls=="ok"}
+					<a class="teaserlink" href="{$slash}{$sulrstrenner}{$news.url_header}"  title="{$message_2012} &quot;{$news.uberschrift|escape:"html"}&quot; {$message_2013}">{$news.islink}</a>
+					
+				{else}
+					<a  class="teaserlink" href="{$slash}{$news.linktext}{$frag_connect}menuid{$gleich_connect}{$news.cattextid}{$plus_connect}reporeid{$gleich_connect}{$news.reporeid}"  title="{$message_2012} &quot;{$news.uberschrift|escape:"html"}&quot; {$message_2013}">{$news.islink}</a>
+					
+				{/if}
+			</div>
+		{/foreach}
+	</div>
+	<!-- ENDE MODUL: news -->
+{/if}

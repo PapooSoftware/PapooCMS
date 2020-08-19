@@ -1,0 +1,13 @@
+{foreach item=banner from=$freiemodule_result}
+{if $tvar>10}
+{if $banner.freiemodule_modulid==$tvar}
+			{if $banner.freiemodule_raw_output}
+				{$banner.freiemodule_code}
+			{else}
+	<div id="mod_freiemodule_{$banner.freiemodule_id}" class="freie_module">
+	{$banner.freiemodule_code}
+	</div>
+			{/if}
+{/if}
+{/if}
+{/foreach}

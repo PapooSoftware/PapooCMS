@@ -1,0 +1,22 @@
+{if $IS_ADMIN}
+	{if $versionlist}
+		<h2>{$message_475}</h2>
+		<ul>
+			{foreach item=link from=$versionlist}
+				<li>
+					<a href="./artikel.php?menuid={$linkmenuid}&reporeid={$link.lan_repore_id}&version={$link.version_art_id}">{$link.header} {$message_474} {$link.version_art_time}</a>
+				</li>
+			{/foreach}
+		</ul>
+	{/if}
+	{if $versionoldlist}
+		<h2>{$message_476}</h2>
+		<ul>
+			{foreach item=link from=$versionoldlist}
+				<li>
+					<a href="./artikel.php?menuid=11&reporeid={$link.lan_repore_id}&version={$link.version_art_id}">{$link.header} {$message_474} {$link.version_art_time} ({$link.username})</a>
+				</li>
+			{/foreach}
+		</ul>
+	{/if}
+{/if}

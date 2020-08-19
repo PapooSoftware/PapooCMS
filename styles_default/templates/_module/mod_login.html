@@ -1,0 +1,28 @@
+{if $module_aktiv.mod_login}
+	<!-- MODUL: login -->
+	<div class="modul" id="mod_login">
+		<a name="einloggen" id="einloggen"></a>
+		{if NOT $loggedin}
+			{include file="_module_intern/mod_loginform.html"}
+		{else}
+			{*<!-- eingeloggt -->*}
+			{*<!-- Account bearbeiten -->*}
+			<h3>{$message_2128}</h3>
+			<div class="inner_mod">
+				<ul>
+					{if $user_dzvhae_id}
+						<li><a class="loginlink" href="{$slash}plugin.php?menuid={$menuid_aktuell}&template=mv/templates/mv_edit_front.html&mv_id=1&mv_content_id={$user_dzvhae_id}">{$message_2133}</a></li>
+					{elseif $user_extern_id}
+						<li><a class="loginlink" target="blank" href="{$site_name}">{$message_2133}</a></li>
+					{else}
+						<li><a class="loginlink" href="{$slash}account.php?menuid=2">{$message_2133}</a></li>
+					{/if}
+					{*<!-- ausloggen -->*}
+					<li><a class="loginlink" href="{$slash}index.php?logoff=1">{$message_2134}</a></li>
+					</ul>
+			</div>
+			{*<!-- Ende eingeloggt -->*}
+		{/if}
+	</div>
+	<!-- ENDE MODUL: login -->
+{/if}

@@ -1,0 +1,110 @@
+	{if $is_eingetragen=="no"}
+  <div class="error">{$plugin_pkalender_wurde_nicht_eingetragen}</div>
+  {/if}
+	<form method="post" action="" class="formk" id="formk" style="width:100%">
+	<input type="hidden" name="pkal_date_id" value="{$pkal_date.0.pkal_date_id|escape:"html"}" />
+	 <fieldset>
+	<legend>{$plugin_kalender_titel_des_terminsfieldset}</legend>
+	
+	<label for="pkal_date_titel_des_termins">{$plugin_pkal_date_titel_des_termins}{$plugin_error.pkal_date_titel_des_termins} </label>
+	<br />
+	<input style="width:50%" type="text" name="pkal_date_titel_des_termins" value="{$pkal_date.0.pkal_date_titel_des_termins|escape:"html"}" class="pkal_date_titel_des_termins" id="pkal_date_titel_des_termins"/>
+	<br />
+	
+	 </fieldset><fieldset>
+	<legend>{$plugin_pkal_date_terminbeschreibungfield}</legend>
+	
+	<label for="pkal_date_terminbeschreibung">{$plugin_pkal_date_terminbeschreibung}{$plugin_error.pkal_date_terminbeschreibung} </label>
+	<br />
+	
+	<textarea cols="30" rows="6" name="pkal_date_terminbeschreibung"  class="pkal_date_terminbeschreibung" id="pkal_date_terminbeschreibung">{$pkal_date.0.pkal_date_terminbeschreibung|escape:"html"}</textarea>
+	<br />
+	
+	 </fieldset>
+	 <fieldset>
+	<legend>{$plugin_pkal_date_link_zu_termin}</legend>
+	
+	<label for="pkal_date_link_zu_terminfeld">{$plugin_pkal_date_link_zu_terminfeld}{$plugin_error.pkal_date_link_zu_terminfeld} </label>
+	<br />
+	<input style="width:70%" type="text" name="pkal_date_link_zu_terminfeld" value="{$pkal_date.0.pkal_date_link_zu_terminfeld|escape:"html"}" class="pkal_date_link_zu_terminfeld" id="pkal_date_link_zu_terminfeld"/>
+	<br />
+	
+	 </fieldset>
+	 
+	 <fieldset>
+	<legend>{$plugin_pkal_date_kategorie_im_kalenderf}</legend>
+	
+	<label for="pkal_date_kategorie_im_kalender">{$plugin_pkal_date_kategorie_im_kalender}{$plugin_error.pkal_date_kategorie_im_kalender} </label>
+	<br />
+	<select name="pkal_date_kategorie_im_kalender" id="pkal_date_kategorie_im_kalender" size="1" ><option value="0">{$message_160}</option>
+	{foreach from=$pcal_kategorien item=dat name=datname}
+	<option {if $pkal_date.0.pkal_date_kategorie_im_kalender==$dat.cat_id}selected="selected"{/if} value="{$dat.cat_id}">{$dat.cat_name|escape:"html"}</option>
+	{/foreach}
+	</select>
+	<br />
+	
+	 </fieldset>
+	 <fieldset>
+	 {literal}
+	 <link rel="stylesheet" type="text/css" href="./interna/css/jquery_ui.css" />
+	 <script src='./interna/js/jquery-ui-1.7.2.custom.min.js' type='text/javascript'></script>
+	<script type="text/javascript">
+		$(function() {
+			$('#pkal_date_start_datum').datepicker({
+				dateFormat: 'dd.mm.yy',
+				changeMonth: true,
+				changeYear: true,
+				minDate: '0d' 
+			});
+		});
+		$(function() {
+			$('#pkal_date_end_datum').datepicker({
+				dateFormat: 'dd.mm.yy',
+				changeMonth: true,
+				changeYear: true,
+				minDate: '+0d' 
+			});
+		});
+		</script>
+	
+	{/literal}
+	<legend>{$plugin_pkal_date_das_startdatum}</legend>
+	
+	<label for="pkal_date_start_datum">{$plugin_pkal_date_start_datum}{$plugin_error.pkal_date_start_datum} </label>
+	<br />
+	<input type="text" name="pkal_date_start_datum" value="{$pkal_date.0.pkal_date_start_datum|date_format:"%d.%m.%Y"}" class="pkal_date_start_datum" id="pkal_date_start_datum"/>
+	<br />
+	 <label for="pkal_date_uhrzeit_beginn">{$plugin_pkal_date_uhrzeit_beginn}{$plugin_error.pkal_date_uhrzeit_beginn} </label>
+	<br />
+	<input type="text" name="pkal_date_uhrzeit_beginn" value="{$pkal_date.0.pkal_date_uhrzeit_beginn|escape:"html"}" class="pkal_date_uhrzeit_beginn" id="pkal_date_uhrzeit_beginn"/>
+	<br />
+	</fieldset><fieldset>
+	<legend>{$plugin_pkal_date_das_enddatum}</legend>
+	
+	 <label for="pkal_date_end_datum">{$plugin_pkal_date_end_datum}{$plugin_error.pkal_date_end_datum} </label>
+	<br />
+	<input type="text" name="pkal_date_end_datum" value="{$pkal_date.0.pkal_date_end_datum|date_format:"%d.%m.%Y"}" class="pkal_date_end_datum" id="pkal_date_end_datum"/>
+	<br /> <label for="pkal_date_uhrzeit_ende">{$plugin_pkal_date_uhrzeit_ende}{$plugin_error.pkal_date_uhrzeit_ende} </label>
+	<br />
+	<input type="text" name="pkal_date_uhrzeit_ende" value="{$pkal_date.0.pkal_date_uhrzeit_ende|escape:"html"}" class="pkal_date_uhrzeit_ende" id="pkal_date_uhrzeit_ende"/>
+	<br />
+	</fieldset>
+
+	 
+	<fieldset>
+	<legend>{$plugin_kalender_gruppen_mit_leserechten}</legend>
+	
+	{$plugin_kalender_whlen_sie_hier_die_gruppen_aus_die_die_eintrge_sehen_drfen}
+	<br />
+		{foreach item=table from=$pcal_gruppen}
+				<input type="checkbox"  {if $table.lese_rights=="ok"}checked="checked"{/if}   id="g{$table.gruppeid}" name="pcal_gruppe_lese[{$table.gruppeid}]" value="{$table.gruppeid}" /><label for="g{$table.gruppeid}">{$table.gruppenname}:</label><br />
+			{/foreach}
+	 </fieldset>
+	 
+	 <fieldset>
+		<legend>{$message_70}</legend>
+				<!-- Speichern -->
+		<input  type="submit" class="submit_back_green" value="{$message_70}" name="formSubmit_save_pcal_date" />
+				
+			</fieldset>
+	</form>

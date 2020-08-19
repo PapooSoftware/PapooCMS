@@ -1,0 +1,42 @@
+{if $table_data2|@count}
+	<div class="SmartyTagsRSSFeed">
+
+{* RSS-Feed-Channel-Daten *}
+		<a href="{$table_data2.channel.link}" target="_blank" title="{$table_data2.image.title}">
+			{if $table_data2.image.url != ""}
+				<img src="{$table_data2.image.url}" alt="{$table_data2.image.title}" title="{$table_data2.image.title}" border="0" align="middle">
+			{/if}
+		</a>
+		<h2>
+			{* Favicon Icon nur, wenn kein Channel-Bild geliefert wird *}
+			{if $table_data2.channel.favicon != "" AND $table_data2.image.url == ""}
+				<img src="{$table_data2.channel.favicon}" alt="{$table_data2.image.title}" title="{$table_data2.image.title}" border="0" class="favicon">
+			{/if}
+			<a href="{$table_data2.channel.link}" target="_blank" title="{$table_data2.channel.title}">{$table_data2.channel.title}</a>
+		</h2>
+		{if $table_data2.channel.description}<p>{$table_data2.channel.description}</p>{/if}
+	  
+{* RSS-Feed-Items *}
+	  <ul>
+		  {foreach item=item from=$table_data2.items}
+{* keinen Link und keinen Link-Cursor, wenn Feed Link(s) liefert (valides HTML sicherstellen *}
+				{if $link} 
+					<li class="item" onMouseOver="this.className='item_over'" onMouseOut="this.className='item'">
+					<a href="{$item.url}" target="_blank" title="{$item.title}">
+				{else}
+					<li class="item" onMouseOver="this.className='item_over_cursor_ctrl'" onMouseOut="this.className='item'">
+				{/if}
+						<object>
+							<div>
+								{$item.title}
+								{if $item_descr AND $item.description}{$item.description}{/if}
+							</div>
+						</object>
+					{if $link}</a>{/if}
+				</li>
+			{/foreach}
+	  </ul>
+	</div>
+{else}
+	Es sind keine Daten zum angegebenen Feed vorhanden.
+{/if}

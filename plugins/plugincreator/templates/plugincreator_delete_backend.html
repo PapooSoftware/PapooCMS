@@ -1,0 +1,85 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+<link rel="stylesheet" type="text/css" href="{$css_path}/backend.css" />
+
+{if $creator_plugin_template_weiche=='delete_list'}
+    <script src="../plugins/plugincreator/js/no_reload.js" type="text/javascript"></script>
+
+    <div class="artikel">
+
+        <h1>Plugin Creator</h1>
+        <br>
+        {*<!-- Hier k�nnen Sie die Plugins verwalten-->*}
+        <h1>{$message_421}</h1>
+        {*<!-- Installierte Plugins-->*}
+        {$message_431}
+
+        {if $plugin.plugincreator.edit_return_code < 0}
+        <div class="error">Fehler! Das Plugin hat nicht die nötigen Rechte um das gewählte Plugin zu löschen! Bitte
+            setzen Sie die Rechte der Dateien und Ordner des gewählten Plugins auf 0777 um fortzufahren.</div>
+        {/if}
+
+        {include file=../../../plugins/plugincreator/templates/all_header.inc.html}
+
+        <table class="plugins_table table table-striped table-hover">
+            <tr>
+                <th>{$intern_plugin_name}</th>
+                <th>{$intern_plugin_version}</th>
+                <th>{$intern_plugin_bes}</th>
+                {if $userHasAdminRights}<th>Löschen</th>{/if}
+            </tr>
+
+            {foreach item=plugin from=$plugin.plugincreator.plugin_data}
+            {*<!-- Plugin löschen-->*}
+            <tr>
+                <td><strong>{$plugin.name}</strong></td>
+                <td>{$plugin.version}</td>
+                <td>{$plugin.beschreibung}</td>
+                {if $userHasAdminRights}
+                <td class="buttons_inline">
+                    <form action="" method="post" class="buttons_inline">
+                        <input type="hidden" name="creatorplugin_action" value="plugin_delete" />
+                        <input type="hidden" name="creatorplugin_id" value="{$plugin.plugin_id}" />
+                        <input type="hidden" name="creatorplugin_identifier" value="{$plugin.identifier}" >
+
+                        <input type="submit" class="submit_deleteplugin btn" name="deletebutton" value="Löschen" />
+                    </form>
+                </td>
+                {/if}
+            </tr>
+            {/foreach}
+        </table>
+
+    </div>
+{elseif $creator_plugin_template_weiche=='delete_confirm'}
+    <div class="artikel">
+        <h1>{$plugin_identifier}</h1>
+        <div style="border:solid 1px red; background:rgba(225, 0, 0, .3); padding-left:5px; width: 96%;">
+        <h1>{$message.plugin.plugincreator.loeschenFrage}</h1>
+        <h1>{$message.plugin.plugincreator.achtungLoeschen}</h1>
+        <h3><a href="plugins.php?menuid=47">{$message.plugin.plugincreator.deinstallLink}</a></h3>
+        </div>
+        <fieldset>
+            <form id="Del_form" action="" method="post">
+                <label><input type="checkbox" name="sicherheitsbox" required="1">{$message.plugin.plugincreator.checkboxCheck}</label>
+                    <input type="hidden" name="creatorplugin_id" value="{$plugin_id}"/>
+                    <input type="hidden" name="creatorplugin_identifier" value="{$plugin_identifier}"/>
+                    <input type="hidden" name="creatorplugin_action" value="DoDelete"/>
+                    <input type="submit" class="btn delete_button" name="response" value="Löschen" style="float: left;margin-top: 10px;margin-bottom: 20px"/>
+            </form>
+
+            <form id="nDel_form" action="" method="post">
+                <input type="submit" class="btn no_delete_button" name="response" value="Nicht löschen" style="clear: left; float:right;margin-right:20px; margin-top:-65px; margin-bottom: 20px"/>
+            </form>
+        </fieldset>
+    </div>
+{/if}
+
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

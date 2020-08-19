@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- version: Papoo-Versions-Nummer fÃ¼r die das Plugin gedacht ist / funktioniert -->
+<plugin version="3.5">
+  <!-- ALLGEMEINE-INFORMATIONEN -->
+  <!-- ************************ -->
+  <!-- name: Name des Plugins -->
+  <name><![CDATA[Querverlinkungen]]></name>
+  <!-- beschreibung_de: Kurz-Beschreibung des Plugins auf deutsch (wird im Plugin-Manager angezeigt) -->
+  <beschreibung_de><![CDATA[Querverlinkungen von Artikeln bzw. Menüpunkten]]></beschreibung_de>
+  <!-- beschreibung_en: Kurz-Beschreibung des Plugins auf englisch (wird im Plugin-Manager angezeigt) -->
+  <beschreibung_en><![CDATA[]]></beschreibung_en>
+  <!-- version: Versions-Nummer des Plugins -->
+  <version>1.0</version>
+  <!-- papooid: Eindeutige Nummer offizieller papoo-Plugins -->
+  <papooid>0</papooid>
+  <!-- link: z.Z. noch ohne Funktion -->
+  <link>http://www.papoo.de</link>
+  <!-- datum: Erscheinungs-Datum bzw. Stand des Plugins -->
+  <datum>07.04.2017</datum>
+  <!-- AUTOR-INFORMATIONEN -->
+  <!-- ******************* -->
+  <!-- autor: Informationen zum Autor (Programmierer) des Plugins -->
+  <autor>
+    <!-- autor.name: Name des Authors -->
+    <name><![CDATA[Martin Güthler]]></name>
+    <!-- autor.email: Email des Authors -->
+    <email><![CDATA[mg@papoo.de]]></email>
+    <!-- autor.telefon: Telefon-Nummer des Autors -->
+    <telefon/>
+    <!-- autor.kontakt: postalische Kontakt-Informationen des Autors -->
+    <kontakt><![CDATA[]]></kontakt>
+  </autor>
+  <!-- MENÃœ-INFORMATIONEN -->
+  <!-- ****************** -->
+  <!-- menue: Informationen fÃ¼r den MenÃ¼-Eintrag im Backend (papoo/interna) -->
+  <menue>
+    <!-- menue.eintrag_de: Name des MenÃ¼-Punktes im Backend auf deutsch -->
+    <eintrag_de><![CDATA[Querverlinkungen]]></eintrag_de>
+    <!-- menue.eintrag_en: Name des MenÃ¼-Punktes im Backend auf englisch -->
+    <eintrag_en><![CDATA[Querverlinkungen]]></eintrag_en>
+    <!-- menue.icon: Pfad zum MenÃ¼-Icon des MenÃ¼-Punktes im Backend (relativ zum Plugin-Verzeichnis) -->
+    <icon/>
+    <!-- menue.link: Name der Seite auf welche der MenÃ¼-Punkt im Backend verweisen soll -->
+    <link>plugin:querverlinkungen/templates/querverlinkungen_backend.html</link>
+    <submenue>
+      <eintrag_de><![CDATA[Artikel <-> Artikel]]></eintrag_de>
+      <eintrag_en><![CDATA[Artikel <-> Artikel]]></eintrag_en>
+      <icon/>
+      <link>plugin:querverlinkungen/templates/artikelartikel_backend.html</link>
+    </submenue>
+    <submenue>
+      <eintrag_de><![CDATA[Menüpunkte <-> Menüpunkte]]></eintrag_de>
+      <eintrag_en><![CDATA[Menüpunkte <-> Menüpunkte]]></eintrag_en>
+      <icon/>
+      <link>plugin:querverlinkungen/templates/menpunktemenpunkte_backend.html</link>
+    </submenue>
+  </menue>
+  <!-- KLASSEN-INFORMATIONEN -->
+  <!-- ****************** -->
+  <!-- klasse: Informationen der Plugin-Klasse welche eingebunden werden sollen -->
+  <klasse>
+    <!-- klasse.name: Name der Klassen-Instanz / des Objekts (also der Name des Dings, das mit $name = new xx_class(); erzeugt wird) -->
+    <name>querverlinkungen</name>
+    <!-- klasse.datei: Pfad zur Klassen-Datei (relativ zum Plugin-Verzeichnis) -->
+    <datei>querverlinkungen/lib/querverlinkungen_class.php</datei>
+  </klasse>
+  <!-- CSS-INFORMATIONEN -->
+  <!-- ***************** -->
+  <!-- css: Pfad zur CSS-Datei (relativ zum Plugin-Verzeichnis) -->
+  <css>querverlinkungen/css/frontend.css</css>
+  <!-- DATENBANK-INFORMATIONEN -->
+  <!-- ****************** -->
+  <datenbank>
+    <!-- datenbank.installation: Pfad zur SQL-Installations-Datei (relativ zum Plugin-Verzeichnis) -->
+    <installation>querverlinkungen/sql/install.sql</installation>
+    <!-- datenbank.deinstallation: Pfad zur SQL-Deinstallations-Datei (relativ zum Plugin-Verzeichnis) -->
+    <deinstallation>querverlinkungen/sql/deinstall.sql</deinstallation>
+  </datenbank>
+  <!-- Einbindung der Sprach-Dateien.
+  In dem hier angegebenen Verzeichnis sollten Dateien mit folgenden Namen liegen:
+	- messages_backend_[de|en|fr| .. etc.].inc.php
+  - messages_frontend_[de|en|fr| .. etc.].inc.php
+-->
+  <messages>querverlinkungen/messages</messages>
+  <modul>
+    <datei>plugin:querverlinkungen/templates/mod_querverlinkungenartikelartikel_frontend.tpl</datei>
+    <name_de><![CDATA[Querverlinkungen Artikel <-> Artikel]]></name_de>
+    <beschreibung_de><![CDATA[Eine Liste mit Links zu anderen Artikeln]]></beschreibung_de>
+    <name_en><![CDATA[Querverlinkungen Artikel <-> Artikel]]></name_en>
+    <beschreibung_en><![CDATA[Eine Liste mit Links zu anderen Artikeln]]></beschreibung_en>
+    <modus>var</modus>
+  </modul>
+  <modul>
+    <datei>plugin:querverlinkungen/templates/mod_querverlinkungenmenpunktemenpunkte_frontend.tpl</datei>
+    <name_de><![CDATA[Querverlinkungen Menüpunkte <-> Menüpunkte]]></name_de>
+    <beschreibung_de><![CDATA[Eine Liste mit Links zu anderen Menüpunkten]]></beschreibung_de>
+    <name_en><![CDATA[Querverlinkungen Menüpunkte <-> Menüpunkte]]></name_en>
+    <beschreibung_en><![CDATA[Eine Liste mit Links zu anderen Menüpunkten]]></beschreibung_en>
+    <modus>var</modus>
+  </modul>
+</plugin>

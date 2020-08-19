@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<plugin version="3.5">
+
+<name>Sprachen übersetzen</name>
+<beschreibung_de><![CDATA[Dieses Plugin dient zur Verwaltung der Sprach-Definitionen für die Lokalisierung.
+]]></beschreibung_de>
+
+<beschreibung_en><![CDATA[This Plugin organices text-definitions for Papoo wich are used for the localisation.
+]]></beschreibung_en>
+
+<version>0.1</version>
+<datum>04.01.2007</datum>
+
+<autor>
+	<name>Stephan Bergmann</name>
+	<kontakt><![CDATA[Stephan Bergmann
+Rembrandtstr. 10/1
+72768 Reutlingen]]></kontakt>
+	<email>S.Bergmann@XiMiX.de</email>
+	<telefon>07121 / 60 39 88</telefon>
+</autor>
+
+<menue>
+	<eintrag_de>Sprach Plugin</eintrag_de>
+	<eintrag_en>Sprach Plugin</eintrag_en>
+	<icon>dev_messages/bilder/icon_back.gif</icon>
+	<link>plugin:dev_messages/templates/back1.html</link>
+	
+
+	<submenue>
+		<eintrag_de>Dateien übersetzen</eintrag_de>
+		<eintrag_en>Translate files</eintrag_en>
+	<icon>dev_messages/bilder/icon_back.gif</icon>
+		<link>plugin:dev_messages/templates/trans_back.html</link>
+	</submenue>
+	<submenue>
+		<eintrag_de>Admin Menü übersetzen</eintrag_de>
+		<eintrag_en>Translate Admin menu</eintrag_en>
+		<eintrag_fr>Fr Translate Admin menu</eintrag_fr>
+		<icon>dev_messages/bilder/icon_back.gif</icon>
+		<link>plugin:dev_messages/templates/trans_menu.html</link>
+	</submenue>
+	<submenue>
+		<eintrag_de>Sprache hinzufügen</eintrag_de>
+		<eintrag_en>Add language</eintrag_en>
+		<icon>dev_messages/bilder/icon_back.gif</icon>
+		<link>plugin:dev_messages/templates/new_lang.html</link>
+	</submenue>
+
+</menue>
+
+<klasse>
+	<name>dev_messages</name>
+	<datei>dev_messages/lib/dev_messages_class.php</datei>
+</klasse>
+
+<datenbank>
+	<installation>dev_messages/sql/dev_messages_install.sql</installation>
+	<deinstallation>dev_messages/sql/dev_messages_deinstall.sql</deinstallation>
+</datenbank>
+
+<!--
+<modul>
+	<datei>plugin:dev_messages/templates/mod_dev_messages_front.html</datei>
+	
+	<name_de>[DEV]-Messages-Modul</name_de>
+	<beschreibung_de>Die ist lediglich ein Test-Modul des Plugins [DEV]-Messages.</beschreibung_de>
+	
+	<name_en>[DEV]-messages-modul</name_en>
+	<beschreibung_en>this is a test-modul of the plugin [DEV]-messages.</beschreibung_en>
+</modul>
+-->
+<messages>dev_messages/messages</messages>
+
+</plugin>

@@ -1,0 +1,30 @@
+{* <-- Die Einstellungen für den Slider bitte in der Datei slick.settings.js vornehmen --> *}
+<div class="slick-class">
+  {foreach item=wechselbild from=$plugins.bildwechsler name=wechselbilder}
+    <div>
+      {if $wechselbild.bw_link}
+        <a {$wechselbild.bw_link}><img {$wechselbild.bw_bild} /></a>
+      {else}
+        <img {$wechselbild.bw_bild} />
+      {/if}
+      {if $wechselbild.bw_text}
+        <span class="slick-caption">{$wechselbild.bw_text}</span>
+      {/if}
+    </div>
+  {/foreach}
+</div>
+		
+{if $smarty.foreach.wechselbilder.total > 1}
+  <script src="{$slash}plugins/bildwechsler/skripte/slick/js/slick.min.js"></script>
+  <script src="{$slash}plugins/bildwechsler/skripte/slick/js/slick.settings.js"></script>
+{/if}
+
+{* weitere Platzhalter:
+
+{$wechselbild.bw_text}
+{$wechselbild.bw_ueberschrift}
+{$bw_noch_mehr_text}
+{$bw_extra_link}
+{$bw_extra_link_text}
+
+*}

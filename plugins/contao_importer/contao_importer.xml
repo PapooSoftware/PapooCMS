@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<plugin name="contao_importer" version="5.0">
+
+    <name>Contao (TYPOlight) Importer</name>
+
+    <beschreibung_de><![CDATA[Plugin um Contao (TYPOlight) Artikel zu importieren.]]></beschreibung_de>
+    <beschreibung_en><![CDATA[Contao (TYPOlight) importer Plugin.]]></beschreibung_en>
+
+    <version>1.0</version>
+
+    <papooid>202</papooid>
+
+    <datum>02.09.2014</datum>
+
+    <autor>
+        <name>Christoph Zimmer</name>
+        <email>cz@papoo.de</email>
+    </autor>
+
+    <klasse>
+        <name>contao_importer</name>
+        <datei>contao_importer/lib/contao_importer_class.php</datei>
+    </klasse>
+
+    <menue>
+        <eintrag_de>Contao Importer</eintrag_de>
+        <eintrag_en>Contao Importer</eintrag_en>
+        <link>plugin:contao_importer/templates/backend.html</link>
+    </menue>
+
+    <css>contao_importer/css/styles.css</css>
+
+    <messages>contao_importer/messages</messages>
+
+</plugin>

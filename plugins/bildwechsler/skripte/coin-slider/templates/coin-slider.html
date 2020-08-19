@@ -1,0 +1,37 @@
+<div id="coin-slider">
+  {foreach item=wechselbild from=$plugins.bildwechsler name=wechselbilder}
+    <a href="{$wechselbild.bw_link}">
+      <img {$wechselbild.bw_bild} />
+      <span>
+        <h4>{$wechselbild.bw_ueberschrift}</h4>
+        {$wechselbild.bw_text}
+      </span>
+    </a>
+  {/foreach}
+</div>
+
+{if $smarty.foreach.wechselbilder.total > 1}
+  <script src="{$slash}plugins/bildwechsler/skripte/coin-slider/js/coin-slider.js"></script>
+  {literal}
+  <script type="text/javascript">
+      $(document).ready(function() {
+          $('#coin-slider').coinslider({
+                width: 510, // width of slider panel
+                height: 250, // height of slider panel
+                spw: 7, // squares per width
+                sph: 5, // squares per height
+                delay: 3000, // delay between images in ms
+                sDelay: 30, // delay beetwen squares in ms
+                opacity: 0.7, // opacity of title and navigation
+                titleSpeed: 500, // speed of title appereance in ms
+                effect: '', // random, swirl, rain, straight
+                navigation: true, // prev next and buttons
+                links : true, // show images as links
+                hoverPause: true // pause on hover
+            });
+      });
+  </script>
+{/literal}
+{/if}
+
+

@@ -1,0 +1,41 @@
+<!-- MODUL: MENULINK -->
+{if $menu.menuname and NOT $menu.link_aktiv}
+	{if $menu.extern}
+		<a href="{$menu.menulink}"  class="{$menu.menuklasse}" id="{$menu.htmltag_id}" title="{$menu.lang_title}">
+			{if $menu.menu_image}<img src="{$slash}images/{$menu.menu_image}" alt="{$menu.menuname}"/>{/if}{$menu.menuname}</a>
+		<span class="ignore">&nbsp;</span>
+	{else}
+		{if NOT $usability}
+			<!--<span class="span_{$menu.menuklasse}">-->
+			{if $sp_urls=="ok" or $free_sp_urls}
+				<a href="{$slash}{if $free_sp_urls=="ok"}{$menu.menuname_free_url}{else}{$menu.menuname_url}{/if}" class="{$menu.menuklasse}" id="{$menu.htmltag_id}" title="{$menu.lang_title}">
+					{if $menu.menu_image}<img src="{$slash}images/{$menu.menu_image}" alt="{$menu.menuname}"/>{/if}{$menu.menuname}</a>
+			{else}
+				<a href="{$slash}{$menu.menulink}{$frag_connect}menuid{$gleich_connect}{$menu.menuid}{$menu.template}" class="{$menu.menuklasse}" id="{$menu.htmltag_id}" title="{$menu.lang_title}">
+					{if $menu.menu_image}<img src="{$slash}images/{$menu.menu_image}" alt="{$menu.menuname}"/>{/if}{$menu.menuname}</a>
+				{/if}
+			<span class="ignore">&nbsp;</span>
+		{else}
+			<span class="{$menu.menuklasse}" id="{$menu.htmltag_id}" title="{$menu.lang_title}">
+				{if $menu.menu_image}<img src="{$slash}images/{$menu.menu_image}" alt="{$menu.menuname}"/>{/if}{$menu.menuname}
+			</span>
+			<span class="ignore">&nbsp;</span>
+		{/if}
+	{/if}
+{else}
+	{if $menu.extern}
+		<a href="{$menu.menulink}"  class="{$menu.menuklasse}" id="{$menu.htmltag_id}" title="{$menu.lang_title}">
+			{if $menu.menu_image}<img src="{$slash}images/{$menu.menu_image}" alt="{$menu.menuname}"/>{/if}{$menu.menuname}</a>
+		<span class="ignore">&nbsp;</span>
+	{else}
+	{if $sp_urls=="ok" or $free_sp_urls}
+	<a {if $menu.has_sub==1}class="dropdown-toggle {$menu.menuklasse}" data-toggle="dropdown"{else}class="{$menu.menuklasse}"{/if} href="{$slash}{if $free_sp_urls=="ok"}{$menu.menuname_free_url}{else}{$menu.menuname_url}{/if}" id="{$menu.htmltag_id}" title="{$menu.lang_title}">
+			{if $menu.menu_image}<img src="{$slash}images/{$menu.menu_image}" alt="{$menu.menuname}"/>{/if}{$menu.menuname}</a>
+	{else}
+		<a href="{$slash}{$menu.menulink}{$frag_connect}menuid{$gleich_connect}{$menu.menuid}{$menu.template}" class="{$menu.menuklasse}" id="{$menu.htmltag_id}" title="{$menu.lang_title}">
+			{if $menu.menu_image}<img src="{$slash}images/{$menu.menu_image}" alt="{$menu.menuname}"/>{/if}{$menu.menuname}</a>
+	{/if}
+		<span class="ignore">&nbsp;</span>
+	{/if}
+{/if}
+<!-- ENDE MODUL: MENULINK -->

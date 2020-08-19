@@ -1,0 +1,32 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+{if $plugin_break_annihilator_succeeded}
+    <div class="message">{$plugin_break_annihilator_succeeded_message}</div>
+{else}
+    <div class="artikel">
+
+        <h1 id="plugin_break_annihilator_head" class="h1" >{$plugin_break_annihilator_head}</h1>
+
+        <p id="plugin_break_annihilator_description" class="h1" >{$plugin_break_annihilator_description}</p>
+
+        <h2 id="plugin_break_annihilator_warning" class="h2" >{$plugin_break_annihilator_warning}</h2>
+
+        <h2 id="plugin_break_annihilator_fieldset_db_head" class="h2" >{$plugin_break_annihilator_fieldset_db_head}</h2>
+        <form method="post" id="formi" action="" >
+
+            <input type="submit" class="submit_back" id="plugin_break_annihilator_br_zerstoeren" name="plugin_break_annihilator_br_zerstoeren" value=" {$plugin_break_annihilator_br_zerstoeren}" />
+
+        </form>
+        <br />
+    </div>
+{/if}
+
+
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

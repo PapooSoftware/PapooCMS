@@ -1,0 +1,55 @@
+{if $IS_ADMIN}
+	<form action="" method="post">
+		<fieldset>
+			<legend>{$message_691}</legend>
+			<label for="cform_name">{$message_711}</label><br />
+			<input type="text" id="cform_name" name="cform_name" value="{$fdat.0.cform_name}" size="30" /><br />
+		</fieldset>
+
+		<fieldset>
+			{*<!-- Kategorie.-->*}
+			<legend>{$message_713}</legend>
+			<label for="cform_type ">{$message_712}</label><br />
+			<select name="cform_type" id="cform_type" size="1">
+				<option value="text" {$checked1}>{$message_714}</option>
+				{foreach item=cat from=$result_cat}
+					<option value="{$cat.type}" {if $fdat.0.cform_type==$cat.type} selected="selected" {/if}>{$cat.name}</option>
+				{/foreach}
+			</select>
+		</fieldset>
+		{foreach item=lang from=$menlang}
+			<fieldset>
+				{*<!-- Bitte geben Sie hier die n�tigen Daten f�r das Bild ein: -->*}
+				<legend>{$message_715} {$lang.sprache})</legend>
+				{*<!-- Alternativtext -->*}
+				<label for="texte[{$lang.lang_id}][alt]">{$message_716}</label><br />
+				<input type="text" id="texte[{$lang.lang_id}][alt]" name="texte[{$lang.lang_id}][alt]" value="{$lang.alt}" size="30" /><br />
+				<br />
+				<input type="hidden" name="texte[{$lang.lang_id}][lang_id]" value="{$lang.lang_id}" size="40" maxlength="100" />
+			</fieldset>
+		{/foreach}
+		<fieldset>
+			{*<!-- Eintragen: -->*}
+			<legend>{$message_717}:</legend>
+			{*<!-- In die Datenbank eintragen -->*}
+			<input type="checkbox" id="cform_must" name="cform_must" {if $fdat.0.cform_must==1}checked="checked"{/if} value="1" />
+			<label for="cform_must">{$message_718}</label><br />
+		</fieldset>
+
+		<fieldset>
+			{*<!-- Eintragen: -->*}
+			<legend>{$message_224}:</legend>
+			{*<!-- In die Datenbank eintragen -->*}
+			<input type="submit" class="submit_back_green" name="eintrag" value="{$message_70}" />
+		</fieldset>
+		{* <!-- In Modus "EDIT" Knopf zum L�schen anbieten --> *}
+		{if $formstart=="edit"}
+			<input type="hidden" name="cform_id" value="{$fdat.0.cform_id}" />
+			<fieldset>
+				{*<!-- Eintragen: -->*}
+				<legend>{$message_719}</legend>
+				<input type="submit" class="submit_back_red" name="loeschen" style="background-color:red;float:left;" value="{$message_720}"><br />
+			</fieldset>
+		{/if}
+	</form>
+{/if}

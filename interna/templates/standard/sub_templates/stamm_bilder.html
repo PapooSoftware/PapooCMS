@@ -1,0 +1,26 @@
+{if $IS_ADMIN}
+	<fieldset>
+		<legend>{$system_config_maximale_bildgre}</legend>
+		<label for="config_maximale_bildgrel">{$system_config_maximale_bildgrel}{$system_error.config_maximale_bildgrel} </label>
+		<br />
+		<input type="text" name="config_maximale_bildgrel" value="{$config.0.config_maximale_bildgrel}" class="config_maximale_bildgrel" id="config_maximale_bildgrel"/>
+		<br />
+	</fieldset>
+	<fieldset>
+		<legend>{$system_config_jpg_komprimierungsfaktor}</legend>
+		<label for="config_jpg_komprimierungsfaktor_feld_">
+			{$system_config_jpg_komprimierungsfaktor_feld_}{$system_error.config_jpg_komprimierungsfaktor_feld_}
+		</label>
+		<br />
+		<input type="text" name="config_jpg_komprimierungsfaktor_feld_" value="{$config.0.config_jpg_komprimierungsfaktor_feld_}" class="config_jpg_komprimierungsfaktor_feld_" id="config_jpg_komprimierungsfaktor_feld_"/>
+		<br />
+
+	</fieldset>
+	<fieldset>
+		<legend>{$system_config_thumbnailgre}</legend>
+		<label for="config_thumbnailgroesse">{$system_config_thumbnailgroesse}{$system_error.config_thumbnailgroesse} </label>
+		<br />
+		<input type="text" name="config_thumbnailgroesse" value="{$config.0.config_thumbnailgroesse}" class="config_thumbnailgroesse" id="config_thumbnailgroesse"/>
+		<br />
+	</fieldset>
+{/if}

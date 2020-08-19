@@ -1,0 +1,127 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+{if $is_eingetragen=="ok"}
+	<div class="message"> {$plugin_fb_plugin_die_daten_wurden_gespeichert}</div>
+{/if}
+
+{if $import_error}
+	<div class="error">{$plugin_contao_import_bitte_alle_felder_ausfllen}</div>
+{/if}
+
+{if $database_error}
+	<div class="error">{$plugin_contao_import_datenbank_existiert_nicht}</div>
+{/if}
+
+{if $daten_saved_import_blog}
+	<div class="message">{$plugin_contao_import_daten_import_erfolgt}</div>
+
+{/if}
+
+{if $import_step1}
+
+ <h1 id="plugin_contao_import_daten_import_erfolgt" class="h1" >{$plugin_contao_import_daten_import_erfolgt}</h1>
+
+ <p id="plugin_contao_import_bitte_berprfen_sie_die" class="h1" >{$plugin_contao_import_bitte_berprfen_sie_die}</p>
+
+{else}
+
+<h1 id="plugin_contao_import_head" class="h1" >{$plugin_contao_import_head}</h1>
+
+ <p id="plugin_contao_import_description" class="h1" >{$plugin_contao_import_description}</p>
+    
+    <h2 id="plugin_contao_import_warning" class="h2" >{$plugin_contao_import_warning}</h2>
+
+ <h2 id="plugin_contao_import_fieldset_db_head" class="h2" >{$plugin_contao_import_fieldset_db_head}</h2>
+<form method="post" id="formi" action="" >
+ <fieldset>
+<legend>{$plugin_contao_import_db_verbindungsdaten}</legend>
+
+ <div class="labdiv"><label for="plugin_contao_import_db_server">{$plugin_contao_import_db_server}{$plugin_error.plugin_contao_import_db_server} </label>
+
+<input type="text" name="plugin_contao_import_db_server" value="localhost{$blogger_import.0.plugin_contao_import_db_server|escape:"html"}" class="plugin_contao_import_db_server" id="plugin_contao_import_db_server"/>
+</div><br />
+
+  <div class="labdiv"><label for="plugin_contao_import_db_name">{$plugin_contao_import_db_name}{$plugin_error.plugin_contao_import_db_name} </label>
+
+<input type="text" name="plugin_contao_import_db_name" value="contao27{$blogger_import.0.plugin_contao_import_db_name|escape:"html"}" class="plugin_contao_import_db_name" id="plugin_contao_import_db_name"/>
+</div><br />
+
+  <div class="labdiv"><label for="plugin_contao_import_db_user">{$plugin_contao_import_db_user}{$plugin_error.plugin_contao_import_db_user} </label>
+
+<input type="text" name="plugin_contao_import_db_user" value="root{$blogger_import.0.plugin_contao_import_db_user|escape:"html"}" class="plugin_contao_import_db_user" id="plugin_contao_import_db_user"/>
+</div><br />
+
+  <div class="labdiv"><label for="plugin_contao_import_db_passwort">{$plugin_contao_import_db_passwort}{$plugin_error.plugin_contao_import_db_passwort} </label>
+
+<input type="text" name="plugin_contao_import_db_passwort" value="test{$blogger_import.0.plugin_contao_import_db_passwort|escape:"html"}" class="plugin_contao_import_db_passwort" id="plugin_contao_import_db_passwort"/>
+</div><br />
+
+  <div class="labdiv"><label for="plugin_contao_import_prfix">{$plugin_contao_import_prfix}{$plugin_error.plugin_contao_import_prfix} </label>
+
+<input type="text" name="plugin_contao_import_prfix" value="tl{*$blogger_import.0.plugin_contao_import_prfix|escape:"html"*}" class="plugin_contao_import_prfix" id="plugin_contao_import_prfix"/>
+</div>
+ <div class="labdiv"><label for="plugin_contao_import_url_der_installation3">{$plugin_contao_import_url_der_installation3}{$plugin_error.plugin_contao_import_url_der_installation3} </label>
+
+<input type="text" name="plugin_contao_import_url_der_installation3" value="http://www.g-pro.com{$blogger_import.0.plugin_contao_import_url_der_installation3|escape:"html"}" class="plugin_contao_import_url_der_installation3" id="plugin_contao_import_url_der_installation3"/>
+</div><br />
+
+
+</fieldset><br />
+
+<fieldset>
+    <legend>{$plugin_contao_import_version_head}</legend>
+
+    <div class="labdiv"><label for="plugin_contao_import_version_whle_name">{$plugin_contao_import_version_whle_lbl}</label>
+
+        <select name="plugin_contao_import_version_whle_name" class="plugin_contao_import_version_whle_name" id="plugin_contao_import_version_whle_name">
+            <option value="2.7">TYPOlight 2.7</option>
+        </select>
+    </div><br />
+
+
+</fieldset><br />
+
+<fieldset><legend> {$plugin_contao_import_import_starten}</legend>
+<input type="submit" class="submit_back" id="plugin_contao_import_import_starten" name="plugin_contao_import_import_starten" value=" {$plugin_contao_import_import_starten}" />
+
+</fieldset>
+
+</form>
+<br />
+{/if}
+{if $is_dev}
+ #start#
+
+
+
+ <span class="ignore"></span>
+  <!-- Der Start Button ist notwendig damit sich das System daran aufhängen kann. -->
+     <div class="rapid_form">
+        <form action="" name="" method="POST">
+        <!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+        <input type="hidden" name="tb_name" value="blogger_import" />
+        <!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+        <input type="hidden" name="php_datei_name" value="blogger_import" />
+        <!-- Das Standarpräfix für die Ids -->
+        <input type="hidden" name="praefix" value="blogger_import" />
+        <!-- Das Standarpräfix für die Feldernamen und Namen -->
+        <input type="hidden" name="praefix_spezial" value="blogger_import" />
+        <!-- Das Tool einbinden -->
+            {include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div>
+
+
+{/if}
+</div>
+
+
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

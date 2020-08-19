@@ -1,0 +1,67 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+	<h1>{$plugin.dev_messages.name}</h1>
+	
+		<p>{$plugin.dev_messages.text2}</p>
+
+	<h2>{$plugin.dev_messages.vergleich}</h2>
+	<form action="" method="post" id="formi">
+	<fieldset>
+  <legend>{$plugin.dev_messages.Referenzdatei}</legend>
+  <label for="sprachreferenz">{$plugin.dev_messages.Referenzdatei}</label>
+  <select name="sprachreferenz" id="sprachreferenz" title="" style="width: 40%;" size="1">
+    <option value="">{$plugin.dev_messages.ausws}</option>
+   
+  {foreach item=sprach from=$plugin_sprachdatar}
+   <option value="{$sprach.name}" {if $sprachreferenz == $sprach.name}selected="selected"{/if}>{$sprach.name}</option>
+  {/foreach}
+  </select>
+  </fieldset>
+  <fieldset>
+  <legend>{$plugin.dev_messages.vergld}</legend>
+  <label for="vergleichsdatei">{$plugin.dev_messages.Vergleichsdatei}</label>
+  <select name="vergleichsdatei" id="vergleichsdatei" title="" style="width: 40%;" size="1">
+    <option value="">{$plugin.dev_messages.ausws}</option>
+   
+  {foreach item=sprach from=$plugin_sprachdatar}
+   <option value="{$sprach.name}" {if $vergleichsdatei == $sprach.name}selected="selected"{/if}>{$sprach.name}</option>
+  {/foreach}
+  </select>
+  </fieldset>
+  <fieldset>
+  <legend>{$plugin.dev_messages.Vergleich_starten}</legend>
+ <input type="submit" name="vergleichen" value="{$plugin.dev_messages.Vergleich_starten}" />
+  </fieldset>
+	</form>
+	
+	{if $dev_messages.template_weiche == "AUSGABE_SCHIRM"}
+		<h3>{$plugin.dev_messages.vgsp}</h3>
+		<p>
+			{$plugin.dev_messages.refd}&quot;{$dev_messages.datei_referenz}&quot;<br />
+			{$plugin.dev_messages.tesd} &quot;{$dev_messages.datei_test}&quot;
+		</p>
+		{if $dev_messages.sprachdefinitionen}
+			<p style="color: 993333;">
+				<strong>{$plugin.dev_messages.folgd}&quot;{$dev_messages.datei_test}&quot;:</strong><br />
+				<br />
+				<form>
+				<textarea rows="20" cols="80">
+				{foreach item=definition from=$dev_messages.sprachdefinitionen}$this->content->template{$definition}='{$dev_messages.referenzwerte.$definition}';
+				{/foreach}
+				</textarea>
+				</form>
+			</p>
+		{/if}
+	{/if}
+	
+
+	
+</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

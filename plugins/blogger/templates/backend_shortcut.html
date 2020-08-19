@@ -1,0 +1,93 @@
+{if $blogger_message}
+<div class="alert alert-success">{$blogger_message}</div>
+{/if}
+<h2>Hier können Sie Menüpunkte mit den Frontendmodulen verknüpfen.</h2>
+        <p>{$plugin_blogger__whlen_sie_hier_aus_an_welchen_menpunkten}</p>
+        <p>{$plugin_blogger__es_werden_auch_nur_die_artikel}</p>
+<form action="" method="post">
+  <fieldset>
+    <field>
+      <table>
+        <tr>
+          <th>Menüpunkt</th>
+          <th>Archivkalender</th>
+          <th>Archiv Monate</th>
+          <th>Wordcloud</th>
+        </tr>
+        {foreach from=$blogger_menu item=menuitem}
+        <tr>
+          <td><input name="blogger_menu[{$menuitem.menuid}]" type="hidden" value="{$menuitem.menuid}" />{$menuitem.menuname}</td>
+          <td><input name="blogger_calendar[{$menuitem.menuid}]" type="checkbox"{if $blogger_config.shortcut[$menuitem.menuid].blogger_shortcuts_calendar == 1} checked="checked"{/if} /></td>
+            <td><input name="blogger_month[{$menuitem.menuid}]" type="checkbox"{if $blogger_config.shortcut[$menuitem.menuid].blogger_shortcuts_month == 1} checked="checked"{/if} /></td>
+            <td><input name="blogger_wordcloud[{$menuitem.menuid}]" type="checkbox"{if $blogger_config.shortcut[$menuitem.menuid].blogger_shortcuts_wordcloud == 1} checked="checked"{/if}/></td>
+        </tr>
+        {/foreach}
+      </table>
+    </field>
+    <field>
+
+    </field>
+    <input class="btn btn-success " name="save_config" type="submit" value="Speichern" />
+  </fieldset>
+
+</form>
+        <h2>{$plugin_blogger__stellen_sie_hier_ein_wieviel_wrter_in_der_wortwolke_genutzt_werden_sollen}</h2>
+        <p>{$plugin_blogger__stellen_sie_hier_ein_wieviel_wrter_in_der_wortwolke_genutzt_werden_sollen2}</p>
+<form action="" method="post">
+    <fieldset>
+
+    <legend for="blogger_config[wordcloud_count]">Anzahl an Wörter in der Wordcloud</legend>
+    <input name="blogger_config[wordcloud_count]" type="number" step="1" min="10" style="width:100px;"
+           value="{$blogger_config.wordcloud_count}" size="5" />
+
+     </fieldset>
+    <fieldset>
+        <legend>{$plugin_blogger__welche_felder_sollen_fr_die_verschlagwortung_genutzt_werden}</legend>
+        <input type="checkbox" id="typ1" name="plugin_blogger__feldtypen_fuer_schlagworte[1]" {if $blogger_config.blogger__feldtypen_fuer_schlagworte.1==1} checked="checked" {/if} value="1"/><label for="typ1">{$plugin_blogger_headline}</label><br />
+        <input type="checkbox" id="typ2"  name="plugin_blogger__feldtypen_fuer_schlagworte[2]" {if $blogger_config.blogger__feldtypen_fuer_schlagworte.2==1} checked="checked" {/if} value="1" /><label for="typ2">{$plugin_blogger_inhalt}</label><br />
+        <input type="checkbox" id="typ3"  name="plugin_blogger__feldtypen_fuer_schlagworte[3]" {if $blogger_config.blogger__feldtypen_fuer_schlagworte.3==1} checked="checked" {/if} value="1" /><label for="typ3">{$plugin_blogger_teaser}</label><br />
+        <input type="checkbox" id="typ4"  id="typ1"  name="plugin_blogger__feldtypen_fuer_schlagworte[4]" {if $blogger_config.blogger__feldtypen_fuer_schlagworte.4==1} checked="checked" {/if} value="1" /><label for="typ4">{$plugin_blogger_descrip}</label><br />
+        <input type="checkbox" id="typ5" name="plugin_blogger__feldtypen_fuer_schlagworte[5]" {if $blogger_config.blogger__feldtypen_fuer_schlagworte.5==1} checked="checked" {/if} value="1" /><label for="typ5">{$plugin_blogger_tags}</label><br />
+
+        </fieldset>
+    <fieldset>
+        <legend>Speichern</legend>
+
+        <input class="btn btn-success"
+                                                                          name="save_config_data"
+                                                                  type="submit" value="Speichern" />
+        <br />
+        </fieldset>
+
+</form>
+       <h2>{$plugin_blogger__wortliste_generieren}</h2>
+<p>{$plugin_blogger__klicken_siehier_um_die_wortwolke_neu_zu_setzen}</p>
+<form action="" method="post">
+    <fieldset><br />
+    <input class="btn btn-info" name="create_wordlist" type="submit" value="Wörterliste generieren" />
+        <br />
+        </fieldset>
+</form>
+{if $is_dev}
+
+#start#<!-- END DIV --><br />
+
+
+<span class="ignore"></span>
+<!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+<div class="rapid_form">
+    <form action="" name="" method="POST">
+        <!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+        <input type="hidden" name="tb_name" value="plugin_blogger_shortcut_config" />
+        <!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+        <input type="hidden" name="php_datei_name" value="blogger_class" />
+        <!-- Das Standarpr�fix f�r die Ids -->
+        <input type="hidden" name="praefix" value="blogger_" />
+        <!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+        <input type="hidden" name="praefix_spezial" value="blogger_" />
+        <!-- Das Tool einbinden -->
+        {include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+</div>
+
+{/if}

@@ -1,0 +1,35 @@
+.awesome{
+	background: #222 url(./images/alert-overlay.png) repeat-x;
+	display: inline-block;
+	padding: 5px 10px 6px;
+	color: #fff;
+	text-decoration: none;
+	font-weight: bold;
+	line-height: 1;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: 0 2px 4px #999;
+	-webkit-box-shadow: 0 2px 4px #999;
+	text-shadow: 0 -1px 1px #222;
+	border-bottom: 1px solid #222;
+	position: relative;
+	cursor: pointer;
+
+}
+.large.awesome {
+	font-size: 14px;
+	padding: 8px 14px 9px;
+}
+.center {
+	width:240px;
+	margin:0 auto;
+	padding:10px;
+}
+#hrefbrowser_link,
+#srcbrowser_link {
+	color:#fff;
+
+}
+#prev {
+	height:200px;
+}

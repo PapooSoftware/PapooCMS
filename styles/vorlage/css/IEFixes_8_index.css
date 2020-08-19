@@ -1,0 +1,22 @@
+.container_12 .grid_7 fieldset,
+#spamschutz fieldset {
+position:relative;
+margin-top:25px;
+padding-left:10px;
+
+}
+.container_12 .grid_7 legend,
+#spamschutz legend {
+position:relative;
+margin-top:-25px;
+margin-left:-20px;
+}
+
+#mod_suchbox
+{
+	margin-bottom: -25px;
+}
+
+#mod_suchbox #searchbutton{
+	padding-bottom: 30px;
+}

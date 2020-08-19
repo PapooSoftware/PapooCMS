@@ -1,0 +1,29 @@
+{if $IS_ADMIN}
+	{foreach item=menu from=$menuinput_data}
+		<fieldset>
+		<legend>{$system_config_emailadmin}</legend>
+			<label for="email">{$message_299}</label><br />
+			<input type="text" id="email" name="email" size="30" value="{$menu.email}" title="" />
+			<br />
+		</fieldset>
+		<fieldset>
+			{*<!-- (eMail)-Benachrichtigungen bei: -->*}
+			<legend>{$message_508}</legend>
+			<input type="checkbox" {$menu.checkedbenach_neueruser} id="benach_neueruser" name ="benach_neueruser" value="1" />
+			<label for="benach_neueruser" style="width:50%">{$message_509}</label><br />
+			{*<!-- Soll angezeigt werden, wie oft der Artikel schon besucht wurde?:-->*}
+			<input type="checkbox" {$menu.checkedbenach_neu_forum} id="benach_neu_forum" name ="benach_neu_forum" value="1" />
+			<label for="benach_neu_forum" style="width:50%">{$message_510}</label><br />
+			<input type="checkbox" {$menu.checkedbenach_neu_gaestebuch} id="benach_neu_gaestebuch" name ="benach_neu_gaestebuch" value="1" />
+			<label for="benach_neu_gaestebuch" style="width:50%">{$message_511}</label><br />
+			<input type="checkbox" {$menu.checkedbenach_neu_kommentar} id="benach_neu_kommentar" name ="benach_neu_kommentar" value="1" />
+			<label for="benach_neu_kommentar" style="width:50%">{$message_512}</label><br />
+		</fieldset>
+		<fieldset>
+			<legend>{$system_config_benachrichtungsadresse}</legend>
+			<label for ="benach_email">{$message_513}</label><br />
+			<input type="text" id="benach_email" name="benach_email" size="30" value="{$menu.benach_email}" title="" />
+		</fieldset>
+		<br />
+	{/foreach}
+{/if}

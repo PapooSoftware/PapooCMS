@@ -1,0 +1,195 @@
+# ===============================================================================
+# Dies ist die .htaccess Datei um sprechende urls auf dem Apache nutzen zu können
+# Dafür muß auf dem Server das mod_rewrite Modul aktiviert sein
+# Zeilen mit # davor sind auskommentiert werden nicht beachtet
+# !!ACHTUNG!!
+# Achten Sie darauf das sich keine index.html im gleichen Verzeichnis befindet.
+# ================================================================================
+
+#=================================================================================
+# Im ersten Schritt wird die Zip Kodierung aktiviert
+# und verschiedene Mime Typen aktiviert
+#=================================================================================
+
+AddEncoding gzip .svgz
+AddType audio/ogg .oga ogg
+AddType application/octet-stream .safariextz
+AddType application/vnd.ms-fontobject .eot
+AddType application/x-font-woff .woff
+AddType application/x-chrome-extension .crx
+AddType application/x-shockwave-flash .swf
+AddType application/x-xpinstall .xpi
+AddType font/truetype .ttf
+AddType font/opentype .otf
+AddType image/svg+xml .svg svgz
+AddType image/x-icon .ico
+AddType image/webp .webp
+AddType text/cache-manifest .appcache
+AddType text/x-component .htc
+AddType video/ogg .ogv
+AddType video/mp4 .mp4
+AddType video/webm .webm
+
+#=================================================================================
+# Festlegen wie lange Dateien eines bestimmten Typs im Cache des
+# Browsers verbleiben sollen.
+#=================================================================================
+<ifModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 month"
+    ExpiresByType text/html "access plus 1 second"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType text/javascript "access plus 2 months"
+    ExpiresByType application/x-javascript "access plus 2 months"
+    ExpiresByType application/javascript "access plus 2 months"
+</ifModule>
+
+FileETag MTime Size
+<ifmodule mod_expires.c>
+  <filesmatch "\.(jpg|gif|png|css|js|swf|ico)$">
+       ExpiresActive on
+       ExpiresDefault "access plus 1 year"
+   </filesmatch>
+</ifmodule>
+
+#=================================================================================
+# Bestimmte Header setzen
+#=================================================================================
+<ifModule mod_headers.c>
+    <filesMatch "\\.(ico|pdf|flv|jpg|jpeg|png|gif|swf)$">
+        Header set Cache-Control "max-age=2592000, public"
+    </filesMatch>
+    <filesMatch "\\.(css)$">
+        Header set Cache-Control "max-age=2592000, public, Vary Accept-Encoding"
+    </filesMatch>
+    <filesMatch "\\.(js)$">
+        Header set Cache-Control "max-age=2592000, private, Vary Accept-Encoding"
+    </filesMatch>
+    <filesMatch "\\.(xml|txt)$">
+        Header set Cache-Control "max-age=2592000, public, must-revalidate"
+    </filesMatch>
+    <filesMatch "\\.(html|htm|php)$">
+        Header set Cache-Control "max-age=1, private, must-revalidate"
+    </filesMatch>
+</ifModule>
+
+<IfModule mod_headers.c>
+    Header unset ETag
+</IfModule>
+FileETag None
+
+#=================================================================================
+# Dynamisch Komprimierung für die Ausgabe aktivieren.
+# Die komprimierte Übertragung von Inhalten spart nicht nur Bandbreite und Traffic,
+# sondern verringert auch die Ladezeit für den Besucher und verbessert damit das Surferlebnis.
+# Außerdem werden durch die kürze Verbindungszeit des Besuchers zum Server
+# Resourcen schneller wieder freigegeben.
+#
+# Achtung! Standardmäig deaktivert; alleine die nachfrage führt auf manchen Servern zu einem 500er.
+#=================================================================================
+#<IfModule mod_filter.c>
+#    AddOutputFilterByType DEFLATE application/javascript application/json application/pdf application/rss+xml application/vnd.ms-fontobject application/x-httpd-php application/x-javascript application/x-shockwave-flash application/xml
+#    AddOutputFilterByType DEFLATE image/gif image/jpeg image/jpg image/png image/x-icon
+#    AddOutputFilterByType DEFLATE text/css text/htm text/html text/plain text/javascript text/x-component text/xml
+#    AddOutputFilterByType DEFLATE video/mp4
+#</IfModule>
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/javascript application/json application/pdf application/rss+xml application/vnd.ms-fontobject application/x-httpd-php application/x-javascript application/x-shockwave-flash application/xml
+    AddOutputFilterByType DEFLATE image/gif image/jpeg image/jpg image/png image/x-icon
+    AddOutputFilterByType DEFLATE text/css text/htm text/html text/plain text/javascript text/x-component text/xml
+    AddOutputFilterByType DEFLATE video/mp4
+</IfModule>
+
+# Start der Rewrite Engine in Apache
+# (Funktioniert nicht mit IIS Servern)
+# Fragen Sie im Zweifelsfall Ihren Provider!
+# ==================================
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+
+    # =========================================================
+    # entkommentieren auf manchen 1und1 und Servern anderer Provider z.B. Domainfactory
+    # Um die Basis einzustellen auf die verwiesen wird
+    # Hier kann auch das Unterverzeichnis stehen z.B.
+    # RewriteBase /ihr_unter_verzeichnis/ (mit Slash am Ende!)
+    # =================================================
+    # RewriteBase /
+
+
+    # =========================================================
+    # Rewrite von nicht-www auf www
+    # Rewrite von http:// auf https: umstellen (hat nix mit 1und1 speziell zu tun))
+    # Damit es keinen doppelten Content in den Suchmaschinen gibt (von www.seite.de und seite.de).
+    # Hier natürlich noch Ihren Domainnamen anpassen!!!
+    # Und anschließend die Kommentarzeichen entfernen
+    # =================================================
+    #RewriteCond %{HTTP_HOST} !^www\. [NC]
+    #RewriteRule .* https://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,NE,L]
+
+    #RewriteCond %{HTTPS} off
+    #ODER bei loadbalancer #RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    #RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [R=301,NE,L]
+
+    # =========================================================
+    # 1. ReWrite für "echte" Verzeichnisse unterdrücken
+    # Hier sollten alle echten Verzeichnisse stehen die auf der
+    # root Ebene der Installation vorhanden sind.
+    # Alle Papoo Verzeichnisse sind hier schon aufgelistet.
+    # Ihre Verzeichnisse ergänzen Sie mit der folgenden Synthax
+    # RewriteRule ^ihr_unter_verzeichnis/(.*)$ - [L,NE]
+    # =========================================================
+    RewriteRule ^bilder/(.*)$ - [L,NE]
+    RewriteRule ^css/(.*)$ - [L,NE]
+    RewriteRule ^dokumentation/(.*)$ - [L,NE]
+    RewriteRule ^dokumente/(.*)$ - [L,NE]
+    RewriteRule ^editorbild/(.*)$ - [L,NE]
+    RewriteRule ^images/(.*)$ - [L,NE]
+    RewriteRule ^interna/(.*)$ - [L,NE]
+    RewriteRule ^js/(.*)$ - [L,NE]
+    RewriteRule ^lib/(.*)$ - [L,NE]
+    RewriteRule ^plugins/(.*)$ - [L,NE]
+    RewriteRule ^setup/(.*)$ - [L,NE]
+    RewriteRule ^styles/(.*)$ - [L,NE]
+    RewriteRule ^styles_default/(.*)$ - [L,NE]
+    RewriteRule ^templates/(.*)$ - [L,NE]
+    RewriteRule ^templates_c/(.*)$ - [L,NE]
+    RewriteRule ^video/(.*)$ - [L,NE]
+    RewriteRule ^robots.txt$ - [L,NE]
+    RewriteRule ^sitemap.xml$ - [L,NE]
+    RewriteRule ^favicon.ico$ - [L,NE]
+    RewriteRule ^favicon.png$ - [L,NE]
+
+    # 2. Regeln für ReWrite der URLS
+    # Hier werden aus den sprechenden urls wieder Variablen umgesetzt die
+    # das Papoo System verstehen kann
+    # ====================================================================
+    RewriteRule ^([^/]*)/([^/]*)/([^/]*)/([^/]*)/([^/]*)/([^/]*)/([^/]*)/([^/]*)/([^/]*)$ index.php?var1=$1&var2=$2&var3=$3&var4=$4&var5=$5&var6=$6&var7=$7&var8=$8&var9=$9 [QSA,L]
+    RewriteRule ^([^/]*)/([^/]*)/([^/]*)/([^/]*)/([^/]*)/([^/]*)/([^/]*)/([^/]*)$ index.php?var1=$1&var2=$2&var3=$3&var4=$4&var5=$5&var6=$6&var7=$7&var8=$8 [QSA,L]
+    RewriteRule ^([^/]*)/([^/]*)/([^/]*)/([^/]*)/([^/]*)/([^/]*)/([^/]*)$ index.php?var1=$1&var2=$2&var3=$3&var4=$4&var5=$5&var6=$6&var7=$7 [QSA,L]
+    RewriteRule ^([^/]*)/([^/]*)/([^/]*)/([^/]*)/([^/]*)/([^/]*)$ index.php?var1=$1&var2=$2&var3=$3&var4=$4&var5=$5&var6=$6 [QSA,L]
+    RewriteRule ^([^/]*)/([^/]*)/([^/]*)/([^/]*)/([^/]*)$ index.php?var1=$1&var2=$2&var3=$3&var4=$4&var5=$5 [QSA,L]
+    RewriteRule ^([^/]*)/([^/]*)/([^/]*)/([^/]*)$ index.php?var1=$1&var2=$2&var3=$3&var4=$4 [QSA,L]
+    RewriteRule ^([^/]*)/([^/]*)/([^/]*)$ index.php?var1=$1&var2=$2&var3=$3 [QSA,L]
+    RewriteRule ^([^/]*)/([^/]*)$ index.php?var1=$1&var2=$2 [QSA,L]
+    RewriteRule ^([^/]*).html$ index.php?var1=$1 [QSA,L]
+
+    #=====================================================================
+    # Diese Zeile auskommentieren wenn auch
+    # Aufrufe ohne / oder .html am Ende gewünscht sind
+    #=====================================================================
+    #RewriteRule ^([^/]*)$ index.php?var1=$1 [QSA,L]
+
+</IfModule>
