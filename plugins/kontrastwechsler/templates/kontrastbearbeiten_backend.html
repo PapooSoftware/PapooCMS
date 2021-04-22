@@ -1,0 +1,43 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+<link rel="stylesheet" type="text/css" href="../plugins/kontrastwechsler/css/backend.css"/>
+<div class="artikel">
+	<form action="" method="post">
+		<!-- END DIV -->
+		<fieldset>
+			<input inputmode="latin" type="hidden" name="kontrast_id"
+				   value="{$kontrastwechsler.kontrastID|escape}"/>
+			<p>
+				<label for="name">{$message.plugin.kontrastwechsler.contrast_name}</label>
+				<input inputmode="latin" type="text" name="kontrast_name" maxlength="64"
+					   value="{$kontrastwechsler.kontrastName|escape}"/>
+			</p>
+			<p>
+				<label for="description">{$message.plugin.kontrastwechsler.aria_label}</label>
+				<textarea inputmode="latin" name="kontrast_description" maxlength="255">{$kontrastwechsler.kontrastDescription|escape}</textarea>
+			</p>
+			<p>
+				<label for="text-color">{$message.plugin.kontrastwechsler.text_color}</label>
+				<input type="color" name="kontrast_text-color"
+					   value="{$kontrastwechsler.kontrastTextColor|escape}"/>
+			</p>
+			<p>
+				<label for="input-background-color">{$message.plugin.kontrastwechsler.background_color}</label>
+				<input type="color" name="kontrast_background-color"
+					   value="{$kontrastwechsler.kontrastBackgroundColor|escape}"/>
+			</p>
+			<p>
+				<button type="submit" class="btn btn-success" name="editContrast" value="save">
+					{$message.plugin.kontrastwechsler.save}
+				</button>
+			</p>
+		</fieldset>
+	</form>
+</div>
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

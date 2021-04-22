@@ -1,0 +1,46 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+<h2>Messe-Reminder</h2>
+
+{if $plugin.messe_reminder.updated}
+<div class="message">Ihre Änderungen wurden übernommen.</div>
+{/if}
+{if $plugin.messe_reminder.update_failed}
+<div class="error">Das Speichern in die Datenbank ist fehlgeschlagen!</div>
+{/if}
+{if $plugin.messe_reminder.edit}
+{include file=../../../plugins/messe_reminder/templates/edit.sub.html}
+{else}
+<h3>Einträge</h3>
+
+<table width="99%">
+<thead>
+	<tr><th>Messe</th><th>E-Mail-Adresse</th><th>Letzte Erinnerung</th><th>Intervall</th><th style="width: 5ex;">Aktiv</th><th style="width: 13ex;"></th></tr>
+</thead>
+<tbody>
+{foreach item=dat from=$plugin.messe_reminder.messe_list }
+	<tr>
+		<td>{$dat.name}</td>
+		<td>{$dat.email}</td>
+		<td>{$dat.last_timestamp}</td>
+		<td>{if $dat.interval == 0}&mdash;{else}{$dat.interval} Wochen{/if}</td>
+		<td style="text-align: center;"><input disabled="disabled" readonly="readonly" type="checkbox" {if $dat.enabled}checked="checked"{/if} class="activecheckbox" name="active-{$dat.id}" /></td>
+		<td style="text-align: center"><a href="{$fl_link}&amp;messe_id={$dat.id}">Bearbeiten</a></td>
+	</tr>
+{/foreach}
+</tbody>
+</table>
+{/if}
+   
+</div>
+<script type="text/javascript" src="../plugins/messe_reminder/js/listcheckboxes.js"></script>
+
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

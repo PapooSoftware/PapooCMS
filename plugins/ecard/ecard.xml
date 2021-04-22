@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin version="3.7">
+
+<name>ECard Plugin</name>
+<beschreibung_de><![CDATA[ECard Plugin - zur Versendung von E-Cards.]]></beschreibung_de>
+<version>1.0</version>
+
+<datum>31.03.2009</datum>
+
+<autor>
+	<name>Stephan Bergmann / Carsten Euwens</name>
+	<kontakt><![CDATA[Stephan Bergmann
+Rembrandtstr. 10/1
+72768 Reutlingen]]></kontakt>
+	<email>S.Bergmann@XiMiX.de // info@papoo.de</email>
+	<telefon>07121 / 60 33 10 // 00228 280 566 8</telefon>
+</autor>
+
+<menue>
+	<eintrag_de>ECard Plugin</eintrag_de>
+	<icon>ecard/bilder/ecard.png</icon>
+	<link>plugin:ecard/templates/ecard_back.html</link>
+	
+	<submenue>
+		<eintrag_de>Karten Vorlagen</eintrag_de>
+		<icon>ecard/bilder/ecard.png</icon>
+		<link>plugin:ecard/templates/ecard_back_cards.html</link>
+	</submenue>
+	<submenue>
+		<eintrag_de>Galerien</eintrag_de>
+		<icon>ecard/bilder/ecard.png</icon>
+		<link>plugin:ecard/templates/ecard_back_galerien.html</link>
+	</submenue>
+	<submenue>
+		<eintrag_de>Einbindung</eintrag_de>
+		<icon>ecard/bilder/ecard.png</icon>
+		<link>plugin:ecard/templates/ecard_back_einbindung.html</link>
+	</submenue>
+	<submenue>
+		<eintrag_de>Einstellungen</eintrag_de>
+		<icon>ecard/bilder/ecard.png</icon>
+		<link>plugin:ecard/templates/ecard_back_einstellungen.html</link>
+	</submenue>
+</menue>
+
+<klasse>
+	<name>ecard</name>
+	<datei>ecard/lib/ecard_class.php</datei>
+</klasse>
+
+
+<css>ecard/css/ecard.css</css>
+
+
+
+
+<datenbank>
+	<installation>ecard/sql/ecard_install.sql</installation>
+	<deinstallation>ecard/sql/ecard_deinstall.sql</deinstallation>
+</datenbank>
+
+
+<messages>ecard/messages</messages>
+
+</plugin>

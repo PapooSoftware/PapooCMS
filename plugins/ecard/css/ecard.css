@@ -1,0 +1,16 @@
+.ecard_liste img {
+	float:left;
+	margin-right:20px;
+}
+.ecard_liste {
+	
+		float:left;
+	width:100%;
+	margin-bottom:20px;
+}
+.ecard_liste .subc {
+	float:left;
+	width:100%;
+	margin-bottom:40px;
+
+}

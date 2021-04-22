@@ -1,0 +1,26 @@
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+{if $eintragmakeartikelfertig}
+<!-- Die Artikel wurden durchgeloopt-->
+<h2>{$messe_20}</h2>
+{/if}
+{if $exist}
+<!-- Der Eintrag exisitiert schon-->
+<h2 style="color:red;">{$messe_5}.</h2>
+{/if}
+
+{if $neuereintrag}
+<!-- Es soll ein neuer Eintrag erstellt werden -->
+{include file=../../../plugins/messeverwaltung/templates/messeverwaltungformeingabe.html}
+  
+{/if}
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}

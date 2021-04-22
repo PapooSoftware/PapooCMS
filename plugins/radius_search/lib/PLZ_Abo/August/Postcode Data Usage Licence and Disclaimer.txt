@@ -1,0 +1,77 @@
+
+########################################################
+##Postcode Data Usage Licence and Disclaimer Agreement##
+########################################################
+
+DISCLAIMER
+-----------
+In compiling the information ZIPCodeSoft has used its best endeavours to ensure that the information is correct and current at the time of publication, but takes no responsibility for any error or defect therein. 
+ZIPCodeSoft shall not be liable for any loss or damage arising from the use of, or reliance placed on, any information provided by it. 
+
+LICENCE
+-----------
+READ THIS LICENSE AGREEMENT BEFORE USING THIS PRODUCT. IT DEFINES YOUR RIGHTS AND OBLIGATIONS. 
+
+THIS LIMITED USE LICENSE AGREEMENT IS A LEGAL AGREEMENT BETWEEN YOU, THE END USER, AND ZIPCodeSoft BY RECEIVING THE PRODUCT OR INDIVIDUAL IMAGES BY ANY MEANS, ELECTRONIC OR OTHERWISE, OPENING THE CD LICENSE ENVELOPE OR BREAKING THE SHRINKWRAP, YOU AGREE TO BE BOUND BY ALL TERMS AND CONDITIONS OF THIS LICENSE AGREEMENT. 
+
+ONCE DELIVERY HAS BEEN RECEIVED, ELECTRONIC OR OTHERWISE, ALL SALES FINAL, NO REFUNDS. 
+
+Grant of License. This license is not a sale. ZIPCodeSoft grants you the non-exclusive, non-transferable license to use the databases and scripts contained on this CD or downloaded collection (herein called the "Product") subject to the conditions contained herein. You may not rent, loan, disseminate, publish electronically or by printed media, sell, sublicense, assign, transfer, or grant any rights to this Agreement or the databases and scripts contained hereon, or grant rights to any compilation, derivative or collective work containing such databases and scripts to any other person or organization without prior written consent of ZIPCodeSoft 
+
+Usage Rights. You may: 
+
+a. Install the Product on only one computer at any one time. 
+
+b. Physically transfer the Product from one computer to another provided the Product is used on only one computer at a time. 
+
+c. Make one copy of the Product for backup or archival purposes. 
+
+d. You may use all files in a single application (i.e., within one website, ONE domain), free from copyright infringement, whether such application is for free or for fee. Use of this file on more than one computer is prohibited without prior written consent except when necessary for the development of a single web site. 
+
+Prohibitions. You may not: 
+
+a. Use the Product on more than one computer at a time. 
+
+b. Sell the Product; rent the Product; lease or lend the Product; publish the Product electronically; distribute the Product by any means including online auction, internet 'virtual world' sites, direct mail, retail, mail order or other means; or publicly display the Product. 
+
+d. Use or permit the use of the databases and scripts from this Product, or any part thereof, as a trademark or service mark, or claim any proprietary rights of any kind in the databases and scripts or any part thereof. 
+
+e. Post or permit the posting of any databases and scripts from this Product on any internet 'virtual world' enterprise, electronic bulletin board, blog, or website, even when contained in another product. 
+
+f. Distribute, or permit the distribution of any databases and scripts from the Product on any internet 'virtual world' enterprise, electronic bulletin board, blog, or website as freeware or for a fee. 
+
+g. Sell or distribute any databases and scripts from this Product as stock files, in any size or format, either alone or as part of a digital file library or other product. 
+
+h. Use or permit the use of the databases and scripts from this Product, or any part thereof, including derivative works, in any product for sale or resale or for use by others, whether or not for sale or resale, without written permission from ZIPCodeSoft 
+
+Copyright. Title and all copyrights, trademarks and all other conceivable intellectual property rights related to the Product, documentation and any copy made by you are owned by ZIPCodeSoft and are protected by BVI copyright laws, international treaty provisions and all applicable law. Unauthorized copying or transmission to others of the Product or failure to comply with the above restrictions, will result in automatic termination of this license and will make available to ZIPCodeSoft other legal remedies. 
+
+Warranty. ZIPCodeSoft DISCLAIMS ALL WARRANTIES, WHETHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF THE MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE WITH RESPECT TO THE PRODUCT. ZIPCodeSoft DOES NOT WARRANT THAT THE OPERATION OF THE PRODUCT WILL BE UNINTERRUPTED OR ERROR FREE, OR THAT THE PRODUCT WILL MEET YOUR SPECIFIC REQUIREMENTS AND IS DELIVERED "AS IS" AND WITH ALL FAULTS. ADDITIONAL STATEMENTS SUCH AS PRESENTATIONS, WHETHER ORAL OR WRITTEN, DO NOT CONSTITUTE WARRANTIES BY ZIPCodeSoft AND SHOULD NOT BE RELIED UPON. 
+
+Warranty on Product shall be limited to replacement of a defective Product only. Verification of original purchase required. For replacement of defective Product contact: ZIPCodeSoft, email to: info@zipcode-radius.com. 
+
+Limitation of Liability. IN NO EVENT WILL ZIPCodeSoft AND ITS DISTRIBUTORS, RESELLERS, OR AGENTS BE LIABLE FOR ANY DAMAGES, INCLUDING LOSS OF DATA, LOST PROFITS, LOST SAVINGS, COST OF COVER OR OTHER SPECIAL, INCIDENTAL, CONSEQUENTIAL OR INDIRECT DAMAGES ARISING FROM THE USE OF THE PRODUCT, HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY. THIS LIMITATION WILL APPLY EVEN IF ZIPCodeSoft, ITS DISTRIBUTORS OR AGENTS HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. YOU ACKNOWLEDGE THAT THE LICENSE FEE REFLECTS THIS ALLOCATION OF RISK. SOME JURISDICTIONS DO NOT ALLOW THE LIMITATION OR EXCLUSION OF LIABILITY FOR INCIDENTAL OR CONSEQUENTIAL DAMAGES, SO THE ABOVE LIMITATION MAY NOT APPLY TO YOU. 
+
+Termination. This license is in force until it is terminated. If you fail to comply with any terms of this Agreement, your license is automatically terminated, without notice. Upon termination, you must destroy all copies of the Product and documentation in your possession, custody or control. 
+
+General Provisions. The user may not sublicense, assign or transfer this Agreement or the Product. This Agreement will be governed by the laws of the State of the British Virgin Islands. This Agreement is the entire Agreement between us and supersedes any other communications or advertising with respect to the Product. If any provision of this Agreement is held invalid, the remainder of this Agreement shall continue in full force and effect. 
+
+YOU ACKNOWLEDGE THAT YOU HAVE READ THIS AGREEMENT, YOU UNDERSTAND THIS AGREEMENT, AND UNDERSTAND THAT BY CONTINUING THE INSTALLATION OF THE PRODUCT, DOWNLOADING THE PRODUCT, BY LOADING OR RUNNING THE PRODUCT, OR BY PLACING OR COPYING THE PRODUCT ONTO YOUR COMPUTER HARD DRIVE OR RAM, YOU AGREE TO BE BOUND BY THE TERMS AND CONDITIONS OF THIS AGREEMENT. YOU FURTHER AGREE THAT, EXCEPT FOR WRITTEN SEPARATE AGREEMENTS BETWEEN ZIPCodeSoft AND YOU, THIS AGREEMENT IS A COMPLETE AND EXCLUSIVE STATEMENT OF THE RIGHTS AND LIABILITIES OF THE PARTIES HERETO. THIS AGREEMENT SUPERSEDES ALL PRIOR ORAL AGREEMENTS, PROPOSALS OR UNDERSTANDINGS, AND ANY OTHER COMMUNICATIONS BETWEEN ZIPCodeSoft AND YOU RELATING TO THE SUBJECT MATTER OF THIS AGREEMENT. 
+
+If you need clarification or have any questions, or have any special licensing requests, please contact us at hq@zipcodesoft.com. 
+
+
+
+Infotec Gestiones Informaticas Ltd: ZIPcodeSoft Enterprise License Agreement
+
+
+Usage Rights. You may: 
+
+a. Use the Product on all computers within your enterprise. 
+
+b. You may use all databases and scripts in multiple applications (i.e., within websites, multiple domains) run by your enterprise, free from copyright infringement. 
+
+All other terms and conditions as stipulated in the Single License Agreement shall remain in full force. 
+
+© Copyright 2012 ZIPCodeSoft
+

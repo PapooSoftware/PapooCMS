@@ -1,0 +1,77 @@
+{if $module_aktiv.mod_kontrastwechsler_frontend}
+<!-- MODUL: kontrastwechsler -->
+<div id="mod_kontrastwechsler">
+	{if $moduleStyleID == 3}
+		<style>{$moduleStyleCSS}</style>
+	{elseif $moduleStyleID == 2}
+		<link rel="stylesheet" type="text/css" href="{$slash}plugins/kontrastwechsler/css/kontrast_style_2.css"/>
+	{elseif $moduleStyleID == 1}
+		<link rel="stylesheet" type="text/css" href="{$slash}plugins/kontrastwechsler/css/kontrast_style_1.css"/>
+	{/if}
+	<link rel="stylesheet" type="text/css" href="{$slash}plugins/kontrastwechsler/css/contrast.css" id="currentStyle"/>
+	<style id="currentStyleSheet" data-kontrast="{$plugin.kontrastwechsler.initialStyle|json_encode}"></style>
+	<script id="contrastChangerConfig">
+		{literal}
+		window.ContrastChanger = {
+			config: {
+				webpath: {/literal}{$slash|json_encode}{literal},
+				initialStyle: {/literal}{$plugin.kontrastwechsler.initialStyle|json_encode}{literal},
+			}
+		};
+		{/literal}
+	</script>
+	<script type="text/javascript" src="{$slash}plugins/kontrastwechsler/js/contrast.js"></script>
+	<div class="row" id="kopf-zeile">
+		<div id="kopfzeile_mitte">
+			<div id="kontrast_wechsel">{$message.plugin.kontrastwechsler.kontrast}
+				{foreach item=kontrast from=$kontraste}
+					<a href="javascript:void()"
+					   data-kontrast="{$kontrast.kontrastID}"
+					   title="{$kontrast.description}"
+					   aria-label="{$kontrast.description}"
+					   style="color:{$kontrast.textcolor}!important; background-color:{$kontrast.backgroundcolor}!important;">a</a>
+				{/foreach}
+				<a href="javascript:void()"
+				   id="contrast_weg"
+				   data-kontrast="reset"
+				   title="Kontrast entfernen"
+				   aria-label="Kontrast entfernen"
+				   style="color:black!important; background-color:white!important;">/</a>
+			</div>
+			<script>{$module_aktiv.mod_efafontsize_front}</script>
+			{if !isset($module_aktiv.mod_efafontsize_front) && $efa == 1 ||
+			isset($module_aktiv.mod_efafontsize_front) && $module_aktiv.mod_efafontsize_front == false && $efa == 1}
+				<div id="schrift_wechsler">
+					<!-- MODUL: efa_fontsize -->
+					<div class="modul" id="mod_efa_fontsize">
+						<span class="mod_efa_fontsize_text">{$message.plugin.kontrastwechsler.font_size}</span>
+						<script type="text/javascript">
+							//default text size as percentage of user default
+							var efa_default = {$efa_fontsize_spez.0.efa_fontsize_spez_schriftgre_default_wert|escape:"html"};
+							//percentage to increase/decrease font size
+							var efa_increment = {$efa_fontsize_spez.0.efa_fontsize_spez_steigerung_pro_schritt_in_|escape:"html"};
+							var efa_max_size = {$efa_fontsize_spez.0.efa_fontsize_spez_maximale_schriftgre_in_|escape:"html"};
+							var efa_min_size = {$efa_fontsize_spez.0.efa_fontsize_spez_minimale_schriftgre_in_|escape:"html"}.01;
+							var efa_fontSize = new Efa_Fontsize(efa_increment, efa_bigger, efa_reset, efa_smaller, efa_default);
+
+							if (efa_fontSize) {ldelim}
+								efa_fontSize.efaInit();
+							{rdelim}
+
+							if (efa_fontSize) {ldelim}
+								efa_bigger[2] = "{$mod_efa_fontsize.bigger}";
+								efa_reset[2] = "{$mod_efa_fontsize.normal}";
+								efa_smaller[2] = "{$mod_efa_fontsize.smaller}";
+								var efa_fontSize_lokalisiert = new Efa_Fontsize(efa_increment, efa_bigger, efa_reset, efa_smaller, efa_default);
+								document.write(efa_fontSize_lokalisiert.allLinks);
+							{rdelim}
+						</script>
+					</div>
+					<!-- ENDE MODUL: efa_fontsize -->
+				</div>
+			{/if}
+		</div>
+	</div>
+</div>
+<!-- ENDE MODUL: kontrastwechsler -->
+{/if}

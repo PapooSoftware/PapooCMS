@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<plugin version="1">
+
+<name>Flexslider</name> 
+
+<beschreibung_de><![CDATA[ Plugin zur Verwaltung eines, oder mehrerer, sich wechselnder Bilder. Diese können für jeden Menüpunkt separat angegeben und jeweils mit einem Link versehen werden.
+Die Platzierung im Frontend erfolgt durch Einfügen eines Moduls an der gewünschten Stelle.]]>
+</beschreibung_de>
+
+<version>1.0</version>
+<datum>11.06.2013</datum>
+
+<autor>
+	<name>Yörn Jünger</name>
+	<email>yj@papoo.de</email>
+</autor>
+
+<menue>
+	<eintrag_de>Flexslider</eintrag_de>
+	<icon>flexslider/bilder/menue_icon.gif</icon>
+	<link>plugin:flexslider/templates/back.html</link>
+</menue>
+
+<klasse>
+	<name>flexslider</name>
+	<datei>flexslider/lib/flexslider_class.php</datei>
+</klasse>
+
+<modul>
+	<datei>plugin:flexslider/templates/mod_flexslider.html</datei>
+	<name_de>Plugin: Flexslider</name_de>
+	<beschreibung_de>Modul zur Platzierung des Flexsliders.</beschreibung_de>
+</modul>
+
+<datenbank>
+	<installation>flexslider/sql/flexslider_install.sql</installation>
+	<deinstallation>flexslider/sql/flexslider_deinstall.sql</deinstallation>
+</datenbank>
+
+<css>flexslider/css/flexslider.css</css>
+
+</plugin>

@@ -1,0 +1,43 @@
+{if $module_aktiv.mod_flexslider}
+	<!-- MODUL: flexslider -->
+		<script src="../plugins/flexslider/js/jquery.flexslider-min.js"></script>
+		<script>
+			{literal}
+				$(function(){
+					$('.flexslider').flexslider({
+						animation: "fade",
+						slideshow: true,
+						slideshowSpeed: 700000,
+						animationDuration: 600,
+						prevText: "Previous",
+						nextText: "Next",
+						controlNav: true,
+					})
+				})
+			{/literal}
+		</script>
+		<div class="modul" id="mod_flexslider">
+			<div class="flexslider">
+				<ul class="slides">
+					{foreach item=wechselbild from=$plugins.flexslider name=wechselbilder}
+						<li>
+							<img {$wechselbild.fs_bild} />
+							<div class="flex-caption">
+								<div class="slide-text ">
+									{if $wechselbild.fs_ueberschrift_1}
+										<p class="slide-text-1">{$wechselbild.fs_ueberschrift_1}</p>
+									{/if}
+									{if $wechselbild.fs_ueberschrift_2}
+										<p class="slide-text-2">{$wechselbild.fs_ueberschrift_2}</p>
+									{/if}
+								</div>
+								<p class="indent-bot-10">{$wechselbild.fs_text}</p>
+								<a class="slide-button" href="#{$wechselbild.fs_link}">Click Here!</a>
+							</div>
+						</li>
+					{/foreach}
+				</ul>
+			</div>
+		</div>
+	<!-- ENDE MODUL: flexslider -->
+{/if}

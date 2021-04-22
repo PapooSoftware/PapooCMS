@@ -1,0 +1,104 @@
+{if $IS_ADMIN}{*<!-- Wird nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+<link rel="stylesheet" type="text/css" href="{$css_path}/backend.css"/>
+<div class="artikel">
+	<h1>{$message.plugin.kontrastwechsler.main_header}</h1>
+	<p>{$message.plugin.kontrastwechsler.main_description}</p>
+
+	{if $smarty.get.add_success == 1}
+		<div class="alert alert-success">
+			<strong>{$message.plugin.kontrastwechsler.add_success}</strong>
+		</div>
+	{/if}
+	{if $smarty.get.edit_success == 1}
+		<div class="alert alert-success">
+			<strong>{$message.plugin.kontrastwechsler.edit_success}</strong>
+		</div>
+	{/if}
+	{if $smarty.get.delete_success == 1}
+		<div class="alert alert-success">
+			<strong>{$message.plugin.kontrastwechsler.delete_success}</strong>
+		</div>
+	{/if}
+	{if $smarty.get.edit_css_success == 1}
+		<div class="alert alert-success">
+			<strong>{$message.plugin.kontrastwechsler.edit_css_success}</strong>
+		</div>
+	{/if}
+
+	<form action="" method="post">
+		<!-- END DIV -->
+		<fieldset>
+			<table class="outside table table-striped">
+				<tr>
+					<td><strong>{$message.plugin.kontrastwechsler.name}</strong></td>
+					<td><strong>{$message.plugin.kontrastwechsler.description}</strong></td>
+					<td><strong>{$message.plugin.kontrastwechsler.background_color}</strong></td>
+					<td><strong>{$message.plugin.kontrastwechsler.text_color}</strong></td>
+					<td></td>
+				</tr>
+
+				{foreach from=$plugin.kontrastwechsler.daten item=kontraste}
+					<tr>
+						<td>{$kontraste.name|escape}</td>
+						<td>{$kontraste.description|escape}</td>
+						<td>
+							<div class="kontrast_text_farbe" style="background-color:{$kontraste.backgroundColor|escape};">
+							</div>
+							{$kontraste.backgroundColor}
+						</td>
+						<td>
+							<div class="kontrast_hintergrund_farbe" style=" background-color:{$kontraste.textcolor|escape};"></div>
+							{$kontraste.textcolor}
+						</td>
+						<td class="kontrast_bearbeiten">
+							<a href="plugin.php?menuid={$aktive_menuid}&template=kontrastwechsler/templates/kontrastbearbeiten_backend.html&kontrast_id={$kontraste.kontrastID}">
+								{$message.plugin.kontrastwechsler.edit}
+							</a>
+							|
+							<a href="plugin.php?menuid={$aktive_menuid}&template=kontrastwechsler/templates/confirm_delete_backend.html&kontrast_id={$kontraste.kontrastID}">
+								{$message.plugin.kontrastwechsler.delete}
+							</a>
+						</td>
+					</tr>
+				{/foreach}
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td class="kontrast_hinzufügen">
+						<a href="plugin.php?menuid={$aktive_menuid}&template=kontrastwechsler/templates/kontrasterstellen_backend.html">
+							{$message.plugin.kontrastwechsler.add}
+						</a>
+					</td>
+				</tr>
+			</table>
+			{*<!-- Weitere Seiten einbinden -->*}
+			{include file=weiter.inc.html}
+		</fieldset>
+		<h2>{$message.plugin.kontrastwechsler.css_header}</h2>
+		<p>{$message.plugin.kontrastwechsler.css_description}</p>
+		<fieldset>
+			{foreach from=$plugin.kontrastwechsler.css item=text}
+				<p>
+					<input inputmode="latin" type="hidden" name="css_id" value="{$text.cssID|escape}"/>
+					<label for="css_test"></label>
+					<textarea rows="25" inputmode="latin" name="css_text">{$text.cssText|replace:'<br />':''|escape}</textarea>
+				</p>
+			{/foreach}
+			<p>
+				<button type="submit" class="btn btn-success" name="editCSS" value="save">
+					{$message.plugin.kontrastwechsler.save}
+				</button>
+			</p>
+		</fieldset>
+	</form>
+</div>
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

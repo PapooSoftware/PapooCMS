@@ -1,0 +1,19 @@
+{if $module_aktiv.mod_ecard_linkanimation}
+	<!-- MODUL: mod_ecard_linkanimation -->
+	
+	{if $plugin.ecard.galerien_liste}
+		
+		<script type="text/javascript" src="{$slash}plugins/ecard/js/ecard_funktionen.js"> </script>
+		
+		<script type="text/javascript">
+			
+			link_ecard_animation_init({$plugin.ecard.einstellungen.thumb_breite}, {$plugin.ecard.einstellungen.thumb_hoehe}, {$plugin.ecard.einstellungen.streifenbild_offset});
+			{foreach item=galerie from=$plugin.ecard.galerien_liste}
+				wechselbild_init({$galerie.bgalg_id}, "{$slash}plugins/ecard/bilder/{$galerie.bgalg_bild}.jpg");
+			{/foreach}
+			
+		</script>
+	{/if}
+		
+	<!-- ENDE MODUL: mod_ecard_linkanimation -->
+{/if}

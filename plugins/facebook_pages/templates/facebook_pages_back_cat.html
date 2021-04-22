@@ -1,0 +1,108 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+{if $is_eingetragen=="ok"}
+  <div class="message">{$plugin_pkalender_wurde_eingetragen}</div>
+  {/if}
+  {if $is_eingetragen=="del"}
+  <div class="message">{$plugin_pkalender_wurde_del}</div>
+  {/if}
+
+  {if $is_eingetragen=="no"}
+  <div class="error">{$plugin_pkalender_wurde_nicht_eingetragen}</div>
+  {/if}
+<div class="artikel">
+{if $lp_form} 
+
+<h1 id="kalender_erstellen__bearbeiten_von_kategorien" class="h1" >{$plugin_kalender_erstellen__bearbeiten_von_kategorien}</h1>
+
+ <p id="kalender_hier_knnen_sie_kategorie_erstellen_oder_bearbeiten" class="h1" >{$plugin_kalender_hier_knnen_sie_kategorie_erstellen_oder_bearbeiten}</p>
+<form method="post" action="" id="formi" style="width:100%">
+<input type="hidden" name="facebook_page_id" value="{$facebook_page.0.facebook_page_id|escape:"html"}" />
+ <fieldset>
+<legend>{$plugin_kalender_kategorie_name}</legend>
+
+
+<label for="facebook_page_der_name_der_kategorie_">{$plugin_facebook_page_der_name_der_kategorie_}{$plugin_error.facebook_page_der_name_der_kategorie_} </label>
+<br />
+<input type="text" name="facebook_page_der_name_der_kategorie_" value="{$facebook_page.0.facebook_page_der_name_der_kategorie_|escape:"html"}" class="facebook_page_der_name_der_kategorie_" id="facebook_page_der_name_der_kategorie_"/>
+<br />
+
+
+ </fieldset><fieldset>
+<legend>{$plugin_kalender_daten_eintragen}</legend>
+			<!-- Speichern -->
+	<input  type="submit" class="submit_back_green" value="{$message_70}" name="formSubmit_save_lanpag" />
+</fieldset><br />
+<br />
+</form>
+
+{else}
+
+ <h1 id="kalender_kategorien_fr_die_facebook_pages" class="h1" >{$plugin_kalender_kategorien_fr_die_facebook_pages}</h1>
+
+ <p id="kalender_erstellen_sie_hier_die_kategorien" class="h1" >{$plugin_kalender_erstellen_sie_hier_die_kategorien}</p>
+
+ <h1 id="kalender_neue_kategorie_erstellen" class="h1" >{$plugin_kalender_neue_kategorie_erstellen}</h1>
+
+ <a href="{$lp_self_link}&lp_cat_id=new" id="kalender_erstellen_sie_hier_eine_neue_kategorie" class="132link" >{$plugin_kalender_erstellen_sie_hier_eine_neue_kategorie}</a>
+
+ <h1 id="kalender_kategorien_bearbeiten" class="h1" >{$plugin_kalender_kategorien_bearbeiten}</h1>
+
+ <p id="kalender_hier_knnen_sie_die_kategorien_bearb" class="h1" >{$plugin_kalender_hier_knnen_sie_die_kategorien_bearb}</p>
+ 
+ 
+ <table style="width:99%;vertical-align:top;">
+  <tr style="vertical-align:top;">
+  <th>{$plugin_kalender_id_des_kalenders}</th>
+  <th>{$plugin_facebook_page_name_der_kategorie2}</th>
+	<th>{$plugin_facebook_page_anzahl_der_seiten}</th>
+		<th style="width:140px;"> {$plugin_kalender_aktion}</th>
+	</tr>
+ {foreach from=$facebook_page_cat_liste item=typ name=xtyp}
+ <tr>
+ <td>{$typ.facebook_page_id|escape:"html"}</td>
+ <td>{$typ.facebook_page_der_name_der_kategorie_|escape:"html"}</td>
+ <td>{$typ.anzahl|escape:"html"}</td>
+
+
+ <td><a href="{$lp_self_link}&lp_cat_id={$typ.facebook_page_id}">  {$plugin_facebook_page_bearbeiten}</a> </td>
+ <tr>
+ {/foreach}
+ </table>
+ 
+ 
+ 
+{/if}
+
+  
+
+{if $is_dev}
+ #start#
+<span class="ignore"></span>
+<br />
+
+  <!-- Der Start Button ist notwendig damit sich das System daran aufhängen kann. -->
+	 <div class="rapid_form">
+		<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="plugin_facebook_page" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="plugin_facebook_page" />
+		<!-- Das Standarpräfix für die Ids -->
+		<input type="hidden" name="praefix" value="facebook_page" />
+		<!-- Das Standarpräfix für die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="facebook_page" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div> {/if}
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

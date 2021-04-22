@@ -1,0 +1,162 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+
+
+	<h1>{$message.plugin.ecard.name}</h1>
+	<p id="ecard_klicken_sie_auf_den_button_um_eine" class="h1" >{$plugin_ecard_klicken_sie_auf_den_button_um_eine}</p>
+	{if $plugin.ecard.template_weiche == "ecard_LISTE"}
+	 <h2 id="ecard_neuen_eintrag_erstellen" class="h2" >{$plugin_ecard_neuen_eintrag_erstellen}</h2>
+
+		<form action="" method="post">
+			<input type="hidden" name="action" value="bgalb_neu" />
+			<input type="submit" class="submit_back_white" value="neuer Eintrag" />
+		</form>
+		
+		{if NOT $plugin.ecard.babies_liste}
+				 <h2 id="ecard_vorhandene_vorlagen" class="h2" >{$plugin_ecard_vorhandene_vorlagen}</h2>
+
+ <p id="ecard_bis_jetzt_sind_noch_keine_vorlagen" class="h1" >{$plugin_ecard_bis_jetzt_sind_noch_keine_vorlagen}</p>
+
+
+		
+		{else}
+		<h2 id="ecard_vorhandene_vorlagen" class="h2" >{$plugin_ecard_vorhandene_vorlagen}</h2>
+			<table class="babies_tabelle" style="width: 99%;">
+			<tr>
+			<th>
+ {$plugin_ecard_galerie}</th>
+
+ <th>{$plugin_ecard_bild}</th>
+
+ <th>{$plugin_ecard_bearbeiten}</th>
+
+<th>{$plugin_ecard_lschen}</th>
+			</tr>
+			
+			
+				{foreach item=baby from=$plugin.ecard.babies_liste name=babies_liste}
+					<tr>
+						<td>{$baby.bgalg_name}</td>
+						<td><img src="../plugins/ecard/ecard_bilder/_thumbs/{$baby.bgalb_bild}.jpg"
+					style=""
+					/></td>
+						<td>
+							<a href="./plugin.php?menuid={$aktive_menuid}&amp;template=ecard/templates/ecard_back_cards.html&amp;bgalb_id={$baby.bgalb_id}&amp;action=bgalb_edit">
+								{$plugin_ecard_bearbeiten}
+							</a></td>
+						<td>
+							
+							<a href="./plugin.php?menuid={$aktive_menuid}&amp;template=ecard/templates/ecard_back_cards.html&amp;bgalb_id={$baby.bgalb_id}&amp;action=bgalb_loeschen">
+								{$plugin_ecard_lschen}
+							</a>
+						</td>
+					</tr>
+				{/foreach}
+			</table>
+		{/if}
+	{/if}
+	
+	
+	{if $plugin.ecard.template_weiche == "ecard_NEU_EDIT"}
+		<form action="" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="action" value="bgalb_save" />
+			<input type="hidden" name="modus" value="{$plugin.ecard.modus}" />
+			<input type="hidden" name="bgalb_id" value="{$plugin.ecard.baby_data.bgalb_id}" />
+			
+			
+			 <fieldset>
+<legend>{$plugin_ecard_galerie_auswhlen}</legend>
+
+
+			<label for="bgalb_bgalg_id"> {$plugin_ecard_galerie}:</label>
+			<select name="bgalb_bgalg_id" id="bgalb_bgalg_id">
+				{foreach item=galerie from=$plugin.ecard.galerien_liste}
+					<option value="{$galerie.bgalg_id}" {if $plugin.ecard.baby_data.bgalb_bgalg_id == $galerie.bgalg_id}selected="selected"{/if}>
+						{$galerie.bgalg_name} (ID: {$galerie.bgalg_id})
+					</option>
+				{/foreach}
+			</select><br />
+	
+			</fieldset>
+			{if $plugin.ecard.baby_data.bgalb_bild}
+			<fieldset>
+				<legend>{$plugin_ecard_derzeitiges_bild}</legend>
+				<img src="../plugins/ecard/ecard_bilder/_thumbs/{$plugin.ecard.baby_data.bgalb_bild}.jpg"
+					style=""
+					/>
+				</fieldset>
+			{/if}	
+			
+<fieldset>
+<legend>{$plugin_ecard_bild_hochladen}</legend>
+			<!--
+			<label for="bgalb_name">Name:</label><br />
+			<input type="text" name="bgalb_name" id="bgalb_name" value='{$plugin.ecard.baby_data.bgalb_name|escape:"html"}' /><br />
+			<br />
+			-->
+			<label for="bgalb_bild_upload">Bild: </label>
+			<input type="file" name="bgalb_bild_upload" id="bgalb_bild_upload" accept="image/*" /><br />
+			<small>Bilder m&uuml;ssen vom Typ JPG (JPEG) sein, Querformat im Verh&auml;ltnis 4:3 <br /></small>
+			<br />
+</fieldset>
+<fieldset>
+<legend>{$plugin_ecard_bild_speichern}</legend>
+<input type="submit" value="Speichern" class="submit_back_green" />
+</fieldset>
+			
+			
+		</form>
+	{/if}
+	
+	
+	{if $plugin.ecard.template_weiche == "LOESCHEN"}
+		<h2> {$plugin_ecard_wollen_sie_diesen_}</h2>
+		
+		<p>
+					<img src="../plugins/ecard/ecard_bilder/_thumbs/{$plugin.ecard.baby_data.bgalb_bild}.jpg"
+					style=""
+					/>
+			
+		</p>
+		<a href="./plugin.php?menuid={$aktive_menuid}&amp;template=ecard/templates/ecard_back_cards.html&amp;bgalb_id={$plugin.ecard.baby_data.bgalb_id}&amp;action=bgalb_loeschen_do" class="submit_back_red" >
+		{$plugin_ecard_lschen}
+		</a>
+	{/if}
+ 
+{if $is_dev}
+
+
+
+
+
+ #start#
+
+ <span class="ignore"></span>
+  <!-- Der Start Button ist notwendig damit sich das System daran aufhängen kann. -->
+	 <div class="rapid_form">
+			<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="ecard_data" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="ecard" />
+		<!-- Das Standarpräfix für die Ids -->
+		<input type="hidden" name="praefix" value="ecard" />
+		<!-- Das Standarpräfix für die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="ecard_data" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div> 
+{/if}
+	
+		
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

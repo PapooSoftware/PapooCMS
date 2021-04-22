@@ -1,0 +1,71 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+<div class="artikel">
+
+
+	<h2 class="h2" >{$plugin_partner_unterseiten.headline}</h2>
+
+	<p>{$plugin_partner_unterseiten.desc}</p>
+
+	<p>{$plugin_partner_unterseiten.usage}</p>
+	
+	<table>
+		<colgroup>
+			<col />
+			<col />
+			<col style="width:11ex;" />
+		</colgroup>
+		<thead>
+			<tr>
+				<td>{$plugin_partner_unterseiten.name}</td>
+				<td>{$plugin_partner_unterseiten.link}</td>
+				<td>{$plugin_partner_unterseiten.action}</td>
+			</tr>
+		</thead>
+		<tbody>
+			{foreach from=$unterseiten item="unterseite"}
+			<tr>
+				<td>{if $unterseite.unterseiten_name != ''}{$unterseite.unterseiten_name|escape}{else}<em>Hauptseite</em>{/if}</td>
+				<td>{if $unterseite.unterseiten_name != ''}<a href="{$unterseite.link|escape}" rel="nofollow">{$unterseite.link|escape}</a>{/if}</td>
+				<td><a href="{$backend_path}backend_edit.html&amp;unterseiten_id={$unterseite.unterseiten_id}" rel="edit-form">{$plugin_partner_unterseiten.edit}</a></td>
+			</tr>
+			{/foreach}
+			{if !$unterseiten}
+			<tr><td colspan="3"><em>{$plugin_partner_unterseiten.no_pages}</em></td></tr>
+			{/if}
+		</tbody>
+	</table>
+	
+	<p>
+		<a href="{$backend_path}backend_edit.html" rel="create-form" class="btn btn-primary">{$plugin_partner_unterseiten.new_head}</a>
+	</p>
+	
+	{if $is_dev}
+	#start#
+	<span class="ignore"></span>
+	<!-- Der Start Button ist notwendig damit sich das System daran aufhängen kann. -->
+		<div class="rapid_form">
+			<form action="" name="" method="POST">
+			<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+			<input type="hidden" name="tb_name" value="shop_var_preis_config" />
+			<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+			<input type="hidden" name="php_datei_name" value="shop_var_preis_class" />
+			<!-- Das Standarpräfix für die Ids -->
+			<input type="hidden" name="praefix" value="shop_var_preis_plugin" />
+			<!-- Das Standarpräfix für die Feldernamen und Namen -->
+			<input type="hidden" name="praefix_spezial" value="shop_var_preis" />
+			<!-- Das Tool einbinden -->
+				{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+		</form>
+	</div>
+	{/if}
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

@@ -1,0 +1,200 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+<div class="artikel">
+	{if $is_eingetragen=="ok"}
+	<div class="message">{$plugin_google_kalender_wurde_eingetragen}</div>
+	{/if}
+	{if $is_eingetragen=="del"}
+	<div class="message">{$plugin_google_kalender_wurde_del}</div>
+	{/if}
+	{if $google_access=="forbidden"}
+	<div class="error">{$plugin_google_kalender_nicht_freigegeben}</div>
+	{/if}
+	{if $google_access=="no_calendar"}
+	<div class="error">{$plugin_google_kalender_existiert_nicht}</div>
+	{/if}
+	{if $is_eingetragen=="no"}
+	<div class="error">{$plugin_google_kalender_wurde_nicht_eingetragen}</div>
+	{/if}
+{if $kalender_del}
+<h1>{$plugin_google_kalender_kalender_lschen}</h1>
+
+ 
+<form method="post" action="" id="formi" style="width:100%">
+<input type="hidden" name="kalender_id" value="{$kalender.kalender_id|escape:"html"}" />
+<fieldset>
+<legend>{$plugin_google_kalender_kalender_lschen_field}</legend>
+{$kalender.kalender_name|escape:"html"}
+</fieldset>
+<fieldset>
+	<legend>{$plugin_google_kalender_kalender_lschen}</legend>
+			<!-- Speichern -->
+	<input  type="submit" class="submit_back_red" value="{$plugin_google_kalender_kalender_lschen}" name="formSubmit_delete_pcal" />
+</fieldset>
+</form>
+{else}
+
+{if $edit_pcal_entry}
+<h1>{$plugin_google_kalender_bearbeiten_sie_hier_einen_kalender}</h1>
+
+<form method="post" action="" id="formi" style="width:100%">
+	<input type="hidden" name="kalender_id" value="{$kalender.kalender_id|escape:"html"}" />
+	<button type="submit" class="hidden" name="formSubmit_save_pcal" value="1">{$message_70}</button>
+	{if $kalender.kalender_id}
+	<fieldset>
+		<legend>{$plugin_google_kalender_link_fr_die_einbindung_im_menpunkt}</legend>
+		<input type="text" readonly="readonly" value="plugin:google_kalender/templates/google_kalender_front.html&amp;kal_id={$kalender.kalender_id|escape:"html"}" /><br style="display:inline;"/>
+		{$plugin_google_kalender_zustzlicher_parameter_calview}<br />
+	</fieldset>
+	{/if}
+	<fieldset>
+		<legend>{$plugin_google_kalender_kalender_basis_daten}</legend>
+		<p>
+			<label for="kalender_google_id">{$plugin_google_kalender_google_kalender_id}{$plugin_error.kalender_google_id}</label>
+			<br />
+			<input type="text" required="required" maxlength="255" inputmode="email" name="kalender_google_id" value="{$kalender.kalender_google_id|escape:"html"}" id="kalender_google_id"/>
+			<br style="display: inline" />
+			{$plugin_google_kalender_kalender_id_info}
+		</p>
+		<p>
+			{if $kalender.kalender_read_only}
+			<strong class="alert-danger">{$plugin_google_kalender_read_only}</strong>
+			{/if}
+		</p>
+		<p>
+			<label for="kalender_timezone">{$plugin_google_kalender_timezone} {$plugin_google_kalender_timezone_info}{$plugin_error.kalender_timezone}</label>
+			<br />
+			<input type="text" required="required" maxlength="64" pattern="[A-Za-z]+/[A-Za-z0-9_+-]+|UTC|[A-Z][A-Z]T" inputmode="latin" name="kalender_timezone" value="{if $kalender and $kalender.kalender_timezone}{$kalender.kalender_timezone|escape:"html"}{else}Europe/Berlin{/if}" id="kalender_timezone"/>
+		</p>
+	</fieldset>
+
+	<fieldset>
+		<script language="javascript" type="text/javascript" src="./tiny_mce/tiny_mce.js" charset="utf-8"></script>
+		<script language="javascript" type="text/javascript" src="./tiny_mce/FileBrowser.js"></script>
+		<script language="javascript" type="text/javascript">
+		tinyMCE.init({ldelim}
+		mode : "exact",
+		language : "de",
+		elements : "kalender_text_above",
+		theme : "advanced",
+		{include file=tiny_inc_conf.html}
+		{rdelim} );
+		//function fileBrowserCallBack(field_name, url, type)
+		//{ldelim}
+		// This is where you insert your custom filebrowser logic
+		//	alert("Filebrowser callback: " + field_name + "," + url + "," + type);
+		//{rdelim}
+		</script>
+		<legend>{$plugin_google_kalender_kalender_sprach_daten}</legend>
+
+		<p>
+			<label for="kalender_name">{$plugin_google_kalender_name}{$plugin_error.kalender_name} </label>
+			<br />
+			<input type="text" required="required" name="kalender_name" value="{$kalender.kalender_name|escape:"html"}" class="kalender_name" id="kalender_name"/>
+		</p>
+		<p>
+			<label for="kalender_text_above">{$plugin_google_kalender_text_above}{$plugin_error.kalender_text_above} </label>
+			<br />
+			<textarea cols="30" rows="6" name="kalender_text_above" id="kalender_text_above">{$kalender.kalender_text_above|escape:"html"}</textarea>
+		</p>
+	</fieldset>
+
+	<fieldset>
+		<legend>{$plugin_google_kalender_google_connect}</legend>
+		<p>{$plugin_google_kalender_google_connect_info}</p>
+		
+		<p>
+			{if $kalender.kalender_id}
+				{if $kalender.kalender_access_token}
+					<button class="btn btn-danger" type="submit" name="formSubmit_save_pcal" value="disconnect_oauth">Account trennen</button>
+				{else}
+					<button class="btn btn-primary" type="submit" name="formSubmit_save_pcal" value="connect_oauth">Account verbinden</button>
+				{/if}
+			{else}
+			<strong>{$plugin_google_kalender_save_before_connect}</strong>
+			{/if}
+		</p>
+	</fieldset>
+
+	<fieldset>
+		<legend>{$plugin_google_kalender_rechte_einstellung}</legend>
+		<p>
+			<input type="checkbox" name="kalender_send_email" value="1" {if $kalender.kalender_send_email==1}checked="checked"{/if} class="kalender_send_email" id="kalender_send_email"/><label for="kalender_send_email">{$plugin_google_kalender_send_email}{$plugin_error.kalender_send_email} </label>
+		</p>
+		<p>
+			<label for="kalender_info_email">{$plugin_google_kalender_info_email}{$plugin_error.kalender_info_email} </label>
+			<br />
+			<input type="email" maxlength="255" name="kalender_info_email" value="{$kalender.kalender_info_email|escape:"html"}" id="kalender_info_email"/>
+		</p>
+	</fieldset>
+	<fieldset>
+		<legend>{$plugin_google_kalender_gruppen_mit_leserechten}</legend>
+		{$plugin_google_kalender_whlen_sie_hier_die_gruppen_aus_die_die_eintrge_sehen_drfen}
+		<div class="clearfix"></div>
+		{foreach item=table from=$pcal_gruppen}
+			<input type="checkbox" {if $table.lese_rights=="ok"}checked="checked"{/if} id="g{$table.gruppeid}" name="pcal_gruppe_lese[{$table.gruppeid}]" value="{$table.gruppeid}" /><label for="g{$table.gruppeid}">{$table.gruppenname}</label><br />
+		{/foreach}
+	</fieldset>
+	<fieldset>
+		<legend>{$plugin_google_kalender_gruppen_mit_schreibrechten}</legend>
+		{$plugin_google_kalender_whlen_sie_hier_die_gruppen_aus_die_die_eintrge_erstellen_drfen}
+		<div class="clearfix"></div>
+		{foreach item=table from=$pcal_gruppen}
+			<input type="checkbox" {if $table.write_rights=="ok"}checked="checked"{/if}  id="gs{$table.gruppeid}" name="pcal_gruppe_write[{$table.gruppeid}]" value="{$table.gruppeid}" /><label for="gs{$table.gruppeid}">{$table.gruppenname}</label><br />
+		{/foreach}
+	</fieldset>
+	<fieldset>
+		<legend>{$message_70}</legend>
+		<!-- Speichern -->
+		<button type="submit" class="submit_back_green" name="formSubmit_save_pcal" value="1">{$message_70}</button>
+	</fieldset>
+</form>
+{else}
+<h1 id="kalender_erstellen__bearbeiten_eines_kalenders2" >{$plugin_google_kalender_erstellen__bearbeiten_eines_kalenders2}</h1>
+
+<p id="kalender_hier_knnen_sie_beliebig_viele_kalender_erstellen_und_bearbeiten" >{$plugin_google_kalender_hier_knnen_sie_beliebig_viele_kalender_erstellen_und_bearbeiten}</p>
+
+<a href="{$pkal_self1}new" id="kalender_erstellen_sie_hier_einen_neuen_kalender" class="132link" >{$plugin_google_kalender_erstellen_sie_hier_einen_neuen_kalender}</a>
+
+<h1 id="kalender_bersicht_der_vorhandenen_kalender" >{$plugin_google_kalender_bersicht_der_vorhandenen_kalender}</h1>
+
+<p id="kalender_klicken_sie_auf_einen_eintrag_um_ihn_zu_bearbeiten" >{$plugin_google_kalender_klicken_sie_auf_einen_eintrag_um_ihn_zu_bearbeiten}</p>
+
+<table class="outside table table-striped table-hover">
+	<tr style="vertical-align:top;">
+		<th>{$plugin_google_kalender_id_des_kalenders}</th>
+		<th>{$plugin_google_kalender_kalendername}</th>
+		<th>{$plugin_google_kalender_kalender_id}</th>
+		<th style="width:140px;"> {$plugin_google_kalender_aktion}</th>
+	</tr>
+	{foreach from=$pcal_liste item=typ}
+	<tr>
+		<td>{$typ.kalender_id|escape:"html"}</td>
+		<td>{$typ.kalender_name|escape:"html"}</td>
+		<td>{$typ.kalender_google_id|escape:"html"}</td>
+		<td>
+			{if $typ.kalender_can_write}
+			<a href="{$pkal_self1}{$typ.kalender_id}&amp;cal_act=show">{$plugin_google_kalender_bearbeiten}</a>
+			| <a href="{$pkal_self1}{$typ.kalender_id}&amp;cal_act=delete"> {$plugin_google_kalender_lschen}</a>
+			{elseif $typ.kalender_can_read}
+			<a href="{$pkal_self1}{$typ.kalender_id}&amp;cal_act=show">{$plugin_google_kalender_anzeigen}</a>
+			{/if}
+		</td>
+	</tr>
+	{/foreach}
+</table>
+ {/if}
+
+
+{/if}
+
+</div>
+
+
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

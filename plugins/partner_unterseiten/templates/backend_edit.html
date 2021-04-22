@@ -1,0 +1,169 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+<div class="artikel">
+	<h2>{$plugin_partner_unterseiten.headline}</h2>
+
+	{if !$unterseiten_id}
+	<h3>{$plugin_partner_unterseiten.new_head}</h3>
+	{else}
+	{assign var="partner_esc" value=$unterseiten_name|escape}
+	<h3><q>{$plugin_partner_unterseiten.edit_head|replace:'$0':$partner_esc}</q></h3>
+	{/if}
+	
+	{if $error}
+	<div class="error">
+		Die Änderungen konnten nicht gespeichert werden. Bitte prüfen Sie Ihre Eingaben.
+	</div>
+	{/if}
+
+	<form method="POST" action="">
+		
+		{if !$unterseiten_id || $unterseiten_name !== ''}
+		<fieldset>
+			<legend>{$plugin_partner_unterseiten.fieldset_general}</legend>
+			<p>
+				<label for="unterseiten-name">
+					{$plugin_partner_unterseiten.labels.unterseiten_name}
+					{$plugin_partner_unterseiten.label_extra_name}
+				</label>
+				<input id="unterseiten-name" type="text" inputmode="verbatim" {if $unterseiten_id}readonly="readonly"{else}required="required"{/if} manlength="63" pattern="[a-zA-Z0-9_.-]*" name="unterseiten_name" value="{$unterseiten_name|escape}" />
+			</p>
+			
+			<p>
+				<label for="unterseiten-default-menuid">
+					{$plugin_partner_unterseiten.labels.unterseiten_default_menuid}
+				</label>
+				<select name="unterseiten_default_menuid" id="unterseiten-default-menuid" required="required">
+					<option value=""><em>{$plugin_partner_unterseiten.please_select}</em></option>
+					{foreach from=$menulist_data item="menu"}
+					<option value="{$menu.menuid}" {if $unterseiten_default_menuid == $menu.menuid}selected="selected"{/if}>
+						{$menu.nummer}: {$menu.menuname|escape}
+					</option>
+					{/foreach}
+				</select>
+			</p>
+			
+			<p>
+				<label for="unterseiten-bildwechsler-menuid">
+					{$plugin_partner_unterseiten.labels.unterseiten_bildwechsler_menuid}
+				</label>
+				<select name="unterseiten_bildwechsler_menuid" id="unterseiten-bildwechsler-menuid">
+					<option value=""><em>{$plugin_partner_unterseiten.no_change}</em></option>
+					{foreach from=$menulist_data item="menu"}
+					<option value="{$menu.menuid}" {if $unterseiten_bildwechsler_menuid == $menu.menuid}selected="selected"{/if}>
+						{$menu.nummer}: {$menu.menuname|escape}
+					</option>
+					{/foreach}
+				</select>
+			</p>
+		</fieldset>
+		{else}
+		<p>
+			{$plugin_partner_unterseiten.mainsite_info}
+		</p>
+		{/if}
+		
+		<fieldset>
+			<legend>{$plugin_partner_unterseiten.fieldset_menu}</legend>
+			{if !$unterseiten_id}
+			<p><em>{$plugin_partner_unterseiten.info_menu_unsaved}</em></p>
+			{else}
+			<p>
+				<select id="menu-item-select" name="menuedits_add">
+					{foreach from=$menulist_data item="menu"}
+					<option value="{$menu.menuid}" {if $menuedits[$menu.menuid]}disabled="disabled"{/if}>
+						{$menu.nummer}: {$menu.menuname|escape}
+					</option>
+					{/foreach}
+				</select>
+				<button type="submit" name="add_menu_item" value="true" id="menu-item-add-button" formnovalidate="formnovalidate" class="btn btn-primary btn-small">Hinzufügen</button>
+			</p>
+			<table>
+				<colgroup><col /><col /><col style="width: 12ex;" /></colgroup>
+				<tbody id="menu-item-container">
+					{foreach from=$menuedits item="menuedit"}
+					<tr>
+						<td title="Menü-ID {$menuedit.menuid}">{$menuedit.menuname|escape}</td>
+						<td>
+							<select name="menuedits[{$menuedit.menuid}][menuid2]">
+								<option value="">Streichen</option>
+								{foreach from=$menulist_data item="menu"}
+								<option value="{$menu.menuid}" {if $menuedit.menuid2 == $menu.menuid}selected="selected"{/if} {if $menu.menuid == $menuedit.menuid}disabled="disabled"{/if}>
+									Ersetzen mit {$menu.nummer}: {$menu.menuname|escape}
+								</option>
+								{/foreach}
+							</select>
+						</td>
+						<td>
+							<button type="submit" name="delete_menu_item" formnovalidate="formnovalidate" value="{$menuedit.menuid}" class="btn btn-danger btn-small">Löschen</button>
+						</td>
+					</tr>
+					{/foreach}
+				</tbody>
+			</table>
+			{/if}
+		</fieldset>
+		
+		{if !$unterseiten_id || $unterseiten_name !== ''}
+		<fieldset>
+			<legend>{$plugin_partner_unterseiten.fieldset_shop}</legend>
+			<p>
+				<label for="unterseiten-shop-redirect">
+					{$plugin_partner_unterseiten.labels.unterseiten_shop_redirect}
+				</label>
+				<input id="unterseiten-shop-redirect" type="url" manlength="255" name="unterseiten_shop_redirect" value="{$unterseiten_shop_redirect|escape}" />
+			</p>
+			
+			<p>
+				<label for="unterseiten-shop-redirect-time">
+					{$plugin_partner_unterseiten.labels.unterseiten_shop_redirect_time}
+				</label>
+				<input id="unterseiten-shop-redirect-time" type="number" manlength="4" min="-1" max="600" step="1" required="required" name="unterseiten_shop_redirect_time" value="{$unterseiten_shop_redirect_time|escape}" />
+			</p>
+		</fieldset>
+		{/if}
+		
+		<p>
+			<button type="submit" name="action" value="save" class="btn btn-success">{$plugin_partner_unterseiten.save}</button><br/>
+			<a style="margin-left: 2ex;" href="{$backend_path}backend.html" class="btn btn-default">{$plugin_partner_unterseiten.cancel}</a>
+		</p>
+		
+		{if $unterseiten_id && $unterseiten_name !== ''}
+		<div>
+			<a href="{$backend_path}backend_edit.html&amp;copy_from={$unterseiten_id}" class="btn btn-primary">{$plugin_partner_unterseiten.copy}</a>
+		</div>
+		<div>
+			<button type="submit" name="action" value="delete" formnovalidate="formnovalidate" class="btn btn-danger">{$plugin_partner_unterseiten.delete}</button>
+		</div>
+		{/if}
+	</form>
+	
+	{if $is_dev}
+	#start#
+	<span class="ignore"></span>
+	<!-- Der Start Button ist notwendig damit sich das System daran aufhängen kann. -->
+	<div class="rapid_form">
+		<form action="" name="" method="POST">
+			<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+			<input type="hidden" name="tb_name" value="shop_var_preis_config" />
+			<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+			<input type="hidden" name="php_datei_name" value="shop_var_preis_class" />
+			<!-- Das Standarpräfix für die Ids -->
+			<input type="hidden" name="praefix" value="shop_var_preis_plugin" />
+			<!-- Das Standarpräfix für die Feldernamen und Namen -->
+			<input type="hidden" name="praefix_spezial" value="shop_var_preis" />
+			<!-- Das Tool einbinden -->
+				{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+		</form>
+	</div>
+	{/if}
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

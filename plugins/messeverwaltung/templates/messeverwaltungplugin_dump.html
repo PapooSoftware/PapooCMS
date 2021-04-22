@@ -1,0 +1,44 @@
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+{*<!-- Datenbank sicherungen erstellen und einspielen -->*}
+{$messe_27}
+<br />
+{*<!-- Um eine Sicherung zu erstellen klicken Sie bitte hier -->*}
+<ul>
+<li>
+<a href="./plugin.php?menuid={$formmenuid}&template=../../plugins/messeverwaltung/templates/messeverwaltungplugin_dump.html&msgid={$ander.news_user_id}&makedump=1">{$messe_28}</a>
+</li>
+</ul>
+{*<!-- Um eine Sicherung einzuspielen klicken Sie hier -->*}
+<br />
+<h3>{$messe_29}</h3>
+{if $is_uploaded}
+<strong style="color:red;">{$messe_30}</strong>
+{/if}
+{$messe_31}
+
+<form method="POST" id="formi" action="./plugin.php?menuid={$formmenuid}&template=../../plugins/messeverwaltung/templates/messeverwaltungplugin_dump.html&msgid={$ander.news_user_id}&backdump=1" enctype="multipart/form-data">
+  <fieldset>
+{*<!-- Eingabe der Datei:-->*}
+  <legend>{$message_337}</legend>
+{*<!-- Das Dokument:-->*}
+  <label>{$message_338}</label>
+  <input type="file" name="myfile" value="{$myfilename}" />
+  </fieldset>
+
+  <fieldset>
+{*<!-- Datei hochladen:-->*}
+  <legend>{$message_344}</legend>
+{*<!-- hochladen-->*}
+  <input type="submit" value="{$message_356}" class="submit_back" name="restore" />
+  </fieldset>
+</form>
+</div>
+  
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}

@@ -1,0 +1,12 @@
+USE myDBname
+BULK
+INSERT de
+FROM 'C:\de_complete.txt'
+WITH
+(
+FIRSTROW = 2,
+FIELDTERMINATOR = ';',
+ROWTERMINATOR = '\n',
+CODEPAGE = 'ACP'
+)
+GO

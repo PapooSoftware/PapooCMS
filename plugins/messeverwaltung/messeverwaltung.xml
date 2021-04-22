@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<!-- version: Versions-Nummer papoo für die das Plugin gedacht ist / funktioniert -->
+<plugin version="3.x">
+
+<!-- ALLGEMEINE-INFORMATIONEN -->
+<!-- ************************ -->
+<!-- name: Name des Plugins -->
+<name>Messeverwaltung Plugin</name>
+
+<!-- beschreibung_de: Kurz-Beschreibung des Plugins auf deutsch (wird im Plugin-Manager angezeigt) -->
+<beschreibung_de><![CDATA[Mit diesem Plugin können Messedaten verwaltet werden.]]></beschreibung_de>
+
+<!-- beschreibung_en: Kurz-Beschreibung des Plugins auf englisch (wird im Plugin-Manager angezeigt) -->
+<beschreibung_en><![CDATA[With this Plugin you can manage Messe Data.]]></beschreibung_en>
+
+<!-- version: Versions-Nummer des Plugins -->
+<version>0.1</version>
+
+<!-- papooid: Eindeutige Nummer offizieller papoo-Plugins -->
+<papooid>16</papooid>
+
+<!-- link: z.Z. noch ohne Funktion -->
+<link>http://www.papoo.de</link> 
+
+<!-- datum: Erscheinungs-Datum bzw. Stand des Plugins -->
+<datum>15.03.2006</datum>
+
+
+<!-- AUTOR-INFORMATIONEN -->
+<!-- ******************* -->
+<!-- autor: Informationen zum Autor (Programmierer) des Plugins -->
+<autor>
+	<!-- autor.name: Name des Authors -->
+	<name>Carsten Euwens</name>
+	
+	<!-- autor.kontakt: postalische Kontakt-Informationen des Autors -->
+	<kontakt><![CDATA[Carsten Euwens, Heerstr. 110, 53111 Bonn]]></kontakt>
+	
+	<!-- autor.email: eMail-Adresse des Autors -->
+	<email>webwork@papoo.de</email>
+	
+	<!-- autor.telefon: Telefon-Nummer des Autors -->
+	<telefon>0177/8075846</telefon>
+</autor>
+
+
+<!-- MENÜ-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- menue: Informationen für den Menü-Eintrag im Backend (papoo/interna) -->
+<menue>
+	<!-- menue.eintrag_de: Name des Menü-Punktes im Backend auf deutsch -->
+	<eintrag_de>Messeverwaltung</eintrag_de>
+	<!-- menue.eintrag_en: Name des Menü-Punktes im Backend auf englisch -->
+	<eintrag_en>Messe check</eintrag_en>
+	<!-- menue.icon: Pfad zum Menü-Icon des Menü-Punktes im Backend (relativ zum Plugin-Verzeichnis) -->
+	<icon>messeverwaltung/bilder/pic_01.gif</icon>
+	<!-- menue.link: Name der Seite auf welche der Menü-Punkt im Backend verweisen soll -->
+	<link>plugin:messeverwaltung/templates/messeverwaltungplugin.html</link>
+	
+	<!-- menue.submenue: Untermenü-Punkt für diesen Menü-Punkt im Backend, Struktur wie menue -->
+	
+	<submenue>
+		<eintrag_de>Eintrag erstellen</eintrag_de>
+		<eintrag_en>create Entry</eintrag_en>
+		<icon>messeverwaltung/bilder/pic_01.gif</icon>
+		<link>plugin:messeverwaltung/templates/messeverwaltungplugin_create.html</link>
+	</submenue>
+	
+	<submenue>
+		<eintrag_de>Eintrag bearbeiten</eintrag_de>
+		<eintrag_en>Edit Entry</eintrag_en>
+		<icon>messeverwaltung/bilder/pic_01.gif</icon>
+		<link>plugin:messeverwaltung/templates/messeverwaltungplugin_edit.html</link>
+	</submenue>
+	
+	<submenue>
+		<eintrag_de>Datenbank Sicherung</eintrag_de>
+		<eintrag_en>Database dump</eintrag_en>
+		<icon>messeverwaltung/bilder/pic_01.gif</icon>
+		<link>plugin:messeverwaltung/templates/messeverwaltungplugin_dump.html</link>
+	</submenue>
+</menue>
+
+
+<!-- KLASSEN-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- klasse: Informationen der Plugin-Klasse welche eingebunden werden sollen -->
+<klasse>
+	<!-- klasse.name: Name der Klassen-Instanz / des Objekts (also der Name des Dings, das mit $name = new xx_class(); erzeugt wird) -->
+	<name>messeverwaltungplugin</name>
+	<!-- klasse.datei: Pfad zur Klassen-Datei (relativ zum Plugin-Verzeichnis) -->
+	<datei>messeverwaltung/lib/messeverwaltungplugin_class.php</datei>
+</klasse>
+
+
+
+<!-- CSS-INFORMATIONEN -->
+<!-- ***************** -->
+<!-- css: Pfad zur CSS-Datei (relativ zum Plugin-Verzeichnis) -->
+<css>messeverwaltung/css/messeverwaltungplugin.css</css>
+
+
+<!-- DATENBANK-INFORMATIONEN -->
+<!-- ****************** -->
+<datenbank>
+	<!-- datenbank.installation: Pfad zur SQL-Installations-Datei (relativ zum Plugin-Verzeichnis) -->
+	<installation>messeverwaltung/sql/messeverwaltungplugin_install.sql</installation>
+	<!-- datenbank.deinstallation: Pfad zur SQL-Deinstallations-Datei (relativ zum Plugin-Verzeichnis) -->
+	<deinstallation>messeverwaltung/sql/messeverwaltungplugin_deinstall.sql</deinstallation>
+</datenbank>
+
+
+
+<messages>messeverwaltung/messages</messages>
+
+
+
+</plugin>

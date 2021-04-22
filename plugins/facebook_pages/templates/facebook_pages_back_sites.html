@@ -1,0 +1,243 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+{if $is_eingetragen=="ok"}
+  <div class="message">{$plugin_pkalender_wurde_eingetragen}</div>
+  {/if}
+  {if $is_eingetragen=="del"}
+  <div class="message">{$plugin_pkalender_wurde_del}</div>
+  {/if}
+
+  {if $is_eingetragen=="no"}
+  <div class="error">{$plugin_pkalender_wurde_nicht_eingetragen}</div>
+  {/if}
+<div class="artikel">
+{if $kalender_del}
+<h1 id="facebook_page_sites_seite_lschen" class="h1" >{$plugin_facebook_page_sites_seite_lschen}</h1>
+
+ <p id="facebook_page_sites_hier_knnen_sie_die_folgende_seite_lschen" class="h1" >{$plugin_facebook_page_sites_hier_knnen_sie_die_folgende_seite_lschen}</p>
+<form method="post" action="" id="formi" style="width:100%">
+<input type="hidden" name="kalender_id" value="{$kalender.0.kalender_id|escape:"html"}" />
+ <fieldset>
+<legend>{$plugin_kalender_basisdaten}</legend>
+
+<label for="kalender_interne_bezeichnung">{$plugin_facebook_page_sites_interne_bezeichnung}{$plugin_error.kalender_interne_bezeichnung} </label>
+<br />
+<input type="text" name="kalender_interne_bezeichnung" value="{$kalender.0.kalender_interne_bezeichnung|escape:"html"}" class="kalender_interne_bezeichnung" id="kalender_interne_bezeichnung"/>
+<br />
+<!--
+ <label for="kalender_domain">{$plugin_facebook_page_sites_domain}{$plugin_error.kalender_domain} </label>
+<br />
+<input type="text" name="kalender_domain" value="{$kalender.0.kalender_domain|escape:"html"}" class="kalender_domain" id="kalender_domain"/>
+
+-->
+ </fieldset>
+ <fieldset>
+<legend> {$plugin_facebook_page_sites_datensatz_lschen}</legend>
+<input  type="submit" class="submit_back_green_big" value=" {$plugin_facebook_page_sites_datensatz_lschen}" name="formSubmit_del_lanpag_site" />
+
+</fieldset><br />
+
+</form>
+
+
+
+{else}
+{if $lp_form} 
+ <h1 id="kalender_erstellen__bearbeiten_von_seiten" class="h1" >{$plugin_kalender_erstellen__bearbeiten_von_seiten}</h1>
+
+ <p id="kalender_hier_knnen_soe" class="h1" >{$plugin_kalender_hier_knnen_soe}</p>
+<form method="post" action="" id="formi" style="width:100%">
+<input type="hidden" name="kalender_id" value="{$kalender.0.kalender_id|escape:"html"}" />
+ <fieldset>
+<legend>{$plugin_kalender_basisdaten}</legend>
+
+<label for="kalender_interne_bezeichnung">{$plugin_facebook_page_sites_interne_bezeichnung}{$plugin_error.kalender_interne_bezeichnung} </label>
+<br />
+<input type="text" name="kalender_interne_bezeichnung" value="{$kalender.0.kalender_interne_bezeichnung|escape:"html"}" class="kalender_interne_bezeichnung" id="kalender_interne_bezeichnung"/>
+<br />
+<!--
+ <label for="kalender_domain">{$plugin_facebook_page_sites_domain}{$plugin_error.kalender_domain} </label>
+<br />
+<input type="text" name="kalender_domain" value="{$kalender.0.kalender_domain|escape:"html"}" class="kalender_domain" id="kalender_domain"/>
+
+<br />
+-->
+ <label for="kalender_gacode">{$plugin_facebook_page_sites_gacode}{$plugin_error.kalender_gacode} </label>
+<br />
+<input type="text" name="kalender_gacode" value="{$kalender.0.kalender_gacode|escape:"html"}" class="kalender_gacode" id="kalender_gacode"/>
+<br />
+
+<label for="kalender_kategori_der_sseite">{$plugin_facebook_page_sites_kategori_der_sseite}{$plugin_error.kalender_kategori_der_sseite} </label>
+<br />
+<select name="kalender_kategori_der_sseite" id="kalender_kategori_der_sseite" size="1"/><option value="0">{$message_160}</option>
+{foreach from=$facebook_page_cat_liste item=typ name=xtyp}
+<option {if $kalender.0.kalender_kategori_der_sseite==$typ.facebook_page_id}selected="selected"{/if} value="{$typ.facebook_page_id}">{$typ.facebook_page_der_name_der_kategorie_|escape:"html"}</option>
+{/foreach}</select>
+ </fieldset>
+ <fieldset>
+<legend>{$plugin_facebook_page_sites_verwendetes_design}</legend>
+
+<label for="kalender_design">{$plugin_facebook_page_sites_design}{$plugin_error.kalender_design} </label>
+<br />
+<select name="kalender_design" id="kalender_design" size="1"/><option value="0">{$message_160}</option>
+{foreach from=$lp_style_liste item=typ name=xtyp}
+<option {if $kalender.0.kalender_design==$typ.style_id}selected="selected"{/if} value="{$typ.style_id}">{$typ.style_name|escape:"html"}</option>
+{/foreach}
+</select>
+<br />
+
+ </fieldset>
+ <!--
+ <fieldset>
+<legend>{$plugin_facebook_page_sites_metadaten}</legend>
+
+<label for="kalender_titel_der_seite">{$plugin_facebook_page_sites_titel_der_seite}{$plugin_error.kalender_titel_der_seite} </label>
+<br />
+<input type="text" name="kalender_titel_der_seite" value="{$kalender.0.kalender_titel_der_seite|escape:"html"}" class="kalender_titel_der_seite" id="kalender_titel_der_seite"/>
+<br />
+
+ <label for="kalender_meta_description">{$plugin_facebook_page_sites_meta_description}{$plugin_error.kalender_meta_description} </label>
+<br />
+<textarea cols="30" rows="6" name="kalender_meta_description"  class="kalender_meta_description" id="kalender_meta_description">{$kalender.0.kalender_meta_description|escape:"html"}</textarea>
+<br />
+
+ <label for="kalender_meta_keywords">{$plugin_facebook_page_sites_meta_keywords}{$plugin_error.kalender_meta_keywords} </label>
+<br />
+<textarea cols="30" rows="6" name="kalender_meta_keywords"  class="kalender_meta_keywords" id="kalender_meta_keywords">{$kalender.0.kalender_meta_keywords|escape:"html"}</textarea>
+<br />
+
+ </fieldset>
+ 
+ -->
+ <fieldset>
+ <script language="javascript" type="text/javascript" src="./tiny_mce/tiny_mce.js" charset="utf-8"></script>
+  <script language="javascript" type="text/javascript" src="./tiny_mce/FileBrowser.js"></script>
+	<script language="javascript" type="text/javascript">
+	tinyMCE.init({ldelim}
+	mode : "exact",
+	language : "de",
+	elements : "kalender_content",
+	theme : "advanced",
+	{include file=tiny_inc_conf.html}
+	{rdelim} );
+	//function fileBrowserCallBack(field_name, url, type)
+	//{ldelim}
+	// This is where you insert your custom filebrowser logic
+	//	alert("Filebrowser callback: " + field_name + "," + url + "," + type);
+	//{rdelim}
+	</script>
+<legend>{$plugin_facebook_page_sites_eigentlicher_inhalt}</legend>
+
+<label for="kalender_content">{$plugin_facebook_page_sites_content}{$plugin_error.kalender_content} </label>
+<br />
+<textarea style="width:99%;height:700px;" cols="30" rows="6" name="kalender_content"  class="kalender_content" id="kalender_content">{$kalender.0.kalender_content|escape:"html"}</textarea>
+<br />
+
+ </fieldset>
+ 
+ <fieldset>
+<legend>{$plugin_facebook_page_sites_daten_speichern2}</legend>
+<input  type="submit" class="submit_back_green" value="{$message_70}" name="formSubmit_save_lanpag_site" />
+<input  type="submit" class="submit_back_green_big" style="float:right;" value="{$plugin_facebook_page_sites_als_kopie_speichern}" name="formSubmit_save_lanpag_site_copy" />
+</fieldset>
+
+
+<br />
+
+</form>
+<br />
+<br />
+<br />
+<br />
+
+ {else}
+
+
+
+ <h1 id="kalender_seiten_erstellen_und_bearbeiten" class="h1" >{$plugin_kalender_seiten_erstellen_und_bearbeiten}</h1>
+
+ <p id="kalender_sie_knnen_hier_die_seiten" class="h1" >{$plugin_kalender_sie_knnen_hier_die_seiten}</p>
+
+ <h1 id="kalender_neue_seite_erstellen" class="h1" >{$plugin_kalender_neue_seite_erstellen}</h1>
+
+ <a href="{$lp_self_link_site}&fb_site_id=new" id="kalender_erstellen_sie_eine_neue_seite" class="132link" >{$plugin_kalender_erstellen_sie_eine_neue_seite}</a>
+
+ <h1 id="kalender_vorhandene_seiten_bearbeiten" class="h1" >{$plugin_kalender_vorhandene_seiten_bearbeiten}</h1>
+
+ <p id="kalender_whlen_sie_die_seite_aus" class="h1" >{$plugin_kalender_whlen_sie_die_seite_aus}</p>
+ 
+  
+ <table style="width:99%;vertical-align:top;">
+  <tr style="vertical-align:top;">
+  <th>{$plugin_facebook_page_sites_interne_bezeichnung_id}</th>
+  <th>{$plugin_facebook_page_sites_kategori_der_sseite}</th>
+  <th>{$plugin_facebook_page_sites_interne_bezeichnung}</th>
+	<!--<th>{$plugin_facebook_page_sites_domain}</th>-->
+	
+	<th>{$plugin_facebook_page_sites_titel_der_seite}</th>
+	<th>{$plugin_facebook_page_sites_meta_description}</th>
+	<th>{$plugin_facebook_page_sites_verwendetes_design}</th>
+
+	<th style="width:140px;"> {$plugin_kalender_aktion}</th>
+	</tr>
+ {foreach from=$facebook_page_site_liste item=typ name=xtyp}
+ <tr>
+ <td>{$typ.kalender_id|escape:"html"}</td>
+  <td>{$typ.facebook_page_der_name_der_kategorie_|escape:"html"}</td>
+
+ <td>{$typ.kalender_interne_bezeichnung|escape:"html"}
+ <br />
+  /plugins/facebook_pages/sites/{$typ.kalender_interne_bezeichnung_site}/</td>
+ 
+ <!--<td>{$typ.kalender_domain|escape:"html"}</td>-->
+ <td>{$typ.kalender_titel_der_seite|escape:"html"}</td>
+ <td>{$typ.kalender_meta_description|escape:"html"}</td>
+ <td>{$typ.kalender_design|escape:"html"}</td>
+
+
+ <td> <a href="{$lp_self_link_site}&fb_site_aktu_id={$typ.kalender_id}" id="facebook_page_sites_aktualisieren" class="132link" >{$plugin_facebook_page_sites_aktualisieren}</a> | <a href="{$lp_self_link_site}&fb_site_id={$typ.kalender_id}">  {$plugin_facebook_page_bearbeiten}</a> | <a href="{$lp_self_link_site}&fb_site_id={$typ.kalender_id}&del_site=del"> {$plugin_facebook_page_sites_lschen}</a></td>
+ <tr>
+ {/foreach}
+ </table>
+ 
+ 
+ 
+{/if}{/if}
+<span class="ignore"></span>
+
+
+
+
+
+{if $is_dev}
+#start#
+<br />
+
+ 
+
+ 
+  <!-- Der Start Button ist notwendig damit sich das System daran aufhängen kann. -->
+	 <div class="rapid_form">
+		<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="plugin_facebook_page_sites" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="plugin_facebook_page_sites" />
+		<!-- Das Standarpräfix für die Ids -->
+		<input type="hidden" name="praefix" value="facebook_page_sites" />
+		<!-- Das Standarpräfix für die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="kalender" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div> {/if}
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

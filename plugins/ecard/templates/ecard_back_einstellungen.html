@@ -1,0 +1,32 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+
+<div class="artikel">
+	
+	<h2>{$message.plugin.ecard.name} ::: EINSTELLUNGEN :::</h2>
+	<form action="" method="post">
+		<input type="hidden" name="action" value="bgalset_save" />
+		<fieldset>
+			<label for="bgalset_email_absender">Absender-Adresse bei Versand per E-Mail:</label><br />
+			<input type="text" name="bgalset_email_absender" id="bgalset_email_absender" value="{$plugin.ecard.einstellungen.bgalset_email_absender}" /><br />
+			<br />
+			<input type="submit" class="submit_back_green_big" value="Einstellungen speichern" />
+		</fieldset>
+	</form>
+	
+	{*<!--
+	<p>
+		ToDo:
+	</p>
+	<ul>
+		<li>evtl. Bild-Groessen als Konfig-Option einfuegen</li>
+		<li>Sicherheits-Kontrolle E-Mailversand (evtl. per Transaktions-ID gespeichert in SESSION)</li>
+	</ul>
+	-->*}
+	
+</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

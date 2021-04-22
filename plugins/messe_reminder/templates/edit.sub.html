@@ -1,0 +1,49 @@
+<h3>Erinnerung für <q>{$plugin.messe_reminder.name}</q> bearbeiten</h3>
+
+<form method="POST" action="">
+	<fieldset><legend>Eintrag</legend>
+		<p>
+			Besitzer (aus Messeverwaltung):<br />
+			<input size="50" maxlength="254" readonly="readonly" disabled="disabled" value="{$plugin.messe_reminder.user}" />
+		</p>
+		<p>
+			<label for="email">E-Mail</label><br />
+			<input type="email" size="50" maxlength="254" type="email" name="email" id="email" value="{$plugin.messe_reminder.email}" />
+		</p>
+		
+		<p>
+			<input type="checkbox" name="active" id="active" value="1" {if $plugin.messe_reminder.active}checked="checked"{/if} />
+			<label for="active">Erinnerungen aktiv</label><br />
+		</p>
+		
+		<p>
+			<label for="subject">Betreff</label><br />
+			<input size="70" maxlength="254" name="subject" id="subject" value="{$plugin.messe_reminder.subject}" />
+		</p>
+		
+		<p>
+			<label for="content">Inhalt</label><br />
+			<textarea cols="52" rows="10" name="content" id="content" >{$plugin.messe_reminder.content}</textarea>
+		</p>
+		
+		<p>
+			<label for="interval">Erinnerungsmail alle </label>
+			<input size="3" maxlength="4" type="number" name="interval" id="interval" value="{$plugin.messe_reminder.interval}" min="0" max="100" />
+			<label for="interval"> Wochen wiederholen.</label>
+		</p>
+		
+		<p style="margin-top: 2em;">In Betreff und Inhalt stehen folgende Tags zur Verfügung:<br />
+			<strong>#vorname#</strong>: Vorname des Empfängers,<br />
+			<strong>#nachname#</strong>: Nachname des Empfängers,<br />
+			<strong>#messe#</strong>: Name der Messe,<br />
+			<strong>#branche#</strong>: Branche der Messe,<br />
+			<strong>#datum#</strong>: Letztes Datum der Messe
+		</p>
+		
+	</fieldset>
+	
+	<p>
+		<input class="submit_back_green" type="submit" name="update" value="Speichern" />
+	</p>
+</form>
+<p><a href="{$fl_link}">Zurück</a></p>

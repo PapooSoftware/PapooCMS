@@ -1,0 +1,85 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+{if $bulk_import_ok}
+<div class="message">{$bulkimport_message_ok}</div>
+{/if}
+{if $is_eingetragen=="ok"}
+  <div class="message"> {$plugin_plugin_zentrale_inhalte_daten_wurden_gespeichert}</div> 
+{/if}
+<div class="artikel">
+
+
+ <h1 id="plugin_cotent_client_zentrale_inhalte_einbinden" class="h1" >{$plugin_plugin_cotent_client_zentrale_inhalte_einbinden}</h1>
+
+ <p id="plugin_cotent_client_hier_tragen_sie_die_daten_ein_die_sie" class="h1" >{$plugin_plugin_cotent_client_hier_tragen_sie_die_daten_ein_die_sie}</p>
+ 
+ <a class="button" href="{$webverzeichnis}plugins/content_client/get_content.php?token={$plugin_cotent_client.0.plugin_cotent_client_token_key_kommt_aus_der_zentrale}&domain_key={$plugin_cotent_client.0.plugin_cotent_client_domain_key}" id="plugin_cotent_client_diese_seite_mit_der_zentrale_synchronisieren" class="132link" >{$plugin_plugin_cotent_client_diese_seite_mit_der_zentrale_synchronisieren}</a>
+
+ 
+ <h2 id="plugin_cotent_client_daten_eintragen_fr_den_kontakt" class="h2" >{$plugin_plugin_cotent_client_daten_eintragen_fr_den_kontakt}</h2>
+<form method="post" enctype="multipart/form-data"  action="" id="formi" style="">
+ 
+ <fieldset>
+<legend>{$plugin_plugin_cotent_client_daten_verwalten}</legend>
+
+ <div class="labdiv"><label for="plugin_cotent_client_url_der_zentrale">{$plugin_plugin_cotent_client_url_der_zentrale}{$plugin_error.plugin_cotent_client_url_der_zentrale} </label>
+
+<input type="text" name="plugin_cotent_client_url_der_zentrale" value="{$plugin_cotent_client.0.plugin_cotent_client_url_der_zentrale|escape:"html"}" class="plugin_cotent_client_url_der_zentrale" id="plugin_cotent_client_url_der_zentrale"/>
+</div><br />
+
+  <div class="labdiv"><label for="plugin_cotent_client_token_key_kommt_aus_der_zentrale">{$plugin_plugin_cotent_client_token_key_kommt_aus_der_zentrale}{$plugin_error.plugin_cotent_client_token_key_kommt_aus_der_zentrale} </label>
+
+<input type="text" name="plugin_cotent_client_token_key_kommt_aus_der_zentrale" value="{$plugin_cotent_client.0.plugin_cotent_client_token_key_kommt_aus_der_zentrale|escape:"html"}" class="plugin_cotent_client_token_key_kommt_aus_der_zentrale" id="plugin_cotent_client_token_key_kommt_aus_der_zentrale"/>
+</div><br />
+
+  <div class="labdiv"><label for="plugin_cotent_client_domain_key">{$plugin_plugin_cotent_client_domain_key}{$plugin_error.plugin_cotent_client_domain_key} </label>
+
+<input type="text" name="plugin_cotent_client_domain_key" value="{$plugin_cotent_client.0.plugin_cotent_client_domain_key|escape:"html"}" class="plugin_cotent_client_domain_key" id="plugin_cotent_client_domain_key"/>
+</div><br />
+</fieldset>
+<fieldset>
+<legend> {$plugin_plugin_cotent_client_daten_speichern}</legend>
+	<input  type="submit" class="submit_back_green_big" value=" {$plugin_plugin_cotent_client_daten_speichern}" name="formSubmit_save_domaindaten" />
+
+
+
+</fieldset> </form><br />
+
+
+
+</fieldset><br />
+
+{if $is_dev} #start#
+ <span class="ignore"></span>
+  <!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+	 <div class="rapid_form">
+			<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="plugin_cotent_client" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="plugin_cotent_client" />
+		<!-- Das Standarpr�fix f�r die Ids -->
+		<input type="hidden" name="praefix" value="plugin_cotent_client" />
+		<!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="plugin_cotent_client" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div>
+
+
+
+
+ {/if}
+
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

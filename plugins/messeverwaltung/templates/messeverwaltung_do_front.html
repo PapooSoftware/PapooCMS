@@ -1,0 +1,64 @@
+
+<div>
+
+<div id="artikel_content">
+{if $messe}
+
+<h2>{$messe.0.messe_name}</h2>
+<div class="messe_daten"><div class="messe_bilder" style="float:right;">
+<img src="{$slash}images/{$messe.0.messe_logo}" alt="Logo {$messe.0.messe_name}"/>
+</div>
+
+<p>{$messe.0.messe_von} - {$messe.0.messe_bis}</p>
+<p>{$messe.0.messe_descrip}</p>
+<br />
+
+<br />
+{$messe_messeblock1}
+{$messe_messeblock2}
+
+
+</div>
+
+{else}
+
+ <h2>{$messe_diemessen}</h2>
+	 <ul class="messelinks">
+		
+		 <li><a href="{$slash}{$linktext}?menuid={$menuid_aktuell}&amp;template={$template}&amp;sort_order=messe_von" >{$messe_zeit}</a>
+		 </li>
+		  <li><a href="{$slash}{$linktext}?menuid={$menuid_aktuell}{$cattextid}&amp;template={$template}&amp;sort_order=messe_name" >{$messe_alpha}</a>
+		 </li>
+	 </ul>
+  <div class="glossar_liste_div">
+  
+  
+  {foreach item=glist from=$messe_result}
+ <table style="width: 99%;" border="0"><tbody><tr><td>
+	<div class="messe_items">
+		<div class="messe_items_dat">
+			<h2>{$glist.messe_name} {$glist.messe_von} - {$glist.messe_bis}</h2>
+		
+		</div>
+		<div class="messe_items_descrip">
+			{$glist.messe_descrip}<div class="messe_bilder" style="float:right;">
+			<img src="{$slash}images/{$glist.messe_logo}" alt="Logo {$glist.messe_name}"/>
+			</div>
+			<a href="{$slash}{$linktext}?menuid={$menuid_aktuell}{$cattextid}&amp;template={$template}&amp;messe_id={$glist.messe_id}" id="">{$glist.messe_name}</a><br />
+					
+		</div>
+	</div>
+	<br />
+	</td></tr><tr><td><hr /></td></tr></tbody></table>
+	{/foreach}
+  
+  {/if}
+  
+  </div>
+
+  
+<span class="backlink"><a href="javascript:history.go(-1)">{$messe_zuruck}</a></span><span class="ignore">.</span>
+</div>
+
+
+</div>

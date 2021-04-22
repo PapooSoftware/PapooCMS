@@ -1,0 +1,44 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+<h1>{$message.plugin.flex_select.title}</h1>
+
+{if $plugin.flex_select.incomplete}
+<div class="error">{$message.plugin.flex_select.incomplete}</div>
+{/if}
+{if $plugin.flex_select.insertfailed}
+<div class="error">{$message.plugin.flex_select.insertfailed}</div>
+{/if}
+{if $plugin.flex_select.updated}
+<div class="message">{$message.plugin.flex_select.updatedtext}</div>
+{/if}
+{if $plugin.flex_select.update_failed}
+<div class="error">{$message.plugin.flex_select.updatefailedtext}</div>
+{/if}
+
+{if $plugin.flex_select.create}
+{include file=../../../plugins/flex_select/templates/create.sub.html}
+{/if}
+
+{if $plugin.flex_select.edit}
+{include file=../../../plugins/flex_select/templates/edit.sub.html}
+{/if}
+
+{if $plugin.flex_select.show_existing_list}
+{include file=../../../plugins/flex_select/templates/existing_list.sub.html}
+{/if}
+
+{if $plugin.flex_select.show_form_list}
+{include file=../../../plugins/flex_select/templates/mv_list.sub.html}
+{/if}
+   
+</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

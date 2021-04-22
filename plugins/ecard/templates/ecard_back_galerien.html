@@ -1,0 +1,115 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+
+<div class="artikel">
+	
+	<h1>{$message.plugin.ecard.name} </h1>
+	<p id="ecard_hier_finden_sie_die_galeriedaten" class="h1" >{$plugin_ecard_hier_finden_sie_die_galeriedaten}</p>
+ <a href="./plugin.php?menuid={$aktive_menuid}&amp;template=ecard/templates/ecard_back_galerien.html&amp;bgalg_id={$galerie.bgalg_id}&amp;action=bgalg_new" id="ecard_neue_galerie_hinzufgen" class="132link" >{$plugin_ecard_neue_galerie_hinzufgen}</a>
+
+ <h2 id="ecard_vorhande_galerien" class="h2" >{$plugin_ecard_vorhande_galerien}</h2>
+
+	{if $plugin.ecard.template_weiche == "GALERIEN_LISTE"}
+		{if $plugin.ecard.galerien_liste}
+	<table style="width: 99%;">
+	<thead><tr>
+	<th> {$plugin_ecard_name_der_galerie}</th>
+	<th> {$plugin_ecard_beschreibung_der_galerie}</th>
+	<th> {$plugin_ecard_galerie_bearbeiten}</th>
+	
+	</tr>
+	
+	</thead>
+	<tbody>
+	<tr>
+	
+	</tr>
+	</tbody>
+	</table>
+		
+		
+			<ul>
+				{foreach item="galerie" from=$plugin.ecard.galerien_liste}
+					<li>
+						<p>
+							{$galerie.bgalg_name} <small>(ID: {$galerie.bgalg_id})</small>
+						</p>
+						<p>
+							{$galerie.bgalg_text}
+						</p>
+						<a href="./plugin.php?menuid={$aktive_menuid}&amp;template=ecard/templates/ecard_back_galerien.html&amp;bgalg_id={$galerie.bgalg_id}&amp;action=bgalg_edit" >
+							::: bearbeiten :::
+						</a>
+						<br />
+					</li>
+				{/foreach}
+			</ul>
+		{else}
+			<p>Keine Galerien definiert.</p>
+		{/if}
+	{/if}
+	
+	{if $plugin.ecard.template_weiche == "GALERIEN_EDIT"}
+		<form action="" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="action" value="bgalg_save" />
+			<input type="hidden" name="modus" value="{$plugin.ecard.modus}" />
+			<input type="hidden" name="bgalg_id" value="{$plugin.ecard.galerie_data.bgalg_id}" />
+			
+			
+			 <fieldset>
+			<legend>{$plugin_ecard_galerienbezeichnung}</legend>
+				<label for="bgalg_name">Name:</label><br />
+			<input type="text" name="bgalg_name" id="bgalg_name" value='{$plugin.ecard.galerie_data.bgalg_name|escape:"html"}' /><br />
+			<br />
+			
+			
+			<label for="bgalg_text">Text:</label><br />
+			<textarea name="bgalg_text" id="bgalg_text" rows="5" cols="30">{$plugin.ecard.galerie_data.bgalg_text|escape:"html"}</textarea><br />
+			<br />
+			</fieldset>
+			<fieldset>
+			<legend>{$plugin_ecard_daten_speichern3}</legend>
+			
+			<input type="submit" class="submit_back_green_white" value="speichern" /></fieldset>
+		</form>
+	{/if}
+	
+	
+	
+
+
+
+
+<br />
+<br />
+
+
+{if $is_dev}
+
+ #start#
+ <span class="ignore"></span>
+  <!-- Der Start Button ist notwendig damit sich das System daran aufhängen kann. -->
+	 <div class="rapid_form">
+			<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="ecard_data" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="ecard" />
+		<!-- Das Standarpräfix für die Ids -->
+		<input type="hidden" name="praefix" value="ecard" />
+		<!-- Das Standarpräfix für die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="ecard_data" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div> 
+
+{/if}
+	
+	
+</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

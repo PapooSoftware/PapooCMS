@@ -1,0 +1,443 @@
+<!doctype html>
+<html class="no-js" lang="de">
+<head><title></title>
+		<meta name="description" content="etert
+ewtrwert" />
+	<meta name="keywords" content="" />
+<!-- TEMPLATE: _kopf.utf8.html -->
+<!--
+Ihre barrierefreie Internetseite wurde ermöglicht durch
+das barrierefreie CMS Papoo Version 6.0.0 Rev. 4716 - Papoo Enterprise.
+Information  unter http://www.papoo.de
+-->
+
+<script>
+    var $buoop = {c:2};
+    function $buo_f(){
+     var e = document.createElement("script");
+     e.src = "./plugins/ie6warning/js/ie6bar.min.js";
+     document.body.appendChild(e);
+    };
+    try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
+    catch(e){window.attachEvent("onload", $buo_f)}
+</script> 
+<meta charset="utf-8"/>
+
+<meta name="dcterms.publisher"     content="Ihre Name" />
+<meta name="dcterms.subject"       content="Hier geht es zur Startseite - localhost" />
+<meta name="dcterms.creator"       content="Ihre Name" />
+<meta name="dcterms.language"       content="de" />
+<meta name="dcterms.title"       content="Hier geht es zur Startseite - localhost" />
+<meta name="dcterms.description"       content="Metabeschreibung des Menüpunktes Startseite." />
+<meta name="viewport" content="width=device-width, initial-scale=0.9" />
+
+<!-- Standard Metatags -->
+
+
+<meta name="robots" content="INDEX,FOLLOW" />
+
+
+
+<!-- Einbindung externer Schriften -->
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,700' rel='./css'>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='./css'>
+
+<!-- Einbindung Javascripte -->
+<script type="text/javascript" src="./js/jquery.js"></script>
+<script type="text/javascript" src="./js/modernizr.js"></script>
+<script type="text/javascript" src="./js/_jq_papoopopupimage.js"></script>
+
+    <script type="text/javascript" src="./js/function_front.js"></script>
+
+    <script type="text/javascript" src="./js/jquery.colorbox-min.js"></script>
+    <link type="text/css" media="screen" rel="./css/colorbox.css" />
+    <script type="text/javascript">
+    
+        $(document).ready(function(){
+            $("a[rel='lightbox']").colorbox({transition: "fade"});
+            $(".iframe_link").colorbox({transition:"none", width:"1000", height:"400", opacity:"0.8", close: "Close", iframe: true });
+            $("header").css("overflow","visible");
+        });
+    
+    </script>
+
+<!-- Sprach rel alternate bei Mehrsprachigkeit -->
+  <link rel="alternate" href="http://localhost/papoo_trunk/localhost./index.php?style=0&amp;getlang=de" xml:lang="de" lang="de" hreflang="de" title="Deutsch" />
+
+<!--  URL des RSS Feeds -->
+
+
+
+<!-- CSS Einbindung -->
+<link  rel="stylesheet" type="text/css"  href="http://localhost/papoo_trunk/css/1422950943_plugins.css" />
+<link  rel="stylesheet" type="text/css"  href="http://localhost/papoo_trunk/css/_index.css" />
+<link  rel="stylesheet" type="text/css"  href="http://localhost/papoo_trunk/css/startseite.css" />
+
+<!-- CSS Einbindung - extras für alte INternetexplorer -->
+<!--[if IE 9]>
+<link  rel="stylesheet" type="text/css"  href="http://localhost/papoo_trunk/css/IEFixes_9_index.css" />
+<![endif]-->
+<!--[if IE 8]>
+<link  rel="stylesheet" type="text/css"  href="http://localhost/papoo_trunk/css/IEFixes_8_index.css" />
+<![endif]-->
+<!--[if IE 7]>
+<link  rel="stylesheet" type="text/css"  href="http://localhost/papoo_trunk/css/IEFixes_7_index.css" />
+<![endif]-->
+<!--[if lte IE 6]>
+<link  rel="stylesheet" type="text/css"  href="http://localhost/papoo_trunk/css/IEFixes_6_index.css" />
+<![endif]-->
+<!--[if lt IE 6]>
+<link  rel="stylesheet" type="text/css"  href="http://localhost/papoo_trunk/css/IEFixes_5_5_index.css" />
+<![endif]-->
+
+<!-- Extra Ausgaben aus den Plugins im Kopf -->
+<link rel="./css/tm-slider.css" />
+
+
+
+
+<!-- ENDE TEMPLATE: _kopf.utf8.html -->
+
+<link href="http://localhost/papoo_trunk/code.google.com/apis/maps/documentation/javascript/examples/default.css"  rel="stylesheet" type="text/css"  />
+<script type="text/javascript" src="./js/js?sensor=false"></script>
+<script type="text/javascript">
+	  var geocoder;
+  var map;
+  
+   function initialize() {
+    var myLatlng = new google.maps.LatLng(50.363882,7.044922);
+    var myOptions = {
+      zoom: 15,
+      center: myLatlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+
+    var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+    var contentString = 'Auguststr. 4<br /> 53229 Bonn<br /><a href="http://localhost/papoo_trunk/maps.google.de/maps?daddr=Auguststr. 4  53229 Bonn&amp;geocode=&amp;dirflg=&amp;saddr=&amp;f=d&amp;sll=50.738278,7.091015&amp;sspn=0.00846,0.017273&amp;ie=UTF8&amp;z=16" target="_blank"><u>Route</u></a>';
+        
+    var infowindow = new google.maps.InfoWindow({
+        content: contentString
+    });
+
+   geocoder = new google.maps.Geocoder();
+    var address = "Auguststr. 4  53229 Bonn";
+    geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        map.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+            map: map, 
+            position: results[0].geometry.location,
+            title:"Auguststr. 4  53229 Bonn"
+        });
+         infowindow.open(map,marker);
+      } else {
+        alert("Geocode was not successful for the following reason: " + status);
+      }
+    });
+  }
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+</head>
+   <!-- TEMPLATE: _body_kopf.utf8.html -->
+<body class="frontend menulevel-0 menuid-1 url-index-php-style-0-amp-getlang-de php-file-index-php   extra-css-file-startseite-css">
+<a  id="top"></a>
+<div id="top_space"></div> 
+<!-- ENDE TEMPLATE: _body_kopf.utf8.html -->   
+      <span id="styledir" class="styles/foundation_papoo"></span>
+   
+      <header>
+         <div class="row">
+            <div class="large-12 columns">
+
+               <!-- TEMPLATE: _head.html -->
+<!-- MODUL: menue_sprung (intern) -->
+<div id="menue_sprung">
+	<ul id="skiplinks">
+				<li><a href="http://localhost/papoo_trunk/a><span class="ignore">. </span></li>
+							</ul>
+</div>
+<!-- ENDE MODUL: menue_sprung (intern) -->								<div id="mod_freiemodule_1" class="freie_module">
+	<div class="span3"><p><img src="./images/crop_10_logo_green.png" alt="Papoo Logo" title="Papoo Logo" /></p></div>
+	</div>
+								<!-- MODUL: suchbox -->
+	<div class="modul" id="mod_suchbox" >
+		<a  id="suchen"></a>
+
+		<div class="inner_mod">
+			<form id="suche" method="get" action="./index.php">
+
+					
+										<input type="text" id="search" name="search" size="20" value="Suchbegriff"
+						onblur="if(this.value=='')this.value='Suchbegriff';"
+						onfocus="if(this.value=='Suchbegriff')this.value='';"
+						title="Suchbegriff hier eingeben"
+						 />
+										<input  type="hidden" name="erw_suchbereich" value="" />
+                    <input  type="hidden" name="getlang" value="de" />
+                                        <input  type="hidden" name="menuid" value="1" />
+					<input class="senden" type="submit" name="find" value="finden" />
+
+			</form>
+		</div>
+	</div>
+	<!-- ENDE MODUL: suchbox -->
+								<nav class="top-bar" data-topbar>
+	  
+    <ul class="title-area">
+      <!-- Title Area -->
+      <li class="name">
+        <strong>
+          <a href="" accesskey="0" title="Dieser Link führt zur Startseite von  localhost">
+            
+          </a>
+        </strong>
+      </li>
+      <li class="toggle-topbar menu-icon"><a href="http://localhost/papoo_trunk/span></a></li>
+    </ul>
+	  
+	  <section class="top-bar-section">
+				<div id="cat_" class="cat_aktiv" >	
+				
+			
+				<ul class="mod_menue_ul left">
+																		<li>							<!-- MODUL: MENULINK -->
+						<!--<span class="span_menuxaktiv_back extra-css-startseite-css">-->
+							<a href="http://localhost/papoo_trunk/index.php?menuid=1" class="menuxaktiv_back extra-css-startseite-css" id="menu_1" title="Hier geht es zur Startseite">
+					Startseite</a>
+							<span class="ignore">&nbsp;</span>
+			<!-- ENDE MODUL: MENULINK -->							</li>																								<li>							<!-- MODUL: MENULINK -->
+				<a href="http://localhost/papoo_trunk/index.php?menuid=2" class="menuxaktiv active" id="menu_2" title="Übersicht">
+			Übersicht</a>
+			<span class="ignore">&nbsp;</span>
+	<!-- ENDE MODUL: MENULINK -->																															<ul><li>							<!-- MODUL: MENULINK -->
+				<a href="http://localhost/papoo_trunk/index.php?menuid=8" class="menuxaktiv active" id="menu_8" title="Maximale Freiheit">
+			Maximale Freiheit</a>
+			<span class="ignore">&nbsp;</span>
+	<!-- ENDE MODUL: MENULINK -->							</li>																								<li>							<!-- MODUL: MENULINK -->
+				<a href="http://localhost/papoo_trunk/index.php?menuid=9" class="menuxaktiv active" id="menu_9" title="SEO und Barrierefreiheit">
+			SEO und Barrierefreiheit</a>
+			<span class="ignore">&nbsp;</span>
+	<!-- ENDE MODUL: MENULINK -->							</li>																								<li>							<!-- MODUL: MENULINK -->
+				<a href="http://localhost/papoo_trunk/index.php?menuid=19" class="menuxaktiv active" id="menu_19" title="Layout &amp; Design">
+			Layout &amp; Design</a>
+			<span class="ignore">&nbsp;</span>
+	<!-- ENDE MODUL: MENULINK -->							</li></ul></li>																								<li>							<!-- MODUL: MENULINK -->
+				<a href="http://localhost/papoo_trunk/index.php?menuid=3" class="menuxaktiv active" id="menu_3" title="Plugins">
+			Plugins</a>
+			<span class="ignore">&nbsp;</span>
+	<!-- ENDE MODUL: MENULINK -->																															<ul><li>							<!-- MODUL: MENULINK -->
+				<a href="http://localhost/papoo_trunk/index.php?menuid=13" class="menuxaktiv active" id="menu_13" title="Bildergalerie von Papoo">
+			Bildergalerie</a>
+			<span class="ignore">&nbsp;</span>
+	<!-- ENDE MODUL: MENULINK -->							</li>																								<li>							<!-- MODUL: MENULINK -->
+				<a href="http://localhost/papoo_trunk/plugin.php?menuid=12&amp;template=pkalender/templates/pkalender_front.html&amp;kal_id=25&amp;cal_view=cal" class="menuxaktiv active" id="menu_12" title="Kalender">
+			Kalender</a>
+			<span class="ignore">&nbsp;</span>
+	<!-- ENDE MODUL: MENULINK -->							</li>																								<li>							<!-- MODUL: MENULINK -->
+				<a href="http://localhost/papoo_trunk/forum.php?menuid=5" class="menuxaktiv active" id="menu_5" title="Forum">
+			Forum</a>
+			<span class="ignore">&nbsp;</span>
+	<!-- ENDE MODUL: MENULINK -->							</li>																								<li>							<!-- MODUL: MENULINK -->
+				<a href="http://localhost/papoo_trunk/ Sitemap">
+			Sitemap</a>
+			<span class="ignore">&nbsp;</span>
+	<!-- ENDE MODUL: MENULINK -->							</li></ul></li>																								<li>							<!-- MODUL: MENULINK -->
+				<a href="guestbook.php?menuid=6" class="menuxaktiv active" id="menu_6" title="Gästebuch">
+			Gästebuch</a>
+			<span class="ignore">&nbsp;</span>
+	<!-- ENDE MODUL: MENULINK -->							</li>																								<li>							<!-- MODUL: MENULINK -->
+				<a href="kontakt.php?menuid=4" class="menuxaktiv active" id="menu_4" title="Kontaktformular">
+			Kontakt</a>
+			<span class="ignore">&nbsp;</span>
+	<!-- ENDE MODUL: MENULINK -->							</li>																								<li>							<!-- MODUL: MENULINK -->
+				<a href="http://localhost/papoo_trunk/index.php?menuid=20" class="menuxaktiv active" id="menu_20" title="Blog">
+			Blog</a>
+			<span class="ignore">&nbsp;</span>
+	<!-- ENDE MODUL: MENULINK -->							</li>															</ul>
+				
+			</div>
+				</section>
+	</nav>
+	<!-- ENDE MODUL: menue -->
+	<!-- ENDE TEMPLATE: _head.html -->
+            </div>
+         </div>
+      </header>
+
+    <div id="links" class="row">
+    <article id="content_links" class="large-12 medium-12 columns">
+        <!-- TEMPLATE: _inhalt_links.html -->
+			<!-- MODUL: bildwechsler -->
+<div class="modul" id="mod_bildwechsler">
+
+            <ul data-orbit data-options= "timer_speed: 6000; animation:fade; animation_speed: 1000;
+																	bullets: true;
+																	circular: true;
+																	slide_number_text: von;
+																	">
+        
+                <li>
+                        <img src="./images/10_slide5.jpg" alt="Erdbeere" title="Erdbeere" width="1200" height="473" />
+            
+                        <div class="orbit-caption">
+                <h1><a href="http://www.google.de">Die Headline Nr 2</a></h1><br />
+                <h2><a href="http://www.google.de">Weitere Subheadline</a></h2>
+
+
+
+                <!-- bw_noch_mehr_text bw_ueberschrift bw_extra_link bw_extra_link_text-->
+            </div>
+            
+        </li>
+                <li>
+                        <img src="./images/10_slide4.jpg" alt="On the Road" title="On the Road" width="1200" height="470" />
+            
+                        <div class="orbit-caption">
+                <h1><a href="http://www.papoo.de">Die Headline</a></h1><br />
+                <h2><a href="http://www.papoo.de">Die Subheadline</a></h2>
+
+
+
+                <!-- bw_noch_mehr_text bw_ueberschrift bw_extra_link bw_extra_link_text-->
+            </div>
+            
+        </li>
+                <li>
+                        <img src="./images/10_slide3.jpg" alt="&Uuml;ber Dubai" title="&Uuml;ber Dubai" width="1200" height="478" />
+            
+                        <div class="orbit-caption">
+                <h1><a href="http://localhost/papoo_trunk/a></h1><br />
+                <h2><a href="http://localhost/papoo_trunk/a></h2>
+
+
+
+                <!-- bw_noch_mehr_text bw_ueberschrift bw_extra_link bw_extra_link_text-->
+            </div>
+            
+        </li>
+            </ul>
+</div>
+<!-- ENDE MODUL: bildwechsler -->
+
+<!-- TEMPLATE: _inhalt_links.html -->    </article>
+    </div>
+
+      <div id="main" class="row">
+
+
+        
+                        
+          <article id="content" class="large-12 medium-12 columns">
+             <!-- TEMPLATE: _inhalt_mitte.html -->
+<h1>Herzlich Willkommen auf Ihrer Internetseite.</h1><p><strong>Herzlichen Glückwunsch.</strong> Die Installation Ihrer Papoo Edition hat funktioniert und Sie können das barrierefreie und suchmaschienenoptimierte CMS Papoo jetzt voll benutzen.<img style="float: right; margin: 10px;" title="Gratulation - die Installation hat funktioniert" alt="Gratulation - die Installation hat funktioniert" src="./images/10_gratulation.jpg" height="205" width="310" /></p><p> </p><p>Mit dem CMS Papoo steht Ihnen ein <strong>vollwertiges Content Management System</strong> zur Verfügung mit dem Sie beliebig viele Inhalte erstellen und managen können.</p><p> </p><p>Unser besonderer Focus liegt auf der <strong>Suchmaschinenoptimierung </strong>und der Barrierefreiheit, daher werden Sie mit dem CMS Papoo immer eine erfolgreiche und auch für behinderte Mitbürger zugängliche Webseite erstellen können.</p><p> </p><p>Diesen Artikel hier z.B. können Sie unter Inhalte / Startseite-Inhalt in der Administration verändern.</p><h2>Administration des CMS</h2><p><a rel="lightbox" title="Screenshot der Administration" href="http://localhost/papoo_tru./images/10_admin_screen.jpg"><img style="float: left; margin: 10px;" title="Screenshot  der Administration" alt="Screenshot der Administration" src="./images/10_admin_screen.jpg" height="74" width="120" /></a>Die Administration Ihrer neuen Webseite finden Sie unter <a href="http://www.test.papoo.de/373/pro/interna/"> ihre_seite.xy/interna/</a>. Klicken Sie auf den Link um in die Administration zu gelangen.</p><p>Sie können sich dort mit dem Benutzernamen root und dem Passwort anmelden dass Sie bei der Installation im letzten Schritt vergeben haben. Falls Sie sich nicht mehr daran erinner, führen Sie einfach den letzten Schritt /setup/start.php noch einmal durch.</p><p> </p><p>Für eine größere Ansicht des Screenshots klicken Sie ihn einfach mal an. Diese Funktion können Sie übrigens in der Administration einfach per Klick einbauen.</p><p> </p><h2><span class="lang_en" xml:lang="en" lang="en"> Kostenloser Support</span></h2><p>Wenn Sie Fragen zu Ihrem neuen Papoo System haben können Sie jederzeit in unserem <a href="http://www.papoo.de/forum.php"> Community Forum</a> um Rat fragen. Und keine Sorge, Neulinge werden dort genauso herzlich willkommen geheißen wie die alten Hasen.<br /> <img style="margin: 10px; float: right;" title="Papoo  Support" alt="Papoo Support" src="./images/10_support1.jpg" height="135" width="200" /></p><h2><br />Business Support</h2><p>Zusätzlich stehen wir unseren Papoo Plus, Pro und <span class="lang_en" xml:lang="en" lang="en"> Business</span> Kunden auch immer gerne per E-Mail oder Telefon über unsere Hotline hilfreich zur Seite.</p><p> </p><p>Wenn Sie weitere Fragen haben, wie z.B. ob wir von <a href="http://www.papoo.de/" title="Papoo"> Papoo</a> <span class="lang_en" xml:lang="en" lang="en"> Software</span> ihr <span class="lang_en" xml:lang="en" lang="en"> Design</span> erstellen oder spezielle Anpassungen oder Funktionen programmieren können, dann kontaktieren Sie uns einfach oder rufen uns an: 0228 / 280 56 68.</p><p> </p><h2>Dokumentation</h2><p>Eine ausführliche PDF Dokumentation finden sie auf unserer <a href="http://www.papoo.de/cms-dokumentation/cms-dokumentation-papoo.html"> CMS Webseite</a>, dort finden Sie auch unser Online Hilfe Forum, unsere Online Wiki Dokumentation und eine FAQ Sammlung.</p><p> </p><h2><span class="lang_en" xml:lang="en" lang="en"> Designvorlagen für Papoo<br /></span></h2><p><img style="float: left; margin: 10px;" title="Design Varianten" alt="Design Varianten" src="./images/10_designs.jpg" height="110" width="166" /></p><p>Die Grundlage des CSS für das Standard Layout ist das 960 CSS Grid System, für viele Designs benutzen wir auch das YAML Layout.</p><p> </p><p>In unseren Papoo Plus, Pro und Business Versionen liefern wir mind. 30 fertige, sofort nutzbare Designvorlagen mit. Wie diese aussehen, davon können Sie sich auf unserer Webseite ein Bild machen.</p><h2>Individuelle Designs für Ihre Webseite</h2><p>Gerne setzen wir für Sie auch ein invididuelle Design für Sie um, wir können das für Sie erstellen mit unseren TOP Grafik Designern oder wir setzen ein erstelltest Photoshop Design oder vorhandenes Design für Sie um. Wenn Sie Fragen dazu haben, rufen Sie uns einfach an: 0228 280 56 68</p><p><br />Prinzipiell läßt sich nahezu jedes beliebige Design mit Papoo umsetzen. Was alles möglich ist, können Sie in unserer Referenzliste schauen mit weit mehr als 1000 ausgewählten Einträgen.</p><p> </p><h2>Viel Erfolg</h2><p>Viel Erfolg mit Ihrem neuen <a href="http://www.papoo.de/" title="Papoo"> Papoo</a> CMS System</p><p> </p><p>Ihr Team von Papoo Software.</p>
+	<!-- MODUL (intern): mod_artikel_optionen  -->
+<div class="modul" id="mod_artikel_optionen">
+		
+	<span class="ignore">.</span>
+	
+	<ul class="option">
+		<li class="ignore"></li>
+							<li>
+								
+                <span class="ignore">.</span>
+			</li>
+            <!-- <li>
+             <a target="blank" href="http://www.web2pdfconvert.com/convert.aspx">Mit Web2PDF PDF der Seite erstellen</a>
+             <span class="ignore">.</span></li>-->
+				
+				
+			</ul>
+
+
+</div>
+<!-- ENDE MODUL (intern): mod_artikel_optionen  --><!-- MODUL (intern): mod_back_top  -->
+        <div class="cleafix"></div>
+<div class="modul" id="mod_back_top" style="clear: both;">
+
+</div>
+<!-- ENDE MODUL (intern): mod_back_top --><!-- TEMPLATE: _inhalt_mitte.html -->          </article>
+        
+                 
+      </div>
+      
+      <footer class="row">
+
+
+               <!-- TEMPLATE: _fuss.html -->
+<div class="large-12 columns">
+																<!-- MODUL: menue_top -->
+	<div class="large-4 medium-4 columns" id="mod_menue_top">
+        <h2><i class="fa fa-info-circle"></i> Weitere Informationen</h2>
+		<ul class=" left">
+			
+				<li>
+					<a class="top_link" href="http://localhost/papoo_trunk/index.php?menuid=1&amp;reporeid=7" title="" id="mod_menue_top_link_5" >
+						<span class="ignore">1.: </span>
+						Impressum<span class="ignore">.</span>
+					</a>
+					
+				</li>
+			
+				<li>
+					<a class="top_link" href="kontakt.php" title="" id="mod_menue_top_link_6" >
+						<span class="ignore">2.: </span>
+						Kontakt<span class="ignore">.</span>
+					</a>
+					
+				</li>
+			
+				<li>
+					<a class="top_link" href="inhalt.php" title="" id="mod_menue_top_link_7" >
+						<span class="ignore">3.: </span>
+						Inhaltsverzeichnis<span class="ignore">.</span>
+					</a>
+					
+				</li>
+			
+		</ul>
+	</div>
+
+	<!-- ENDE MODUL: menue_top -->
+																<div id="mod_freiemodule_3" class="freie_module">
+	<div class="large-3 medium-3 columns"><h2><i class="fa fa-map-marker"> </i>Hier sind wir zu finden</h2><p>Auguststr. 4<br />53229 Bonn</p><p>&nbsp;</p><p><i class="fa fa-phone"></i>  0228 / 280 56 68</p><p><i class="fa fa-envelope">  </i><a href="http://localhost/papoo_trunk/a></p><p><i class="fa fa-facebook"></i>   <a target="_blank" href="http://www.facebook.com/cms.papoo">Facebook</a></p><p><i class="fa fa-home"></i> <a target="_blank" href="http://www.papoo.de">Webseite</a></p></div><div class="large-5 medium-5 columns"><address>Auguststr. 4<br /> 53229 Bonn<br /></address><br /><div id="map_canvas" style="width: 450px; height: 180px"></div><br /></div>
+	</div>
+						
+</div>
+        <div class="clear_fix break_artikel"></div>
+			<!-- Copyright - nicht entfernen! -->
+
+<!-- ENDE TEMPLATE: _fuss.html -->
+
+      </footer>
+<div class="row subfooter">
+
+    <div class="large-12 columns ">
+        <div class="large-8 medium-8 columns">
+        <a class="link_poweredbypapoo" target="blank" href="http://www.papoo.de">
+            <img src="./images/poweredbypapoo3.png" style="" alt="Powered by Papoo 2012"/>
+        </a>
+        <!-- -->
+                        <div class="anzeig_besucher span3">	3 Besucher </div>
+                                </div>
+
+        <div class="large-4 medium-4 columns">
+        <!-- Freies Modul - manuell eingebunden - auch das geht -->
+                                                                         <div id="mod_freiemodule_4" class="freie_module">
+            <ul class="social-media-icons clearfix"><li><a href="http://www.facebook.com/cms.papoo" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></li><li><a href="http://localhost/papoo_trunk/i></a></li><li><a href="http://localhost/papoo_trunk/plus.google.com/+papoode/posts" target="_blank" title="Google+"><i class="fa fa-google-plus"></i></a></li><li><a href="http://localhost/papoo_trunk/plugins/rssfeed/feed1.xml" target="_blank" title="RSS Feed"><i class="fa fa-rss"></i></a></li></ul>
+        </div>
+                        </div>
+    </div>
+
+</div>
+
+      <script src="styles/foundation_papoo/js/script.js"></script>
+      <script src="styles/foundation_papoo/foundation/js/foundation.min.js"></script>
+      <script>
+         $(document).foundation();
+      </script>
+
+    
+   </body>
+</html>

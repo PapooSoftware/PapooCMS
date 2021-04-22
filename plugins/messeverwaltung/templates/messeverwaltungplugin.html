@@ -1,0 +1,43 @@
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+<h2>{$messe_1}</h2><br>
+{$messe_2}
+
+  <form action="#" method="post" >
+  <fieldset> 
+  <legend>{$messe_3}
+   </legend>
+  <!--{*
+  <label for="messe_xml_yn">Daten als xml zur Verfügung stellen?</label>
+  <input type="checkbox" {if $xml_result.0.messe_xml_yn==1}checked="checked"{/if} name="messe_xml_yn" id="messe_xml_yn" value="1" />
+  <br /> <br />
+  <label for="messe_xml_link">Daten aus xml Datei:</label>
+  <p>Daten aus einer xml Datei automatisch holen und abgleichen? <br />Dann Adresse angeben.</p>
+  <input type="text" name="messe_xml_link" id="messe_xml_link" value="{$xml_result.0.messe_xml_link}" size="80" />
+   <br /> *}
+   -->
+   {*<!-- Hier werden weitere Sprachen für das Frontend ausgewählt. Bedenken Sie, das Sie für jede Sprache eigene Menüpunkte und Artikel eingeben müssen!-->*}
+    <p>{$message_367}</p>
+{foreach item=lang from=$messe_language}
+    <label for="lang{$lang.lang_id}">{$lang.language}</label>
+    <input type="checkbox" {$lang.selected} name ="lang[]" id="lang{$lang.lang_id}" value="{$lang.lang_id}" />
+    <br />
+{/foreach}
+   <br />
+  <input type="submit" class="submit_back_green" name="submitglossar" value="{$messe_4}"/>
+ 
+  
+  </fieldset>
+  </form>
+  
+
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}

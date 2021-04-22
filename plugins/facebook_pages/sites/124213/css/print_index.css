@@ -1,0 +1,106 @@
+@media all {
+body {
+	background:#fff;
+	font-family:Arial,sans-serif;
+	font-size:90%; 
+}
+#head,
+#col1,
+#col2  {
+	display:none;
+	}
+#printtop1 {
+	top:0px;
+	left:0px;
+	position:absolute;
+	font-size:90%;
+}
+#printtop1 img {
+	width:4.5cm;
+	margin-top:40px;
+}
+#printleft1 img {
+	margin-top:60px;
+	width:4.5cm;
+	
+}
+#printlink {
+	font-size:100%;
+	margin-top:210px;
+	text-align:right;
+	
+	
+}
+#mitte {
+	padding-top:18px;
+	margin-left:5.5cm;
+	margin-right:40%;
+}
+h1, h2, h3, h4 {
+	color:#000;
+}
+#mitte .url{
+margin-top:20px;
+margin-bottom:60px;
+font-size:110%;
+}
+#mitte img{
+	float:left;
+	margin-right:20px;
+}
+a
+{
+	color:#333333;
+	font-weight:400;
+	
+}
+acronym {
+	font-weight: bold;
+	text-decoration: none;
+}
+
+acronym:after {
+	content: " (Acronym: "attr(title)") ";
+	font-weight: normal;
+	text-decoration: none;
+}
+
+abbr {
+	font-weight: bold;
+	text-decoration: none;
+}
+
+abbr:after {
+	content: " (Abkürzung für: "attr(title)") ";
+	font-weight: normal;
+	text-decoration: none;
+}
+
+}
+@media print {
+#backlink {
+	display:none;
+}
+#mitte {
+	margin:0px;
+	width:11cm;
+	margin-left:5.7cm;
+	overflow:visible;
+}
+#printtop1 {
+	display:block;
+	top:0px;
+	left:0px;
+	position:absolute;
+	overflow:visible;
+	padding-right:10px;
+}
+.floatbox { overflow:visible; }
+#printtop1 img {
+	
+}
+#printlink {
+	margin-top:490px;
+}
+
+}

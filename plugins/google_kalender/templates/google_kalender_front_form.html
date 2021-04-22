@@ -1,0 +1,76 @@
+{if $is_eingetragen=="no"}
+<div class="error">{$plugin_google_kalender_wurde_nicht_eingetragen}</div>
+{/if}
+<form method="post" action="" style="width:100%">
+	<fieldset>
+		<legend>{$plugin_google_kalender_titel_des_terminsfieldset}</legend>
+		<p>
+			<label for="gkal_summary">{$plugin_google_kalender_date_titel_des_termins}*{$plugin_error.gkal_summary} </label>
+			<br />
+			<input style="width:50%" type="text" name="gkal_summary" value="{$gkal_date.gkal_summary|escape:"html"}" id="gkal_summary" maxlength="254" required="required" inputmode="latin" />
+		</p>
+		<p>
+			<label for="gkal_description">{$plugin_google_kalender_date_terminbeschreibung}{$plugin_error.gkal_description} </label>
+			<br />
+			<textarea cols="30" rows="6" name="gkal_description" id="gkal_description">{$gkal_date.gkal_description|escape:"html"}</textarea>
+		</p>
+		<p>
+			<label for="gkal_location">{$plugin_google_kalender_date_location}{$plugin_error.gkal_location} </label>
+			<br />
+			<input style="width:70%" type="text" inputmode="latin" name="gkal_location" value="{$gkal_date.gkal_location|escape:"html"}" maxlength="254" id="gkal_location"/>
+		</p>
+	</fieldset>
+
+	<fieldset>
+		{literal}
+			<link rel="stylesheet" type="text/css" href="./interna/css/jquery_ui.css" />
+			<script src='./interna/js/jquery-ui-1.7.2.custom.min.js' type='text/javascript'></script>
+			<script type="text/javascript">
+			$(function() {
+				$('#gkal_date_start_datum').datepicker({
+					dateFormat: 'dd.mm.yy',
+					changeMonth: true,
+					changeYear: true,
+					minDate: '0d' 
+				});
+			});
+			$(function() {
+				$('#gkal_date_end_datum').datepicker({
+					dateFormat: 'dd.mm.yy',
+					changeMonth: true,
+					changeYear: true,
+					minDate: '+0d' 
+				});
+			});
+			</script>
+		{/literal}
+		<legend>{$plugin_google_kalender_date_das_startdatum}</legend>
+		<p>
+			<label for="gkal_date_start_datum">{$plugin_google_kalender_date_start_datum}*{$plugin_error.gkal_date_start_datum} </label>
+			<br />
+			<input type="date" name="gkal_date_start_datum" value="{$gkal_date.gkal_date_start_datum|date_format:"%Y-%m-%d"}" required="required" id="gkal_date_start_datum"/>
+			<br />
+			<label for="gkal_date_uhrzeit_beginn">{$plugin_google_kalender_date_uhrzeit_beginn}*{$plugin_error.gkal_date_uhrzeit_beginn} </label>
+			<br />
+			<input type="time" name="gkal_date_uhrzeit_beginn" value="{$gkal_date.gkal_date_uhrzeit_beginn|escape:"html"}" required="required" id="gkal_date_uhrzeit_beginn"/>
+		</p>
+	</fieldset>
+	<fieldset>
+	<legend>{$plugin_google_kalender_date_das_enddatum}</legend>
+		<p>
+			<label for="gkal_date_end_datum">{$plugin_google_kalender_date_end_datum}*{$plugin_error.gkal_date_end_datum} </label>
+			<br />
+			<input type="date" name="gkal_date_end_datum" value="{$gkal_date.gkal_date_end_datum|date_format:"%Y-%m-%d"}" required="required" id="gkal_date_end_datum"/>
+			<br />
+			<label for="gkal_date_uhrzeit_ende">{$plugin_google_kalender_date_uhrzeit_ende}*{$plugin_error.gkal_date_uhrzeit_ende} </label>
+			<br />
+			<input type="time" name="gkal_date_uhrzeit_ende" value="{$gkal_date.gkal_date_uhrzeit_ende|escape:"html"}" required="required" id="gkal_date_uhrzeit_ende"/>
+		</p>
+	</fieldset>
+		
+	<fieldset>
+		<legend>{$message_70}</legend>
+		<!-- Speichern -->
+		<button type="submit" class="submit_back_green" value="1" name="formSubmit_save_pcal_date">{$message_70}</button>
+	</fieldset>
+</form>

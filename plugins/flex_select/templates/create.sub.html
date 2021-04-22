@@ -1,0 +1,29 @@
+<h2>{$message.plugin.flex_select.create_header|replace:'NAME':$plugin.flex_select.mv_name}</h2>
+<p>{$message.plugin.flex_select.create_info}</p>
+
+<form method="POST" action="">
+	<input type="hidden" name="mv_id" value="{$plugin.flex_select.mv_id}" />
+	<fieldset><legend>{$message.plugin.flex_select.create_legend}</legend>
+		<p><label for="field1">{$message.plugin.flex_select.field1}</label><br />
+			<select id="field1" name="field1">
+				<option value=""></option>
+			{foreach item=dat from=$plugin.flex_select.select_fields}
+				<option value="{$dat.id}" {if $dat.selected == 1}selected="selected"{/if}>{$dat.name}</option>
+			{/foreach}
+			</select>
+		</p>
+		
+		<p><label for="field2">{$message.plugin.flex_select.field2}</label><br />
+			<select id="field2" name="field2">
+				<option value=""></option>
+			{foreach item=dat from=$plugin.flex_select.select_fields}
+				<option value="{$dat.id}" {if $dat.selected == 2}selected="selected"{/if}>{$dat.name}</option>
+			{/foreach}
+			</select>
+		</p>
+	</fieldset>
+	
+	<fieldset><legend>{$message.plugin.flex_select.create_submit}</legend>
+		<input class="submit_back_green" type="submit" name="create" value="{$message.plugin.flex_select.create_submit}" />
+	</fieldset>
+</form>

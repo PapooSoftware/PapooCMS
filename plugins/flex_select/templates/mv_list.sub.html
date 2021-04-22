@@ -1,0 +1,6 @@
+<p>{$message.plugin.flex_select.form_list_info}</p>
+<ol>
+	{foreach item=dat from=$plugin.flex_select.form_list }
+	<li><a href="{$fl_link}&amp;mv_id={$dat.mv_id}">{$dat.mv_name}</a></li>
+	{/foreach}
+</ol>

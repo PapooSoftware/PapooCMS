@@ -1,0 +1,36 @@
+<h2>{$message.plugin.flex_select.edit_header|replace:'NAME':$plugin.flex_select.mv_name}</h2>
+
+<form method="POST" action="">
+	<input type="hidden" name="mv_id" value="{$plugin.flex_select.mv_id}" />
+	<input type="hidden" name="link_id" value="{$plugin.flex_select.link_id}" />
+	<fieldset><legend>{$message.plugin.flex_select.edit_legend}</legend>
+		<table style="min-width:50%">
+			<tr>
+				<td><label for="field1">{$message.plugin.flex_select.field1}</label></td>
+				<td style="text-align:right"><input type="text" readonly="readonly" id="field1" disabled="disabled" value="{$plugin.flex_select.field1}" /></td>
+			</tr>
+			<tr>
+				<td><label for="field2">{$message.plugin.flex_select.field2}</label></td>
+				<td style="text-align:right"><input type="text" readonly="readonly" id="field2" disabled="disabled" value="{$plugin.flex_select.field2}" /></td>
+			</tr>
+		</table>
+	</fieldset>
+	
+	{foreach item=dat from=$plugin.flex_select.data}
+	<fieldset><legend>{$plugin.flex_select.field1} = {$dat.name}</legend>
+		<p>
+			{foreach item=dat2 from=$dat.choices}
+			<input type="checkbox" name="options{$dat.id}[]" id="option{$dat.id}-{$dat2.id}" value="{$dat2.id}" {if $dat2.checked}checked="checked"{/if} /> 
+			<label for="option{$dat.id}-{$dat2.id}">{$dat2.name}</label> <br />
+			{/foreach}
+		</p>
+	</fieldset>
+	{/foreach}
+	
+	<p>
+		<input class="submit_back_green" type="submit" name="update" value="{$message.plugin.flex_select.submit}" />
+	</p>
+	<p>
+		<input class="submit_back_red" type="submit" name="remove" value="{$message.plugin.flex_select.remove}" />
+	</p>
+</form>

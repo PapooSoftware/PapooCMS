@@ -1,0 +1,4 @@
+-- NOTE: ONLY ONE FIRST LINE CAN BE HEADER, NOT TWO LINES!!!
+COPY "myDBname".de
+FROM 'c:/de_complete.txt'
+WITH CSV HEADER

@@ -1,0 +1,3 @@
+Version für kostenpflichtige Postleitzahlen-DB. Die beiliegenden Daten im Unterverzeichnis PLZ-Abo sind allesamt rechtlich geschützt 
+und sollen nur als Beispiel dienen! Eine Weitergabe und/oder Nutzung der Daten ist nur durch Erwerb einer Lizenz unter http://www.plz-umkreis.com/plz-umkreissuche erlaubt!
+Kostenbeispiel dt. Daten 99 Euro einmalig mit lebenslangem kostenfreier Updates. Beiliegende Daten stammen aus 08/2013, sind also nicht mehr aktuell.

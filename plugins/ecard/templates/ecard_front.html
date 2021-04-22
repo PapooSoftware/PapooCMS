@@ -1,0 +1,120 @@
+<div  class="floatbox artikel_details">
+<a  id="artikel"></a>
+	
+	{if $plugin.ecard.template_weiche == "GALERIEN_LISTE"}
+		<h2>{$message.plugin.ecard.name}</h2>
+		{if NOT $plugin.ecard.galerien_liste}
+			<p>
+				{$message.plugin.ecard.galerien_keine}
+			</p>
+		{else}
+			<ul class="galerie_liste_ecard">
+				{foreach item=galerie from=$plugin.ecard.galerien_liste}
+					<li class="floatbox">
+						<a href="{$webverzeichnis}plugin.php?menuid={$menuid_aktuell}&template=ecard/templates/ecard_front.html&bgalg_id={$galerie.bgalg_id}"><strong>{$galerie.bgalg_name}</strong></a><br />
+					
+						{$galerie.bgalg_text}<br />
+						
+					</li>
+				{/foreach}
+			</ul>
+		{/if}
+	{/if}
+	
+	{if $plugin.ecard.template_weiche == "ecard_LISTE"}
+		
+		{if NOT $plugin.ecard.babies_liste}
+			<p>
+				{$message.plugin.ecard.babies_keine}
+			</p>
+		{else}
+			<h2>{$plugin.ecard.galerie_data.bgalg_name}</h2>
+			<p>{$plugin.ecard.galerie_data.bgalg_text}</p><br />
+			<div class="subcolumns ecard_liste">
+				{foreach name=babies_liste item=baby from=$plugin.ecard.babies_liste}
+					{if $smarty.foreach.babies_liste.iteration is odd by 1}
+						<div class="c50l">
+						{*<!--<div class="subcl">-->*}
+					{else}
+						<div class="c50r">
+						
+					{/if}
+						<div class="subc">
+							<a href="{$front_link_ecard}&amp;bgalg_id={$baby.bgalb_bgalg_id}&amp;bgalb_id={$baby.bgalb_id}">
+								<img src="{$slash}plugins/ecard/ecard_bilder/_thumbs/{$baby.bgalb_bild}.jpg"
+									width="{$plugin.ecard.einstellungen.thumb_breite}" height="{$plugin.ecard.einstellungen.thumb_hoehe}"
+									alt='{$baby.bgalb_name|replace:"'":"&#39;"}' title='{$baby.bgalb_name|replace:"'":"&#39;"}' class="bild_links" style="border:none;"/>
+							<br /><br /><br />
+								<span class="ecardliste_infos">Zum Verschicken der Karte klicken Sie bitte hier...</span>
+							</a>
+						</div>
+					</div>
+				{/foreach}
+			</div>
+			
+			{include file="_module_intern/mod_weiter.html}
+		{/if}
+	{/if}
+	
+	{if $plugin.ecard.template_weiche == "ecard_DETAIL" AND NOT $plugin.ecard.template_switch_druck_postkarte}
+		
+		{if NOT $plugin.ecard.baby_data}
+			<p>
+				{$message.plugin.ecard.baby_infos_keine}
+			</p>
+		{else}
+			
+			<div id="ecard_baby_daten_mit_bild" style="position: relative; top: 0px; left: 0px;">
+			{if $ecard_is_send}
+				<div class="message"><h3>{$ecard_is_send}</h3></div>
+				
+				{else}
+			
+				<img src="{$slash}plugins/ecard/ecard_bilder/{$plugin.ecard.baby_data.bgalb_bild}.jpg" width="540" height="405" alt='{$plugin.ecard.baby_data.bgalb_name}|replace:"'":"&#39;"' style="border:none;"/>
+			
+			</div>
+			
+			{if $ecard_error}
+				<div class="error">{$ecard_error}</div>
+				
+				{/if}
+			<div class="postkarten_druck_ausblenden">
+				
+				
+				<form action="" method="post" id="formk" >
+					<input type="hidden" name="action" value="email_senden" />
+					<input type="hidden" name="bgalgw_bgalb_id" value="{$plugin.ecard.baby_data.bgalb_id}" />
+					<fieldset>
+						<legend>
+							{$message.plugin.ecard.email_introtext}
+						</legend>
+						
+						<label for="ecard_email_empfaenger">{$message.plugin.ecard.email_empfaenger}:</label><br />
+						<input type="text" name="email_empfaenger" id="ecard_email_empfaenger" value="" /><br />
+						<label for="ecard_email_name">{$message.plugin.ecard.email_name}:</label><br />
+						<input type="text" name="email_name" id="ecard_email_name" value="" /><br />
+						<label for="ecard_email_text">{$message.plugin.ecard.email_text}:</label><br />
+						<textarea name="email_text" id="ecard_email_text" style="width:95%;height:200px;"></textarea><br />
+						</fieldset>
+						{if $stamm_kontakt_spamschutz}
+							{include file="_module_intern/mod_spamschutz.html}
+				
+						{/if}
+					<fieldset>
+						<legend>
+							{$message.plugin.ecard.email_introtext}
+						</legend>	
+						<input type="submit" value="{$message.plugin.ecard.email_senden}" />
+					</fieldset>
+				</form>
+				
+				{/if}
+				
+			
+				
+			</div>
+			
+		{/if}
+	{/if}
+	
+</div>

@@ -1,0 +1,30 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+<link rel="stylesheet" type="text/css" href="../plugins/kontrastwechsler/css/backend.css"/>
+{include file=head.inc.utf8.html}
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+<div class="artikel">
+	<form action="" method="post">
+		<!-- END DIV -->
+		<fieldset>
+			<div class="alert error">
+				<strong>{$message.plugin.kontrastwechsler.confirm_delete}</strong>
+			</div>
+			<p>
+				<button type="submit" class="btn btn-success" name="confirmDeletion" value="save">
+					{$message.plugin.kontrastwechsler.delete1}
+				</button>
+			</p>
+			<p>
+				<a href="plugin.php?menuid={$aktive_menuid}&template=kontrastwechsler/templates/kontrastwechsler_backend.html"
+				   class="btn btn-danger ">
+					{$message.plugin.kontrastwechsler.cancel}
+				</a>
+			</p>
+		</fieldset>
+	</form>
+</div>
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

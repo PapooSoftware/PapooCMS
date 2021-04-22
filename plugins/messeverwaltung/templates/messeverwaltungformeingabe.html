@@ -1,0 +1,75 @@
+{if $neuereintrag}
+<h2>{$messe_6}</h2>
+
+{/if}
+{if $altereintrag}
+<h2>{$messe_7}</h2>
+{/if}
+<p>{$messe_8}</p>
+
+
+  <form action="#" method="post" enctype="multipart/form-data">
+  
+  <fieldset>
+   <legend>{$messe_9}
+    </legend>
+   
+ 
+  <label for="messe_name">{$messe_10}</label><br />
+  <input type="text" name="messe_name" id="messe_name" value="{$messe_name}" size="60" />
+  
+
+    <br />
+    {if $altereintrag}
+    <br />
+    <div style="float:right; border:1px solid black;">
+    <img src="../images/{$messe_logo}" alt="Logo" /></div>
+    <br />
+   
+ <label for="messe_logo ">{$messe_11}</label><br /> 
+<p>{$messe_12}</p>
+ {/if}
+ {if $neuereintrag}
+ <label for="messe_logo ">{$messe_13}</label><br /> 
+ 
+  {/if}
+ <input name="strFile" value="" type="file" />
+
+    <br />
+ <label for="messe_von">{$messe_14}</label><br />
+  <input type="text" name="messe_von" id="messe_von" value="{$messe_von}" size="8" maxlength="10" />
+  
+  <br /><label for="messe_bis">{$messe_15}</label><br />
+  <input type="text" name="messe_bis" id="messe_bis" value="{$messe_bis}" size="8" maxlength="10" />
+  
+  <br />
+  
+  <input type="hidden" name="messe_id" value="{$messe_id}"/>
+    </fieldset>
+    {foreach item=lang from=$messe_language}
+    {if $lang.selected}
+    <fieldset>
+    
+    <legend>{$messe_18}{$lang.language}</legend>
+ 
+  <label for="messe_descrip{$lang.lang_id}">{$messe_16}</label><br />
+  <textarea name="messe_descrip[{$lang.lang_id}]" id="messe_descrip{$lang.lang_id}" rows="4" cols="50" >{$messe_descrip[$lang.lang_id]}</textarea>
+  <br />
+  </fieldset>
+  {/if}
+  {/foreach}
+  
+  <fieldset>
+    
+    <legend>{$messe_4}</legend>
+  {if $altereintrag}
+  <br />
+  <input style="float:right;margin-right:50px;" type="submit" class="submit_back_red" name="submitdel" value="{$messe_17}"/>
+{/if}
+					   <input style="float:left;" type="submit" name="submitentry" class="submit_back_green" value="{$messe_4}"/>
+
+  </fieldset>
+  	
+  
+  </form>
+  

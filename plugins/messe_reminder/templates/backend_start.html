@@ -1,0 +1,25 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+<h2>Messe-Reminder</h2>
+<p>Hier können Sie die Erinnerungen für Messeeinträge verwalten.</p>
+<p>Klicken Sie links auf <q>Vorlage</q> um die Vorlage, nach der die Einträge für neue Messen erstellt werden, zu bearbeiten.</p>
+<p>Unter <q>Einträge</q> finden Sie die Liste der vorhandenen Messen und deren Einstellungen.<br />Diese werden automatisch erstellt, sobald Sie die Vorlage fertig ausgefüllt haben.</p>
+<p style="margin-top: 5em">Damit die Erinnerungen versandt werden können, müssen Sie folgenden Link als täglichen Cronjob einrichten:</p>
+<p>{$urlbase}template=messe_reminder/templates/cronjob.html&amp;username=<b>Benutzername</b>&amp;password=<b>Passwort</b></p>
+
+<form method="POST" action="{$urlbase}template=messe_reminder/templates/cronjob.html">
+<p><input type="submit" value="Versenden manuell anstoßen" name="cronjob" class="submit" /></p>
+</form>
+
+</div>
+
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+
+{/if}

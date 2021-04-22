@@ -1,0 +1,24 @@
+<h2>{$message.plugin.flex_select.existing_list_header|replace:'NAME':$plugin.flex_select.mv_name}</h2>
+<p>{$message.plugin.flex_select.existing_list_info}</p>
+<table style="width:99%;">
+	<thead><tr>
+		<th>Auswahlfeld</th>
+		<th>Gebundendes Feld</th>
+		<th> </th>
+	</tr></thead>
+	<tbody>
+	{foreach item=dat from=$plugin.flex_select.existing_list }
+		<tr>
+			<td>{$dat.field1_name}</td>
+			<td>{$dat.field2_name}</td>
+			<td><a href="{$fl_link}&amp;mv_id={$plugin.flex_select.mv_id}&amp;link_id={$dat.link_id}">Bearbeiten</a></li></td>
+		</tr>
+	{/foreach}
+	{if !$plugin.flex_select.existing_list}
+		<tr><td colspan="3" style="text-align: center;">&mdash;</td></tr>
+	{/if}
+
+	</tbody>
+</table>
+
+<p><a href="{$fl_link}&amp;mv_id={$mv_id}&amp;link_id=new">Neue Verknüpfung anlegen</a></p>

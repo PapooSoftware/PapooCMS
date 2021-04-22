@@ -1,0 +1,26 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+<h2>Messe-Reminder</h2>
+<h3>Cronjob-Ergebnisse</h3>
+<table style="width:99%">
+	{foreach item=dat from=$plugin.messe_reminder.data }
+	<tr>
+		<td>{$dat.data.name}</td>
+		<td>{$dat.data.email}</td>
+		<td>{if $dat.data.interval == 0}&mdash;{else}{$dat.data.interval} Wochen{/if}</td>
+		<td>{$dat.status}</td>
+	</tr>
+	{/foreach}
+</table>
+   
+</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

@@ -1,0 +1,57 @@
+/* Style 1: Als Kopfzeile */
+body {
+  padding-top: 25px!important;
+}
+#kopf-zeile
+{
+  z-index: 99999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-size: .875rem;
+  width: 102%;
+  border-bottom: 1px solid #611200;
+  max-width: none;
+  padding-top:0.3125rem;
+}
+#kopfzeile_mitte
+{
+  height: 20px;
+  text-align: center;
+}
+#schrift_wechsler
+{
+  display: inline-block;
+}
+#mod_efa_fontsize
+{
+  margin: 0!important;
+  color: inherit;
+}
+#mod_efa_fontsize a
+{
+  background: black;
+  color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-left: .3125rem;
+  font-size: .875rem;
+  width: 1.5625rem;
+  display: inline-block;
+  text-align: center;
+}
+#kontrast_wechsel
+{
+  margin-top: 1px;
+  display: inline-block;
+}
+#kontrast_wechsel > a {
+  padding: .125rem .3125rem;
+  border-radius: .3125rem;
+  margin-right: .3125rem;
+  text-decoration: none;
+  box-sizing: border-box;
+  border: 1px solid black;
+}
+
+/* Ende Style 1 */

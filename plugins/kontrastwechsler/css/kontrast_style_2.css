@@ -1,0 +1,87 @@
+/* Style 2: An der Seite der Webseite */
+#kopf-zeile {
+  position: fixed;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: .875rem;
+  z-index: 99999;
+  max-width: none;
+  background-color: white!important;
+  width: 100%;
+  padding-top: 0px!important;
+}
+#mod_efa_fontsize {
+  background: white;
+  border: 1px solid white;
+  border-radius: 5px 0 0 5px;
+  display: flex;
+  flex-flow: column;
+  position: fixed;
+  margin: 1rem 0;
+  right: 0;
+  padding: 0.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.mod_efa_fontsize_text {
+  color: black!important;
+}
+#mod_efa_fontsize a
+{
+  border: 1px solid #444;
+  border-radius: 3px;
+  color: #444 !important;
+  display: inline-block;
+  font-weight: 500;
+  line-height: 1.75em;
+  padding: .25em .4em;
+  transition: background-color .2s linear,
+  color .2s linear;
+  text-align: center;
+  text-decoration: none !important;
+}
+#mod_efa_fontsize > a:hover {
+    background-color: black;
+    color: #fff !important;
+}
+#mod_efa_fontsize > * {
+    margin: .25em;
+}
+
+#kontrast_wechsel {
+  background: white;
+  color: black!important;
+  border: 1px solid white;
+  border-radius: 0 5px 5px 0;
+  display: flex;
+  flex-flow: column;
+  position: fixed;
+  margin: 1rem 0;
+  left: 0;
+  padding: 0.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+#kontrast_wechsel a
+{
+  border: 1px solid #444;
+  border-radius: 3px;
+  color: #444 !important;
+  display: inline-block;
+  font-weight: 500;
+  line-height: 1.75em;
+  padding: .25em .4em;
+  transition: background-color .2s linear,
+  color .2s linear;
+  text-align: center;
+  text-decoration: none !important;
+}
+#kontrast_wechsel > a:hover {
+    background-color: black;
+    color: #fff !important;
+}
+#kontrast_wechsel > * {
+    margin: .25em;
+}
+/* Ende Style 2 */

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<plugin version="2.0">
+<name>Umkreissuche</name>
+<beschreibung_de><![CDATA[Umkreissuche für Papoo]]></beschreibung_de>
+<beschreibung_en><![CDATA[Radius Search for Papoo]]></beschreibung_en>
+<version>0.1</version>
+<papooid>4</papooid>
+<link>http://www.papoo.de</link>
+<datum>14.12.2010</datum>
+<autor>
+	<name>khmweb</name>
+		<kontakt><![CDATA[khmweb
+							Sonnleitstr. 6
+							83483 Bischofswiesen]]>
+		</kontakt>
+		<email>khm@khmweb.de</email>
+		<telefon>08652 978487</telefon>
+</autor>
+<menue>
+	<!-- menue.eintrag_de: Name des Menü-Punktes im Backend auf deutsch -->
+	<eintrag_de>Umkreissuche</eintrag_de>
+	<icon>newsletter/bilder/pic_01.gif</icon>
+	<link>plugin:radius_search/templates/radius_search_back.html</link>
+</menue>
+<klasse>
+	<name>radius_search</name>
+	<datei>radius_search/lib/radius_search.php</datei>
+</klasse>
+<css>radius_search/css/radius_search.css</css>
+<datenbank>
+	<installation>radius_search/sql/radius_search_install.sql</installation>
+	<deinstallation>radius_search/sql/radius_search_deinstall.sql</deinstallation>
+</datenbank>
+<messages>radius_search/messages</messages>
+</plugin>
