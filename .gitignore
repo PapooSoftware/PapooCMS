@@ -15,4 +15,3 @@ lib/site_conf.php
 dokumente/logs/*.zip
 lib/classes/third-party/composer/vendor/
 templates_c/
-/lib/site_conf.php
