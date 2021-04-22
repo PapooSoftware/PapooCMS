@@ -1,0 +1,52 @@
+{if !$faq_no_login} {* Angemeldeter User? *}
+	{if $faq_no_writeaccess} {* Schreibrecht vorhanden? *}
+		<p class="bold_red">{$plugin.faq_front.message.no_writeaccess}</p><br /> {* Keine Schreibrechte *}
+	{else}
+		<div class="form width100">
+			<h2>{$plugin.faq_front.pageheader.faq_new}</h2>
+			{if $fehler2}<div class="error">{$plugin.faq_front.errmsg.frage_fehlt}</div>{/if}
+			{if $fehler3}<div class="error">{$plugin.faq_front.errmsg.antwort_fehlt}</div>{/if}
+			{if $fehler1}<div class="error">{$plugin.faq_front.errmsg.incorrect_cat_id}</div>
+			{else}
+				<div class="div_margins">
+					<strong>{$plugin.faq_front.text.cat} {$cat_data.0.catname}</strong><br />
+					{$cat_data.0.catdescript}
+				</div>
+				<div class="div_margins">{$plugin.faq_front.text.faq_count} {$cat_data.0.faq_count_active}</div>
+				<div class="div_margins"><strong>{$plugin.faq_front.text.author} {$username}</strong></div>
+				<br />
+				<form name="faq_front_new" action="" method="post">
+			
+{* Felder Frage und Antwort *}
+					<fieldset>
+						<legend class="mb_10">{$plugin.faq_front.formtext.legend_question}</legend>
+						<textarea name="faq_question" id="faq_front_question_id" class="height_50" cols="3" rows="5">{$faq_question|escape:"html"}</textarea>
+						<div class="mb_15"> </div>
+					</fieldset>
+					{include file="../../plugins/faq/templates/faq_front_editor.html}
+					<fieldset>
+						<legend>{$plugin.faq_front.formtext.legend_answer}</legend>
+						<label for="faq_new_answer_id"><strong>{$plugin.faq_front.formtext.label_answer}</strong></label><br /><br />
+						<textarea name="faq_answer" id="faq_new_answer_id" rows="20" cols="50"
+						 class="width90">{$faq_new_answer|escape:"html"}</textarea>
+					</fieldset>
+			
+{* Attachments sind nur bei der Bearbeitung möglich *}
+					<fieldset>
+						<legend>{$plugin.faq_front.formtext.legend_faq_edit_attachment}</legend>
+						<label for="faq_edit_attachment">{$plugin.faq_front.formtext.label_faq_new_attachment}</label><br /><br />
+					</fieldset>
+			
+			{* Button Submit *}
+					<fieldset>
+						 <legend>{$plugin.faq_front.submit.faq_new}</legend><br />
+						<input type="submit" value="{$plugin.faq_front.submit.faq_new}" name="submit" title="{$plugin.faq_front.submit.faq_new}" />
+					</fieldset>
+						<input type="hidden" name="faq_main_id" value="{$faq_main_id}" />
+				</form>
+			{/if}
+		</div>
+	{/if}
+{else} {* Nicht angemeldet *}
+	<p class="bold_red">{$plugin.faq_front.message.no_login}</p><br />
+{/if}

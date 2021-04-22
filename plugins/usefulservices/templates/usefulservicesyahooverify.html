@@ -1,0 +1,33 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+<h2>{$message_5850}</h2>
+<p>{$message_5851}</p>
+<p>{$message_5852}</p>
+
+  <form action="#" method="post" >
+  <fieldset> 
+  <legend>{$message_5853}
+   </legend>
+  <label for="usefulservices_yahoo_verify">{$message_5854}</label><br />
+ <input type="text" name="usefulservices_yahoo_verify" id="usefulservices_yahoo_verify" value="{$usefulservices_yahoo_verify}" size="30"/><br /><br />
+  
+  <input type="submit" class="submit_back_green" name="submityahooverify" value="{$message_5855}"/>
+ 
+  
+  </fieldset>
+  </form>
+  
+
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

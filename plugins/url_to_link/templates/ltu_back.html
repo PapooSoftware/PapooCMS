@@ -1,0 +1,86 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+
+    <h1 id="test__link_to_url_plugin" class="h1" >{$plugin_test__link_to_url_plugin}</h1>
+
+ <p id="test__sie_knnen_fr_jedes_dieser_eingabefelder_einen_platzhalter" class="h1" >{$plugin_test__sie_knnen_fr_jedes_dieser_eingabefelder_einen_platzhalter}</p>
+
+ <h2 id="test__platzhalter_1_link_to_url_1" class="h2" >{$plugin_test__platzhalter_1_link_to_url_1}</h2>
+    <p id="test__tragen_sie_hier_die_urls_ein_die_verknpft_werden_sollen" class="h1" >{$plugin_test__tragen_sie_hier_die_urls_ein_die_verknpft_werden_sollen}</p>
+    <form name="test_daten" method="post" action="">
+ <fieldset>
+<legend>{$plugin_test__linkverknpfungen}</legend>
+
+
+ <div class="labdiv"><label for="ltu__link_to_url_1">{$plugin_ltu__link_to_url_1}{$plugin_error.ltu__link_to_url_1} </label>
+<br />
+<textarea cols="30" rows="6" name="ltu__link_to_url_1"  class="ltu__link_to_url_1" id="ltu__link_to_url_1">{$ltu_.0.ltu__link_to_url_1|escape:"html"}</textarea>
+</div><br />
+
+
+ <div class="labdiv"><label for="ltu__link_to_url_2">{$plugin_ltu__link_to_url_2}{$plugin_error.ltu__link_to_url_2} </label>
+<br />
+<textarea cols="30" rows="6" name="ltu__link_to_url_2"  class="ltu__link_to_url_2" id="ltu__link_to_url_2">{$ltu_.0.ltu__link_to_url_2|escape:"html"}</textarea>
+</div>
+
+
+     <div class="labdiv"><label for="ltu__link_to_url_3">{$plugin_ltu__link_to_url_3}{$plugin_error.ltu__link_to_url_3} </label>
+         <br />
+         <textarea cols="30" rows="6" name="ltu__link_to_url_3"  class="ltu__link_to_url_3" id="ltu__link_to_url_3">{$ltu_.0.ltu__link_to_url_3|escape:"html"}</textarea>
+     </div>
+
+
+     <div class="labdiv"><label
+             for="ltu__link_to_url_4">{$plugin_ltu__link_to_url_4}{$plugin_error.ltu__link_to_url_4} </label>
+         <br/>
+         <textarea cols="30" rows="6" name="ltu__link_to_url_4" class="ltu__link_to_url_4" id="ltu__link_to_url_4">{$ltu_.0.ltu__link_to_url_4|escape:"html"}</textarea>
+     </div>
+
+ </fieldset>
+        <fieldset>
+<legend>{$plugin_ltu__daten_speichern}</legend>
+        <input type="submit" class="submit_back" name="submit_ltu" value="{$plugin_ltu__daten_speichern}" />
+		</fieldset>
+	</form>
+	</p>
+
+
+    <br />
+<br />
+    {if $is_dev}
+ #start#
+
+    <span class="ignore"></span>
+    <!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+    <div class="rapid_form">
+        <form action="" name="" method="POST">
+            <!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+            <input type="hidden" name="tb_name" value="plugin_ltu" />
+            <!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+            <input type="hidden" name="php_datei_name" value="ltu_class" />
+            <!-- Das Standarpr�fix f�r die Ids -->
+            <input type="hidden" name="praefix" value="ltu_" />
+            <!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+            <input type="hidden" name="praefix_spezial" value="ltu_" />
+            <!-- Das Tool einbinden -->
+            {include file=../../../plugins/devtools/templates/rapid_felder.htm}
+        </form>
+    </div>
+
+
+</div>
+
+
+
+{/if}
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

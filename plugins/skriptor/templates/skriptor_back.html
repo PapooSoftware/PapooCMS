@@ -1,0 +1,86 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+	{*<!-- Hier kommt der Kopf rein-->*}
+	{include file=head.inc.utf8.html}
+	<!-- Menü kommt hier rein-->
+	{include file=menu.inc.html}
+	<div class="artikel">
+		{$message.plugin.skriptor.kopf}
+		<form name="skriptor" method="post" action="">
+			<fieldset>
+				<legend>{$plugin_redirect301_plugin_javascript_einstellungen}</legend>
+				<br />
+				<label>
+					<input type="checkbox" name="options[]" value="js_active" {$plugin.skriptor.js_active_checked}/>
+					{$message.plugin.skriptor.form_js_active_label}
+				</label><br />
+				<label>
+					<input style="margin-left: 1em;" type="checkbox" name="options[]" value="js_compress" {$plugin.skriptor.js_compress_checked}/>
+					{$message.plugin.skriptor.form_js_compress_label}
+				</label><br />
+				<label>
+					<input style="margin-left: 1em;" type="checkbox" name="options[]" value="js_remove_comments" {$plugin.skriptor.js_remove_comments_checked}/>
+					{$message.plugin.skriptor.form_js_remove_comments_label}
+				</label>
+			</fieldset>
+			<fieldset>
+				<legend>{$plugin_redirect301_plugin_css_einstellungen}</legend>
+				<label>
+					<input type="checkbox" name="options[]" value="css_active" {$plugin.skriptor.css_active_checked}/>
+					{$message.plugin.skriptor.form_css_active_label}
+				</label><br />
+				<label>
+					<input style="margin-left: 1em;" type="checkbox" name="options[]" value="css_compress" {$plugin.skriptor.css_compress_checked}/>
+					{$message.plugin.skriptor.form_css_compress_label}
+				</label><br />
+				<label>
+					<input style="margin-left: 1em;" type="checkbox" name="options[]" value="css_remove_comments" {$plugin.skriptor.css_remove_comments_checked}/>
+					{$message.plugin.skriptor.form_css_remove_comments_label}
+				</label><br /><br />
+			</fieldset>
+			<fieldset>
+				<legend>{$plugin_redirect301_plugin_html_komprimieren}</legend>
+				<input type="checkbox" name="options[]" value="site_speed_plugin_leerzeichen_tabs" {if $site_speed_plugin.0.site_speed_plugin_leerzeichen_tabs==1}checked="checked"{/if} class="site_speed_plugin_leerzeichen_tabs" id="site_speed_plugin_leerzeichen_tabs"/>
+				<label for="site_speed_plugin_leerzeichen_tabs">{$plugin_site_speed_plugin_leerzeichen_tabs}{$plugin_error.site_speed_plugin_leerzeichen_tabs} </label>
+				<br />
+				<div class="labdiv"> <input type="checkbox" name="options[]" value="site_speed_plugin_komplet_html" {if $site_speed_plugin.0.site_speed_plugin_komplet_html==1}checked="checked"{/if} class="site_speed_plugin_komplet_html" id="site_speed_plugin_komplet_html"/>
+					<label for="site_speed_plugin_komplet_html">{$plugin_site_speed_plugin_komplet_html}{$plugin_error.site_speed_plugin_komplet_html} </label>
+				</div><br />
+			</fieldset>
+			<fieldset>
+				<legend>{$plugin_site_speed_plugin_bidler_einstellungen}</legend>
+				<div class="labdiv"> <input type="checkbox" name="options[]" value="site_speed_plugin_bilder_komprimieren" {if $site_speed_plugin.0.site_speed_plugin_bilder_komprimieren==1}checked="checked"{/if} class="site_speed_plugin_bilder_komprimieren" id="site_speed_plugin_bilder_komprimieren"/>
+					<label for="site_speed_plugin_bilder_komprimieren">{$plugin_site_speed_plugin_bilder_komprimieren}{$plugin_error.site_speed_plugin_bilder_komprimieren} </label>
+				</div><br /><br />
+			</fieldset>
+			<fieldset>
+				<legend>{$plugin_redirect301_plugin_einstellungen_speichedrn}</legend>
+				<input type="submit" class="submit_back_green" name="submit" value="speichern" />
+			</fieldset>
+		</form>
+		<br />
+		<br />
+		<br />
+		<br />
+		{if $is_dev}
+			#start#
+			<span class="ignore"></span>
+			<!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+			<div class="rapid_form">
+				<form action="" name="" method="POST">
+					<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+					<input type="hidden" name="tb_name" value="plugin_site_speed_config" />
+					<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+					<input type="hidden" name="php_datei_name" value="site_speed_class" />
+					<!-- Das Standarpr�fix f�r die Ids -->
+					<input type="hidden" name="praefix" value="site_speed_plugin" />
+					<!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+					<input type="hidden" name="praefix_spezial" value="site_speed_plugin" />
+					<!-- Das Tool einbinden -->
+					{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+				</form>
+			</div>
+		{/if}
+	</div>
+	{*<!-- Hier kommt der Fuss rein-->*}
+	{include file=foot.inc.html}
+{/if}

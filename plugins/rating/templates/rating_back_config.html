@@ -1,0 +1,32 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		<h1>{$plugin.rating_back.backtitel}</h1>
+		{$plugin.rating_back.kopf2}
+		{if $erfolg}<div class="message">{$plugin.rating.saved}</div>
+		{else}
+			{foreach item=err from=$fehler key=mykey}
+				<div class="error">{$plugin.rating_back.$mykey}</div>
+			{/foreach}
+		{/if}
+		<form action="" method="post" id="formk" enctype="multipart/form-data" name="config">
+			<fieldset>
+				<legend>{$plugin.rating_back.settings}</legend>
+				<input id="rating_active" name="rating_active" value="1" type="checkbox" 
+				{if $rating_active=="1"}checked="checked"{/if} />
+				<label for="rating_active">{$plugin.rating_back.rating_active}</label>
+				<br />
+				<br />
+				<input id="time_lock" name="time_lock" value="{$time_lock}" type="text" maxlength="10" size="10" />
+				<label for="time_lock">{$plugin.rating_back.ip_block_text1}</label>
+			</fieldset>
+			<fieldset>
+				<legend>{$plugin.rating_back.save}</legend>
+				<input type="submit" value="{$plugin.rating_back.save}" name="submit_config" />
+			</fieldset>
+		</form>
+	</div>
+	{*<!-- Hier kommt der Fuss rein-->*}
+	{include file=foot.inc.html}
+{/if}

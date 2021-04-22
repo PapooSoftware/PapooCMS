@@ -1,0 +1,64 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		<h2>Protokoll: Gesendete Newsletter und deren Abonnenten</h2>
+		{if $nl_send_to}
+			<p>Anzahl der gesendeten Newsletter: {$anzahl_gesendet}</p>
+			{if $weiter}<div class="nl_weiter">{include file=weiter.inc.html}<br /></div>{/if}
+			<table class="news_old">
+				<tr>
+					<th id="id" style="text-align:right">Id</th>
+					<th id="inhalt">{$message_20002}</th>
+					<th id="lang" style="text-align:center">Sprache</th>
+					<th id="datum" style="text-align:right">{$datum}</th>
+					<th id="senddate" style="text-align:right">{$senddate}</th>
+					<th id="abonnenten" style="text-align:right">{$useranzahl}</th>
+				</tr>
+				{foreach item=send_to from=$nl_send_to}
+					<tr class="news_old_row">
+						<td headers="id" align="right">
+							{$send_to.news_id}
+						</td>
+						<td headers="inhalt">
+							<a href="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/news_protocol.html&news_id={$send_to.news_id}" title="{$news_show_recipients}">{if $send_to.news_uberschrift}{$send_to.news_uberschrift}{else}Betreff fehlt{/if}</a>
+						</td>
+						<td headers="lang" style="text-align:center">{$send_to.news_inhalt_lang}</td>
+						<td headers="datum"  style="text-align:right">{$send_to.news_date}</td>
+						<td headers="senddate"  style="text-align:right">{$send_to.news_date_send}</td>
+						<td headers="abonnenten" style="text-align:right">{$send_to.news_abo}</td>
+					</tr>
+				{/foreach}
+			</table>
+		{elseif $recipients}
+			<p>Anzahl der Abonnenten, an die der Newsletter gesendet wurde: {$anzahl_abonennten}</p>
+			{if $weiter}<div class="nl_weiter">{include file=weiter.inc.html}<br /></div>{/if}
+			<table class="news_old">
+				<tr>
+					<th id="email">{$plugin.newsletter.email}</th>
+					<th id="type">Ausgewählte Verteilerliste/n</th>
+				</tr>
+				{foreach item=recipient from=$recipients}
+					<tr class="news_old_row">
+						<td headers="email">
+							{if $recipient.news_type == "NL"}
+								<a href="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/newsabo.html&msgid={$recipient.news_user_id}" title="{$abo_edite}">
+									{$recipient.news_user_email}</a>
+							{elseif $recipient.news_type == "Papoo"}
+								<a href="./user.php?menuid=8&userid={$recipient.news_user_id}" title="{$abo_edite}">
+									{$recipient.news_user_email}</a>
+							{else}
+								{$recipient.news_user_email}
+							{/if}
+						</td>
+						<td headers="type">
+							{$recipient.news_type}
+						</td>
+					</tr>
+				{/foreach}
+			</table>
+		{/if}
+		{if $weiter}<br /><div class="nl_weiter">{include file=weiter.inc.html}</div>{/if}
+	</div>
+	{include file=foot.inc.html}
+{/if}

@@ -1,0 +1,32 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+<h1>{$plugin.form_manager.couponsmanagen} {if $form_manager_name}- {$form_manager_name}{/if}</h1>
+{if $submitted_count}
+	<p>Es wurden {$submitted_count} Couponcodes (davon {$submitted_count_used} bereits verbraucht) &uuml;bertragen.</p>
+	<p><a href="{$fl_link}">{$plugin.form_manager.zurck}</a></p>
+{/if}
+{if $form=="ok"}
+{include file=../../../plugins/form_manager/templates/couponeingabe.html}
+{else}
+{if $liste=="ok"}
+<h2>{$plugin.form_manager.Liste_form}</h2>
+<ol>
+{foreach item=dat from=$list}
+<li><a href="{$fl_link}&form_manager_id={$dat.form_manager_id}">{$dat.form_manager_name} {$plugin.form_manager.bearbeiten2}</a></li>
+{/foreach}
+</ol>
+{/if}
+{/if}
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

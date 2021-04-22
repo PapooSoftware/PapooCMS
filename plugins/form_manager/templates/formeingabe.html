@@ -1,0 +1,257 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{if $form_manager_link}
+	{*<!--  Link:   -->*}
+	<h2>{$plugin.form_manager.link}</h2>
+	<div class="alert alert-success">
+	{$form_manager_link}<br />
+	</div>
+	<h2>{$plugin.form_manager.fuermenu}</h2>
+	<div class="alert alert-success">
+	plugin:form_manager/templates/form.html&form_manager_id={$form_manager_id}
+	</div>
+{/if}
+
+{if !$altereintrag}
+	<h1>{$plugin.form_manager.emailadresse} </h1>
+{/if}
+
+{if $fehler}
+	<div class="error">{$fehler}</div>
+{/if}
+
+<form method="post"  action="" name="suche" id="formi" style="width:100%" enctype="multipart/form-data">
+	<input type="hidden" name="form_manager_id" value="{$form_manager_id}" />
+	
+	<fieldset>
+		<br />
+		{include file=../../../plugins/form_manager/templates/formeingabe_editor.html}
+		
+		{*<!--  Email:   -->*}
+		<legend>{$plugin.form_manager.nameform}</legend>
+		<label for="form_manager_name">{$plugin.form_manager.nameeingeb}</label><br />
+		<input id="form_manager_name" name="form_manager_name" value="{$form_manager_name}" type="text" />
+	</fieldset>
+	
+	<fieldset>
+		<legend>{$plugin.form_manager.kategorie}</legend>
+		<label for="form_manager_kategorie">{$plugin.form_manager.kategorie} {$emailfalsch}</label> <br />
+		<select name="form_manager_kategorie">
+		<option value="0">{$plugin.form_manager.kategorie_select}</option>
+		
+		{foreach item=dat from=$formcat_liste}
+			<option value="{$dat.formcat__id}" {if $form_manager_kategorie==$dat.formcat__id} selected="selected"  {/if}>{$dat.formcat__name_der_kategorie}</option>
+		{/foreach}
+		
+		</select>
+		
+	</fieldset>
+	
+	<fieldset>
+		<legend>{$plugin.form_manager.emailan}</legend>
+		<label for="form_manager_email">{$message_83} - {$plugin.form_manager.mehrere} {$emailfalsch}</label> <br />
+		<textarea id="form_manager_email" name="form_manager_email" rows="6" cols="50" >{$form_manager_email}</textarea><br />
+	</fieldset>
+	
+	<fieldset>
+		<legend>{$plugin.form_manager.emailan_selectyn}</legend>
+		
+		<input type="checkbox" {if $form_manager_anzeig_select_email==1}checked="checked"{/if}id="form_manager_anzeig_select_email" name="form_manager_anzeig_select_email" value="1" /><br />
+	<label for="form_manager_anzeig_select_email">{$plugin.form_manager.emailan_selectyn}</label> </fieldset>
+	
+	{if $salesforce}
+		<fieldset>
+			<legend>{$plugin.form_manager.salesforce}</legend>
+			{$plugin.form_manager.salesforce_text}<br />
+			<br />
+			<input type="checkbox" {if $form_manager_saleforce_yn==1}checked="checked"{/if} id="form_manager_saleforce_yn" name="form_manager_saleforce_yn" value="1"/>
+			<label for="form_manager_saleforce_yn">{$plugin.form_manager.salesforce_yn}</label><br />
+			<br />
+			<label for="form_manager_saleforce_action">{$plugin.form_manager.salesforce_url}</label><br />
+			<input id="form_manager_saleforce_action" name="form_manager_saleforce_action" value="{$form_manager_saleforce_action}" type="text" /><br />
+			<br />
+			<label for="form_manager_saleforce_oid">{$plugin.form_manager.salesforce_oid}</label><br />
+			<input id="form_manager_saleforce_oid" name="form_manager_saleforce_oid" value="{$form_manager_saleforce_oid}" type="text" /><br />
+			<br />
+			<div class="clearfix"></div>
+			<input id="form_manager_saleforce_debug" {if $form_manager_saleforce_debug==1}checked="checked"{/if} name="form_manager_saleforce_debug" type="checkbox" value="1" />
+			<label for="form_manager_saleforce_debug">{$plugin.form_manager.salesforce_debug}</label><br />
+			<br />
+			<label for="form_manager_saleforce_debug_email">{$plugin.form_manager.salesforce_debug_email}</label><br />
+			<input id="form_manager_saleforce_debug_email" name="form_manager_saleforce_debug_email" value="{$form_manager_saleforce_debug_email}" type="text" /><br />
+			<br />
+		</fieldset>
+	{/if}
+	
+	<fieldset>
+		<legend>{$plugin.form_manager.leadsloesc} </legend>
+		
+		<label for="form_manager_loesch_dat1">{$plugin.form_manager.loesch1}</label><br />
+		<input id="form_manager_loesch_dat1" name="form_manager_loesch_dat1" value="{$form_manager_loesch_dat1}" type="text" /><br />
+		<br />
+		<label for="form_manager_loesch_dat2">{$plugin.form_manager.loesch2}</label><br />
+		<input id="form_manager_loesch_dat2" name="form_manager_loesch_dat2" value="{$form_manager_loesch_dat2}" type="text" /><br />
+		<br />
+	</fieldset>
+
+	{if $altereintrag}
+		<div style="border:1px solid #999;background:#eee;padding:10px;width:96%;margin-top:10px;" class="">
+			<h5 style="margin:0px 0px 5px 0px;padding:0px;">{$plugin.form_manager.platzhalter}</h5>
+			<ul style="margin:0px;padding:0px;">
+                <li style="display:inline;">#remote_ip#&nbsp;&nbsp;&nbsp;</li>
+                <li style="display:inline;">#RefererG#&nbsp;&nbsp;&nbsp;</li>
+                <li style="display:inline;">#gclid#&nbsp;&nbsp;&nbsp; </li>
+                <li style="display:inline;">#RefererN# &nbsp;&nbsp;&nbsp; </li>
+                <li style="display:inline;">#RefererF# &nbsp;&nbsp;&nbsp;</li>
+				{foreach item=lang from=$felder_form}
+					{foreach item=lang2 from=$lang}
+						<li style="display:inline;">#{$lang2.plugin_cform_name}#&nbsp;&nbsp;&nbsp;</li>
+					{/foreach}
+				{/foreach}
+                {if $plugin.form_manager.installed_leadtracker}<li style="display:inline;">#UserID# &nbsp;&nbsp;&nbsp;</li>{/if}
+			</ul>
+		</div>
+	{/if}
+	
+	
+		<fieldset>
+		<legend>{$plugin.form_manager.menu_zuordnung} </legend>
+	 <label for="form_manager_menuid">{$plugin.form_manager.menu_zuordnung_menu}</label>
+   <br />
+  <select name="form_manager_menuid" id="form_manager_menuid" title="" style="width: 40%;" size="1">
+    <option value="">{$plugin.form_manager.auswaehlen}</option>
+
+    <option value="999999999" {if $form_manager_menuid=='all'}selected="selected"{/if} >{$plugin.form_manager.immer}</option>
+    {foreach item=menu from=$menulist_data}
+								{if $menu.menuid}
+									<option  value="{$menu.menuid}" class="levelshift_{$menu.level}" {if $menu.menuid == $form_manager_menuid}selected="selected"{/if} >
+										{$menu.nummer}[{$menu.menuid}]: {$menu.menuname}
+									</option>
+								{/if}
+							{/foreach}
+
+    </select>
+    <a href="#tmp_sprung" onclick="createInput('form_manager_menuid', 'menliste', '{$message_826}');" class="submit_back">{$message_824}</a>
+			<br />
+			<br />
+			<ul id="menliste">
+			{foreach item=dat from=$form_men_ar}
+			
+			{if $dat.form_menu_id=="999999999"}
+						<li class="menlistli" id="liid_999999999">
+								<input value="999999999" id="inid_999999999" name="inhalt_ar[cattext_ar][999999999]" type="hidden" />
+								<span>Immer</span>
+								<a href="#tmp_sprung" onclick="delinput('999999999');" class="submit_back_del">Immer {$message_826}</a>
+							</li>
+						
+						{/if}
+		{/foreach}
+				{foreach item=menu from=$menulist_data}
+					{foreach item=dat from=$form_men_ar}
+						{if $dat.form_menu_id==$menu.menuid}
+						
+							<li class="menlistli" id="liid_{$dat.form_menu_id}">
+								<input value="{$dat.form_menu_id}" id="inid_{$menu.menuid}" name="inhalt_ar[cattext_ar][{$menu.nummer}]" type="hidden" />
+								<span>{$menu.nummer}[{$menu.menuid}]: {$menu.menuname}</span>
+								<a href="#tmp_sprung" onclick="delinput('{$menu.menuid}');" class="submit_back_del">{$menu.nummer}[{$menu.menuid}]: {$menu.menuname} {$message_826}</a>
+							</li>
+						{/if}
+					{/foreach}
+				{/foreach}
+				
+				
+			</ul>
+   <br />
+	</fieldset>
+	
+	
+	<fieldset>
+		<legend>{$plugin.form_manager.textoberhalb} </legend>
+		
+		{foreach item=lang from=$language_form}
+			<h2>{$lang.language}</h2>
+			{*<!--  Antwort_html:   -->*}
+			<label for="form_manager_toptext_html{$lang.lang_id}">{$plugin.form_manager.antwort_html} </label><br />
+			<textarea id="form_manager_toptext_html{$lang.lang_id}" name="form_manager_toptext_html[{$lang.lang_id}]" rows="15" cols="60" title="{$plugin.form_manager.antwort_html}");" >{$form_manager_toptext_html[$lang.lang_id]}</textarea><br />
+		{/foreach}
+	</fieldset>
+	
+	<fieldset>
+		<legend>{$plugin.form_manager.textunterhalb}</legend>
+		
+		{foreach item=lang from=$language_form}
+			<h2>{$lang.language}</h2>
+			{*<!--  Antwort_html:   -->*}
+			<label for="form_manager_bottomtext_html{$lang.lang_id}">{$plugin.form_manager.antwort_html} </label><br />
+			<textarea id="form_manager_bottomtext_html{$lang.lang_id}" name="form_manager_bottomtext_html[{$lang.lang_id}]" rows="15" cols="60" title="{$plugin.form_manager.antwort_html}");" >{$form_manager_bottomtext_html[$lang.lang_id]}</textarea><br />
+		{/foreach}
+	</fieldset>
+	
+	<fieldset>
+		<legend>{$plugin.form_manager.versendebuttom}</legend>
+		
+		{foreach item=lang from=$language_form}
+			<h2>{$lang.language}</h2>
+			<label for="form_manager_lang_button{$lang.lang_id}">{$plugin.form_manager.versendebuttom} </label><br />
+			<input type="text" id="form_manager_lang_button{$lang.lang_id}" name="form_manager_lang_button[{$lang.lang_id}]" value="{$form_manager_lang_button[$lang.lang_id]}"/><br />
+		{/foreach}
+	</fieldset>
+	
+	<fieldset>
+		<legend>{$plugin.form_manager.antwortnachversenden}</legend>
+		
+		{foreach item=lang from=$language_form}
+			<h2>{$lang.language}</h2>
+			<label for="form_manager_antwort_html{$lang.lang_id}">{$plugin.form_manager.antwort_html} </label><br />
+			<textarea id="form_manager_antwort_html{$lang.lang_id}" name="form_manager_antwort_html[{$lang.lang_id}]" rows="15" cols="60" title="{$plugin.form_manager.antwort_html}");" >{$form_manager_antwort_html[$lang.lang_id]}</textarea><br />
+		{/foreach}
+	</fieldset>
+	
+	<fieldset>
+		<legend>{$plugin.form_manager.antwort}</legend>
+		
+		<label for="form_manager_antwort_yn" class="left">{$plugin.form_manager.antwort}</label><br />
+		<input type="radio" {if $form_manager_antwort_yn==1}checked="checked"{/if} name="form_manager_antwort_yn" id="form_manager_antwort_yn" value="1" />
+		<label for="form_manager_antwort_yn">{$plugin.form_manager.ja}</label><br />
+		
+		<input type="radio" {if $form_manager_antwort_yn==0}checked="checked"{/if} name="form_manager_antwort_yn" id="form_manager_antwort_yn" value="0" />
+		<label for="form_manager_antwort_yn">{$plugin.form_manager.nein}</label><br />
+		<br />
+		
+		{foreach item=lang from=$language_form}
+			<h2>{$lang.language}</h2>
+			<label for="form_manager_antwort_email_betreff{$lang.lang_id}">{$plugin.form_manager.betreff}</label><br />
+			<input id="form_manager_antwort_email_betreff{$lang.lang_id}" name="form_manager_antwort_email_betreff[{$lang.lang_id}]" value="{$form_manager_antwort_email_betreff[$lang.lang_id]}" type="text" />
+			<br />
+			<label for="form_manager_antwort_email{$lang.lang_id}">{$plugin.form_manager.antwort_email} </label><br />
+			<textarea id="form_manager_antwort_email" name="form_manager_antwort_email[{$lang.lang_id}]" rows="10" cols="40" title="{$plugin.form_manager.antwort_email}");" >{$form_manager_antwort_email[$lang.lang_id]}</textarea><br />
+			<br />
+			<label for="form_manager_antwort_email_html{$lang.lang_id}">{$plugin.form_manager.antwort_email} HTML </label><br />
+			<textarea id="form_manager_antwort_email_html{$lang.lang_id}" name="form_manager_antwort_email_html[{$lang.lang_id}]" rows="10" cols="40" title="{$plugin.form_manager.antwort_email}");" >{$form_manager_antwort_email_html[$lang.lang_id]}</textarea><br />
+		{/foreach}
+	</fieldset>
+	
+	<fieldset>
+		<legend>{$plugin.form_manager.mail_an_betreiber_inhalt}</legend>
+		
+		{foreach item=lang from=$language_form}
+			<h2>{$lang.language}</h2>
+			<label for="mail_an_betreiber_betreff{$lang.lang_id}">{$plugin.form_manager.betreff}</label><br />
+			<input id="mail_an_betreiber_betreff{$lang.lang_id}" name="mail_an_betreiber_betreff[{$lang.lang_id}]" value="{$mail_an_betreiber_betreff[$lang.lang_id]}" type="text" />
+			<br />
+			<label for="mail_an_betreiber_inhalt{$lang.lang_id}">{$plugin.form_manager.mail_an_betreiber_inhalt}</label><br />
+			<textarea id="mail_an_betreiber_inhalt{$lang.lang_id}" name="mail_an_betreiber_inhalt[{$lang.lang_id}]" rows="10" cols="40" title="{$plugin.form_manager.mail_an_betreiber_inhalt}");" >{$mail_an_betreiber_inhalt[$lang.lang_id]}</textarea><br />
+		{/foreach}
+	</fieldset>
+	
+	<fieldset>
+		<legend>{$plugin.form_manager.erstellen}/{$plugin.form_manager.aendern}</legend>
+		{if !$altereintrag}
+			<input type="submit" class="submit_back_green" value="{$plugin.form_manager.erstellen}" name="formSubmit" />
+		{else}
+			<input type="submit" class="submit_back_green" value="{$plugin.form_manager.aendern}" name="formSubmit" />
+			<input style="float:right;" class="submit_back_red" type="submit" name="submitdel" value="{$plugin.form_manager.loeschen3}"/>
+		{/if}
+	</fieldset>
+</form>
+
+{/if}

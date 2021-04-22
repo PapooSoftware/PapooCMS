@@ -1,0 +1,81 @@
+<h1>{$templ_serg}</h1>
+{include file=../../plugins/extended_search/templates/search_front_form.html}
+{if $thesaurus_frontend}
+  <div class="thesaurus">{$plugin_ext_search_thesaurus_ie_haben_nach} "{$suchworte}" {$plugin_ext_search_thesaurus_gesucht}. {$plugin_shop_einten_ie_vielleicht}
+    <a href="{$slash}index.php?search={$thesaurus_frontend}&menuid={$menuid_aktuell}&erw_suchbereich={$erw_suchbereich}&find=Finden">{$thesaurus_frontend}</a>
+  </div>
+{/if}
+<p>{$templ_ergbn}
+  <strong>"{$suchworte}"</strong>
+</p>
+<p>{$templ_res}
+{foreach item=weiter from=$weiter_array}
+    {if @$weiter.aktivhref}
+        {$weiter.olstart} {$templ_bis} {$weiter.olend}
+        {$templ_insg} {$matches} ({$weiter.page_result} {$templ_seiten}).
+        </p>
+        <div class="floatbox artikel_details"><br />
+          <ol class="search" start="{$weiter.olstart}">
+    {/if}
+{/foreach}
+    {if !$weiter}
+        {if $matches+$startseite!=0}1 {$templ_bis} {$matches} {$templ_insg} {$matches} (1 {$templ_seite}).
+        {else} 0.
+        {/if}
+        </p>
+        <div class="floatbox artikel_details"><br />
+            <ol class="searchol" start="1">
+    {/if}
+{foreach item=table from=$table_data }
+    <li class="ext_search_block">
+        <!--FLEX-->
+        {if $table.ext_search_seite_mv_content_id != 0}
+            <h3 class="searchh3"><a href="{$table.url_header}" title="{$message_2012} &quot;{$table.uberschrift}&quot; {$message_2013}">{$table.uberschrift|strip_tags}</a></h3>
+            <div class="searchtext">{if $table.img}<div class="ext_search_teaser_img">
+                <a href="{$table.url_header}" title="{$message_2012} &quot;{$table.uberschrift}&quot; {$message_2013}"><img src="{$slash}plugins/papoo_shop/images/{$table.img}" alt="{$table.uberschrift}" title="{$table.uberschrift}" /></a></div>{/if}{$table.text}<br />
+            </div>
+        {else}
+            {if $table.ext_search_document_path}
+                <h3 class="searchh3">
+                    <a target="blank" href="{$table.ext_search_document_path}" title="{$message_2012} &quot;{$table.uberschrift}&quot; {$message_2013}">
+                      {$table.uberschrift}
+                    </a>
+                </h3>
+                <div class="searchtext">
+                    {if $table.img}
+                        <div class="ext_search_teaser_img">
+                            <a href="{$table.ext_search_document_path}" title="{$message_2012} &quot;{$table.uberschrift}&quot; {$message_2013}">
+                                <img src="{$slash}plugins/papoo_shop/images/{$table.img}" alt="{$table.uberschrift}" title="{$table.uberschrift}" />
+                            </a>
+                        </div>
+                    {/if}
+                    {$table.text}<!-- <a href="{$table.ext_search_document_path}" title="{$message_2012} &quot;{$table.uberschrift}&quot; {$message_2013}"></a>-->
+                    <br />
+                </div>
+                {else}
+                  
+                    <h3 class="searchh3">
+                      <a href="{$table.url_header}" title="{$message_2012} &quot;{$table.uberschrift}&quot; {$message_2013}">{$table.uberschrift}</a>
+                    </h3>
+                    <div class="searchtext">{if $table.img}
+                      <div class="ext_search_teaser_img">
+                        <a href="{$table.url_header}" title="{$message_2012} &quot;{$table.uberschrift}&quot; {$message_2013}">
+                          <img src="{$slash}plugins/papoo_shop/images/{$table.img}" alt="{$table.uberschrift}" title="{$table.uberschrift}" />
+                        </a>
+                      </div>
+                    </div>
+                  {/if}
+                  {if !$table.uberschrift}
+                    <a href="{$table.url_header}" title="{$message_2012} &quot;{$table.uberschrift}&quot; {$message_2013}">{$table.text}</a>
+                  {else}
+                    {$table.text}
+                  {/if}
+                  <br />
+
+               
+            {/if}
+        {/if}
+    </li>
+{/foreach}
+</ol>
+</div>

@@ -59,11 +59,13 @@ class PapooAPI
 
 		$user_id = (int)$user_id;
 		$menu_id = (int)$menu_id;
-
-		return (int)$db->get_var("SELECT COUNT(*) ".
+		$db->csrfok = true;
+		$return= (int)$db->get_var("SELECT COUNT(*) ".
 				"FROM {$cms->tbname["papoo_lookup_ug"]} ug ".
 				"JOIN {$cms->tbname["papoo_lookup_men_ext"]} mg ON ug.gruppenid = mg.gruppenid ".
 				"WHERE ug.userid = $user_id AND mg.menuid = $menu_id") > 0;
+		$db->csrfok = false;
+		return $return;
 	}
 
 	/**
@@ -76,11 +78,14 @@ class PapooAPI
 
 		$user_id = (int)$user_id;
 		$article_id = (int)$article_id;
+		$db->csrfok = true;
 
-		return (int)$db->get_var("SELECT COUNT(*) ".
+		$return= (int)$db->get_var("SELECT COUNT(*) ".
 				"FROM {$cms->tbname["papoo_lookup_ug"]} ug ".
 				"JOIN {$cms->tbname["papoo_lookup_write_article"]} ag ON ug.gruppenid = ag.gruppeid_wid_id ".
 				"WHERE ug.userid = $user_id AND ag.article_wid_id = $article_id") > 0;
+		$db->csrfok = false;
+		return $return;
 	}
 
 	/**
@@ -90,13 +95,17 @@ class PapooAPI
 	private function userHasAccessToBilling($user_id) {
 		$user_id = (int)$user_id;
 
-		return (int)$GLOBALS["db"]->get_var("SELECT COUNT(_menu.menuid) ".
+		$GLOBALS["db"]->csrfok = true;
+		$return = (int)$GLOBALS["db"]->get_var("SELECT COUNT(_menu.menuid) ".
 				"FROM {$GLOBALS["cms"]->tbname["papoo_user"]} _user ".
 				"JOIN {$GLOBALS["cms"]->tbname["papoo_lookup_ug"]} _user_group ON _user_group.userid = _user.userid ".
 				"JOIN {$GLOBALS["cms"]->tbname["papoo_lookup_men_int"]} _menu_group ON _menu_group.gruppenid = _user_group.gruppenid ".
 				"JOIN {$GLOBALS["cms"]->tbname["papoo_menuint"]} _menu ON _menu.menuid = _menu_group.menuid ".
 				"WHERE _user.userid = $user_id AND _menu.menulink LIKE 'plugin:papoo_shop/templates/papoo_shop_order.html' ".
 				"GROUP BY _menu.menuid") > 0;
+
+		$GLOBALS["db"]->csrfok = false;
+		return $return;
 	}
 
 	/**
@@ -111,6 +120,7 @@ class PapooAPI
 
 		$userHasWritingPermission = $this->userHasWritePermissionForMenu($userId, $menu_id);
 
+		$db->csrfok = true;
 		if ($userHasWritingPermission) {
 			$db->query("UPDATE {$cms->tbname["papoo_menu_language"]} ".
 				"SET publish_yn_lang_men = IF(publish_yn_lang_men = 1, 0, 1) ".
@@ -120,6 +130,7 @@ class PapooAPI
 		$published = (int)$db->get_var("SELECT publish_yn_lang_men ".
 				"FROM {$cms->tbname["papoo_menu_language"]} ".
 				"WHERE menuid_id = $menu_id AND lang_id = $langId") == 1;
+		$db->csrfok = false;
 
 		$this->setResponse(["userId" => $userId, "permission" => $userHasWritingPermission, "menuId" => $menu_id, "newState" => $published]);
 	}
@@ -136,6 +147,7 @@ class PapooAPI
 
 		$userHasWritingPermission = $this->userHasWritePermissionForArticle($userId, $article_id);
 
+		$db->csrfok = true;
 		if ($userHasWritingPermission) {
 			$db->query("UPDATE {$cms->tbname["papoo_language_article"]} ".
 				"SET publish_yn_lang = IF(publish_yn_lang = 1, 0, 1) ".
@@ -146,6 +158,7 @@ class PapooAPI
 				"FROM {$cms->tbname["papoo_language_article"]} ".
 				"WHERE lan_repore_id = $article_id AND lang_id = $langId") == 1;
 
+		$db->csrfok = false;
 		$this->setResponse(["userId" => $userId, "permission" => $userHasWritingPermission, "articleId" => $article_id, "newState" => $published]);
 	}
 
@@ -158,6 +171,7 @@ class PapooAPI
 		$menu_id = (int)$menu_id;
 		$userId = (int)$user->userid;
 
+		$db->csrfok = true;
 		$userHasWritingPermission = $this->userHasWritePermissionForMenu($userId, $menu_id);
 
 		if ($userHasWritingPermission) {
@@ -178,6 +192,7 @@ class PapooAPI
 		$permissionGranted = (int)$db->get_var("SELECT COUNT(*) ".
 				"FROM {$cms->tbname["papoo_lookup_me_all_ext"]} ".
 				"WHERE menuid_id = $menu_id AND gruppeid_id = 10") > 0;
+		$db->csrfok = false;
 
 		$this->setResponse(["userId" => $userId, "permission" => $userHasWritingPermission, "menuId" => $menu_id, "newState" => $permissionGranted]);
 	}
@@ -211,7 +226,7 @@ class PapooAPI
 		$permissionGranted = (int)$db->get_var("SELECT COUNT(*) ".
 				"FROM {$cms->tbname["papoo_lookup_article"]} ".
 				"WHERE article_id = $article_id AND gruppeid_id = 10") > 0;
-
+		$db->csrfok = false;
 		$this->setResponse(["userId" => $userId, "permission" => $userHasWritingPermission, "articleId" => $article_id, "newState" => $permissionGranted]);
 	}
 
@@ -253,6 +268,7 @@ class PapooAPI
 
 		$userHasAccessToBilling = $this->userHasAccessToBilling($userId);
 
+		$db->csrfok = true;
 		if ($userHasAccessToBilling) {
 			(int)$GLOBALS["db"]->query(
 				"UPDATE {$GLOBALS["cms"]->tbname["plugin_shop_order"]} ".

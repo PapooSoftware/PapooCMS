@@ -1,0 +1,23 @@
+
+{$message.plugin.noindex.005}
+
+<div class="settings-saved message hidden" name="forum_seiten">{$message.plugin.noindex.024}</div>
+<div class="settings-saving message hidden" name="forum_seiten">{$message.plugin.noindex.023}</div>
+<div class="settings-error error hidden" name="forum_seiten">{$message.plugin.noindex.025}</div>
+
+<form class="noindex_noreload" action="" method="POST" name="forum_seiten" id="test">
+    <fieldset>
+        <label><input type="checkbox" name="noindex_forum_listing" id="noindex_forum_listing" {if $plugin.noindex.forum_listing}checked{/if}>Das komplette Listing nicht indizieren</label>
+    </fieldset>
+
+    {foreach item=subforum from=$plugin.noindex.forum}
+    <fieldset>
+        <legend>{$subforum.forumname}</legend>
+        <textarea id="noindex_forum_pages_{$subforum.forumid}" name="noindex_forum_pages[{$subforum.forumid}]">{$subforum.pages}</textarea>
+    </fieldset>
+    {/foreach}
+
+    <fieldset>
+        <input type="submit" class="btn btn-info" value="{$message_70}">
+    </fieldset>
+</form>

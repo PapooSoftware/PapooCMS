@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin name="tinypng" version="6.0">
+	
+	<name>TinyPNG</name>
+	
+	<beschreibung_de><![CDATA[Dieses Plugin nutzt die TinyPNG API und verkleinert die auf dem Server befindlichen PNGs in ihrer Dateigröße.]]></beschreibung_de>
+	<beschreibung_en><![CDATA[This plugin makes use of the TinyPNG API and shrinks the png files on the server in filesize.]]></beschreibung_en>
+	
+	<version>1.1</version>
+	
+	<papooid>2306</papooid>
+	
+	<datum>2015-07-17</datum>
+	
+	<autor>
+		<name>Christoph Zimmer</name>
+		<email>cz@papoo.de</email>
+		<kontakt>Massive Überarbeitung durch Stephan Bergmann http://www.XiMiX.de</kontakt>
+	</autor>
+	
+	<klasse>
+		<name>tinypng</name>
+		<datei>tinypng/lib/tinypng_class.php</datei>
+	</klasse>
+	
+	<menue>
+		<eintrag_de>TinyPNG</eintrag_de>
+		<eintrag_en>TinyPNG</eintrag_en>
+		<link>plugin:tinypng/templates/backend.html</link>
+	</menue>
+	
+	<datenbank>
+		<!-- datenbank.installation: Pfad zur SQL-Installations-Datei (relativ zum Plugin-Verzeichnis) -->
+		<installation>tinypng/sql/install.sql</installation>
+		<!-- datenbank.deinstallation: Pfad zur SQL-Deinstallations-Datei (relativ zum Plugin-Verzeichnis) -->
+		<deinstallation>tinypng/sql/remove.sql</deinstallation>
+	</datenbank>
+	
+	<messages>tinypng/messages</messages>
+	
+</plugin>

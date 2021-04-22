@@ -1,0 +1,13 @@
+DROP TABLE IF EXISTS `XXX_papoo_faq_categories`; ##b_dump##
+DROP TABLE IF EXISTS `XXX_papoo_faq_content`; ##b_dump##
+DROP TABLE IF EXISTS `XXX_papoo_faq_versions`; ##b_dump##
+DROP TABLE IF EXISTS `XXX_papoo_faq_cat_link`; ##b_dump##
+DROP TABLE IF EXISTS `XXX_papoo_faq_content_frontend`; ##b_dump##
+DROP TABLE IF EXISTS `XXX_papoo_faq_cat_link_frontend`; ##b_dump##
+DROP TABLE IF EXISTS `XXX_papoo_faq_cat_link_new_question_frontend`; ##b_dump##
+DROP TABLE IF EXISTS `XXX_papoo_faq_cat_link_frontend`; ##b_dump##
+DROP TABLE IF EXISTS `XXX_papoo_faq_attachments`; ##b_dump##
+DROP TABLE IF EXISTS `XXX_papoo_faq_config`; ##b_dump##
+DROP TABLE IF EXISTS `XXX_papoo_faq_read_privileges`; ##b_dump##
+DROP TABLE IF EXISTS `XXX_papoo_faq_write_privileges`; ##b_dump##
+DROP TABLE IF EXISTS `XXX_papoo_faq_new_question_frontend`; ##b_dump##

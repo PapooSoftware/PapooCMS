@@ -131,7 +131,7 @@ if(!isset($checked->no_output)) {
 
 // Error reporting für smarty senken, weil es pseudofehler sind
 $error_reporting = error_reporting();
-error_reporting($error_reporting & ~E_NOTICE & ~E_STRICT);
+error_reporting($error_reporting & ~E_WARNING & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT);
 
 // templates parsen
 if ($checked->no_output != "no") {

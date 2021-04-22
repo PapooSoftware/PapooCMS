@@ -1,0 +1,128 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+
+<div class="artikel">
+	
+	
+	
+	{if $plugin.glossar.template-weiche != "ERSETZUNG"}
+		<p><strong>{$message.plugin.glossar.ersetzung_fertig}</strong></p>
+	{else}
+		{$plugin.glossar.plugin}
+		<strong>plugin:glossar/templates/glossar_front.html</strong>
+	{/if}
+	
+	<form action="" method="post">
+		<input type="hidden" name="glossar_action" value="sichern" />
+		<input type="hidden" name="glosspref_liste" value="1" />
+		<fieldset>
+			<legend> {$plugin.glossar.einstellungen} </legend>
+			<!--<label for="glosspref_liste">{$plugin.glossar.wahl}</label><br />
+			<select name="glosspref_liste" size="1">
+				<option value="1" {if $plugin.glossar.praeferenzen.glosspref_liste == 1}selected="selected"{/if}>{$plugin.glossar.link_list}</option>
+				<option value="2" {if $plugin.glossar.praeferenzen.glosspref_liste == 2}selected="selected"{/if}>{$plugin.glossar.lange_list}</option>
+			</select>
+			<br />-->
+			<br/>
+			<label for="glosspref_menu_pfad">{$message.plugin.glossar.menu_pfad}</label>
+			<input tpye="text" name="glosspref_menu_pfad" id="glosspref_menu_pfad" value='{$plugin.glossar.praeferenzen.glosspref_menu_pfad|escape:"html"}' size="40"/>
+			<br/>
+			<label for="glossar_mit_popup">{$plugin_glossar_mit_popup}{$plugin_error.glossar_mit_popup}</label>
+			<input type="checkbox" name="glossar_mit_popup" value="1" {if $plugin.glossar.praeferenzen.glossar_mit_popup==1}checked="checked"{/if}
+			       class="glossar_mit_popup" id="glossar_mit_popup"/>
+			<br/>
+			<label for="glossar_mit_alphabet">{$plugin_glossar_mit_alphabet}{$plugin_error.glossar_mit_alphabet}</label>
+			<input type="checkbox" name="glossar_mit_alphabet" value="1" {if $plugin.glossar.praeferenzen.glossar_mit_alphabet==1}checked="checked"{/if}
+			       class="glossar_mit_alphabet" id="glossar_mit_alphabet"/>
+			<br/>
+			<label for="glossar_tabs">{$plugin_glossar_tabs}{$plugin_error.glossar_tabs}</label>
+			<input type="checkbox" name="glossar_tabs" value="1" {if $plugin.glossar.praeferenzen.glossar_tabs==1}checked="checked"{/if}
+			       class="glossar_tabs" id="glossar_tabs"/>
+			<br/>
+		</fieldset>
+	{if $plugin.glossar.praeferenzen.glossar_mit_popup==1}
+	<fieldset>
+		<legend>{$plugin_glossar_einstellungen_fr_colorbox_popup}</legend>
+		
+		<label for="glossar_colorbox_hoehe">{$plugin_glossar_colorbox_hoehe}{$plugin_error.glossar_colorbox_hoehe} </label>
+		<br />
+		<input type="text" name="glossar_colorbox_hoehe" value="{$plugin.glossar.praeferenzen.glossar_colorbox_hoehe}" class="glossar_colorbox_hoehe" id="glossar_colorbox_hoehe"/>
+		<br />
+		
+		 <label for="glossar_colorbox_breite">{$plugin_glossar_colorbox_breite}{$plugin_error.glossar_colorbox_breite} </label>
+		<br />
+		<input type="text" name="glossar_colorbox_breite" value="{$plugin.glossar.praeferenzen.glossar_colorbox_breite}" class="glossar_colorbox_breite" id="glossar_colorbox_breite"/>
+		<br />
+		
+		 <label for="glossar_colorbox_fading">{$plugin_glossar_colorbox_fading}{$plugin_error.glossar_colorbox_fading} </label>
+		<br />
+		<input type="text" name="glossar_colorbox_fading" value="{$plugin.glossar.praeferenzen.glossar_colorbox_fading}" class="glossar_colorbox_fading" id="glossar_colorbox_fading"/>
+		<br />
+		
+		 
+ 	</fieldset><br />
+{/if}
+	 <fieldset>
+		<legend>{$plugin_glossar_einstellungen_speichern}</legend>
+			<input class="submit_back_green" type="submit" name="submitglossar" value="{$plugin.glossar.eintragen}"/>
+		</fieldset><br />
+
+	</form>
+	
+	
+	<p>&nbsp;</p>
+	
+	<form action="" method="post">
+		<input type="hidden" name="glossar_action" value="text_speichern" />
+		<fieldset>
+			<legend> {$message.plugin.glossar.legend_introtext} </legend>
+			{include file=artikel_editor.inc.html}
+			<br />
+			<br />
+			<input type="submit" class="submit_back_green" value="{$plugin.glossar.eintragen}" />
+		</fieldset>
+	</form>
+	
+	<p>&nbsp;</p>
+	
+	<form action="" method="post">
+		<input type="hidden" name="glossar_action" value="ersetzungen_in_allen_artikeln" />
+		<fieldset>
+			<legend> {$message.plugin.glossar.legend_ersetzung} </legend>
+			<strong style="color: #FF0000;">{$message.plugin.glossar.text_ersetzung}</strong>
+			<br />
+			<input type="submit" class="submit_back_green_xxl" name="submitglossar" value="{$message.plugin.glossar.legend_ersetzung}"/>
+		</fieldset>
+	</form>
+	
+
+ {if $is_dev}
+
+	<span class="ignore">
+
+ #start#</span>
+
+  <!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+	 <div class="rapid_form">
+		<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="glossar_daten" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="glossar_class" />
+		<!-- Das Standarpr�fix f�r die Ids -->
+		<input type="hidden" name="praefix" value="glossar" />
+		<!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="glossar" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div>  {/if}
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+
+{/if}

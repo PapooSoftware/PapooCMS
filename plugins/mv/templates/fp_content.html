@@ -1,0 +1,158 @@
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+<div class="artikel">
+	{if $papoo_version|substr:0:1 == "3"}{include file=hilfe.html}{/if}
+	<a  ></a>
+	<div class="mv">
+		<script type="text/javascript" src="../plugins/mv/js/tooltip.js"></script>
+		<h1>{$plugin.mv.daten_eintragen}</h1>
+		{if $kein_pflichtfeld_fe}<div class="error">{$plugin.mv.fields.kein_pflichtfeld_fe}</div>{/if}
+		{if $kein_pflichtfeld_be}<div class="error">{$plugin.mv.fields.kein_pflichtfeld_be}</div>{/if}
+		{if $kein_pflichtfeld_fe or $kein_pflichtfeld_be}
+		{else}
+		{*<!-- Systemmessage was zuletzt gemacht wurde -->*}
+		{if $mv_system_msg!=""}<div class="message">{$mv_system_msg}</div>{/if}
+		{*<!-- Fehlermeldung Allgemein -->*}
+		{if $mv_system_error!=""}<div class="error">{$mv_system_error}</div><br />{/if}
+		{if $mv_upload_error}<div class="error">{$mv_upload_error}</div>{/if}
+		{*$pcfronttext.0.mv_toptext_html*}
+		{if $fehlerliste && $zweiterunde}
+		<div class="fehlerliste">
+			<h2>{$plugin.mv.bitte_korrek}</h2>
+			<ul>
+				{foreach item=dat from=$fehlerliste}
+				<li>{$dat}</li>
+				{/foreach}
+			</ul>
+		</div>
+		{/if}
+		{if $noch_kein_feld==""}
+		{if $rights_error==""}
+		<form action="" method="post" id="formk" enctype="multipart/form-data">
+			{*<!-- Rechte- und Metagruppen -->*}
+			<a href="#" onClick="document.getElementById('meta_rechte_gruppen').style.visibility ='visible';document.getElementById('meta_rechte_gruppen').style.display ='block';">{$plugin.mv.rechte_einblenden}</a>
+			<div id="meta_rechte_gruppen" style="visibilty:hidden;display:none;">
+				<a href="#" onClick="document.getElementById('meta_rechte_gruppen').style.visibility ='hidden';document.getElementById('meta_rechte_gruppen').style.display ='none';">{$plugin.mv.rechte_ausblenden}</a>
+				<br />
+				{*<!-- Mainmetaebene ausw�hlen -->*}
+				<fieldset>
+					<legend>{$plugin.mv.main_metaebene_auswaehlen}</legend>
+					<label for="main_metaebene">{$plugin.mv.main_meta_auswaehlen}</label>
+					<br />
+					<select name="main_metaebene" id="main_metaebene" title="" style="width: 40%;" size="1">
+						{foreach item=metaebene from=$mv_metaebenen}
+						<option value="{$metaebene.mv_meta_id}" 
+						{if $mv_main_meta_id == $metaebene.mv_meta_id} selected="selected"{/if}>
+						{$metaebene.mv_meta_group_name}
+						</option>
+						{/foreach}
+					</select>
+				</fieldset>
+				{*<!-- sonst. Metaebenen ausw�hlen -->*}
+				<fieldset>
+					<legend>{$plugin.mv.metaebene_auswaehlen}</legend>
+					{foreach item=metaebene from=$mv_metaebenen}
+					<input type="checkbox" name="mv_metaebenen[]" value="{$metaebene.mv_meta_id}" id="mv_metaebenen_{$metaebene.mv_meta_id}" 
+					{if $metaebene.checked=="1"}checked="checked"{/if}> 
+					<label for="mv_metaebenen_{$metaebene.mv_meta_id}">{$metaebene.mv_meta_group_name}</label>
+					<br />
+					{/foreach}
+				</fieldset>
+				{if $mv_id==1}
+				{*<!-- Rechtegruppen ausw�hlen -->*}
+				<fieldset>
+					<legend>{$plugin.mv.rechtegruppen_auswaehlen}</legend>
+					{foreach item=rechtegruppe from=$mv_rechtegruppen}
+					<input type="checkbox" name="mv_rechtegruppen[]" value="{$rechtegruppe.gruppeid}" id="add_rechtegruppe_{$rechtegruppe.gruppeid}" 
+					{if $rechtegruppe.checked=="1"}checked="checked"{/if}> 
+					<label for="add_rechtegruppe_{$rechtegruppe.gruppeid}">{$rechtegruppe.gruppenname}</label>
+					<br />
+					{/foreach}
+				</fieldset>
+				{/if}
+			</div>
+			<br />
+			{if $show_tiny}
+			<script language="javascript" type="text/javascript" src="./tiny_mce/FileBrowser.js"></script>
+			<script language="javascript" type="text/javascript" src="./tiny_mce/tiny_mce.js" charset="utf-8"></script>
+			<script language="javascript" type="text/javascript">
+tinyMCE.init({ldelim}
+mode : "exact",
+language : "de",
+elements : "{$tiny_elements}",
+theme : "advanced",
+{include file=tiny_inc_conf.html}
+{rdelim} );
+			</script>
+			{/if}
+			{* Ausgabe der von der Flex generierten Felder aufgrund der Felddefinitionen *}
+			{foreach item=dat from=$gfliste}
+			<fieldset>
+				<legend>{$dat.mvcform_group_text}</legend>
+				{foreach item=idat from=$dat.felder}
+				<div class="vwfeld">{$idat}</div>
+				{/foreach}
+				<a href="#top">Top</a>
+			</fieldset>
+			{/foreach}
+			{if $mv_sperre_zeigen!="nein"}
+			<fieldset>{$mv_sperre_zeigen}
+				<legend>{$plugin.mv.sperren}</legend> 
+				<input type="checkbox" name="mv_content_sperre" id="mv_content_sperre" value="1"
+				{if $mv_content_sperre=="1"} checked="checked"{/if} />
+				{$plugin.mv.sperren_long_text}	
+			</fieldset>
+			{else}
+			<input type="hidden" name="mv_content_sperre" value="" />
+			{/if}
+			{if $user_darf_schreiben}	
+			<fieldset>
+				<legend>{$plugin.mv.senden}</legend>
+				<input type="hidden" name="mv_id" value="{$mv_id}" />
+				<input type="hidden" name="zweiterunde" value="ja" />
+				<input type="hidden" name="dzvhae_system_id" value="{$mv_dzvhae_system_id}" />
+				<input type="submit" class="submit_back_green" name="mv_submit" value="{$plugin.mv.senden}" />
+			</fieldset>
+			{/if}
+		</form>
+		{/if}
+		{else}
+		{$noch_kein_feld}
+		{/if}
+		{*$pcfronttext.0.mv_bottomtext_html*}
+		{/if}
+	</div>
+	<!-- Rechte Fehlermeldung-->
+	{include file=rechte.html}
+</div>
+{*<!-- Javascript f�r die Multiselect Felder hinzuf�gen/entfernen -->*}
+{literal}
+<script type="text/javascript" charset="iso-8859-1">
+function addMultiSelectOption(multiSelectFeld)
+{
+	//alert(multiSelectFeld);
+	//alert((multiSelectFeld + "_" + document.getElementById(multiSelectFeld).options[document.getElementById(multiSelectFeld).selectedIndex].value));
+	var the_element = document.getElementById(multiSelectFeld).options[document.getElementById(multiSelectFeld).selectedIndex].value;
+	//alert (the_element);
+	document.getElementById(multiSelectFeld + "_" + the_element).style.display = "block";
+	document.getElementById("hidden" + multiSelectFeld + "_" + the_element).value = "1";
+}  
+function delMultiSelectOption(multiSelectFeld, optionValue)
+{
+	document.getElementById(multiSelectFeld + "_" + optionValue).style.display = "none";
+	document.getElementById("hidden" + multiSelectFeld + "_" + optionValue).value = "0";
+} 
+</script>
+{/literal}
+{*<!-- Javascript damit man zum Anker des Multiselect Feldes springt
+{literal}
+	<script type="text/javascript" charset="iso-8859-1">
+	  window.location.href = "#{/literal}{$multiselect_anker}{literal}";
+	</script>
+{/literal}
+-->*}
+
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}

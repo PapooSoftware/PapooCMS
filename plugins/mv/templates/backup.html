@@ -1,0 +1,62 @@
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+<div class="mv">
+{*<!-- Datenbank sicherungen erstellen und einspielen -->*}
+{if $rights_error==""}
+{$plugin.mv.sicherung}
+<br />
+{*<!-- Um eine Sicherung zu erstellen klicken Sie bitte hier -->*}
+<ul>
+<li>
+<a href="./plugin.php?menuid={$formmenuid}&template=mv/templates/backup.html&msgid={$ander.news_user_id}&makedump=1">Jetzt eine Sicherung erstellen</a>
+</li>
+
+</ul>
+{if $newdump_message!=""}
+<ul>
+<li>
+{$newdump_message}
+</li>
+</ul>
+{/if}
+{*<!-- Um eine Sicherung einzuspielen klicken Sie hier -->*}
+<br />
+<h3>{$plugin.mv.sicherung_einspielen}</h3>
+{if $is_uploaded}
+<strong style="color:red;">{$plugin.mv.sicherung_ready}</strong>
+{/if}
+<p>{$plugin.mv.hinweis}</p>
+<p><strong style="color:red;">{$plugin.mv.warnung}</strong></p>
+
+<form method="post" id="formi" action="./plugin.php?menuid={$formmenuid}&template=mv/templates/backup.html&msgid={$ander.news_user_id}&backdump=1" enctype="multipart/form-data">
+  <fieldset>
+{*<!-- Eingabe der Datei:-->*}
+  <legend>{$plugin.mv.eingabe_datei}</legend>
+{*<!-- Das Dokument:-->*}
+  <label>{$plugin.mv.dokument}</label>
+  <input type="file" name="myfile" value="{$myfilename}" />
+  </fieldset>
+
+  <fieldset>
+{*<!-- Datei hochladen:-->*}
+  <legend>{$plugin.mv.datei_upload}</legend>
+{*<!-- hochladen-->*}
+  <input type="submit" value="{$plugin.mv.upload}" name="restore" />
+  </fieldset>
+</form>
+</div>
+
+{/if}
+
+<!-- Rechte Fehlermeldung-->
+{include file=rechte.html}
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}

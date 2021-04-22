@@ -1,0 +1,105 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+{if $deleted}
+<div class="message">
+<strong>{$plugin.linkliste.deleted}</strong>
+</div>
+{/if}
+{if $exist}
+<div class="error">
+<!-- Der Eintrag exisitiert schon-->
+{$plugin.linkliste.exist}
+</div>
+{/if}
+{if $eintragmakeartikelfertig}
+<div class="message">
+<!-- Die Artikel wurden durchgeloopt-->
+{$plugin.linkliste.eingetragen}
+</div>
+{/if}
+<div class="artikel">
+
+
+
+
+
+{if $list}
+{$plugin.linkliste.liste}
+<a href="{$ll_link}&order=men">{$plugin.linkliste.nach_kategorie}</a> | <a href="{$ll_link}&order=all">{$plugin.linkliste.alle}</a>
+<br />
+ <form action="" method="post" enctype="multipart/form-data">
+
+  <fieldset>
+   <legend>{$plugin.linkliste.kategorie_wahl}
+    </legend>
+<label for="cat_linkliste_id ">{$plugin.linkliste.kategorie_wahl}</label><br />
+  <select name="cat_linkliste_id" size="1" id="cat_linkliste_id">
+     <option value="0" {$checked1}>{$plugin.linkliste.keine}</option>
+    {foreach item=cat from=$result_cat_back}
+
+    <option value="{$cat.cat_id}" {if $catidx==$cat.cat_id} selected="selected" {/if}>{$cat.cat_name}</option>
+
+      {/foreach}
+
+  </select>
+  <br />
+  <input type="hidden" name="order" value="aus" />
+					   <input class="submit_back"  type="submit" name="catselect" value="{$plugin.linkliste.waehlen}"/>
+		</fieldset>
+		</form>
+<table style="width:99%;">
+<tr>
+<th>{$plugin.linkliste.LLID}</th>
+<th>{$plugin.linkliste.link_bild}</th>
+<th>{$plugin.linkliste.Name}</th>
+<th>{$plugin.linkliste.beschreibung}</th>
+<th>{$plugin.linkliste.besuchen}</th>
+<th>{$plugin.linkliste.loeschen}</th>
+</tr>
+{foreach item=dat from=$list_dat}
+<tr>
+<td>{$dat.linkliste_id}</td>
+<td>{if $dat.paket_logo}<img src="../images/{$dat.paket_logo}" style="max-width:160px;max-height:160px;" alt=""/>{/if}</td>
+<td><a href="{$ll_link}{$dat.linkliste_id}">{$dat.linkliste_Wort} {$plugin.linkliste.bearbeiten}</a></td>
+<td>{$dat.linkliste_descrip|strip_tags}</td>
+<td><a href="{$dat.linkliste_Wort}" title="{$dat.linkliste_Wort} {$plugin.linkliste.besuchen}" target="blank"> {$plugin.linkliste.besuchen}</a></td>
+<td><a href="{$ll_link}{$dat.linkliste_id}&glossarname={$dat.linkliste_Wort}&submitdel=del" title="{$dat.linkliste_Wort} {$plugin.linkliste.delete}">{$plugin.linkliste.delete}</a></td>
+</tr>
+{/foreach}
+</table>
+{/if}
+{if $edit}
+<!-- Es soll ein neuer Eintrag erstellt werden -->
+{include file=../../../plugins/linkliste/templates/linklisteformeingabe.html}
+ {/if}
+
+{if $fragedel}
+<h2>{$plugin.linkliste.fragedel}</h2>
+<form action="#" method="post">
+
+  <fieldset>
+   <legend>{$plugin.linkliste.fragedel2}
+    </legend>
+<strong>{$glossarname}</strong>
+
+  <input type="hidden" name="linkliste_id" value="{$linkliste_id}"/>
+  <br /><br />
+  <input style="float:left;" class="submit_back_red" type="submit" name="submitdelecht" value="{$plugin.linkliste.loeschen}"/>
+
+
+
+
+  </fieldset>
+  </form>
+{/if}
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

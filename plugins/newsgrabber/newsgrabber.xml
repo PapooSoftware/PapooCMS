@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<!-- version: Versions-Nummer papoo für die das Plugin gedacht ist / funktioniert -->
+<plugin version="3.0">
+
+<!-- ALLGEMEINE-INFORMATIONEN -->
+<!-- ************************ -->
+<!-- name: Name des Plugins -->
+<name>News-Grabber</name>
+
+<!-- beschreibung_de: Kurz-Beschreibung des Plugins auf deutsch (wird im Plugin-Manager angezeigt) -->
+<beschreibung_de><![CDATA[Dieses Plugin dient zum Auslesen von RSS-Feeds und Anzeigen in der Webseite.
+Es werden nur RSS-Feeds unterstützt und einige ATOM-Feeds.]]></beschreibung_de>
+
+<!-- beschreibung_en: Kurz-Beschreibung des Plugins auf englisch (wird im Plugin-Manager angezeigt) -->
+<beschreibung_en><![CDATA[This Plugin is for the grabbing of RSS feeds and indicate in the web page.
+Only RSS feeds and some atomic feeds are supported.]]></beschreibung_en>
+
+<!-- version: Versions-Nummer des Plugins -->
+<version>1.0</version>
+
+<!-- papooid: Eindeutige Nummer offizieller papoo-Plugins -->
+<papooid>3</papooid>
+
+<!-- link: z.Z. noch ohne Funktion -->
+<link>http://www.netzwelt-kali.de</link>
+
+<!-- datum: Erscheinungs-Datum bzw. Stand des Plugins -->
+<datum>10.12.2006</datum>
+
+
+<!-- AUTOR-INFORMATIONEN -->
+<!-- ******************* -->
+<!-- autor: Informationen zum Autor (Programmierer) des Plugins -->
+<autor>
+	<!-- autor.name: Name des Authors -->
+	<name>Karl Fahrtmann</name>
+
+	<!-- autor.kontakt: postalische Kontakt-Informationen des Autors -->
+	<kontakt><![CDATA[Karl Fahrtmann
+Am Hagen 23
+37191 Katlenburg-Lindau]]></kontakt>
+
+	<!-- autor.email: eMail-Adresse des Autors -->
+	<email>karl@karl-fahrtmann.de</email>
+
+	<!-- autor.telefon: Telefon-Nummer des Autors -->
+	<telefon>05552/9991040</telefon>
+</autor>
+
+
+<!-- MENÜ-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- menue: Informationen für den Menü-Eintrag im Backend (papoo/interna) -->
+<menue>
+	<!-- menue.eintrag_de: Name des Menü-Punktes im Backend auf deutsch -->
+	<eintrag_de> News-Grabber</eintrag_de>
+	<!-- menue.eintrag_en: Name des Menü-Punktes im Backend auf englisch -->
+	<eintrag_en> News-Grabber</eintrag_en>
+	<!-- menue.icon: Pfad zum Menü-Icon des Menü-Punktes im Backend (relativ zum Plugin-Verzeichnis) -->
+	<icon>newsgrabber/bilder/pic_01.gif</icon>
+	<!-- menue.link: Name der Seite auf welche der Menü-Punkt im Backend verweisen soll -->
+	<link>plugin:newsgrabber/templates/news_einstellen.html</link>
+
+</menue>
+
+<!-- KLASSEN-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- klasse: Informationen der Plugin-Klasse welche eingebunden werden sollen -->
+<klasse>
+	<!-- klasse.name: Name der Klassen-Instanz / des Objekts (also der Name des Dings, das mit $name = new xx_class(); erzeugt wird) -->
+	<name>newsgrabber</name>
+	<!-- klasse.datei: Pfad zur Klassen-Datei (relativ zum Plugin-Verzeichnis) -->
+	<datei>newsgrabber/lib/newsgrabber_class.php</datei>
+</klasse>
+
+
+<!-- CSS-INFORMATIONEN -->
+<!-- ***************** -->
+<!-- css: Pfad zur CSS-Datei (relativ zum Plugin-Verzeichnis) -->
+<css>newsgrabber/css/newsgrabber.css</css>
+
+
+<!-- DATENBANK-INFORMATIONEN -->
+<!-- ****************** -->
+<datenbank>
+	<!-- datenbank.installation: Pfad zur SQL-Installations-Datei (relativ zum Plugin-Verzeichnis) -->
+	<installation>newsgrabber/sql/newsgrabber_install.sql</installation>
+	<!-- datenbank.deinstallation: Pfad zur SQL-Deinstallations-Datei (relativ zum Plugin-Verzeichnis) -->
+	<deinstallation>newsgrabber/sql/newsgrabber_deinstall.sql</deinstallation>
+</datenbank>
+
+<!-- MODUL-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- modul: Informationen des Frontend-Moduls -->
+<modul>
+	<!-- modul.datei: Datei-Name des Modul-Templates (relativ zum Plugin-Verzeichnis) -->
+	<datei>plugin:newsgrabber/templates/newsgrabber_front.html</datei>
+
+	<!-- modul.name_de: Der deutsche Name des Moduls -->
+	<name_de>News-Grabber</name_de>
+	<!-- modul.beschreibung_de: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_de>Zum Auslesen von News-Feeds (RSS/ATOM) und Anzeigen in der Webseite.</beschreibung_de>
+
+	<!-- modul.name_en: Der deutsche Name des Moduls -->
+	<name_en>News-Grabber</name_en>
+	<!-- modul.beschreibung_en: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_en>For the grabbing of news-feeds (RSS/ATOM) and publishing in the web page.</beschreibung_en>
+</modul>
+<!-- Einbindung der Sprach-Daten.
+	In dem hier angegebenen Verzeichnis sollten Dateien mit folgenden Namen liegen:
+	- messages_backend_[de|en|sp| .. etc.].inc.php
+	- messages_frontend_[de|en|sp| .. etc.].inc.php
+-->
+<messages>newsgrabber/messages</messages>
+</plugin>

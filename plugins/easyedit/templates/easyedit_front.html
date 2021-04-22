@@ -1,0 +1,108 @@
+{if $easyeditok=="ok"}
+<div class="floatbox artikeldetails">
+<h2>{$plugin.easyedit.artikelbearbeiten}</h2>
+{if $easyfehlerimg}
+	{$easyfehlerimg}
+{/if}
+<form action="" method="post" id="formk" name="frmImage" enctype="multipart/form-data">
+<input type="hidden" name="reporeid" value="{$easyc[0].reporeID}" />
+<input type="hidden" name="edit" value="{$easyedit2}" />
+<input type="hidden" name="menuid" value="{$menuid_aktuell}" />
+	<fieldset>
+		<legend>{$plugin.easyedit.uberschrift}</legend>
+		<label for="iheader">{$plugin.easyedit.uberschrift}</label>
+		<input type="text" name="header" style="width:99%;" id="iheader" value="{$easyc[0].header|escape:"htmlall"}" />
+	</fieldset>
+
+	<fieldset>
+		<legend>{$plugin.easyedit.teaser}</legend>
+		<label for="lan_teaser">{$plugin.easyedit.teaser}</label>
+		<textarea rows="5" style="width:99%;" name="lan_teaser" id="lan_teaser" >{$easyc[0].lan_teaser}</textarea>
+	</fieldset>
+{include file="../../plugins/easyedit/templates/easyedit_front_editor.html"}
+
+	<fieldset>
+		<legend>{$plugin.easyedit.inhalt}</legend>
+		<label for="lan_article_sans">{$plugin.easyedit.inhalt}</label>
+		<textarea rows="20" style="width:99%;"  name="lan_article_sans" id="lan_article_sans" >{$easyc[0].lan_article_sans}</textarea>
+	</fieldset>
+{*<!-- 
+
+	<fieldset>
+		<legend>{$plugin.easyedit.teaserbild}</legend>
+		<input  onclick='show("teaserb")' type="checkbox"  id="showteaserb" name="showteaserb" size="20" value="showteaserb" />
+	<label for="showteaserb">{$plugin.easyedit.tasuwahl}</label>
+
+	<div id="teaserb" style="display:none;">
+	<br />
+		<div >
+		<label for="teaser_bild">{$plugin.easyedit.teaserbild}</label><br />
+		<select name="teaser_bild" id="teaser_bild">
+		<option value="0">{$plugin.easyedit.auswahlen}</option>
+		{foreach item=img from=$bild_data}
+			<option value="{$img.image_name}" {if $easyc.0.teaser_bild==$img.image_name}selected="selected"{/if}>{$img.image_alt}</option>
+		{/foreach}
+
+		</select>
+
+		</div>
+		<div >
+
+		<input {if $easyc.0.teaser_bild_lr=="left"}checked="checked"{/if} type="radio" name="teaser_bild_lr" id="left" value="left" />
+		<label for="left">{$plugin.easyedit.link}</label>
+		<br />
+
+		<input {if $easyc.0.teaser_bild_lr=="right"}checked="checked"{/if} type="radio" name="teaser_bild_lr" id="right" value="right" />
+		<label for="right">{$plugin.easyedit.rechts}</label>
+		</div>
+	 </div>
+	</fieldset>
+
+	<fieldset>
+		<legend>{$plugin.easyedit.bupload}</legend>
+			<input onclick='show("showpicd")' {if $postkarteok =="ok"}checked="checked"{/if} type="checkbox"  id="showpic" name="showpic" value="showpic" />
+	<label for="showpic">{$plugin.easyedit.buanz}</label>
+
+	<div id="showpicd" style="display:none;">
+	<input type="hidden" name="action" value="UPLOAD" />
+		<label for="file">{$plugin.easyedit.bausw}</label><br />
+		<input type="file" name="strFile" accept="image/*"  id="file" value="" /><br />
+		<label for="alt">{$plugin.easyedit.picn}</label><br />
+		<input type="text" name="alt" id="alt" value="" /><br />
+		<label for="image_dir ">{$plugin.easyedit.katlabel}</label><br />
+			<select name="image_dir" size="1">
+				<option value="0" {$checked1}>{$plugin.easyedit.keine}</option>
+				{foreach item=cat from=$result_cat}
+					<option value="{$cat.bilder_cat_id}" {if $image_dir==$cat.bilder_cat_id} selected="selected" {/if}>{$cat.bilder_cat_name}</option>
+				{/foreach}
+			</select><br />
+		<input type="submit" name="uploadimg" class="senden" value="{$plugin.easyedit.hochladen}" />
+		</div>
+	</fieldset>
+	 -->
+	<!--
+	<fieldset>
+		<legend>Ver&ouml;ffentlichen</legend>
+
+		<input type="checkbox" name="" id="" value="" />
+		<label for="">Ver&ouml;ffentlichen</label>
+		<br />
+
+		<input type="checkbox" name="" id="" value="" />
+		<label for="">Auf der Startseite anzeigen</label>
+	</fieldset>
+-->*}
+	{if $is_easy}
+	<fieldset>
+		<legend>{$plugin.easyedit.Speichern}</legend>
+		<input type="submit" name="easysave" style="float:left;"  value="{$plugin.easyedit.Speichern}" />
+		<input type="submit" name="easydel" style="float:right;" value="{$plugin.easyedit.loeschen}" />
+	</fieldset>
+	{else}
+	{$plugin.easyedit.demomessage}
+	<br /><br /><br /><br />
+	{/if}
+
+</form>
+</div>
+{/if}

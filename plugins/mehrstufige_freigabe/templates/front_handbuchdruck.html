@@ -1,0 +1,33 @@
+<h2>Inhaltsverzeichnis:</h2>
+{foreach name=handbuch_kapitel item=kapitel from=$plugin.mehrstufige_freigabe.handbuch}
+	{$kapitel.menu.nummer} {$kapitel.menu.menuname}<br />
+{/foreach}
+
+{foreach name=handbuch_kapitel item=kapitel from=$plugin.mehrstufige_freigabe.handbuch}
+	
+	{foreach name=handbuch_seite item=seite from=$kapitel.artikel}
+		
+		{*<!--
+		{if NOT ($smarty.foreach.handbuch_kapitel.first AND $smarty.foreach.handbuch_seite.first)}<div style="clear: both; page-break-after: always;" class="print_pagebreak">&nbsp;</div>{/if}
+		-->*}
+		
+		<div style="clear: both; page-break-after: always;" class="print_pagebreak">&nbsp;</div>
+		
+		{if $seite.freigabe}
+			{assign var="handbuchdruck_freigabe_anzeigen" value=true}
+			{if $kapitel.menu.untermenuzu} {assign var="plugin_mehrstufige_freigabe_menu_aktu" value="`$kapitel.menu.nummer` `$kapitel.menu.menuname`"}
+			{else} {assign var="plugin_mehrstufige_freigabe_menu_aktu" value="&nbsp;"}
+			{/if}
+			{assign var="plugin_mehrstufige_freigabe_informationen" value=$seite.freigabe}
+			{include file="`$pfadhier`plugins/mehrstufige_freigabe/templates/mod_mehrstufige_freigabe_informationen.html"}
+		{else}
+			{assign var="handbuchdruck_freigabe_anzeigen" value=false}
+		{/if}
+		
+		<h2>{$seite.uberschrift}</h2>
+		{$seite.text}
+		
+	{/foreach}
+	
+{/foreach}
+

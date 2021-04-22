@@ -1,0 +1,56 @@
+<script language="javascript" type="text/javascript" src="./interna/tiny_mce/tiny_mce.js"></script>
+<script language="javascript" type="text/javascript" src="./interna/tiny_mce/FileBrowser_easy.js"></script>
+	<script language="javascript" type="text/javascript">
+	tinyMCE.init({ldelim}
+	mode : "exact",
+	language : "de",
+	elements : "lan_article_sans,lan_teaser",
+	theme : "advanced",
+	plugins : "safari,table,advimage,advlink,searchreplace,contextmenu,paste,style",
+	theme_advanced_disable : "fontselect,fontsizeselect,hr,underline,strikethrough,outdent,indent,cut,copy,paste,undo,redo,cleanup,removeformat,sub,sup,forecolor,backcolor,charmap,visualaid,separator",
+	//theme_advanced_buttons1_add_before : "save,separator",
+	//theme_advanced_buttons1_add : "fontselect,fontsizeselect",
+theme_advanced_buttons1_add : ",",
+	theme_advanced_buttons2_add : ",",
+	theme_advanced_buttons2_add_before: "cut,copy,paste,pasteword,separator,search,replace",
+	theme_advanced_buttons3_add_before : "tablecontrols,spellchecker",
+	theme_advanced_buttons3_add : "advhr",
+		theme_advanced_toolbar_location : "top",
+	theme_advanced_toolbar_align : "left",
+	theme_advanced_path_location : "bottom",
+	plugin_insertdate_dateFormat : "%Y-%m-%d",
+	plugin_insertdate_timeFormat : "%H:%M:%S",
+	convert_newlines_to_brs : true,
+	convert_urls : false,
+	accessibility_focus : true,
+	inline_styles : true,
+	convert_fonts_to_spans : true,
+	apply_source_formatting : false,
+	fix_list_elements : true,
+	remove_trailing_nbsp : true,
+	trim_span_elements : false,
+	theme_advanced_resizing : true,
+	force_p_newlines : true,
+	force_br_newlines : false,
+	verify_html : false,
+	entity_encoding : "raw",
+	relative_urls : false,
+	remove_script_host : true,
+	spellchecker_languages : "+Deutsch=de,English=en",
+	//content_css : './papoo_css.php',
+	content_css : '{$slash}{$standard_style},{$slash}interna/css/hintergrund.css',
+external_link_list_url : "{$slash}interna/example_link_list.php?tinymce_lang_id={$tinymce_lang_id}",
+	external_image_list_url : "{$slash}interna/example_image_list.php?tinymce_lang_id={$tinymce_lang_id}&front=front",
+	flash_external_list_url : "{$slash}interna/example_flash_list.php?tinymce_lang_id={$tinymce_lang_id}",
+ media_external_list_url : "{$slash}interna/example_media_list.php?tinymce_lang_id={$tinymce_lang_id}",
+	valid_elements : "*[*]",
+	file_browser_callback : 'myFileBrowser'
+
+	{rdelim} );
+	
+	//function fileBrowserCallBack(field_name, url, type)
+	//{ldelim}
+	// This is where you insert your custom filebrowser logic
+	//	alert("Filebrowser callback: " + field_name + "," + url + "," + type);
+	//{rdelim}
+	</script>

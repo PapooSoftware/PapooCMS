@@ -1,0 +1,90 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+    {if $is_eingetragen=="ok"}
+    <div class="message"> {$plugin_fb_plugin_die_daten_wurden_gespeichert}
+
+    </div>
+    {/if}
+    {if $plugin_error}
+    <div class="error">  {$plugin_geo_redirect_ip_bitte_tragen_sie_auch_sinnvollen_daten_ein}
+    </div>
+    {/if}
+    {if $error_geo_ip}
+    <div class="error">  {$error_geo_ip}
+    </div>
+    {/if}
+
+    {if $geo_ip_ok}
+    <div class="message">
+        {$geo_ip_ok}
+    </div>
+    {/if}
+
+
+
+ <h1 id="geo_var_geo_var__variablen_geo_abhngig_ausgeben_lassen" class="h1" >{$plugin_geo_var_geo_var__variablen_geo_abhngig_ausgeben_lassen}</h1>
+
+ <p id="geo_var_mit_hilfe_dieses_plugins_" class="h1" >{$plugin_geo_var_mit_hilfe_dieses_plugins_}</p>
+
+ <h2 id="geo_var_variablen_eingeben" class="h2" >{$plugin_geo_var_variablen_eingeben}</h2>
+
+ <p id="geo_var_geben_sie_die_werte_bitte" class="h1" >{$plugin_geo_var_geben_sie_die_werte_bitte}</p>
+
+ <p id="geo_var_ausgabeformat" class="h1" >{$plugin_geo_var_ausgabeformat}</p>
+
+ <p id="geo_var_deva_1wert_1" class="h1" >{$plugin_geo_var_deva_1wert_1}</p>
+
+    <form method="post" action="" id="formi" style="width:99%">
+        <fieldset>
+            <legend>{$plugin_geo_var_daten_eingabe_2}</legend>
+
+            <div class="labdiv"><label for="geo_var_variablen">{$plugin_geo_var_variablen}{$plugin_error.geo_var_variablen} </label>
+
+<textarea cols="40" rows="20" name="geo_var_variablen"  class="geo_var_variablen" id="geo_var_variablen">{$geo_var_variablen|escape:"html"}</textarea>
+</div></fieldset>
+    <fieldset>
+        <legend>{$plugin_geo_redirect__daten_speichern}</legend>
+        <!-- Speichern -->
+        <input  type="submit" class="submit_back_green_big" value="{$plugin_geo_redirect__daten_speichern}" name="formSubmit_savelang" />
+
+
+    </fieldset><br />
+    </form>
+
+
+    {if $is_dev}
+#start#<br />
+<br />
+
+
+ <span class="ignore"></span>
+  <!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+	 <div class="rapid_form">
+			<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="plugin_geo_var" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="geo_var" />
+		<!-- Das Standarpr�fix f�r die Ids -->
+		<input type="hidden" name="praefix" value="geo_var" />
+		<!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="geo_var" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div>
+
+
+ {/if}
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

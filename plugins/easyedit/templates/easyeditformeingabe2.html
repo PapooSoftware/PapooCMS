@@ -1,0 +1,75 @@
+{$plugin.tinyterminkalender.termin_erstellen}
+
+<form action="" method="post">
+  <fieldset>
+<legend>{$plugin.tinyterminkalender.monat_wahl}</legend>
+<select name="tiny_monat" size="1" id="tiny_monat">
+{foreach item=monat from=$monat_array}
+ <option {if $tiny_monat==$monat.mon_id}selected="selected"{/if} value="{$monat.mon_id}">{$monat.name} - {$monat.jahr}</option>
+{/foreach}
+
+
+</select>
+</fieldset>
+  <fieldset>
+<legend>{$plugin.tinyterminkalender.tag_oder}</legend>
+<label for="tiny_tage">{$plugin.tinyterminkalender.zeitraum_geben} {$tagefalsch}</label><br />
+  <input type="text" name="tiny_tage" id="tiny_tage" value="{$tiny_tage}" size="20" maxlength="254"/>
+  <br />
+</fieldset>
+  <fieldset>
+<legend>{$plugin.tinyterminkalender.uhrzeit}</legend>
+<label for="tiny_zeit">{$plugin.tinyterminkalender.uhrzeit_geben} {$zeitfalsch}</label><br />
+  <input type="text" name="tiny_zeit" id="tiny_zeit" value="{$tiny_zeit}" size="20" maxlength="254"/>
+  <br />
+</fieldset>
+  <fieldset>
+<legend>{$plugin.tinyterminkalender.event}</legend>
+<label for="tiny_event">{$plugin.tinyterminkalender.event_geben} {$eventfalsch}</label><br />
+<textarea name="tiny_event" id="tiny_event" rows="3" cols="80">{$tiny_event}</textarea>
+  <br />
+</fieldset>
+  <fieldset>
+<legend>{$plugin.tinyterminkalender.linktext}</legend>
+<label for="tiny_info_link_text">{$plugin.tinyterminkalender.linktext_geben} {$linktextfalsch}</label><br />
+  <input type="text" name="tiny_info_link_text" id="tiny_info_link_text" value="{$tiny_info_link_text}" size="20" maxlength="254"/>
+  <br />
+</fieldset>
+<fieldset>
+<legend>{$plugin.tinyterminkalender.bild_wahl}</legend>
+<select name="tiny_img" size="1" style="width:200px;" id="tiny_img">
+ <option {if tiny_img==0}selected="selected"{/if} value="0">{$plugin.tinyterminkalender.auswaehlen}</option>
+ {foreach item=id from=$image_liste}
+ <option {if $tiny_img==$id.image_name}selected="selected"{/if} value="{$id.image_name}">{$id.alt}</option>
+ {/foreach}
+</select>
+</fieldset>
+<fieldset>
+<legend>{$plugin.tinyterminkalender.link_url}</legend>
+<label for="tiny_info_link">{$plugin.tinyterminkalender.linkurl_geben} {$linkurlfalsch}</label><br />
+  <input type="text" name="tiny_info_link" id="tiny_info_link" value="{$tiny_info_link}" size="40" maxlength="254"/>
+  <br />  <br />
+
+  <input type="checkbox" name="tiny_popup" id="tiny_popup" {if $tiny_popup==1}checked="checked"{/if} value="1" /> <label for="tiny_popup">{$plugin.tinyterminkalender.popup} </label>
+  <br />
+  <label for="tiny_popup_width">{$plugin.tinyterminkalender.popup_breite} </label><br />
+  <input type="text" name="tiny_popup_width" id="tiny_popup_width" value="{$tiny_popup_width}" size="10" maxlength="254"/>
+  <br />
+  <label for="tiny_popup_height">{$plugin.tinyterminkalender.popup_hoehe} </label><br />
+  <input type="text" name="tiny_popup_height" id="tiny_popup_height" value="{$tiny_popup_height}" size="10" maxlength="254"/>
+  <br />
+</fieldset>
+
+{if $tiny_id}
+<input type="hidden" name="tiny_id" value="{$tiny_id}" />
+<fieldset>
+<legend>{$plugin.tinyterminkalender.loeschen}</legend>
+ <input type="submit" name="delentry" value="L&ouml;schen"/>
+</fieldset>
+{/if}
+<fieldset>
+<legend>{$plugin.tinyterminkalender.eintragen}</legend>
+ <input type="submit" name="submitentry" value="Eintragen"/>
+</fieldset>
+  </form>
+

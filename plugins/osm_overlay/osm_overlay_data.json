@@ -1,0 +1,22 @@
+[
+    {
+        "lon": "7.094174",
+        "lat": "50.739749",
+        "title": "Yörn Jünger",
+        "description": [
+            "Wolfstr 26",
+            "53111 Bonn",
+            "<a href='mailto:yj@papoo.de'>yj@papoo.de</a>"
+        ]
+    },
+    {
+        "lon": "7.126550",
+        "lat": "50.742670",
+        "title": "Papoo Software",
+        "description": [
+            "Auguststraße 2",
+            "53111 Bonn",
+            "0228 2805668"
+        ]
+    }
+]

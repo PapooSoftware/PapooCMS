@@ -1,0 +1,136 @@
+#osm_overlay {
+  box-sizing: border-box;
+  width: 98%;
+}
+
+#osm_overlay .olMap {
+  width: 98%;
+  height: 40em;
+}
+
+#osm_overlay .osm-overlay-search {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+
+#osm_overlay .osm-overlay-search button,
+#osm_overlay .osm-overlay-search input {
+  margin: 0px;
+}
+
+#osm_overlay .osm-overlay-header,
+#osm_overlay .osm-overlay-footer {
+  background: transparent;
+  display: block;
+  height: auto !important;
+  width: auto !important;
+  margin: 1em 0em;
+  padding: 0;
+}
+
+img.olAlphaImg {
+	height:60px !important;
+	width:40px !important;
+	max-width:40px !important;
+}
+
+#osm_overlay_backend fieldset {
+  display: block;
+  width: 100% !important;
+  position:relative;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+#osm_overlay_backend fieldset legend {
+  margin: 0px 0px 0px 0px !important;
+  position:absolute;
+  top: -51px;
+  padding: 0 !important;
+  width: 97% !important;
+  line-height: 50px;
+}
+
+#osm_overlay_backend fieldset field {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block;
+  vertical-align: middle;
+}
+
+#osm_overlay_backend fieldset field > * {
+  vertical-align: middle;
+}
+#osm_overlay_backend fieldset field > label {
+  display: block;
+}
+
+#osm_overlay_backend fieldset field > select,
+#osm_overlay_backend fieldset field > textarea,
+#osm_overlay_backend fieldset field > input {
+  width: 90% !important;
+}
+
+
+#osm_overlay_backend input[type='checkbox'],
+#osm_overlay_backend input[type='radio'] {
+  display: inline-block;
+  float: none;
+}
+
+#osm_overlay_backend input[type='text'],
+#osm_overlay_backend input[type='number'] {
+}
+
+#osm_overlay_backend table tr th,
+#osm_overlay_backend table tr td {
+  text-align: center !important;
+}
+#osm_overlay_backend form br,
+#osm_overlay_backend fieldset br {
+  display: block;
+}
+
+
+#osm_overlay .ol-popup {
+	position: absolute;
+	background-color: white;
+	-webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+	filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+	padding: 15px;
+	border-radius: 10px;
+	border: 1px solid #cccccc;
+	bottom: 12px;
+	left: -50px;
+	min-width: 280px;
+}
+#osm_overlay .ol-popup:after, #osm_overlay .ol-popup:before {
+	top: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+#osm_overlay .ol-popup:after {
+	border-top-color: white;
+	border-width: 10px;
+	left: 48px;
+	margin-left: -10px;
+}
+#osm_overlay .ol-popup:before {
+	border-top-color: #cccccc;
+	border-width: 11px;
+	left: 48px;
+	margin-left: -11px;
+}
+#osm_overlay .ol-popup-closer {
+	text-decoration: none;
+	position: absolute;
+	top: 2px;
+	right: 8px;
+}
+#osm_overlay .ol-popup-closer:after {
+	content: "✖";
+}

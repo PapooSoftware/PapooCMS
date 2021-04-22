@@ -1,0 +1,69 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+<h1>{$message.plugin.marquee.title}</h1>
+
+{if $plugin.marquee.updated}
+<div class="message">{$message.plugin.marquee.updatedtext}</div>
+{/if}
+{if $plugin.marquee.update_failed}
+<div class="error">{$message.plugin.marquee.updatefailedtext}</div>
+{/if}
+
+<h2>{$plugin.marquee.lang}</h2>
+<form action="" method="POST">
+
+	<fieldset><legend>{$message.plugin.marquee.contentlegend}</legend>
+		<p>
+			<textarea id="mq-content" cols="120" rows="3" name="marquee_content">{$plugin.marquee.content}</textarea>
+		</p>
+	</fieldset>
+	
+	<fieldset><legend>{$message.plugin.marquee.behaviorlegend}</legend>
+		<p>
+			<label for="mq-behavior">{$message.plugin.marquee.behaviorlabel}</label><br />
+			<select id="mq-behavior" name="marquee_behavior">
+				<option value="scroll" {if $plugin.marquee.behavior == "scroll"}selected="selected"{/if}>{$message.plugin.marquee.scroll}</option>
+				<option value="alternate" {if $plugin.marquee.behavior == "alternate"}selected="selected"{/if}>{$message.plugin.marquee.alternate}</option>
+				<option value="slide" {if $plugin.marquee.behavior == "slide"}selected="selected"{/if}>{$message.plugin.marquee.slide}</option>
+			</select><br />
+		</p>
+		
+		<p>
+			<label for="mq-direction">{$message.plugin.marquee.directionlabel}</label><br />
+			<select id="mq-direction" name="marquee_direction">
+				<option value="right" {if $plugin.marquee.direction == "right"}selected="selected"{/if}>{$message.plugin.marquee.right}</option>
+				<option value="left" {if $plugin.marquee.direction == "left"}selected="selected"{/if}>{$message.plugin.marquee.left}</option>
+				<option value="down" {if $plugin.marquee.direction == "down"}selected="selected"{/if}>{$message.plugin.marquee.down}</option>
+			</select>
+		</p>
+		
+		<p>
+			<label for="mq-speed">{$message.plugin.marquee.speedlabel}</label><br />
+			<input id="mq-speed" name="marquee_scrollamount" value="{$plugin.marquee.scrollamount}" min="1" max="30" step="1" />
+		</p>
+		
+		<p>
+			<label for="mq-class">{$message.plugin.marquee.classlabel}</label><br />
+			<input id="mq-class" name="marquee_class" maxlength="62" size="30" value="{$plugin.marquee.class}" required="true" />
+		</p>
+		
+	</fieldset>
+	<p>
+		<input type="submit" name="marquee_submit" value="{$message.plugin.marquee.submit}" />
+	</p>
+	
+</form>
+
+   
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

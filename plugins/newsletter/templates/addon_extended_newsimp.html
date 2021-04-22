@@ -1,0 +1,34 @@
+<fieldset>
+	<legend>{$plugin.newsletter_addon.hardbounce}</legend>
+	{$plugin.newsletter_addon.hardbounce_desc}
+	<br />
+	<br />
+	<input type="checkbox" id="addon_check_hardbounce" name="addon_check_hardbounce" value="1" {if $newsletter_addon.check_hardbounce} checked="checked" {/if} />
+	<label for="addon_check_hardbounce">{$plugin.newsletter_addon.check_hardbounce}</label>
+	<br />
+	<br />
+	<label for="addon_pop3_server">{$plugin.newsletter_addon.pop3_server}</label>
+	<br />
+	<input type="text" id="addon_pop3_server" name="addon_pop3_server" maxlength="255" value="{$newsletter_addon.pop3_server}" title="" />
+	<br />
+	<label for="addon_pop3_username">{$plugin.newsletter_addon.pop3_username}</label>
+	<br />
+	<input type="text" id="addon_" name="addon_pop3_username" maxlength="255" value="{$newsletter_addon.pop3_username}" title="" />
+	<br />
+	<label for="addon_pop3_password">{$plugin.newsletter_addon.pop3_password}</label>
+	<br />
+	<input type="text" id="addon_pop3_password" name="addon_pop3_password" maxlength="255" value="{$newsletter_addon.pop3_password}" title="" />
+	<br />
+	<label for="addon_pop3_port">{$plugin.newsletter_addon.pop3_port}</label>
+	<br />
+	<input type="text" id="addon_pop3_port" name="addon_pop3_port" maxlength="5" value="{$newsletter_addon.pop3_port}" title="" />
+	<br />
+	<label for="addon_max_hardbounce">{$plugin.newsletter_addon.max_hardbounce}</label>
+	<br />
+	<input type="text" id="addon_max_hardbounce" name="addon_max_hardbounce" maxlength="2" value="{$newsletter_addon.max_hardbounce}" title="" />
+	<br />
+	<label for="addon_max_hardbounce_time">{$plugin.newsletter_addon.max_hardbounce_time}</label>
+	<br />
+	<input type="text" id="addon_max_hardbounce_time" name="addon_max_hardbounce_time" maxlength="2" value="{$newsletter_addon.max_hardbounce_time}" title="" />
+	<br />
+</fieldset>

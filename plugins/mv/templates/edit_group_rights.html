@@ -1,0 +1,104 @@
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+<div class="artikel">
+	<div class="mv">
+		<h2>{$plugin.mv.rechte_gruppen}</h2>
+		{if $liste_rights!=""}
+			<form action="" method="post" id="form_liste_rights" enctype="multipart/form-data">
+				<table>
+					<tr>
+						<td>{$plugin.mv.gruppenname}</td>
+						<td>{$plugin.mv.gruppenid}</td>
+						<td>{$plugin.mv.feldname}</td>
+						<td>{$plugin.mv.feldid}</td>
+						<td>{$plugin.mv.feldwert}</td>
+						<td>{$plugin.mv.feldwert_label}</td>
+						<td>{$plugin.mv.gruppenread}</td>
+						<td>{$plugin.mv.gruppenwrite}</td>
+						<td>{$plugin.mv.gruppenloeschen}</td>
+					</tr>
+					{foreach item=gruppe from=$liste_rights}
+						<tr>
+							<td>{$gruppe.gruppenname}</td>
+							<td>{$gruppe.group_id}</td>
+							<td>{$gruppe.mvcform_label}</td>
+							<td>{$gruppe.field_id}</td>
+							<td>{$gruppe.field_value}</td>
+							{if $gruppe.field_label==""}
+								<td>{$plugin.mv.feldwert_label_standard}</td>
+							{else}
+								<td>{$gruppe.field_label}</td>
+							{/if}
+							<td>
+								<input type="checkbox" id="group_read_{$gruppe.id}" name="group_read_{$gruppe.id}"{if $gruppe.group_read==1} checked="checked"{/if} value="1" />
+							</td>
+							<td>
+								<input type="checkbox" id="group_write_{$gruppe.id}" name="group_write_{$gruppe.id}"{if $gruppe.group_write==1} checked="checked"{/if} value="1" />
+							</td>
+							<td><a href="{$link}&id={$gruppe.id}&submit_del=1">{$plugin.mv.loeschen3}</a></td>
+						</tr>
+					{/foreach}
+				</table>
+				<fieldset>
+					<legend>{$plugin.mv.lese_schreib_rechte_eintragen}</legend>
+					<input type="submit" name="submit_rights" value="{$plugin.mv.senden}" />
+				</fieldset>
+			</form>
+		{else}
+			{$plugin.mv.noch_keine_gruppen}
+		{/if}
+		<p></p>
+		<form action="" method="post" id="form_new_field" name="form_new_field" enctype="multipart/form-data">
+			<fieldset>
+				<legend>{$plugin.mv.neue_gruppe}</legend>
+				<label for="group_name">{$plugin.mv.gruppenname}</label>
+				<select name="group_name" id="group_name" size="1">
+					{foreach item=gruppe from=$gruppen}
+						<option value="{$gruppe.gruppeid}">{$gruppe.gruppenname}</option>
+					{/foreach}
+				</select>
+				<br />
+				<label for="field_name">{$plugin.mv.feldname}</label>
+				<select name="field_name" id="field_name" size="1" onchange="get_field_values(this.value)">
+					<option value="">{$plugin.mv.bittewaehlen}</option>
+					{foreach item=feld from=$felder}
+						<option value="{$feld.mvcform_id}">{$feld.mvcform_label}(ID={$feld.mvcform_id})</option>
+					{/foreach}
+				</select>
+				<br />
+				<label for="field_value">{$plugin.mv.feldwert}</label>
+				<select name="field_value" id="field_value" size="1">
+					<option value="">--------------------------</option>
+				</select>
+				<br />
+				<label for="group_read">{$plugin.mv.gruppenread}</label>
+				<input type="checkbox" name="group_read" id="group_read" value="1" />
+				<br />
+				<label for="group_write">{$plugin.mv.gruppenwrite}</label>
+				<input type="checkbox" name="group_write" id="group_write" value="1" />
+				<br />
+				<input type="submit" name="submit_new_group" value="{$plugin.mv.senden}" />
+				<input type="hidden" name="mv_id" id="mv_id" value="{$mv_id}">
+				{$hidden_field}
+			</fieldset>
+		</form>
+		{literal}
+			<script type="text/javascript" charset="iso-8859-1">
+				function get_field_values(field_id) 
+				{
+					var selections = document.getElementById(field_id + "_name").value.split(",");
+					var lookup_id = document.getElementById(field_id + "_lookup_id").value.split(",");
+					document.form_new_field.field_value.length = selections.length;
+					for (var i = 0; i < selections.length; i++)
+					{
+						document.form_new_field.field_value.options[i].text = selections[i];
+						document.form_new_field.field_value.options[i].value = lookup_id[i];
+					}
+				}
+			</script>
+		{/literal}
+		<!-- Rechte Fehlermeldung-->
+		{include file=rechte.html}
+	</div>
+</div>
+{include file=foot.inc.html}

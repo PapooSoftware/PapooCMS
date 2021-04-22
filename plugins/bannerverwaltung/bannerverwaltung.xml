@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<!-- version: Versions-Nummer papoo für die das Plugin gedacht ist / funktioniert -->
+<plugin version="3.x">
+
+<!-- ALLGEMEINE-INFORMATIONEN -->
+<!-- ************************ -->
+<!-- name: Name des Plugins -->
+<name>Bannerverwaltung</name> 
+
+<!-- beschreibung_de: Kurz-Beschreibung des Plugins auf deutsch (wird im Plugin-Manager angezeigt) -->
+<beschreibung_de><![CDATA[Mit diesem Plugin kann eine Bannerverwaltung gemacht werden. Werbebanner können flexibel auf der Seite eingebunden werden und könnnen mit einer zufälligen Rotation dargestellt werden. ]]></beschreibung_de>
+
+<!-- beschreibung_en: Kurz-Beschreibung des Plugins auf englisch (wird im Plugin-Manager angezeigt) -->
+<beschreibung_en><![CDATA[With this Plugin you can make a Bannerrotation.]]></beschreibung_en>
+
+<!-- version: Versions-Nummer des Plugins -->
+<version>1.1</version>
+
+<!-- papooid: Eindeutige Nummer offizieller papoo-Plugins -->
+<papooid>15</papooid>
+
+<!-- link: z.Z. noch ohne Funktion -->
+<link>http://www.papoo.de</link>
+
+<!-- datum: Erscheinungs-Datum bzw. Stand des Plugins -->
+<datum>05.03.2006</datum>
+
+
+<!-- AUTOR-INFORMATIONEN -->
+<!-- ******************* -->
+<!-- autor: Informationen zum Autor (Programmierer) des Plugins -->
+<autor>
+	<!-- autor.name: Name des Authors -->
+	<name>Carsten Euwens</name>
+
+	<!-- autor.kontakt: postalische Kontakt-Informationen des Autors -->
+	<kontakt><![CDATA[Carsten Euwens, Heerstr. 110, 53111 Bonn]]></kontakt>
+
+	<!-- autor.email: eMail-Adresse des Autors -->
+	<email>webwork@papoo.de</email>
+
+	<!-- autor.telefon: Telefon-Nummer des Autors -->
+	<telefon>0177/8075846</telefon>
+</autor>
+
+
+<!-- MENÜ-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- menue: Informationen für den Menü-Eintrag im Backend (papoo/interna) -->
+<menue>
+	<!-- menue.eintrag_de: Name des Menü-Punktes im Backend auf deutsch -->
+	<eintrag_de>Bannerverwaltung</eintrag_de>
+	<!-- menue.eintrag_en: Name des Menü-Punktes im Backend auf englisch -->
+	<eintrag_en>Banner Rotation</eintrag_en>
+	<!-- menue.icon: Pfad zum Menü-Icon des Menü-Punktes im Backend (relativ zum Plugin-Verzeichnis) -->
+	<icon>bannerverwaltung/bilder/pic_01.gif</icon>
+	<!-- menue.link: Name der Seite auf welche der Menü-Punkt im Backend verweisen soll -->
+	<link>plugin:bannerverwaltung/templates/bannerverwaltungplugin.html</link>
+
+	<!-- menue.submenue: Untermenü-Punkt für diesen Menü-Punkt im Backend, Struktur wie menue -->
+
+	<submenue>
+		<eintrag_de>Banner erstellen</eintrag_de>
+		<eintrag_en>create Entry</eintrag_en>
+		<icon>bannerverwaltung/bilder/pic_01.gif</icon>
+		<link>plugin:bannerverwaltung/templates/bannerverwaltungplugin_create.html</link>
+	</submenue>
+
+	<submenue>
+		<eintrag_de>Banner bearbeiten</eintrag_de>
+		<eintrag_en>Edit Entry</eintrag_en>
+		<icon>bannerverwaltung/bilder/pic_01.gif</icon>
+		<link>plugin:bannerverwaltung/templates/bannerverwaltungplugin_edit.html</link>
+	</submenue>
+	
+	<!--
+	<submenue>
+		<eintrag_de>Datenbank Sicherung</eintrag_de>
+		<eintrag_en>Database dump</eintrag_en>
+		<icon>bannerverwaltung/bilder/pic_01.gif</icon>
+		<link>plugin:bannerverwaltung/templates/bannerverwaltungplugin_dump.html</link>
+	</submenue>
+	-->
+</menue>
+
+
+<!-- KLASSEN-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- klasse: Informationen der Plugin-Klasse welche eingebunden werden sollen -->
+<klasse>
+	<!-- klasse.name: Name der Klassen-Instanz / des Objekts (also der Name des Dings, das mit $name = new xx_class(); erzeugt wird) -->
+	<name>bannerverwaltungplugin</name>
+	<!-- klasse.datei: Pfad zur Klassen-Datei (relativ zum Plugin-Verzeichnis) -->
+	<datei>bannerverwaltung/lib/bannerverwaltungplugin_class.php</datei>
+</klasse>
+
+
+
+<!-- CSS-INFORMATIONEN -->
+<!-- ***************** -->
+<!-- css: Pfad zur CSS-Datei (relativ zum Plugin-Verzeichnis) -->
+
+
+
+<!-- DATENBANK-INFORMATIONEN -->
+<!-- ****************** -->
+<datenbank>
+	<!-- datenbank.installation: Pfad zur SQL-Installations-Datei (relativ zum Plugin-Verzeichnis) -->
+	<installation>bannerverwaltung/sql/bannerverwaltungplugin_install.sql</installation>
+	<!-- datenbank.deinstallation: Pfad zur SQL-Deinstallations-Datei (relativ zum Plugin-Verzeichnis) -->
+	<deinstallation>bannerverwaltung/sql/bannerverwaltungplugin_deinstall.sql</deinstallation>
+</datenbank>
+
+
+<!-- MODUL-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- modul: Informationen des Frontend-Moduls -->
+<modul>
+	<!-- modul.datei: Datei-Name des Modul-Templates (relativ zum Plugin-Verzeichnis) -->
+	<datei>plugin:bannerverwaltung/templates/bannerverwaltung_front.html</datei>
+
+	<!-- modul.name_de: Der deutsche Name des Moduls -->
+	<name_de>Bannerverwaltung 1</name_de>
+	<!-- modul.beschreibung_de: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_de>Bannerverwaltung Modul 1.</beschreibung_de>
+
+	<!-- modul.name_en: Der deutsche Name des Moduls -->
+	<name_en>Banner Rotation 1</name_en>
+	<!-- modul.beschreibung_en: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_en>Banner Rotation modul 1.</beschreibung_en>
+
+	<!-- modul.modus: (optional) legt fest, ob das Modul in allen Bereichen, oder nur in einem bestimmten Bereich angezeigt werden kann.
+		mögliche Werte: "var" (default) Anzeige in allen Bereichen möglich, "fix" Anzeige nur in einem bestimmten Bereich möglich -->
+	<modus>var</modus>
+
+</modul>
+<modul>
+	<!-- modul.datei: Datei-Name des Modul-Templates (relativ zum Plugin-Verzeichnis) -->
+	<datei>plugin:bannerverwaltung/templates/bannerverwaltung_2_front.html</datei>
+
+	<!-- modul.name_de: Der deutsche Name des Moduls -->
+	<name_de>Bannerverwaltung 2</name_de>
+	<!-- modul.beschreibung_de: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_de>Bannerverwaltung 2.</beschreibung_de>
+
+	<!-- modul.name_en: Der deutsche Name des Moduls -->
+	<name_en>Banner Rotation 2</name_en>
+	<!-- modul.beschreibung_en: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_en>Banner Rotation 2.</beschreibung_en>
+
+	<!-- modul.modus: (optional) legt fest, ob das Modul in allen Bereichen, oder nur in einem bestimmten Bereich angezeigt werden kann.
+		mögliche Werte: "var" (default) Anzeige in allen Bereichen möglich, "fix" Anzeige nur in einem bestimmten Bereich möglich -->
+	<modus>var</modus>
+
+</modul>
+<modul>
+	<!-- modul.datei: Datei-Name des Modul-Templates (relativ zum Plugin-Verzeichnis) -->
+	<datei>plugin:bannerverwaltung/templates/bannerverwaltung_3_front.html</datei>
+
+	<!-- modul.name_de: Der deutsche Name des Moduls -->
+	<name_de>Bannerverwaltung 3</name_de>
+	<!-- modul.beschreibung_de: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_de>Bannerverwaltung 3.</beschreibung_de>
+
+	<!-- modul.name_en: Der deutsche Name des Moduls -->
+	<name_en>Banner Rotation 3</name_en>
+	<!-- modul.beschreibung_en: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_en>Banner Rotation 3.</beschreibung_en>
+
+	<!-- modul.modus: (optional) legt fest, ob das Modul in allen Bereichen, oder nur in einem bestimmten Bereich angezeigt werden kann.
+		mögliche Werte: "var" (default) Anzeige in allen Bereichen möglich, "fix" Anzeige nur in einem bestimmten Bereich möglich -->
+	<modus>var</modus>
+
+</modul>
+<modul>
+	<!-- modul.datei: Datei-Name des Modul-Templates (relativ zum Plugin-Verzeichnis) -->
+	<datei>plugin:bannerverwaltung/templates/bannerverwaltung_4_front.html</datei>
+
+	<!-- modul.name_de: Der deutsche Name des Moduls -->
+	<name_de>Bannerverwaltung 4</name_de>
+	<!-- modul.beschreibung_de: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_de>Bannerverwaltung 4.</beschreibung_de>
+
+	<!-- modul.name_en: Der deutsche Name des Moduls -->
+	<name_en>Banner Rotation 4</name_en>
+	<!-- modul.beschreibung_en: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_en>Banner Rotation 4.</beschreibung_en>
+
+	<!-- modul.modus: (optional) legt fest, ob das Modul in allen Bereichen, oder nur in einem bestimmten Bereich angezeigt werden kann.
+		mögliche Werte: "var" (default) Anzeige in allen Bereichen möglich, "fix" Anzeige nur in einem bestimmten Bereich möglich -->
+	<modus>var</modus>
+
+</modul>
+<modul>
+	<!-- modul.datei: Datei-Name des Modul-Templates (relativ zum Plugin-Verzeichnis) -->
+	<datei>plugin:bannerverwaltung/templates/bannerverwaltung_5_front.html</datei>
+
+	<!-- modul.name_de: Der deutsche Name des Moduls -->
+	<name_de>Bannerverwaltung 5</name_de>
+	<!-- modul.beschreibung_de: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_de>Bannerverwaltung 5.</beschreibung_de>
+
+	<!-- modul.name_en: Der deutsche Name des Moduls -->
+	<name_en>Banner Rotation 5</name_en>
+	<!-- modul.beschreibung_en: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_en>Banner Rotation 5.</beschreibung_en>
+
+	<!-- modul.modus: (optional) legt fest, ob das Modul in allen Bereichen, oder nur in einem bestimmten Bereich angezeigt werden kann.
+		mögliche Werte: "var" (default) Anzeige in allen Bereichen möglich, "fix" Anzeige nur in einem bestimmten Bereich möglich -->
+	<modus>var</modus>
+
+</modul>
+<modul>
+	<!-- modul.datei: Datei-Name des Modul-Templates (relativ zum Plugin-Verzeichnis) -->
+	<datei>plugin:bannerverwaltung/templates/bannerverwaltung_6_front.html</datei>
+
+	<!-- modul.name_de: Der deutsche Name des Moduls -->
+	<name_de>Bannerverwaltung 6</name_de>
+	<!-- modul.beschreibung_de: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_de>Bannerverwaltung 6.</beschreibung_de>
+
+	<!-- modul.name_en: Der deutsche Name des Moduls -->
+	<name_en>Banner Rotation 6</name_en>
+	<!-- modul.beschreibung_en: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_en>Banner Rotation 6.</beschreibung_en>
+
+	<!-- modul.modus: (optional) legt fest, ob das Modul in allen Bereichen, oder nur in einem bestimmten Bereich angezeigt werden kann.
+		mögliche Werte: "var" (default) Anzeige in allen Bereichen möglich, "fix" Anzeige nur in einem bestimmten Bereich möglich -->
+	<modus>var</modus>
+
+</modul>
+<modul>
+	<!-- modul.datei: Datei-Name des Modul-Templates (relativ zum Plugin-Verzeichnis) -->
+	<datei>plugin:bannerverwaltung/templates/bannerverwaltung_7_front.html</datei>
+
+	<!-- modul.name_de: Der deutsche Name des Moduls -->
+	<name_de>Bannerverwaltung 7</name_de>
+	<!-- modul.beschreibung_de: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_de>Bannerverwaltung 7.</beschreibung_de>
+
+	<!-- modul.name_en: Der deutsche Name des Moduls -->
+	<name_en>Banner Rotation 7</name_en>
+	<!-- modul.beschreibung_en: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_en>Banner Rotation 7.</beschreibung_en>
+
+	<!-- modul.modus: (optional) legt fest, ob das Modul in allen Bereichen, oder nur in einem bestimmten Bereich angezeigt werden kann.
+		mögliche Werte: "var" (default) Anzeige in allen Bereichen möglich, "fix" Anzeige nur in einem bestimmten Bereich möglich -->
+	<modus>var</modus>
+
+</modul>
+<modul>
+	<!-- modul.datei: Datei-Name des Modul-Templates (relativ zum Plugin-Verzeichnis) -->
+	<datei>plugin:bannerverwaltung/templates/bannerverwaltung_8_front.html</datei>
+
+	<!-- modul.name_de: Der deutsche Name des Moduls -->
+	<name_de>Bannerverwaltung 8</name_de>
+	<!-- modul.beschreibung_de: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_de>Bannerverwaltung 8.</beschreibung_de>
+
+	<!-- modul.name_en: Der deutsche Name des Moduls -->
+	<name_en>Banner Rotation 8</name_en>
+	<!-- modul.beschreibung_en: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_en>Banner Rotation 8.</beschreibung_en>
+
+	<!-- modul.modus: (optional) legt fest, ob das Modul in allen Bereichen, oder nur in einem bestimmten Bereich angezeigt werden kann.
+		mögliche Werte: "var" (default) Anzeige in allen Bereichen möglich, "fix" Anzeige nur in einem bestimmten Bereich möglich -->
+	<modus>var</modus>
+
+</modul>
+<modul>
+	<!-- modul.datei: Datei-Name des Modul-Templates (relativ zum Plugin-Verzeichnis) -->
+	<datei>plugin:bannerverwaltung/templates/bannerverwaltung_9_front.html</datei>
+
+	<!-- modul.name_de: Der deutsche Name des Moduls -->
+	<name_de>Bannerverwaltung 9</name_de>
+	<!-- modul.beschreibung_de: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_de>Bannerverwaltung 9.</beschreibung_de>
+
+	<!-- modul.name_en: Der deutsche Name des Moduls -->
+	<name_en>Banner Rotation 9</name_en>
+	<!-- modul.beschreibung_en: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_en>Banner Rotation 9.</beschreibung_en>
+
+	<!-- modul.modus: (optional) legt fest, ob das Modul in allen Bereichen, oder nur in einem bestimmten Bereich angezeigt werden kann.
+		mögliche Werte: "var" (default) Anzeige in allen Bereichen möglich, "fix" Anzeige nur in einem bestimmten Bereich möglich -->
+	<modus>var</modus>
+
+</modul>
+<modul>
+	<!-- modul.datei: Datei-Name des Modul-Templates (relativ zum Plugin-Verzeichnis) -->
+	<datei>plugin:bannerverwaltung/templates/bannerverwaltung_10_front.html</datei>
+
+	<!-- modul.name_de: Der deutsche Name des Moduls -->
+	<name_de>Bannerverwaltung 10</name_de>
+	<!-- modul.beschreibung_de: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_de>Bannerverwaltung 10.</beschreibung_de>
+
+	<!-- modul.name_en: Der deutsche Name des Moduls -->
+	<name_en>Banner Rotation 10</name_en>
+	<!-- modul.beschreibung_en: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_en>Banner Rotation 10.</beschreibung_en>
+
+	<!-- modul.modus: (optional) legt fest, ob das Modul in allen Bereichen, oder nur in einem bestimmten Bereich angezeigt werden kann.
+		mögliche Werte: "var" (default) Anzeige in allen Bereichen möglich, "fix" Anzeige nur in einem bestimmten Bereich möglich -->
+	<modus>var</modus>
+
+</modul>
+<!-- Einbindung der Sprach-Daten.
+	In dem hier angegebenen Verzeichnis sollten Dateien mit folgenden Namen liegen:
+	- messages_backend_[de|en|sp| .. etc.].inc.php
+	- messages_frontend_[de|en|sp| .. etc.].inc.php
+-->
+<messages>bannerverwaltung/messages</messages>
+</plugin>

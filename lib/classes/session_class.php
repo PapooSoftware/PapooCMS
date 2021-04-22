@@ -85,6 +85,17 @@ class session_class
 			session_set_cookie_params($cookie_lifetime, $cookie_base_path, $cookie_domain, $cookie_secure, $cookie_httponly);
 			@session_start();
 
+			if($_SESSION['csrf_token_fail_count']> 999)
+			{
+				session_destroy();
+				$location_url = $_SERVER['PHP_SELF'];
+				header("Location: $location_url");
+			}
+
+			if ($_SESSION['csrf_token'] === '' or $_SESSION['csrf_token'] === null) {
+				$_SESSION['csrf_token'] = md5(bin2hex(rand(0,99999999999999)).PAPOO_ABS_PFAD);
+			}
+
 			//Aktivieren wenn kein Efa Fontsize genutzt wird...
 			//session_regenerate_id() ;
 			#$_SESSION=array();
@@ -116,7 +127,7 @@ class session_class
 
 			// SESSION die bereits einmal versucht wurde zu Übernehmen nicht mehr verwenden, sondern neue SESSION mit neuer ID starten
 			if (!empty($_SESSION['hijacked'])) {
-				//echo ".. SESSION wurde gestohlen: ".session_id()."; HiJack-ID: ".$_SESSION['hijack_id']."; HiJacked: ".$_SESSION['hijacked']."<br />\n"; 
+				//echo ".. SESSION wurde gestohlen: ".session_id()."; HiJack-ID: ".$_SESSION['hijack_id']."; HiJacked: ".$_SESSION['hijacked']."<br />\n";
 
 				if (isset($_COOKIE[session_name()])) {
 					setcookie(session_name(), '', time()-42000, '/');

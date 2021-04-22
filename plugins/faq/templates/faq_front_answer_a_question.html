@@ -1,0 +1,74 @@
+{if !$faq_no_login} {* Angemeldeter User? *}
+	{if $faq_no_writeaccess} {* Schreibrecht vorhanden? *}
+		<p class="bold_red">{$plugin.faq_front.message.no_writeaccess}</p><br /> {* Keine Schreibrechte *}
+	{else}
+		<div class="form width100">
+			<h2>{$plugin.faq_front.pageheader.faq_answer_a_question}</h2>
+			<div class="div_margins">
+				<strong>{$plugin.faq_front.text.cat} {$faq_catdata.0.catname}</strong><br />
+				{$faq_catdata.0.catdescript}
+			</div>
+			<div class="div_margins">
+				<strong>{$plugin.faq_front.text.created}</strong>
+				{$faq_data.0.0.created}
+			</div>
+			<div class="div_margins">
+				<strong>{$plugin.faq_front.text.author} {$username}</strong>
+			</div>
+			{if $shownewfaq}
+				<div class="div_margins">{$plugin.faq_front.text.shownewfaq}</div>
+			{/if}
+			<br />
+			{if $fehler1}<div class="error">{$plugin.faq_front.errmsg.incorrect_faq_id}</div>{/if}
+			{if $fehler2}<div class="error">{$plugin.faq_front.errmsg.incorrect_cat_id}</div>{/if}
+			{if $fehler3}<div class="error">{$plugin.faq_front.errmsg.src_missing}</div>{/if}
+			{if $fehler4}<div class="error">{$plugin.faq_front.errmsg.frage_fehlt}</div>{/if}
+			{if $fehler5}<div class="error">{$plugin.faq_front.errmsg.antwort_fehlt}</div>{/if}
+
+{* Formulardaten zur Bearbeitung anzeigen *}
+			{if $faq_data|@count}
+{* Formulardaten sind vorhanden *}
+				<form name="faq_back_edit" action="" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="faq_cat_id[]" value="{$faq_main_id}" />
+					<input type="hidden" name="faq_id" value="{$faq_id}" />
+					<input type="hidden" name="src" value="{$src}" />
+					
+{* Felder Frage und Antwort *}
+					<fieldset>
+						<legend class="mb_10">{$plugin.faq_front.formtext.legend_question}</legend>
+{* Frage *}
+						<label for="faq_back_question_id">{$plugin.faq_front.formtext.label_question}</label><br />
+						<textarea name="faq_question" id="faq_back_question_id" class="faq_new_edit_textarea" cols="3" rows="5" readonly="readonly">{$faq_data.0.0.question|escape:"html"}</textarea>
+						<div class="mb_15"> </div>
+					</fieldset>
+{* TinyMCE Editor *}
+					{include file="../../plugins/faq/templates/faq_front_editor.html}
+					<fieldset> 
+						<legend>{$plugin.faq_front.formtext.legend_answer}</legend>
+						<label for="faq_new_answer_id"><strong>{$plugin.faq_front.formtext.label_answer}</strong></label><br /><br />
+{* Antwort *}
+						<textarea name="faq_answer" id="faq_new_answer_id" rows="20" cols="50"
+							 class="width90">{$faq_data.0.0.answer|escape:"html"}</textarea> 
+						<br />
+					</fieldset>
+		
+{* Attachments sind nur bei der Bearbeitung möglich *}
+					<fieldset>
+						<legend>{$plugin.faq_front.formtext.legend_faq_edit_attachment}</legend>
+						<label for="faq_edit_attachment">{$plugin.faq_front.formtext.label_faq_new_attachment}</label><br /><br />
+					</fieldset>
+
+{* Button Submit *}
+					<fieldset>
+						<legend>{$plugin.faq_front.submit.faq_edit_submit}</legend>
+{* Speichern der FAQ Daten*}
+						<input type="submit" value="{$plugin.faq_front.submit.faq_edit}" name="submit" title="{$plugin.faq_front.submit.faq_edit}" /> 
+					</fieldset>
+					<input type="hidden" name="faq_id" value="{$faq_id}" />
+				</form>
+			{/if}
+		</div>
+	{/if}
+{else} {* Nicht angemeldet *}
+	<p class="bold_red">{$plugin.faq_front.message.no_login}</p><br />
+{/if}

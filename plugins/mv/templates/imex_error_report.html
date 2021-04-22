@@ -1,0 +1,62 @@
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+<script src='../plugins/mv/js/confirm.js' type='text/javascript'></script>
+<div class="artikel">
+	<h2>{$plugin.mv.pageheader.error_report}</h2>
+		{if $report_deleted}<div class="message">{$plugin.mv.report_deleted}</div><br />{/if}
+		<table width="100%" class="mv_table">
+			<thead>
+				<tr>
+					<th>{$plugin.mv.id}</th>
+					<th>{$plugin.mv.import_time}</th>
+					<th>{$plugin.mv.normaler_user}</th>
+					<th>{$plugin.mv.vorlage}</th>
+					<th>{$plugin.mv.used_file}</th>
+					<th>{$plugin.mv.records_to_import}</th>
+					<th>{$plugin.mv.error_count}</th>
+					<th>{$plugin.mv.success_count}</th>
+					{if $is_admin}
+						<th>{$plugin.mv.loeschen3}</th>
+					{/if}
+				</tr>
+			</thead>
+			<tbody>
+				{foreach item=report from=$error_report}
+					<tr>
+						<td align="right">
+                        	{if $report.error_count}
+								<a href="./plugin.php?menuid={$menuid_aktuell}&amp;template=mv/templates/imex_error_report_details.html&amp;report_id={$report.report_id}" title="{$plugin.mv.import_error_report_show_details}" style="color:red;font-weight:bold">
+								{$report.report_id}
+								</a>
+                          	{else}
+                            	{$report.report_id}
+							{/if}
+						</td>
+						<td>
+							{if $report.error_count}
+								<a href="./plugin.php?menuid={$menuid_aktuell}&amp;template=mv/templates/imex_error_report_details.html&amp;report_id={$report.report_id}" title="{$plugin.mv.import_error_report_show_details}" style="color:red;font-weight:bold">
+									{$report.import_time}
+								</a>
+                          	{else}
+								{$report.import_time}
+							{/if}
+						</td>
+						<td>{$report.imported_by}</td>
+						<td>{$report.used_template_name}</td>
+						<td>{$report.used_file}</td>
+						<td align="right">{$report.records_to_import}</td>
+						<td align="right">{$report.error_count}</td>
+						<td align="right">{$report.success_count}</td>
+						{if $is_admin}
+							<td align="center">
+								<form id="report_delete" method="post" action="./plugin.php?menuid={$menuid_aktuell}&amp;template=mv/templates/imex_error_report.html&report_del_id={$report.report_id}" name="adminForm{$report.report_id}">
+									<a href='javascript: var msg="{$plugin.mv.linktext.sync} "+"\""+"{$report.report_id}"+"\""+" {$plugin.mv.linktext.sync2}"; if (confirm(msg)) submitform("{$report.report_id}");' title="{$plugin.mv.alttext.sync}">X</a>
+								</form>
+							</td>
+						{/if}
+					</tr>
+				{/foreach}
+			</tbody>
+		</table>
+	</form>
+</div>

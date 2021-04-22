@@ -1,0 +1,42 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		
+		{*<!-- Datenbank sicherungen erstellen und einspielen -->*}
+		{$plugin.faq.sicherung}
+		<br />
+		{*<!-- Um eine Sicherung zu erstellen klicken Sie bitte hier -->*}
+		<ul>
+			<li>
+				<a href="./plugin.php?menuid={$formmenuid}&amp;template=faq/templates/backup_back.html&amp;msgid={$ander.news_user_id}&amp;makedump=1" title="{$plugin.faq.make_dump}">{$plugin.faq.make_dump}</a>
+			</li>
+		</ul>
+		{*<!-- Um eine Sicherung einzuspielen klicken Sie hier -->*}
+		<br />
+		<h3>{$plugin.faq.sicherung_einspielen}</h3>
+		{if $is_uploaded}
+			<span class="bold_red">{$plugin.faq.sicherung_ready}</span>
+		{/if}
+		<p>{$plugin.faq.hinweis}</p>
+		<p><span class="bold_red">{$plugin.faq.warnung}</span></p>
+		<form method="post" id="formi" action="./plugin.php?menuid={$formmenuid}&amp;template=faq/templates/backup_back.html&amp;msgid={$ander.news_user_id}&amp;backdump=1" enctype="multipart/form-data">
+			<fieldset>
+				{*<!-- Eingabe der Datei:-->*}
+		  		<legend>{$plugin.faq.eingabe_datei}</legend>
+				{*<!-- Das Dokument:-->*}
+		 		 <label for="myfile">{$plugin.faq.dokument}</label>
+		  		<input type="file" name="myfile" value="{$myfilename}" id="myfile" />
+		  	</fieldset>
+			<fieldset>
+				{*<!-- Datei hochladen:-->*}
+		  		<legend>{$plugin.faq.datei_upload}</legend>
+				{*<!-- hochladen-->*}
+		  		<input type="submit" class="submit_back" value="{$plugin.faq.upload}" name="restore" />
+		  	</fieldset>
+		</form>
+	</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

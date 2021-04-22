@@ -1,0 +1,53 @@
+<!-- START FLEX -->
+
+<div class="artikel">
+
+	{if $mv_error}
+		{$mv_error}
+	{else}
+		<div class="mv eintrag_register">
+			<div id="letter_index">
+				<div class="letter {if $letter_to_show == 'A'}active{/if}"><a href="{$web_url}&letter=A&word_cutoff={$word_cutoff}">A</a></div>
+				<div class="letter {if $letter_to_show == 'B'}active{/if}"><a href="{$web_url}&letter=B&word_cutoff={$word_cutoff}">B</a></div>
+				<div class="letter {if $letter_to_show == 'C'}active{/if}"><a href="{$web_url}&letter=C&word_cutoff={$word_cutoff}">C</a></div>
+				<div class="letter {if $letter_to_show == 'D'}active{/if}"><a href="{$web_url}&letter=D&word_cutoff={$word_cutoff}">D</a></div>
+				<div class="letter {if $letter_to_show == 'E'}active{/if}"><a href="{$web_url}&letter=E&word_cutoff={$word_cutoff}">E</a></div>
+				<div class="letter {if $letter_to_show == 'F'}active{/if}"><a href="{$web_url}&letter=F&word_cutoff={$word_cutoff}">F</a></div>
+				<div class="letter {if $letter_to_show == 'G'}active{/if}"><a href="{$web_url}&letter=G&word_cutoff={$word_cutoff}">G</a></div>
+				<div class="letter {if $letter_to_show == 'H'}active{/if}"><a href="{$web_url}&letter=H&word_cutoff={$word_cutoff}">H</a></div>
+				<div class="letter {if $letter_to_show == 'I'}active{/if}"><a href="{$web_url}&letter=I&word_cutoff={$word_cutoff}">I</a></div>
+				<div class="letter {if $letter_to_show == 'J'}active{/if}"><a href="{$web_url}&letter=J&word_cutoff={$word_cutoff}">J</a></div>
+				<div class="letter {if $letter_to_show == 'K'}active{/if}"><a href="{$web_url}&letter=K&word_cutoff={$word_cutoff}">K</a></div>
+				<div class="letter {if $letter_to_show == 'L'}active{/if}"><a href="{$web_url}&letter=L&word_cutoff={$word_cutoff}">L</a></div>
+				<div class="letter {if $letter_to_show == 'M'}active{/if}"><a href="{$web_url}&letter=M&word_cutoff={$word_cutoff}">M</a></div>
+				<div class="letter {if $letter_to_show == 'N'}active{/if}"><a href="{$web_url}&letter=N&word_cutoff={$word_cutoff}">N</a></div>
+				<div class="letter {if $letter_to_show == 'O'}active{/if}"><a href="{$web_url}&letter=O&word_cutoff={$word_cutoff}">O</a></div>
+				<div class="letter {if $letter_to_show == 'P'}active{/if}"><a href="{$web_url}&letter=P&word_cutoff={$word_cutoff}">P</a></div>
+				<div class="letter {if $letter_to_show == 'Q'}active{/if}"><a href="{$web_url}&letter=Q&word_cutoff={$word_cutoff}">Q</a></div>
+				<div class="letter {if $letter_to_show == 'R'}active{/if}"><a href="{$web_url}&letter=R&word_cutoff={$word_cutoff}">R</a></div>
+				<div class="letter {if $letter_to_show == 'S'}active{/if}"><a href="{$web_url}&letter=S&word_cutoff={$word_cutoff}">S</a></div>
+				<div class="letter {if $letter_to_show == 'T'}active{/if}"><a href="{$web_url}&letter=T&word_cutoff={$word_cutoff}">T</a></div>
+				<div class="letter {if $letter_to_show == 'U'}active{/if}"><a href="{$web_url}&letter=U&word_cutoff={$word_cutoff}">U</a></div>
+				<div class="letter {if $letter_to_show == 'V'}active{/if}"><a href="{$web_url}&letter=V&word_cutoff={$word_cutoff}">V</a></div>
+				<div class="letter {if $letter_to_show == 'W'}active{/if}"><a href="{$web_url}&letter=W&word_cutoff={$word_cutoff}">W</a></div>
+				<div class="letter {if $letter_to_show == 'X'}active{/if}"><a href="{$web_url}&letter=X&word_cutoff={$word_cutoff}">X</a></div>
+				<div class="letter {if $letter_to_show == 'Y'}active{/if}"><a href="{$web_url}&letter=Y&word_cutoff={$word_cutoff}">Y</a></div>
+				<div class="letter {if $letter_to_show == 'Z'}active{/if}"><a href="{$web_url}&letter=Z&word_cutoff={$word_cutoff}">Z</a></div>
+				<div class="letter {if $letter_to_show == '0-9'}active{/if}"><a href="{$web_url}&letter=0-9&word_cutoff={$word_cutoff}">0-9</a></div>
+				<div class="letter {if $letter_to_show == ''}active{/if}"><a href="{$web_url}&letter=&word_cutoff={$word_cutoff}">&amp;</a></div>
+			</div>
+			<div id="word_index">
+				{foreach item=word from=$register_words}
+				<div class="word {if $word_to_show == $word->word}active{/if}"><a href="{$web_url}&letter={$letter_to_show}&word_cutoff={$word_cutoff}&word_to_show={$word->word}">{$word->word} ({$word->count})</a></div>
+				{/foreach}
+			</div>
+			<div id="word_content">
+				{foreach item=word_content from=$register_contents}
+				{$word_content->to_singleview_html()}
+				{/foreach}
+			</div>
+		</div>
+	{/if}
+</div>
+
+<!-- STOP FLEX -->

@@ -1,0 +1,77 @@
+<!-- START FLEX KALENDER -->
+
+<div class="modul" id="mod_paket_kalender_{$mod_paket_kalender_.5}">
+<!-- Kalender -->
+
+<h3>{$plugin.mv.kalender}</h3>
+<div style="width: 100%;">
+{literal}
+<script language="JavaScript"> 
+<!-- 
+
+function gox_{/literal}{$mv_id_kal.5}{literal}(){
+ document.monatformx{/literal}{$mv_id_kal.5}{literal}.submit();
+
+}
+//-->
+</script>
+{/literal}
+<div class="Kalender" ><label for="monats_id{$mv_id_kal.5}">{$plugin.mv.monat_auswaehlen}</label>
+<form action="" name="monatformx{$mv_id_kal.5}" method="post">
+<table>
+	<tr>
+	<td>
+		<select name="jahr_id{$mv_id_kal.5}" size="1" id="jahr_id{$mv_id_kal.5}">
+{foreach item=jahr key=name from=$jahr_array.5}
+			<option value="{$jahr.jahr_id}"{if $jahr_id.5==$jahr.jahr_id} selected="selected"{/if}>{$jahr.name}</option>
+{/foreach}		
+		</select>
+		<select name="monats_id{$mv_id_kal.5}" size="1" id="monats_id{$mv_id_kal.5}">
+{foreach item=mon key=name from=$monat_array.5}
+			<option value="{$mon.mon_id}"{if $monats_id.5==$mon.mon_id} selected="selected"{/if}>{$mon.name}</option>
+{/foreach}
+		</select>
+	</td>
+	<td>
+	</td>
+</tr>
+<tr>
+	<td colspan="2">
+		<input class="senden" type="submit" name="find" value="Suchen" />
+	</td>
+</tr>
+</table>
+</form>
+<table class="kalender_table">
+	<tr>
+		<th>{$plugin.mv.tag_mo}</th>
+		<th>{$plugin.mv.tag_di}</th>
+		<th>{$plugin.mv.tag_mi}</th>
+		<th>{$plugin.mv.tag_do}</th>
+		<th>{$plugin.mv.tag_fr}</th>
+		<th>{$plugin.mv.tag_sa}</th>
+		<th>{$plugin.mv.tag_so}</th>
+	</tr>
+	<tr>
+{foreach item=ptag from=$tagderwoche_a.5}		<td></td>
+{/foreach}
+{*<!-- geht alle Tage des Monats durch -->*}
+{foreach item=ptag from=$paket_tage.5}
+{*<!-- wenn es kein Monatag ist, dann ohne </tr><tr> am Anfang -->*}
+{if $ptag.1!=Mon}
+		<td{if $ptag.link=="ok"} class="set"{/if}>{if $ptag.link=="ok"}<a title="{$ptag.treffer}" class="set" href="{$url_suchmaske.5}&amp;mv_id={$ptag.mv_id}&amp;datum={$ptag.datum}&amp;anfrage=ok">{$ptag.0}</a>{else}{$ptag.0}{/if}</td>
+{*<!-- Montage mit neuer Zeile im Kalender anfangen -->*}
+{else}	</tr>
+	<tr>
+		<td{if $ptag.link=="ok"} class="set"{/if}>{if $ptag.link=="ok"}<a title="{$ptag.treffer}" class="set" href="{$url_suchmaske.5}&amp;mv_id={$ptag.mv_id}&amp;datum={$ptag.datum}&amp;anfrage=ok">{$ptag.0}</a>{else}{$ptag.0}{/if}</td>
+{/if}
+{/foreach}
+	</tr>
+</table>
+</div>
+
+</div>
+
+</div>
+
+<!-- STOP FLEX KALENDER -->

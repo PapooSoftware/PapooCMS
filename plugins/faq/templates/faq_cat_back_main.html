@@ -1,0 +1,51 @@
+{if $IS_ADMIN}{*<!-- Wird nur in der Admin angezeigt -->*}
+	{*<!-- Hier kommt der Kopf rein-->*}
+	{include file=head.inc.utf8.html}
+	<!-- Menü kommt hier rein-->
+	{include file=menu.inc.html}
+	<div class="artikel">
+		
+		{include file=../../../plugins/faq/templates/faq_cat_menue.html}
+	
+{* Anzeige der Kategorien *}
+		<div>{$plugin.faq_back.text.cat_count} {$anzahl_faq_cats}</div>
+		<ul class="cat_main_ul ul_no_style_pl5">
+			{foreach item=cat from=$cat_data}
+	
+{* Link Erweitern/Reduzieren für parent *}
+				<!--<li class="float_left">
+					{if $cat[parent]}
+						<a href="#" title="{$plugin.faq_back.linktext.cat_collapse}"
+								onclick="HideShowCat('Catid_{$cat.id}');">&#177;</a>
+					{else}
+						<span class="ml_11">&nbsp;</span>
+					{/if}
+				</li>-->
+
+{* Kategoriename mit Link zum direkten Edit *}
+				<li><a href="./plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_cat_back_edit.html&amp;cat_edit_id={$cat.id}" title="{$plugin.faq_back.linktext.cat_edit}">
+				<strong>{$cat.catname}</strong> (ID: {$cat.id})</a>
+					{if $cat[orphan]}
+						<span class="bold_red">{$plugin.faq_back.text.cat_orphan}</span>
+					{/if}
+	
+{* Listensteuerung: neue Unterkategorie und End-Tags *}
+				{if $cat[parent]}
+					<ul id="Catid_{$cat.id}" class="ul_no_style_pl13">
+				{else}
+					</li>
+				{/if}
+	
+{* End-Tags-Steuerung. Zahl der End-Tags lt. Variable einfügen *}
+				{if $cat[close_tags]}
+					{section name=ende loop=$cat.close_tags step=-1}
+						</ul></li>
+					{/section}
+				{/if}
+			{/foreach}
+		</ul>
+	</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

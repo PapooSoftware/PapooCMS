@@ -1,0 +1,74 @@
+
+<div class="floatbox artikel_details">
+<a  id="artikel"></a><span class="ignore">.</span>
+<div class="floatbox artikel_liste" style="min-height: 500px;">
+
+<div id="artikel_content" class="clearfix">
+	{if $glossarid}
+		<h1 class="glossar_h1">{$result.glossar_Wort}</h1>
+		{$result.glossar_descrip}
+	{/if}
+	{if $modus1}
+		{if $glossarliste}
+			{$plugin.glossar.praeferenzen.glosspref_introtext_de}
+			{*<!--
+			<h2>{$plugin.glossar.liste}</h2>
+			-->*}
+			<div class="glossar_liste_div" >
+			{if $glossarliste_alphabet}
+			<ul class="alphabet_liste">
+			{foreach item=al from=$glossarliste_alphabet}
+			<li><a href="#{$al}">{$al}</a></li>
+			{/foreach}
+			</ul>
+			{/if}
+			<div class="tab_container">
+				<ul class="glossar_ul">
+					{foreach item=glist from=$result}
+						{if $glist.glossar_Wort|strlen < 2 and $is_jq_tabs=="ok"}
+							{if $glist.glossar_Wort!= "A"}
+								</div>
+							{/if}
+							<div id="{$glist.glossar_Wort}" class="tab_content">
+						{/if}
+						<li class="glossar_li">
+							{if $link_glossar}
+								{if $glist.glossar_id}
+									<a href='{$link_glossar}{$glist.glossar_id}{$link_glossar_2}'>{$glist.glossar_Wort}</a>
+								{else}
+									<a name="{$glist.glossar_Wort}"></a>{$glist.glossar_Wort}
+								{/if}
+							{else}
+								{if $glist.glossar_Wort|strlen < 2 }
+									{if $is_jq_tabs!="ok"}
+										<a name="{$glist.glossar_Wort}" id="{$glist.glossar_Wort}" ></a>{$glist.glossar_Wort}
+									{/if}
+								{else}
+									<a name="{$glist.glossar_Wort}" id="{$glist.glossar_Wort}" href='{$glist.glossar_id}-{$glist.glossar_Wort|escape:"url"}.html'>{$glist.glossar_Wort}</a>
+								{/if}
+							{/if}
+						</li>
+					{/foreach}
+					{if $is_jq_tabs=="ok"}
+						</div>
+					{/if}
+				</ul>
+				</div>
+			</div>
+		{/if}
+	{/if}
+	{if $modus2}
+		<h2>{$plugin.glossar.liste}</h2>
+		<div class="glossar_liste_div">
+			<dl>
+				{foreach item=glist from=$result}
+					<a name="{$glist.glossar_id}" id="{$glist.glossar_id}"></a>
+					<dt>{$glist.glossar_Wort}</dt>
+					<dd>{$glist.glossar_descrip}</dd>
+				{/foreach}
+			</dl>
+		</div>
+	{/if}
+</div>
+
+</div></div>

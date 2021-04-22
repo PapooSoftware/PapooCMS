@@ -1,0 +1,130 @@
+{if $faq_no_readaccess} {* Leserecht vorhanden? *}
+	<p class="bold_red">{$plugin.faq_front.message.no_readaccess}</p><br /> {* Keine Leserechte *}
+{else}
+{* Layout "Linkliste2" *}
+	<div class="floatbox artikel_details">
+		<p class="div_margins">{$templ_ergbn} "<strong>{$suchworte}</strong>": {$search_matches} 
+			{if $search_matches == 1}{$plugin.faq_front.text.search_match} {* 1 Resultat *}
+			{else}{$plugin.faq_front.text.search_matches} {* XX Resultate *}
+			{/if}
+		</p>
+{* 1. Seite Kategorien-Liste mit Links zur 2. Seite (Liste der FAQS zu einer Kategorie) *}
+		{section name=rowct1 start=0 loop=$cat_data|@count step=1}
+			{assign var="rowctx1" value=$smarty.section.rowct1.index}
+			{if $faq_search_data[$rowctx1]|@count} {* Kategoriedaten ohne FAQ-Daten nicht anzeigen *} 
+				{if $cat_data[$rowctx1].catname AND !$cat_selected_id}
+					<div>
+						<p class="lvl_{$cat_data[$rowctx1].level}">
+							<a href="{$slash}plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_front.html&amp;faq_main_id={$cat_data[$rowctx1].id}&amp;search_faq={$suchworte}" title="{$plugin.faq_front.linktext.faq_show2}"><img src="{$slash}plugins/faq/bilder/cat_menu.gif" width="12" height="10" class="mr_3_no_border" title="{$plugin.faq_front.imgtext.cat}" alt="{$plugin.faq_front.imgtext.cat}" />
+							<strong>{$cat_data[$rowctx1].catname}</strong></a>
+							{if !$cat_data[$rowctx1].question}
+								({$faq_search_data[$rowctx1]|@count}
+								{if $faq_search_data[$rowctx1]|@count == 1}
+									{$plugin.faq_front.text.search_match}) {* 1 Resultat *}
+								{else}
+									{$plugin.faq_front.text.search_matches}) {* XX Resultate *}
+								{/if}
+							{/if}
+							<br />
+							<span class="no_bold">{$cat_data[$rowctx1].catdescript}</span>
+							<br />
+							<br />
+						</p>
+					</div>
+				{/if}
+{* 2. Seite oben: Überschrift *}
+				{if $cat_data[$rowctx1].catname AND $cat_selected_id == $cat_data[$rowctx1].id}
+					<h3 class="faq_listing_style_4">{$cat_data[$rowctx1].catname}</h3> {* Kategorie *}
+					{$cat_data[$rowctx1].catdescript}
+					{* Link neue FAQ erstellen, wenn Schreibrechte vorhanden sind *}
+					{if $faq_user_may_write}
+						<div class="div_margins">
+							<a href="{$slash}plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_front_new.html&amp;faq_main_id={$cat_data[$rowctx1].id}" title="{$plugin.faq_front.linktext.faq_new}">{$plugin.faq_front.linktext.faq_new}</a>
+						</div>
+						<div class="div_margins">
+							<a href="{$slash}plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_front_new_question.html&amp;faq_main_id={$cat_data[$rowctx1].id}" title="{$plugin.faq_front.linktext.faq_new_question}">{$plugin.faq_front.linktext.faq_new_question}</a>
+						</div>
+					{/if}
+				
+{* 2. Seite oben: Liste der Fragen mit Links zu den Antworten auf der 2. Seite unten *}
+				{section name=rowct2 start=0 loop=$faq_search_data[$rowctx1]|@count step=1}
+					{assign var="rowctx2" value=$smarty.section.rowct2.index}
+					<div class="faq_listing_style_3">
+						{if $faq_search_data[$rowctx1][$rowctx2].question}
+							<a{if $cat_data[$rowctx1].level > 0} class="lvl_{$cat_data[$rowctx1].level}" {/if}
+								href="{$slash}plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_front.html&amp;faq_main_id={$cat_data[$rowctx1].id}&amp;search_faq={$suchworte}#c{$cat_data[$rowctx1].id}f{$faq_search_data[$rowctx1][$rowctx2].faq_id}"
+								title="{$plugin.faq_front.linktext.faq_show}">
+								<img src="{$slash}plugins/faq/bilder/faq.gif" width="10" height="10" class="mr_3_no_border" title="{$plugin.faq_front.imgtext.faq}" alt="{$plugin.faq_front.imgtext.faq}" />
+							{$faq_search_data[$rowctx1][$rowctx2].question}</a>
+							<br />
+						{/if}
+					</div>
+				{/section}
+				{/if}
+			{/if}
+		{/section}
+		<br />
+		{include file="_module_intern/mod_weiter.html"}
+
+{* 2. Seite unten: Kategorien, Fragen inklusive Antworten, Attachments *}
+		{section name=rowct1 start=0 loop=$cat_data|@count step=1}
+			{assign var="rowctx1" value=$smarty.section.rowct1.index}
+			{section name=rowct2 start=0 loop=$faq_search_data[$rowctx1]|@count step=1}
+				{assign var="rowctx2" value=$smarty.section.rowct2.index}
+				{if $cat_selected_id == $faq_search_data[$rowctx1][$rowctx2].cat_id}
+					{* Frage *}
+					<a name="c{$cat_data[$rowctx1].id}f{$faq_search_data[$rowctx1][$rowctx2].faq_id}"></a>
+					{if $faq_search_data[$rowctx1][$rowctx2].question}
+						{if $rowctx2 > 0}<div class="div_margins">&nbsp;</div>{/if}
+						<h4 class="faq_listing_style_5">
+							<img src="{$slash}plugins/faq/bilder/faq.gif" width="10" height="10" class="mr_3_no_border" title="{$plugin.faq_front.imgtext.faq}" alt="{$plugin.faq_front.imgtext.faq}" />
+							{$faq_search_data[$rowctx1][$rowctx2].question}
+						</h4>
+						{if $faq_search_data[$rowctx1][$rowctx2].answer}
+							<div>{$faq_search_data[$rowctx1][$rowctx2].answer}</div> {* Antwort *}
+						{else}
+							{* Text: keine Antwort zu dieser FAQ *}
+							<div class="div_margins">{$plugin.faq_front.text.no_answer}</div> 
+						{/if}
+{* 2. Seite: zusätzlich Attachments, wenn vorhanden *}
+						{if $faq_attach[$rowctx1][$rowctx2]|@count}
+							<p class="faq_listing_style_5">
+								<strong>Attachments:</strong>
+								<br />
+								{section name=rowct3 start=0 loop=$faq_attach[$rowctx1][$rowctx2]|@count step=1}
+									{assign var="rowctx3" value=$smarty.section.rowct3.index}
+									{if $faq_attach[$rowctx1][$rowctx2][$rowctx3].name}
+										<a href="{$slash}plugins/faq/attachments/{$faq_attach[$rowctx1][$rowctx2][$rowctx3].name_stored}" title="{$plugin.faq_front.linktext.faq_edit_attachment}" target="_blank">
+											{$faq_attach[$rowctx1][$rowctx2][$rowctx3].name}</a> 
+											({$faq_attach[$rowctx1][$rowctx2][$rowctx3].size} Bytes)<br />
+									{/if}
+								{/section}
+							</p>
+						{/if}
+{* 2. Seite: Timestamps *}
+						<div class="div_margins">
+							<strong>{$plugin.faq_front.text.created}</strong>
+							{$faq_search_data[$rowctx1][$rowctx2].created} {$faq_search_data[0][$rowctx2].createdby}
+						</div>
+						{if $faq_search_data[$rowctx1][$rowctx2].changedd}
+							<div>
+								<strong>{$plugin.faq_front.text.changed}</strong>
+								{$plugin.faq_front.text.version} {$faq_search_data[$rowctx1][$rowctx2].version_id} {$faq_search_data[$rowctx1][$rowctx2].changedd} {$faq_search_data[0][$rowctx2].changedby}
+							</div>
+						{/if}
+{* 2. Seite: "Diesen Artikel bearbeiten", wenn Schreibrechte vorhanden sind *}
+						{if $faq_user_may_write}
+							<div class="div_margins">
+								<a href="{$slash}plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_front_edit.html&amp;faq_id={$faq_data[0][$rowctx2].faq_id}&amp;faq_main_id={$cat_data[$rowctx1].id}" title="{$plugin.faq_front.linktext.faq_edit}">
+								{$plugin.faq_front.linktext.faq_edit}</a>
+							</div>
+						{/if}
+					{/if}
+				{/if}
+			{/section}
+		{/section}
+		<br />
+		<br />
+		{include file="_module_intern/mod_weiter.html"}
+	</div>
+{/if}

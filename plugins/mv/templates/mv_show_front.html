@@ -1,0 +1,14 @@
+<!-- START FLEX -->
+<div class="artikel">
+	<div class="mv">
+		{if $errmsg}<p class="error" style="font-weight:bold;color:red;font-size:12px">{$errmsg}</p>{/if}
+		{$mv_template_all}
+		{if $is_own_acc=="1"}
+			<br />
+			<a href="{$is_own_acc_link}">{$plugin.mv.is_own_acc}</a>
+			<br />
+			<br />
+		{/if}
+	</div>
+</div>
+<!-- STOP FLEX -->

@@ -1,0 +1,148 @@
+<div class="floatbox artikel_details">
+{if $new_newsletter}
+	{$message_20018}
+	<form method="post" action="" id="formk">
+		<fieldset>
+			<legend>{$news_front4}</legend>
+			<div class="sub-container">
+				{foreach item=table from=$table_datax}
+					{if $news_erw}
+						<div class="formrow-select clearfix">
+							<div class="sub-label">
+								<label>Anrede {if $table.fehltgender}<strong style="color:#f00">{$news_front14}</strong>{/if}</label>
+							</div>
+							<div class="sub-field">
+								<input type="radio" id="herr" name="gender" value="1" size="35" maxlength="50" {if $table.gender==1}checked{/if} />
+								<label for="herr"><span class="label">{$news_front5} *</span></label>
+								<br />
+								<input type="radio" id="frau" name="gender" value="2" size="35" maxlength="50" {if $table.gender==2}checked{/if} />
+								<label for="frau"><span class="label">{$news_front6} *</span></label>
+								<br />
+								<br />
+							</div>
+						</div>
+						<div class="formrow-std clearfix">
+							<div class="sub-label">
+								<label for="neuvorname">{$news_front7} {if $table.fehltvorname}<strong style="color:#f00">{$news_front14}</strong>{/if}</label>
+							</div>
+							<div class="sub-field">
+								<input type="text" class="inpt" id="neuvorname" name="neuvorname" value="{$table.neuvorname|escape:"htmlall"}" size="35" maxlength="50" />
+							</div>
+						</div>
+						<div class="formrow-std clearfix">
+							<div class="sub-label">
+								<label for="neunachname" class="left">{$news_front8} * {if $table.fehltnachname}<strong style="color:#f00">{$news_front14}</strong>{/if}</label>
+							</div>
+							<div class="sub-field">
+								<input type="text" class="inpt" id="neunachname" name="neunachname" value="{$table.neunachname|escape:"htmlall"}" size="35" maxlength="50" />
+							</div>
+						</div>
+						<div class="formrow-std clearfix">
+							<div class="sub-label">
+								<label for="neustrnr">{$news_front9} {if $table.fehltstrnr}<strong style="color:#f00">{$news_front14}</strong>{/if}</label>
+							</div>
+							<div class="sub-field">
+								<input type="text" class="inpt" id="neustrnr" name="neustrnr" value="{$table.neustrnr|escape:"htmlall"}" size="35" maxlength="50" />
+							</div>
+						</div>
+						<div class="formrow-std clearfix">
+							<div class="sub-label">
+								<label for="neuplz">{$news_front10} {if $table.fehltplz==2}<strong style="color:#f00">{$news_front15}</strong>{/if}
+									{if $table.fehltplz==1}<strong style="color:#f00">{$news_front14}</strong>{/if}
+								</label>
+							</div>
+							<div class="sub-field">
+								<input type="text" class="inpt" id="neuplz" name="neuplz" value="{$table.neuplz|escape:"htmlall"}" size="35" maxlength="50" />
+							</div>
+						</div>
+						<div class="formrow-std clearfix">
+							<div class="sub-label">
+								<label for="neuort">{$news_front11} {if $table.fehltort}<strong style="color:#f00">{$news_front14}</strong>{/if}</label>
+							</div>
+							<div class="sub-field">
+								<input type="text" class="inpt" id="neuort" name="neuort" value="{$table.neuort|escape:"htmlall"}" size="35" maxlength="50" />
+							</div>
+						</div>
+						<div class="formrow-std clearfix">
+							<div class="sub-label">
+								<label for="neustaat">{$news_front13} {if $table.fehltstaat}<strong style="color:#f00">{$news_front14}</strong>{/if}</label>
+							</div>
+							<div class="sub-field">
+								<input type="text" class="inpt" id="neustaat" name="neustaat" value="{$table.neustaat|escape:"htmlall"}" size="35" maxlength="50" />
+							</div>
+						</div>
+						<div class="formrow-std clearfix">
+							<div class="sub-label">
+								<label for="neuphone">{$news_front22} {if $table.fehltphone}<strong style="color:#f00">{$news_front15}</strong>{/if}</label>
+							</div>
+							<div class="sub-field">
+								<input type="text" class="inpt" id="neuphone" name="neuphone" value="{$table.neuphone|escape:"htmlall"}" size="35" maxlength="50" />
+							</div>
+						</div>
+					{/if}
+				{/foreach}
+				<div class="formrow-std clearfix">
+					<div class="sub-label">
+						<label for="newsletter_neuemail">{$plugin.newsletter.email} *{if $table.fehltemail}<strong style="color:#f00">{$news_front15}</strong>{/if}</label>
+					</div>
+					<div class="sub-field">
+						<input type="text" class="inpt" id="newsletter_neuemail" name="newsletter_neuemail" value="{$table.newsletter_neuemail|escape:"htmlall"}" size="20" maxlength="50" />
+					</div>
+				</div>
+				<input type="hidden" value="new_user" name="news_message" />
+				{if $oeffentliche_verteilerlisten > 0}
+					<p>Verfügbare Newsletter Gruppen : {if $fehltgrp}<strong style="color:#f00">{$news_front21}</strong>{/if}</p>
+					{foreach item=nlgruppe from=$grp_data}
+						{if $nlgruppe.show_front == 1}
+							<input type="checkbox" name="nlgruppe[{$nlgruppe.grp_id}]" id="nlgruppe_{$nlgruppe.grp_id}" {$nlgruppe.checked|escape:"htmlall"} value="{$nlgruppe.grp_id}" />
+							<label for="nlgruppe_{$nlgruppe.grp_id}" id="nlgruppe_{$nlgruppe.grp_id}">{$nlgruppe.name}</label>
+							<br />
+						{/if}
+					{/foreach}
+				{else}
+					<input type="hidden" name="nlgruppe[1]" id="nlgruppe_1" value="1" />
+				{/if}
+				{if $news_sprachwahl}
+					<div class="formrow-std clearfix">
+						<div class="sub-label">
+							<label for="news_user_lang">{$lang.language}</label>
+						</div>
+						<div class="sub-field">
+							<select name="news_user_lang" id="news_user_lang" style="margin:.4em 0 .4em 0">
+								{foreach item=lang from=$language_newsd}
+									<option value="{$lang.lang_id}" {if $lang.selected} selected="selected"{/if}>{$lang.language}</option>
+								{/foreach}
+							</select>
+						</div>
+					</div>
+				{/if}
+			</div>
+		</fieldset>
+		<fieldset class="no-border no-padding">
+			<legend style="margin-bottom:10px;">Datenschutzerklärung</legend>
+			<input style="margin-top:5px;float:left;" type="checkbox" value="1" name="datenschutz_newsl" id="datenschutz_newsl" />
+			<label style="float:left;width:90%;">{$message_20018_ds}</label>
+		</fieldset>
+		<fieldset>
+			<legend>{$message_20020}</legend>
+			<div class="sub-container">
+				<div class="formrow-buttons">
+					<input type="submit" value="{$message_20020}" name="loginnow" class="button" title="{$message_20020}" />
+				</div>
+			</div>
+		</fieldset>
+	</form>
+{/if}
+{if $gesendet_newsletter}
+	{$gesendet_newsletter}
+{elseif $requireUnsubscribeConfirmation}
+	<h2>{$plugin.newsletter.unsubscribe_newsletter_title}</h2>
+	<form action="" method="post">
+		<button type="submit" name="action" value="confirmUnsubscribe">{$plugin.newsletter.unsubscribe_newsletter}</button>
+		<a href="{$slash}"><button type="button">{$plugin.newsletter.cancel}</button></a>
+	</form>
+{/if}
+<br />
+<div class="contact clearfix"></div>
+<div class="backtotop"><a title="zum Seitenanfang" href="#contentcol">zum Seitenanfang</a></div>
+</div>

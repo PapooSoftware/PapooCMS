@@ -636,6 +636,14 @@ else {
 	set_minimum_memory_limit();
 }
 
+// Polyfill is_countable (PHP >= 7.3.0)
+if (function_exists('is_countable') == false) {
+	function is_countable($var): bool
+	{
+		return is_array($var) || $var instanceof Countable;
+	}
+}
+
 /**
  * Diese Funktion lädt stylespezifische Spracheinträge aus dem Ordner styles/{}/messages/.
  *

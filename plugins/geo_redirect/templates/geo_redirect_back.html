@@ -1,0 +1,158 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+    {*<!-- Hier kommt der Kopf rein-->*}
+	{include file=head.inc.utf8.html}
+
+	<!-- Men� kommt hier rein-->
+	{include file=menu.inc.html}
+
+	<div class="artikel">
+        {if $is_eingetragen=="ok"}
+			<div class="message"> {$plugin_fb_plugin_die_daten_wurden_gespeichert}</div>
+        {/if}
+        {if $plugin_error}
+			<div class="error">  {$plugin_geo_redirect_ip_bitte_tragen_sie_auch_sinnvollen_daten_ein}</div>
+        {/if}
+        {if $error_geo_ip}
+			<div class="error">  {$error_geo_ip}</div>
+        {/if}
+
+        {if $saved_aktivierung}
+			<div class="message">
+                {$plugin_aktiv_plugin_die_aktivierung_wurde_gespeichert}
+			</div>
+        {/if}
+		<h1 id="akquise__gep_redirect_plugin" class="h1" >{$plugin_akquise__gep_redirect_plugin}</h1>
+		<p id="akquise__hier_knnen_sie_einstellen_zu_welcher_domain" class="h1" >{$plugin_akquise__hier_knnen_sie_einstellen_zu_welcher_domain}</p>
+		<h2 id="akquise__einstellungen_domainabhngig" class="h3" >{$plugin_akquise__einstellungen_domainabhngig}</h2>
+		<form method="post" action="" id="formi" style="width:99%">
+			<fieldset>
+				<legend>{$plugin_geo_redirect_domain__dateneingeben}</legend>
+				<div class="labdiv">
+					<label for="geo_redirect_domain__domainname">
+						{$plugin_geo_redirect_domain__domainname}{$plugin_error.geo_redirect_domain__domainname}
+					</label>
+					<input type="text" name="geo_redirect_domain__domainname" value="{$geo_redirect_domain_.0.geo_redirect_domain__domainname|escape:"html"}"
+					       class="geo_redirect_domain__domainname" id="geo_redirect_domain__domainname"/>
+				</div><br />
+				<div class="labdiv">
+					<label for="geo_redirect_domain__sprache_die_erzwungen_werden_soll">
+						{$plugin_geo_redirect_domain__sprache_die_erzwungen_werden_soll}{$plugin_error.geo_redirect_domain__sprache_die_erzwungen_werden_soll}
+					</label>
+
+					<select name="geo_redirect_domain__sprache_die_erzwungen_werden_soll" id="geo_redirect_domain__sprache_die_erzwungen_werden_soll" size="1"/>
+					<option value="">{$message_160}</option>
+					{foreach from=$geo_lang_select item=geo key=kgeo name=ngeo}
+						<option {if $geo_redirect_domain_.0.geo_redirect_domain__sprache_die_erzwungen_werden_soll==$geo.lang_id}selected="selected"{/if} value="{$geo.lang_id}">
+							{$geo.lang_long} ({$geo.lang_id})
+						</option>
+					{/foreach}
+					</select>
+				</div><br />
+			</fieldset>
+			<fieldset>
+				<legend>{$plugin_geo_redirect__daten_speichern}</legend>
+				<!-- Speichern -->
+				<input  type="submit" class="submit_back_green_big" value="{$plugin_geo_redirect__daten_speichern}" name="formSubmit_save_domain_lang" />
+			</fieldset><br />
+		</form>
+		<br />
+		<table style="width: 100%;">
+			<tr>
+				<th>ID</th>
+				<th>{$plugin_geo_redirect_domain__domainname}</th>
+				<th>{$plugin_geo_redirect_domain__sprache_die_erzwungen_werden_soll}</th>
+				<th> {$plugin_geo_redirect_ip_lschen}</th>
+			</tr>
+            {foreach from=$domain_geo_liste item=dom key=keydom name=name_dom}
+				<tr>
+					<td>{$dom.geo_redirect_domain__id}</td>
+					<td>{$dom.geo_redirect_domain__domainname}</td>
+					<td>{$dom.geo_redirect_domain__sprache_die_erzwungen_werden_soll}</td>
+					<td>
+						<a href="{$domain_geo_liste_self_link}&dom_geo_id={$dom.geo_redirect_domain__id}&del=1"
+						   onclick='javascript: var msg="Soll dieser Eintrag wirklich gel&ouml;scht werden?"; if (confirm(msg)) return true;else return false;'>
+							{$plugin_geo_redirect_ip_lschen}
+						</a>
+					</td>
+				</tr>
+			{/foreach}
+		</table>
+		<h2 id="geo_redirect_domain__einstellungen_ip_abhngig" class="h2" >{$plugin_geo_redirect_domain__einstellungen_ip_abhngig}</h2>
+		<form method="post" action="" id="formi" style="width:99%">
+			<fieldset>
+				<legend>{$plugin_geo_redirect_domain__daten_ip_eingeben}</legend>
+
+				<div class="labdiv"><label for="geo_redirect_ip_countrycodeip">{$plugin_geo_redirect_domain__countrycodeip}{$plugin_error.geo_redirect_domain__countrycodeip} </label>
+
+					<select name="geo_redirect_ip_countrycodeip" id="geo_redirect_ip_countrycodeip" size="1"/><option value="">{$message_160}</option>
+
+                    {foreach from=$country_list item=geo key=kgeo name=ngeo}
+					<option {if $geo_redirect_domain_.0.geo_redirect_domain__countrycodeip==$kgeo}selected="selected"{/if} value="{$kgeo}">
+                        {$kgeo} - {$geo}
+						</option>{/foreach}
+					</select>
+				</div><br />
+
+				<div class="labdiv"><label for="geo_redirect_ip_sprache_erzwingen">{$plugin_geo_redirect_ip_sprache_erzwingen}{$plugin_error.geo_redirect_ip_sprache_erzwingen} </label>
+
+					<select name="geo_redirect_ip_sprache_erzwingen" id="geo_redirect_ip_sprache_erzwingen" size="1"/><option value="">{$message_160}</option>
+                    {foreach from=$geo_lang_select item=geo key=kgeo name=ngeo}
+					<option {if $geo_redirect_ip.0.geo_redirect_ip_sprache_erzwingen==$geo.lang_id}selected="selected"{/if} value="{$geo.lang_id}">
+                        {$geo.lang_long} ({$geo.lang_id})
+						</option>{/foreach}
+					</select>
+				</div><br />
+			</fieldset>
+			<fieldset>
+				<legend>{$plugin_geo_redirect__daten_speichern}</legend>
+				<!-- Speichern -->
+				<input  type="submit" class="submit_back_green_big" value="{$plugin_geo_redirect__daten_speichern}" name="formSubmit_ip_lang" />
+			</fieldset><br />
+		</form>
+		<br />
+		<table style="width: 100%;">
+			<tr>
+				<th>ID</th>
+				<th>{$plugin_geo_redirect_domain__countrycodeip}</th>
+				<th>{$plugin_geo_redirect_domain__sprache_die_erzwungen_werden_soll}</th>
+				<th> {$plugin_geo_redirect_ip_lschen}</th>
+			</tr>
+			{foreach from=$domain_geo_ip_liste item=dom key=keydom name=name_dom}
+				<tr>
+					<td>{$dom.geo_redirect_ip_id}</td>
+					<td>{$dom.geo_redirect_ip_countrycodeip}</td>
+					<td>{$dom.geo_redirect_ip_sprache_erzwingen}</td>
+					<td>
+						<a href="{$domain_geo_liste_self_link}&dom_geo_ip_id={$dom.geo_redirect_ip_id}&del=1"
+						   onclick='javascript: var msg="Soll dieser Eintrag wirklich gel&ouml;scht werden?"; if (confirm(msg)) return true;else return false;'>
+							{$plugin_geo_redirect_ip_lschen}
+						</a>
+					</td>
+				</tr>
+			{/foreach}
+		</table>
+		{if $is_dev}
+			#start#
+			<span class="ignore"></span>
+			<!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+			<div class="rapid_form">
+				<form action="" name="" method="POST">
+					<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+					<input type="hidden" name="tb_name" value="plugin_geo_redirect_ip" />
+					<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+					<input type="hidden" name="php_datei_name" value="geo_redirect_ip" />
+					<!-- Das Standarpr�fix f�r die Ids -->
+					<input type="hidden" name="praefix" value="geo_redirect_ip" />
+					<!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+					<input type="hidden" name="praefix_spezial" value="geo_redirect_ip" />
+					<!-- Das Tool einbinden -->
+					{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+				</form>
+			</div>
+		{/if}
+	</div>
+
+
+    {*<!-- Hier kommt der Fuss rein-->*}
+    {include file=foot.inc.html}
+{/if}

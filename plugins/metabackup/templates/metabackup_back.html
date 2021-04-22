@@ -1,0 +1,88 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+    <h1>Artikel-Metadaten Backup</h1>
+    <p>Hier können sie die Metadaten ihrer Artikel als CSV speichern, downloaden und wieder zurück in die Datenbank einspielen.</p>
+
+    {if $plugin.metabackup.message}
+        <div class="message">{$plugin.metabackup.message}</div>
+    {/if}
+    {if $plugin.metabackup.error}
+        <div class="error">{$plugin.metabackup.error}</div>
+    {/if}
+    
+    {if !$plugin.metabackup.step}
+    <form action="" method="POST">
+        <fieldset>
+            <legend>CSV Datei erstellen</legend>
+            <input class="btn {if $plugin.metabackup.backup.status}btn-{$plugin.metabackup.backup.status}{else}btn-info{/if}" type="submit" name="backup" value="Jetzt erstellen" />
+            <p>Erstellen sie aus den Metadaten eine CSV Datei, die sie downloaden können.</p>
+        </fieldset>
+    </form>
+    <form action="" method="POST" enctype="multipart/form-data">
+        <fieldset>
+            <legend>CSV Datei hochladen (Update bestehende)</legend>
+            <input class=""  type="file" name="file" />
+            <input class="btn {if $plugin.metabackup.upload.status}btn-{$plugin.metabackup.upload.status}{else}btn-info{/if}"  type="submit" name="upload" value="Upload" />
+            <p>Hiermit können Sie eine vorher erstellte Backupdatei hochladen und die vorhandene ggf. ersetzen.</p>
+        </fieldset>
+    </form>
+
+    <form action="" method="POST" enctype="multipart/form-data">
+        <fieldset>
+            <legend>CSV Datei hochladen (Neue Artikel)</legend>
+            <input class=""  type="file" name="file_insert" />
+            <input class="btn {if $plugin.metabackup.upload.status}btn-{$plugin.metabackup.upload.status}{else}btn-info{/if}"  type="submit" name="upload_neu" value="Upload" />
+            <p>Die CSV Datei sollt folgende Spalten enthalten in exakt der Bezeichnung und tab getrennt sein.</p>
+            <p> menuid, headline, teaser, inhalt, title, description, url</p>
+	        <p>-</p>
+            <p> menuid: Die Menü-ID dem der Artikel zugeordnet ist.</p>
+            <p> headline: Überschrift des Artikels.</p>
+            <p> teaser: Teaser des Artikels.</p>
+            <p> inhalt: Inhalt des Artikels.</p>
+            <p> title: Meta-Titel des Artikels.</p>
+            <p> description: Meta-Beschreibung des Artikels.</p>
+            <p> url: URL des Artikels (z.B. '/test.html' o. /test/) anderes wird nicht akzeptiert und produziert Fehler.</p>
+        </fieldset>
+    </form>
+    {/if}
+    
+    {if $plugin.metabackup.step == 1}
+        <form action="" method="POST">
+            <fieldset>
+                <legend>CSV Datei herunterladen</legend>
+                <input class="btn btn-info"  type="submit" name="download" value="Download" />
+                <p>Laden sie hier die gespeicherte CSV Datei herunter.</p>
+            </fieldset>
+        </form>
+    {/if}
+    {if $plugin.metabackup.step == 2}
+        <form action="" method="POST">
+            <fieldset>
+                <legend>CSV Datei zurückspielen</legend>
+                <input class="btn {if $plugin.metabackup.rollback.status}btn-{$plugin.metabackup.rollback.status}{else}btn-info{/if}"  type="submit" name="rollback" value="Jetzt zurückspielen" />
+                <p>Aktualisieren Sie ihre Datenbank mit dem gespeicherten CSV.</p>
+            </fieldset>
+        </form>
+    {/if}
+
+    {if $plugin.metabackup.step == 3}
+    <form action="" method="POST">
+        <fieldset>
+            <legend>CSV Datei einspielen</legend>
+            <input class="btn {if $plugin.metabackup.rollback.status}btn-{$plugin.metabackup.rollback.status}{else}btn-info{/if}"  type="submit" name="insertnow" value="Jetzt zurückspielen" />
+            <p>Spielen Sie nun die Artikel in die Datenbank ein (Sie sollten vorher unbedingt eine Sicherung der Seite erstellen).</p>
+        </fieldset>
+    </form>
+    {/if}
+</div>
+
+
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

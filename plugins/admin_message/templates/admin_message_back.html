@@ -1,0 +1,76 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+{if $bulk_import_ok}
+<div class="message">{$bulkimport_message_ok}</div>
+{/if}
+{if $is_eingetragen=="ok"}
+  <div class="message"> {$plugin_plugin_zentrale_inhalte_daten_wurden_gespeichert}</div> 
+{/if}
+<div class="artikel">
+
+ <h1 id="plugin_cotent_client_admin_message_plugin" class="h1" >{$plugin_plugin_cotent_client_admin_message_plugin}</h1>
+
+ <p id="plugin_admin_message_hier_knnen_sie_die_email_adressen" class="h1" >{$plugin_plugin_admin_message_hier_knnen_sie_die_email_adressen}</p>
+
+
+
+
+
+
+<form method="post" enctype="multipart/form-data"  action="" id="formi" style="">
+ <fieldset>
+<legend>{$plugin_plugin_admin_message_adresse_eintragen}</legend>
+ <div class="labdiv"><label for="plugin_admin_message_email_adressen">{$plugin_plugin_admin_message_email_adressen}{$plugin_error.plugin_admin_message_email_adressen} </label>
+<br />
+<textarea cols="30" rows="6" name="plugin_admin_message_email_adressen"  class="plugin_admin_message_email_adressen" id="plugin_admin_message_email_adressen">{$plugin_admin_message.0.plugin_admin_message_email_adressen|escape:"html"}</textarea>
+</div>
+
+
+</fieldset><br />
+<fieldset>
+<legend> {$plugin_plugin_admin_message_daten_speichern}</legend>
+	<input  type="submit" class="submit_back_green_big" value="{$plugin_plugin_admin_message_daten_speichern|strip_tags}" name="formSubmit_save_admindaten" />
+
+
+
+</fieldset>
+  </form><br />
+
+
+
+</fieldset><br />
+{if $is_dev}
+ #start#
+ <span class="ignore"></span>
+  <!-- Der Start Button ist notwendig damit sich das System daran aufhängen kann. -->
+	 <div class="rapid_form">
+			<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="plugin_admin_message" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="plugin_admin_message" />
+		<!-- Das Standarpräfix für die Ids -->
+		<input type="hidden" name="praefix" value="plugin_admin_message" />
+		<!-- Das Standarpräfix für die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="plugin_admin_message" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div>
+
+
+
+
+ {/if}
+
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

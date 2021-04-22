@@ -1,0 +1,57 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+{$linkliste_toptext}
+
+  <form action="#" method="post" >
+  <fieldset>
+  <legend>{$plugin.linkliste.einstellungen}
+   </legend>
+   {*<!--
+  <label for="linkliste_xml_yn">Daten für andere Domains zur Verfügung stellen?</label>
+  <input type="checkbox" {if $xml_result.0.linkliste_xml_yn==1}checked="checked"{/if} name="linkliste_xml_yn" id="linkliste_xml_yn" value="1" />
+  <br /> <br />
+ <label for="linkliste_xml_link">Daten aus andere Domain importieren?:</label>
+  <input type="checkbox" name="linkliste_xml_link" {if $xml_result.0.linkliste_xml_link==1}checked="checked"{/if} id="linkliste_xml_link" value="1" size="80" />
+   <br />
+   -->*}
+   {*<!-- Hier werden weitere Sprachen für das Frontend ausgewählt. Bedenken Sie, das Sie für jede Sprache eigene Menüpunkte und Artikel eingeben müssen!-->*}
+    <p>{$plugin.linkliste.einstellungen}</p>
+{foreach item=lang from=$language_dat}
+    
+    <input type="checkbox" {$lang.selected} name ="lang[]" id="lang{$lang.lang_id}" value="{$lang.lang_id}" /><label for="lang{$lang.lang_id}">{$lang.language}</label>
+    <br />
+{/foreach}
+   <br />
+   </fieldset>
+   <fieldset>
+   <legend>{$plugin.linkliste.darstellung}</legend>
+   <p>{$plugin.linkliste.text}</p>
+   
+   <input type="radio" {if $xml_result.0.linkliste_show==1}checked="checked"{/if} name="linkliste_show" id="linkliste_liste1" value="1" /><label for="linkliste_liste1">{$plugin.linkliste.liste_komplett}</label>
+  <br />
+ 
+  <input type="radio" {if $xml_result.0.linkliste_show==2}checked="checked"{/if} name="linkliste_show" id="linkliste_liste2" value="2" /> <label for="linkliste_liste2">{$plugin.linkliste.link_liste}</label>
+  <br />
+   </fieldset>
+   <fieldset>
+   <legend>{$plugin.linkliste.eintragen}</legend>
+  <input type="submit" class="submit_back_green" name="submitglossar" value="{$plugin.linkliste.eintragen}"/>
+
+
+  </fieldset>
+  </form>
+
+
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

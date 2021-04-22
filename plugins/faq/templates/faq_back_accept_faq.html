@@ -1,0 +1,94 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		
+		{include file=../../../plugins/faq/templates/faq_menue.html}
+		<h2>{$plugin.faq_back.pageheader.faq_accept_faq}</h2>
+		{if $fehler1}<div class="error">{$plugin.faq_back.errmsg.cat_fehlt}</div>{/if}
+		{if $fehler2}<div class="error">{$plugin.faq_back.errmsg.frage_fehlt}</div>{/if}
+		{if $fehler3}<div class="error">{$plugin.faq_back.errmsg.faqid_fehlt}</div>{/if}
+		{if $fehler4}<div class="error">{$plugin.faq_back.errmsg.antwort_fehlt}</div>{/if}
+		{if $fehler12}<div class="error">{$plugin.faq_back.errmsg.incorrect_faq_id}</div>{/if}
+		{if $fehler14}<div class="error">{$plugin.faq_back.errmsg.incorrect_cat_id}</div>{/if}
+		{if $fehler15}<div class="error">{$plugin.faq_back.errmsg.incorrect_version_id}</div>{/if}
+		{if $fehler16}<div class="error">{$plugin.faq_back.errmsg.incorrect_version_id}</div>{/if}
+		<p>{$plugin.faq_back.text.faq_count} {$faq_anzahl}</p>
+
+{* Formulardaten zur Bearbeitung anzeigen *}
+		{if $faq_data|@count} {* Formulardaten sind vorhanden *}
+			<form name="faq_back_edit" action="" method="post" enctype="multipart/form-data">
+				
+
+{* Kategorieauswahl *}
+				<fieldset>
+					<legend class="mb_10">{$plugin.faq_back.formtext.legend_faq}</legend>
+					<label for="faq_back_catopt_sel_id">{$plugin.faq_back.formtext.label_cat}{$plugin.faq_back.formtext.label_cat_edit}</label><br /><br />
+					<select name="faq_cat_id[]" size="{if $cat_data|@count > 10}10{else}{$cat_data|@count}{/if}" id="faq_back_catopt_sel_id" multiple="multiple" >
+						{foreach item=faq_cat from=$cat_data}
+							<option value="{$faq_cat.id}" id="faqcat{$faq_cat.id}"
+							{if $faq_cat.cat_selected} selected="selected" {/if} {* zugeordnete Kategorie markieren *}
+{* verwaiste kennzeichnen *}
+							{if $faq_cat.orphan}
+								 class="lvl_{$faq_cat.level} bold_red">{$faq_cat.catname} {$plugin.faq_back.text.cat_orphan}
+							{else}
+								 class="lvl_{$faq_cat.level}">{$faq_cat.catname}
+							{/if}
+							</option>
+						{/foreach}
+					</select>
+					<br />
+{* Kategorieanzeige reset *}
+					<input type="submit" value="{$plugin.faq_back.submit.faq_edit_reset}" name="submit[1]" title="{$plugin.faq_back.submit.faq_edit_reset}" />
+				</fieldset>
+				<div class="mt_10"> </div>
+
+{* Felder Frage und Antwort *}
+				<fieldset>
+					<legend class="mb_10">{$plugin.faq_back.formtext.legend_question}</legend>
+					<textarea name="faq_question" id="faq_back_question_id" class="faq_new_edit_textarea" cols="3" rows="5">{$faq_data.0.0.question|escape:"html"}</textarea> {* Frage *}
+					<div class="mb_15"> </div>
+				</fieldset>
+{* Antwort mit TinyMCE Editor *}
+				<fieldset> 
+					<legend>{$plugin.faq_back.formtext.legend_answer}</legend>
+					<label for="faq_new_answer_id"><strong>{$plugin.faq_back.formtext.label_answer}</strong></label><br /><br />
+					<script language="javascript" type="text/javascript" src="./tiny_mce/tiny_mce.js" charset="utf-8"></script>	
+					<script language="javascript" type="text/javascript">
+							tinyMCE.init({ldelim}
+							mode : "exact",
+							language : "{$lang_back_short}",
+							elements : "faq_new_answer_id",
+							{include file=tiny_inc_conf.html}
+							{rdelim} );
+					</script>
+					<textarea name="faq_answer" id="faq_new_answer_id" rows="20" cols="50"
+						 class="width90">{$faq_data.0.0.answer|escape:"html"}</textarea> {* Antwort *}
+					<br />
+				</fieldset>
+
+{* Attachments sind nur bei der Bearbeitung möglich *}
+				<fieldset>
+					<legend>{$plugin.faq_back.formtext.legend_faq_edit_attachment}</legend>
+					{$plugin.faq_back.formtext.label_faq_new_attachment}<br /><br />
+				</fieldset>
+				
+{* Freigabe *}
+				<fieldset>
+					<legend>{$plugin.faq_back.formtext.legend_faq_edit_release}</legend>
+					<input type="checkbox" value="j" name="faq_release" id="faq_release" title="{$plugin.faq_back.formtext.faq_release}" {$checkedrel} />
+					<label for="faq_edit_release">{$plugin.faq_back.formtext.label_faq_edit_release}</label>
+				</fieldset>
+{* Buttons Übernehmen und Löschen *}
+				<fieldset>
+					<legend>{$plugin.faq_back.submit.faq_accept_faq_submit}</legend>
+					<input type="submit" value="{$plugin.faq_back.submit.faq_new_edit_frontend}" name="submit[6]" title="{$plugin.faq_back.submit.faq_new_edit_frontend2}" /> {* Übernehmen der FAQ Daten*}
+				</fieldset>
+				<input type="hidden" name="faq_id" value="{$faq_id}" />
+			</form>
+		{/if}
+	</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

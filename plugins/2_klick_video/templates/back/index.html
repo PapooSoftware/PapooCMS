@@ -1,0 +1,126 @@
+{if $IS_ADMIN}
+	{include file="head.inc.utf8.html"}
+	{include file="menu.inc.html"}
+
+	<section id="plugin--2-klick-video" class="artikel">
+		<header>
+			<h1>{$plugin.2_klick_video.2klick_title}</h1>
+			{if $plugin.2_klick_video.isSuccess || $plugin.2_klick_video.isError}
+				<div class="alert alert-{if $plugin.2_klick_video.isSuccess}success{else}error{/if}">
+					<strong>{$plugin.2_klick_video.responseMessage}</strong>
+				</div>
+			{/if}
+		</header>
+
+		<form action="" method="post">
+			<fieldset>
+				<legend>{$plugin.2_klick_video.general}</legend>
+				<p>
+					<input type="checkbox" id="check-active" name="active" value="1"{if $plugin.2_klick_video.settings.active == 1} checked="checked"{/if} />
+					<label for="check-active">{$plugin.2_klick_video.activate}</label>
+				</p>
+				<p>
+					<input type="checkbox" id="check-two-click" name="two_click" value="1"{if $plugin.2_klick_video.settings.two_click == 1} checked="checked"{/if} />
+					<label for="check-two-click">{$plugin.2_klick_video.two_click}</label>
+				</p>
+				
+				<p>
+					<input type="checkbox" id="check-use-thumbnails" name="use_thumbnails" value="1"{if $plugin.2_klick_video.settings.use_thumbnails == 1} checked="checked"{/if} />
+					<label for="check-use-thumbnails">{$plugin.2_klick_video.use_thumbnails}</label>
+				</p>
+
+				<p>
+					<label for="input-cache-lifetime">{$plugin.2_klick_video.cache_lifetime}</label>
+					<input type="number" id="input-cache-lifetime" name="cache_lifetime" value="{$plugin.2_klick_video.settings.cache_lifetime}" placeholder="z.B. 86400" min="0" max="2592000" step="1" />
+				</p>
+				<div>
+					<button type="button" name="action" value="clearCache" class="btn btn-small btn-danger" data-ajax="true">Vorschaubild-Cache leeren</button>
+				</div>
+			</fieldset>
+
+			<h3 style="text-transform: inherit; margin-bottom:0; padding-bottom:0;">{$plugin.2_klick_video.language_dependent}</h3>
+			<div class="tabbable">
+				<ul class="nav nav-tabs">
+					{foreach from=$plugin.2_klick_video.settings.lang item="lang"}
+					{if $lang.more_lang >= 2}
+						<li {if $plugin.2_klick_video.settings.lang_id == $lang.lang_id}class="active"{/if}>
+							<a href="#tabs-{$lang.lang_id}" data-toggle="tab" lang="{$lang.lang_short}">{$lang.lang_long}</a>
+						</li>
+					{/if}
+					{/foreach}
+				</ul>
+				<fieldset class="tab-content" style="margin-top:-26px;">
+					{foreach from=$plugin.2_klick_video.settings.lang item="lang"}
+					{if $lang.more_lang >= 2}
+					<div class="tab-pane {if $plugin.2_klick_video.settings.lang_id == $lang.lang_id}active{/if}" id="tabs-{$lang.lang_id}">
+						<p>
+							<label for="input-title-text-{$lang.lang_id}">{$plugin.2_klick_video.title_text}</label>
+							<input inputmode="latin" type="text" id="input-title-text-{$lang.lang_id}" name="title_text[{$lang.lang_id}]" value="{$lang.title_text|escape}" maxlength="128" />
+						</p>
+						<p>
+							<label for="input-info-text-{$lang.lang_id}">{$plugin.2_klick_video.link_text}</label>
+							<textarea inputmode="latin" id="input-info-text-{$lang.lang_id}" name="info_text[{$lang.lang_id}]" maxlength="1024">{$lang.info_text|escape}</textarea>
+						</p>
+						<p>
+							<label for="input-link-text-{$lang.lang_id}">{$plugin.2_klick_video.link_text}</label>
+							<input inputmode="latin" type="text" id="input-link-text-{$lang.lang_id}" name="link_text[{$lang.lang_id}]" value="{$lang.link_text|escape}" maxlength="64" />
+						</p>
+						<p>
+							<label for="input-dismiss-text-{$lang.lang_id}">{$plugin.2_klick_video.dismiss_text}</label>
+							<input inputmode="latin" type="text" id="input-dismiss-text-{$lang.lang_id}" name="dismiss_text[{$lang.lang_id}]" value="{$lang.dismiss_text|escape}" maxlength="64" />
+						</p>
+						<p>
+							<label for="input-text-color-{$lang.lang_id}">{$plugin.2_klick_video.text_color}</label>
+							<input type="color" id="input-text-color-{$lang.lang_id}" name="text_color[{$lang.lang_id}]" value="{$lang.text_color|escape}" placeholder="#000000" />
+						</p>
+						<p>
+							<label for="input-background-color-{$lang.lang_id}">{$plugin.2_klick_video.background_color}</label>
+							<input type="color" id="input-background-color-{$lang.lang_id}" name="background_color[{$lang.lang_id}]" value="{$lang.background_color|escape}" placeholder="#FFFFFF" />
+						</p>
+						<p>
+							<label for="input-confirm-button-color-{$lang.lang_id}">{$plugin.2_klick_video.confirm_button_color}</label>
+							<input type="color" id="input-confirm-button-color-{$lang.lang_id}" name="confirm_button_color[{$lang.lang_id}]" value="{$lang.confirm_button_color|escape}" placeholder="#A44F21" />
+						</p>
+						<p>
+							<label for="input-dismiss-button-color-{$lang.lang_id}">{$plugin.2_klick_video.dismiss_button_color}</label>
+							<input type="color" id="input-dismiss-button-color-{$lang.lang_id}" name="dismiss_button_color[{$lang.lang_id}]" value="{$lang.dismiss_button_color|escape}" placeholder="#FFFFFF" />
+						</p>
+						<p>
+							<label for="input-confirm-text-color-{$lang.lang_id}">{$plugin.2_klick_video.confirm_text_color}</label>
+							<input type="color" id="input-confirm-text-color-{$lang.lang_id}" name="confirm_text_color[{$lang.lang_id}]" value="{$lang.confirm_text_color|escape}" placeholder="#FFFFFF" />
+						</p>
+						<p>
+							<label for="input-dismiss-text-color-{$lang.lang_id}">{$plugin.2_klick_video.dismiss_text_color}</label>
+							<input type="color" id="input-dismiss-text-color-{$lang.lang_id}" name="dismiss_text_color[{$lang.lang_id}]" value="{$lang.dismiss_text_color|escape}" placeholder="#1B93B9" />
+						</p>
+						
+					</div>
+					{/if}
+					{/foreach}
+				</div>
+			</fieldset>
+			
+			<fieldset>
+				<legend>{$plugin.2_klick_video.extended}</legend>
+				
+				<p>
+					<input type="checkbox" id="check-use-flex-video" name="use_flex_video" value="1"{if $plugin.2_klick_video.settings.use_flex_video == 1} checked="checked"{/if} />
+					<label for="check-use-flex-video">{$plugin.2_klick_video.use_flex_video}</label>
+				</p>
+				
+				<p>
+					<label for="input-thumbnail-sizes">{$plugin.2_klick_video.thumbnail_sizes}</label>
+					<input type="text" inputmode="verbatim" id="input-thumbnail-sizes" name="thumbnail_sizes" value="{$plugin.2_klick_video.settings.thumbnail_sizes}" placeholder="" maxlength="255" />
+				</p>
+			</fieldset>
+			
+			<p>
+				<button type="submit" class="btn btn-success" name="action" value="save">Speichern</button>
+			</p>
+		</form>
+
+	</section>
+	<script type="text/javascript" src="{$slash}plugins/2_klick_video/js/backend.js" defer="defer"></script>
+
+	{include file="foot.inc.html"}
+{/if}

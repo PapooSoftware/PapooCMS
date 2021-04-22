@@ -1,0 +1,48 @@
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+<div class="mv">
+
+{if $rights_error==""}
+<form action="" method="post" id="formk" enctype="multipart/form-data">
+
+	<fieldset>
+	<legend>{$plugin.mv.sprachen_editieren}</legend>
+	{foreach item=sprache from=$language_liste}
+		<input type="checkbox" id="mv_lang_id[{$sprache.mv_lang_id}]" name="mv_lang_id[{$sprache.mv_lang_id}]"{if $sprache.mv_aktive==1} checked="checked"{/if} value="1" />
+		<label for="mv_lang_id[{$sprache.mv_lang_id}]">{$sprache.mv_lang_long}</label>
+		<br />
+	{/foreach}
+	</fieldset>
+{*<!-- erstmal auskommentiert,da standard english ist 	
+ 	<fieldset>
+	<legend>{$plugin.mv.sprachen_standard}</legend>
+	<label for="mv_lang_standard">{$plugin.mv.mv_standard}</label>
+	<select name="mv_lang_standard" id="mv_lang_standard" size="1">
+	{foreach item=sprache from=$language_liste}
+		<option value="{$sprache.mv_lang_id}" {if $sprache.mv_lang_standard==1} selected="selected" {/if}>{$sprache.mv_lang_long}</option>
+	{/foreach}
+	</select>
+	</fieldset>
+-->*}	
+ 	<fieldset>
+	<legend>{$plugin.mv.senden}</legend>
+	<input type="submit" class="submit_back_green" name="mv_submit" value="{$plugin.mv.senden}" />
+	</fieldset>
+	
+</form>
+
+</div>
+
+{/if}
+
+<!-- Rechte Fehlermeldung-->
+{include file=rechte.html}
+</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}

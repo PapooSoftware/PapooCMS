@@ -1,0 +1,26 @@
+
+.vishidden {
+    visibility: hidden;
+}
+
+.settings-saved {
+
+}
+
+.settings-saved:before {
+    content: "✓";
+    margin-left: 1em;
+    margin-right: 1ex;
+}
+
+.settings-error:before {
+    content: "✗";
+    margin-left: 1em;
+    margin-right: 1ex;
+}
+
+.settings-saving:before {
+    content: url(../bilder/loader.gif);
+    margin-left: 1em;
+    margin-right: 1ex;
+}

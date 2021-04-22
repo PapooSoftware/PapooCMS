@@ -1,0 +1,137 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		
+		{include file=../../../plugins/faq/templates/faq_cat_menue.html}
+		<h2 >{$plugin.faq_back.pageheader.cat_move}</h2>
+		<p>{$plugin.faq_back.text.cat_count} {$anzahl_faq_cats}</p>
+		{if $anzahl_faq_cats}
+			{if $fehler5}<div class="error">{$plugin.faq_back.errmsg.copy_from_fehlt}</div>{/if}
+			{if $fehler6}<div class="error">{$plugin.faq_back.errmsg.copy_to_fehlt}</div>{/if}
+			{if $fehler7}<div class="error">{$plugin.faq_back.errmsg.incorrect_cat_id}</div>{/if}
+			{if $not_numeric}<div class="error">{$plugin.faq_back.errmsg.order_notnumeric}</div>{/if}
+			{if $cat_is_moved}<div class="message">{$plugin.faq_back.message.cat_is_moved}</div>{/if}
+			{if $cat_is_copied}<div class="message">{$plugin.faq_back.message.cat_is_copied}</div>{/if}
+			{if $cat_is_renumbered}<div class="message">{$plugin.faq_back.message.cat_is_renumbered}</div>{/if}
+			<h3>{$plugin.faq_back.pageheader.cat_move_h2}</h3>
+			{if $fehler1}<div class="error">{$plugin.faq_back.errmsg.move_from_fehlt}</div>{/if}
+			{if $fehler2}<div class="error">{$plugin.faq_back.errmsg.move_to_fehlt}</div>{/if}
+			{if $fehler3}<div class="error">{$plugin.faq_back.errmsg.move_gleich}</div>{/if}
+			{if $fehler4}<div class="error">{$plugin.faq_back.errmsg.move_gleich2}</div>{/if}
+	
+	{* Verschieben *}
+			<p>{$plugin.faq_back.text.cat_move}</p>
+			<form action="" method="post">
+				<fieldset class="width100">
+					<legend>{$plugin.faq_back.formtext.legend_cat_move_from}</legend>
+					<select name="cat_move_from_id" size="10" id="cat_move_from">
+						{foreach item=catmove from=$cat_data}
+							<option value="{$catmove.id}" 
+							{if $catmove.cat_selected} selected="selected" {/if}
+							{* verwaist *}
+							{if $catmove.orphan}
+								 class="lvl_{$catmove.level} bold_red">{$catmove.catname} {$plugin.faq_back.text.cat_orphan}
+							{else}
+								class="lvl_{$catmove.level}">{$catmove.catname}
+							{/if}
+							</option>
+						{/foreach}
+					</select>
+				</fieldset>
+				<fieldset class="width100">
+					<legend>{$plugin.faq_back.formtext.legend_cat_move_to}</legend>
+					<select name="cat_move_to_id" size="10" id="cat_move_to">
+						<option value="0" class="fett"{if $cat_0_selected} selected="selected" {/if}>{$plugin.faq_back.formtext.option_cat_move}</option>
+						{foreach item=catmove2 from=$cat_data2}
+							<option value="{$catmove2.id}" 
+							{if $catmove2.cat_selected} selected="selected" {/if}
+							{* verwaist *}
+							{if $catmove2.orphan}
+								class="lvl_{$catmove2.level} bold_red">{$catmove2.catname} {$plugin.faq_back.text.cat_orphan}
+							{else}
+								class="lvl_{$catmove2.level}">{$catmove2.catname}
+							{/if}
+							</option>
+						{/foreach}
+					</select>
+				</fieldset>
+				 <input name="submit" value="{$plugin.faq_back.submit.cat_move}" type="submit" title="{$plugin.faq_back.submit.cat_move_title}" />
+			</form>
+			<br />
+			
+	{* Kopieren *}
+			<h3>{$plugin.faq_back.pageheader.cat_copy_h2}</h3>
+			{if $fehler5}<div class="error">{$plugin.faq_back.errmsg.copy_from_fehlt}</div>{/if}
+			{if $fehler6}<div class="error">{$plugin.faq_back.errmsg.copy_to_fehlt}</div>{/if}
+			<p>{$plugin.faq_back.text.cat_copy}</p>
+			<form action="" method="post">
+				<fieldset class="width100">
+					<legend>{$plugin.faq_back.formtext.legend_cat_copy_from}</legend>
+					<select name="cat_copy_from_id" size="10" id="cat_copy_from">
+						{foreach item=catcopy from=$cat_data}
+							<option value="{$catcopy.id}" 
+							{if $catcopy.cat_selected} selected="selected" {/if}
+							{* verwaist *}
+							{if $catcopy.orphan}
+								class="lvl_{$catcopy.level} bold_red">{$catcopy.catname} {$plugin.faq_back.text.cat_orphan}
+							{else}
+								class="lvl_{$catcopy.level}">{$catcopy.catname}
+							{/if}
+							</option>
+						{/foreach}
+					</select>
+				</fieldset>
+				<fieldset class="width100">
+					<legend>{$plugin.faq_back.formtext.legend_cat_copy_to}</legend>
+					<select name="cat_copy_to_id" size="10" id="cat_copy_to">
+						<option value="0" class="fett"{if $cat_0_selected} selected="selected" {/if}>{$plugin.faq_back.formtext.option_cat_copy}</option>
+						{foreach item=catcopy2 from=$cat_data2}
+							<option value="{$catcopy2.id}" 
+							{if $catcopy2.cat_selected} selected="selected" {/if}
+							{* verwaist *}
+							{if $catcopy2.orphan}
+								class="lvl_{$catcopy2.level} bold_red">{$catcopy2.catname} {$plugin.faq_back.text.cat_orphan}
+							{else}
+								class="lvl_{$catcopy2.level}">{$catcopy2.catname}
+							{/if}
+							</option>
+						{/foreach}
+					</select>
+				</fieldset>
+				 <input name="submit" value="{$plugin.faq_back.submit.cat_copy}" type="submit" title="{$plugin.faq_back.submit.cat_copy_title}" />
+			</form>
+			<br />
+			
+	{* Nummerieren *}
+			<h3>{$plugin.faq_back.pageheader.cat_order_h2}</h3>
+			{if $fehler7}<div class="error">{$plugin.faq_back.errmsg.incorrect_cat_id}</div>{/if}
+			{if $not_numeric}<div class="error">{$plugin.faq_back.errmsg.order_notnumeric}</div>{/if}
+			<form action="" method="post">
+				<fieldset class="width100">
+					<legend>{$plugin.faq_back.formtext.legend_cat_order}</legend>
+					{foreach item=cat_order from=$cat_data}
+						<input class="lvl_{$cat_order.level} renum_faq_cat_input" type="text" name="cat_order_name[{$cat_order.id}]" value="{$cat_order.order_id}" id="cat_order_{$cat_order.id}" />
+						<label for="cat_order_{$cat_order.id}" class="lvl_{$cat_order.level} ml_0">
+							{if $cat_order.not_numeric}
+								{$cat_order.catname} 
+								<span class="bold_red">{$plugin.faq_back.errmsg.order_notnumeric2}</span>
+							{else}
+								{$cat_order.catname} 
+								{* verwaist *}
+								{if $cat_order.orphan}
+									<span class="bold_red">{$plugin.faq_back.text.cat_orphan}</span>
+								{/if}
+							{/if}
+						 </label>
+						<br />
+					 {/foreach}
+				 </fieldset>
+				 <input name="submit" value="{$plugin.faq_back.submit.cat_order}" type="submit" title="{$plugin.faq_back.submit.cat_order_title}" />
+			</form>
+		{/if}
+	</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

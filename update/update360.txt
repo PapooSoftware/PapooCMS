@@ -1,0 +1,10 @@
+<h2>Update der 3.6.0</h2>
+Die Änderungen betreffen die folgenden Einträge:
+Neue Menüpunkte in der Admin
+- Blacklist
+- Layout auf der obersten Ebene
+- Templates mit Unterpunkten
+- CSS und Modulmanager werden zu Layout verschoben
+
+Orderid der rechten Spalte jetzt als ID, damit das auch richtig sortiert wird
+Neue Felder in Stammdaten und Sprachdateien für Artikel

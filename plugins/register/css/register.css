@@ -1,0 +1,35 @@
+ul.register_liste
+{
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+}
+ul.register_liste li
+{
+	margin: 0px;
+	padding: 0px;
+}
+ul.register_liste .buchstabe
+{
+	float: left;
+}
+
+ul.register_liste ul
+{
+	list-style-type: none;
+	margin-left: 25px;
+}
+
+
+/* EINSTELLUNGEN ADMIN */
+/* Farben der versch. Register */
+div#plugin_register_back .register_reg_0 {color: #333333;}
+div#plugin_register_back .register_reg_1 {color: #339933;}
+div#plugin_register_back .register_reg_2 {color: #CC3333;}
+
+/* 3-Spalt aus YAML fuer Nutzung in Admin */
+div#plugin_register_back .subcolumns {width:100%;overflow:hidden}
+div#plugin_register_back .c33l {float:left}
+div#plugin_register_back .c33r {float:right;margin-left:-5px;}
+div#plugin_register_back .c33l, div#plugin_register_back .c33r{width:33.333%}
+div#plugin_register_back .subc{padding:0 0.5em}

@@ -1,0 +1,269 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+<style type="text/css" xmlns="http://www.w3.org/1999/html">{literal}
+.nobullets {
+    list-style-type: none;
+    padding: 0;
+    margin: 5px;
+    margin-left: 0px;
+}
+.all_placeholders {
+    border: 1px solid #999;
+    background: #eee;
+    max-width: 70%;
+    display: block;
+    margin-top:10px;
+ }
+.placeholders_label_hidden {
+    padding: 10px;
+    border-bottom: 1px solid #999;
+    display: none;
+}
+.placeholders_label_shown {
+    padding: 10px;
+    border-bottom: 1px solid #999;
+}
+.placeholders_hidden {
+    padding: 10px;
+    display: none;
+}
+.placeholders_shown {
+    padding: 10px;
+    display: block;
+}
+.placeholders label {
+    font-size: 100%;
+    font-weight: bold;
+}
+{/literal}</style>
+<div class="artikel">
+    {if $plugin_error}
+    <div class="error">
+    <h2 id="leadtracker_achtung_bitte_eintrge_korrigieren" class="h2" >{$plugin_leadtracker_achtung_bitte_eintrge_korrigieren}</h2>
+    </div>
+    {/if}
+
+    {if $leadtracker_is_del}
+    <div class="error">
+        <h2 id="leadtracker_achtung_bitte_eintrge_korrigieren" class="h2" >  {$plugin_leadtracker_die_followup_mail_wurde_gelscht}</h2>
+    </div>
+    {/if}
+    {if $is_eingetragen=="ok"}
+    <div class="message">
+    <h2 id="leadtracker_daten_wurden_gespeichert" class="h2" >{$plugin_leadtracker_daten_wurden_gespeichert}</h2>
+    </div>
+    {/if}
+
+
+
+{if $show_fum_mails_maske}
+    <h1 id="leadtracker_follow_up_inhalt_der_follow_up_mail" class="h1" >{$plugin_leadtracker_follow_up_inhalt_der_follow_up_mail}</h1>
+<fieldset>
+    <field>{$plugin_leadtracker_follow_up_inhalt_desc1}{if $inform_checkreplace}{$plugin_leadtracker_follow_up_inhalt_desc2}{/if}{$plugin_leadtracker_follow_up_inhalt_desc3}{if $inform_checkreplace}{$plugin_leadtracker_follow_up_inhalt_desc4}{/if}{$plugin_leadtracker_follow_up_inhalt_desc5}{if $inform_checkreplace}{$plugin_leadtracker_follow_up_inhalt_desc6}{/if}{$plugin_leadtracker_follow_up_inhalt_desc7}</field>
+</fieldset>
+    <form name="fum_daten" method="post" action="">
+<div {if $inform_checkreplace}class="lead_left"{/if}>
+<fieldset class = "lead_left">
+<legend style="width: 100%; padding: 15px;">{$plugin_leadtracker_follow_up_daten_der_followup_mail}</legend>
+     <a href="{$follow_up_standard_basis_link}leadtracker/templates/leadtracker_follow_up_manager.html&set_fum={$set_fum}&fum_type={$fum_type}" id="leadtracker_zurck_zur_bersicht" class="132link btn btn-info pull-right" style="margin-right:20px;">{$plugin_leadtracker_zurck_zur_bersicht}</a>
+
+
+     <div class="labdiv"><label for="leadtracker_versand_nach">{$plugin_leadtracker_versand_nach}{$plugin_error.leadtracker_versand_nach} </label>
+
+         <input style="width:100px;" type="text" name="leadtracker_versand_nach" value="{$leadtracker.0.leadtracker_versand_nach|escape:"html"}" class="leadtracker_versand_nach" id="leadtracker_versand_nach"/>
+     </div><br />
+
+     
+  <div class="labdiv"><label for="leadtracker_betreff_fum">{$plugin_leadtracker_betreff_fum}{$plugin_error.leadtracker_betreff_fum} </label>
+
+<input type="text" name="leadtracker_betreff_fum" value="{$leadtracker.0.leadtracker_betreff_fum|escape:"html"}" class="leadtracker_betreff_fum" id="leadtracker_betreff_fum"/>
+</div><br />
+
+  {if $inform_checkreplace}
+     <div class="labdiv"><label for="leadtracker_checkreplace_fum">{$plugin_leadtracker_checkreplace_fum}</label>
+         <table style="display: block;">
+          <tr style="float: left;">
+              <td>aktivieren:&nbsp;</td>
+              <td><input type="checkbox" onclick="showvars()" onload="showvars()" id ="leadtracker_checkreplace_activate" name="leadtracker_checkreplace_activate" {if $leadtracker.0.leadtracker_checkreplace} checked="checked"{/if} /></td>
+          </tr>
+         </table><br />
+         <select class="select" name="leadtracker_checkreplace_select" id="leadtracker_checkreplace_select" {if $leadtracker.0.leadtracker_checkreplace}{else}style="display: none;"{/if}>
+             <option value="default">bitte w&auml;hlen</option>
+             <option value="-1">mehr als 1 Download</option>
+             {foreach from=$checkrep_values item=checkrep}
+              <option {if $checkrep.id == $leadtracker.0.leadtracker_checkreplace} selected="selected"{/if} value="{$checkrep.id}">{$checkrep.value}</option>
+             {/foreach}
+         </select>
+  </div><br /><br />
+
+{/if}
+
+<div class="all_placeholders" id="all_placeholders">
+    <div class="placeholders_label_shown" id="placeholder_label_open"><label>{$plugin_leadtracker_all_placeholders}{if $placeholder_open}{$plugin_leadtracker_all_placeholders_clap.1}{else}{$plugin_leadtracker_all_placeholders_clap.0}{/if}</label></div>
+    <div class="placeholders_label_hidden" id="placeholder_label_close"><label>{$plugin_leadtracker_all_placeholders}{if $placeholder_open}{$plugin_leadtracker_all_placeholders_clap.1}{else}{$plugin_leadtracker_all_placeholders_clap.1}{/if}</label></div>
+    <div id="form_placeholders" class="placeholders_hidden">
+        <label>{$plugin_leadtracker_placeholders_formfields}</label>
+        <ul class="nobullets"><li>{foreach from=$formrep_placeholders item=formrep}{$formrep.value}{/foreach}</li></ul>
+    </div>
+    <div id="checkrep_placeholders" class="placeholders_hidden">
+        <div id="checkrep_isset" {if $leadtracker.0.leadtracker_checkreplace}{else}aria-hidden="true" style="display: none;{/if}">
+            <label>{$plugin_leadtracker_placeholders_checkreplace}</label>
+            <ul class="nobullets"><li>{foreach from=$checkrep_placeholders item=checkrep}{$checkrep.value}{/foreach}</li></ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="{$script_path}/show_checkrep_and_dropdown.js"></script>
+ <div class="labdiv"><label for="leadtracker_mail_inhalt_text">{$plugin_leadtracker_mail_inhalt_text}{$plugin_error.leadtracker_mail_inhalt_text} </label>
+<br />
+<textarea cols="30" rows="6" name="leadtracker_mail_inhalt_text"  class="leadtracker_mail_inhalt_text" id="leadtracker_mail_inhalt_text">{$leadtracker.0.leadtracker_mail_inhalt_text|escape:"html"}</textarea>
+</div><br />
+
+ <div class="labdiv" style="float: left; display: block;"><label for="leadtracker_mail_inhalt_html">{$plugin_leadtracker_mail_inhalt_html}{$plugin_error.leadtracker_mail_inhalt_html} </label>
+<br />
+     <script language="javascript" type="text/javascript" src="./tiny_mce/tiny_mce.js" charset="utf-8"></script>
+
+     <script language="javascript" type="text/javascript" src="./tiny_mce/FileBrowser.js"></script>
+     <script language="javascript" type="text/javascript">
+
+         tinyMCE.init({ldelim}
+         mode : "exact",
+                 language : "{$tinymce_lang_short}",
+                 elements : "leadtracker_mail_inhalt_html",
+
+         {include file=tiny_inc_conf.html}
+
+         {rdelim} );
+
+     </script>
+
+<textarea cols="30" rows="15" name="leadtracker_mail_inhalt_html"  class="leadtracker_mail_inhalt_html" id="leadtracker_mail_inhalt_html">{$leadtracker.0.leadtracker_mail_inhalt_html|escape:"html"}</textarea>
+</div><br />
+
+ <input type="hidden" name="leadtracker_id_von_follow_element" value="{$leadtracker.0.leadtracker_id_von_follow_element|escape:"html"}" class="leadtracker_id_von_follow_element" id="leadtracker_id_von_follow_element"/>
+
+
+ <input type="hidden" name="leadtracker_type_von_follow_element" value="{$leadtracker.0.leadtracker_type_von_follow_element|escape:"html"}" class="leadtracker_type_von_follow_element" id="leadtracker_type_von_follow_element"/>
+
+     <input type="hidden" name="leadtracker_fum_id" value="{$leadtracker_fum_id|escape:"html"}" class="leadtracker_fum_id" id="leadtracker_fum_id"/>
+
+
+ </fieldset><br />
+    <fieldset class = "lead_left">
+        <legend style="width: 100%; padding: 15px;">{$plugin_leadtracker_daten_speichern_fum_maske}</legend>
+        <input type="submit" class="submit_back" name="submit_follow_up_mail" value="{$plugin_leadtracker_daten_speichern_fum_maske}" />
+    </fieldset>
+</div>
+    <br />
+    </form>
+
+    {else}
+
+
+
+
+
+
+ <h1 id="leadtracker_follow_up_follow_up_mails_bearbeiten" class="h1" >{$plugin_leadtracker_follow_up_follow_up_mails_bearbeiten}</h1>
+
+ <p id="leadtracker_follow_up_bearbeiten_sie_hier_die_fum" class="h1" >{$plugin_leadtracker_follow_up_bearbeiten_sie_hier_die_fum} {$fum_for_data}</p>
+    <a href="{$follow_up_standard_basis_link}leadtracker/templates//leadtracker_unique_form.html" id="leadtracker_zurck_zur_bersicht" class="132link btn btn-info pull-right"
+       style="margin-right:20px;margin-top:-50px;">{$plugin_leadtracker_zurck_zur_bersicht
+        }</a>
+        {if $nomails}<p classs="h1"><em>{$plugin_leadtracker_follow_up_bearbeiten_desc}</em></p>{/if}
+
+
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>{$plugin_leadtracker_follow_up_name_der_fum}</th>
+            <th>{$plugin_leadtracker_follow_up_versand_nach_zeit}</th>
+            {if $checkreplace}<th>{$plugin_leadtracker_follow_up_check_replace}</th>{/if}
+            <th>{$plugin_leadtracker_follow_up_bearbeiten_fum}</th>
+            <th>{$plugin_leadtracker_follow_up_lschen_fum}</th>
+        </tr>
+
+        {foreach from=$fumails_liste item=fum key=fkey}
+        <tr>
+            <td>{$fum.leadtracker_fum_id}</td>
+            <td>{$fum.leadtracker_betreff_fum}</td>
+            <td>{$fum.leadtracker_versand_nach}</td>
+            {if $checkreplace}<td>{$fum.leadtracker_checkreplace}</td>{/if}
+            <td><a href="{$follow_up_standard_basis_link}leadtracker/templates/leadtracker_follow_up_manager.html&set_fum={$set_fum}&fum_type={$fum_type}&leadtracker_fum_id={$fum.leadtracker_fum_id}">{$plugin_leadtracker_follow_up_bearbeiten_fum}</a></td>
+            <td><a href="{$follow_up_standard_basis_link}leadtracker/templates/leadtracker_follow_up_manager.html&set_fum={$set_fum}&fum_type={$fum_type}&del_fum_id={$fum.leadtracker_fum_id}">{$plugin_leadtracker_follow_up_lschen_fum}</a></td>
+
+        </tr>
+        {/foreach}
+
+    </table>
+
+
+    <a href="{$follow_up_standard_basis_link}leadtracker/templates/leadtracker_follow_up_manager.html&set_fum={$set_fum}&fum_type={$fum_type}&leadtracker_fum_id=new" id="leadtracker_follow_up_neue_followup_mail_generieren" class="132link btn btn-large btn-info"
+            >{$plugin_leadtracker_follow_up_neue_followup_mail_generieren
+        }</a>
+
+
+
+{/if}
+
+    <br /><br /><br /><br /><br /><br />
+
+
+
+
+
+    {if $is_dev}
+
+
+ #start#
+
+
+
+<!--
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <br />
+	<form name="test_daten" method="post" action="">
+		<fieldset>
+
+			<input type="submit" class="submit_back" name="submit" value="submit" />
+		</fieldset>
+	</form>
+	</p>
+-->
+
+
+
+    <span class="ignore"></span>
+    <!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+    <div class="rapid_form">
+        <form action="" name="" method="POST">
+            <!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+            <input type="hidden" name="tb_name" value="plugin_leadtracker_follow_up_mails" />
+            <!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+            <input type="hidden" name="php_datei_name" value="leadtracker_class" />
+            <!-- Das Standarpr�fix f�r die Ids -->
+            <input type="hidden" name="praefix" value="leadtracker" />
+            <!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+            <input type="hidden" name="praefix_spezial" value="leadtracker" />
+            <!-- Das Tool einbinden -->
+            {include file=../../../plugins/devtools/templates/rapid_felder.htm}
+        </form>
+    </div>
+
+
+
+</div>
+
+
+
+
+
+{/if}
+
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

@@ -1,0 +1,227 @@
+{if !$fragedel}
+	{if $altereintrag=="new_next"}
+		<h2>{$plugin.mv.inpuerstellen} - {$plugin.mv.text_type}: {$mvcform_type|upper}</h2>
+	{elseif $altereintrag=="1"}
+    	<h2>{$fdat.0.mvcform_name} {$plugin.mv.feldedit} - {$plugin.mv.text_type}: {$mvcform_type|upper}</h2>
+	{/if}
+	{if $fehler1}<div class="error">{$plugin.mv.fielddefinition.error1}</div>{/if}
+	{if $fehler2}<div class="error">{$plugin.mv.fielddefinition.error2}</div>{/if}
+	{if $fehler13}<div class="error">{$plugin.mv.fielddefinition.error13}</div>{/if}
+	{if $fehler15}<div class="error">{$plugin.mv.fielddefinition.error15}</div>{/if}
+	<form action="" method="post" name="mvform" >
+{*<!-- Feldname -->*}
+		<fieldset>
+			<legend>{$message_691} *</legend>
+			<label for="mvcform_name">
+				{$message_711} 
+			</label>
+			<br />
+			<input 
+				{if $fdat.0.mvcform_id}readonly="readonly" style="background:#bbb;border:none;"{/if}
+				 type="text" id="mvcform_name" name="mvcform_name" value="{$fdat.0.mvcform_name}" size="30" />
+			<br />
+			{$plugin.mv.reserved_field_names}
+		</fieldset>
+{*<!-- Feldname für den Export -->*}
+		<fieldset>
+			<legend>{$plugin.mv.feldname_export}</legend>
+			<label for="mvcform_name_export">{$plugin.mv.feldname_export_text}</label>
+			<br />
+			<input type="text" id="mvcform_name_export" name="mvcform_name_export" value="{$fdat.0.mvcform_name_export}" size="30" /><br />
+		</fieldset>
+{*<!-- Gruppierung -->*}
+		<fieldset>
+			<legend>{$plugin.mv.erstellgrup} *</legend>
+			<label for="mvcform_group_id ">{$plugin.mv.grupfield}</label>
+			<br />
+			<select name="mvcform_group_id" id="mvcform_group_id" size="1">
+				{foreach item=cat from=$glist}
+					<option value="{$cat.mvcform_group_id}" {if $fdat.0.mvcform_group_id==$cat.mvcform_group_id} selected="selected" {/if}>{$cat.mvcform_group_name}</option>
+				{/foreach}
+			</select>
+		</fieldset>
+{*<!-- Bezeichnung im Formular -->*}
+		<fieldset>
+			<legend>{$plugin.mv.text_label_data} * ({$language_form[0].language})</legend>
+			<label for="mvcform_label">{$message_716} (Label)</label>
+			<br />
+			<input type="text" id="mvcform_label" name="mvcform_label" value="{$fdat.0.mvcform_label}" size="30" />
+			<br />
+			<br />
+		</fieldset>
+{*<!-- Eigene Fehlermeldung -->*}
+		<fieldset>
+			<legend>{$plugin.mv.eigfelleg} ({$language_form[0].language})</legend>
+			<label for="mvcform_descrip">{$plugin.mv.optiofehler}</label>
+			<br />
+			<input type="text" id="mvcform_descrip" name="mvcform_descrip" value="{$fdat.0.mvcform_descrip}" size="30" />
+			<br />
+			<br />
+		</fieldset>
+{*<!-- Tooltip -->*}
+		<fieldset>
+			<legend>{$plugin.mv.mvcform_lang_tooltip} ({$language_form[0].language})</legend>
+			<label for="mvcform_lang_tooltip">{$plugin.mv.mvcform_lang_tooltip}</label>
+			<br />
+			<textarea name="mvcform_lang_tooltip" id="mvcform_lang_tooltip" rows="6" cols="30">{$fdat.0.mvcform_lang_tooltip}</textarea>
+			<br />
+		</fieldset>
+{*<!-- Einstellungen: -->*}
+		<fieldset>
+			<legend>{$message_717}</legend>
+{*<!-- Feld aktiv? -->*}
+			<div class="vwfeld">
+				<input class="mv_back_input" type="checkbox" id="mvcform_aktiv" name="mvcform_aktiv" {if $fdat.0.mvcform_aktiv==1}checked="checked"{/if} value="1" />
+				{*<!-- {if $fdat.0.mvcform_aktiv==1}checked="checked"{/if} value="1" /> -->*}
+				<label class="mv_back_label" for="mvcform_aktiv">{$plugin.mv.aktiv_text}</label>
+			</div>
+{*<!-- Pflichtfeld Frontend-->*}
+			<div class="vwfeld">
+				<input class="mv_back_input" type="checkbox" id="mvcform_must" name="mvcform_must" {if $fdat.0.mvcform_must==1}checked="checked"{/if} value="1" />
+				<label class="mv_back_label" for="mvcform_must">{$plugin.mv.must_text}</label>
+			</div>
+{*<!-- Pflichtfeld Backend-->*}
+			<div class="vwfeld">
+				<input class="mv_back_input" type="checkbox" id="mvcform_must_back" name="mvcform_must_back" {if $fdat.0.mvcform_must_back==1}checked="checked"{/if} value="1" />
+				<label class="mv_back_label" for="mvcform_must_back">{$plugin.mv.must_back_text}</label>
+			</div>
+{*<!-- Backend Auflisten -->*}
+			<div class="vwfeld">
+				<input class="mv_back_input" type="checkbox" id="mvcform_list" name="mvcform_list" {if $fdat.0.mvcform_list==1}checked="checked"{/if} value="1" />			
+				<label class="mv_back_label" for="mvcform_list">{$plugin.mv.list_text}</label><br />
+			</div>
+{*<!-- Frontend Auflisten-->*}
+			<div class="vwfeld">
+				<input class="mv_back_input" type="checkbox" id="mvcform_list_front" name="mvcform_list_front" {if $fdat.0.mvcform_list_front==1}checked="checked"{/if} value="1" />			
+				<label class="mv_back_label" for="mvcform_list_front">{$plugin.mv.list_front_text}</label><br />
+			</div>
+{*<!-- Normaler User darf dieses Feld bei der Suchfunktion durchsuchen -->*}
+			<div class="vwfeld">
+				<input class="mv_back_input" type="checkbox" id="mvcform_normaler_user" name="mvcform_normaler_user" {if $fdat.0.mvcform_normaler_user==1}checked="checked"{/if} value="1" />
+					{*<!--{if $fdat.0.mvcform_normaler_user==1}checked="checked"{/if} value="1" />	 -->*}
+				<label class="mv_back_label" for="mvcform_normaler_user">{$plugin.mv.normaler_user_text}</label><br />
+			</div>
+{*<!-- Protokoll bei Änderungen-->*}
+			<div class="vwfeld">
+				<input class="mv_back_input" type="checkbox" id="mvcform_protokoll" name="mvcform_protokoll" {if $fdat.0.mvcform_protokoll==1}checked="checked"{/if} value="1" />			
+				<label class="mv_back_label" for="mvcform_protokoll">{$plugin.mv.protokoll_text}</label>
+				<br />
+			</div>
+{*<!-- Im Frontend bekommt extra Feld in der Suchmaske-->*}
+			<div class="vwfeld">
+				<input class="mv_back_input" type="checkbox" id="mvcform_search" name="mvcform_search" {if $fdat.0.mvcform_search==1}checked="checked"{/if} value="1" />			
+				<label class="mv_back_label" for="mvcform_search">{$plugin.mv.search_text}</label>
+				<br />
+			</div>
+{*<!-- Im Backend bekommt extra Feld in der Suchmaske-->*}
+			<div class="vwfeld">
+				<input class="mv_back_input" type="checkbox" id="mvcform_search_back" name="mvcform_search_back" {if $fdat.0.mvcform_search_back==1}checked="checked"{/if} value="1" />			
+				<label class="mv_back_label" for="mvcform_search_back">{$plugin.mv.search_back_text}</label><br />
+			</div>
+{*<!-- Kalender -->*}
+			<div class="vwfeld">
+				<input class="mv_back_input" type="checkbox" id="mvcform_kalender" name="mvcform_kalender" {if $fdat.0.mvcform_kalender==1}checked="checked"{/if} value="1" />			
+				<label class="mv_back_label" for="mvcform_kalender">{$plugin.mv.kalender_text}</label><br />
+			</div>
+{*<!-- Sprach(un)abhängigkeit -->*}
+			{*<!-- sprachunabhängiges Feld Ja/Nein ausgewählt = Ja, für alle Sprachen gleich -->*}
+			<div class="vwfeld">
+				<input class="mv_back_input" type="checkbox" id="mvcform_lang_dependence" name="mvcform_lang_dependence" {if $fdat.0.mvcform_lang_dependence==1}checked="checked"{/if} value="1" />			
+				<label class="mv_back_label" for="mvcform_lang_dependence">{$plugin.mv.lang_dependence}</label><br />
+			</div>
+{*<!-- mehrere Pflichtfelder erben  -->*}
+			<div class="vwfeld">
+			<br />
+				<label for="mvcform_required_felder">{$plugin.mv.required_felder}</label>
+				<div>	
+					<select name="mvcform_required_felder" id="mvcform_required_felder" size="1">
+						<option value="" selected="selected">{$plugin.mv.bittewaehlen}</option>
+						{foreach item=cat from=$felderauswahl}
+							<option value="{$cat.mvcform_id}">{$cat.mvcform_name} (ID={$cat.mvcform_id})</option>
+						{/foreach}
+					</select>
+					<input onclick="addMultiSelectOption('mvcform_required_felder');" value="{$plugin.mv.hinzufuegen}" name="multiselect_mvcform_required_felder" type="button" />
+				</div>
+				<br />
+				<ul>
+					{foreach item=cat from=$felderauswahl}
+						<li id="mvcform_required_felder_{$cat.mvcform_id}" 
+							{if $cat.is_checked=="1"}
+								style="display: block;"
+							{else}
+								style="display: none;"
+							{/if}>{$cat.mvcform_name} 
+							<input onclick="delMultiSelectOption('mvcform_required_felder','{$cat.mvcform_id}');" value="entfernen" type="button" />
+						</li>
+					{/foreach}
+				</ul>
+					{foreach item=cat from=$felderauswahl}
+						<input type="hidden" id="hiddenmvcform_required_felder_{$cat.mvcform_id}" name="hiddenmvcform_required_felder_{$cat.mvcform_id}" value="
+							{if $cat.is_checked=="1"}1{else}0{/if}" />
+				{/foreach}
+			</div>
+		</fieldset>
+{*<!-- In die Datenbank eintragen -->*}
+		{if $user_darf_schreiben}
+			<fieldset>
+				<legend>{$message_224}</legend>
+				<input type="submit" class="submit_back_green_xl" name="submit_field" value="{$message_224}" />
+			</fieldset>
+		{/if}
+{* <!-- Neues Feld --> *}
+		{if $fdat.0.mvcform_id < 1}
+			<input type="hidden" name="pffeldid" value="new" />
+		{/if}
+{* <!-- verwaltungs ID mitschicken --> *}
+		<input type="hidden" name="mv_id" value="{$mv_id}" />
+		<input type="hidden" name="mvcform_type" value="{$mvcform_type}" id="mvcform_type" />
+{* <!-- In Modus "EDIT" Knopf zum Löschen anbieten --> *}
+		{if $fdat.0.mvcform_id}
+			<input type="hidden" name="mvcform_id" value="{$fdat.0.mvcform_id}" />
+			{*<!-- Löschen? -->*}
+			{if $user_darf_schreiben}
+				{if $is_admin=="ok"}
+					{if !$no_loesch}
+						<fieldset>
+							<legend>{$message_719}</legend>
+							<input class="submit_back_red" type="submit" name="del_field" style="background-color:red;float:left;" value="{$message_720}" />
+							<br />
+						</fieldset>
+					{/if}
+				{/if}
+			{/if}
+		{/if}
+	</form>
+{else}
+	<h2>{$plugin.mv.loeschen}</h2>
+	<form action="#" method="post">
+		<fieldset>
+			<legend>{$plugin.mv.loeschen2}</legend>
+			<strong>{$was_del}</strong>
+			<input type="hidden" name="mv_id" value="{$mv_id}"/>
+			<input type="hidden" name="mvcform_id" value="{$mvcform_id}"/>
+			<br />
+			<input class="submit_back_red" type="submit" name="del_field_echt" value="{$plugin.mv.loeschen3}"/>
+		</fieldset>
+	</form>
+{/if}
+{*<!-- Javascript für Pflichten erben. Felder hinzufügen/entfernen -->*}
+{literal}
+	<script type="text/javascript" charset="iso-8859-1">
+	function addMultiSelectOption(multiSelectFeld)
+	{
+		var optionValue = document.getElementById(multiSelectFeld).options[document.getElementById(multiSelectFeld).selectedIndex].value;
+		if(document.getElementById(multiSelectFeld + "_" + optionValue))
+		{
+			document.getElementById(multiSelectFeld + "_" + optionValue).style.display = "block";
+			document.getElementById("hidden" + multiSelectFeld + "_" + optionValue).value = "1";
+		}
+	}  
+	
+	function delMultiSelectOption(multiSelectFeld, optionValue)
+	{
+		document.getElementById(multiSelectFeld + "_" + optionValue).style.display = "none";
+		document.getElementById("hidden" + multiSelectFeld + "_" + optionValue).value = "0";
+	} 
+	</script>
+{/literal}

@@ -1,0 +1,64 @@
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+<script src='../plugins/newsletter/js/confirm.js' type='text/javascript'></script>
+<div class="artikel">
+	<h2>{$plugin.newsletter.pageheader.error_report}</h2>
+		{if $report_deleted}<div class="message">{$plugin.newsletter.report_deleted}</div><br />{/if}
+		<table width="100%" class="newsletter_table">
+			<thead>
+				<tr>
+					<th>{$plugin.newsletter.id}</th>
+					<th>{$plugin.newsletter.import_time}</th>
+					<th>{$plugin.newsletter.normaler_user}</th>
+					<th>{$plugin.newsletter.used_file}</th>
+					<th style="text-align:right">{$plugin.newsletter.records_to_import}</th>
+					<th style="text-align:right">{$plugin.newsletter.error_count}</th>
+					<th style="text-align:right">{$plugin.newsletter.success_count}</th>
+					{if $is_admin}
+						<th>{$plugin.newsletter.loeschen3}</th>
+					{/if}
+					<th>{$plugin.newsletter.export}</th>
+				</tr>
+			</thead>
+			<tbody>
+				{foreach item=report from=$error_report}
+					<tr>
+						<td align="right">
+                        	{if $report.error_count}
+								<a href="./plugin.php?menuid={$menuid_aktuell}&amp;template=newsletter/templates/news_error_report_details.html&amp;report_id={$report.report_id}" title="{$plugin.newsletter.import_error_report_show_details}" style="color:red;font-weight:bold">
+								{$report.report_id}
+								</a>
+                          	{else}
+                            	{$report.report_id}
+							{/if}
+						</td>
+						<td>
+							{if $report.error_count}
+								<a href="./plugin.php?menuid={$menuid_aktuell}&amp;template=newsletter/templates/news_error_report_details.html&amp;report_id={$report.report_id}" title="{$plugin.newsletter.import_error_report_show_details}" style="color:red;font-weight:bold">
+									{$report.import_time}
+								</a>
+                          	{else}
+								{$report.import_time}
+							{/if}
+						</td>
+						<td>{$report.imported_by}</td>
+						<td>{$report.used_file}</td>
+						<td align="right">{$report.records_to_import}</td>
+						<td align="right">{$report.error_count}</td>
+						<td align="right">{$report.success_count}</td>
+						{if $is_admin}
+							<td align="center">
+								<form id="report_delete" method="post" action="./plugin.php?menuid={$menuid_aktuell}&amp;template=newsletter/templates/news_error_report.html&report_del_id={$report.report_id}" name="adminForm{$report.report_id}">
+									<a href='javascript: var msg="{$plugin.newsletter.linktext.sync} "+"\""+"{$report.report_id}"+"\""+" {$plugin.newsletter.linktext.sync2}"; if (confirm(msg)) submitform("{$report.report_id}");' title="{$plugin.newsletter.alttext.sync}">X</a>
+								</form>
+							</td>
+						{/if}
+						<td align="center">
+							<a href="./plugin.php?menuid={$menuid_aktuell}&amp;template=newsletter/templates/news_error_report_details.html&report_export_id={$report.report_id}" title="Download">X</a>
+						</td>
+					</tr>
+				{/foreach}
+			</tbody>
+		</table>
+	</form>
+</div>

@@ -1,0 +1,45 @@
+.test_text
+{
+	border: 1px solid #993333;
+	font-size: 250%;
+	background: url(../plugins/test/bilder/testbild.jpg);
+}
+
+code.apikey {
+    display: block;
+    font-size: 1.7em;
+    margin: 0.1ex 0.1ex 0.5ex;
+    padding: 0.7ex 0.5ex 0.5ex;
+    width: 25em;
+}
+
+.message.message-progress {
+    background-color: #D9E9F0;
+    border-color: #C7DEE9;
+    color: #466788;
+}
+
+ol.statistics-progress {
+    list-style: none;
+}
+
+ol.statistics-progress li:before {
+    display: inline-block;
+    margin-left: -1em;
+    content: "☐";
+    font-size: 18px;
+    width: 18px;
+    padding-right: 0.5ex;
+    text-align: center;
+}
+ol.statistics-progress li.done:before {
+    content: "✓";
+}
+
+ol.statistics-progress li.failed:before {
+    content: "✗";
+}
+
+ol.statistics-progress li.current:before {
+    content: url(loader.gif);
+}

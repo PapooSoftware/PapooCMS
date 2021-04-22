@@ -1,0 +1,60 @@
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+{if $deleted}
+<strong>{$partner_message_6}</strong>
+{/if}
+
+{if $eintragmakeartikelfertig}
+<!-- Die Artikel wurden durchgeloopt-->
+<h2>{$partner_message_7}.</h2>
+{/if}
+{if $exist}
+<!-- Der Eintrag exisitiert schon-->
+<h2 style="color:red;">{$partner_message_8}.</h2>
+{/if}
+
+{if $list}{$partner_message_9}
+<ol>
+{foreach item=dat from=$list_dat}
+<li>
+
+  <a href="{$link_partner}{$dat.partner_id}">{$dat.partner_name}{$partner_message_10} </a> 
+</li>
+{/foreach}
+</ol>
+{/if}
+{if $edit}
+<!-- Es soll ein neuer Eintrag erstellt werden -->
+{include file=../../../plugins/partnerverwaltung/templates/partnerverwaltungformeingabe.html}
+ {/if} 
+
+{if $fragedel}
+<h2>{$partner_message_11}</h2>
+<form action="#" method="post">
+  
+  <fieldset>
+   <legend>{$partner_message_12}
+    </legend>
+<strong>{$partner_name}</strong>
+  
+  <input type="hidden" name="partner_id" value="{$partner_id}"/>
+  <br /><br />
+  
+  <br />
+  <input class="submit_back_red" type="submit" name="submitdelecht" value="{$partner_message_13}"/>
+
+  
+  
+  
+  </fieldset>
+  </form>
+{/if}
+</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}

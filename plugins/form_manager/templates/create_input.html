@@ -1,0 +1,53 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+
+<h1>{$plugin.form_manager.feldermanagen} {if $form_manager_name}- {$form_manager_name}{/if}</h1>
+{if $fieldedit=="ok"}
+{include file=../../../plugins/form_manager/templates/formeingabe_feld.html}
+{else}
+{if $groupedit=="ok"}
+{include file=../../../plugins/form_manager/templates/formeingabe_group.html}
+{else}
+
+
+{if $form=="ok"}
+{$plugin.form_manager.listgrup}
+<div style="">
+<br />
+<a href="{$fl_link}&form_manager_id={$form_manager_id}&pfgruppeid=new" class="btn btn-info" style="margin-right:20px;">{$plugin.form_manager.gruperstell}</a>
+{if $gruppeok}
+<a href="{$fl_link}&form_manager_id={$form_manager_id}&pffeldid=new"class="btn btn-info">{$plugin.form_manager.Feld_erstellen}</a>
+{else}
+{$plugin.form_manager.erstell_grupp}
+{/if}
+<br /><br />
+</div>{include file=../../../plugins/form_manager/templates/create_input_liste.html}
+{/if}
+{if $liste=="ok"}
+<h2>{$plugin.form_manager.Liste_form}</h2>
+{$plugin.form_manager.wfeld}
+<br />
+<ol>
+{foreach item=dat from=$list}
+<li>
+
+  <a href="{$fl_link}&form_manager_id={$dat.form_manager_id}">{$dat.form_manager_name} {$plugin.form_manager.bearbeiten2}</a>
+</li>
+{/foreach}
+</ol>
+{/if}
+{/if}
+{/if}
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

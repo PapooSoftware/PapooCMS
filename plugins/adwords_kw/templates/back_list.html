@@ -1,0 +1,40 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+
+<link rel="stylesheet" href="{$adwords_kw_css_path}/adwords_kw.css"/>
+
+<div class="artikel">
+    <form method="post" action="./plugin.php?menuid={$menuid}&template=adwords_kw/templates/back_list.html" name="suche">
+        <fieldset>
+            {*<!-- Suche nach einem Artikel -->*}
+            <legend>{$adwords_kw_1}</legend>
+            <input type="text" id="search" name="search" value='{$suchstring}' placeholder="{$adwords_kw_2}"  />
+            {*<!-- <input type="hidden" value="Finden" name="formSubmit" /> -->*}
+            <input  type="submit" class="submit_back  btn btn-info" value="{$message_679}" name="formSubmit" />
+            {if $ergebnis_anzahl}<p>Die Suche ergab {$ergebnis_anzahl} Treffer.</p>{/if}
+        </fieldset>
+    </form>
+    <table>
+        <tr>
+            <th>Keyword</th>
+            <th>URL</th>
+            <th>Letzter Aufruf</th>
+            <th>Aufrufe</th>
+        </tr>
+        {foreach item=dat from=$log_data}
+        <tr>
+            <td>{$dat.keyword}</td>
+            <td>{$dat.url}</td>
+            <td>{$dat.date_time}</td>
+            <td>{$dat.counter}</td>
+        </tr>
+        {/foreach}
+    </table>
+    {*<!-- weitere Seiten -->*}
+    {include file=weiter.inc.html}
+</div>
+
+</body>
+</html>
+{/if}

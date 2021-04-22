@@ -1800,7 +1800,7 @@ class artikel_class
 		if ($this->content->template['anzeig_filter'] == 1) {
 			//ARTIKEL-FILTER filter bauen
 			//wenn falsch gefiltert wurde fehlermeldung
-			if (count($this->result_artikel) == 0 && $this->checked->von_article) {
+			if ((isset($this->result_artikel) == false || count($this->result_artikel) == 0) && $this->checked->von_article) {
 				$this->content->template['filter_falsch'] = "yes";
 			}
 
@@ -2588,10 +2588,9 @@ class artikel_class
 					$start = strtotime($article->pub_start_page);
 					$end = strtotime($article->pub_verfall_page);
 					return
-						$article->pub_start == 1 &&
-						time() >= $start ||
-						$start === false && time() <= $end ||
-						$end === false;
+						$article->teaser_list == 1 &&
+						(time() >= $start || $start === false) &&
+					        (time() <= $end || $end === false);
 				}
 				else {return false;}
 			});

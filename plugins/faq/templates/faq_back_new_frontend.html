@@ -1,0 +1,57 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		
+		{include file=../../../plugins/faq/templates/faq_menue.html}
+		<h2>{$plugin.faq_back.pageheader.faq_new_frontend}</h2>
+		<p>{$plugin.faq_back.text.faq_count} {$faq_anzahl}.<br />{$plugin.faq_back.text.faq_count_frontend} {$faq_content_frontend_anzahl}.</p>
+		{if $faq_is_del}<div class="message">{$plugin.faq_back.message.faq_is_del}</div>{/if}
+		{if $faq_is_accepted}<div class="message">{$plugin.faq_back.message.faq_is_accepted}</div>{/if}
+		{if $faq_frontend_deleted}<div class="message">{$plugin.faq_back.message.faq_frontend_deleted}</div>{/if}
+		{if $delete}
+			<form name="faqdel" action="" method="post" id="faq_back_faqdel_form">
+				<fieldset>
+					<legend>{$plugin.faq_back.formtext.legend_faq_delete}</legend>
+					<label for="faq_back_meta_title"><strong>{$plugin.faq_back.formtext.label_question_delete}</strong></label><br />
+					<input type="submit" value="{$plugin.faq_back.submit.delete_yes}" name="submit" title="{$plugin.faq_back.submit.delete_yes2}" />
+					<input type="submit" value="{$plugin.faq_back.submit.delete_no}" name="submit" title="{$plugin.faq_back.submit.delete_no2}" />
+					<input type="hidden" value="2" name="del" />
+					<input type="hidden" value="{$faq_id}" name="faq_id" />
+				</fieldset>
+			</form>
+		{else}
+			<p>{$plugin.faq_back.text.faq_new_faq}</p>
+			{if $faq_order == "question"}<p class="bold_red">{$plugin.faq_back.text.faq_back_sort_question}</p>{/if}
+			{if $faq_order == "created"}<p class="bold_red">{$plugin.faq_back.text.faq_back_sort_created}</p>{/if}
+			{if $faq_order == "createdby"}<p class="bold_red">{$plugin.faq_back.text.faq_back_sort_createdby}</p>{/if}
+			{if $faq_order == "order_id"}<p class="bold_red">{$plugin.faq_back.text.faq_back_sort_user}</p>{/if}
+{* Liste der offenen Fragen anzeigen *}
+			<table class="faqs">
+				<tr>
+					<th id="question" {if $faq_order == "question"}class="bold_red"{/if}>{$plugin.faq_back.text.faq_offene_frage}</th>
+					<th id="creation_date" {if $faq_order == "created"}class="bold_red"{/if}>{$plugin.faq_back.text.faq_created}</th>
+					<th id="author" {if $faq_order == "createdby"}class="bold_red"{/if}>{$plugin.faq_back.text.faq_createdby}</th>
+					<th id="delete" class="align_center">{$plugin.faq_back.text.faq_delete}</th>
+				</tr>
+				{foreach item=faq_list from=$faq_content_frontend}
+				<tr class="cat_row">
+						<td headers="question">
+							<a href="?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_back_accept_faq.html&amp;faq_id={$faq_list.id}" title="{$plugin.faq_back.linktext.faq_new_frontend2}">{$faq_list.question}</a>
+							{if $faq_list.orphan} {* Verwaist *}
+								<span class="bold_red"> {$plugin.faq_back.text.faq_orphan}</span>
+							{/if}
+						</td>
+						<td headers="creation_date">{$faq_list.created}</td>
+						<td headers="author">{$faq_list.createdby}</td>
+						<td headers="delete" class="align_center"><a href="?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_back_new_frontend.html&amp;faq_id={$faq_list.id}&amp;del=1" title="{$plugin.faq_back.linktext.faq_offene_delete}">X</a></td>
+					</tr>
+				{/foreach}
+			</table>
+			{include file=weiter.inc.html}
+		{/if}
+	</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

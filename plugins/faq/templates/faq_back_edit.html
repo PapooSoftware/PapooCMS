@@ -1,0 +1,223 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		
+		{include file=../../../plugins/faq/templates/faq_menue.html}
+		<h2>{$plugin.faq_back.pageheader.faq_edit}</h2>
+		{if $fehler1}<div class="error">{$plugin.faq_back.errmsg.cat_fehlt}</div>{/if}
+		{if $fehler2}<div class="error">{$plugin.faq_back.errmsg.frage_fehlt}</div>{/if}
+		{if $fehler3}<div class="error">{$plugin.faq_back.errmsg.faqid_fehlt}</div>{/if}
+		{if $fehler4}<div class="error">{$plugin.faq_back.errmsg.kein_filename}</div>{/if}
+		{if $fehler5}<div class="error">{$fehler5}</div>{/if} {* Upload-Fehler Attachments; Textinhalt ist variabel *}
+		{if $fehler6}<div class="error">{$plugin.faq_back.errmsg.file_vorhanden}</div>{/if}
+		{if $fehler7}<div class="error">{$plugin.faq_back.errmsg.file_del_error}<br />{$fehler7}</div>{/if}
+		{if $fehler9}<div class="error">{$plugin.faq_back.errmsg.attachment_already_exist}<br />{$fehler7}</div>{/if}
+		{if $fehler10}<div class="error">{$plugin.faq_back.errmsg.attachment_too_large} {$faq_attachsize}</div>{/if}
+		{if $fehler11}<div class="error">{$plugin.faq_back.errmsg.src_missing}</div>{/if}
+		{if $fehler12}<div class="error">{$plugin.faq_back.errmsg.incorrect_faq_id}</div>{/if}
+		{if $fehler13}<div class="error">{$plugin.faq_back.errmsg.incorrect_att_id}</div>{/if}
+		{if $fehler14}<div class="error">{$plugin.faq_back.errmsg.incorrect_cat_id}</div>{/if}
+		{if $fehler15}<div class="error">{$plugin.faq_back.errmsg.incorrect_version_id}</div>{/if}
+		{if $fehler16}<div class="error">{$plugin.faq_back.errmsg.incorrect_version_id}</div>{/if}
+		{if $attachment_loaded}<div class="message">{$plugin.faq_back.message.attachment_loaded}</div>{/if}
+		{if $attachment_is_del}<div class="message">{$plugin.faq_back.message.attachment_deleted}</div>{/if}
+		<p>{$plugin.faq_back.text.faq_count} {$faq_anzahl}</p>
+{* L�schen Ja / Nein *}
+		{if $delete}
+			<form name="faqdel" action="" method="post" id="faq_back_faqdel_form">
+				<fieldset>
+					<legend>{$plugin.faq_back.formtext.legend_faq_delete}</legend>
+					<label for="faq_back_meta_title"><strong>{$plugin.faq_back.formtext.label_question_delete}</strong></label><br />
+					<input type="submit" value="{$plugin.faq_back.submit.delete_yes}" name="submit[9]" title="{$plugin.faq_back.submit.delete_yes2}" />
+					<input type="submit" value="{$plugin.faq_back.submit.delete_no}" name="submit[9]" title="{$plugin.faq_back.submit.delete_no2}" />
+						<input type="hidden" value="{$faq_id}" name="faq_id" />
+				</fieldset>
+			</form>
+		{else}
+{* Formulardaten zur Bearbeitung anzeigen *}
+			{if is_countable($faq_data) && $faq_data|@count} {* FAQ-Daten sind vorhanden *}
+				{if !$anzahl_faq_cats}<div class="message">{$plugin.faq_back.message.no_cats}</div>
+				{else}
+					<form name="faq_back_edit" action="" method="post" enctype="multipart/form-data">
+						<input type="hidden" name="faq_current_version" value="{$faq_current_version}" />
+		
+{* Versionsauswahl *}
+						<fieldset>
+							<legend class="mb_10">{$plugin.faq_back.formtext.legend_versions}</legend>
+							{if !$version_change_inactive AND is_countable($all_timestamps) && $all_timestamps|@count > 1}
+								<label for="faq_back_version_sel_id">{$plugin.faq_back.formtext.label_versions}</label><br /><br />
+								<select name="faq_version_selected" id="faq_back_version_sel_id">
+									{foreach item=versions from=$all_timestamps name=vers}
+										<option value="{$versions.version_id}" id="version_{$versions.version_id}"
+											{if $faq_version_selected == $versions.version_id} selected="selected"{/if} >
+											{$plugin.faq_back.formtext.option_version_select}{$versions.version_id}, 
+											{if !$smarty.foreach.vers.last}
+												{$versions.changedd}, {$versions.changedby} {* Modifizierte Version *}
+											{else}
+												{$versions.created}, {$versions.createdby} {* Ausgew�hlte Version *}
+											{/if}
+										</option>
+									{/foreach}
+								</select>
+								<input type="submit" name="submit[0]" value="Version anzeigen" />
+							{else}
+								<input type="hidden" name="faq_version_selected" value="{$faq_current_version}" />
+							{/if}
+							<p>
+								<span class="bold_red">{$plugin.faq_back.text.version_inwork}</span>
+								{$faq_current_version}, {$timestamp}, {$timestampby}<br />
+								{$plugin.faq_back.text.version_selected} {$faq_version_selected}, {$timestamp_oldversion}, {$timestampby_oldversion}<br /><br />
+								{$plugin.faq_back.text.version}<br ><br />
+								{if $version_change_inactive}
+									<span class="bold_red">{$plugin.faq_back.formtext.version_select_inactive}</span>
+								{/if}
+							</p>
+						</fieldset>
+		
+{* Kategorieauswahl *}
+						<fieldset>
+							<legend class="mb_10">{$plugin.faq_back.formtext.legend_faq}</legend>
+							<label for="faq_back_catopt_sel_id">{$plugin.faq_back.formtext.label_cat}{$plugin.faq_back.formtext.label_cat_edit}</label><br /><br />
+							<select name="faq_cat_id[]" size="{if is_countable($cat_data) && $cat_data|@count > 10}10{else}{if is_countable($cat_data)}{$cat_data|@count}{/if}{/if}" id="faq_back_catopt_sel_id" multiple="multiple" >
+								{foreach item=faq_cat from=$cat_data}
+									<option value="{$faq_cat.id}" id="faqcat{$faq_cat.id}"
+									{if $faq_cat.cat_selected} selected="selected" {/if} {* zugeordnete Kategorie markieren *}
+									{* verwaiste kennzeichnen *}
+									{if $faq_cat.orphan}
+										 class="lvl_{$faq_cat.level} bold_red">{$faq_cat.catname} {$plugin.faq_back.text.cat_orphan}
+									{else}
+										 class="lvl_{$faq_cat.level}">{$faq_cat.catname}
+									{/if}
+									</option>
+								{/foreach}
+							</select>
+							<br />
+							<input type="submit" value="{$plugin.faq_back.submit.faq_edit_reset}" name="submit[1]" title="{$plugin.faq_back.submit.faq_edit_reset}" /> {* Kategorieanzeige reset *}
+						</fieldset>
+						<div class="mt_10"> </div>
+		
+{* Felder Frage und Antwort *}
+						<fieldset>
+							<legend class="mb_10">{$plugin.faq_back.formtext.legend_question}</legend>
+							<textarea name="faq_question" id="faq_back_question_id" class="faq_new_edit_textarea" cols="3" rows="5">{$faq_data.0.0.question|escape:"html"}</textarea> {* Frage *}
+							<div class="mb_15"> </div>
+						</fieldset>
+						<fieldset> {* Antwort mit TinyMCE Editor *}
+							<legend>{$plugin.faq_back.formtext.legend_answer}</legend>
+							<label for="faq_new_answer_id"><strong>{$plugin.faq_back.formtext.label_answer}</strong></label><br /><br />
+							<script language="javascript" type="text/javascript" src="./tiny_mce/tiny_mce.js" charset="utf-8"></script>	
+							<script language="javascript" type="text/javascript" src="./tiny_mce/FileBrowser.js"></script>
+							<script language="javascript" type="text/javascript">
+									tinyMCE.init({ldelim}
+									mode : "exact",
+									language : "{$lang_back_short}",
+									elements : "faq_new_answer_id",
+									{include file=tiny_inc_conf.html}
+									{rdelim} );
+							</script>
+							<textarea name="faq_answer" id="faq_new_answer_id" rows="20" cols="50"
+								 class="width90">{$faq_data.0.0.answer|escape:"html"}</textarea> {* Antwort *}
+							<br />
+						</fieldset>
+		
+{* Attachments *}
+						<fieldset>
+							<legend>{$plugin.faq_back.formtext.legend_faq_edit_attachment}</legend>
+							<label for="faq_edit_attachment">{$plugin.faq_back.formtext.label_faq_edit_attachment}</label><br />
+							<input type="file" name="faq_edit_attachment_filename" id="faq_edit_attachment" value="" title="{$plugin.faq_back.submit.faq_edit_attachment}" /> {* Filename, Durchsuchen *}
+		
+{* Button Hochladen *}
+							<input type="submit" name="submit[2]" value="{$plugin.faq_back.submit.faq_edit_attachment_upload}" />
+							<br /><br />
+		
+{* Die Attachments *}
+							{if $faq_attach}
+								<div class="mb_4">{$plugin.faq_back.text.faq_edit_attachment}
+		
+{* Ein Attachment ist nicht mehr im Verzeichnis vorhanden *}
+									{if $fehler8}
+										{$plugin.faq_back.text.faq_edit_attachment2}
+									{/if}
+								</div>
+								{foreach item=faq_file from=$faq_attach}
+									<div class="height_18">
+										<input type="image" src="../plugins/faq/bilder/faq_attachment_del.gif" alt="Absenden" name="submit[3][{$faq_file.id}]" value="{$faq_file.id}" title="{$plugin.faq_back.imgtext.faq_edit_attachment} {$faq_file.name}" />
+										<a href="../plugins/faq/attachments/{$faq_file.name_stored}" title="{$plugin.faq_back.linktext.faq_edit_attachment}" target="_blank">{$faq_file.name}</a> ({$faq_file.name_stored} {$faq_file.size} Bytes)
+		
+{* Dieses Attachment ist nicht mehr im Verzeichnis vorhanden *}
+										{if !$faq_file.file_status}
+											<span class="bold_red">{$plugin.faq_back.errmsg.file_fehlt}</span>
+										{/if}
+									</div>
+								{/foreach}
+								<br />
+							{/if}
+						</fieldset>
+		
+{* Freigabe *}
+						<fieldset>
+							<legend>{$plugin.faq_back.formtext.legend_faq_edit_release}</legend>
+							<input type="checkbox" value="j" name="faq_release" id="faq_edit_release" title="{$plugin.faq_back.formtext.faq_edit_release}" {$checkedrel} />
+							<label for="faq_edit_release">{$plugin.faq_back.formtext.label_faq_edit_release}</label>
+						</fieldset>
+		
+{* Buttons Submit und L�schen *}
+						<fieldset>
+							<legend>{$plugin.faq_back.submit.faq_edit_submit}</legend>
+							<input type="submit" value="{$plugin.faq_back.submit.faq_edit}" name="submit[4]" title="{$plugin.faq_back.submit.faq_edit}" /> {* Speichern der FAQ Daten*}
+							<input type="submit" value="{$plugin.faq_back.submit.faq_edit_del}" name="submit[5]" title="{$plugin.faq_back.submit.faq_edit_del}" /> {* L�schen der FAQ *}
+						</fieldset>
+						<input type="hidden" name="faq_id" value="{$faq_id}" />
+						<input type="hidden" value="faqdelete" name="faqdelete" />
+					</form>
+				{/if}
+	
+{* keine Formulardaten: Liste der FAQS anzeigen *}
+			{else} 
+				{if $faq_list}
+					{if !$anzahl_faq_cats}<div class="message">{$plugin.faq_back.message.no_cats2}</div>{/if}
+					<p>{$plugin.faq_back.text.faq_back_edit_list}</p>
+					{if $faq_order == "question"}<p class="bold_red">{$plugin.faq_back.text.faq_back_sort_question}</p>{/if}
+					{if $faq_order == "created"}<p class="bold_red">{$plugin.faq_back.text.faq_back_sort_created}</p>{/if}
+					{if $faq_order == "createdby"}<p class="bold_red">{$plugin.faq_back.text.faq_back_sort_createdby}</p>{/if}
+					{if $faq_order == "order_id"}<p class="bold_red">{$plugin.faq_back.text.faq_back_sort_user}</p>{/if}
+{* Liste der FAQs zum Bearbeiten anzeigen *}
+					<table class="faqs">
+					<tr>
+						<th valign="bottom" id="question" {if $faq_order == "question"}class="bold_red"{/if}>{$plugin.faq_back.text.faq_list_frage}</th>
+						<th valign="bottom" id="creation_date" {if $faq_order == "created"}class="bold_red"{/if}>{$plugin.faq_back.text.faq_created}</th>
+						<th valign="bottom" id="author" {if $faq_order == "createdby"}class="bold_red"{/if}>{$plugin.faq_back.text.faq_createdby}</th>
+						<th id="catscount" class="align_right">{$plugin.faq_back.text.faq_list_catscount}</th>
+						<th id="attcount" class="align_right">{$plugin.faq_back.text.faq_list_attcount}</th>
+						<th valign="bottom" id="release" class="align_center">{$plugin.faq_back.text.faq_locked}</th>
+					</tr>
+					{foreach item=faq_list from=$faq_list}
+						<tr class="cat_row">
+							<td headers="question">
+								<a href="?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_back_edit.html&amp;faq_id={$faq_list.id}" title="{$plugin.faq_back.linktext.faq_edit}">{$faq_list.question}</a>
+							{if $faq_list.orphan} {* Verwaist *}
+								<br /><span class="bold_red">{$plugin.faq_back.text.faq_orphan}</span>
+							{else}
+								{if $faq_list.db_error}
+									<br /><span class="bold_red">{$plugin.faq_back.text.faq_db_error}</span>
+								{/if}
+							{/if}
+							</td>
+							<td headers="creation_date">{$faq_list.created}</td>
+							<td headers="author">{$faq_list.createdby}</td>
+							<td headers="catscount" class="align_right">{$faq_list.catcount}</td>
+							<td headers="attcount" class="align_right">{$faq_list.attcount}</td>
+							<td headers="release" class="align_center">{if $faq_list.active == "n"}X{/if}</td>
+						</tr>
+					{/foreach}
+					</table>
+					{include file=weiter.inc.html}
+				{/if}
+			{/if}
+		{/if}
+	</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

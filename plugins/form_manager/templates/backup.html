@@ -1,0 +1,50 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+{*<!-- Datenbank sicherungen erstellen und einspielen -->*}
+
+{$plugin.form_manager.sicherung}
+<br />
+{*<!-- Um eine Sicherung zu erstellen klicken Sie bitte hier -->*}
+<ul>
+<li>
+<a href="./plugin.php?menuid={$formmenuid}&template=form_manager/templates/backup.html&msgid={$ander.news_user_id}&makedump=1">Jetzt eine Sicherung erstellen</a>
+</li>
+</ul>
+{*<!-- Um eine Sicherung einzuspielen klicken Sie hier -->*}
+<br />
+<h3>{$plugin.form_manager.sicherung_einspielen}</h3>
+{if $is_uploaded}
+<strong style="color:red;">{$plugin.form_manager.sicherung_ready}</strong>
+{/if}
+<p>{$plugin.form_manager.hinweis}</p>
+<p><strong style="color:red;">{$plugin.form_manager.warnung}</strong></p>
+
+<form method="POST" id="formi" action="./plugin.php?menuid={$formmenuid}&template=form_manager/templates/backup.html&msgid={$ander.news_user_id}&backdump=1" enctype="multipart/form-data">
+  <fieldset>
+{*<!-- Eingabe der Datei:-->*}
+  <legend>{$plugin.form_manager.eingabe_datei}</legend>
+{*<!-- Das Dokument:-->*}
+  <label>{$plugin.form_manager.dokument}</label>
+  <input type="file" name="myfile" value="{$myfilename}" />
+  </fieldset>
+
+  <fieldset>
+{*<!-- Datei hochladen:-->*}
+  <legend>{$plugin.form_manager.datei_upload}</legend>
+{*<!-- hochladen-->*}
+  <input type="submit" class="submit_back" value="{$plugin.form_manager.upload}" name="restore" />
+  </fieldset>
+</form>
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

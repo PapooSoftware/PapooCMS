@@ -1,0 +1,33 @@
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+<div class="artikel">
+	<div class="mv">
+		<h2>{$plugin.mv.rechte_spezial2}</h2>
+		<form action="" method="post" id="formk" enctype="multipart/form-data">
+			<table>
+				<tr>
+					<td>&nbsp;</td>
+					<td>{$plugin.mv.gruppenname}</td>
+					<td style="text-align:right">{$plugin.mv.gruppenid}</td>
+				</tr>
+				{foreach item=gruppe from=$liste_rights}
+					<tr>
+						<td>
+							<input type="checkbox" id="group_right_{$gruppe.gruppeid}" name="group_right[]"{if $gruppe.group} checked="checked"{/if} value="{$gruppe.gruppeid}" />
+						</td>
+						<td style="color:{if $gruppe.group}green{else}red{/if}">{$gruppe.gruppenname}</td>
+						<td style="text-align:right">{$gruppe.gruppeid}</td>
+					</tr>
+				{/foreach}
+			</table>
+			<fieldset>
+				<legend>{$plugin.mv.senden}</legend>
+				<input type="submit" class="submit_back_green" name="submit_rights" value="{$plugin.mv.senden}" />
+			</fieldset>
+		</form>
+	</div>
+	<br />
+	<!-- Rechte Fehlermeldung-->
+	{include file=rechte.html}
+</div>
+{include file=foot.inc.html}

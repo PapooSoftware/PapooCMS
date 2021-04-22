@@ -1,0 +1,147 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+ 
+ 
+     {if $plugin_error}
+    <div class="error">
+    <h2 id="leadtracker_achtung_bitte_eintrge_korrigieren" class="h2" >{$plugin_leadtracker_achtung_bitte_eintrge_korrigieren}</h2>
+    </div>
+    {/if}
+
+    {if $leadtracker_is_del}
+    <div class="error">
+        <h2 id="leadtracker_achtung_bitte_eintrge_korrigieren" class="h2" > {$plugin_leadtracker_der_eintrag_wurde_gelscht}</h2>
+    </div>
+    {/if}
+    {if $is_eingetragen=="ok"}
+    <div class="message">
+    <h2>{$plugin_formcat__daten_wurden_gespeichert}</h2>
+    </div>
+    {/if}
+ 
+ 
+
+    {if !$is_form_cat}
+
+    <h1 id="formcat__kategorien_fr_formulare" class="h1" >{$plugin_formcat__kategorien_fr_formulare}</h1>
+
+ <p id="formcat__hier_knnen_sie_die_kategorien_zu_denen_sie_die_formular_sortieren_knnen_erstellen_und_bearbeiten" class="h1" >{$plugin_formcat__hier_knnen_sie_die_kategorien_zu_denen_sie_die_formular_sortieren_knnen_erstellen_und_bearbeiten}</p>
+
+ <a href="{$self_form_cat}&form_cat_id=new" id="formcat__neue_kategorie_erstellen" class="132link btn btn-info" >{$plugin_formcat__neue_kategorie_erstellen}</a>
+
+ <h2 id="formcat__vorhandene_kategorien_" class="h2" >{$plugin_formcat__vorhandene_kategorien_}</h2>
+  <table  class="outside  table table-striped table-hover">
+        <tr>
+            <th>ID</th>
+            <th>{$plugin_formcat__name_der_kategorie}</th>
+            <th style="width:40%;">{$plugin_formcat__beschreibung_der_kategorie}</th>
+            <th>{$plugin_formcat__kategorie_bearbeiten}</th>
+            <th  style="width:20%;">{$plugin_formcat__kategorie_lschen}</th>
+
+        </tr>
+        {if $formcat_liste}
+        {foreach from=$formcat_liste item=cat key=cat_key}
+        <tr>
+            <td>{$cat.formcat__id}</td>
+            <td>{$cat.formcat__name_der_kategorie}</td>
+            <td style="width:40%;">{$cat.formcat__beschreibung_der_kategorie}</td>
+            <td><a class="btn btn-info" href="{$self_form_cat}&form_cat_id={$cat.formcat__id}"><i class="fa fa-pencil-square-o"></i> {$plugin_formcat__kategorie_bearbeiten}</a></td>
+            <td>{if $cat.anzahl >= 1} {$plugin_formcat__diese_kategorie_enthlt} <strong>{$cat.anzahl}</strong> {$plugin_formcat__formulare_und_kann} {else}<a class="btn btn-danger" onclick='var msg="Soll die Kategorie "+"\""+"{$cat.formcat__name_der_kategorie}"+"\""+" wirklich gelöscht werden?"; if (confirm(msg)) return true ;'  href="{$self_form_cat}&del_form_cat_id={$cat.formcat__id}"><i class="fa fa-minus-square-o"></i> {$plugin_formcat__kategorie_lschen}</a>{/if}</td>
+        </tr>
+        {/foreach}
+        {/if}
+    </table>
+ 
+ 
+  
+
+ 
+ 
+{else}
+ <h2 id="formcat__kategorie_erstellen__bearbeiten" class="h2" >{$plugin_formcat__kategorie_erstellen__bearbeiten}</h2>
+ 
+	<form name="form_cat_daten" method="post" action="">
+
+		
+		
+		<fieldset>
+		<legend>{$plugin_formcat__kategoridaten} {if $formcat_.0.formcat__id}(ID {$formcat_.0.formcat__id}){/if}</legend>
+		<input type="hidden" name="formcat__id" value="{$formcat_.0.formcat__id}" />
+		<div class="labdiv"><label for="formcat__name_der_kategorie">{$plugin_formcat__name_der_kategorie}{$plugin_error.formcat__name_der_kategorie} </label>
+			<input type="text" name="formcat__name_der_kategorie" value="{$formcat_.0.formcat__name_der_kategorie|escape:"html"}" class="formcat__name_der_kategorie" id="formcat__name_der_kategorie"/>
+		</div>
+		<br />
+
+		 <div class="labdiv"><label for="formcat__beschreibung_der_kategorie">{$plugin_formcat__beschreibung_der_kategorie}{$plugin_error.formcat__beschreibung_der_kategorie} </label>
+			<textarea cols="30" rows="6" name="formcat__beschreibung_der_kategorie"  class="formcat__beschreibung_der_kategorie" id="formcat__beschreibung_der_kategorie">{$formcat_.0.formcat__beschreibung_der_kategorie|escape:"html"}</textarea>
+		</div>
+			</fieldset>
+	{foreach from=$form_lang_vorhanden item=lang_cat key=lang_key}{/foreach}
+	<fieldset>
+		<legend>{$plugin_formcat__kategorie_speichern}</legend>
+			<input type="submit" class="submit_back" name="submit_form_cats" value="{$plugin_formcat__kategorie_speichern}" />
+	</fieldset>
+	</form>
+
+
+</fieldset><br />
+
+{/if}
+
+
+    {if $is_dev}
+
+ #start#
+
+
+
+    </p>
+
+
+    <br />
+
+
+    <span class="ignore"></span>
+    <!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+    <div class="rapid_form">
+        <form action="" name="" method="POST">
+            <!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+            <input type="hidden" name="tb_name" value="plugin_cform_cats" />
+            <!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+            <input type="hidden" name="php_datei_name" value="form_cats" />
+            <!-- Das Standarpr�fix f�r die Ids -->
+            <input type="hidden" name="praefix" value="formcat_" />
+            <!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+            <input type="hidden" name="praefix_spezial" value="formcat_" />
+            <!-- Das Tool einbinden -->
+            {include file=../../../plugins/devtools/templates/rapid_felder.htm}
+        </form>
+    </div>
+
+    {/if}
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

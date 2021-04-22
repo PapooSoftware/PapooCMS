@@ -1,0 +1,29 @@
+<div class="labdiv labdiv_textarea" id="labdiv_{$field.plugin_cform_name|escape}">
+	<label for="plugin_cform_{$field.plugin_cform_name|escape}"{if $error} class="form_error"{/if}>
+		{if $error}
+			{$field.plugin_cform_descrip|default:$plugin.form_manager.fehlermeldung}
+		{/if}
+
+		{$field.plugin_cform_label}
+
+		{if $field.plugin_cform_must}
+			<span class="must_stern"> *</span>
+		{/if}
+
+		{if $field.plugin_cform_label_img}
+			<br />
+			<img class="form_labelimg" src="{$slash}images/{$field.plugin_cform_label_img|escape}" alt="" title="{$field.plugin_cform_label|escape}" />
+		{/if}
+
+		{if $field.plugin_cform_tooltip}
+			<img src="{$slash}plugins/form_manager/bilder/info.gif" width="16" height="16" alt="info" title="{$field.plugin_cform_tooltip|escape|nl2br}" class="descrip_img" />
+		{/if}
+	</label>
+
+	<textarea id="plugin_cform_{$field.plugin_cform_name|escape}" name="{$field.plugin_cform_name|escape}"
+			  cols="40" rows="6"
+			{if $field.plugin_cform_must}
+				required="required" aria-required="true"
+			{/if}
+	>{$value|escape}</textarea>
+</div>

@@ -1,0 +1,30 @@
+{if $IS_ADMIN}
+	<h1>{$plugin.faq_back.pageheader.cat_main}</h1>
+	{* Linkbutton neue Kategorie *}
+	<div class="height_60">
+		<script src='../plugins/faq/js/confirm.js' type='text/javascript'></script>
+		<div class="cat_tool">
+			<a class="cat_tool_edit" href="./plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_cat_back_new.html" title="{$plugin.faq_back.linktext.cat_create}"><img src="../plugins/faq/bilder/cat_new.gif" width="28" height="22" alt="{$plugin.faq_back.linktext.cat_create}" title="{$plugin.faq_back.linktext.cat_create}" border="0" align="middle" />
+			<br />
+			{$plugin.faq_back.text.cat_new}</a>
+		</div>
+		{* Linkbutton Kategorie Edit *}
+		<div class="cat_tool">
+			<a class="cat_tool_edit" href="./plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_cat_back_edit.html" title="{$plugin.faq_back.linktext.cats_edit}"><img src="../plugins/faq/bilder/cat_edit.gif" width="28" height="22" alt="{$plugin.faq_back.linktext.cats_edit}" title="{$plugin.faq_back.linktext.cats_edit}" border="0" align="middle" />
+			<br />
+			{$plugin.faq_back.text.cat_edit}</a>
+		</div>
+		{* Linkbutton Kategorie l�schen *}
+		<div class="cat_tool">
+			<a class="cat_tool_edit" href="./plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_cat_back_del.html" title="{$plugin.faq_back.linktext.cats_delete}"><img src="../plugins/faq/bilder/cat_delete.gif" width="28" height="22" alt="{$plugin.faq_back.linktext.cats_delete}" title="{$plugin.faq_back.linktext.cats_delete}" border="0" align="middle" />
+			<br />
+			{$plugin.faq_back.text.cat_delete}</a>
+		</div>
+		{* Linkbutton Kategorie sortieren *}
+		<div class="cat_tool">
+			<a class="cat_tool_edit" href="./plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_cat_back_move.html" title="{$plugin.faq_back.linktext.cats_move}"><img src="../plugins/faq/bilder/cat_move.gif" width="28" height="22" alt="{$plugin.faq_back.linktext.cats_move}" title="{$plugin.faq_back.linktext.cats_move}" border="0" align="middle" />
+			<br />
+			{$plugin.faq_back.linktext.cat_move}</a>
+		</div>
+	</div><div class="clearfix"></div>
+{/if}

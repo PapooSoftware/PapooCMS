@@ -1,0 +1,195 @@
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+<div class="artikel">
+	<a ></a>
+	<div class="metaebene_content_dzvhae">
+		<h1>{$plugin.mv.metaebene}</h1>
+		{if $fragedel}
+			<h2>{$plugin.mv.loeschen}</h2>
+			<form action="#" method="post">
+				<fieldset>
+					<legend>{$plugin.mv.loeschen2}</legend>
+					<input type="hidden" name="meta_gruppe" value="{$meta_gruppe}"/>
+					<br />
+					<br />
+					<br />
+					<input style="background:red; float:left;margin-right:50px;" type="submit" name="submitdelecht" value="{$plugin.mv.loeschen3}"/>
+				</fieldset>
+			</form>
+		{else}
+			{*<!-- Metaebene, wird nur angezeigt, wenn auch das Plugin (genau:Sprachdatei des Plugins) installiert ist -->*}
+			{if $plugin_metaebene == "ok"}
+				{*<!-- Systemmessage was zuletzt gemacht wurde -->*}
+				{if $mv_system_msg!=""}<div class="message">{$mv_system_msg}</div>{/if}
+				{*<!-- Fehlermeldung Allgemein -->*}
+				{if $mv_system_error!=""}<div class="error">{$mv_system_error}</div><br />{/if}
+				<div class="metaebene">
+					<p>{$plugin.mv.metaebene_text}</p>
+					<strong>
+						{if $metaebene_name != ""}
+							{$metaebene_name}
+							<br />
+							<br />
+							<a href="{$link}&mv_id={$mv_id}&selected_meta_gruppe=neu">{$plugin.mv.metaebene_neu}</a>
+						{else}
+							{$plugin.mv.metaebene_keine2}
+						{/if}
+					</strong>
+				</div>
+			{/if}
+		</div>
+		{*<!-- Fehlermeldung -->*}
+		{*<!--{if $meta_error_kein_zutritt}<div class="error">{$plugin.mv.meta_error_kein_zutritt}</div><br />{/if} -->*}
+		<!-- Meta Ebene -->
+		{if $metaebene_auswahl == "ok"}
+			<!-- Meta Gruppe auswählen -->
+			<h3>{$plugin.mv.meta_headline}</h3>
+			{if $meta_gruppen}
+				<table class="mv_table">
+					<thead>
+						<tr>
+							<th valign="bottom" id="id">ID</th>
+							<th valign="bottom" id="name">{$plugin.mv.selection}</th>
+							<th valign="bottom" id="count">{$plugin.mv.number_reords}</th>
+							{if $is_admin=="ok"}
+								<th valign="bottom" id="edit">{$plugin.mv.edit}</th>
+								<th valign="bottom" id="delete">{$plugin.mv.loeschen3}</th>
+							{/if}
+						</tr>
+					</thead>
+					<tbody>
+						{foreach item=gruppe from=$meta_gruppen}
+							<tr class="mv_row">
+								<td headers="id" class="align_right">{$gruppe.mv_meta_id}</td>
+								<td headers="name">
+									<a href="{$link}&mv_id={$mv_id}&selected_meta_gruppe={$gruppe.mv_meta_id}">{$gruppe.mv_meta_group_name}</a>
+								</td>
+								<td headers="count" class="align_right">{$gruppe.rec_count}</td>
+								{if $is_admin=="ok"}
+									<td headers="id">
+										<a href="{$mv_meta_editieren}&mv_id={$mv_id}&mv_meta_id={$gruppe.mv_meta_id}">{$plugin.mv.editieren}</a>
+									</td>
+									<td headers="id">
+										<a href="{$link}&mv_id={$mv_id}&meta_gruppe={$gruppe.mv_meta_id}&del_meta=del">{$plugin.mv.loeschen3}</a>
+									</td>
+								{/if}
+							</tr>
+						{/foreach}
+					</tbody>
+				</table>
+			{/if}
+		{/if}
+		{if $mv_is_admin=="ok"}
+			{if $metaebene=="ok"}
+				<!-- Meta Gruppe hinzufügen -->
+				<h3>{$plugin.mv.meta_hinzufuegen}</h3>
+				{*<!-- Fehlermeldungen -->*}
+				{if $meta_error_double}<div class="error">{$plugin.mv.meta_error_double}</div><br />{/if}
+				{if $meta_error_empty}<div class="error">{$plugin.mv.meta_error_empty}</div><br />{/if}
+				<fieldset>
+					<legend>{$plugin.mv.neue_meta_gruppe}</legend>
+					<form action="" method="post" id="form_new_field" name="form_new_field" enctype="multipart/form-data">
+						<label for="group_new_name">{$plugin.mv.group_new_name}</label>
+						<input type="input" name="group_new_name" id="group_new_name" value="" />
+						<input type="submit" class="submit_back" name="submit_group_new_name" value="{$plugin.mv.senden}" />
+						<input type="hidden" name="mv_id" id="mv_id" value="{$mv_id}">
+						{$hidden_field}
+					</form>
+				</fieldset>
+				<!-- Pappo Rechtegruppe eine Metagruppe zuweisen -->
+				<h3>{$plugin.mv.meta_zuweisen}</h3>
+				<p>{$plugin.mv.meta_zuweisen2}</p>
+				{*<!-- Fehlermeldungen -->*}
+				{if $meta_error_rg_double}<div class="error">{$plugin.mv.meta_error_rg_double}</div><br />{/if}
+				{if $meta_error_fehlt_was}<div class="error">{$plugin.mv.meta_error_fehlt_was}</div><br />{/if}
+				<fieldset>
+					<legend>{$plugin.mv.neue_gruppe_zuweisen}</legend>
+					<form action="" method="post" id="form_new_group" name="form_new_group" enctype="multipart/form-data">
+						<!-- Metagruppen Name -->
+						<label for="meta_gruppe">{$plugin.mv.meta_gruppe}</label>
+						<select name="meta_gruppe" id="meta_gruppe" size="1">
+							<option value="">{$plugin.mv.bittewaehlen}</option>
+							{foreach item=gruppe from=$meta_gruppen}
+								<option value="{$gruppe.mv_meta_id}"
+									{if $gruppe.mv_meta_id==$meta_gruppe} selected="selected" {/if}>
+									{$gruppe.mv_meta_group_name}
+								</option>
+							{/foreach}
+						</select>
+						<br />
+						<!-- Papoo Rechtegruppe Name -->
+						<label for="rechte_gruppe">{$plugin.mv.rechte_gruppe}</label>
+						<select name="rechte_gruppe" id="rechte_gruppe" size="1">
+							<option value="">{$plugin.mv.bittewaehlen}</option>
+							{foreach item=gruppe from=$papoo_gruppen}
+								<option value="{$gruppe.gruppeid}"
+									{if $gruppe.gruppeid==$rechte_gruppe} selected="selected" {/if}>
+									{$gruppe.gruppenname}
+								</option>
+							{/foreach}
+						</select>
+						<br />
+						<!-- Leserechte -->
+						<label for="group_read">
+							<input type="checkbox" name="group_read" id="group_read" value="1" {if $group_read==1}checked="checked" {/if}/>
+							{$plugin.mv.gruppenread}
+						</label>
+						<br />
+						<!-- Schreibrechte -->
+						<label for="group_write">
+							<input type="checkbox" name="group_write" id="group_write" value="1" {if $group_write==1}checked="checked" {/if}/>
+							{$plugin.mv.gruppenwrite}
+						</label>
+						<br />
+						<input type="submit" class="submit_back_green" name="submit_new_right_group" value="{$plugin.mv.senden}" />
+						<input type="hidden" name="mv_id" id="mv_id" value="{$mv_id}">
+						<input type="hidden" name="del_mpg" id="del_mpg" value="">
+						<input type="hidden" name="del_mpg" id="del_meta" value="">
+						{$hidden_field}
+					</form>
+				</fieldset>
+				<!-- Meta-Rechte-Gruppen auflisten -->
+				{if $meta_papoo_gruppen!=""}
+					<form action="" method="post" id="form_liste_rights" enctype="multipart/form-data">
+						<table>
+							<tr>
+								<td>{$plugin.mv.meta_gruppe}</td>
+								<td>{$plugin.mv.rechte_gruppe}</td>
+								<td>{$plugin.mv.gruppenread}</td>
+								<td>{$plugin.mv.gruppenwrite}</td>
+								<td>{$plugin.mv.gruppenloeschen}</td>
+							</tr>
+							{foreach item=gruppe from=$meta_papoo_gruppen}
+								<tr>
+									<td>{$gruppe.mv_meta_group_name}</td>
+									<td>{$gruppe.gruppenname}</td>
+									<td>
+										<input type="checkbox" id="group_read_{$gruppe.id}" name="group_read_{$gruppe.id}"
+										{if $gruppe.mv_mpg_read==1} checked="checked"{/if} value="1" />
+									</td>
+									<td>
+										<input type="checkbox" id="group_write_{$gruppe.id}" name="group_write_{$gruppe.id}"
+										{if $gruppe.mv_mpg_write==1} checked="checked"{/if} value="1" />
+									</td>
+									<td>
+										<a href="{$link}&mv_id={$mv_id}&mv_mpg_id={$gruppe.mv_mpg_id}&mv_mpg_group_id={$gruppe.mv_mpg_group_id}&del_mpg=del">{$plugin.mv.loeschen3}</a>
+									</td>
+								</tr>
+							{/foreach}
+						</table>
+						{*<!-- 
+						<fieldset>
+							<legend>{$plugin.mv.lese_schreib_rechte_eintragen}</legend>
+							<input type="submit" name="submit_rights" value="{$plugin.mv.senden}" />
+						</fieldset>
+						 -->*}
+					</form>
+				{/if}
+			{/if}
+		{/if}
+		<!-- Rechte Fehlermeldung-->
+		{include file=rechte.html}
+	{/if}
+</div>
+</body>
+</html>

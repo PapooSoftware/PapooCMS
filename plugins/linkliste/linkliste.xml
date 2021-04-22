@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<!-- version: Versions-Nummer papoo für die das Plugin gedacht ist / funktioniert -->
+<plugin version="3.x">
+
+<!-- ALLGEMEINE-INFORMATIONEN -->
+<!-- ************************ -->
+<!-- name: Name des Plugins -->
+<name>Linkliste Plugin</name> 
+
+<!-- beschreibung_de: Kurz-Beschreibung des Plugins auf deutsch (wird im Plugin-Manager angezeigt) -->
+<beschreibung_de><![CDATA[Mit diesem Plugin kann eine Linkliste erstellt werden. Links können in Kategorien eingeordnet werden, verschlagwortet und mit Beschreibungen versehen werden. Die Darstellung im Frontend erfolgt anhand der Kategorien. Braucht Version 3.x oder höher.]]></beschreibung_de>
+
+<!-- beschreibung_en: Kurz-Beschreibung des Plugins auf englisch (wird im Plugin-Manager angezeigt) -->
+<beschreibung_en><![CDATA[With this Plugin you can create a Linklist. You can categorize these Links and can give them descriptions. Needs Version 3.x or larger.]]></beschreibung_en>
+
+<!-- version: Versions-Nummer des Plugins -->
+<version>1.1</version>
+
+<!-- papooid: Eindeutige Nummer offizieller papoo-Plugins -->
+<papooid>12</papooid>
+
+<!-- link: z.Z. noch ohne Funktion -->
+<link>http://www.papoo.de</link>
+
+<!-- datum: Erscheinungs-Datum bzw. Stand des Plugins -->
+<datum>01.03.2006</datum>
+
+
+<!-- AUTOR-INFORMATIONEN -->
+<!-- ******************* -->
+<!-- autor: Informationen zum Autor (Programmierer) des Plugins -->
+<autor>
+	<!-- autor.name: Name des Authors -->
+	<name>Carsten Euwens</name>
+
+	<!-- autor.kontakt: postalische Kontakt-Informationen des Autors -->
+	<kontakt><![CDATA[Carsten Euwens, Heerstr. 110, 53111 Bonn]]></kontakt>
+
+	<!-- autor.email: eMail-Adresse des Autors -->
+	<email>webwork@papoo.de</email>
+
+	<!-- autor.telefon: Telefon-Nummer des Autors -->
+	<telefon>0177/8075846</telefon>
+</autor>
+
+
+<!-- MENÜ-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- menue: Informationen für den Menü-Eintrag im Backend (papoo/interna) -->
+<menue>
+	<!-- menue.eintrag_de: Name des Menü-Punktes im Backend auf deutsch -->
+	<eintrag_de>Linkliste</eintrag_de>
+	<!-- menue.eintrag_en: Name des Menü-Punktes im Backend auf englisch -->
+	<eintrag_en>Link List</eintrag_en>
+	<!-- menue.icon: Pfad zum Menü-Icon des Menü-Punktes im Backend (relativ zum Plugin-Verzeichnis) -->
+	<icon>linkliste/bilder/pic_01.gif</icon>
+	<!-- menue.link: Name der Seite auf welche der Menü-Punkt im Backend verweisen soll -->
+	<link>plugin:linkliste/templates/linklisteplugin.html</link>
+
+	<!-- menue.submenue: Untermenü-Punkt für diesen Menü-Punkt im Backend, Struktur wie menue -->
+	<submenue>
+		<eintrag_de>Liste eingeben</eintrag_de>
+		<eintrag_en>Enter List</eintrag_en>
+		<icon>linkliste/bilder/pic_01.gif</icon>
+		<link>plugin:linkliste/templates/linklisteplugin_createlist.html</link>
+	</submenue>
+
+	<submenue>
+		<eintrag_de>Eintrag erstellen</eintrag_de>
+		<eintrag_en>create Entry</eintrag_en>
+		<icon>linkliste/bilder/pic_01.gif</icon>
+		<link>plugin:linkliste/templates/linklisteplugin_create.html</link>
+	</submenue>
+
+	<submenue>
+		<eintrag_de>Eintrag bearbeiten</eintrag_de>
+		<eintrag_en>Edit Entry</eintrag_en>
+		<icon>linkliste/bilder/pic_01.gif</icon>
+		<link>plugin:linkliste/templates/linklisteplugin_edit.html</link>
+	</submenue>
+
+	<submenue>
+		<eintrag_de>Einträge sortieren</eintrag_de>
+		<eintrag_en>Sort Entry</eintrag_en>
+		<icon>linkliste/bilder/pic_01.gif</icon>
+		<link>plugin:linkliste/templates/linklistesort.html</link>
+	</submenue>
+
+	<submenue>
+		<eintrag_de>Kategorie erstellen</eintrag_de>
+		<eintrag_en>create Category</eintrag_en>
+		<icon>linkliste/bilder/pic_01.gif</icon>
+		<link>plugin:linkliste/templates/linklistecat_create.html</link>
+	</submenue>
+
+	<submenue>
+		<eintrag_de>Kategorie bearbeiten</eintrag_de>
+		<eintrag_en>Edit Category</eintrag_en>
+		<icon>linkliste/bilder/pic_01.gif</icon>
+		<link>plugin:linkliste/templates/linklistecat_edit.html</link>
+	</submenue>
+
+	<submenue>
+		<eintrag_de>Kategorie sortieren</eintrag_de>
+		<eintrag_en>Sort Category</eintrag_en>
+		<icon>linkliste/bilder/pic_01.gif</icon>
+		<link>plugin:linkliste/templates/linklistecat_sort.html</link>
+	</submenue>
+
+	<submenue>
+		<eintrag_de>Datenbank Sicherung</eintrag_de>
+		<eintrag_en>Database dump</eintrag_en>
+		<icon>linkliste/bilder/pic_01.gif</icon>
+		<link>plugin:linkliste/templates/linklisteplugin_dump.html</link>
+	</submenue>
+</menue>
+
+
+<!-- KLASSEN-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- klasse: Informationen der Plugin-Klasse welche eingebunden werden sollen -->
+<klasse>
+	<!-- klasse.name: Name der Klassen-Instanz / des Objekts (also der Name des Dings, das mit $name = new xx_class(); erzeugt wird) -->
+	<name>linklisteplugin</name>
+	<!-- klasse.datei: Pfad zur Klassen-Datei (relativ zum Plugin-Verzeichnis) -->
+	<datei>linkliste/lib/linklisteplugin_class.php</datei>
+</klasse>
+
+
+
+<!-- CSS-INFORMATIONEN -->
+<!-- ***************** -->
+<!-- css: Pfad zur CSS-Datei (relativ zum Plugin-Verzeichnis) -->
+<css>linkliste/css/linklisteplugin.css</css>
+
+
+<!-- DATENBANK-INFORMATIONEN -->
+<!-- ****************** -->
+<datenbank>
+	<!-- datenbank.installation: Pfad zur SQL-Installations-Datei (relativ zum Plugin-Verzeichnis) -->
+	<installation>linkliste/sql/linklisteplugin_install.sql</installation>
+	<!-- datenbank.deinstallation: Pfad zur SQL-Deinstallations-Datei (relativ zum Plugin-Verzeichnis) -->
+	<deinstallation>linkliste/sql/linklisteplugin_deinstall.sql</deinstallation>
+</datenbank>
+
+<!-- MODUL-INFORMATIONEN -->
+<!-- ****************** -->
+
+<modul>
+	<!-- modul.datei: Datei-Name des Modul-Templates (relativ zum Plugin-Verzeichnis) -->
+	<datei>plugin:linkliste/templates/linklisteplugin_mod1.html</datei>
+
+	<!-- modul.name_de: Der deutsche Name des Moduls -->
+	<name_de>Link Liste - die Neuesten</name_de>
+	<!-- modul.beschreibung_de: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_de>Die neuesten Einträge.</beschreibung_de>
+
+	<!-- modul.name_en: Der deutsche Name des Moduls -->
+	<name_en>Link List - the newest</name_en>
+	<!-- modul.beschreibung_en: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_en>Link List with description.</beschreibung_en>
+
+	<!-- modul.modus: (optional) legt fest, ob das Modul in allen Bereichen, oder nur in einem bestimmten Bereich angezeigt werden kann.
+		mögliche Werte: "var" (default) Anzeige in allen Bereichen möglich, "fix" Anzeige nur in einem bestimmten Bereich möglich -->
+	<modus>var</modus>
+
+</modul>
+<!-- Einbindung der Sprach-Daten.
+	In dem hier angegebenen Verzeichnis sollten Dateien mit folgenden Namen liegen:
+	- messages_backend_[de|en|sp| .. etc.].inc.php
+	- messages_frontend_[de|en|sp| .. etc.].inc.php
+-->
+<messages>linkliste/messages</messages>
+
+
+</plugin>

@@ -144,70 +144,44 @@ class intern_home
 
 	/**
 	 * RSS Feed der papoo.de Seite einbinden
-	 *
-	 * @return bool
 	 */
 	function check_rss()
 	{
-		if ($this->cms->showpapoo==1) {
-			#require_once (PAPOO_ABS_PFAD."/lib/classes/extlib/Snoopy.class.inc.php");
+		if ($this->cms->showpapoo == 1) {
+			$url = "https://www.papoo.de/cms-blog/";
+			$daten = diverse_class::get_url_get(($url));
 
-			#require_once(PAPOO_ABS_PFAD."/lib/classes/xmlparser_class.php");
-			$url="https://www.papoo.de/cms-blog/";
-			#global $Snoopy;
-			#global $html;
-			#if (!is_object($html))
-			#{
-			#$html = new Snoopy();
-			#}
-			#$html->agent="Web Browser Interna";
-			#$html->referer=$_SERVER["HTTP_REFERER"];
-			#error_reporting(E_ALL);
-			#global $html;
-			#$html->fetch($url);
-			$daten=diverse_class::get_url_get(($url));
-			// $daten = $html->results;
-
-			$daten1=explode('id="artikel"></a>',($daten));
-			//<div class="printfooter">
-			$daten2=explode('<!-- MODUL: weiter -->',$daten1['1']);
-			$zwischen= $daten2['0'];
-			//Externe Links gehen ins Blank
-			$zwischen=str_ireplace(" src=\""," nixsrc=\"https://www.papoo.de",$zwischen);
-			$zwischen=str_ireplace("data-src=\"","src=\"https://www.papoo.de",$zwischen);
-
-			$zwischen=str_ireplace("href=\"","href=\"https://www.papoo.de",$zwischen);
-			$zwischen=str_ireplace("href=\"","target=\"blank\" href=\"",$zwischen);
-			$zwischen=strip_tags($zwischen,"<h2><a><img><br><p><span>");
-
-			$data=explode('//]]>',$zwischen);
-			$zwischen="";
-			$i=0;
-			if (is_array($data)) {
-				foreach ($data as $key=>$value) {
-					if ($i>2)continue;
-					$zwischen.=$value."<br /><br />";
-					$zwischen=str_ireplace("//","",$zwischen);
-
-					$i++;
-				}
+			if ($daten == false) {
+				$this->content->template['papoo_news'] = "Keine Verbindung!";
+				$this->content->template['menuid_aktuell'] = $this->checked->menuid;
+				return;
 			}
-			$zwischen=str_ireplace("http:www.papoo.de","https://www.papoo.de",$zwischen);
-			$zwischen=str_ireplace('class="teaserlink"','class="teaserlink pull-right"',$zwischen);
-			#$zwischen.="</div>";
-			if (empty($zwischen)) {
-				$zwischen="Keine Verbindung!";
-			}
-			$zwischen = htmlentities($zwischen);
-			$zwischen=str_ireplace("&bdquo;",'"',$zwischen);
-			$zwischen=str_ireplace("&ldquo;",'"',$zwischen);
-			$this->content->template['papoo_news']="nobr:".(html_entity_decode($zwischen));
+
+			$daten1 = explode('id="artikel"></a>', ($daten));
+			$daten2 = explode('<!-- MODUL: weiter -->', $daten1['1']);
+
+			$rssData = $daten2['0'];
+
+			// Strip out src tags
+			$rssData = preg_replace('#\ssrc=".*?"#', '', $rssData);
+
+			// Replace data-src attributes with src and set the real Papoo-Link
+			$rssData = preg_replace('#\sdata-src="(/.*?)"#', ' src="https://www.papoo.de$1"', $rssData);
+
+			// Edit href with real Papoo-Link and add target="_blank"
+			$rssData = preg_replace('#\shref="(/.*?)"#', ' href="https://www.papoo.de$1" target="_blank" rel="noopener"', $rssData);
+
+			// Strip non-allowed html-tags
+			$rssData = strip_tags($rssData, "<h2><a><img><br><p><span>");
+
+			$rssData .= "<br /><br />";
+
+			$rssData = htmlentities($rssData);
+			$rssData = str_ireplace("&bdquo;", '"', $rssData);
+			$rssData = str_ireplace("&ldquo;", '"', $rssData);
+			$this->content->template['papoo_news'] = "nobr:" . (html_entity_decode($rssData));
 			$this->content->template['menuid_aktuell'] = $this->checked->menuid;
 		}
-		#$zwischen=str_ireplace("href=\"/index.php\?","target=\"blank\" href=\"".$seite.$index."?",$zwischen);
-		#$zwischen= preg_replace('/\[<a(.*?)action=edit(.*?)>bearbeiten<\\/a>\]/i', '', $zwischen);
-		#$zwischen= preg_replace('/\[<a(.*?)action=edit(.*?)>edit<\\/a>\]/i', '', $zwischen);
-		return true;
 	}
 
 	/**

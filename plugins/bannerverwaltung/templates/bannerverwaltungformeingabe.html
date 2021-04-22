@@ -1,0 +1,140 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{if $neuereintrag}
+<h2>{$plugin.bannerverwaltung.neuereintrag}</h2>
+
+{/if}
+{if $altereintrag}
+<h2>{$plugin.bannerverwaltung.altereintrag}</h2>
+{/if}
+<p>{$plugin.bannerverwaltung.name_code}</p>
+
+
+  <form action="#" method="post">
+
+  <fieldset>
+   <legend>{$plugin.bannerverwaltung.bannereintrag}
+    </legend>
+
+  <label for="banner_name">{$plugin.bannerverwaltung.banner_name}</label><br />
+  <input type="text" name="banner_name" id="banner_name" value="{$banner_name}" size="40" maxlength="254"/>
+  <br />
+  
+  <label for="banner_code">{$plugin.bannerverwaltung.banner_code}</label><br />
+  <div style="border: 1px solid #333;background:#fff;;">
+
+  <textarea name="banner_code" id="banner_code" rows="10" cols="50" style="width:99%;background:#fff;">{$banner_code}</textarea>
+  </div>
+  {literal}
+  <script type="text/javascript">
+			var editor = CodeMirror.fromTextArea('banner_code', {
+			height: "450px",
+			width: "100%",
+			//lineNumbers: "on",
+			parserfile: "parsecss.js",
+			stylesheet: "css/csscolors.css",
+			path: "js/"
+			});
+		</script>
+{/literal}
+  <br />
+   <label for="banner_menuid">{$plugin.bannerverwaltung.banner_menuid}</label>
+   <br />
+  <select name="banner_menuid" id="banner_menuid" title="" style="width: 40%;" size="1">
+    <option value="">{$plugin.bannerverwaltung.auswaehlen}</option>
+
+    <option value="all" {if $banner_menuid == 'all'}selected="selected"{/if} >{$plugin.bannerverwaltung.immer}</option>
+    {foreach item=menu from=$menulist_data}
+								{if $menu.menuid}
+									<option  value="{$menu.menuid}" class="levelshift_{$menu.level}" {if $menu.menuid == $banner_menuid}selected="selected"{/if} >
+										{$menu.nummer}[{$menu.menuid}]: {$menu.menuname}
+									</option>
+								{/if}
+							{/foreach}
+
+    </select>
+    <a href="#tmp_sprung" onclick="createInput('banner_menuid', 'menliste', '{$message_826}');" class="submit_back">{$message_824}</a>
+			<br />
+			<br />
+			<ul id="menliste">
+				{foreach item=menu from=$menulist_data}
+					{foreach item=dat from=$banner_ar}
+						{if $dat.banner_menu_id==$menu.menuid}
+							<li class="menlistli" id="liid_{$dat.banner_menu_id}">
+								<input value="{$dat.banner_menu_id}" id="inid_{$menu.menuid}" name="inhalt_ar[cattext_ar][{$menu.nummer}]" type="hidden" />
+								<span>{$menu.nummer}[{$menu.menuid}]: {$menu.menuname}</span>
+								<a href="#tmp_sprung" onclick="delinput('{$menu.menuid}');" class="submit_back_del">{$menu.nummer}[{$menu.menuid}]: {$menu.menuname} {$message_826}</a>
+							</li>
+						{/if}
+					{/foreach}
+				{/foreach}
+			</ul>
+   <br />
+
+   <label for="banner_artikelid">{$plugin.bannerverwaltung.banner_artikelid}</label>
+   <br />
+  <select name="banner_artikelid" id="banner_artikelid" title="" style="width: 40%;" size="1">
+    <option value="">{$plugin.bannerverwaltung.auswaehlen}</option>
+    {foreach item=adat from=$artikel_liste}
+
+    <option value="{$adat.reporeID}" {if $adat.reporeID == $banner_artikelid}selected="selected"{/if}>{$adat.header}</option>
+    {/foreach}
+    </select>
+	<br />
+
+<label for="banner_modulid">{$plugin.bannerverwaltung.banner_modulid}</label>
+   <br />
+   <select name="banner_modulid" id="banner_modulid" title="" style="width: 40%;" size="1">
+		<option value="">{$plugin.bannerverwaltung.auswaehlen}</option>
+		<option value="1" {if $banner_modulid == 1}selected="selected"{/if}>{$plugin.bannerverwaltung.modul} 1</option>
+		<option value="2" {if $banner_modulid == 2}selected="selected"{/if}>{$plugin.bannerverwaltung.modul} 2</option>
+		<option value="3" {if $banner_modulid == 3}selected="selected"{/if}>{$plugin.bannerverwaltung.modul} 3</option>
+		<option value="4" {if $banner_modulid == 4}selected="selected"{/if}>{$plugin.bannerverwaltung.modul} 4</option>
+		<option value="5" {if $banner_modulid == 5}selected="selected"{/if}>{$plugin.bannerverwaltung.modul} 5</option>
+		
+		<option value="6" {if $banner_modulid == 6}selected="selected"{/if}>{$plugin.bannerverwaltung.modul} 6</option>
+		<option value="7" {if $banner_modulid == 7}selected="selected"{/if}>{$plugin.bannerverwaltung.modul} 7</option>
+		<option value="8" {if $banner_modulid == 8}selected="selected"{/if}>{$plugin.bannerverwaltung.modul} 8</option>	
+		<option value="9" {if $banner_modulid == 9}selected="selected"{/if}>{$plugin.bannerverwaltung.modul} 9</option>	
+	<option value="10" {if $banner_modulid == 10}selected="selected"{/if}>{$plugin.bannerverwaltung.modul} 10</option>
+   </select>
+	<br />
+	<label for="banner_lang" >{$plugin.bannerverwaltung.banner_sprache}</label>
+	<br />
+{*<!-- Hier kann eine Sprache ausgew�hlt werden. -->*}
+    <select name="banner_lang" id="banner_lang" title="" style="width:40%;" size="1">
+{*<!-- ausw�hlen/select -->*}
+    <option value="">({$message_294})</option>
+    {foreach item=lang from=$language}
+				<option value="{$lang.lang_short}" {if $lang.lang_short==$banner_lang} selected="selected" {/if} >
+					{$lang.language}
+				</option>
+			{/foreach}
+    </select>
+    <br />
+
+	<label for="banner_zeitrahmen">{$plugin.bannerverwaltung.banner_zeitrahmen}</label>
+	<br />
+	{$plugin.bannerverwaltung.format}
+	<label for="banner_start">{$plugin.bannerverwaltung.veroeffentlichen_von}</label><br />
+	 <input type="text" name="banner_start" id="banner_start" value="{$banner_start}" size="8" maxlength="255"/><br />
+	 <label for="banner_stop">{$plugin.bannerverwaltung.veroeffentlichen_bis}</label><br />
+	 <input type="text" name="banner_stop" id="banner_stop" value="{$banner_stop}" size="8" maxlength="255"/><br /><br />
+	 <label for="banner_count_yn">{$plugin.bannerverwaltung.zaehlenyn}</label><br />
+<input type="checkbox" name="banner_count_yn" id="banner_count_yn" value="1" {if $banner_count_yn==1}checked="checked"{/if}><br /><br />
+  <input type="hidden" name="banner_id" value="{$banner_id}"/>
+  <br /><br />
+
+
+  </fieldset>
+  <fieldset>
+  <legend>{$plugin.bannerverwaltung.eintragen}
+   </legend>
+{if $altereintrag}
+
+  <input type="submit" style="float:right" class="submit_back_red" name="submitdel" value="{$plugin.bannerverwaltung.loeschen}"/>
+{/if}
+
+   <input type="submit" class="submit_back_green" name="submitentry" value="{$plugin.bannerverwaltung.eintragen}"/>
+   </fieldset>
+  </form>
+  {/if}

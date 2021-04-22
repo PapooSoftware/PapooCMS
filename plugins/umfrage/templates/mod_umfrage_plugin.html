@@ -1,0 +1,38 @@
+{if $module_aktiv.mod_umfrage_plugin}
+	<!-- MODUL: umfrage_plugin -->
+	<div class="modul" id="mod_umfrage_plugin">
+	<h3>{$UMFMSG_F_AKTU_UMF}:</h3>
+		{* <!--
+		<div class="mod_title">
+			<h3>{$UMFMSG_F_AKTU_UMF}:</h3>
+		</div>
+		--> *}
+		<div class="inner_mod">
+			<form method="post" action="{$slash}" >
+				<fieldset>
+					<legend>{$UMFMSG_F_AKTU_UMF}:</legend>
+					&quot;{$mod_umfrage_name}&quot;<br />
+					<br />
+					{if $mod_umfrage_weiche == "UMFRAGE"}
+						{foreach item=antwort from=$mod_umfrage_infos}
+							<input type="radio" name="antwort_id" id="antwort_id_{$antwort.umfant_id}" value="{$antwort.umfant_id}" />
+							<label for="antwort_id_{$antwort.umfant_id}">
+								{$antwort.umfantlan_text}
+							</label><br />
+						{/foreach}
+						<input type="submit" name="umfrage_stimme_abgeben" value="{$UMFMSG_F_BTN_ABSTIMMEN}" class="mod_submit"/>
+					{/if}
+					{if $mod_umfrage_weiche == "ANTWORT_JETZT"}
+						{$UMFMSG_F_ABSTIMMEN_DANK}<br />
+						<br />
+					{/if}
+					{if  $mod_umfrage_link_ergebnisse}
+						<input type="submit" name="ergebnis" value="{$UMFMSG_F_LNK_ERGEBNIS}" class="button" />
+					{/if}
+					<input type="hidden" name="umfrage_id" value="{$mod_umfrage_id}" />
+				</fieldset>
+			</form>
+		</div>
+	</div>
+	<!-- ENDE MODUL: umfrage_plugin -->
+{/if}

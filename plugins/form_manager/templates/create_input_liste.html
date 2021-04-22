@@ -1,0 +1,48 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+<h3>Liste der Felder und Gruppierungen</h3>
+<table summary="{$message_707}" style="width:99%;">
+
+
+{foreach item=dat from=$gfliste}
+<form method="POST" action="" >
+<input type="hidden" name="plugin_cform_group_id" value="{$dat.plugin_cform_group_id}" />
+<input type="hidden" name="form_manager_id" value="{$form_manager_id}" />
+<tr style="background:#eee;line-height:20px;hight:20px;font-size:150%;">
+<td colspan="2" style="">
+{if $dat.plugin_cform_group_id=="xx"}
+	  {$plugin.form_manager.grupfield} {$dat.plugin_cform_group_text}
+{else}
+ <a href="{$fl_link}&form_manager_id={$form_manager_id}&grupid={$dat.plugin_cform_group_id}"> {$plugin.form_manager.grupfield} {$dat.plugin_cform_group_text} {$plugin.form_manager.bearbeiten2}</a>
+{/if}
+</td>
+<td><label for="plugin_cform_group_order_id{$dat.plugin_cform_group_id}">	{$message_690} {$dat.plugin_cform_group_text}</label> </td>
+<td><input id="plugin_cform_group_order_id{$dat.plugin_cform_group_id}" name="plugin_cform_group_order_id" type="text" value="{$dat.plugin_cform_group_order_id}" size="2" /></td>
+<td>
+ <input type="submit" class="submit_back" name="submitorder_gr" value="{$message_458}" /></td>
+</tr>
+</form>
+{if $dat.felder}
+
+	{foreach item=idat from=$dat.felder}
+
+	<form method="POST" action="" >
+	<tr >
+	<td>
+<input type="hidden" name="plugin_cform_id" value="{$idat.plugin_cform_id}" />
+<a href="{$fl_link}&form_manager_id={$form_manager_id}&feldid={$idat.plugin_cform_id}">{$idat.plugin_cform_label|escape:"html"}</a>  </td>
+<td>{$idat.plugin_cform_type}</td>
+<td><label for="plugin_cform_order_id{$idat.plugin_cform_id}">	{$message_690} {$idat.plugin_cform_label|escape:"html"}</label> </td>
+<td width="100px"><input id="plugin_cform_order_id{$idat.plugin_cform_id}" name="plugin_cform_order_id" type="text" value="{$idat.plugin_cform_order_id}" size="4" /></td>
+<td>
+ <input type="submit" class="submit_back" name="submitorder" value="{$message_458}" /></td>
+ </tr>
+</form>
+
+</li>
+	{/foreach}
+
+{/if}
+{/foreach}
+	</table>
+</ul>
+{/if}

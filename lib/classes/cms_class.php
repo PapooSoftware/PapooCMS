@@ -2335,6 +2335,21 @@ class cms
 			}
 		} //Normale Templates
 		else {
+			// Menülink analysieren
+			$urlParts = parse_url($tem);
+			parse_str(str_ireplace('amp;', '', $urlParts['query'] ?? ''), $params);
+
+			// Interner Link mit Parametern
+			if (empty($urlParts['scheme']) && count($params)) {
+				// Parameter aus dem Menülink extrahieren und in checked integrieren
+				foreach ($params as $key => $value) {
+					$this->checked->$key = trim(strip_tags($value));
+				}
+
+				// Menülink auf den Dateinamen reduzieren
+				$tem = $urlParts['path'];
+			}
+
 			$templateToFile = [
 				// $template => $file
 				'index.php' => 'index.html', 'forum.php' => 'forum.html',
@@ -2418,7 +2433,7 @@ class cms
 	function get_reporeid($header)
 	{
 		$header = urldecode($header);
-		if (preg_match("/-m-([\d]+)/", $header, $match) !== false && $this->mod_free == 1) {
+		if (preg_match("/-m-([\d]+)\b/", $header, $match) !== false && $this->mod_free == 1) {
 			IfNotSetNull($match[0]);
 			IfNotSetNull($match[1]);
 			$this->checked->menuid = (int)$match[1];

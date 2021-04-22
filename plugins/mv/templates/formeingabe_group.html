@@ -1,0 +1,60 @@
+
+{if !$altereintrag AND $new_group_in_work}
+	<h2>{$plugin.mv.Gruppierung_erstellen}</h2>
+{elseif !$new_group_in_work}
+	<h2>{$plugin.mv.Gruppierung_bearbeiten}</h2>
+{/if}
+{if $fehler}<div class="error">{$fehler}</div>{/if}
+{if $fehler14}<div class="error">{$plugin.mv.fielddefinition.error14}</div>{/if}
+{if !$fragedel}
+	<form method="post" action="#" name="suche" id="formi" style="width:100%" enctype="multipart/form-data">
+		<fieldset>
+			{*include file=../../../plugins/mv/templates/formeingabe_editor.html*}
+			{*<!--  Name der Gruppe:   -->*}
+			<legend>{$plugin.mv.namegroup} *</legend>
+			<label for="mvcform_group_name">{$plugin.mv.nameeingeb}</label>
+			<br />
+			<input id="mvcform_group_name" name="mvcform_group_name" value="{$dat.0.mvcform_group_name}" type="text" 
+			{if $dat.0.mvcform_group_id}readonly="readonly"{/if} />
+		</fieldset>
+		{*<!--  Name der Gruppe im Frontend bzw. Sprache:   -->*}
+		<fieldset>
+			<legend>{$plugin.mv.fieldset} *</legend>
+			<label for="mvcform_group_text">{$plugin.mv.Bezeichung} ({$language_form[0].language})</label>
+			<br />
+			<input id="mvcform_group_text" name="mvcform_group_text" value="{$language_form[0].mvcform_group_text}" size="35" maxlength="254" type="text" />
+			<br />
+		</fieldset>
+		<input type="hidden" name="mvcform_group_id" value="{$dat.0.mvcform_group_id}" />
+		<input type="hidden" name="mv_id" value="{$mv_id}" />
+		{if $user_darf_schreiben}
+			<fieldset>
+				<legend>{$plugin.mv.Eintragen}</legend>
+				{if !$dat.0.mvcform_group_id}
+					<input type="submit" class="submit_back" value="{$plugin.mv.erstellen}" name="submit_group" />
+				{else}
+					{if $is_admin=="ok"}
+						<input type="submit" class="submit_back" value="{$plugin.mv.aendern}" name="submit_group" />
+						{if !$cannot_delete_group}
+							<br />
+							<input style="background:red; float:left;margin-right:50px;" type="submit" name="del_group" value="{$plugin.mv.loeschen3}"/>
+						{else}<p>{$plugin.mv.cannot_delete_group}</p>
+						{/if}
+					{/if}
+				{/if}
+			</fieldset>
+		{/if}
+	</form>
+{elseif !$cannot_delete_group}
+	<h2>{$plugin.mv.loeschen}</h2>
+	<form action="#" method="post">
+		<fieldset>
+			<legend>{$plugin.mv.loeschen2}</legend>
+			<strong>{$was_del}</strong>
+			<input type="hidden" name="mv_id" value="{$mv_id}"/>
+			<input type="hidden" name="mvcform_group_id" value="{$mvcform_group_id}"/>
+			<br />
+			<input style="background:red; float:left;margin-right:50px;" type="submit" name="del_group_echt" value="{$plugin.mv.loeschen3}"/>
+		</fieldset>
+	</form>
+{/if}

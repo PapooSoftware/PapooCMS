@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<plugin version="3">
+
+<name>LangExport-Plugin / Sprachen umkopieren</name> 
+<beschreibung_de><![CDATA[Mit diesem Plugin werden die Daten einer bestimmten Sprache exportiert oder Sprachdateien zwischen verschiedenen Sprachen als Vorlagen umkopiert.]]></beschreibung_de>
+<beschreibung_en><![CDATA[This Plugin export specific language-data.]]></beschreibung_en>
+
+<version>1.1</version>
+
+<datum>23.07.2007</datum>
+
+<autor>
+	<name>Stephan Bergmann</name>
+	<kontakt><![CDATA[Stephan Bergmann
+Rembrandtstr. 10/1
+72768 Reutlingen]]></kontakt>
+	<email>S.Bergmann@XiMiX.de</email>
+	<telefon>07121 / 60 39 88</telefon>
+</autor>
+<autor>
+	<name>Carsten Euwens</name>
+	<kontakt><![CDATA[Carsten Euwens
+    Papoo Software
+    Heerstr. 110
+    53111 Bonn]]></kontakt>
+	<email>info@papoo.de</email>
+	<telefon>0228 280 56 68</telefon>
+</autor>
+<menue>
+	<eintrag_de>Sprach-Export / Kopieren </eintrag_de>
+	<eintrag_en>language-export</eintrag_en>
+	<icon>lang_export/bilder/icon_admin_menu.gif</icon>
+	<link>plugin:lang_export/templates/lang_export_back.html</link>
+</menue>
+
+<klasse>
+	<name>lang_export</name>
+	<datei>lang_export/lib/lang_export_class.php</datei>
+</klasse>
+
+<messages>lang_export/messages</messages>
+
+</plugin>

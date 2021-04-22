@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<plugin version="3.7">
+	<name>Rating - Plugin - Bewertungs-Modul</name> 
+	<beschreibung_de><![CDATA[Bewertungs-Modul]]></beschreibung_de>
+	<beschreibung_en><![CDATA[Rating Module]]></beschreibung_en>
+	<version>1.1</version>
+	<papooid>300</papooid>
+	<link>http://www.khmweb.de</link> 
+	<datum>04.06.2013</datum>
+	<autor>
+		<name>khmweb</name>
+		<kontakt><![CDATA[khmweb Sonnleitstrasse 6 83483 Bischofswiesen]]></kontakt>
+		<email>khm@khmweb.de</email>
+		<telefon>+49 8652 978487</telefon>
+	</autor>
+	<menue>
+		<eintrag_de>Bewertungs-Modul</eintrag_de>
+		<eintrag_en>Rating Module</eintrag_en>
+		<icon>rating/bilder/rating_icon.gif</icon>
+		<link>plugin:rating/templates/rating_back.html</link>
+		<submenue>
+			<eintrag_de>Konfiguration</eintrag_de>
+			<eintrag_en>Configuration</eintrag_en>
+			<icon>rating/bilder/rating_icon.gif</icon>
+			<link>plugin:rating/templates/rating_back_config.html</link>
+		</submenue>
+		<submenue>
+			<eintrag_de>Bewertungen</eintrag_de>
+			<eintrag_en>Ratings</eintrag_en>
+			<icon>rating/bilder/rating_icon.gif</icon>
+			<link>plugin:rating/templates/rating_back_list.html</link>
+		</submenue>
+	</menue>
+	<klasse>
+		<name>rating</name>
+		<!-- klasse.datei: Pfad zur Klassen-Datei (relativ zum Plugin-Verzeichnis) -->
+		<datei>rating/lib/rating_class.php</datei>
+	</klasse>
+	<css>rating/css/rating.css</css>
+	<datenbank>
+		<installation>rating/sql/rating_install.sql</installation>
+		<deinstallation>rating/sql/rating_deinstall.sql</deinstallation>
+	</datenbank>
+	<modul>
+		<datei>plugin:rating/templates/mod_rating.html</datei>
+		<name_de>Bewertungs-Modul</name_de>
+		<beschreibung_de>Bewertungen</beschreibung_de>
+		<name_en>Rating Module</name_en>
+		<beschreibung_en>Ratings</beschreibung_en>
+		<modus>var</modus>
+	</modul>
+<messages>rating/messages</messages>
+</plugin>

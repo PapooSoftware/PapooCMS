@@ -1,0 +1,75 @@
+{* Mitteilungen oben *}
+{if $faq_header}<h1>{$faq_header}</h1>{/if}
+
+{if $description}<div>{$description}</div>{/if}
+{if !$faq_no_login} {* Angemeldeter User? *}
+	{if $faq_no_writeaccess} {* Ja, Schreibrecht vorhanden? *}
+		<!--<p class="bold_red">{$plugin.faq_front.message.no_writeaccess}</p><br />-->
+	{/if}
+{else} {* Nicht angemeldet *}
+	<p class="bold_red">{$plugin.faq_front.message.no_login}</p><br />
+{/if}
+{if $faq_no_readaccess} {* Leserecht vorhanden? *}
+	<p class="bold_red">{$plugin.faq_front.message.no_readaccess}</p><br /> {* Keine Leserechte *}
+{else}
+	{if $cat_data}
+		<div class="artikel ie6width"> 
+{* Suchformular *}
+			<!--<form id="suche_faq" method="post" action="{$slash}plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_front.html" class="align_right">
+				<fieldset class="no_bg_no_border">
+					<input type="text" id="search_faq" name="search_faq" size="11" value="{$search_faq}" onblur="if(this.value=='')this.value='{$search_faq}';"
+						onfocus="if(this.value=='{$search_faq}')this.value='';" title="{$message_2136}" />
+					<input class="senden" type="submit" name="find_faq" value="{$message_2135}" title="{$message_2135}" />
+				</fieldset>
+			</form>
+			-->
+{* diverse Meldungen zur Verarbeitung *}
+			{if $faq_is_edit}<br /><div class="message">{$plugin.faq_front.message.faq_is_edit}</div><br />{/if}
+			{if $faq_question_is_answered}<br /><div class="message">{$plugin.faq_front.message.faq_question_is_answered}</div><br />{/if}
+			{if $faq_is_new}<br /><div class="message">{$plugin.faq_front.message.faq_is_new}</div>
+				{if $shownewfaq}<div class="div_margins">{$plugin.faq_front.text.shownewfaq}</div>{/if}
+			{/if}
+			{if $faq_question_is_new}<br /><div class="message">{$plugin.faq_front.message.faq_is_new_question}</div>
+				{if $shownewf}<div class="div_margins">{$plugin.faq_front.text.shownewf}</div>{/if}
+			{/if}
+			
+{* Kategorien/FAQ Ausgabe *}
+				{* Layout-Typ feststellen und anzeigen *}
+				{if $faq_layout == "Linkliste"}
+					{include file=../../plugins/faq/templates/faq_front_linkliste.html}
+				{else}
+					{if $faq_layout == "Linkliste 2"}
+						{include file=../../plugins/faq/templates/faq_front_linkliste2.html}
+					{else}
+						{if $faq_layout == "Linkliste 3"}
+							{include file=../../plugins/faq/templates/faq_front_linkliste3.html}
+						{else}
+							{if $faq_layout == "Linkliste 4"}
+								{include file=../../plugins/faq/templates/faq_front_linkliste4.html}
+							{else}
+								{if $faq_layout == "Linkliste 5"}
+								{include file=../../plugins/faq/templates/faq_front_linkliste5.html}
+								{else}
+									{if $faq_layout == "Extrapage"}
+										{include file=../../plugins/faq/templates/faq_front_extrapage.html}
+									{else}
+										{include file=../../plugins/faq/templates/faq_front_kompakt.html}
+									{/if}
+								{/if}
+							{/if}
+						{/if}
+					{/if}
+				{/if}
+			<br />
+		</div>
+	{/if}
+{/if}
+{* Mitteilungen unten *}
+{if !$faq_no_login} {* Angemeldeter User? *}
+	{if !$faq_no_writeaccess} {* Schreibrecht vorhanden? *}
+	{else} {* Keine Schreibrechte *}
+		<!--<p class="bold_red">{$plugin.faq_front.message.no_writeaccess}</p><br />-->
+	{/if}
+{else} {* Nicht angemeldet *}
+	<p class="bold_red">{$plugin.faq_front.message.no_login}</p><br />
+{/if}

@@ -1,0 +1,78 @@
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+<div class="artikel">
+	<a ></a>
+	<div class="metaebene_content_dzvhae">
+		<h1>{$plugin.mv.felder_headline}</h1>
+		{*<!-- {include file=hilfe.html} -->*}
+		{*<!-- Metaebene, wird nur angezeigt, wenn auch das Plugin (genau:Sprachdatei des Plugins) installiert ist -->*}
+		{if $plugin_metaebene=="ok"}
+			{*<!-- Systemmessage was zuletzt gemacht wurde -->*}
+			{if $mv_system_msg!=""}<div class="message">{$mv_system_msg}</div>{/if}
+			{*<!-- Fehlermeldung Allgemein -->*}
+			{if $mv_system_error!=""}<div class="error">{$mv_system_error}</div><br />{/if}
+			{*<!-- Systemmessage was zuletzt gemacht wurde -->*}
+			{if $grp_changed}<div class="message">{$plugin.mv.grp_changed}</div>{/if}
+			{if $grp_saved}<div class="message">{$plugin.mv.grp_saved}</div>{/if}
+			{if $delok}<div class="message">{$plugin.mv.delete}</div>{/if}
+			{if $change_ok}<div class="message">{$plugin.mv.change_ok}</div>{/if}
+			{if $new_ok}<div class="message">{$plugin.mv.daten_eingetragen}</div>{/if}
+            {if $fehler15
+				AND !$formeingabe_fehler}<div class="error">{$plugin.mv.fielddefinition.error15}</div>{/if}
+		{/if}
+		<p> </p>
+		{if $kein_pflichtfeld_fe}<div class="error">{$plugin.mv.fields.kein_pflichtfeld_fe}</div>{/if}
+		{if $kein_pflichtfeld_be}<div class="error">{$plugin.mv.fields.kein_pflichtfeld_be}</div>{/if}
+		{if $kein_pflichtfeld_fe OR $kein_pflichtfeld_be}<div class="error">{$plugin.mv.fields.kein_pflichtfeld_be_fe}</div>{/if}
+		{*<!-- Fehlermeldung -->*}
+		{*<!-- {if $meta_error_kein_zutritt}
+			<div class="error">{$plugin.mv.meta_error_kein_zutritt}</div>
+			<br />
+		{/if} -->*}
+		<!-- Feld editieren -->
+		{if $altereintrag=="new"
+        	AND !$formeingabe_fehler}
+            {include file=../../../plugins/mv/templates/select_field_type.html}
+        {elseif $altereintrag=="1"
+        	OR $altereintrag=="new_next"
+            OR $formeingabe_fehler} {include file="../../../plugins/mv/templates/formeingabe_$mvcform_type.html"}
+		{/if}
+		<!-- Gruppe editieren -->
+		{if $groupedit=="ok"}
+			{include file=../../../plugins/mv/templates/formeingabe_group.html}
+		{/if}
+		{if $metaebene_name == ""}
+			<strong>{$plugin.mv.metaebene_keine2}</strong>
+			<br /><br />
+			<a href="{$link_meta}&mv_id={$mv_id}&selected_meta_gruppe=neu">{$plugin.mv.metaebene_neu}</a>
+		{/if}
+		<!-- Alle Gruppen und Felder auflisten -->
+		{if $form=="ok"}
+			{if $plugin_metaebene=="ok"}
+				<h3>{$plugin.mv.metaebene} </h3>
+				<strong>
+					{if $metaebene_name != ""}
+						{$metaebene_name} [ID = {$metaebene_name_id}]
+					{/if}
+				</strong>
+				<br /><br />
+				<a href="{$link_meta}&mv_id={$mv_id}&selected_meta_gruppe=neu">{$plugin.mv.metaebene_neu}</a>
+			{/if}
+			<div>
+				<h3>{$plugin.mv.gruppe_feld_erstellen}</h3>
+				<ul>
+					<li><a href="{$link}&mv_id={$mv_id}&pfgruppeid=new">{$plugin.mv.gruperstell}</a></li>
+					{if $gruppeok}
+						<li><a href="{$link}&mv_id={$mv_id}&pffeldid=new">{$plugin.mv.Feld_erstellen}</a></li>
+					{else}
+						{$plugin.mv.erstell_grupp}
+					{/if}
+				</ul>
+			</div>
+			{include file=../../../plugins/mv/templates/create_input_liste.html} {* Gruppen und Felder anzeigen *}
+		{/if}
+	</div>
+	<!-- Rechte Fehlermeldung-->
+	{include file=rechte.html}
+</div>
+{include file=foot.inc.html}

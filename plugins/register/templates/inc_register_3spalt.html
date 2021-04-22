@@ -1,0 +1,47 @@
+<div class="subcolumns">
+	<div class="c33l">
+		<div class="subc">
+			
+			<ul class="register_liste">
+				{foreach item=register from=$plugin.register.register_liste}
+
+{if $register.break}
+			</ul>
+		</div>
+	</div>
+	
+	<div {if $register.break_last}
+		 	class="c33r"
+		 {else}
+		 	class="c33l"
+		 {/if}
+	>
+		<div class="subc">
+			<ul class="register_liste">
+{/if}
+
+					<li>
+						<strong class="buchstabe">{$register.buchstabe}</strong>
+						
+						{if $register.eintraege}
+							<ul>
+								{foreach item=eintrag from=$register.eintraege}
+									<li>
+										{if $eintrag.reg_name == NULL}
+											<a href="javascript:register_eintrag_zeigen({$eintrag.reg_id})" class="register_reg_{$eintrag.reg_reg_id}">{$plugin_shop_fehlt_eintrag}</a>
+										{else}
+											<a href="javascript:register_eintrag_zeigen({$eintrag.reg_id})" class="register_reg_{$eintrag.reg_reg_id}">{$eintrag.reg_name}</a>
+										{/if}
+									</li>
+								{/foreach}
+							</ul>
+						{else}
+							<ul><li>.. kein Eintrag</li></ul>
+						{/if}
+					</li>
+				{/foreach}
+			</ul>
+			
+		</div>
+	</div>
+</div>

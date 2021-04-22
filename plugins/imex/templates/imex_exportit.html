@@ -1,0 +1,66 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+	<h1>Import / Export</h1>
+	<p>Sie k&ouml;nnen hier die Daten exportieren. W&auml;hlen Sie dazu eine Tabelle aus und bestimmen Sie das Format.
+	Dier Datei wird anschlie&szlig;end als Download angeboten.</p>
+	{if $no_table_selected}<div class="error">{$message.plugin.test.no_table_selected}</div>{/if}
+	{if $delete}
+	<h2>Die Datei wurde gel&ouml;scht.</h2>
+	{/if}
+	{if $file}
+	<h2>Export CSV/XML Datei downloaden</h2>
+	<p>Laden Sie hier die Datei runter. Klicken Sie nach dem Download auf Datei l&ouml;schen um die Datei auf dem Server zu l&ouml;schen.</p>
+	<ul>
+	<li>
+	<a href="{$pfad}{$file}" download="{$pfad}{$file}">{$file} downloaden</a>
+	</li>
+	<li>
+	<a href="{$self}&file={$file}&delfile=ok">{$file} l&ouml;schen</a>
+	</li>
+	</ul>
+	{else}
+	<h2>Export CSV/XML Datei erstellen</h2>
+	<form action="" method="post" id="formi">
+	<fieldset>
+  <legend>Tabelle ausw&auml;hlen</legend>
+  <label for="tabelle">Tabelle ausw&auml;hlen</label>
+  <select name="tabelle" id="tabelle" title="" style="width: 40%;" size="1">
+    <option value="">(select){$plugin.imex.ausws}</option>
+   
+  {foreach item=sprach key=tabname from=$tabtar}
+   <option value="{$tabname}" {if $tabelle == $tabname}selected="selected"{/if}>{$tabname}</option>
+  {/foreach}
+  </select>
+  </fieldset>
+  <fieldset>
+  <legend>Format</legend>
+ <input type="radio" name="format" id="format1" {if $format == "csv"}checked="checked"{/if} value="csv" /> <label for="format1">CSV Format</label>
+ <br />
+ <input type="radio" name="format" {if $format == "xml"}checked="checked"{/if} id="format2" value="xml" /> <label for="format2">XML Format</label>
+  </fieldset>
+  <fieldset>
+  <legend>Erste Zeile mit Feldnamen bei CSV?</legend>
+ <input type="radio" name="feld" {if $feld == "ohne"}checked="checked"{/if} id="feld1" value="ohne" /> <label for="feld1">Ohne Feldnamen</label>
+ <br />
+ <input type="radio" name="feld" {if $feld == "mit"}checked="checked"{/if} id="feld2" value="mit" /> <label for="feld2">Mit Feldnamen</label>
+  </fieldset>
+  <fieldset>
+  <legend>Export starten</legend>
+ <input type="submit" class="submit_back_green" name="startexport" value="Export starten" />
+  </fieldset>
+  <input type="hidden" name="delete" value=""/>
+	</form>
+	{/if}
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

@@ -1,0 +1,33 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+<h2>{$message_5840}</h2>
+<p>{$message_5841}</p>
+<p>{$message_5842}</p>
+
+  <form action="#" method="post" >
+  <fieldset> 
+  <legend>{$message_5843}
+   </legend>
+  <label for="usefulservices_google_verify">{$message_5844}</label><br />
+ <input type="text" name="usefulservices_google_verify" id="usefulservices_google_verify" value="{$usefulservices_google_verify}" size="30"/><br /><br />
+  
+  <input type="submit" class="submit_back_green" name="submitgoogleverify" value="{$message_5845}"/>
+ 
+  
+  </fieldset>
+  </form>
+  
+
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

@@ -1,0 +1,47 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{if !$altereintrag}<h2>{$plugin.form_manager.Gruppierung_erstellen}</h2>
+{/if}
+{if $fehler}
+<div style="color:red; border:1px solid black;">{$fehler}</div>
+{/if}
+<form method="post"  action="#" name="suche"
+ id="formi" style="width:100%" enctype="multipart/form-data">
+<p>
+
+<fieldset>
+
+ <br />
+{include file=../../../plugins/form_manager/templates/formeingabe_editor.html}
+
+{*<!--  Email:   -->*}
+<legend>{$plugin.form_manager.namegroup}</legend>
+<label for="plugin_cform_group_name">{$plugin.form_manager.nameeingeb}</label><br />
+<input id="plugin_cform_group_name" name="plugin_cform_group_name" value="{$dat.0.plugin_cform_group_name}" type="text" />
+</fieldset>
+<fieldset>
+<legend>{$plugin.form_manager.fieldset}</legend>
+{foreach item=lang from=$language_form}
+
+ <label for="plugin_cform_group_text{$lang.lang_id}">{$plugin.form_manager.Bezeichung} ({$lang.language})</label> <br />
+<input id="plugin_cform_group_text{$lang.lang_id}" name="plugin_cform_group_text[{$lang.lang_id}]" value="{$lang.plugin_cform_group_text}" size="35"
+ maxlength="254" type="text" /><br />
+ {/foreach}
+</fieldset>
+
+
+<input type="hidden" name="plugin_cform_group_id" value="{$dat.0.plugin_cform_group_id}" />
+<input type="hidden" name="form_manager_id" value="{$form_manager_id}" />
+
+<fieldset>
+<legend>{$plugin.form_manager.Eintragen}</legend>
+{if !$dat.0.plugin_cform_group_id}
+<input type="submit" class="submit_back_green" value="{$plugin.form_manager.erstellen}" name="submit_group" />
+{else}
+<input type="submit" value="{$plugin.form_manager.aendern}" name="submit_group" />
+  <br />
+  <input style="background:red; float:left;margin-right:50px;" type="submit" name="del_group" value="{$plugin.form_manager.loeschen3}"/>
+{/if}
+</fieldset>
+</form>
+
+{/if}

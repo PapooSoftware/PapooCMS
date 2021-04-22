@@ -1,0 +1,852 @@
+<h2>{$plugin.mv.inpuerstellen}: {$plugin.mv.inpuerstellen_auswahl}</h2>
+<h4>Welcher Feld-Typ soll erstellt werden?</h4>
+<p><strong>W&auml;hlen Sie aus der folgenden Liste einen der gezeigten Typen aus oder nutzen Sie die Schnellauswahl, wenn Ihnen die Feld-Typen bereits gel&auml;ufig sind.</strong></p>
+<form action="" id="select_field_type_form" name="select_field_type_form" enctype="multipart/form-data" method="post">
+    <fieldset>
+        <legend>Schnellauswahl {$plugin.mv.text_type}</legend>
+        <label for="mvcform_type">{$plugin.mv.field_edit.field_change2}</label>
+        <br />
+        <select name="mvcform_type_select" id="mvcform_type_select" size="1">
+            <option value="">ausw&auml;hlen</option>
+            {foreach item=cat from=$result_cat}
+            {if $cat.type == "skip"}
+            <optgroup label="- - - - - - - - - - - - - - - - - - -">
+                {elseif $cat.type == "skip_end"}</optgroup>
+            {else}
+            <option value="{$cat.type}" {if $fdat.0.mvcform_type==$cat.type} selected="selected" {/if}>{$cat.name}</option>
+            {/if}
+            {/foreach}
+        </select>
+        {if $user_darf_schreiben}
+        <input type="submit" class="submit_back_green_xl" name="mvcform_type[quick]" value="weiter" />
+        {/if}
+    </fieldset>
+    <div style="margin:30px 0 10px 0">
+        <strong>Falls Sie die Feld-Typen noch nicht genau kennen, treffen Sie eine Auswahl aus der folgenden Liste und entscheiden Sie, welcher Feldtyp am Besten Ihren Anforderungen entspricht.</strong>
+    </div>
+    <fieldset>
+        <legend>Text-Eingabefeld</legend>
+        <p>Einzeilige Eingabefelder dienen zur Aufnahme von einem oder wenigen Worten oder einer Zahl.</p>
+        <p>
+            <label for="textfeld_bsp">Beispiel eines Text-Eingabefeldes</label>
+            <br />
+            <input id="textfeld_bsp" name="textfeld_bsp" type="text" value="Beispiel eines Text-Eingabefeldes" size="32" disabled/>
+        </p>
+        <p>M&ouml;gliche Angaben: anzuzeigende Feldl&auml;nge, alpha oder rein numerisch, minimale und maximale Anzahl der Eingabezeichen, Hilfetext, Fehlertext, Labletext, Feldname f&uuml;r den Export, Fieldset(Gruppen)-Zuordnung.</p>
+        <input type="submit" class="submit_back_green_xl" name="mvcform_type[text]" value="Diesen Feld-Typ ausw&auml;hlen" />
+    </fieldset>
+    <fieldset>
+        <legend>Text-Area</legend>
+        <p>Mehrzeilige Eingabefelder dienen zur Aufnahme von Kommentaren, Nachrichten usw. Um darin einen Zeilenumbruch zu erzeugen, muss am Ende der Zeile <strong>&lt;br /&gt;</strong> eingegeben werden. Die Eingabetaste hilft nicht.</p>
+        <p>
+            <label for="textarea_bsp">Beispiel einer Text-Area</label>
+            <br />
+            <textarea id="textarea_bsp" name="textarea_bsp" cols="25" rows="3" disabled>Beispiel einer Text-Area</textarea>
+        </p>
+        <p>M&ouml;gliche Angaben: minimale Anzahl der Eingabezeichen, Hilfetext, Fehlertext, Labletext, Feldname f&uuml;r den Export, Fieldset(Gruppen)-Zuordnung.</p>
+        <input type="submit" class="submit_back_green_xl" name="mvcform_type[textarea]" value="Diesen Feld-Typ ausw&auml;hlen" />
+    </fieldset>
+    <fieldset>
+        <script language="javascript" type="text/javascript" src="./tiny_mce/FileBrowser.js"></script>
+        <script language="javascript" type="text/javascript" src="./tiny_mce/tiny_mce.js"></script>
+        <script language="javascript" type="text/javascript">
+			tinyMCE.init({ldelim}
+			mode : "exact",
+				language : "de",
+				elements : "textarea_tiny_bsp",
+				theme : "advanced",
+				plugins : "flvplayer,safari,table,advimage,advlink,searchreplace,media,contextmenu,paste,style,spellchecker,iespell",
+				theme_advanced_disable : "fontselect,fontsizeselect,hr,underline,strikethrough,outdent,indent,cut,copy,paste,undo,redo,cleanup,removeformat,sub,sup,forecolor,backcolor,charmap,visualaid,separator",
+				//theme_advanced_buttons1_add_before : "save,separator",
+				//theme_advanced_buttons1_add : "fontselect,fontsizeselect",
+				theme_advanced_buttons1_add : ",",
+				theme_advanced_buttons2_add : ",",
+				theme_advanced_buttons2_add_before: "cut,copy,paste,pasteword,separator,search,replace",
+				theme_advanced_buttons3_add_before : "tablecontrols,separator,spellchecker",
+				theme_advanced_buttons3_add : "iespell,advhr,print, media,flvplayer",
+				theme_advanced_toolbar_location : "top",
+				theme_advanced_toolbar_align : "left",
+				theme_advanced_path_location : "bottom",
+				plugin_insertdate_dateFormat : "%Y-%m-%d",
+				plugin_insertdate_timeFormat : "%H:%M:%S",
+				convert_newlines_to_brs : true,
+				convert_urls : false,
+				accessibility_focus : true,
+				inline_styles : true,
+				convert_fonts_to_spans : true,
+				apply_source_formatting : false,
+				fix_list_elements : true,
+				remove_trailing_nbsp : true,
+				trim_span_elements : false,
+				theme_advanced_resizing : true,
+				force_p_newlines : true,
+				force_br_newlines : false,
+				verify_html : false,
+				entity_encoding : "raw",
+				relative_urls : false,
+				remove_script_host : true,
+				spellchecker_languages : "+Deutsch=de,English=en",
+				//content_css : './papoo_css.php',
+				content_css : '../{$standard_style},./css/hintergrund.css',
+				external_link_list_url : "./example_link_list.php?tinymce_lang_id={$tinymce_lang_id}",
+				external_image_list_url : "./example_image_list.php?tinymce_lang_id={$tinymce_lang_id}",
+				media_external_list_url : "./example_media_list.php?tinymce_lang_id={$tinymce_lang_id}",
+				valid_elements : "*[*]"
+			{rdelim} );
+        </script>
+        <legend>Textarea mit Wysiwyg-Editor</legend>
+        <p>Mit Hilfe dieses Editors erstellen Sie Texte ohne HTML-Kenntnisse. Ihre Eingaben werden sp&auml;ter genauso angezeigt, wie Sie sie formatieren. Haben Sie HTML-Kenntnisse, k&ouml;nnen Sie die HTML &uuml;ber den Button "HTML" editieren.</p>
+        <p>
+            <label for="textarea_tiny_bsp">Beispiel einer Textarea mit Wysiwyg-Editor</label>
+            <br />
+            <textarea id="textarea_tiny_bsp" name="textarea_tiny_bsp" cols="25" rows="3" disabled>Beispiel einer Textarea mit Wysiwyg-Editor</textarea>
+        </p>
+        <p>M&ouml;gliche Angaben: minimale Anzahl der Eingabezeichen, Hilfetext, Fehlertext, Labletext, Feldname f&uuml;r den Export, Fieldset(Gruppen)-Zuordnung.</p>
+        <input type="submit" class="submit_back_green_xl" name="mvcform_type[textarea_tiny]" value="Diesen Feld-Typ ausw&auml;hlen" />
+    </fieldset>
+    <fieldset>
+        <legend>E-Mail-Eingabefeld</legend>
+        <p>Einzeiliges Eingabefeld zur Aufnahme einer E-Mail-Adresse. Das korrekte Format der Adresse wird gepr&uuml;ft..</p>
+        <p>
+            <label for="email_bsp">Beispiel eines E-Mail-Eingabefeldes</label>
+            <br />
+            <input id="email_bsp" name="email_bsp" type="text" value="beispiel@papoo.de" size="32" disabled/>
+        </p>
+        <p>M&ouml;gliche Angaben: anzuzeigende Feldl&auml;nge, Hilfetext, Fehlertext, Labletext, Feldname f&uuml;r den Export, Fieldset(Gruppen)-Zuordnung.</p>
+        <input type="submit" class="submit_back_green_xl" name="mvcform_type[email]" value="Diesen Feld-Typ ausw&auml;hlen" />
+    </fieldset>
+    <fieldset>
+        <legend>Passwort-Eingabefeld</legend>
+        <p>Einzeiliges Eingabefeld zur Aufnahme eines Kennworts. Die eingegebenen Daten werden verdeckt statt im Klartext angezeigt.</p>
+        <p>
+            <label for="password_bsp">Beispiel eines Passwort-Eingabefeldes</label>
+            <br />
+            <input id="password_bsp" name="password_bsp" type="password" value="12345678" size="32" disabled/>
+        </p>
+        <p>M&ouml;gliche Angaben: anzuzeigende Feldl&auml;nge, minimale und maximale Anzahl der Eingabezeichen, Hilfetext, Fehlertext, Labletext, Feldname f&uuml;r den Export, Fieldset(Gruppen)-Zuordnung.</p>
+        <input type="submit" class="submit_back_green_xl" name="mvcform_type[password]" value="Diesen Feld-Typ ausw&auml;hlen" />
+    </fieldset>
+    <fieldset>
+        <legend>Link-Eingabefeld</legend>
+        <p>Einzeiliges Eingabefeld zur Aufnahme einer Internetadresse.</p>
+        <p>
+            <label for="link_bsp">Beispiel eines Link-Eingabefeldes</label>
+            <br />
+            <input id="link_bsp" name="link_bsp" type="text" value="http://www.khmweb.de" size="32" disabled/>
+        </p>
+        <p>M&ouml;gliche Angaben: anzuzeigende Feldl&auml;nge, Hilfetext, Fehlertext, Labletext, Feldname f&uuml;r den Export, Fieldset(Gruppen)-Zuordnung.</p>
+        <input type="submit" class="submit_back_green_xl" name="mvcform_type[link]" value="Diesen Feld-Typ ausw&auml;hlen" />
+    </fieldset>
+    <fieldset>
+        <legend>Selectbox</legend>
+        <p>Sie k&ouml;nnen dem Anwender eine Liste mit festen Eintr&auml;gen anbieten, aus der er genau einen Eintrag ausw&auml;hlen kann.</p>
+        <p>
+            <label for="select_bsp">Beispiel einer Selectbox</label>
+            <br />
+            <select name="select_bsp" disabled>
+                <option>Heino</option>
+                <option>Michael Jackson</option>
+                <option>Tom Waits</option>
+                <option>Nina Hagen</option>
+                <option>Marianne Rosenberg</option>
+            </select>
+        </p>
+        <p>M&ouml;gliche Angaben: Hilfetext, Fehlertext, Labletext, Feldname f&uuml;r den Export, Fieldset(Gruppen)-Zuordnung.</p>
+        <input type="submit" class="submit_back_green_xl" name="mvcform_type[select]" value="Diesen Feld-Typ ausw&auml;hlen" />
+    </fieldset>
+    <fieldset>
+        <script type="text/javascript" charset="iso-8859-1">
+			{literal}
+			function addMultiSelectOption(multiSelectFeld)
+			{
+				var optionValue = document.getElementById(multiSelectFeld).options[document.getElementById(multiSelectFeld).selectedIndex].value;
+				if(document.getElementById(multiSelectFeld + "_" + optionValue))
+				{
+					document.getElementById(multiSelectFeld + "_" + optionValue).style.display = "block";
+					document.getElementById("hidden" + multiSelectFeld + "_" + optionValue).value = "1";
+				}
+			}
+			function delMultiSelectOption(multiSelectFeld, optionValue)
+			{
+				document.getElementById(multiSelectFeld + "_" + optionValue).style.display = "none";
+				document.getElementById("hidden" + multiSelectFeld + "_" + optionValue).value = "0";
+			}
+			{/literal}
+        </script>
+        <legend>Multi-Selectbox</legend>
+        <p>Sie k&ouml;nnen dem Anwender eine Liste mit festen Eintr&auml;gen anbieten, aus der er einen bis mehrere Eintr&auml;ge ausw&auml;hlen kann.</p>
+        <p>
+            <label for="multiselect_bsp">Beispiel einer Multi-Selectbox</label>
+            <br />
+            <select name="multiselect_bsp" id="multiselect_bsp" size="1" disabled>
+                <option value="1">Heino</option>
+                <option value="2">Michael Jackson</option>
+                <option value="3">Tom Waits</option>
+                <option value="4">Nina Hagen</option>
+                <option value="5">Marianne Rosenberg</option>
+            </select>
+            <input type="button" name="multiselect_multiselect_bsp" value="Hinzuf&uuml;gen" onclick="addMultiSelectOption('multiselect_bsp');" />
+        <ul class="multilist" style="margin:0;">
+            <li id="multiselect_bsp_1" style="display:none;">
+                <div class="multilistitem">
+                    <input type="button" value="entfernen" onclick="delMultiSelectOption('multiselect_bsp','1');" />
+                    Heino
+                </div>
+            </li>
+            <li id="multiselect_bsp_2" style="display:none;">
+                <div class="multilistitem">
+                    <input type="button" value="entfernen" onclick="delMultiSelectOption('multiselect_bsp','2');" />
+                    Michael Jackson
+                </div>
+            </li>
+            <li id="multiselect_bsp_3" style="display:none;">
+                <div class="multilistitem">
+                    <input type="button" value="entfernen" onclick="delMultiSelectOption('multiselect_bsp','3');" />
+                    Tom Waits
+                </div>
+            </li>
+            <li id="multiselect_bsp_4" style="display:none;">
+                <div class="multilistitem">
+                    <input type="button" value="entfernen" onclick="delMultiSelectOption('multiselect_bsp','4');" />
+                    Nina Hagen
+                </div>
+            </li>
+            <li id="multiselect_bsp_5" style="display:none;">
+                <div class="multilistitem">
+                    <input type="button" value="entfernen" onclick="delMultiSelectOption('multiselect_bsp','5');" />
+                    Marianne Rosenberg
+                </div>
+            </li>
+        </ul>
+        </p>
+        <p>M&ouml;gliche Angaben: Hilfetext, Fehlertext, Labletext, Feldname f&uuml;r den Export, Fieldset(Gruppen)-Zuordnung.</p>
+        <input type="submit" class="submit_back_green_xl" name="mvcform_type[multiselect]" value="Diesen Feld-Typ ausw&auml;hlen" />
+    </fieldset>
+    <fieldset>
+        <legend>Bilder-/Textauswahl (Preselect)</legend>
+        <p>F&uuml;r jeden Wert in der Auswahlliste des Eingabeformulars kann ein "Ersatzwert" vorgegeben werden, z. B. k&ouml;nnte f&uuml;r "Heino" ein Link, ein Foto oder ein Text vorgegeben werden. Dieser "Ersatzwert" wird bei der sp&auml;teren Ausgabe auf der Internetseite statt "Heino" angezeigt, also ein Link, ein Foto oder ein Text, je nachdem, was definiert wurde.</p>
+        <p>
+            <label for="preselect_bsp">Beispiel einer Preselectbox</label>
+            <br />
+            <select name="preselect_bsp" disabled>
+                <option>Heino</option>
+                <option>Michael Jackson</option>
+                <option>Tom Waits</option>
+                <option>Nina Hagen</option>
+                <option>Marianne Rosenberg</option>
+            </select>
+        </p>
+        <p>M&ouml;gliche Angaben: Hilfetext, Fehlertext, Labletext, Feldname f&uuml;r den Export, Fieldset(Gruppen)-Zuordnung.</p>
+        <input type="submit" class="submit_back_green_xl" name="mvcform_type[preselect]" value="Diesen Feld-Typ ausw&auml;hlen" />
+    </fieldset>
+    <fieldset>
+        <legend>Radio-Button</legend>
+        <p>Radio-Buttons sind eine Gruppe von beschrifteten Kn&ouml;pfen, von denen der Anwender einen ausw&auml;hlen kann. Es kann immer nur einer der Radio-Buttons ausgew&auml;hlt sein.</p>
+        <p>Beispiel Radio-Buttons
+            <br />
+            <input id="radio_bsp1" name="radio_bsp" type="radio" value="MasterCard" disabled/> <label for="radio_bsp1" >MasterCard</label>
+            <br />
+            <input id="radio_bsp2" name="radio_bsp" type="radio" value="VISA" disabled/> <label for="radio_bsp2">VISA</label>
+            <br />
+            <input id="radio_bsp2" name="radio_bsp" type="radio" value="American Express" disabled/> <label for="radio_bsp2">American Express</label>
+        </p>
+        <p>Man kann aber auch nur einen Radio-Button vorgeben, um z. B. die AGB zu akzeptieren oder den Newsletter zu abonnieren.</p>
+        <p>M&ouml;gliche Angaben: Hilfetext, Fehlertext, Labletext, Feldname f&uuml;r den Export, Fieldset(Gruppen)-Zuordnung.</p>
+        <input type="submit" class="submit_back_green_xl" name="mvcform_type[radio]" value="Diesen Feld-Typ ausw&auml;hlen" />
+    </fieldset>
+    <fieldset>
+        <legend>Checkbox</legend>
+        <p>Checkboxen sind eine Gruppe von ankreuzbaren Quadraten, bei denen der Anwender keine, eins oder mehrere ausw&auml;hlen kann.</p>
+        <p>Beispiel einer Checkbox
+            <br />
+            <input id="checkbox_bsp" name="checkbox" type="checkbox" value="Ja" disabled/> <label for="checkbox">Newsletter abonnieren</label>
+        </p>
+        <p>Wird mehr als eine Checkbox ben&ouml;tigt, m&uuml;ssen mehrere Felder hierzu definiert werden, je Checkbox ein Feld.</p>
+        <p>M&ouml;gliche Angaben: Hilfetext, Fehlertext, Labletext, Feldname f&uuml;r den Export, Fieldset(Gruppen)-Zuordnung.</p>
+        <input type="submit" class="submit_back_green_xl" name="mvcform_type[check]" value="Diesen Feld-Typ ausw&auml;hlen" />
+    </fieldset>
+    <fieldset>
+        <legend>Timestamp</legend>
+        <p>Der Timestamp dient zur Angabe eines Datums. Das angegebene Datum wird anschliessend auf G&uuml;ltigkeit gepr&uuml;ft.</p>
+        <p>Beispiel eines Timestamp
+            <br />Geburtsdatum
+            <label for="timestamp_tag_bsp">Tag:</label>
+            <select name="timestamp_tag_bsp" id="timestamp_tag_bsp" size="1" disabled>
+                <option value="">TT</option>
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31">31</option>
+            </select>
+            <label for="timestamp_monat_bsp">Monat:</label>
+            <select name="timestamp_monat_bsp" id="timestamp_monat_bsp" size="1" disabled>
+                <option value="">MM</option>
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+            <label for="timestamp_jahr_bsp">Jahr:</label>
+            <select name="timestamp_jahr_bsp" id="timestamp_jahr_bsp" size="1" disabled>
+                <option value="">JJJJ</option>
+                <option value="1920">1920</option>
+                <option value="1921">1921</option>
+                <option value="1922">1922</option>
+                <option value="1923">1923</option>
+                <option value="1924">1924</option>
+                <option value="1925">1925</option>
+                <option value="1926">1926</option>
+                <option value="1927">1927</option>
+                <option value="1928">1928</option>
+                <option value="1929">1929</option>
+                <option value="1930">1930</option>
+                <option value="1931">1931</option>
+                <option value="1932">1932</option>
+                <option value="1933">1933</option>
+                <option value="1934">1934</option>
+                <option value="1935">1935</option>
+                <option value="1936">1936</option>
+                <option value="1937">1937</option>
+                <option value="1938">1938</option>
+                <option value="1939">1939</option>
+                <option value="1940">1940</option>
+                <option value="1941">1941</option>
+                <option value="1942">1942</option>
+                <option value="1943">1943</option>
+                <option value="1944">1944</option>
+                <option value="1945">1945</option>
+                <option value="1946">1946</option>
+                <option value="1947">1947</option>
+                <option value="1948">1948</option>
+                <option value="1949">1949</option>
+                <option value="1950">1950</option>
+                <option value="1951">1951</option>
+                <option value="1952">1952</option>
+                <option value="1953">1953</option>
+                <option value="1954">1954</option>
+                <option value="1955">1955</option>
+                <option value="1956">1956</option>
+                <option value="1957">1957</option>
+                <option value="1958">1958</option>
+                <option value="1959">1959</option>
+                <option value="1960">1960</option>
+                <option value="1961">1961</option>
+                <option value="1962">1962</option>
+                <option value="1963">1963</option>
+                <option value="1964">1964</option>
+                <option value="1965">1965</option>
+                <option value="1966">1966</option>
+                <option value="1967">1967</option>
+                <option value="1968">1968</option>
+                <option value="1969">1969</option>
+                <option value="1970">1970</option>
+                <option value="1971">1971</option>
+                <option value="1972">1972</option>
+                <option value="1973">1973</option>
+                <option value="1974">1974</option>
+                <option value="1975">1975</option>
+                <option value="1976">1976</option>
+                <option value="1977">1977</option>
+                <option value="1978">1978</option>
+                <option value="1979">1979</option>
+                <option value="1980">1980</option>
+                <option value="1981">1981</option>
+                <option value="1982">1982</option>
+                <option value="1983">1983</option>
+                <option value="1984">1984</option>
+                <option value="1985">1985</option>
+                <option value="1986">1986</option>
+                <option value="1987">1987</option>
+                <option value="1988">1988</option>
+                <option value="1989">1989</option>
+                <option value="1990">1990</option>
+                <option value="1991">1991</option>
+                <option value="1992">1992</option>
+                <option value="1993">1993</option>
+                <option value="1994">1994</option>
+                <option value="1995">1995</option>
+                <option value="1996">1996</option>
+                <option value="1997">1997</option>
+                <option value="1998">1998</option>
+                <option value="1999">1999</option>
+                <option value="2000">2000</option>
+                <option value="2001">2001</option>
+                <option value="2002">2002</option>
+                <option value="2003">2003</option>
+                <option value="2004">2004</option>
+                <option value="2005">2005</option>
+                <option value="2006">2006</option>
+                <option value="2007">2007</option>
+                <option value="2008">2008</option>
+                <option value="2009">2009</option>
+                <option value="2010">2010</option>
+                <option value="2011">2011</option>
+                <option value="2012">2012</option>
+                <option value="2013">2013</option>
+                <option value="2014">2014</option>
+                <option value="2015">2015</option>
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+                <option value="2020">2020</option>
+            </select>
+        </p>
+        <p>Das gew&auml;hlte Datum wird im Frontend in der Form TT.MM.JJJJ ausgegeben.</p>
+        <p>M&ouml;gliche Angaben: Hilfetext, Fehlertext, Labletext, Feldname f&uuml;r den Export, Fieldset(Gruppen)-Zuordnung.</p>
+        <input type="submit" class="submit_back_green_xl" name="mvcform_type[timestamp]" value="Diesen Feld-Typ ausw&auml;hlen" />
+    </fieldset>
+    <fieldset>
+        <legend>File-Upload-Eingabefeld</legend>
+        <p>Dieses Feld dient zum Hochladen einer Datei. Die Datei kann sp&auml;ter zum Download bereitgestellt werden.</p>
+        <p>
+            <label for="file_bsp">Beispiel eines File-Upload-Eingabefeldes</label>
+            <br />
+            <input id="file_bsp" name="file_bsp" type="file" accept="image/*" disabled/>
+            {*<input id="file_submit_bsp" name="file_submit_bsp" type="submit" value="Datei hochladen" />*}
+        </p>
+        <p>M&ouml;gliche Angaben: Hilfetext, Fehlertext, Labletext, Feldname f&uuml;r den Export, Fieldset(Gruppen)-Zuordnung.</p>
+        <input type="submit" class="submit_back_green_xl" name="mvcform_type[file]" value="Diesen Feld-Typ ausw&auml;hlen" />
+    </fieldset>
+    <fieldset>
+        <legend>Bild-Upload-Eingabefeld</legend>
+        <p>Es kann ein Bild hochgeladen werden. Das hochgeladene Bild kann im Frontend angezeigt werden.</p>
+        <p>
+            <label for="picture_bsp">Beispiel eines Bild-Upload-Eingabefeldes</label>
+            <br />
+            <input id="picture_bsp" name="file_bsp" type="file" accept="image/*" disabled/>
+            {*<input id="picture_submit_bsp" name="picture_submit_bsp" type="submit" value="Bild hochladen" />*}
+        </p>
+        <p>M&ouml;gliche Angaben: Hilfetext, Fehlertext, Labletext, Feldname f&uuml;r den Export, Fieldset(Gruppen)-Zuordnung.</p>
+        <input type="submit" class="submit_back_green_xl" name="mvcform_type[picture]" value="Diesen Feld-Typ ausw&auml;hlen" />
+    </fieldset>
+    <fieldset>
+        <legend>Bilder-Galerie</legend>
+        <p>Es k&ouml;nnen beliebig viele Bilder hochgeladen werden. Die hochgeladenen Bilder k&ouml;nnen im Frontend als Bildergalerie angezeigt werden.</p>
+        <p>
+            <label for="galerie_bsp">Beispiel einer Bildergalerie</label>
+            <br />
+            <input id="galerie_bsp" name="galerie_bsp" type="file" accept="image/*" disabled/>
+            {*<input id="galerie_submit_bsp" name="galerie_submit_bsp" type="submit" value="Bild hochladen" />*}
+        </p>
+        <p>M&ouml;gliche Angaben: Hilfetext, Fehlertext, Labletext, Feldname f&uuml;r den Export, Fieldset(Gruppen)-Zuordnung.</p>
+        <input type="submit" class="submit_back_green_xl" name="mvcform_type[galerie]" value="Diesen Feld-Typ ausw&auml;hlen" />
+    </fieldset>
+    <fieldset>
+        <legend>Zeitintervall</legend>
+        <p>Es kann ein Zeitraum (Datum von/bis) angegeben werden. Die G&uuml;ltigkeit der Daten wird gepr&uuml;ft.</p>
+        <p>Beispiel eines Zeitintervalls
+            <br />
+            Datum von<br />
+            <label for="anfang_tag_Datum">Tag:</label>
+            <select name="anfang_tag_Datum" id="anfang_tag_Datum" size="1" disabled>
+                <option value="">TT</option>
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31">31</option>
+            </select>
+            <label for="anfang_monat_Datum">Monat:</label>
+            <select name="anfang_monat_Datum" id="anfang_monat_Datum" size="1" disabled>
+                <option value="">MM</option>
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+            <label for="anfang_jahr_Datum">Jahr:</label>
+            <select name="anfang_jahr_Datum" id="anfang_jahr_Datum" size="1" disabled>
+                <option value="">JJJJ</option>
+                <option value="1910">1910</option>
+                <option value="1911">1911</option>
+                <option value="1912">1912</option>
+                <option value="1913">1913</option>
+                <option value="1914">1914</option>
+                <option value="1915">1915</option>
+                <option value="1916">1916</option>
+                <option value="1917">1917</option>
+                <option value="1918">1918</option>
+                <option value="1919">1919</option>
+                <option value="1920">1920</option>
+                <option value="1921">1921</option>
+                <option value="1922">1922</option>
+                <option value="1923">1923</option>
+                <option value="1924">1924</option>
+                <option value="1925">1925</option>
+                <option value="1926">1926</option>
+                <option value="1927">1927</option>
+                <option value="1928">1928</option>
+                <option value="1929">1929</option>
+                <option value="1930">1930</option>
+                <option value="1931">1931</option>
+                <option value="1932">1932</option>
+                <option value="1933">1933</option>
+                <option value="1934">1934</option>
+                <option value="1935">1935</option>
+                <option value="1936">1936</option>
+                <option value="1937">1937</option>
+                <option value="1938">1938</option>
+                <option value="1939">1939</option>
+                <option value="1940">1940</option>
+                <option value="1941">1941</option>
+                <option value="1942">1942</option>
+                <option value="1943">1943</option>
+                <option value="1944">1944</option>
+                <option value="1945">1945</option>
+                <option value="1946">1946</option>
+                <option value="1947">1947</option>
+                <option value="1948">1948</option>
+                <option value="1949">1949</option>
+                <option value="1950">1950</option>
+                <option value="1951">1951</option>
+                <option value="1952">1952</option>
+                <option value="1953">1953</option>
+                <option value="1954">1954</option>
+                <option value="1955">1955</option>
+                <option value="1956">1956</option>
+                <option value="1957">1957</option>
+                <option value="1958">1958</option>
+                <option value="1959">1959</option>
+                <option value="1960">1960</option>
+                <option value="1961">1961</option>
+                <option value="1962">1962</option>
+                <option value="1963">1963</option>
+                <option value="1964">1964</option>
+                <option value="1965">1965</option>
+                <option value="1966">1966</option>
+                <option value="1967">1967</option>
+                <option value="1968">1968</option>
+                <option value="1969">1969</option>
+                <option value="1970">1970</option>
+                <option value="1971">1971</option>
+                <option value="1972">1972</option>
+                <option value="1973">1973</option>
+                <option value="1974">1974</option>
+                <option value="1975">1975</option>
+                <option value="1976">1976</option>
+                <option value="1977">1977</option>
+                <option value="1978">1978</option>
+                <option value="1979">1979</option>
+                <option value="1980">1980</option>
+                <option value="1981">1981</option>
+                <option value="1982">1982</option>
+                <option value="1983">1983</option>
+                <option value="1984">1984</option>
+                <option value="1985">1985</option>
+                <option value="1986">1986</option>
+                <option value="1987">1987</option>
+                <option value="1988">1988</option>
+                <option value="1989">1989</option>
+                <option value="1990">1990</option>
+                <option value="1991">1991</option>
+                <option value="1992">1992</option>
+                <option value="1993">1993</option>
+                <option value="1994">1994</option>
+                <option value="1995">1995</option>
+                <option value="1996">1996</option>
+                <option value="1997">1997</option>
+                <option value="1998">1998</option>
+                <option value="1999">1999</option>
+                <option value="2000">2000</option>
+                <option value="2001">2001</option>
+                <option value="2002">2002</option>
+                <option value="2003">2003</option>
+                <option value="2004">2004</option>
+                <option value="2005">2005</option>
+                <option value="2006">2006</option>
+                <option value="2007">2007</option>
+                <option value="2008">2008</option>
+                <option value="2009">2009</option>
+                <option value="2010">2010</option>
+                <option value="2011">2011</option>
+                <option value="2012">2012</option>
+                <option value="2013">2013</option>
+                <option value="2014">2014</option>
+                <option value="2015">2015</option>
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+                <option value="2029">2029</option>
+                <option value="2030">2030</option>
+                <option value="2031">2031</option>
+                <option value="2032">2032</option>
+                <option value="2033">2033</option>
+                <option value="2034">2034</option>
+                <option value="2035">2035</option>
+                <option value="2036">2036</option>
+            </select>
+            bis<br />
+            <label for="ende_tag_Datum">Tag:</label>
+            <select name="ende_tag_Datum" id="ende_tag_Datum" size="1" disabled>
+                <option value="">TT</option>
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31">31</option>
+            </select>
+            <label for="ende_monat_Datum">Monat:</label>
+            <select name="ende_monat_Datum" id="ende_monat_Datum" size="1" disabled>
+                <option value="">MM</option>
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+            <label for="ende_jahr_Datum">Jahr:</label>
+            <select name="ende_jahr_Datum" id="ende_jahr_Datum" size="1" disabled>
+                <option value="">JJJJ</option>
+                <option value="1910">1910</option>
+                <option value="1911">1911</option>
+                <option value="1912">1912</option>
+                <option value="1913">1913</option>
+                <option value="1914">1914</option>
+                <option value="1915">1915</option>
+                <option value="1916">1916</option>
+                <option value="1917">1917</option>
+                <option value="1918">1918</option>
+                <option value="1919">1919</option>
+                <option value="1920">1920</option>
+                <option value="1921">1921</option>
+                <option value="1922">1922</option>
+                <option value="1923">1923</option>
+                <option value="1924">1924</option>
+                <option value="1925">1925</option>
+                <option value="1926">1926</option>
+                <option value="1927">1927</option>
+                <option value="1928">1928</option>
+                <option value="1929">1929</option>
+                <option value="1930">1930</option>
+                <option value="1931">1931</option>
+                <option value="1932">1932</option>
+                <option value="1933">1933</option>
+                <option value="1934">1934</option>
+                <option value="1935">1935</option>
+                <option value="1936">1936</option>
+                <option value="1937">1937</option>
+                <option value="1938">1938</option>
+                <option value="1939">1939</option>
+                <option value="1940">1940</option>
+                <option value="1941">1941</option>
+                <option value="1942">1942</option>
+                <option value="1943">1943</option>
+                <option value="1944">1944</option>
+                <option value="1945">1945</option>
+                <option value="1946">1946</option>
+                <option value="1947">1947</option>
+                <option value="1948">1948</option>
+                <option value="1949">1949</option>
+                <option value="1950">1950</option>
+                <option value="1951">1951</option>
+                <option value="1952">1952</option>
+                <option value="1953">1953</option>
+                <option value="1954">1954</option>
+                <option value="1955">1955</option>
+                <option value="1956">1956</option>
+                <option value="1957">1957</option>
+                <option value="1958">1958</option>
+                <option value="1959">1959</option>
+                <option value="1960">1960</option>
+                <option value="1961">1961</option>
+                <option value="1962">1962</option>
+                <option value="1963">1963</option>
+                <option value="1964">1964</option>
+                <option value="1965">1965</option>
+                <option value="1966">1966</option>
+                <option value="1967">1967</option>
+                <option value="1968">1968</option>
+                <option value="1969">1969</option>
+                <option value="1970">1970</option>
+                <option value="1971">1971</option>
+                <option value="1972">1972</option>
+                <option value="1973">1973</option>
+                <option value="1974">1974</option>
+                <option value="1975">1975</option>
+                <option value="1976">1976</option>
+                <option value="1977">1977</option>
+                <option value="1978">1978</option>
+                <option value="1979">1979</option>
+                <option value="1980">1980</option>
+                <option value="1981">1981</option>
+                <option value="1982">1982</option>
+                <option value="1983">1983</option>
+                <option value="1984">1984</option>
+                <option value="1985">1985</option>
+                <option value="1986">1986</option>
+                <option value="1987">1987</option>
+                <option value="1988">1988</option>
+                <option value="1989">1989</option>
+                <option value="1990">1990</option>
+                <option value="1991">1991</option>
+                <option value="1992">1992</option>
+                <option value="1993">1993</option>
+                <option value="1994">1994</option>
+                <option value="1995">1995</option>
+                <option value="1996">1996</option>
+                <option value="1997">1997</option>
+                <option value="1998">1998</option>
+                <option value="1999">1999</option>
+                <option value="2000">2000</option>
+                <option value="2001">2001</option>
+                <option value="2002">2002</option>
+                <option value="2003">2003</option>
+                <option value="2004">2004</option>
+                <option value="2005">2005</option>
+                <option value="2006">2006</option>
+                <option value="2007">2007</option>
+                <option value="2008">2008</option>
+                <option value="2009">2009</option>
+                <option value="2010">2010</option>
+                <option value="2011">2011</option>
+                <option value="2012">2012</option>
+                <option value="2013">2013</option>
+                <option value="2014">2014</option>
+                <option value="2015">2015</option>
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+                <option value="2029">2029</option>
+                <option value="2030">2030</option>
+                <option value="2031">2031</option>
+                <option value="2032">2032</option>
+                <option value="2033">2033</option>
+                <option value="2034">2034</option>
+                <option value="2035">2035</option>
+                <option value="2036">2036</option>
+            </select>
+        </p>
+        <p>Beispiel Veranstaltungskalender: Wird im Formular der Zeitraum der Veranstaltung mit Hilfe der obigen Auswahlen festgelegt, erscheint die Veranstaltung zusammen mit den vorgegebenen Daten des Zeitraums im Frontend. Die Veranstaltung wird jedoch nur im vorgegebenen Zeitraum im Frontend angezeigt, nicht mehr ausserhalb des Zeitraums.</p>
+        <p>M&ouml;gliche Angaben: Hilfetext, Fehlertext, Labletext, Feldname f&uuml;r den Export, Fieldset(Gruppen)-Zuordnung.</p>
+        <input type="submit" class="submit_back_green_xl" name="mvcform_type[zeitintervall]" value="Diesen Feld-Typ ausw&auml;hlen" />
+    </fieldset>
+    <fieldset>
+        <legend>Preisintervall</legend>
+        <p>Beim Preisintervall k&ouml;nnen mehrere Preise definiert werden, die in der Suchmaske im Frontend zur Suche nach einer Preisspanne dienen (Preis liegt im Bereich von/bis).</p>
+        <p>M&ouml;gliche Angaben: Hilfetext, Fehlertext, Labletext, Feldname f&uuml;r den Export, Fieldset(Gruppen)-Zuordnung.</p>
+        <input type="submit" class="submit_back_green_xl" name="mvcform_type[preisintervall]" value="Diesen Feld-Typ ausw&auml;hlen" />
+    </fieldset>
+</form>

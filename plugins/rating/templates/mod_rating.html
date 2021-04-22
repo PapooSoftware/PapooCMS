@@ -1,0 +1,49 @@
+{if !$rating_data.dont_show AND $rating_active} {* wenn die Anzeige für diese Seite gewünscht ist und das Modul aktiviert ist *}
+	{* (Sprach)Daten-Übergabe an JS *}
+	<script type="text/javascript">
+	//<![CDATA[
+	var text1_singular = '{$plugin.rating.star_from}';
+	var text1_plural = '{$plugin.rating.stars_from}';
+	var text2_singular = '{$plugin.rating.rating}';
+	var text2_plural = '{$plugin.rating.ratings}';
+	var text3_singular = '{$plugin.rating.star}';
+	var text3_plural = '{$plugin.rating.stars}';
+	var text4 = '{$plugin.rating.text4}';
+	var text5 = '{$plugin.rating.text5}';
+	var uri = '{$uri}';
+	// Irgendwas (variables_class?) zerstört die URI nach der Angabe der menuid=xx,
+	// daher vorher alle &amp; ersetzen, später wieder korrigieren (in der rating_class.php)
+	uri = uri.replace(/&amp;/g, "ABCDE");
+	var header = '{$header}'; // Seitentitel
+	var server_path = '{$server_path}';
+	//]]>
+	</script>
+	<script type="text/javascript" src="{$slash}plugins/rating/js/request.js"></script>
+	<div class="rightitem">
+		<h1>{$plugin.rating.head}</h1>
+		<p class="center">{$plugin.rating.head2}</p>
+		<ul class="rating">
+			<li class="rating_curr" id="rating_curr" style="width:{math equation="x * y" x=$rating_data.rating_value y=25}px"> </li>
+			{if !$ip_noch_gesperrt}<li><a href="javascript:rate_it_now(1,'{$reporeid_print}','{$startseite}')" class="einStern" onMouseOut="document.getElementById('caption').innerHTML ='&nbsp;'" onMouseOver="document.getElementById('caption').innerHTML ='{$plugin.rating.rating_text1}'"></a></li>
+			<li><a href="javascript:rate_it_now(2,'{$reporeid_print}','{$startseite}')" class="zweiSterne" onMouseOut="document.getElementById('caption').innerHTML ='&nbsp;'" onMouseOver="document.getElementById('caption').innerHTML ='{$plugin.rating.rating_text2}'"></a></li>
+			<li><a href="javascript:rate_it_now(3,'{$reporeid_print}','{$startseite}')" class="dreiSterne" onMouseOut="document.getElementById('caption').innerHTML ='&nbsp;'" onMouseOver="document.getElementById('caption').innerHTML ='{$plugin.rating.rating_text3}'"></a></li>
+			<li><a href="javascript:rate_it_now(4,'{$reporeid_print}','{$startseite}')" class="vierSterne" onMouseOut="document.getElementById('caption').innerHTML ='&nbsp;'" onMouseOver="document.getElementById('caption').innerHTML ='{$plugin.rating.rating_text4}'"></a></li>
+			<li><a href="javascript:rate_it_now(5,'{$reporeid_print}','{$startseite}')" class="fuenfSterne" onMouseOut="document.getElementById('caption').innerHTML ='&nbsp;'" onMouseOver="document.getElementById('caption').innerHTML ='{$plugin.rating.rating_text5}'"></a></li>{/if}
+		</ul>
+		<div id="rating_text" class="rating_text" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+			<span itemprop="ratingValue">{$rating_data.rating_value}</span> 
+			{if $rating_data.rating_value == 1}
+				{$plugin.rating.star_from}
+			{else}
+				{$plugin.rating.stars_from}
+			{/if}
+			<span itemprop="reviewCount">{$rating_data.rating_count}</span> 
+			{if $rating_data.rating_count == 1}
+				{$plugin.rating.rating}
+			{else}
+				{$plugin.rating.ratings}
+			{/if}
+			<div id="caption">&nbsp;</div>
+		</div>
+	</div>
+{/if}

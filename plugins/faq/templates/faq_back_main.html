@@ -1,0 +1,81 @@
+{if $IS_ADMIN}{*<!-- Wird nur in der Admin angezeigt -->*}
+	{*<!-- Hier kommt der Kopf rein-->*}
+	{include file=head.inc.utf8.html}
+	<!-- Menü kommt hier rein-->
+	{include file=menu.inc.html}
+	<div class="artikel">
+		
+		{include file=../../../plugins/faq/templates/faq_menue.html}
+		<p>{$plugin.faq_back.text.faq_main}</p>
+		{if $fehler1}<div class="error">{$plugin.faq_back.errmsg.incorrect_cat_id}</div>{/if}
+		<p>{$plugin.faq_back.text.faq_count} {$faq_anzahl}</p>
+		{if $faq_is_del}<div class="message">{$plugin.faq_back.message.faq_is_del}</div>{/if}
+		{if $faq_is_edit}<div class="message">{$plugin.faq_back.message.faq_is_edit}</div>{/if}
+		{if is_countable($faq_search_data) && $faq_search_data|@count OR $faq_nomatch}
+			{include file=../../../plugins/faq/templates/faq_back_search_results.html}
+		{else} {* Hier keine Suche aktiv *}
+{* Anzeige der Kategorien *}
+			{if $faq_order == "question"}<p class="bold_red">{$plugin.faq_back.text.faq_back_sort_question}</p>{/if}
+			{if $faq_order == "created"}<p class="bold_red">{$plugin.faq_back.text.faq_back_sort_created}</p>{/if}
+			{if $faq_order == "createdby"}<p class="bold_red">{$plugin.faq_back.text.faq_back_sort_createdby}</p>{/if}
+			{if $faq_order == "order_id"}<p class="bold_red">{$plugin.faq_back.text.faq_back_sort_user}</p>{/if}
+			{if $anzahl_faq_cats}
+				<table class="faqs" class="outside  table table-striped table-hover">
+					<tr>
+						<th id="faqname">
+							{$plugin.faq_back.text.cat_name}
+							<span {if $faq_order == "question"}class="bold_red"{/if}>{$plugin.faq_back.text.cat_name2}</span>
+						</th>
+						<th id="catdescript">{$plugin.faq_back.text.cat_descript}</th>
+						<th id="faq_count" width="50" class="align_right">{$plugin.faq_back.text.faq_count}</th>
+					</tr>
+					{foreach item=cat from=$cat_data}
+                    {if $cat.catname}
+						<tr class="cat_row">
+							<td headers="faqname">
+								{if $cat.question}
+									{* FAQ verwaist *}
+									<a class="faq_lvl_0" href="./plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_back_edit.html&amp;faq_id={$cat.id}" title="{$plugin.faq_back.linktext.faq_edit}"><!--<img src="../plugins/faq/bilder/faq.gif" width="10" height="10" class="mr_3_no_border" title="{$plugin.faq_back.imgtext.faq}" alt="{$plugin.faq_back.imgtext.faq}" />-->
+                                        <i class="fa fa-question-circle"></i>
+                                        <span class="pl_7_color_red">{$cat.question} {$plugin.faq_back.text.faq_orphan}</span>
+								{else}
+									<a class="lvl_{$cat.level}" href="./plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_back_main.html&amp;faq_main_id={$cat.id}" title="{$plugin.faq_back.linktext.cat_sel}">
+                                        <i class="fa fa-folder-open"></i>
+
+                                        <!--<img src="../plugins/faq/bilder/cat_menu.gif" width="12" height="10" class="mr_3_no_border" title="{$plugin.faq_back.imgtext.cat}" alt="{$plugin.faq_back.imgtext.cat}" />-->
+									{$cat.catname}</a>
+									{* Kategorie verwaist *}
+									{if $cat.orphan}
+										<span class="bold_red"> {$plugin.faq_back.text.cat_orphan}</span>
+									{/if}
+								{/if}
+							</td>
+							<td headers="catdescript">{$cat.catdescript}</td>
+							<td headers="faq_count" align="right">{$cat.faq_count}</td>
+						</tr>
+						{foreach item=faq from=$faq_data.0}
+							{if $faq.cat_id == $cat.id}
+								<tr>
+									<td headers="faqname" colspan="3" class="p_0_no_border">
+										<table class="faqs faq_listing_style_1 width96">
+											<tr>
+												<td class="faq_listing_style_2"><a class="faq_lvl_{$cat.level}" href="./plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_back_edit.html&amp;faq_id={$faq.id}" title="{$plugin.faq_back.linktext.faq_edit}"><i class="fa fa-question-circle"></i> <!--<img src="../plugins/faq/bilder/faq.gif" width="10" height="10" class="mr_3_no_border" title="{$plugin.faq_back.imgtext.faq}" alt="{$plugin.faq_back.imgtext.faq}" />-->{$faq.question}</a>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							{/if}
+						{/foreach}
+                    {/if}
+					{/foreach}
+				</table>
+			{else}
+				<div class="message">{$plugin.faq_back.message.no_cats2}</div>
+			{/if}
+		{/if}
+	</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

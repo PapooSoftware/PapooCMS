@@ -1,0 +1,84 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		
+		{include file=../../../plugins/faq/templates/faq_menue.html}
+		<h2>{$plugin.faq_back.pageheader.faq_new}</h2>
+		{if $fehler1}<div class="error">{$plugin.faq_back.errmsg.cat_fehlt}</div>{/if}
+		{if $fehler2}<div class="error">{$plugin.faq_back.errmsg.frage_fehlt}</div>{/if}
+		{if $faq_is_new}<div class="message">{$plugin.faq_back.message.faq_is_new}</div>{/if}
+		{if !$cat_data}<p><div class="message">{$plugin.faq_back.message.no_cats}</div>{/if}
+		<p>{$plugin.faq_back.text.faq_count} {$faq_anzahl}</p>
+		{if $cat_data}
+			<div class="div_margins"><strong>{$plugin.faq_back.text.author} {$username}</strong></div>
+{* Selectbox mit Kategorien anzeigen *}
+			<form name="faq_back_new" action="" method="post">
+				<fieldset>
+					<legend class="mb_10">{$plugin.faq_back.formtext.legend_faq}</legend>
+					<label for="faq_back_catopt_sel_id">{$plugin.faq_back.formtext.label_cat}</label><br /><br />
+					<select name="faq_cat_id[]" size="10" id="faq_back_catopt_sel_id" multiple="multiple" >
+						{foreach item=faq_cat from=$cat_data}
+							<option value="{$faq_cat.id}" id="faqcat{$faq_cat.id}"
+							{if $faq_cat.cat_selected} selected="selected" {/if}
+							{* verwaist *}
+							{if $faq_cat.orphan}
+								 class="lvl_{$faq_cat.level} bold_red">{$faq_cat.catname} {$plugin.faq_back.text.cat_orphan}
+							{else}
+								 class="lvl_{$faq_cat.level}">{$faq_cat.catname}
+							{/if}
+							</option>
+						{/foreach}
+					</select>
+				</fieldset>
+				<div class="mt_10"> </div>
+	
+{* Felder Frage und Antwort *}
+				<fieldset>
+					<legend class="mb_10">{$plugin.faq_back.formtext.legend_question}</legend>
+					<textarea name="faq_question" id="faq_back_question_id" class="faq_new_edit_textarea" cols="3" rows="5">{$faq_question|escape:"html"}</textarea>
+					<div class="mb_15"> </div>
+				</fieldset>
+				<fieldset>
+					<legend>{$plugin.faq_back.formtext.legend_answer}</legend>
+					<label for="faq_new_answer_id"><strong>{$plugin.faq_back.formtext.label_answer}</strong></label><br /><br />
+					<script language="javascript" type="text/javascript" src="./tiny_mce/tiny_mce.js" charset="utf-8"></script>	
+					<script language="javascript" type="text/javascript" src="./tiny_mce/FileBrowser.js"></script>
+					<script language="javascript" type="text/javascript">
+						tinyMCE.init({ldelim}
+						mode : "exact",
+						language : "{$lang_back_short}",
+						elements : "faq_new_answer_id",
+						{include file=tiny_inc_conf.html}
+						{rdelim} );
+					</script>
+				
+					<textarea name="faq_answer" id="faq_new_answer_id" rows="20" cols="50"
+					 class="width90">{$faq_new_answer|escape:"html"}</textarea>
+				</fieldset>
+
+{* Attachments sind nur bei der Bearbeitung möglich *}
+				<fieldset>
+					<legend>{$plugin.faq_back.formtext.legend_faq_edit_attachment}</legend>
+					{$plugin.faq_back.formtext.label_faq_new_attachment}<br /><br />
+				</fieldset>
+
+{* Freigabe *}
+				<fieldset>
+					<legend>{$plugin.faq_back.formtext.legend_faq_new_release}</legend>
+					<input type="checkbox" value="y" name="faq_new_release" title="{$plugin.faq_back.formtext.faq_new_release}" {$checkedrel} id="faq_new_release" />
+					<label for="faq_new_release">{$plugin.faq_back.formtext.label_faq_new_release}</label>
+				</fieldset>
+
+{* Button Submit *}
+				<fieldset>
+					 <legend>{$plugin.faq_back.submit.faq_new}</legend><br />
+					<input type="submit" value="{$plugin.faq_back.submit.faq_new}" name="submit" title="{$plugin.faq_back.submit.faq_new}" />
+				</fieldset>
+			</form>
+		{/if}
+	</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

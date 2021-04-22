@@ -1,0 +1,28 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+    <a href="{$template_base_path}leadtracker_follow_up.html" class="btn btn-primary pull-right" rel="up">{$plugin_leadtracker_cronjob_zurueck}</a>
+
+    <h1>{$plugin_leadtracker_cronjob_ueberschrift}</h1>
+
+    <h3>{$plugin_leadtracker_cronjob_zwischenschrift}</h3>
+
+    <form method="POST" action="">
+	    <p>
+            <input type="hidden" name="guard_code" value="{$cron_guard}" />
+            <button class="btn btn-danger" name="send_mails" value="1">{$plugin_leadtracker_cronjob_sendnow}</button>
+        </p>
+        <p><strong>{$plugin_leadtracker_cronjob_autocode}</strong>: <code>{$template_base_path}leadtracker_cronjob.html&amp;send_mails=1&amp;guard_code={$cron_guard}</code>
+    </form>
+
+</div>
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+
+{/if}

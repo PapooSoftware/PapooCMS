@@ -1,0 +1,127 @@
+{if !$faq_no_login} {* Angemeldeter User? *}
+	{if $faq_no_writeaccess} {* Schreibrecht vorhanden? *}
+		<p class="bold_red">{$plugin.faq_front.message.no_writeaccess}</p><br /> {* Keine Schreibrechte *}
+	{else}
+		<div class="form width100">
+			<h2>{$plugin.faq_front.pageheader.faq_edit}</h2>
+			<div class="div_margins">
+				<strong>{$plugin.faq_front.text.cat} {$faq_catdata.0.catname}</strong><br />
+				{$faq_catdata.0.catdescript}
+			</div>
+			<p>{$plugin.faq_front.text.faq_count} {$faq_anzahl}</p>
+			<div class="div_margins"><strong>{$plugin.faq_front.text.changed} {$username}</strong></div>
+			{if $fehler1}<div class="error">{$plugin.faq_front.errmsg.cat_fehlt}</div>{/if}
+			{if $fehler2}<div class="error">{$plugin.faq_front.errmsg.frage_fehlt}</div>{/if}
+			{if $fehler3}<div class="error">{$plugin.faq_front.errmsg.faqid_fehlt}</div>{/if}
+			{if $fehler4}<div class="error">{$plugin.faq_front.errmsg.kein_filename}</div>{/if}
+			{if $fehler5}<div class="error">{$fehler5}</div>{/if} {* Upload-Fehler Attachments; Textinhalt ist variabel *}
+			{if $fehler6}<div class="error">{$plugin.faq_front.errmsg.file_vorhanden}</div>{/if}
+			{if $fehler7}<div class="error">{$plugin.faq_front.errmsg.file_del_error}<br />{$fehler7}</div>{/if}
+			{if $fehler9}<div class="error">{$plugin.faq_front.errmsg.attachment_already_exist}<br />{$fehler7}</div>{/if}
+			{if $fehler10}<div class="error">{$plugin.faq_front.errmsg.attachment_too_large} {$faq_attachsize}</div>{/if}
+			{if $fehler12}<div class="error">{$plugin.faq_front.errmsg.incorrect_faq_id}</div>{/if}
+			{if $fehler13}<div class="error">{$plugin.faq_front.errmsg.incorrect_att_id}</div>{/if}
+			{if $fehler14}<div class="error">{$plugin.faq_front.errmsg.incorrect_cat_id}</div>{/if}
+			{if $fehler15}<div class="error">{$plugin.faq_front.errmsg.incorrect_version_id}</div>{/if}
+			{if $fehler16}<div class="error">{$plugin.faq_front.errmsg.incorrect_version_id}</div>{/if}
+			{if $attachment_loaded}<div class="message">{$plugin.faq_front.message.attachment_loaded}</div>{/if}
+			{if $attachment_is_del}<div class="message">{$plugin.faq_front.message.attachment_deleted}</div>{/if}
+{* Formulardaten zur Bearbeitung anzeigen *}
+			{if $faq_data|@count}
+{* Formulardaten sind vorhanden *}
+				<form name="faq_front_edit" action="" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="faq_current_version" value="{$faq_current_version}" />
+					<input type="hidden" name="faq_version_selected" value="{$faq_version_selected}" />
+					<input type="hidden" name="faq_release" value="{$faq_data.0.0.active}" />
+					<input type="hidden" name="faq_cat_id[]" value="{$faq_main_id}" />
+{* Felder Frage und Antwort *}
+					<fieldset>
+						<legend class="mb_10">{$plugin.faq_front.formtext.legend_question}</legend>
+{* Frage *}
+						<label for="faq_back_question_id">{$plugin.faq_front.formtext.label_question}</label><br />
+						<textarea name="faq_question" id="faq_back_question_id" class="faq_new_edit_textarea" cols="3" rows="5" readonly="readonly">{$faq_data.0.0.question|escape:"html"}</textarea>
+						<div class="mb_15"> </div>
+					</fieldset>
+{* TinyMCE Editor *}
+					{include file="../../plugins/faq/templates/faq_front_editor.html}
+					<fieldset> 
+						<legend>{$plugin.faq_front.formtext.legend_answer}</legend>
+						<label for="faq_new_answer_id"><strong>{$plugin.faq_front.formtext.label_answer}</strong></label><br /><br />
+{* Antwort *}
+						<textarea name="faq_answer" id="faq_new_answer_id" rows="20" cols="50"
+							 class="width90">{$faq_data.0.0.answer|escape:"html"}</textarea> 
+						<br />
+					</fieldset>
+		
+{* Attachments *}
+					<fieldset>
+						<legend>{$plugin.faq_front.formtext.legend_faq_edit_attachment}</legend>
+						<label for="faq_edit_attachment">{$plugin.faq_front.formtext.label_faq_edit_attachment}</label><br />
+{* Filename, Durchsuchen *}
+						<input type="file" name="faq_edit_attachment_filename" id="faq_edit_attachment" value="" title="{$plugin.faq_front.submit.faq_edit_attachment}" /> 
+{* Button Hochladen *}
+						<input type="submit" name="submit[2]" value="{$plugin.faq_front.submit.faq_edit_attachment_upload}" />
+						<br /><br />
+{* Die Attachments *}
+						{if $faq_attach}
+							<div class="mb_4">{$plugin.faq_front.text.faq_edit_attachment}
+{* Ein Attachment ist nicht mehr im Verzeichnis vorhanden *}
+								{if $fehler8}
+									{$plugin.faq_front.text.faq_edit_attachment2}
+								{/if}
+							</div>
+							{foreach item=faq_file from=$faq_attach}
+								<div class="height_18">
+									<input type="image" src="plugins/faq/bilder/faq_attachment_del.gif" alt="Absenden" name="submit[3][{$faq_file.id}]" value="{$faq_file.id}" title="{$plugin.faq_front.imgtext.faq_edit_attachment} {$faq_file.name}" />
+									<a href="plugins/faq/attachments/{$faq_file.name_stored}" title="{$plugin.faq_front.linktext.faq_edit_attachment}" target="_blank">{$faq_file.name}</a> ({$faq_file.name_stored} {$faq_file.size} Bytes)
+{* Dieses Attachment ist nicht mehr im Verzeichnis vorhanden *}
+									{if !$faq_file.file_status}
+										<span class="bold_red">{$plugin.faq_front.errmsg.file_fehlt}</span>
+									{/if}
+								</div>
+							{/foreach}
+							<br />
+						{/if}
+					</fieldset>
+{* Button Submit *}
+					<fieldset>
+						<legend>{$plugin.faq_front.submit.faq_edit_submit}</legend>
+{* Speichern der FAQ Daten*}
+						<input type="submit" value="{$plugin.faq_front.submit.faq_edit}" name="submit[4]" title="{$plugin.faq_front.submit.faq_edit}" /> 
+					</fieldset>
+					<input type="hidden" name="faq_id" value="{$faq_id}" />
+				</form>
+			{else}
+{* keine Formulardaten: Liste der FAQS anzeigen *}
+				{if $faq_list}
+{* Falls keine FAQs angelegt wurden *}
+{* Liste der FAQs zum Bearbeiten anzeigen *}
+					<table class="faqs">
+					<tr>
+						<th id="question">{$plugin.faq_front.text.faq_list_frage}</th>
+						<th id="catscount" class="align_right">{$plugin.faq_front.text.faq_list_catscount}</th>
+						<th id="attcount" class="align_right">{$plugin.faq_front.text.faq_list_attcount}</th>
+					</tr>
+					{foreach item=faq_list from=$faq_list}
+						<tr class="cat_row">
+							<td headers="question">
+								<a href="?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_front_edit.html&amp;faq_id={$faq_list.id}" title="{$plugin.faq_front.linktext.faq_edit}">
+								{$faq_list.question}</a>
+{* Verwaist *}
+								{if $faq_list.orphan} 
+									<span class="bold_red"> {$plugin.faq_front.text.faq_orphan}</span>
+								{/if}
+							</td>
+							<td headers="catscount" align="right">{$faq_list.catcount}</td>
+							<td headers="attcount" align="right">{$faq_list.attcount}</td>
+						</tr>
+					{/foreach}
+					</table>
+					{include file=weiter.inc.html}
+				{/if}
+			{/if}
+		</div>
+{/if}
+{else} {* Nicht angemeldet *}
+	<p class="bold_red">{$plugin.faq_front.message.no_login}</p><br />
+{/if}

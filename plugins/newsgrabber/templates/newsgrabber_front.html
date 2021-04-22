@@ -1,0 +1,27 @@
+<div class="clearfix"></div>
+<div id="content_1386079576" class="rssfeed teaser large-12 medium-12 columns">
+{foreach from=$newsgrabber_array item=data name=datasets}
+    {if $smarty.foreach.datasets.iteration <= $max_news}
+    {if $data.image}<div class="large-3 medium-12 columns">
+        {$data.image}</div>{/if}
+
+    <div class="{if $data.image}large-9{else}large-12{/if} medium-12 columns"><h4>{$data.title|strip_tags}</h4>
+        <div class="teasertext"><p><p>{$data.description|strip_tags}<br />
+            <a target="blank" href="{$data.link}">Zum Newseintrag
+                "{$data.title|strip_tags}" auf einer Fachbetriebesseite.</a></p></div>
+    </div>
+    <div class="clearfix"></div>
+    {/if}
+{/foreach}
+
+<!-- MODUL: newsgrabber_front -->
+
+	<!-- ENDE MODUL: newsgrabber_front -->
+
+
+
+
+
+
+</div>
+<div class="clearfix"></div>

@@ -1,0 +1,114 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+	{$message.plugin.keywords.kopf}<br />
+	{$message.plugin.keywords.form_kopf}
+
+	{if isset($keywords_error) && $keywords_error}
+		<div class="alert error">
+			<strong>{$plugin_keywords_shop_error}</strong>
+		</div>
+	{/if}
+
+	<form name="test_daten" method="post" action="">
+		<fieldset>
+			<legend>{$message.plugin.keywords.form_legend}</legend>
+			<label for="keywords_wieoft">{$message.plugin.keywords.form_testwert_label}</label><br />
+			<input size="8" type="text"id="keywords_wieoft" name="keywords_wieoft" value="{$keyword.0.keywords_wieoft}" /><br />
+			<br />
+			<label for="keywords_wieviel">{$message.plugin.keywords.form_testwert_label2}</label><br />
+			<input size="2" type="text"id="keywords_wieviel" name="keywords_wieviel" value="{$keyword.0.keywords_wieviel}" /><br />
+			
+			</fieldset>
+			<fieldset>
+<legend>{$plugin_keywords_stop_wrter_fieldset}</legend>
+			<label for="keywords_stop_wrter">{$plugin_keywords_stop_wrter}{$plugin_error.keywords_stop_wrter} </label>
+<br />
+<textarea cols="30" rows="6" name="keywords_stop_wrter"  class="keywords_stop_wrter" id="keywords_stop_wrter">{$keyword.0.keywords_stop_wrter|strip_tags}</textarea>
+<br />
+</fieldset>
+ <fieldset>
+<legend>{$plugin_keywords_tag_cloud_basis}</legend>
+
+<label for="keywords_basis_der_tag_cloud">{$plugin_keywords_basis_der_tag_cloud}{$plugin_error.keywords_basis_der_tag_cloud} </label>
+<br />
+<select name="keywords_basis_der_tag_cloud" id="keywords_basis_der_tag_cloud" size="1"/><option {if $keyword.0.keywords_basis_der_tag_cloud==1}selected="selected"{/if} value="1">CMS Artikel
+</option><option {if $keyword.0.keywords_basis_der_tag_cloud==2}selected="selected"{/if} value="2">Shop Produkte</option></select>
+<br />
+
+</fieldset>
+			<fieldset>
+<legend>{$plugin_keywords_einstellungen_speichern}</legend>
+<input type="submit" class="submit_back_green" name="submit_keyword" value="{$message.plugin.keywords.submit_label2}" /> <br />
+</fieldset>
+
+		
+	</form>
+	</p>
+	<h2>{$message.plugin.keywords.jetzaktu}</h2>
+	{if $is_aktu}
+		<strong>Wurde aktualisiert</strong>
+	{/if}
+	<form name="test_daten" method="post" action="">
+		<fieldset>
+			<legend>{$message.plugin.keywords.form_legend2}</legend>
+						
+			<input type="submit" class="submit_back_big" name="submit_aktu" value="{$message.plugin.keywords.form_legend2}" />
+		</fieldset>
+	</form>
+	<div>
+<h2>{$message.plugin.keywords.liste}</h2>
+<table>
+<tr>
+<th scope="col">Eintrag</th>
+<th scope="col">Anzahl</th>
+</tr>
+{foreach item=eintrag from=$keywords_liste}
+<tr>
+<td>{$eintrag.keywords_liste_keyword}
+</td>
+<td>{$eintrag.keywords_liste_wieoft}
+</td>
+</tr>
+{/foreach}
+</table>
+ 
+
+
+{if $is_dev}
+<span class="ignore">
+<br />
+ #start#</span>
+  <!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+	 <div class="rapid_form">
+		<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="papoo_keywords_tabelle" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="ext_search_class" />
+		<!-- Das Standarpr�fix f�r die Ids -->
+		<input type="hidden" name="praefix" value="keywords" />
+		<!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="keywords" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div>
+
+{/if}
+
+
+</div>
+	
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

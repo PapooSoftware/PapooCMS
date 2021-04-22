@@ -1,0 +1,21 @@
+<div class="image_upload_shop">
+	<form action="" method="post"  enctype="multipart/form-data">
+		<fieldset> 
+			<legend> {$plugin_shop_upload_plugin_daten_eintragen}</legend>
+				<input type="hidden" name="ps_act" value="NIX" />
+				 
+					 <div class="labdiv2"><label for="shop_upload_plugin_text_hochladen">{$plugin_shop_upload_plugin_tragen_sie_hier_den_text_ein_fr_ihre}</label>
+					<br />
+					<textarea class="shop_textarea_text" cols="30" rows="6" name="shop_upload_plugin_text_hochladen"  class="shop_upload_plugin_text_hochladen" id="shop_upload_plugin_text_hochladen">{$text_shop_upload}</textarea>
+					</div>
+
+				{$upload_img_shop}
+				<label>{$plugin_shop_upload_plugin_laden_sie_hier_das_bild_hoch_fr_ihre}</label><br />
+					<input type="file" name="strFile" accept="image/*" />
+					
+		<p> {$plugin_shop_upload_plugin_untersttzte_formate}</p>
+					<input type="hidden" name="MAX_FILE_SIZE" value="250000" /><br />
+										<input  type="submit" class="submit_img_shop" name="submit_img_shop" value="abschicken" />
+				</fieldset>
+			</form>
+</div>

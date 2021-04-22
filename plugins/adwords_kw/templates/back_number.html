@@ -1,0 +1,25 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+
+<link rel="stylesheet" href="{$adwords_kw_css_path}/adwords_kw.css"/>
+
+<div class="artikel">
+    <form action="" method="post">
+        <fieldset>
+            <legend>Rufnummer Tracking eintragen / bearbeiten</legend>
+                <label for="number_script">Das Google-Skript</label>
+                <textarea cols="40" rows="16" id="number_script" name="number_script" placeholder="{$adwords_kw_3}">{$number_script|escape}</textarea>
+                <label for="number_number">Die zu ersetzende Telefonnummer</label>
+                <input type="text" name="number_number" id="number_number" placeholder="{$adwords_kw_4}" value="{if $number_number}{$number_number}{/if}" />
+        </fieldset>
+        <fieldset>
+            <legend>Speichern</legend>
+            <input type="submit" class="btn btn-info" value="Speichern" name="updateNumber" />
+        </fieldset>
+    </form>
+</div>
+
+</body>
+</html>
+{/if}

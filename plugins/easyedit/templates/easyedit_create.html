@@ -1,0 +1,71 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+
+
+{if $drin}
+<!-- Die Artikel wurden durchgeloopt-->
+<h2>{$plugin.easyedit.daten_eingetragen}</h2>
+{/if}
+<h2>{$plugin.easyedit.menu_bearbeiten}</h2>
+<p>{$plugin.easyedit.menu_bearbeiten_text}</p>
+
+
+<h2>{$plugin.easyedit.menu_optionen}</h2>
+<form action="" method="post">
+<table style="width:89%;" summary="{$plugin.easyedit.lstmenu}">
+<tr>
+<td>{$plugin.easyedit.mname}</td>
+<td>{$plugin.easyedit.sortierung}</td>
+<td>{$plugin.easyedit.greasyedit}</td>
+<td></td>
+</tr>
+{foreach item=menu from=$menu_data_rights}
+<!--style="background:#{$menu.style};" -->
+<tr >
+
+<td>{$menu.menuname}</td>
+<td>
+<input type="checkbox" {if $menu.easy_order_id=="1"}checked="checked"{/if} name ="easy_order_id[{$menu.menuid}]" value="1" />
+
+</td>
+<td style="text-align:center;">
+<select name="easy_easy_ok[{$menu.menuid}]" id="easy_easy_ok[{$menu.menuid}]">
+		<option value="0">Keine Gruppe</option>
+		{foreach item=img from=$gruppen}
+		{if $img.easy_geasy_ok=="1"}
+			<option value="{$img.gruppeid}" {if $menu.easy_easy_ok==$img.gruppeid}selected="selected"{/if} >{$img.gruppenname}</option>
+			{/if}
+		{/foreach}
+
+		</select>
+
+
+</td>
+<td></td>
+</tr>
+{/foreach}
+</table>
+<br />
+<fieldset>
+<legend>{$plugin.easyedit.eintragen1}</legend>
+<input type="submit" class="submit_back_green" name="entermen" value="{$plugin.easyedit.eintragen2}" />
+</fieldset>
+</form>
+ <a href="javascript:history.go(-1)">{$plugin.easyedit.zurueck}</a>
+
+
+
+
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

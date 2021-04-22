@@ -1,0 +1,35 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+<h2>{$message_5800}</h2>
+<p>{$message_5801}</p>
+<p>{$message_5802}</p>
+
+  <form action="#" method="post" >
+  <fieldset> 
+  <legend>{$message_5803}
+   </legend>
+   <label for="usefulservices_snap_key">{$message_5805}</label><br />
+ <input type="text" name="usefulservices_snap_key" id="usefulservices_snap_key" value="{$usefulservices_snap_key}" size="30"/><br />
+ <label for="usefulservices_snap_domain">{$message_5804}</label><br />
+ <input type="text" name="usefulservices_snap_domain" id="usefulservices_snap_domain" value="{$usefulservices_snap_domain}" size="30"/><br /><br />
+  
+  <input type="submit" class="submit_back_green" name="submitsnap" value="{$message_5806}"/>
+ 
+  
+  </fieldset>
+  </form>
+  
+
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

@@ -1,0 +1,31 @@
+/* Gesamter News-Container */
+.rss_news {
+
+}
+.rss_news h2, .rss_news A, .rss_news h2 A {
+
+}
+/* Block fuer eine News */
+.rss_newsblock {
+
+}
+/* Kopfsegment einer News */
+.rss_newsblockkopf {
+
+}
+.rss_newsblockkopf A {
+
+}
+/* Nachrichtsegment einer News */
+.rss_newsblock {
+	margin-top:20px;
+	padding:3px;
+border:1px solid #ddd;
+}
+.rss_newskoerper A {
+
+}
+/* Titel der gesamten News (Ueberschrift) */
+.rss_titel {
+
+}

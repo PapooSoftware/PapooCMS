@@ -66,6 +66,7 @@ class counter {
 		$timegestern=$time-86400;
 		//aktuelle IP
 		$ip=$_SERVER["REMOTE_ADDR"];
+		$this->db->csrfok = true;
 
 		//Alle Einträge löschen die älter l 24 h sind
 		$sql=sprintf("DELETE FROM %s WHERE counter_stamp<'%s'",
@@ -107,6 +108,7 @@ class counter {
 			);
 			$this->db->query($sql);
 		}
+		$this->db->csrfok = false;
 	}
 
 	/**

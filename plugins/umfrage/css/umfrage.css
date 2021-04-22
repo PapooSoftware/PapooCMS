@@ -1,0 +1,38 @@
+#mod_umfrage_plugin fieldset input[type=submit]
+{
+	margin: 1em 0 1em 0;
+}
+
+/* Umfrage Ergebnis (Balken etc.) */
+
+.umfrage_ergebnisliste
+{
+	list-style-type: none !important;
+	position:static;
+}
+
+/* Umfrage-Backend */
+#umfrage_backend input[type=text]
+{
+	width: 50em;
+}
+.umfrage_ergebnisliste img {
+	height:1px;
+	
+}
+.umfrage_balken1{ background-color: #c03030; border: 2px ridge #C00000; }
+
+.umfrage_balken2{ background-color: #c040e0; border: 2px ridge #e030E0; }
+
+.umfrage_balken3{ background-color: #909090; border: 2px ridge #D0D0D0; }
+
+.umfrage_balken4{ background-color: #f08000; border: 2px ridge #FFc030; }
+
+.umfrage_balken5{ background-color: #608020; border: 2px ridge #608000; }
+
+.umfrage_balken6{ background-color: #FF5050; border: 2px ridge #FF0000; }
+
+.umfrage_balken7{ background-color: #FF4050; border: 2px ridge #FFa000; }
+.umfrage_balken8{ background-color: #FF4050; border: 2px ridge #FFa000; }
+.umfrage_balken9{ background-color: #FF4050; border: 2px ridge #FFa000; }
+.umfrage_balken10{ background-color: #FF4050; border: 2px ridge #FFa000; }

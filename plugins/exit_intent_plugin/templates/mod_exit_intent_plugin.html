@@ -1,0 +1,23 @@
+{if $module_aktiv.mod_exit_intent_plugin}
+
+<!-- Modul wird nicht genutzt-->
+<div class="modul" id="mod_exit_intent_plugin">
+    <script type="text/javascript" src="{$webverzeichnis}js/bioep.js"></script>
+    <script type="text/javascript">
+        {literal}
+        bioEp.init({
+            width: {/literal}{$singleItem.0.ei_breite}{literal},
+        height: {/literal}{$singleItem.0.ei_hoehe}{literal},
+        html: '{/literal}{$singleItem.0.ei_link}{literal}',
+        delay:{/literal}{$singleItem.0.ei_delay}{literal},
+        showOnDelay: false,
+                cookieExp: {/literal}{$singleItem.0.ei_auslaufdatum}{literal},
+        cookie_name: '{/literal}{$singleItem.0.ei_cookie_name}{literal}'
+        });
+        {/literal}
+
+
+    </script>
+</div>
+    <!-- ENDE MODUL: exit_intent_plugin -->
+{/if}

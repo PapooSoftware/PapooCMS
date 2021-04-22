@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS `XXX_plugin_flex2sitemap`; ##b_dump##  

@@ -1,9 +1,11 @@
-{foreach item=error from=$page_error}{$error}{/foreach}<!doctype html>
+<!doctype html>
 <html class="no-js" lang="de"{if isset($openGraphMetaTags) && $openGraphMetaTags} prefix="og: http://ogp.me/ns#"{/if}>
 <head>
     {include file="_kopf.utf8.html"}
 </head>
 {include file="_body_kopf.utf8.html"}
+
+{foreach item=error from=$page_error}{$error}{/foreach}
 
 <span id="styledir" class="{$slash}styles/{$style_dir}"></span>
 

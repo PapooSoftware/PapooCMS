@@ -1,0 +1,30 @@
+<div class="artikel">
+	{if $delete}<h2>datei_geloescht{$plugin.mv.datei_geloescht}</h2>{/if}
+	{if $kein_inhalt}kein_inhalt<div class="error">{$plugin.mv.kein_inhalt}</div><br />{/if}
+	{if $fehler == 1}no_table<div class="error">{$plugin.mv.no_table}</div><br />{/if}
+	{if $fehler == 2}no_lang<div class="error">{$plugin.mv.no_lang}</div><br />{/if}
+	{if $fehler == 3}no_meta<div class="error">{$plugin.mv.no_meta}</div><br />{/if}
+	{if $fehler == 4}no_tableno_lang <div class="error">{$plugin.mv.no_table}</div><br /><div class="error">{$plugin.mv.no_lang}</div><br />{/if}
+    <form action="" method="post" id="formi">
+        <input type="hidden" name="mv_sql" value="{$mv_sql}" />
+        <input type="hidden" name="mv_meta_id" value="{$mv_meta_id}" />
+        <input type="hidden" name="metachoose" value="{$mv_meta_id}" />
+        <input type="hidden" name="metaebene" value="{$mv_meta_id}" />
+        <input type="hidden" name="tabelle" value="papoo_mv_content_{$mv_id}" />
+        <input type="hidden" name="format" value="csv" />
+        <input type="hidden" name="feld" value="mit" />
+        <input type="hidden" name="trenner" value="tab" />
+        <fieldset>
+            <legend>{$plugin.mv.export_starten}</legend>
+            <input type="submit" class="submit_back" name="startexport" value="{$plugin.mv.export_starten}" />
+        </fieldset>
+    </form>
+    {if $file}
+		<h2>{$plugin.mv.export_downloaden}</h2>
+		<p>{$plugin.mv.export_downloaden_text}</p>
+		<ul>
+			<li><a href="{$pfad}{$file}">{$file} {$plugin.mv.downloaden}</a></li>
+			<li><a href="{$self}&file={$file}&delfile=ok">{$file} {$plugin.mv.mv_list_del}</a></li>
+		</ul>
+       {/if}
+</div>

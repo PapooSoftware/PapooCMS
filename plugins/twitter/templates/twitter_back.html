@@ -1,0 +1,40 @@
+{include file=head.inc.html}
+{include file=menu.inc.html}
+
+<div class="artikel">
+    <h1><img src="../plugins/twitter/bilder/twitter-icon.png" alt="twitter" title="twitter" />Twitter Plugin</h1>
+    <br />
+    <p>Mit dem Twitter Plugin kann man sich eine beliebige Anzahl von Tweets oder Followern ueber einen Benutzernamen oder Hashtag anzeigen lassen.</p>
+    <hr />
+    <h2>1. Tweets ueber Benutzername anzeigen</h2>
+    <p>Mit <b>#twitter+usertweets</b> lassen sich die letzten Tweets vom jeweiligen Benutzernamen anzeigen.
+       <br />
+       Die Syntax lautet: <b>#twitter+usertweets+name+count+mediayn#</b><br />
+       Ein Beispiel waere <b>#twitter+usertweets+twitterapi+5+0#</b> um sich die letzten <i>5</i> Tweets des Benutzers mit dem Namen <i>twitterapi</i> ohne Bilder/Videos ausgeben zulassen. <br />
+       Wenn Sie den letzten Parameter auf "1" setzen, so werden Medien im tweet mit angezeigt.
+    </p>
+    <hr />
+    <h2>2. Tweets ueber Hashtag anzeigen</h2>
+    <p>Mit <b>#twitter+hashtweets</b> lassen sich die letzten Tweets mit jeweiligem Hashtag anzeigen.
+       <br />
+       Die Syntax lautet: <b>#twitter+hashtweets+name+count+mediayn#</b><br />
+       Ein Beispiel waere <b>#twitter+hashtweets+cms+5+0#</b> um sich die letzten <i>5</i> Tweets mit dem Hashtag <i>cms</i> ohne Bilder/Videos anzeigen zulassen. <br/>
+        Wenn Sie den letzten Parameter auf "1" setzen, so werden Medien im tweet mit angezeigt.
+    </p>
+    <hr />
+    <h2>3. Followers ueber Benutzername anzeigen</h2>
+    <p>Mit <b>#twitter+followers</b> lassen sich die letzten Tweets mit jeweiligem Hashtag anzeigen.
+       <br />
+       Die Syntax lautet: <b>#twitter+followers+name+count#</b><br />
+       Ein Beispiel waere <b>#twitter+followers+twitterapi+30#</b> um sich <i>30</i> Followers vom Benutzer mit dem Namen <i>twitterapi</i> anzeigen zulassen.
+    </p>
+    <hr />
+    <h2>4. Einen bestimmten Tweet einbinden</h2>
+    Wenn Sie einen bestimmten Tweet einbinden möchten, kopieren Sie den Link zum Tweet, wie im folgenden Bild dargestellt und fügen ihn an der gewünschten Stelle wie angegeben ein.
+    <figure>
+        <img src="{$plugins.twitter.web_path}bilder/copy-tweet-link.png" width="760" height="210" />
+        <figcaption><strong>#twitter.com/Google/status/908742851873460224#</strong></figcaption>
+    </figure>
+</div>
+</body>
+</html>

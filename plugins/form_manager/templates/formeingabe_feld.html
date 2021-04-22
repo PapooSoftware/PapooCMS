@@ -1,0 +1,180 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{if !$altereintrag}<h2>{$plugin.form_manager.inpuerstellen}</h2>
+{/if}
+{if $fehler}
+<div style="color:red; border:1px solid black;"><h2>{$plugin.form_manager.korrektbitte}</h2>
+<script>
+alert("{$plugin.form_manager.bittekorekt}");
+</script>
+</div>
+{/if}
+
+<form action="" method="post" name="video" enctype="multipart/form-data" >
+		<input type="hidden" name="filename" value="{$dateiname}" />
+		<input type="hidden" name="exist" value="{$video_id}" />
+		<fieldset>
+				<legend>{$message_691}</legend>
+			<label for="plugin_cform_name">{$message_711} {if $ffname}<span style="color:red;">***</span>{/if}</label><br />
+				<input type="text" id="plugin_cform_name" name="plugin_cform_name" value="{$fdat.0.plugin_cform_name}" size="30" /><br />
+		</fieldset>
+		<fieldset>
+			{*<!-- Kategorie.-->*}
+			<legend>{$plugin.form_manager.erstellgrup}</legend>
+			<label for="plugin_cform_group_id ">{$plugin.form_manager.grupfield}</label><br />
+			<select name="plugin_cform_group_id" id="plugin_cform_group_id" size="1">
+
+				{foreach item=cat from=$glist}
+					<option value="{$cat.plugin_cform_group_id}" {if $fdat.0.plugin_cform_group_id==$cat.plugin_cform_group_id} selected="selected" {/if}>{$cat.plugin_cform_group_text}</option>
+				{/foreach}
+			</select>
+		</fieldset>
+
+		<fieldset>
+			{*<!-- Kategorie.-->*}
+			<legend>{$message_713}</legend>
+			<label for="plugin_cform_type ">{$message_712}</label><br />
+			<select name="plugin_cform_type" id="plugin_cform_type" size="1">
+				<option value="text" {$checked1}>{$message_714}</option>
+				{foreach item=cat from=$result_cat}
+					<option value="{$cat.type}" {if $fdat.0.plugin_cform_type==$cat.type} selected="selected" {/if}>{$cat.name}</option>
+				{/foreach}
+			</select>
+		</fieldset>
+		<fieldset>
+			{*<!-- Kategorie.-->*}
+			<legend>{$plugin.form_manager.inhaltstyp}</legend>
+			<label for="plugin_cform_content_type ">{$plugin.form_manager.waehlinhalt}</label><br />
+			<select name="plugin_cform_content_type" id="plugin_cform_content_type" size="1">
+
+				{foreach item=cat from=$result_cat_ctyp}
+					<option value="{$cat.type}" {if $fdat.0.plugin_cform_content_type==$cat.type} selected="selected" {/if}>{$cat.name}</option>
+				{/foreach}
+			</select>
+		</fieldset>
+		<fieldset>
+				<legend>{$plugin.form_manager.mindeslaenge}</legend>
+			<label for="plugin_cform_minlaeng">{$plugin.form_manager.gibminein}</label><br />
+				<input type="text" id="plugin_cform_minlaeng" name="plugin_cform_minlaeng" value="{$fdat.0.plugin_cform_minlaeng}" size="5" /><br />
+		</fieldset>
+		<fieldset>
+				<legend>{$plugin.form_manager.size}</legend>
+			<label for="plugin_cform_size">{$plugin.form_manager.size1}</label><br />
+				<input type="text" id="plugin_cform_size" name="plugin_cform_size" value="{$fdat.0.plugin_cform_size}" size="5" /><br />
+		</fieldset>
+		
+
+		{foreach item=lang from=$language_form}
+			<fieldset>
+				{*<!--  -->*}
+				<legend>{$message_715}  {$lang.language})</legend>
+
+
+				{*<!--  -->*}
+				<label for="plugin_cform_label[{$lang.lang_id}]">{$message_716} (Label){if $fflabel[$lang.lang_id]}<span style="color:red;">***</span>{/if}</label><br />
+				<input type="text" id="plugin_cform_label[{$lang.lang_id}]" name="plugin_cform_label[{$lang.lang_id}]" value="{$lang.plugin_cform_label}" size="30" /><br />
+				<br />
+			</fieldset>
+			
+			<fieldset>
+				{*<!--  -->*}
+				<legend>{$plugin.form_manager.eigfelleg} ({$lang.language})</legend>
+
+
+				{*<!--  -->*}
+				<label for="plugin_cform_descrip[{$lang.lang_id}]">{$plugin.form_manager.optiofehler}(Label){if $fflabel[$lang.lang_id]}<span style="color:red;">***</span>{/if}</label><br />
+				<input type="text" id="plugin_cform_descrip[{$lang.lang_id}]" name="plugin_cform_descrip[{$lang.lang_id}]" value="{$lang.plugin_cform_descrip}" size="30" /><br />
+				<br />
+			</fieldset>
+			
+			<fieldset>
+				{*<!--  -->*}
+				<legend>{$plugin.form_manager.tooltip}({$lang.language})</legend>
+				
+			{*<!--plugin_cform_tooltip  -->*}
+	<label for="plugin_cform_tooltip[{$lang.lang_id}]">{$plugin.form_manager.tooltiplabel} {if $ffctype[$lang.lang_id]}<span style="color:red;">***</span>{/if}</label><br />
+				<textarea name="plugin_cform_tooltip[{$lang.lang_id}]" id="plugin_cform_tooltip[{$lang.lang_id}]" rows="6" cols="30">{$lang.plugin_cform_tooltip}</textarea>
+			</fieldset>
+			
+			
+			<fieldset>
+				{*<!--  -->*}
+				<legend>{$plugin.form_manager.wertradiosel}({$lang.language})</legend>
+				{$plugin.form_manager.tragwerteein}
+				
+				
+				{*<!--  -->*}
+				<label for="plugin_cform_content_list[{$lang.lang_id}]">{$plugin.form_manager.Auswahlwerte} {if $ffctype[$lang.lang_id]}<span style="color:red;">***</span>{/if}</label><br />
+				<textarea name="plugin_cform_content_list[{$lang.lang_id}]" id="plugin_cform_content_list[{$lang.lang_id}]" rows="6" cols="30">{$lang.plugin_cform_content_list}</textarea>
+			</fieldset>
+		{/foreach}
+		
+			<fieldset>
+				{*<!--  -->*}
+				<legend>{$plugin.form_manager.bildlabel}</legend>
+				
+				<div style="float:right; border:1px solid black;display:none{$fdat.0.plugin_cform_label_img};"><img
+				 src="../images/thumbs/{$fdat.0.plugin_cform_label_img}" alt="Logo" /></div>
+				<br />
+				<label for="paket_logo2">{$plugin.form_manager.bild_wahl}</label><br />
+				<select name="paket_logo2" size="1" id="paket_logo2">
+				<option value=""{if not $fdat[0].plugin_cform_label_img} selected="selected"{/if}>{$plugin.form_manager.keine|default:'Bitte auswählen&hellip;'}</option>
+				{foreach item=art from=$bild_data name=imageList}
+					{if $art.image_dir != $currentImageCategory || $smarty.foreach.imageList.first}
+						{if not $smarty.foreach.imageList.first}
+							</optgroup>
+						{/if}
+						<optgroup label="{$art.image_dir|default:'unsortiert'|escape}">
+						{assign var=currentImageCategory value=$art.image_dir}
+					{/if}
+					{if $art.image_name}
+						<option value="{$art.image_name}"{if $art.image_name == $fdat[0].plugin_cform_label_img} selected="selected"{/if}>{$art.image_alt|trim|default:$art.image_name|escape}</option>
+					{/if}
+					{if $smarty.foreach.imageList.last}
+						</optgroup>
+					{/if}
+				{/foreach}
+				
+				</select> <br />
+				<label for="paket_logo">{$plugin.form_manager.bild_neu}</label><br />
+				<p>{$plugin.form_manager.bild_alt}</p>
+			
+				<input name="strFile" value="" type="file" /> <br />
+			</fieldset>
+
+		<fieldset>
+			{*<!-- Eintragen: -->*}
+			<legend>{$message_717}:</legend>
+			{*<!-- In die Datenbank eintragen -->*}
+			<br />
+			<input type="checkbox" id="plugin_cform_must" name="plugin_cform_must" {if $fdat.0.plugin_cform_must==1}checked="checked"{/if} value="1" /><label for="plugin_cform_must">{$message_718}</label>
+		</fieldset>
+
+		<fieldset>
+			{*<!-- Eintragen: -->*}
+			<legend>{$message_224}:</legend>
+			{*<!-- In die Datenbank eintragen -->*}
+			<input type="submit" class="submit_back_green_xl" name="submit_field" value="{$message_224}" />
+		</fieldset>
+
+		{if $fdat.0.plugin_cform_id<1}
+			<input type="hidden" name="pffeldid" value="new" />
+			{/if}
+			<input type="hidden" name="form_manager_id" value="{$form_manager_id}" />
+	{* <!-- In Modus "EDIT" Knopf zum Löschen anbieten --> *}
+	{if $fdat.0.plugin_cform_id}
+
+			<input type="hidden" name="plugin_cform_id" value="{$fdat.0.plugin_cform_id}" />
+
+
+
+			<fieldset>
+				{*<!-- Eintragen: -->*}
+				<legend>{$message_719}</legend>
+				<input type="submit" name="del_field" class="submit_back_red" value="{$message_720}"><br />
+			</fieldset>
+
+{/if}
+</form>
+
+
+{/if}

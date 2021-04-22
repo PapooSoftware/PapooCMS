@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<plugin version="4">
+
+<name>userlogin</name> 
+
+<beschreibung_de><![CDATA[ Plugin zur Realisierung einer Benutzer-Anmeldung im Content-Bereich. 
+Im NICHT-angemeldeten Zustand wird der Artikel angezeigt, welcher dem Plugin-Menü-Punkt zugewiesen ist <small>(es darf nur EIN Artikel sein)</small>. 
+Für den angemeldeten Zustand kann ein entsprechender Text angegeben werden.]]></beschreibung_de>
+
+<version>2.0</version>
+<datum>14.08.2012</datum>
+
+<autor>
+	<name>Stephan Bergmann</name>
+	<email>S.Bergmann@XiMiX.de</email>
+</autor>
+
+<menue>
+	<eintrag_de>User-Login</eintrag_de>
+	<icon>userlogin/bilder/menue_icon.gif</icon>
+	<link>plugin:userlogin/templates/back.html</link>
+</menue>
+
+<klasse>
+	<name>userlogin</name>
+	<datei>userlogin/lib/userlogin_class.php</datei>
+</klasse>
+
+<datenbank>
+	<installation>userlogin/sql/userlogin_install.sql</installation>
+	<deinstallation>userlogin/sql/userlogin_deinstall.sql</deinstallation>
+</datenbank>
+
+<modul>
+	<datei>plugin:userlogin/templates/mod_userlogin_logout.html</datei>
+	<name_de>Plugin "userlogin" Logout-Button</name_de>
+	<beschreibung_de>Modul zur Platzierung eines separaten Logout-Button.</beschreibung_de>
+</modul>
+
+<messages>userlogin/messages</messages>
+
+</plugin>

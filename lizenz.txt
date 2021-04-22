@@ -1,0 +1,38 @@
+Software-Lizenzbedingungen
+
+1.
+Vorbemerkung
+1.1
+Diese Lizenzbedingungen gelten ergänzend zu den Allgemeinen Geschäftsbedingungen. Die Lizenzbedingungen werden durch das Fortsetzen der Installation anerkannt.
+
+2.
+Einräumung von Nutzungsrechten
+2.1
+Mit Vertragsschluss über die Lieferung/den Download von Software (unabhängig vom Speichermedium) wird dem Kunden das nicht übertragbare und nicht ausschließliche Nutzungsrecht an der vertragsgegenständlichen Software eingeräumt, das auf die nachfolgend beschriebene Nutzung beschränkt ist. Alle dort nicht ausdrücklich aufgeführten Nutzungsrechte verbleiben bei Papoo Software bzw. Dr. Carsten Euwens (Papoo Software) als Inhaber aller Urheber- und Schutzrechte.
+
+3.
+Umfang der Nutzungsrechte
+3.1
+Mit der Lieferung erwirbt der Kunde das Recht, die ihm gelieferte Software im vertragsgemäßen Umfang (Anzahl der erworbenen Lizenzen, Dauer des Nutzungsrechts) auf beliebigen Rechnern zu nutzen, die für diese Zwecke geeignet sind. Die Dauer des Nutzungsrechts bestimmt sich nach dem jeweiligen Software-Produkt, sie wird dem Kunden bei Vertragsbeginn und bei jedem weiteren Update mitgeteilt. Darüber hinaus wird dem Kunden bei allen Produkten ausdrücklich das Recht eingeräumt, Online-Datenbanken zu nutzen. Das Nutzungsrecht der Online-Datenbank bestimmt sich ausschließlich nach dem Bezugszeitraum für das jeweilige Software-Produkt und endet gleichzeitig mit diesem. 
+
+3.2
+Der Kunde verpflichtet sich, das Programm nur für eigene Zwecke zu nutzen und es Dritten weder unentgeltlich noch entgeltlich zu überlassen. Die Software darf pro Lizenz nur unter einer Domain auf einem Server, nicht jedoch gleichzeitig auf zwei oder mehreren Domains, genutzt werden. Für die Nutzung einer weiteren Domain ist eine sogenannte Domainzusatzlizenz erforderlich. Pro Domainzusatzlizenz darf eine weitere Domain mit der Software genutzt werden. 
+
+3.2.1 Die Papoo Light Version darf hingegen auf beliebig vielen Domains genutzt werden, dies gilt für rein private Internetauftritte und Internetauftritte gemeinnütziger Organisationen. Alle anderen Betreiber müßen eine Domain Lizenz erwerben die in allen Produkten außer Papoo Light enthalten ist. Eine Domainlizenz ist im Gegensatz zu der Domainzusatzlizenz nicht einzeln erhältlich, sondern nur im Zusammenhang mit einer Papoo Version außer der Papoo Light Version. 
+
+3.2.2 Auf lokalen Testumgebungen die nicht der Öffentlichkeit zur Verfügung stehen, darf jede Version beliebig getestet werden.
+
+3.3
+Der Kunde ist berechtigt, die Software auf die Festplatte des Servers zu installieren und zu nutzen sowie von der Originaldiskette oder CD-ROM eine Sicherungskopie zu fertigen, die aber nicht gleichzeitig neben der Originalversion genutzt werden darf. Im Falle eines Vertrages über eine Netzwerkversion/Mehrfach-Lizenz ist der Kunde berechtigt, die Software entsprechend der vertraglichen Vereinbarung zu jedem Zeitpunkt auf einem oder mehreren Rechnern mit mehreren Personen gleichzeitig zu nutzen.
+3.4
+Der Kunde ist nicht berechtigt, Kopien der Software zu erstellen, sofern die Kopien nicht zu Datensicherungszwecken erfolgen und auch nur zu diesem Zwecke eingesetzt werden. Er darf ferner die Softwarebestandteile, mitgelieferte Bilder, das Handbuch, Begleittexte sowie die zur Software gehörige Dokumentation durch Fotokopieren oder Mikroverfilmen, elektronische Sicherung oder durch andere Verfahren nicht vervielfältigen, die Software und/oder die zugehörige Dokumentation weder vertreiben, vermieten, Dritten Unterlizenzen hieran einräumen noch diese in anderer Weise Dritten zur Verfügung stellen. Der Kunde ist nicht berechtigt, Zugangskennungen und/oder Passwörter für das Produkt oder für Datenbankzugänge, die mit dem Produkt im Zusammenhang stehen, an Dritte weiterzugeben. Der Kunde ist  befugt, die Software und/oder die zugehörige Dokumentation ganz oder teilweise ausschließlich für die eigenen Bedürfnisse zu ändern, zu modifizieren, anzupassen oder zu dekompilieren. Auch ist es dem Kunden untersagt, Copyrightvermerke, Kennzeichen/Markenzeichen und/oder Eigentumsangaben des Herausgebers an Programmen oder am Dokumentationsmaterial zu verändern. Allerdings ist es möglich die Copyrightvermerke durch das erwerben einer sogenannten Whitelabel Lizenz für jeweils eine Domain zu entfernen.
+3.5
+Das Papoo CMS nutzt den TinyMCE Editor von Moxiecode, der unter der GPL Lizenz steht. Sie akzeptieren ebenfalls die Nutzung dieses Plugins und weitere Papoo Plugins unter der GPL Lizenz.
+4.
+Haftung
+4.1
+Papoo Software übernimmt keine Haftung für die Fehlerfreiheit der Software. Insbesondere übernimmt die Papoo Software keine Gewährleistung dafür, dass die Software Ihren Anforderungen und Zwecken genügt oder mit anderen von Ihnen ausgewählten Programmen zusammenarbeitet. Die Verantwortung für die richtige Auswahl und die Folgen der Benutzung der Software, sowie der damit beabsichtigten oder erzielten Ergebnisse, tragen Sie selbst.
+
+Papoo Software haftet nicht für Schäden die aufgrund der Benutzung dieser Software oder der Unfähigkeit diese Software zu verwenden entstehen. Wir haften nicht auf Schadensersatz für Mängel oder andere Pflichtverletzungen. Ausgenommen hiervon sind Schäden aus der Verletzung des Lebens, des Körpers oder der Gesundheit, wenn wir die Pflichtverletzung zu vertreten haben, und für sonstige Schäden, die auf einer vorsätzlichen oder grob fahrlässigen Pflichtverletzung durch uns oder auf einer von uns erklärten Garantie beruhen. Ausgenommen sind auch Schäden, für die wir nach dem Produkthaftungsgesetz zwingend haften oder die auf einer schuldhaften Verletzung wesentlicher Vertragspflichten zurückzuführen sind. In letzterem Fall beschränkt sich unsere Haftung auf den vorhersehbaren, typischerweise eintretenden Schaden.
+
+Die Pflichtverletzung unserer gesetzlichen Vertreter oder unserer Erfüllungsgehilfen steht einer Pflichtverletzung durch uns gleich.

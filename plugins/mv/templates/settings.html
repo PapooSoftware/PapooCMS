@@ -1,0 +1,44 @@
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+<div class="mv">
+{*<!-- Einstellungen ändern -->*}
+
+{$plugin.mv.einstellungen}
+<br />
+<form action="" method="post" enctype="multipart/form-data">
+<fieldset><legend>{$plugin.mv.is_group_sys}</legend>
+<label for="group_name">{$plugin.mv.group_name}</label>
+<select name="group_name" id="group_name" size="1">
+	<option value="">keine</option>
+{foreach item=dat from=$groupies}
+	<option value="{$dat}" {if $dat == $group_name} selected="selected" {/if}>{$dat}</option>
+{/foreach}
+</select>
+<br />
+<label for="group_id">{$plugin.mv.group_id}</label>
+<input name="group_id" id="group_id" value="{$group_id}" size="3" maxlength="3" readonly/>
+</fieldset>
+
+
+<fieldset><legend></legend>
+
+</fieldset>
+ 	<fieldset>
+	<legend>{$plugin.mv.senden}</legend>
+	<input type="submit" name="mv_submit" value="{$plugin.mv.aendern}" />
+	</fieldset>
+</form>
+</div>
+
+
+<!-- Rechte Fehlermeldung-->
+{include file=rechte.html}
+</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}

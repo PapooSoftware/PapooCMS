@@ -1,0 +1,28 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+ <h1 class="h1">Flex2Mail</h1>
+
+ <p>Um diese Modul zu nutzen, gehen sie in die Flex-Verwaltung die Sie nutzen m&ouml;chten und gehen in die Linkliste. Dort kopieren Sie den Link der Suchmaske, der auf Ihr Feld verweist. Aus diesen Link erstellen Sie bitte einen neuen Men&uuml;punkt unter "Inhalte->Men&uuml; verwalten->Men&uuml; erstellen". Wenn Sie Sie den Namen und Titel des neuen Men&uuml;punktes eingegeben haben, &auml;nder Sie den Link im Formularpunkt "Einbindung des Links oder der Datei." (unterstes Feld auf der Seite) in Ihren kopierten Flex-Verwaltungs-Link. Speichern.</p>
+ <p>Jetzt rufen das Untermen&uuml; "Ausgabe" Ihrer Flex-Verwaltung auf. Im Feld "Template für die Einzelansicht im Frontendbereich" (oberstes Feld auf der Seite) tragen Sie bitte folgendes ein:
+ <span class="alert-success">$#IHR_EMAIL_FELDNAME#$email_formular$$</span>
+ wobei Sie IHR_EMAIL_FELDNAME durch den Namen der EMail-Feldes Ihrer Flex-Verwaltung ersetzen.
+ </p>
+ <p>Im Feld darunter "Template für die Übersicht im Frontendbereich" geben Sie bitte
+ <span class="alert-success">#IHR_EMAIL_FELDNAME# $$link$$</span>
+ ein, wobei Sie IHR_EMAIL_FELDNAME durch den Namen der EMail-Feldes Ihrer Flex-Verwaltung ersetzen.
+ Speichern.
+ </p>
+ <p>Wenn Sie jetzt im Frontendbereich auf Ihren neuen Menüpunkt klicken, können Sie eine EMail-Addresse ausw&auml;hlen und eine EMail mit Anh&auml;ngen aus Papoo schreiben
+ <p/>
+</div>
+
+
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

@@ -1,0 +1,136 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		
+		<h1>{$plugin.faq_back.pageheader.faq_config}</h1>
+		{if $fehler1}<div class="error">{$plugin.faq_back.errmsg.stepsize_notnumeric}</div>{/if}
+		{if $fehler2}<div class="error">{$plugin.faq_back.errmsg.catspp_notnumeric}</div>{/if}
+		{if $fehler3}<div class="error">{$plugin.faq_back.errmsg.faqspp_notnumeric}</div>{/if}
+		{if $fehler4}<div class="error">{$plugin.faq_back.errmsg.attsize_notnumeric}</div>{/if}
+		{if $fehler5}<div class="error">{$plugin.faq_back.errmsg.adminmail_fehlt}</div>{/if}
+		{if $fehler6}<div class="error">{$plugin.faq_back.errmsg.uploads_notnumeric}</div>{/if}
+		{if $fehler7}<div class="error">{$plugin.faq_back.errmsg.db_error}</div>{/if}
+		{if $faq.config_saved}<div class="message">{$plugin.faq_back.message.config_saved}</div>{/if}
+		{foreach item=config from=$faq_config} {* Array mit 1 Element auflösen *}
+			<form name="artikel" action="" method="post" id="faq_back_config_form">
+
+{* META Daten *}
+				<fieldset>
+					<legend>{$plugin.faq_back.formtext.legend_faq_config_meta}</legend>
+					{* Titel der FAQ *}
+					<label for="faq_back_meta_title"><span>{$plugin.faq_back.formtext.label_faq_config_meta_title}</span></label><br />
+					<textarea name="title" id="faq_back_meta_title" class="faq_new_edit_textarea mb_10" cols="3" rows="5">{$config.title|escape:"html"}</textarea><br />
+
+{* Beschreibung *}
+					<label for="faq_back_meta_descript"><span>{$plugin.faq_back.formtext.label_faq_config_meta_descript}</span></label><br />
+					<textarea name="descript" id="faq_back_meta_descript" class="faq_new_edit_textarea mb_10" cols="3" rows="5">{$config.descript|escape:"html"}</textarea><br />
+
+{* Keywords *}
+					<label for="faq_back_meta_keys"><span>{$plugin.faq_back.formtext.label_faq_config_meta_keys}</span></label><br />
+					<textarea name="keywords" id="faq_back_meta_keys" class="faq_new_edit_textarea mb_10" cols="3" rows="5">{$config.keywords|escape:"html"}</textarea><br />
+				</fieldset>
+	
+{* Darstellung *}
+				<fieldset>
+					<legend>{$plugin.faq_back.formtext.legend_faq_config_layout}</legend>
+
+{* Überschrift *}
+					<label for="faq_back_header"><span>{$plugin.faq_back.formtext.label_faq_config_header}</span></label><br />
+					<textarea name="faq_header" id="faq_back_header" class="faq_new_edit_textarea mb_10" cols="3" rows="5">{$config.faq_header|escape:"html"}</textarea><br />
+
+{* Kopftext *}
+					<label for="faq_back_head_text"><span>{$plugin.faq_back.formtext.label_faq_config_head_text}</span></label><br />
+					<textarea name="faq_head_text" id="faq_back_head_text" class="faq_new_edit_textarea mb_10" cols="3" rows="5">{$config.faq_head_text|escape:"html"}</textarea><br />
+
+{* Fusstext *}
+					<label for="faq_back_footer"><span>{$plugin.faq_back.formtext.label_faq_config_footer}</span></label><br />
+					<textarea name="faq_footer" id="faq_back_footer" class="faq_new_edit_textarea mb_10" cols="3" rows="5">{$config.faq_footer|escape:"html"}</textarea><br />
+
+{* Layout-Typ Auswahl *}
+<div class="clearfix"></div>
+<label for="faq_back_faq_layout"><span>{$plugin.faq_back.formtext.label_faq_layout}</span></label>
+					<select name="layout" id="faq_back_faq_layout" class="config_select_1">
+						<option value="{$plugin.faq_back.formtext.option_faq_layout_compact}" id="faq_layout_compact"{if $config.layout=="Kompakt"} selected="selected" {/if}>{$plugin.faq_back.formtext.option_faq_layout_compact}</option>
+						<option value="{$plugin.faq_back.formtext.option_faq_layout_linklist}" id="faq_layout_linklist"{if $config.layout=="Linkliste"} selected="selected" {/if}>{$plugin.faq_back.formtext.option_faq_layout_linklist}</option>
+						<option value="{$plugin.faq_back.formtext.option_faq_layout_linklist2}" id="faq_layout_linklist2"{if $config.layout=="Linkliste 2"} selected="selected" {/if}>{$plugin.faq_back.formtext.option_faq_layout_linklist2}</option>
+						<option value="{$plugin.faq_back.formtext.option_faq_layout_linklist3}" id="faq_layout_linklist3"{if $config.layout=="Linkliste 3"} selected="selected" {/if}>{$plugin.faq_back.formtext.option_faq_layout_linklist3}</option>
+						<option value="{$plugin.faq_back.formtext.option_faq_layout_linklist4}" id="faq_layout_linklist4"{if $config.layout=="Linkliste 4"} selected="selected" {/if}>{$plugin.faq_back.formtext.option_faq_layout_linklist4}</option>
+						<option value="{$plugin.faq_back.formtext.option_faq_layout_linklist5}" id="faq_layout_linklist5"{if $config.layout=="Linkliste 5"} selected="selected" {/if}>{$plugin.faq_back.formtext.option_faq_layout_linklist5}</option>
+						<option value="{$plugin.faq_back.formtext.option_faq_layout_extrapage}" id="faq_layout_extrapage"{if $config.layout=="Extrapage"} selected="selected" {/if}>{$plugin.faq_back.formtext.option_faq_layout_extrapage}</option>
+					</select> <br />
+
+{* Sortierung *}<label for="faq_back_faq_order"><span>{$plugin.faq_back.formtext.label_faq_config_faq_order}</span></label><br />
+					<select name="faq_order" id="faq_back_faq_order" class="config_select_1">
+						<option value="created" id="faqconfset_1"{if $config.faq_order=="created"} selected="selected" {/if}>{$plugin.faq_back.formtext.option_faq_order_date}</option>
+						<option value="question" id="faqconfset_2"{if $config.faq_order=="question"} selected="selected" {/if}>{$plugin.faq_back.formtext.option_faq_order_frage}</option>
+						<option value="createdby" id="faqconfset_3"{if $config.faq_order=="createdby"} selected="selected" {/if}>{$plugin.faq_back.formtext.option_faq_order_autor}</option>
+						<option value="order_id" id="faqconfset_4"{if $config.faq_order=="order_id"} selected="selected" {/if}>{$plugin.faq_back.formtext.option_faq_order_id}</option>
+					</select> 
+
+{* Schrittweite der benutzerdefinierten Reihenfolge *}
+				<label for="faq_back_orderid_stepsize"><span>{$plugin.faq_back.formtext.label_faq_config_orderid_stepsize}</span></label>	<input type="text" name="renum_step" id="faq_back_orderid_stepsize" class="config_input_3" size="8" value="{$config.renum_step|escape:"html"}" /> <br />
+
+{* Anzahl Kategorien/FAQs/Fragen je Seite im Frontend*}
+					<label for="faq_back_settings_cats_per_page"><span>{$plugin.faq_back.formtext.label_faq_config_cats_per_page}</span></label><br /><input type="text" name="cats_per_page" id="faq_back_settings_cats_per_page" class="config_input_3" size="8" value="{$config.cats_per_page|escape:"html"}" /> 
+
+{* Attachments anzeigen J/N *}<div class="clearfix"></div>
+					<input type="checkbox" name="attachshow" id="faq_back_settings_attachshow" class="mb_10 ml_0" value="j" {if $config.attachshow=="j"}checked="checked"{/if} /> <label for="faq_back_settings_attachshow"><span>{$plugin.faq_back.formtext.label_faq_config_attachshow}</span></label><br /><div class="clearfix"></div>
+
+{* max. Anzahl Attachment Uploads bei einer 'Änderung *}
+					<label for="faq_back_settings_uploads_per_faq"><span>{$plugin.faq_back.formtext.label_faq_config_uploads_per_faq}</span></label><br /><input type="text" name="uploads_per_faq" id="faq_back_settings_uploads_per_faq" class="config_input_3" size="8" value="{$config.uploads_per_faq|escape:"html"}" /> 
+
+{* Autodetect Sprache *}<div class="clearfix"></div>
+					<input type="checkbox" name="autodetect_lang" id="faq_back_settings_autolang" class="mb_10 ml_0" value="j" {if $config.autodetect_lang=="j"}checked="checked"{/if} /> <label for="faq_back_settings_autolang"><span>{$plugin.faq_back.formtext.label_faq_config_autolang}</span></label><br /><div class="clearfix"></div>
+				</fieldset>
+
+{* Plugin Einstellungen *}
+				<fieldset>
+					<legend>{$plugin.faq_back.formtext.legend_faq_config_settings}</legend>
+
+{* Anzahl anzuzeigender FAQs im Backend *}
+				 <label for="faq_back_settings_faqs_per_page"><span>{$plugin.faq_back.formtext.label_faq_config_faqs_per_page}</span></label><br />	<input type="text" name="faqs_per_page" id="faq_back_settings_faqs_per_page" class="config_input_3" size="8" value="{$config.faqs_per_page|escape:"html"}" />
+
+{* max. Attachmentsize *}
+ <label for="faq_back_attachsize"><span>{$plugin.faq_back.formtext.label_faq_config_attachsize}</span></label><br />
+					<input type="text" name="attachsize" id="faq_back_attachsize" class="config_input_3" size="8" value="{$config.attachsize|escape:"html"}" />
+<div class="clearfix"></div>
+{* Neue FAQ direkt anzeigen oder nach Adminfreigabe *}
+					<input type="checkbox" name="shownewfaq" id="faq_back_shownewfaq" class="mb_10 ml_0" value="j" {if $config.shownewfaq=="j"}checked="checked"{/if} /> <label for="faq_back_shownewfaq"><span>{$plugin.faq_back.formtext.label_faq_config_shownewfaq}</span></label><br />
+
+{* Neue Frage direkt anzeigen oder nach Adminfreigabe *}
+					<input type="checkbox" name="shownewf" id="faq_back_shownewf" class="mb_10 ml_0" value="j" {if $config.shownewf=="j"}checked="checked"{/if} /> <label for="faq_back_shownewf"><span>{$plugin.faq_back.formtext.label_faq_config_shownewf}</span></label><br />
+
+{* E-Mail an Admin? *}
+					<input type="checkbox" name="sendMail" id="faq_back_sendMail" class="mb_10 ml_0" value="j" {if $config.sendMail=="j"}checked="checked"{/if} /> <label for="faq_back_sendMail"><span>{$plugin.faq_back.formtext.label_faq_config_sendmail}</span></label><br />
+
+{* Admin E-Mail-Adresse *}
+				<label for="faq_back_adminmaile"><span>{$plugin.faq_back.formtext.label_faq_config_adminmail}</span></label>	<input type="text" name="adminmail" id="faq_back_adminmail" class="config_input_2 mb_10" size="75" value="{$config.adminmail|escape:"html"}" /> 
+				</fieldset>
+
+{* Leserechte *}
+				<fieldset>
+					<legend>{$plugin.faq_back.formtext.legend_faq_config_read_privileges}</legend>
+					{foreach item=read_group from=$group_privileges}
+						<input type="checkbox" name="faq_back_read_privileges[{$read_group.gruppeid}]" id="faq_back_read_privileges{$read_group.gruppeid}" class="mb_10" value="{$read_group.gruppeid}"
+						{if $read_group.gruppeid_read} checked="checked"{/if} /> <label for="faq_back_read_privileges{$read_group.gruppeid}"><span>{$read_group.gruppenname}</span></label><br />
+					{/foreach}
+				</fieldset>
+
+{* Schreibrechte *}
+				<fieldset>
+					<legend>{$plugin.faq_back.formtext.legend_faq_config_write_privileges}</legend>
+					{foreach item=write_group from=$group_privileges}
+						<input type="checkbox" name="faq_back_write_privileges[{$write_group.gruppeid}]" id="faq_back_write_privileges{$write_group.gruppeid}" class="mb_10" value="{$write_group.gruppeid}"
+						{if $write_group.gruppeid_write} checked="checked"{/if} /> <label for="faq_back_write_privileges{$write_group.gruppeid}"><span>{$write_group.gruppenname}</span></label><br />
+					{/foreach}
+					<input type="submit" class="submit_back_green" value="{$plugin.faq_back.submit.faq_config}" name="submit" title="{$plugin.faq_back.submit.faq_config}" />
+				</fieldset>
+				<input type="hidden" value="{$config.id}" name="id" />
+			</form>
+		{/foreach}
+	</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

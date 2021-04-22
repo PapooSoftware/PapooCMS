@@ -1,0 +1,36 @@
+{if $IS_ADMIN}{*<!-- Wird nur in der Admin angezeigt -->*}
+	{include file="head.inc.utf8.html"}
+	{include file=menu.inc.html}
+<div class="artikel">
+	
+	{if $grpname_error}<div class="error">{$message_20032}</div>{/if}
+	<h2>{$grp_edite}</h2>
+	<form action="{$xlink}" method="post" name="verzeichnis">
+		<fieldset>
+			{*<!-- news_grpname = Name der Gruppe -->*}
+			<legend>{$news_grpname}</legend>
+			{*<!-- 500 = Name eingeben -->*}
+			<label for="dir1">{$message_500}</label><br />
+			<input name="news_grpname" id="dir1" accept="" type="text" size="30" value="{$grpname}" /><br />
+			{*<!-- news_grpdescript = Beschreibung eingeben -->*}
+			<label for="dir2">{$news_grpdescript}</label><br />
+			<input name="news_grpdescript" id="dir2" accept="" type="text" size="30" value="{$grpdescrip}" /><br />
+		</fieldset>
+		<fieldset>
+			<legend>{$message_21027}</legend>
+			<input name="news_grpfront" id="show_front" type="checkbox" size="30" value="1" {if $grpfront}checked{/if} /><br />
+		</fieldset>
+		<fieldset>
+			<legend>{$message_21028}</legend>
+			<input name="news_grpmoderated" id="grpmoderated" type="checkbox" size="30" value="1" {if $grpmoderated}checked{/if} /><br />
+		</fieldset>
+		<fieldset>
+			{*<!-- 490 = In die Datenbank eintragen -->*}
+			<legend>{$message_490}</legend>
+			{*<!-- news_edit = Aendern -->*}
+			<input name="submit" class="submit_back_green" value="{$plugin.newsletter.speichern}"  type="submit" class="submit_back" />
+		</fieldset>
+	</form>
+</div>
+	{include file="foot.inc.html"}
+{/if}

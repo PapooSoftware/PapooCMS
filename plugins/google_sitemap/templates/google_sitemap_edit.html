@@ -1,0 +1,68 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+<h2>{$plugin.google_sitemap.change}</h2>
+<p></p>
+
+
+<form action="#" method="post" enctype="multipart/form-data"><!--         Die allgemeinen Daten         -->
+
+<fieldset><legend>{$plugin.google_sitemap.text2}</legend>
+<label for="changefreq">{$plugin.google_sitemap.changefreq}</label><br />
+<select name="changefreq" size="1" id="changefreq">
+ <option value="always" {if $changefreq=="always"} selected="selected"{/if}>always</option>
+ <option value="hourly" {if $changefreq=="hourly"} selected="selected"{/if}>hourly</option>
+ <option value="daily" {if $changefreq=="daily"} selected="selected"{/if}>daily</option>
+ <option value="weekly" {if $changefreq=="weekly"} selected="selected"{/if}>weekly</option>
+ <option value="monthly" {if $changefreq=="monthly"} selected="selected"{/if}>monthly</option>
+ <option value="yearly" {if $changefreq=="yearly"} selected="selected"{/if}>yearly</option>
+ <option value="never" {if $changefreq=="never"} selected="selected"{/if}>never</option>
+</select><br />
+
+<label for="priority">{$plugin.google_sitemap.prioritaet}</label><br />
+<select name="priority" size="1" id="priority">
+ <option value="0.5" {if $priority=="0.5"} selected="selected"{/if}>0.5</option>
+ <option value="0.0" {if $priority=="0.0"} selected="selected"{/if}>0.0</option>
+ <option value="0.1" {if $priority=="0.1"} selected="selected"{/if}>0.1</option>
+ <option value="0.2" {if $priority=="0.2"} selected="selected"{/if}>0.2</option>
+ <option value="0.3" {if $priority=="0.3"} selected="selected"{/if}>0.3</option>
+ <option value="0.4" {if $priority=="0.4"} selected="selected"{/if}>0.4</option>
+ <option value="0.6" {if $priority=="0.6"} selected="selected"{/if}>0.6</option>
+ <option value="0.7" {if $priority=="0.7"} selected="selected"{/if}>0.7</option>
+ <option value="0.8" {if $priority=="0.8"} selected="selected"{/if}>0.8</option>
+ <option value="0.9" {if $priority=="0.9"} selected="selected"{/if}>0.9</option>
+ <option value="1.0" {if $priority=="1.0"} selected="selected"{/if}>1.0</option>
+</select> <br />
+</fieldset>
+
+<fieldset><legend>{$plugin.google_sitemap.eintragen}</legend> <br />
+<input class="submit_back_green" type="submit" name="submitentry"
+ value="Eintragen" /></fieldset>
+
+<fieldset><legend>{$plugin.google_sitemap.erlaeuterung}</legend>
+{$plugin.google_sitemap.text3}
+ <br />
+	* always <br />
+    * hourly <br />
+    * daily <br />
+    * weekly <br />
+    * monthly <br />
+    * yearly <br />
+    * never <br />
+     <br />
+{$plugin.google_sitemap.text4}
+</fieldset>
+</form>
+
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

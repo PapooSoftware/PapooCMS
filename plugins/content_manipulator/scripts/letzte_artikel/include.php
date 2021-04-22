@@ -110,7 +110,7 @@ class last_artikel
 	 * @param int $id
 	 * @return string|null Der Pfad zum Template, wenn es im Style- oder Pluginverzeichnis gefunden wird; ansonsten null.
 	 */
-	private function findTemplate(int $id): ?string
+	private function findTemplate(int $id)
 	{
 		$filename = "plugins/content_manipulator/scripts/letzte_artikel/templates/teaser{$id}.html";
 
@@ -248,6 +248,11 @@ $(document).ready(function() {
 				$tag=$this->make_monat(@date("d",$datum));
 				$artikel_daten[$key]['lan_datum']=date("d M Y",$value['erstellungsdatum']);
 				$artikel_daten[$key]['article_datum_mon']=$mon;
+
+				$createTimestamp = (int)$value['erstellungsdatum'];
+				$artikel_daten[$key] += [
+					'create_date_dd_mm_yyyy' => date('d.m.Y', $createTimestamp),
+				];
 
 				$umlaute = array(
 					"&euro;" => "€",

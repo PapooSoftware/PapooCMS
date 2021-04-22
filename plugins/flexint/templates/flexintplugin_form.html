@@ -1,0 +1,70 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{if $flexint_result.0.flexint_id}
+ <h2 id="flexint_ink_fuer_menu" class="h1" >{$plugin_flexint_ink_fuer_menu}</h2>
+ <strong>plugin:flexint/templates/flexintfront.html&flexint_id={$flexint_result.0.flexint_id}</strong>
+<br /><br />
+{/if}
+<form action="" method="post" >
+<fieldset>
+   <legend>{$plugin_flexint_eben_ie_hier_die_interne_ezeichnung_ein}
+    </legend>
+    <input style="width:59%;" type="text" name="flexint_name" id="flexint_name" value="{$flexint_result.0.flexint_name}" />
+   </fieldset>
+  <fieldset>
+   <legend> {$plugin_flexint_eben_ie_hier_den_eitennamen_ein}
+    </legend>
+ <strong> {$plugin_flexint_s_darf_sich_kei}<br /><br />
+ {$plugin_flexint_Richtig}</strong>
+ <br /> <br />
+    <input style="width:99%;" type="text" name="flexint_url_sans" id="flexint_url_sans" value="{$flexint_result.0.flexint_url_sans}" />
+   </fieldset>
+   <fieldset>
+   <legend>{$plugin_flexint_eben_ie_hier_das_nterverzeichnis_ein}
+    </legend>
+ <strong>{$plugin_flexint_s_darf_sich_kein_am_ende}<br /><br />
+ {$plugin_flexint_richtig_unterverzeichnis}</strong>
+ <br /> <br />
+    <input style="width:99%;" type="text" name="flexint_unterverzeichnis" id="flexint_unterverzeichnis" value="{$flexint_result.0.flexint_unterverzeichnis}" />
+   </fieldset>
+	<fieldset>
+   <legend>{$plugin_flexint_eben_ie_hier_die_rl_der_lexverwaltung_ein}
+    </legend>
+    <strong>{$plugin_flexint_keine_sprechenden_urls}</strong>
+ <br /> <br />
+    <textarea name="flexint_url" id="flexint_url" rows="2" cols="65" style="width:99%;">{$flexint_result.0.flexint_url}</textarea>
+   </fieldset>
+
+	<fieldset class="formatierung">
+		<legend>Text auf der Seite oben:</legend>
+		<script language="javascript" type="text/javascript" src="./tiny_mce/tiny_mce.js" charset="utf-8"></script>
+	<script language="javascript" type="text/javascript">
+	tinyMCE.init({ldelim}
+	mode : "exact",
+	language : "de",
+	elements : "ta,ta2",
+	theme : "advanced",
+	{include file=tiny_inc_conf.html}
+	{rdelim} );
+	//function fileBrowserCallBack(field_name, url, type)
+	//{ldelim}
+	// This is where you insert your custom filebrowser logic
+	//	alert("Filebrowser callback: " + field_name + "," + url + "," + type);
+	//{rdelim}
+	</script>
+
+		<textarea id="ta" name="flexint_text_oben" style="width:100%" rows="25" cols="80">{$flexint_back_texte.0.flexint_text_oben}</textarea>
+	</fieldset>
+	<fieldset class="formatierung">
+		<legend>Text auf der Seite unten:</legend>
+
+		<textarea id="ta2" name="flexint_text_unten" style="width:100%" rows="25" cols="80">{$flexint_back_texte.0.flexint_text_unten}</textarea>
+	</fieldset>
+	   <fieldset>
+   <legend>Speichern
+    </legend>
+    <input  name="flexint_id" value="{$flexint_result.0.flexint_id}" type="hidden">
+	<input  name="submitflexint" value="{$plugin_flexint_intragen}" class="submit_back_green" type="submit">
+</fieldset>
+</form>
+</div>
+{/if}

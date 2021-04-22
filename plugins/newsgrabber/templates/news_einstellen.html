@@ -1,0 +1,157 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+		{include file=head.inc.utf8.html}
+
+		<!-- Menü kommt hier rein-->
+		{include file=menu.inc.html}
+		<div class="artikel">
+        <h2>Einbindung Men&uuml;</h2>
+        <p>plugin:newsgrabber/templates/newsgrabber_front.html </p>
+		
+			{$plugin.newsgrabber.text1}
+			<form action="" name="newsgrabber" id="newsgrabber" method="post">
+				<fieldset>
+				<label for="newsfilequelle">{$plugin.newsgrabber.feed_quelle}</label><br />
+				<input type="radio" name="newsfilequelle[]"  id="newsfilequelle0" value="true" onclick="{literal}if (this.checked==true) {document.newsgrabber.newsfile1.disabled = false;document.newsgrabber.newsfile.disabled = true;}{/literal}" /> {$plugin.newsgrabber.feed_wahl}<br />
+				<div class="cleafix"></div>
+				<select name="newsfile1" size="1" id="newsfile1" disabled="disabled">
+					<optgroup label="--- {$plugin.newsgrabber.radio_tv} ---">
+						<option value="http://www.dradio.de/rssfeed/?feed=aktuell&amp;v=200" label="Deutschlandradio">Deutschlandradio</option>
+						<option value="http://www.prosieben.de/index.xml" label="Pro 7">Pro 7</option>
+					</optgroup>
+					<optgroup label="--- {$plugin.newsgrabber.news} ---">
+						<option value="http://www.heise.de/tp/news-xl.rdf" label="Telepolis News">Telepolis News</option>
+						<option value="http://focus.msn.de/fol/XML/rss_folnews.xml" label="Focus Online - News">Focus Online - News</option>
+						<option value="http://www.netzeitung.de/export/news/rss/titelseite.xml" label="Netzzeitung.de">Netzzeitung.de</option>
+						<option value="http://www.tagesschau.de/newsticker.rdf" label="Tageschau.de">Tageschau.de</option>
+						<option value="http://www.presseportal.de/rss/52.rss2" label="Presseportal.de">Presseportal.de</option>
+						<option value="http://www.nordclick.de/news/rss/?id=1" label="nordClick">nordClick-Schlagzeilen</option>
+					</optgroup>
+					<optgroup label="--- {$plugin.newsgrabber.technik} ---">
+						<option value="http://www.heise.de/newsticker/heise.rdf" label="heise online news">heise online news</option>
+						<option value="http://www.heise.de/security/news/news.rdf" label="heise security news">heise security news</option>
+						<option value="http://www.winfuture.de/winfuturenews.xml" label="WinFuture.de - Das online Magazin">WinFuture.de - Das online Magazin</option>
+						<option value="http://www.pcwelt.de/rss/newsfeed.xml" label="PCWelt.de">PCWelt.de</option>
+						<option value="http://www.golem.de/rss.php?feed=RSS2.0" label="Golem.de">Golem.de</option>
+						<option value="http://www.drweb.de/rss.xml" label="Dr. Web">Dr. Web</option>
+						<option value="http://www.network-secure.de/index2.php?option=ds-syndicate&version=1&feed_id=3" label="Network Secure">Network Secure</option>
+					</optgroup>
+					<optgroup label="--- {$plugin.newsgrabber.wissenschaft} ---">
+						<option value="http://www.blog.de/xmlsrv/rdf.php?blog=11354" label="archaeologie- news">archaeologie- news</option>
+						<option value="http://www.blog.de/xmlsrv/rdf.php?blog=12786" label="wissenschafts- news">wissenschafts- news</option>
+						<option value="http://www.scienceticker.info/feed/" label="Scienceticker">Scienceticker</option>
+						<option value="http://www.scienceticker.info/category/technik/feed/" label="Scienceticker-Technik">Scienceticker-Technik</option>
+						<option value="http://www.scouty.de/rss/feed_13.xml" label="SCOUTY.de">SCOUTY.de - Wissenschaft</option>
+						<option value="http://www.wissen-news.de/rss/rss.xml" label="wissen-news.de">Astronomie und Wissenschaft - der Wissens-Weblog</option>
+					</optgroup>
+					<optgroup label="--- {$plugin.newsgrabber.sport} ---">
+						<option value="http://mediadb.kicker.de/library/rss091/kicker.xml" label="kicker online">kicker online</option>
+						<option value="http://fussball.germanblogs.de/rss/fussball.rss" label="fussball blog">fussball blog</option>
+						<option value="http://www.judo-club-katlenburg.de/doku/jck-info.rss" label="Judo-Club Katlenburg e.V.">Judo-Club Katlenburg e.V.</option>
+						<option value="http://www.1asport.de/sport/rss/handball.rss" label="1asport.de - Handball">1asport.de - Handball</option>
+						<option value="http://www.1asport.de/sport/rss/tennis.rss" label="1asport.de - Tennis">1asport.de - Tennis</option>
+						<option value="http://www.1asport.de/sport/rss/sport.rss" label="1asport.de - Sportnachrichten">1asport.de - Sportnachrichten</option>
+						<option value="http://www.1asport.de/sport/rss/formel1.rss" label="1asport.de - Formel 1">1asport.de - Formel 1</option>
+						<option value="http://feeds.feedburner.com/BundesligaTelegramm.xml" label=">Bild.T-Online Bundesliga-Telegramm">Bild.T-Online Bundesliga-Telegramm</option>
+						<option value="http://feeds.feedburner.com/SportTelegramm.xml" label="Bild.T-Online Sport Telegramm">Bild.T-Online Sport Telegramm</option>
+					</optgroup>
+					<optgroup label="--- {$plugin.newsgrabber.presse} ---">
+						<option value="http://www.pm-magazin.de/de/default.htm?rss=1" label="P.M. Magazin">P.M. Magazin</option>
+						<option value="http://www.welt.de/export/xml/rss-1/1.xml" label="Die Welt">Die Welt</option>
+						<option value="http://newsfeed.zeit.de/index" label="Die Zeit">Die Zeit</option>
+						<option value="http://www.rp-online.de/public/rdf" label="RP Online">RP Online</option>
+						<option value="http://www.spiegel.de/schlagzeilen/rss/index.xml" label="Spiegel">Spiegel</option>
+					</optgroup>
+					<optgroup label="--- {$plugin.newsgrabber.webdesign} ---">
+						<option value="http://www.einfach-fuer-alle.de/blog/feed/efafeed.rss" label="Einfach f&uuml;r alle">Einfach f&uuml;r alle</option>
+						<option value="http://aktuell.de.selfhtml.org/weblog/rss-feed" label="SELFHTML">SELFHTML Aktuell Weblog</option>
+						<option value="http://www.phparchiv.de/rss/rss.xml" label="phparchiv.de">phparchiv.de</option>
+					</optgroup>
+					<optgroup label="--- {$plugin.newsgrabber.sonstiges} ---">
+						<option value="http://www.prosieben.de/lifestyle_magazine/lifestyle/klatsch/rss/index.xml" label="ProSieben.de - Lifestyle und Magazine - Klatsch">ProSieben.de - Lifestyle und Magazine - Klatsch</option>
+						<option value="http://focus.msn.de/fol/XML/rss_folnews_reisen.xml" label="FOCUS Online - Reisen-News">FOCUS Online - Reisen-News</option>
+						<option value="http://www.filmstarts.de/xml/filmstarts.xml" label="Aktuelle Kinokritiken">Aktuelle Kinokritiken</option>
+						<option value="http://www.frag-mutti.de/newsfeed/rss-de.xml" label="Frag- Mutti.de">Frag- Mutti.de</option>
+						<option value="http://www.frag-vati.de/newsfeed/rss-fv.xml" label="Frag- Mutti.de">Frag- Vati.de</option>
+						<option value="http://witze.net/rss/041111211/witze.xml" label="witze.net">Zufalls-Witze - witze.net!</option>
+					</optgroup>
+				</select><br /><br />
+				<input type="radio" name="newsfilequelle[]"  id="newsfilequelle" value="false" checked="checked" onclick="{literal}if (this.checked==true) {document.newsgrabber.newsfile1.disabled = true;document.newsgrabber.newsfile.disabled = false;}{/literal}" /> {$plugin.newsgrabber.feed_eingabe} <a href="http://www.klipfolio.com/" target="_blank">http://www.klipfolio.com/</a>, <a href="http://www.rss-katalog.com/" target="_blank">http://www.rss-katalog.com/</a> {$plugin.newsgrabber.und} <a href="http://www.rss-scout.de/" target="_blank">http://www.rss-scout.de/</a>):<br />
+				<div class="cleafix"></div>
+				<textarea rows="10" cols="50" style="width:90%;" name="newsfile" id="newsfile"  onfocus="{literal}this.select()';{/literal}">{$newsfile|strip_tags}</textarea><br /><br />
+				<label for="enable_caching">{$plugin.newsgrabber.feed_cachen}</label><br />
+				{if $enable_caching == "false"}
+				<input type="radio" name="enable_caching[]"  id="enable_caching" value="true" onclick="{literal}if (this.checked==true) document.newsgrabber.cache_refresh_time.disabled = false;{/literal}" /> {$plugin.newsgrabber.ja}<br />
+				<div class="cleafix"></div>
+				<input type="radio" name="enable_caching[]"  id="enable_caching" value="false" checked="checked" onclick="{literal}if (this.checked==true) document.newsgrabber.cache_refresh_time.disabled = true;{/literal}" /> {$plugin.newsgrabber.nein}<br />
+				{else}
+				<div class="cleafix"></div>
+				<input type="radio" name="enable_caching[]"  id="enable_caching" value="true" checked="checked" onclick="{literal}if (this.checked==true) document.newsgrabber.cache_refresh_time.disabled = false;{/literal}" /> {$plugin.newsgrabber.ja}<br />
+				<div class="cleafix"></div>
+				<input type="radio" name="enable_caching[]"  id="enable_caching" value="false" onclick="{literal}if (this.checked==true) document.newsgrabber.cache_refresh_time.disabled = true;{/literal}" /> {$plugin.newsgrabber.nein}<br />
+				{/if}
+				{* <input type="hidden" name="cache_file"  id="cache_file" value="{$cache_file}" />*}<br />
+				<label for="cache_refresh_time">{$plugin.newsgrabber.refresh_time}</label><br />
+				<input type="text" name="cache_refresh_time" id="cache_refresh_time" value="{$cache_refresh_time}" onfocus="{literal}this.select();{/literal}" {if $enable_caching != "true"} disabled="disabled"{/if} /><br /><br />
+				<label for="max_news">{$plugin.newsgrabber.max_news}</label><br />
+				<input type="text" name="max_news" id="max_news" value="{$max_news}" onfocus="{literal}this.select();{/literal}" /><br /><br />
+				<label for="kommentieren">{$plugin.newsgrabber.link_anzeigen}</label><br />
+				{if $kommentieren == "true"}
+				<input type="radio" name="kommentieren[]"  id="kommentieren" value="true" checked="checked" /> {$plugin.newsgrabber.ja}<br />
+				<div class="cleafix"></div>
+				<input type="radio" name="kommentieren[]"  id="kommentieren" value="false" /> {$plugin.newsgrabber.nein}<br /><br />
+				{else}
+				<input type="radio" name="kommentieren[]"  id="kommentieren" value="true" /> {$plugin.newsgrabber.ja}<br />
+				<div class="cleafix"></div>
+				<input type="radio" name="kommentieren[]"  id="kommentieren" value="false" checked="checked" /> {$plugin.newsgrabber.nein}<br /><br />
+				{/if}
+				<label for="schlagzeile">{$plugin.newsgrabber.teaser_anzeigen}</label><br />
+				{if $schlagzeile == "false"}
+				<input type="radio" name="schlagzeile[]"  id="schlagzeile" value="true" /> {$plugin.newsgrabber.ja}<br />
+				<div class="cleafix"></div>
+				<input type="radio" name="schlagzeile[]"  id="schlagzeile" value="false" checked="checked" /> {$plugin.newsgrabber.nein}<br /><br />
+				{else}
+				<input type="radio" name="schlagzeile[]"  id="schlagzeile" value="true" checked="checked" /> {$plugin.newsgrabber.ja}<br />
+				<div class="cleafix"></div>
+				<input type="radio" name="schlagzeile[]"  id="schlagzeile" value="false" /> {$plugin.newsgrabber.nein}<br /><br />
+				{/if}
+				<label for="datumanzeigen">{$plugin.newsgrabber.datum_anzeigen}</label><br />
+				{if $datumanzeigen == "false"}
+				<input type="radio" name="datumanzeigen[]"  id="datumanzeigen" value="true" /> {$plugin.newsgrabber.ja}<br />
+				<div class="cleafix"></div>
+				<input type="radio" name="datumanzeigen[]"  id="datumanzeigen" value="false" checked="checked" /> {$plugin.newsgrabber.nein}<br /><br /><br />
+				{else}
+				<input type="radio" name="datumanzeigen[]"  id="datumanzeigen" value="true" checked="checked" /> {$plugin.newsgrabber.ja}<br />
+				<div class="cleafix"></div>
+				<input type="radio" name="datumanzeigen[]"  id="datumanzeigen" value="false" /> {$plugin.newsgrabber.nein}<br /><br /><br />
+				{/if}
+				<label for="fehleranzeige">{$plugin.newsgrabber.meldung}</label><br />
+				{if $fehleranzeige == "false"}
+				<input type="radio" name="fehleranzeige[]"  id="fehleranzeige" value="true" /> {$plugin.newsgrabber.ja}<br />
+				<div class="cleafix"></div>
+				<input type="radio" name="fehleranzeige[]"  id="fehleranzeige" value="false" checked="checked" /> {$plugin.newsgrabber.nein}<br /><br /><br />
+				{else}
+				<input type="radio" name="fehleranzeige[]"  id="fehleranzeige" value="true" checked="checked" /> {$plugin.newsgrabber.ja}<br />
+				<div class="cleafix"></div>
+				<input type="radio" name="fehleranzeige[]"  id="fehleranzeige" value="false" /> {$plugin.newsgrabber.nein}<br /><br /><br />
+				{/if}
+				<label for="id">{$plugin.newsgrabber.menuepunkt}</label><br />
+				<select name="newsgrabber_menuid" id="newsgrabber_menuid" style="width: 40%;" size="1">
+					<option value="0">{$plugin.newsgrabber.immer}</option>
+					{foreach item=menu from=$menulist_data}
+						{if $menu.menuid}
+						<option  value="{$menu.menuid}" class="levelshift_{$menu.level}" {if $menu.menuid == $menu_id}selected="selected"{/if}>
+							{$menu.nummer}[{$menu.menuid}]: {$menu.menuname}
+						</option>
+						{/if}
+					{/foreach}
+				</select><br /><br />
+			
+				<input type="submit" class="submit_back_green" name="senden" id="senden" value="{$plugin.newsgrabber.speichern}" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" class="btn btn-danger" value="{$plugin.newsgrabber.leeren}" />
+				</fieldset>
+			</form>
+	</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

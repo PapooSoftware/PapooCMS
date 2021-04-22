@@ -1,0 +1,55 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+{if $is_fertig}
+<div class="message">{$swro_fertig}</div>
+{/if}
+<link rel="stylesheet" type="text/css" href="../plugins/galdownload/css/galdownload.css" />
+<div class="artikel">
+
+{if $plugin_error}
+<div class="error">{$error_swro}</div>
+{/if}
+
+
+ <h1 id="plugin_galdownload_icon_download_von_galerien_als_zip_file" class="h1" >{$plugin_plugin_galdownload_icon_download_von_galerien_als_zip_file}</h1>
+
+ <p id="plugin_galdownload_icon_das_plugin_realsiert_den_download" class="h1" >{$plugin_plugin_galdownload_icon_das_plugin_realsiert_den_download}</p>
+
+    {if $is_dev}
+ #start#
+
+
+ <span class="ignore"></span>
+  <!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+	 <div class="rapid_form">
+			<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="plugin_galdownload_icon" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="plugin_galdownload_icon" />
+		<!-- Das Standarpr�fix f�r die Ids -->
+		<input type="hidden" name="praefix" value="plugin_galdownload_icon" />
+		<!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="plugin_galdownload" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div>
+
+
+
+
+
+    {/if}
+
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

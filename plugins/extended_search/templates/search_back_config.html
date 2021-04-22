@@ -1,0 +1,201 @@
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+  <div class="artikel">
+ <h1 id="shop_onfiguration_der_erweiterten_uche" class="h1" >{$plugin_shop_onfiguration_der_erweiterten_uche}</h1>
+  {if $is_eingetragen=="ok"}
+  <div class="message">  {$plugin_ext_search_thesaurus_ie_aten_wurden_eingetragen}
+
+</div>
+{/if}
+ <p id="shop_ier_stellen_ie_einige_rundeinstllungen_der_uche_ein" class="h1" >{$plugin_shop_ier_stellen_ie_einige_rundeinstllungen_der_uche_ein}</p>
+<form method="post" action="" id="formi" style="width:100%">
+
+<!--
+<fieldset>
+<legend>{$plugin_ext_search_auswahl_der_suchart}</legend>
+
+{$plugin_ext_search_suchart_match}<br /><br />
+ <label for="ext_search_match_oder_listen_suche">{$plugin_ext_search_match_oder_listen_suche}{$plugin_error.ext_search_match_oder_listen_suche} </label>
+<br />
+<select name="ext_search_match_oder_listen_suche" id="ext_search_match_oder_listen_suche" size="1"/><option value="0">{$message_160}</option><option {if $ext_search.0.ext_search_match_oder_listen_suche==1}selected="selected"{/if} value="1">Match Against
+</option><option {if $ext_search.0.ext_search_match_oder_listen_suche==2}selected="selected"{/if} value="2">Listing</option></select>
+<br />
+
+ </fieldset><br />
+-->
+
+
+ <fieldset>
+<legend>{$plugin_shop_onfiguration_der_erweiterten_uche_ield}</legend>
+
+<label for="ext_search_lemente_mit_ewichtung">{$plugin_ext_search_lemente_mit_ewichtung}{$plugin_error.ext_search_lemente_mit_ewichtung} </label>
+<br />
+<textarea cols="30" rows="6" name="ext_search_lemente_mit_ewichtung"  class="ext_search_lemente_mit_ewichtung" id="ext_search_lemente_mit_ewichtung">{$ext_search.0.ext_search_lemente_mit_ewichtung|escape:"htmlall"}</textarea>
+<br /><br />
+ <label for="ext_search_top_rter">{$plugin_ext_search_top_rter}{$plugin_error.ext_search_top_rter} </label>
+<br />
+<textarea cols="30" rows="6" name="ext_search_top_rter"  class="ext_search_top_rter" id="ext_search_top_rter">{$ext_search.0.ext_search_top_rter}</textarea>
+<br /><br />
+
+ <label for="ext_search_nzahl_der_uchergebnisse">{$plugin_ext_search_nzahl_der_uchergebnisse}{$plugin_error.ext_search_nzahl_der_uchergebnisse} </label>
+<br />
+<input type="text" name="ext_search_nzahl_der_uchergebnisse" value="{$ext_search.0.ext_search_nzahl_der_uchergebnisse|escape:"htmlall"}" class="ext_search_nzahl_der_uchergebnisse" id="ext_search_nzahl_der_uchergebnisse"/>
+
+<br />
+
+			<div class="form-control">
+				<label for="ext_search_teaser_max_length">
+					{$plugin_ext_search_teaser_max_length}{$plugin_error.ext_search_teaser_max_length}
+				</label>
+				<br />
+				<input type="text" name="ext_search_teaser_max_length" id="ext_search_teaser_max_length"
+					   value="{$ext_search[0].ext_search_teaser_max_length|default:400|escape}" />
+			</div>
+
+<!--
+ <label for="ext_search_blaufzeit">{$plugin_ext_search_blaufzeit}{$plugin_error.ext_search_blaufzeit} </label>
+<br />
+<input type="text" name="ext_search_blaufzeit" value="{$ext_search.0.ext_search_blaufzeit|escape:"htmlall"}" class="ext_search_blaufzeit" id="ext_search_blaufzeit"/>
+<br />
+ <label for="ext_search_as_soll_als_berschriftink_verwendet_werden">{$plugin_ext_search_as_soll_als_berschriftink_verwendet_werden}{$plugin_error.ext_search_as_soll_als_berschriftink_verwendet_werden} </label>
+<br />
+<select name="ext_search_as_soll_als_berschriftink_verwendet_werden" id="ext_search_as_soll_als_berschriftink_verwendet_werden" size="1"/><option value="0">{$message_160}</option><option {if $ext_search.0.ext_search_as_soll_als_berschriftink_verwendet_werden==1}selected="selected"{/if} value="1">Title Tag
+</option><option {if $ext_search.0.ext_search_as_soll_als_berschriftink_verwendet_werden==2}selected="selected"{/if} value="2">Überschrift</option></select>
+<br />
+
+-->
+
+
+<br />
+ <input type="checkbox" name="ext_search_orschkge_in_der_uchemaske_aktivieren" value="1" {if $ext_search.0.ext_search_orschkge_in_der_uchemaske_aktivieren==1}checked="checked"{/if} class="ext_search_orschkge_in_der_uchemaske_aktivieren" id="ext_search_orschkge_in_der_uchemaske_aktivieren"/><label for="ext_search_orschkge_in_der_uchemaske_aktivieren">{$plugin_ext_search_orschkge_in_der_uchemaske_aktivieren}{$plugin_error.ext_search_orschkge_in_der_uchemaske_aktivieren} </label><br />
+  <input type="checkbox" name="ext_search_vorschlge_im_modul_suchmaske" value="1" {if $ext_search.0.ext_search_vorschlge_im_modul_suchmaske==1}checked="checked"{/if} class="ext_search_vorschlge_im_modul_suchmaske" id="ext_search_vorschlge_im_modul_suchmaske"/><label for="ext_search_vorschlge_im_modul_suchmaske">{$plugin_ext_search_vorschlge_im_modul_suchmaske}{$plugin_error.ext_search_vorschlge_im_modul_suchmaske} </label>
+<br />
+
+</fieldset>
+<fieldset>
+<legend>{$plugin_ext_search_ingrenzung_der_uche_ermglichen}</legend>
+
+<input type="checkbox" name="ext_search_ur_rtikel" value="1" {if $ext_search.0.ext_search_ur_rtikel==1}checked="checked"{/if} class="ext_search_ur_rtikel" id="ext_search_ur_rtikel"/><label for="ext_search_ur_rtikel">{$plugin_ext_search_ur_rtikel}{$plugin_error.ext_search_ur_rtikel} </label>
+<br />
+
+ <input type="checkbox" name="ext_search_ur_rodukte" value="1" {if $ext_search.0.ext_search_ur_rodukte==1}checked="checked"{/if} class="ext_search_ur_rodukte" id="ext_search_ur_rodukte"/><label for="ext_search_ur_rodukte">{$plugin_ext_search_ur_rodukte}{$plugin_error.ext_search_ur_rodukte} </label>
+<br />
+
+ <input type="checkbox" name="ext_search_ur_orum" value="1" {if $ext_search.0.ext_search_ur_orum==1}checked="checked"{/if} class="ext_search_ur_orum" id="ext_search_ur_orum"/><label for="ext_search_ur_orum">{$plugin_ext_search_ur_orum}{$plugin_error.ext_search_ur_orum} </label>
+<br />
+
+ <input type="checkbox" name="ext_search_ur_lex" value="1" {if $ext_search.0.ext_search_ur_lex==1}checked="checked"{/if} class="ext_search_ur_lex" id="ext_search_ur_lex"/><label for="ext_search_ur_lex">{$plugin_ext_search_ur_lex}{$plugin_error.ext_search_ur_lex} </label>
+<br />
+ <input type="checkbox" name="ext_search_inschrnkung_auf_nur_" value="1" {if $ext_search.0.ext_search_inschrnkung_auf_nur_==1}checked="checked"{/if} class="ext_search_inschrnkung_auf_nur_" id="ext_search_inschrnkung_auf_nur_"/><label for="ext_search_inschrnkung_auf_nur_">{$plugin_ext_search_inschrnkung_auf_nur_}{$plugin_error.ext_search_inschrnkung_auf_nur_} </label>
+
+ {if $pdf_extension}
+ <input type="checkbox" name="ext_search_ur_doc" value="1" {if $ext_search.0.ext_search_ur_doc==1}checked="checked"{/if} class="ext_search_ur_doc" id="ext_search_ur_doc"/><label for="ext_search_ur_doc">{$plugin_ext_search_ur_doc}{$plugin_error.ext_search_ur_doc} </label>
+<br />
+{/if}
+<br />
+<br />
+ {$plugin_ext_search_enn_ie_oben_einen_der}
+<br />
+</fieldset>
+<fieldset>
+<legend>{$plugin_ext_search_instellungen_fr_ighlighting_nach_der_uche}</legend>
+
+<label for="ext_search__fr_igh">{$plugin_ext_search__fr_igh}{$plugin_error.ext_search__fr_igh} </label>
+<br />
+<textarea cols="30" rows="6" name="ext_search__fr_igh"  class="ext_search__fr_igh" id="ext_search__fr_igh">{$ext_search.0.ext_search__fr_igh}</textarea>
+<br />
+
+
+ <label for="ext_search_ighlighting_rt">{$plugin_ext_search_ighlighting_rt}{$plugin_error.ext_search_ighlighting_rt} </label>
+<br />
+<select name="ext_search_ighlighting_rt" id="ext_search_ighlighting_rt" size="1"/><option {if $ext_search.0.ext_search_ighlighting_rt==1}selected="selected"{/if} value="1">Exakt: genaue Übereinstimmung notwendig
+</option><option {if $ext_search.0.ext_search_ighlighting_rt==2}selected="selected"{/if} value="2">Gesamt: findet Teilübereinstimmungen und markiert das gesamte Wort</option>
+<option {if $ext_search.0.ext_search_ighlighting_rt==3}selected="selected"{/if} value="3">Partiell: findet und markiert Teile von Wörtern</option></select>
+<br />
+<input type="checkbox" name="ext_search_highlighting_aktivieren" value="1" {if $ext_search.0.ext_search_highlighting_aktivieren==1}checked="checked"{/if} class="ext_search_highlighting_aktivieren" id="ext_search_highlighting_aktivieren"/><label for="ext_search_highlighting_aktivieren">{$plugin_ext_search_highlighting_aktivieren}{$plugin_error.ext_search_highlighting_aktivieren} </label>
+<br />
+ <input type="checkbox" name="ext_search_ighlighting_auch_bei_oogle_reffern_aktivieren" value="1" {if $ext_search.0.ext_search_ighlighting_auch_bei_oogle_reffern_aktivieren==1}checked="checked"{/if} class="ext_search_ighlighting_auch_bei_oogle_reffern_aktivieren" id="ext_search_ighlighting_auch_bei_oogle_reffern_aktivieren"/><label for="ext_search_ighlighting_auch_bei_oogle_reffern_aktivieren">{$plugin_ext_search_ighlighting_auch_bei_oogle_reffern_aktivieren}{$plugin_error.ext_search_ighlighting_auch_bei_oogle_reffern_aktivieren} </label>
+<br />
+
+
+
+
+ </fieldset>
+
+
+
+    <fieldset>
+        <legend>{$plugin_ext_search_einschrnkung_auf_menpunkte}</legend>
+
+        <p id="ext_search_spezialsuchmen" class="h1" >{$plugin_ext_search_spezialsuchmen}</p>
+        <label for="banner_menuid">{$plugin_ext_search_spezialsuchmen_menu}</label>
+        <br />
+        <select name="banner_menuid" id="banner_menuid" title="" style="width: 40%;" size="1">
+            <option value="">{$plugin_ext_search_spezialsuchmen_menu}</option>
+            {foreach item=menu from=$menulist_data}
+            {if $menu.menuid}
+            <option  value="{$menu.menuid}" class="levelshift_{$menu.level}" {if $menu.menuid == $banner_menuid}selected="selected"{/if} >
+            {$menu.nummer}[{$menu.menuid}]: {$menu.menuname}
+            </option>
+            {/if}
+            {/foreach}
+
+        </select> <a href="#tmp_sprung" onclick="createInput('banner_menuid', 'menliste', '{$message_826}');" class="submit_back">{$message_824}</a>
+        <br />
+        <br />
+        <ul id="menliste">
+            {foreach item=menu from=$menulist_data}
+            {foreach item=dat from=$banner_ar}
+            {if $dat.banner_menu_id==$menu.menuid}
+            <li class="menlistli" id="liid_{$dat.banner_menu_id}">
+                <input value="{$dat.banner_menu_id}" id="inid_{$menu.menuid}" name="inhalt_ar[cattext_ar][{$menu.nummer}]" type="hidden" />
+                <span>{$menu.nummer}[{$menu.menuid}]: {$menu.menuname}</span>
+                <a href="#tmp_sprung" onclick="delinput('{$menu.menuid}');" class="submit_back_del">{$menu.nummer}[{$menu.menuid}]: {$menu.menuname} {$message_826}</a>
+            </li>
+            {/if}
+            {/foreach}
+            {/foreach}
+        </ul>
+        <br />
+       </fieldset>
+
+
+<fieldset>
+ 	<legend>{$message_70}</legend>
+			<!-- Speichern -->
+	<input  type="submit" class="submit_back_green" value="{$message_70}" name="formSubmit_search_settings" />
+
+		</fieldset>
+    </form>
+
+
+      {if $is_dev}
+<br />
+<br />
+      <span class="ignore"> #start#</span>
+  <!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+	 <div class="rapid_form">
+		<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="plugin_ext_search_config" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="ext_search_class" />
+		<!-- Das Standarpr�fix f�r die Ids -->
+		<input type="hidden" name="praefix" value="ext_search" />
+		<!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="ext_search" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div>
+
+
+{/if}
+  </div>
+
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}

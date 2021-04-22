@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<plugin version="4">
+
+    <name><![CDATA[Adwords Ersetzugs-Plugin]]></name>
+
+    <beschreibung_de><![CDATA[ Plugin zur Verwaltung von zu ersetzenden Platzhaltern im Inhalt durch Adwords.]]>
+    </beschreibung_de>
+
+    <version>1.1</version>
+
+    <autor>
+        <name><![CDATA[Marco Hellenthal]]></name>
+        <email><![CDATA[mh@papoo.de]]></email>
+    </autor>
+
+    <menue>
+        <eintrag_de><![CDATA[Adwords Ersetzung]]></eintrag_de>
+        <icon>adwords_kw/bilder/menue_icon.gif</icon>
+        <link>plugin:adwords_kw/templates/back.html</link>
+
+        <submenue>
+            <eintrag_de><![CDATA[Keywords]]></eintrag_de>
+            <icon>adwords_kw/bilder/pic_01.gif</icon>
+            <link>plugin:adwords_kw/templates/back_edit.html</link>
+        </submenue>
+
+        <submenue>
+            <eintrag_de><![CDATA[Telefonnummern Google]]></eintrag_de>
+            <icon>adwords_kw/bilder/pic_01.gif</icon>
+            <link>plugin:adwords_kw/templates/back_number.html</link>
+        </submenue>
+
+        <submenue>
+            <eintrag_de><![CDATA[TelNr AdWords Alternative]]></eintrag_de>
+            <icon>adwords_kw/bilder/pic_01.gif</icon>
+            <link>plugin:adwords_kw/templates/back_edit_tel.html</link>
+        </submenue>
+
+        <submenue>
+            <eintrag_de><![CDATA[A-B Test Einrichtung]]></eintrag_de>
+            <icon>adwords_kw/bilder/pic_01.gif</icon>
+            <link>plugin:adwords_kw/templates/back_ab.html</link>
+        </submenue>
+
+        <submenue>
+            <eintrag_de><![CDATA[Keyword Statistik]]></eintrag_de>
+            <icon>adwords_kw/bilder/pic_01.gif</icon>
+            <link>plugin:adwords_kw/templates/back_list.html</link>
+        </submenue>
+
+    </menue>
+
+    <klasse>
+        <name>adwords_kw_class</name>
+        <datei>adwords_kw/lib/adwords_kw_class.php</datei>
+    </klasse>
+
+    <datenbank>
+        <installation>adwords_kw/sql/adwords_kw_install.sql</installation>
+        <deinstallation>adwords_kw/sql/adwords_kw_deinstall.sql</deinstallation>
+    </datenbank>
+
+    <messages>adwords_kw/messages</messages>
+    <css>adwords_kw/css/adwords_kw.css</css>
+
+</plugin>

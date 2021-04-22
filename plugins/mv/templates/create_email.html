@@ -1,0 +1,17 @@
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+<div class="artikel">
+	<div class="mv">
+		{if $rights_error==""}
+			{if $ausgabe}<h2>{$plugin.mv.eingetragen}</h2>{/if}
+			<!-- Der Eintrag exisitiert schon-->
+			{if $exist}<h2 style="color:red;">{$plugin.mv.existiert}</h2>{/if}
+			<!-- Es soll ein neuer Eintrag erstellt werden -->
+			{include file=../../../plugins/mv/templates/edit_create_mv.html}
+		{/if}
+	</div>
+	<!-- Rechte Fehlermeldung-->
+	{include file=rechte.html}
+</div>
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}

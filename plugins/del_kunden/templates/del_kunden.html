@@ -1,0 +1,62 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+    {if $del_kunden_variablen}
+    <div class="error">     {$plugin_geo_var_die_kundendatenbank_wurde_gelscht}
+    </div>
+    {/if}
+   
+
+
+
+<h1 id="geo_var_kunden_lschen" class="h1" >{$plugin_geo_var_kunden_lschen}</h1>
+
+ <p id="geo_var_hier_knnen_sie_mit_einem_klick" class="h1" >{$plugin_geo_var_hier_knnen_sie_mit_einem_klick}</p>
+    <form method="post" action="" id="formi" style="width:99%">
+ <fieldset>
+<legend>{$plugin_geo_var_jetzt_lschen}</legend>
+
+ <div class="labdiv">
+
+<input type="submit" name="del_kunden_jetzt_alle_kunden_lschen" value="{$plugin_geo_var_jetzt_alle_kunden_lschen}" class="btn btn-danger del_kunden_jetzt_alle_kunden_lschen" id="del_kunden_jetzt_alle_kunden_lschen"/>
+</div><br />
+
+</fieldset><br />
+        </form>
+<br />
+<br />
+
+    {if $is_dev}
+
+ #start#
+ <span class="ignore"></span>
+  <!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+	 <div class="rapid_form">
+			<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="plugin_del_kunden" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="del_kunden" />
+		<!-- Das Standarpr�fix f�r die Ids -->
+		<input type="hidden" name="praefix" value="geo_var" />
+		<!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="del_kunden" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div>
+
+
+ {/if}
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

@@ -42,6 +42,7 @@ class ezSQL_mysqli extends ezSQLcore
     var $dbport = false;
     var $encoding = false;
     var $rows_affected = false;
+    var $csrfok = false;
 
     /**********************************************************************
      *  Constructor - allow the user to perform a quick connect at the
@@ -240,6 +241,20 @@ class ezSQL_mysqli extends ezSQLcore
 
         // For reg expressions
         $query = trim($query);
+
+        if($this->csrfok==false)
+		{
+			//csrf check // ein Update oder INSERT statement - dann auf csrf checken
+			if(stristr($query,"UPDATE") || stristr($query,"INSERT")  || stristr($query,"DELETE"))
+			{
+				//Wenn kein POST Csrf Token vorliegt - dann isses sowieso mist...
+				if (!empty($_SESSION['sessionusername']) and (empty($_POST['csrf_token']) or $_POST['csrf_token'] !== $_SESSION['csrf_token'])) {
+					@header('X-Papoo-Warning: "at least one persisting action was blocked because of an invalid CSRF-Token"');
+					$_SESSION['csrf_token_fail_count']++;
+					return false;
+				}
+			}
+		}
 
         // Log how the function was called
         $this->func_call = "\$db->query(\"$query\")";

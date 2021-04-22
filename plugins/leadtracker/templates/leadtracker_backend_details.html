@@ -1,0 +1,74 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+
+{if !$STANDALONE}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+{else}
+{include file=../../../plugins/leadtracker/templates/standalone_head.html}
+{/if}
+
+<style type="text/css">{literal}
+	table tr.placeholder td {
+		text-align: center;
+	}
+{/literal}</style>
+
+{if !$STANDALONE}
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+{/if}
+
+<div class="artikel">
+	{if !$STANDALONE}<h1>{$plugin_leadtracker_statistics_ueberschrift}</h1>{/if}
+	<a href="{$template_base_path}leadtracker_user_statistik.html" class="btn btn-primary pull-right" rel="up">{$plugin_leadtracker_statistics_zurueck}</a>
+	<h3>{$plugin_leadtracker_statistics_details}</h3>
+	
+	<h4>{$cookie_id|escape}{if $statistic.mail} &ndash; {$statistic.mail|escape}{/if}</h4>
+	<p>({$statistic.first_visit|date_format:"%d.%m.%Y"} &ndash; {$statistic.last_visit|date_format:"%d.%m.%Y"})</p>
+
+	<div role="navigation">
+		<ul class="nav nav-tabs" data-container="subcontent">
+			<li data-panel="tab-forms" {if $subpage=="forms"}class="active" rel="self"{/if}><a href="{$template_base_path|escape}leadtracker_backend_details.html&amp;cookie_id={$cookie_id|escape}&amp;tab=forms">{$plugin_leadtracker_statistics_formularanfragen}</a></li>
+			<li data-panel="tab-pages" {if $subpage=="pages"}class="active" rel="self"{/if}><a href="{$template_base_path|escape}leadtracker_backend_details.html&amp;cookie_id={$cookie_id|escape}&amp;tab=pages">{$plugin_leadtracker_statistics_besuchte_webseiten}</a></li>
+			<li data-panel="tab-downloads" {if $subpage=="downloads"}class="active" rel="self"{/if}><a href="{$template_base_path|escape}leadtracker_backend_details.html&amp;cookie_id={$cookie_id|escape}&amp;tab=downloads">{$plugin_leadtracker_statistics_downloads}</a></li>
+            <li data-panel="tab-fums" {if $subpage=="fums"}class="active" rel="self"{/if}><a href="{$template_base_path|escape}leadtracker_backend_details.html&amp;cookie_id={$cookie_id|escape}&amp;tab=fums">{$plugin_leadtracker_statistics_fums}</a></li>
+            <li data-panel="tab-adwords" {if $subpage=="adwords"}class="active" rel="self"{/if}><a href="{$template_base_path|escape}leadtracker_backend_details.html&amp;cookie_id={$cookie_id|escape}&amp;tab=adwords">{$plugin_leadtracker_statistics_adwords}</a></li>
+		</ul>
+	</div>
+	<div id="subcontent">
+	{if $subpage=="forms"}
+        <div id="tab-forms">
+            {include file=../../../plugins/leadtracker/templates/leadtracker_backend_details_sub_forms.html}
+        </div>
+	{elseif $subpage=="pages"}
+        <div id="tab-pages">
+            {include file=../../../plugins/leadtracker/templates/leadtracker_backend_details_sub_pages.html}
+        </div>
+	{elseif $subpage=="downloads"}
+        <div id="tab-downloads">
+            {include file=../../../plugins/leadtracker/templates/leadtracker_backend_details_sub_downloads.html}
+        </div>
+    {elseif $subpage=="fums"}
+        <div id="tab-fums">
+            {include file=../../../plugins/leadtracker/templates/leadtracker_backend_details_sub_fums.html}
+        </div>
+    {elseif $subpage=="adwords"}
+        <div id="tab-adwords">
+            {include file=../../../plugins/leadtracker/templates/leadtracker_backend_details_sub_adwords.html}
+	{else}
+        <div id="tab-error">
+            <p class="error">{$plugin_leadtracker_statistics_keine_daten}</p>
+        </div>
+	{/if}
+</div>
+
+    <script type="text/javascript" src="{$script_path}/tabs.js"></script>
+
+{if !$STANDALONE}
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{else}
+{include file=../../../plugins/leadtracker/templates/standalone_foot.html}
+{/if}
+
+{/if}

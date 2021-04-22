@@ -1,0 +1,59 @@
+	<div class="form_modul modul">
+		<div id="form_modul_content" class="clearfix">
+			<!-- START FORM -->
+			{if isset($form_html) && $form_html}
+				{$form_html}
+			{else}
+				{if $formok === "ok"}
+					{$pcfronttext[0].form_manager_toptext_html}
+					{if isset($fehlerliste) && $fehlerliste}
+						<div class="fehlerliste"><a name="error" id="error" ></a>
+							<h2>{$plugin.form_manager.bitte_korrek}</h2>
+							<br />
+							<ul>
+								{foreach  item=dat from=$fehlerliste }
+									<li>{$dat}</li>
+								{/foreach}
+							</ul>
+						</div>
+					{/if}
+					<div class="stwformwrap">
+						<form action="#error" method="post" id="formsub" enctype="multipart/form-data">
+							<input  type="hidden" name="getlang" value="{$lang_short}" />
+								{foreach item=dat from=$gfliste}
+									<fieldset id="field_{$dat.plugin_cform_group_id}" class="field_class">
+										<legend>{$dat.plugin_cform_group_text}</legend>
+										{foreach item=idat from=$dat.felder}
+											{$idat}
+										{/foreach}
+									</fieldset>
+								{/foreach}
+								{if $form_versende}
+									<fieldset>
+										<legend>{$plugin.form_manager.anwensenden}</legend>
+										<div class="labdiv">
+											<label for="style">{$plugin.form_manager.anwensenden}</label>
+											{$form_versende}
+										</div>
+									</fieldset>
+								{/if}
+							<input type="text" size="30" name="nicht_ausfuellen" style="display:none;" id="plugin_cform_vorname" value=""/>
+							{if $stamm_kontakt_spamschutz && $is_last_page_form=="ok"}
+							{include file="_module_intern/mod_spamschutz.html}
+							<br />
+							{/if}
+							<fieldset>
+								<legend>{$plugin.form_manager.senden}</legend>
+								<input type="hidden" name="form_manager_id" value="{$form_manager_id}" />
+								<input type="submit" name="form_manager_submit" class="senden" value="{$pcfronttext[0].form_manager_lang_button}" />
+								<input type="hidden" name="is_last_page" value="1" />
+								<input type="hidden" name="is_cm_form" value="1" />
+							</fieldset>
+						</form>
+					</div>
+					{$pcfronttext[0].form_manager_bottomtext_html}
+				{/if}
+			{/if}
+			<!-- STOP FORM -->
+		</div>
+	</div>

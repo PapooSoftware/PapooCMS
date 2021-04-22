@@ -1,0 +1,105 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+{if $is_eingetragen=="ok"}
+<div class="message"> {$plugin_fb_plugin_die_daten_wurden_gespeichert}</div>
+{/if}
+
+{if $import_error}
+<div class="error">{$plugin_blogger_import_bitte_alle_felder_ausfllen}</div>
+{/if}
+
+{if $daten_saved_import_blog}
+<div class="message">{$plugin_blogger_import_daten_import_erfolgt}</div>
+
+{/if}
+<div class="artikel">
+{if $import_step1}
+
+ <h1 id="blogger_import_daten_import_erfolgt" class="h1" >{$plugin_blogger_import_daten_import_erfolgt}</h1>
+
+ <p id="blogger_import_bitte_berprfen_sie_die" class="h1" >{$plugin_blogger_import_bitte_berprfen_sie_die}</p>
+
+{else}
+
+<h1 id="shop_upload_plugin_beitrge_aus_wordpress_importieren" class="h1" >{$plugin_shop_upload_plugin_beitrge_aus_wordpress_importieren}</h1>
+
+ <p id="shop_upload_plugin_hier_knnen_sie_beitrge_aus" class="h1" >{$plugin_shop_upload_plugin_hier_knnen_sie_beitrge_aus}</p>
+
+ <h2 id="shop_upload_plugin_tragen_sie_hier_die_db" class="h2" >{$plugin_shop_upload_plugin_tragen_sie_hier_die_db}</h2>
+<form method="post" id="formi" action="" >
+ <fieldset>
+<legend>{$plugin_shop_upload_plugin_db_verbindungsdaten}</legend>
+
+ <div class="labdiv"><label for="blogger_import_db_server">{$plugin_blogger_import_db_server}{$plugin_error.blogger_import_db_server} </label>
+
+<input type="text" name="blogger_import_db_server" value="{$blogger_import.0.blogger_import_db_server|escape:"html"}" class="blogger_import_db_server" id="blogger_import_db_server"/>
+</div><br />
+
+  <div class="labdiv"><label for="blogger_import_db_name">{$plugin_blogger_import_db_name}{$plugin_error.blogger_import_db_name} </label>
+
+<input type="text" name="blogger_import_db_name" value="{$blogger_import.0.blogger_import_db_name|escape:"html"}" class="blogger_import_db_name" id="blogger_import_db_name"/>
+</div><br />
+
+  <div class="labdiv"><label for="blogger_import_db_user">{$plugin_blogger_import_db_user}{$plugin_error.blogger_import_db_user} </label>
+
+<input type="text" name="blogger_import_db_user" value="{$blogger_import.0.blogger_import_db_user|escape:"html"}" class="blogger_import_db_user" id="blogger_import_db_user"/>
+</div><br />
+
+  <div class="labdiv"><label for="blogger_import_db_passwort">{$plugin_blogger_import_db_passwort}{$plugin_error.blogger_import_db_passwort} </label>
+
+<input type="text" name="blogger_import_db_passwort" value="{$blogger_import.0.blogger_import_db_passwort|escape:"html"}" class="blogger_import_db_passwort" id="blogger_import_db_passwort"/>
+</div><br />
+
+  <div class="labdiv"><label for="blogger_import_prfix">{$plugin_blogger_import_prfix}{$plugin_error.blogger_import_prfix} </label>
+
+<input type="text" name="blogger_import_prfix" value="{$blogger_import.0.blogger_import_prfix|escape:"html"}" class="blogger_import_prfix" id="blogger_import_prfix"/>
+</div>
+ <div class="labdiv"><label for="blogger_import_url_der_installation3">{$plugin_blogger_import_url_der_installation3}{$plugin_error.blogger_import_url_der_installation3} </label>
+
+<input type="text" name="blogger_import_url_der_installation3" value="{$blogger_import.0.blogger_import_url_der_installation3|escape:"html"}" class="blogger_import_url_der_installation3" id="blogger_import_url_der_installation3"/>
+</div><br />
+
+
+</fieldset><br />
+<fieldset><legend> {$plugin_blogger_import_import_starten}</legend>
+<input type="submit" class="submit_back" id="startimportblogger" name="startimportblogger" value=" {$plugin_blogger_import_import_starten}" />
+
+</fieldset>
+
+</form>
+<br />
+{/if}
+{if $is_dev}
+ #start#
+
+
+
+ <span class="ignore"></span>
+  <!-- Der Start Button ist notwendig damit sich das System daran aufhängen kann. -->
+     <div class="rapid_form">
+        <form action="" name="" method="POST">
+        <!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+        <input type="hidden" name="tb_name" value="blogger_import" />
+        <!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+        <input type="hidden" name="php_datei_name" value="blogger_import" />
+        <!-- Das Standarpräfix für die Ids -->
+        <input type="hidden" name="praefix" value="blogger_import" />
+        <!-- Das Standarpräfix für die Feldernamen und Namen -->
+        <input type="hidden" name="praefix_spezial" value="blogger_import" />
+        <!-- Das Tool einbinden -->
+            {include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div>
+
+
+{/if}
+</div>
+
+
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

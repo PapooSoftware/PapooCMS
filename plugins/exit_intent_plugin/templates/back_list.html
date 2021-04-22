@@ -1,0 +1,45 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+
+<link rel="stylesheet" href="{$exit_intent_plugin_css_path}/backend.css" />
+
+<div class="artikel">
+    {$plugin_exit_intent_message3}
+    <table class="outside  table table-striped table-hover">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Html</th>
+            <th>Höhe</th>
+            <th>Breite</th>
+            <th>Delay</th>
+            <th>Auslaufdatum</th>
+            <th>CSS-Eigenschaften</th>
+            <th>Kopieren</th>
+            <th>Bearbeiten</th>
+            {foreach item=dat from=$list}
+        </tr>
+        <tr>
+            <td>{$dat.ei_id}</td>
+            <td>{$dat.ei_name}</td>
+            <td><textarea type="text" rows="2" disabled>{$dat.ei_link|replace:"<br />":""}</textarea></td>
+            <td>{$dat.ei_hoehe}</td>
+            <td>{$dat.ei_breite}</td>
+            <td>{$dat.ei_delay}</td>
+            <td>{$dat.ei_auslaufdatum}</td>
+            <td><textarea type="text" rows="2" disabled>{$dat.ei_css_datei_link|replace:"<br />":""}</textarea></td>
+            <td><a class="delicon"  href="{$menu_link}&template=exit_intent_plugin/templates/back_list.html&cop_id={$dat.ei_id}">kopieren</a></td>
+            <td><a class="delicon"  href="{$ei_link}&ei_id={$dat.ei_id}">bearbeiten</a></td>
+        </tr>
+        {/foreach}
+    </table>
+
+    {if $is_dev}
+    {/if}
+
+</div>
+
+</body>
+</html>
+{/if}

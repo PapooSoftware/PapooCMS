@@ -1,0 +1,51 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+{$plugin.linkliste.sortieren_text}
+  <!-- Alle Menüpunkte deren Reihenfolge verändert werden kann. -->
+	<ul class="menu_order_baum">
+		{foreach item=menu from=$result_cat}
+			{$menu.shift_anfang}
+
+			<div class="menu_order_baum_li">
+				<div style="width: 30px; height: 20px; float: right;">
+					{if NOT $menu.letzter}
+						<form action="" method="post" class="menu_order_baum_form">
+							<input type="hidden" name="menuorder_menuid" value="{$menu.cat_id}" />
+							<input type="hidden" name="menuorder_action_minus" value="runter" />
+							<label for="menuorder_action_minus{$menu.cat_id}" class="ignore">{$plugin.linkliste.menue_unten}</label>
+							<input type="image" title="{$plugin.linkliste.nach_unten}" alt="{$plugin.linkliste.nach_unten}"
+								id="menuorder_action_minus{$menu.cat_id}" name="menuorder_action_minus{$menu.cat_id}" value="runter"
+								src="bilder/pfeil_runter.gif" class="menu_order_baum_knopf" />
+						</form>
+					{/if}
+				</div>
+				<div style="width: 30px; height: 20px; float: right;">
+					{if $menu.cat_order_id > 1}
+						<form action="" method="post" class="menu_order_baum_form">
+							<input type="hidden" name="menuorder_menuid" value="{$menu.cat_id}" />
+							<input type="hidden" name="menuorder_action_plus" value="hoch" />
+							<label for="menuorder_action_plus{$menu.menuid}" class="ignore">{$plugin.linkliste.menue_oben}</label>
+							<input type="image" title="{$plugin.linkliste.nach_oben}" alt="{$plugin.linkliste.nach_oben}"
+								id="menuorder_action_plus{$menu.cat_id}" name="menuorder_action_plus{$menu.cat_id}" value="hoch"
+								src="bilder/pfeil_hoch.gif" class="menu_order_baum_knopf" />
+						</form>
+					{/if}
+				</div>
+				<span style="border: 1px solid #fff;border-right:0px;display:block;">{$menu.cat_id}[{$menu.cat_order_id}]:  {$menu.cat_name}</span>
+			</div>
+
+			{$menu.shift_ende}
+		{/foreach}
+	</ul>
+</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

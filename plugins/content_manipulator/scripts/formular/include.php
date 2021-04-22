@@ -72,7 +72,7 @@ class formularintegration
 			$ndat = explode("_", $dat);
 			IfNotSetNull($ndat['1']);
 			IfNotSetNull($ndat['2']);
-			$formular_daten = $this->get_formular_aus_plugin($ndat['1'],$ndat['2']);
+			$formular_daten = $this->get_formular_aus_plugin($ndat[1], $ndat[2]);
 			$inhalt = preg_replace('~<p>\s*'.preg_quote($ausgabe[0][$i], "~").'\s*</p>~', $formular_daten, $inhalt);
 			$inhalt = str_ireplace($ausgabe['0'][$i], $formular_daten, $inhalt);
 			$i++;
@@ -83,10 +83,10 @@ class formularintegration
 
 	/**
 	 * @param int $formular_id
-	 * @param int $empfanger_flex_id
+	 * @param string|null $outputFormat
 	 * @return mixed
 	 */
-	function get_formular_aus_plugin($formular_id = 0, $empfanger_flex_id = 0)
+	function get_formular_aus_plugin($formular_id = 0, $outputFormat=null)
 	{
 		// Heutiges Datum
 		global $form_manager;
@@ -223,6 +223,7 @@ class formularintegration
 
 		// Formular raussuchen und anzeigen
 		if ((is_numeric($this->checked->form_manager_id))) {
+			$this->content->template['formOutputFormat'] = $outputFormat;
 			$this->content->template['formok'] = "ok";
 			$this->content->template['form_manager_id'] = $this->checked->form_manager_id;
 			// FOrmular raussuchen und anzeigen
@@ -232,6 +233,7 @@ class formularintegration
 		$this->content->assign();
 
 		$output = $GLOBALS["smarty"]->fetch(self::findTemplate("form_modul_cm.html"));
+		unset($this->content->template['formOutputFormat']);
 		return $output;
 	}
 }

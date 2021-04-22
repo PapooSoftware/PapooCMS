@@ -1,0 +1,171 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{if $enter}
+<h2>{$plugin.linkliste.daten_eingetragen}</h2>
+{/if}
+
+{if $neueliste==1}
+{$plugin.linkliste.text2}
+  <form action="#" method="post" enctype="multipart/form-data">
+
+  <fieldset>
+   <legend>{$plugin.linkliste.liste_eingabe}
+    </legend>
+    <textarea name="voll_liste" id="voll_liste" rows="4" cols="50"/></textarea>
+    <br /></fieldset><fieldset><legend>{$plugin.linkliste.eintragen}
+    </legend>
+	<input type="submit" class="submit_back_green" name="submitliste" value="{$plugin.linkliste.eintragen}"/>
+</fieldset>
+</form>
+<hr />
+{else}
+<!--                 Die Sprachdaten        -->
+<script language="javascript" type="text/javascript" src="./tiny_mce/tiny_mce.js" charset="utf-8"></script>	
+<script language="javascript" type="text/javascript">
+	tinyMCE.init({ldelim}
+	mode : "exact",
+	language : "de",
+	elements : "linkliste_descrip[1],linkliste_descrip[2],linkliste_descrip[3],linkliste_descrip[4],linkliste_descrip[5],linkliste_descrip[6],linkliste_descrip[7],linkliste_descrip[7]",
+	{include file=tiny_inc_conf.html}
+	{rdelim} );
+	//function fileBrowserCallBack(field_name, url, type)
+	//{ldelim}
+	// This is where you insert your custom filebrowser logic
+	//	alert("Filebrowser callback: " + field_name + "," + url + "," + type);
+	//{rdelim}
+	</script>
+{if $neuereintrag}
+
+<h2>{$plugin.linkliste.link_new}</h2>
+
+
+{/if}
+{if $altereintrag}
+<h2>{$plugin.linkliste.link_aendern}</h2>
+{/if}
+
+<p>{$plugin.linkliste.link_eintrag}</p>
+  <form action="#" method="post"enctype="multipart/form-data" >
+
+  <fieldset>
+   <legend>{$plugin.linkliste.kategorie}
+    </legend>
+
+ <label for="cat_linkliste_id ">{$plugin.linkliste.kategorie2}</label><br />
+  <select name="cat_linkliste_id" size="1" id="cat_linkliste_id">
+     <option value="0" {$checked1}>{$plugin.linkliste.keine}</option>
+    {foreach item=cat from=$result_cat_back}
+    {if $cat_id!=$cat.cat_id}
+    <option value="{$cat.cat_id}" {if $cat_linkliste_id==$cat.cat_id} selected="selected" {/if}>{$cat.cat_name}</option>
+    {/if}
+      {/foreach}
+
+  </select>
+
+  <input type="hidden" name="linkliste_id" value="{$linkliste_id}"/>
+    </fieldset>
+    {if $result_real}
+    <fieldset>
+   <legend>Partner:
+    </legend>
+
+  <br />
+  <label for="linkliste_real">Wer hat realisiert:</label><br />
+  <select name="linkliste_real" size="1" id="linkliste_real">
+     <option value="0" {$checked1}>kein Partner (default)</option>
+    {foreach item=art from=$result_real}
+
+    <option value="{$art.partner_id}" {if $linkliste_real==$art.partner_id} selected="selected" {/if}>{$art.partner_name}</option>
+
+      {/foreach}
+
+  </select>
+  </fieldset>
+  {/if}
+
+
+
+<!--    Bilddaten   -->
+
+<fieldset><legend>{$plugin.linkliste.bild_angabe} </legend> <br />
+{if $altereintrag} <br />
+<div style="float:right; border:1px solid black;"><img
+ src="../images/thumbs/{$paket_logo}" alt="Logo" /></div>
+<br />
+<label for="paket_logo2">{$plugin.linkliste.bild_wahl}</label><br />
+<select name="paket_logo2" size="1" id="paket_logo2">
+ <option value=""{$checked1}>{$plugin.linkliste.keine}</option>
+ {foreach item=art from=$bild_data} {if $art.image_name}
+ <option value="{$art.image_name}" {if $art.image_name==$paket_logo}selected="selected"{/if}>{$art.image_alt}</option>
+ {/if} {/foreach}
+
+</select> <br />
+<label for="paket_logo">{$plugin.linkliste.bild_neu}</label><br />
+<p>{$plugin.linkliste.bild_alt}</p>
+{/if} {if $neuereintrag} <label for="paket_logo2">{$plugin.linkliste.bild_wahl}</label><br />
+<select name="paket_logo2" size="1" id="paket_logo2">
+ <option value=""{$checked1}>{$plugin.linkliste.keine}</option>
+ {foreach item=art from=$bild_data} {if $art.image_name}
+ <option value="{$art.image_name}">{$art.image_alt}</option>
+ {/if} {/foreach}
+
+</select> <br />
+
+<label for="messe_logo ">{$plugin.linkliste.bild_das_wahl}</label><br />
+
+{/if} <input name="strFile" value="" type="file" /> <br />
+</fieldset>
+
+
+
+    {foreach item=lang from=$language_dat}
+    {if $lang.selected}
+    <fieldset>
+
+    <legend>{$plugin.linkliste.eintrag_fuer} {$lang.language}</legend>
+      <label for="linkliste_link_lang">{$plugin.linkliste.link_url} {$lang.language} {$plugin.linkliste.an}</label><br />
+  <input type="text" name="linkliste_link_lang[{$lang.lang_id}]" id="linkliste_link_lang" value="{$linkliste_link_lang[$lang.lang_id]}" size="60" />
+
+  <br />
+  <label for="linkliste_link2">{$plugin.linkliste.link_artikel}</label><br />
+  <select name="linkliste_link_art" size="1" id="linkliste_link2">
+     <option value="0" {$checked1}>{$plugin.linkliste.keine}</option>
+    {foreach item=art from=$result_art}
+
+    <option value="{$art.reporeID}" {if $linkliste_link_art==$art.reporeID} selected="selected" {/if}>{$art.header}</option>
+
+      {/foreach}
+
+  </select>
+  <br />
+  <br />
+   <label for="linkliste_Wort">{$plugin.linkliste.link_name}</label><br />
+  <input type="text" name="linkliste_Wort[{$lang.lang_id}]" id="linkliste_Wort" value="{$linkliste_Wort[$lang.lang_id]}" size="40" maxlength="254"/>
+  <br />
+  <label for="linkliste_lang_header">{$plugin.linkliste.top}</label><br />
+  <input type="text" name="linkliste_lang_header[{$lang.lang_id}]" id="linkliste_lang_header" value="{$linkliste_lang_header[$lang.lang_id]}" size="40" maxlength="254"/>
+  <br />
+  <br />
+  <label for="linkliste_descrip">{$plugin.linkliste.beschreibung}</label><br />
+  <textarea name="linkliste_descrip[{$lang.lang_id}]" id="linkliste_descrip[{$lang.lang_id}]" rows="30" cols="60" >{$linkliste_descrip[$lang.lang_id]}</textarea>
+  <br />
+  </fieldset>
+  {/if}
+  {/foreach}
+
+  <fieldset>
+
+    <legend>{$plugin.linkliste.eintragen}</legend>
+  {if $altereintrag}
+  <br />
+  <input style="float:right;" class="submit_back_red" type="submit" name="submitdel" value="{$plugin.linkliste.loeschen}"/>
+  <input class="submit_back"  type="submit" name="copy" value="{$plugin.linkliste.kopieren}"/>
+
+{/if}<br />
+					   <input class="submit_back_green" type="submit" name="submitentry" value="{$plugin.linkliste.eintragen}"/>
+
+  </fieldset>
+
+
+  </form>
+  {/if}
+  {/if}

@@ -123,7 +123,7 @@ class bildwechsler_class
 			$this->switch_front();
 		}
 
-		$this->reset_sprachen();
+		//$this->reset_sprachen();
 
 		// BACKEND:
 		if (defined("admin")) {

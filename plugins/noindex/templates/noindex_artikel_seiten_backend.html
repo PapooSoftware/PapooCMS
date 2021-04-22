@@ -1,0 +1,21 @@
+
+{$message.plugin.noindex.003}
+
+<div class="settings-saved message hidden" name="artikel_seiten">{$message.plugin.noindex.024}</div>
+<div class="settings-saving message hidden" name="artikel_seiten">{$message.plugin.noindex.023}</div>
+<div class="settings-error error hidden" name="artikel_seiten">{$message.plugin.noindex.025}</div>
+
+<form class="noindex_noreload" action="" method="POST" name="artikel_seiten">
+    <fieldset>
+        <label><input type="checkbox" name="noindex_article_listing" id="noindex_article_listing" {if $plugin.noindex.article.listing}checked{/if}>Das komplette Listing nicht indizieren</label>
+    </fieldset>
+
+    <fieldset>
+        <legend>{$message.plugin.noindex.018}</legend>
+        <textarea id="noindex_article_pages" name="noindex_article_pages">{$plugin.noindex.article.pages}</textarea>
+    </fieldset>
+
+    <fieldset>
+        <input type="submit" class="btn btn-info" value="{$message_70}">
+    </fieldset>
+</form>

@@ -1,0 +1,120 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+<style>{literal}
+    .nobullets {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+{/literal}</style>
+
+<div class="artikel">
+
+    <h1 id="leadtracker_formular_verknpfen" class="h1" >{$plugin_leadtracker_formular_verknpfen}</h1>
+
+    <a href="{$follow_up_standard_basis_link}leadtracker/templates/leadtracker_follow_up.html" id="leadtracker_zurck_zur_bersicht" class="132link btn btn-info pull-right" style="margin-right:20px; margin-left: 60px;">{$plugin_leadtracker_zurck_zur_bersicht}</a>
+ <p id="leadtracker_sie_knnen_hier_ein_formular" class="h1" >{$plugin_leadtracker_sie_knnen_hier_ein_formular}</p>
+
+    <h2 id="leadtracker_verknpfte_formulare" class="h2" >{$plugin_leadtracker_verknpfte_formulare}</h2>
+    <form action="" method="post">
+        <input type="hidden" name="check_autorefill" value="check_autorefill" />
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>{$plugin_leadtracker_bezeichnung_des_formulars}</th>
+                <th>{$plugin_leadtracker_formular_fr_neuauswahl}</th>
+                <!--<th>{$plugin_test__aufrufe}</th>-->
+                <th>{$plugin_leadtracker_followup_autorefill}</th>
+                <th>{$plugin_leadtracker_followup_mails_anzahl}</th>
+                <th>{$plugin_leadtracker_followup_mails_bearbeiten}</th>
+                <th>{$plugin_leadtracker_verknpfung_lsen}</th>
+            </tr>
+            {if $leadtracker_verknuepfte_forms}
+            {foreach from=$leadtracker_verknuepfte_forms item=file key=file_key}
+            <input type="hidden" name="form_id-{$file.form_manager_id}" value="{$file.form_manager_id}" />
+            <tr>
+                <td>{$file.form_manager_id}</td>
+                <td>{$file.form_manager_name}</td>
+                <td><ul><li class="nobullets">{if $file.leadtracker_formular_fr_neuauswahl_form<1}{$file.form_manager_name}{else}{$all_forms_zuordnung[$file.leadtracker_formular_fr_neuauswahl_form]}{/if}</li><li class="nobullets"><a href="{$follow_up_standard_basis_link}leadtracker/templates/leadtracker_follow_up_manager_set_follow_form.html&set_fum={$file.form_manager_id}&fum_type=2">{$plugin_leadtracker_formular_fr_neuauswahl_set}</a></li></ul></td>
+                <!--<td>{$file.wieoft}</td>-->
+                <td><input title="" name="autorefill-{$file.form_manager_id}" type="checkbox" {if $file.leadtracker_autofill} checked="checked" {/if} /></td>
+                <td>{$file.count_fum}</td>
+                <td><a href="{$follow_up_standard_basis_link}leadtracker/templates/leadtracker_follow_up_manager.html&set_fum={$file.form_manager_id}&fum_type=2">{$plugin_leadtracker_followup_mails_bearbeiten}</a></td>
+                <td><a class="delicon"  href="{$leadtracker_own_link}&set_new_form_del={$file.form_manager_id}">{$plugin_leadtracker_verknpfung_lsen}</a></td>
+            </tr>
+            {/foreach}
+            {/if}
+        </table>
+        <button class="btn btn-primary" type="submit">{$plugin_leadtracker_followup_submit}</button>
+    </form>
+
+    <h2 id="leadtracker_nicht_verknpfte_formulare" class="h2" >{$plugin_leadtracker_nicht_verknpfte_formulare}</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>{$plugin_leadtracker_bezeichnung_des_formulars}</th>
+            <th>{$plugin_leadtracker_als_followup_mail_form_definieren}</th>
+
+
+        </tr>
+        {if $leadtracker_nicht_verknuepfte_forms}
+        {foreach from=$leadtracker_nicht_verknuepfte_forms item=file key=file_key}
+        <tr>
+            <td>{$file.form_manager_id}</td>
+            <td>{$file.form_manager_name}</td>
+            <td><a href="{$leadtracker_own_link}&set_new_form={$file.form_manager_id}">{$plugin_leadtracker_als_followup_mail_form_definieren}</a></td>
+        </tr>
+        {/foreach}
+        {/if}
+
+    </table>
+
+
+    {if $is_dev}
+
+
+
+ #start#
+<!--
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <br />
+	<form name="test_daten" method="post" action="">
+		<fieldset>
+
+			<input type="submit" class="submit_back" name="submit" value="submit" />
+		</fieldset>
+	</form>
+	</p>
+-->
+
+    <span class="ignore"></span>
+    <!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+    <div class="rapid_form">
+        <form action="" name="" method="POST">
+            <!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+            <input type="hidden" name="tb_name" value="plugin_leadtracker" />
+            <!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+            <input type="hidden" name="php_datei_name" value="leadtracker_class" />
+            <!-- Das Standarpr�fix f�r die Ids -->
+            <input type="hidden" name="praefix" value="leadtracker" />
+            <!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+            <input type="hidden" name="praefix_spezial" value="leadtracker" />
+            <!-- Das Tool einbinden -->
+            {include file=../../../plugins/devtools/templates/rapid_felder.htm}
+        </form>
+    </div>
+
+
+
+</div>
+
+{/if}
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

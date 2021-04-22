@@ -1,0 +1,390 @@
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+<div class="artikel">
+	<h1>{$plugin.mv.import_export}</h1>
+	<p><br /><a href="./plugin.php?menuid={$menuid_aktuell}&amp;template=mv/templates/imex_error_report.html">{$plugin.mv.importprotokoll3}</a></p><br />
+	<p><strong>{$plugin.mv.import_hinweis}</strong></p>
+	{if $verwaltung_fehlt}<div class="error">{$plugin.mv.import.verwaltung_fehlt}</div>{/if}
+	{if $mv_fehlt}<div class="error">{$plugin.mv.import.mv_fehlt}</div>{/if}
+	{if $add_meta_fehlt}<div class="error">{$plugin.mv.import.add_meta_fehlt}</div>{/if}
+	{if $rechtegruppe_fehlt}<div class="error">{$plugin.mv.import.rechtegruppe_fehlt}</div>{/if}
+	{if $neu_update_fehlt}<div class="error">{$plugin.mv.import.neu_update_fehlt}</div>{/if}
+	{if !$is_uploaded_step3}
+		<p>{$plugin.mv.import_export_text_1}</p>
+		<p>{$plugin.mv.import_export_text_2}</p>
+	{/if}
+	{*<!-- VIERTER SCHRITT: Daten wurden eingetragen, Link zur Ausgabe eines Importprotokolls etc. -->*}
+	{if $is_uploaded_step3}
+    	{if $imported_records}
+			<h2>{$imported_records} {$plugin.mv.daten_eingetragen}</h2>
+        {else}
+         	<div class="error">{$plugin.mv.daten_nicht_eingetragen}</div>
+        {/if}
+        {if $records_in_error
+        	AND $imported_records}
+         	<div class="error">{$records_in_error} {$plugin.mv.daten_nicht_eingetragen2}</div>
+        {/if}
+		{*<!-- Wenn beim Import die Jahreszahlen nur 2 Ziffern hatten, dann hier eine Meldung rausgeben -->*}
+		{if $mv_jahreszahl_ziffern}
+			<div class="message">{$mv_jahreszahl_ziffern}</div>
+		{/if}
+		{*<!-- Link zum Importprotokoll anzeigen -->*}
+		<p><a href="{$mv_protokoll_link}">{$plugin.mv.importprotokoll}</a></p>
+		<p><a href="./plugin.php?menuid={$menuid_aktuell}&amp;template=mv/templates/imex_error_report.html">{$plugin.mv.importprotokoll3}</a></p>
+	{else}
+		{*<!-- DRITTER SCHRITT: Felder Zuordnung angeben -->*}
+		{if $is_uploaded_step2}
+			{*<!-- Vorlage wurde gespeichert -->*}
+			{if $vorsaved}<h2>{$plugin.mv.vorlage_gespeichert}</h2>{/if}
+			{if $templ_exists}<div class="error">{$plugin.mv.vorlage_exists}</div>{/if}
+			{if $bn_in_error}<div class="error">{$plugin.mv.bn_fehlt}</div>{/if}
+			{if $is_update}
+				<h2>{$plugin.mv.update}</h2>
+				<p>{$plugin.mv.update_text_1}</p>
+				<p>{$plugin.mv.update_text_2}</p>
+				<form method="post" id="formi" action="" >
+					<table>
+						<tr>
+							<th>{$plugin.mv.felder_csv}</th>
+							<th>{$plugin.mv.felder_datenbank}</th>
+							<th>{$plugin.mv.zuordnen}</th>
+						</tr>
+						{if $ref_csv_tabelle}
+							<tr>
+								<td>{$ref_csv_tabelle}</td>
+								<td>{$ref_dat_tabelle}</td>
+								<td>
+									<input type="hidden" name="ref_dat_tabelle" value="{$ref_dat_tabelle_value}"/>
+									<input type="hidden" name="ref_csv_tabelle" value="{$ref_csv_tabelle_value}"/>
+									<input type="submit" id="{$tabname}_refstartentfernen" name="{$tabname}_refstartentfernen" value="Entfernen" />
+								</td>
+							</tr>	
+						{else}
+							<tr>
+								<td>
+									<label for="refdat_tabelle">{$plugin.mv.felder_datei}</label>
+									<br />
+									<select name="ref_dat_tabelle" id="refdat_tabelle" title="" style="" size="1">
+										{foreach item=sprach key=tabname from=$csv_felder}
+											<option value="{$tabname}">{$sprach}</option>
+										{/foreach}
+									</select>
+								</td>
+								<td>
+									<label for="refcsv_tabelle">{$plugin.mv.felder_datenbank}</label>
+									<br />
+									<select name="ref_csv_tabelle" id="refcsv_tabelle" title="" style="" size="1">
+										{foreach item=sprach key=tabname from=$tabelle_felder}
+											<option value="{$tabname}" >{$sprach}</option>
+										{/foreach}
+									</select>
+								</td>
+								<td>
+									<input type="hidden" name="tabelle" value="{$tabelle}"/>
+									<input type="hidden" name="mv_import_sprachen" value="{$mv_import_sprachen}"/>
+									<input type="hidden" name="is_auswahl" value="1"/>
+									<input type="hidden" name="format" value="{$format}"/>
+									<input type="submit" id="refstartzuordnen" name="refstartzuordnen" value="{$plugin.mv.zuordnen}" />
+								</td>
+							</tr>
+						{/if}
+					</table>
+				</form>
+			{/if}
+			{*<!-- wirklicher DRITTER SCHRITT in Flexverwaltung: Felder Zuordung angeben -->*}
+			<h2>{$plugin.mv.felder_zuordnung}</h2>
+			{if $vorlagen_fehler1 == 1}<div class="error">{$plugin.mv.templ_error1}</div>{/if}
+			{if $vorlagen_fehler1 == 2}<div class="error">{$plugin.mv.templ_error2}</div>{/if}
+			{if $vorlagen_fehler1 == 3}<div class="error">{$plugin.mv.templ_error3}</div>{/if}
+			<form method="post" id="formi" action="" >
+				<table>
+					<tr>
+						<th>{$plugin.mv.felder_csv}</th>
+						<th>{$plugin.mv.felder_datenbank}</th>
+						<th>{$plugin.mv.zuordnen}</th>
+					</tr>
+					{*<!-- Felder aus der CSV Datei -->*}
+					<tr>
+					<td>
+						{if $csv_felder}
+							<label for="csv_tabelle">{$plugin.mv.felder_datei}</label>
+							<br />
+							<select name="csv_tabelle" id="csv_tabelle" title="" style="" size="1">
+								{foreach item=sprach key=tabname from=$csv_felder}
+									<option value="{$tabname}" >{$sprach}</option>
+								{/foreach}
+							</select>
+						{/if}
+					</td>
+					{*<!-- Felder aus der Datenbank -->*}		
+					<td>
+						{if $tabelle_felder}
+							<label for="dat_tabelle">{$plugin.mv.felder_datenbank}</label>
+							<br />
+							<select name="dat_tabelle" id="dat_tabelle" title="" style="" size="1">
+								{foreach item=sprach key=tabname from=$tabelle_felder}
+									<option value="{$tabname}" >{$sprach}</option>
+								{/foreach}
+							</select>
+						{/if}
+					</td>
+					<td>
+						<input type="hidden" name="tabelle" value="{$tabelle}"/>
+						<input type="hidden" name="mv_import_sprachen" value="{$mv_import_sprachen}"/>
+						<input type="hidden" name="is_auswahl" value="1"/>
+						<input type="hidden" name="format" value="{$format}"/>
+						<input type="hidden" name="metaebene" value="{$metaebene}"/>
+						<input type="hidden" name="ins" value="{$ins}"/>
+						<input type="hidden" name="myvorlage" value="{$myvorlage}"/>
+						{if $csv_felder}
+							<input type="hidden" name="ref_dat_tabelle" value="{$ref_dat_tabelle_value}"/>
+							<input type="hidden" name="ref_csv_tabelle" value="{$ref_csv_tabelle_value}"/>
+						{/if}
+						{*<!-- Zuordnen Submit Button -->*}
+						{if $ref_csv_tabelle OR $tabelle_felder}
+							<label for ="startimport"> </label>
+							<br />
+							<input type="submit" id="startzuordnen" name="startzuordnen" value="{$plugin.mv.zuordnen}" />
+						{/if}
+					</td>
+				</tr>
+				{*<!-- Zuordnungen der Vorlage oder schon gemachter Verknüpfungen auflisten -->*}
+				{foreach item=sprach key=tabname from=$csv_tabelle_daten}
+					<tr>
+						{*<!-- Feldname aus der CSV Datei -->*}
+						<td>{$sprach.csv}</td>
+						{*<!-- Feldname aus der Datenbank -->*}
+						<td>{$sprach.tab}</td>
+						<td>
+							<input type="submit" id="{$tabname}_startentfernen" name="{$tabname}_startentfernen" value="{$plugin.mv.Entfernen}" />
+						</td>
+					</tr>	
+				{/foreach}
+				{*<!-- Welches Feld aus der CSV Datei ist die System ID für dzvhae -->*}		
+				{if $mv_is_dzvhae_mv=="1"}
+					<tr>
+						<td colspan="3">
+							<fieldset>
+								<legend>{$plugin.mv.dzvhae_system_id}</legend>
+								<select name="mv_dzvhae_system_id" id="mv_dzvhae_system_id" title="" style="" size="1">
+									{foreach item=sprach key=tabname from=$tabelle_felder_csv_all}
+										<option value="{$tabname}"{if $mv_dzvhae_system_id==$tabname} selected="selected"{/if}>{$sprach}</option>
+									{/foreach}
+								</select>
+							</fieldset>
+						</td>
+					</tr>	
+				{/if}
+				{*<!-- Wenn mindestens eine Zuordnung da ist, dann wird Folgendes mit angezeigt -->*}
+				{*<!-- Müsste die Update Funktion sein, gibts bei Flex nicht, noch nicht -->*}
+				{if $is_update}
+					{if $csv_tabelle_daten and $ref_csv_tabelle}
+						<tr>
+							<td colspan="3">
+								<fieldset>
+									<legend>{$plugin.mv.import_starten}</legend>
+									<input type="submit" name="makeimport" value="Update starten" />
+								</fieldset>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3">
+								<fieldset>
+									<legend>{$plugin.mv.zuordnung_speichern}</legend>
+									<label for="importvorlage_name">{$plugin.mv.bezeichnung_der_vorlage}</label>
+									<br />
+									<input type="text" id="importvorlage_name" size="50" name="importvorlage_name" value="" />
+									<br /><br />
+									<input type="submit" name="makevorlage" value="{$plugin.mv.als_vorlage_speichern}" />
+								</fieldset>
+							</td>
+						</tr>
+					{/if}
+					{*<!-- Neue Einträge hinzufügen -->*}	
+				{else}
+					{if $csv_tabelle_daten}
+						{if !$vorlagen_fehler1}
+							<tr>
+								<td colspan="3">
+									<fieldset>
+										<legend>{$plugin.mv.import_starten}</legend>
+										<input type="submit" name="makeimport" value="Import starten" />
+									</fieldset>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3">
+									<fieldset>
+										<legend>{$plugin.mv.zuordnung_speichern}</legend>
+										<label for="importvorlage_name">{$plugin.mv.bezeichnung_der_vorlage}</label>
+										<br />
+										<input type="text" id="importvorlage_name" size="50" name="importvorlage_name" value="{$importvorlage_name}" />
+										<br /><br />
+										<input type="submit" name="makevorlage" value="{$plugin.mv.als_vorlage_speichern}" />
+									</fieldset>
+								</td>
+							</tr>
+						{/if}
+					{/if}
+				{/if}
+				</table>
+			</form>
+		{/if}
+		{$errortext}
+		{*<!-- ERSTER SCHRITT: Zu importierende Datei auswählen, Option Vorlagen löschen -->*}	
+		{if $is_start_mv}
+			<h2>{$plugin.mv.datei_importieren}</h2>
+			<form method="post" id="formi" action="" enctype="multipart/form-data">
+				{*<!-- Datei auswählen -->*}
+				<fieldset>
+					<legend>{$plugin.mv.eingabe_datei}</legend>
+					<label for="myfile">{$plugin.mv.das_dokument}</label>
+					<input name="myfile" id="myfile" value="" type="file">
+				</fieldset>
+				{*<!-- Submit Button zum Datei hochladen -->*}
+				<fieldset>
+					<legend>{$plugin.mv.import_starten}</legend>
+					<input type="submit" class="submit_back" name="startupload" value="{$plugin.mv.datei_hochladen}" />
+				</fieldset>
+				<input type="hidden" name="delete" value=""/>
+			</form>
+			<br />
+			{*<!-- Nachricht wenn Vorlage gelöscht wurde -->*}		
+			{if $vorlage_geloescht}<h2>{$plugin.mv.datei_geloescht}</h2>{/if}
+			<h2>{$plugin.mv.vorlage_loeschen}</h2>
+			<p>{$plugin.mv.vorlage_loeschen_text}</p>
+			<form method="post" id="formi" action="" enctype="multipart/form-data">
+				{*<!-- Zu löschende Vorlage auswählen -->*}
+				<fieldset>
+					<legend>{$plugin.mv.vorlage_loeschen}</legend>
+					<label for="myvorlage">{$plugin.mv.vorlage}:</label>
+					<br />
+					<select name="myvorlage" id="myvorlage" title="" style="width: 40%;" size="1">
+						<option value="">(select){$plugin.imex.ausws}</option>
+						{foreach item=vorlage key=tabname from=$vorlage_array}
+							<option value="{$vorlage.imex_id}" >{$vorlage.imex_name}</option>
+						{/foreach}
+					</select>
+					{*<!-- Submit Button zum Löschen von Vorlagen -->*}		
+					<input type="submit" class="submit_back_red" name="delete_vorlage" value="{$plugin.mv.vorlage_loeschen}" />
+				</fieldset>
+			</form>
+		{/if}
+		{*<!-- ZWEITER SCHRITT: Wenn Datei hochgeladen wurde, dann mv_id, Format, Meta_ebene etc. auswählen -->*}		
+		{if $is_uploaded}
+			{if !$no_upload_msg}
+				<h2>{$plugin.mv.datei_ist_oben}</h2>
+				<strong>{$plugin.mv.datei_ist_oben_text}</strong>
+			{/if}
+			<p>{$plugin.mv.geben_sie_text}</p>
+			<form method="post" id="formi" action="" enctype="multipart/form-data">
+				{*<!-- Verwaltung für den Import auswählen -->*}
+				<fieldset>
+					<legend>{$plugin.mv.tabelle_import}</legend>
+					<label for="tabelle">{$plugin.mv.tabelle_import2}</label>
+					<br />
+					<select name="tabelle" id="tabelle" title="" style="width: 40%;" size="1">
+						{foreach item=sprach key=tabname from=$tabtar}
+							<option value="{$sprach}" {if $tabelle == $sprach}selected="selected"{/if}>{$tabname}</option>
+						{/foreach}
+					</select>
+				</fieldset>
+				{*<!-- Sprache für den Import auswählen -->*}
+				<fieldset>
+					<legend>{$plugin.mv.lang_select}</legend>
+					<label for="sprachen">{$plugin.mv.lang_select2}</label>
+					<br />
+					<select name="sprachen" id="sprachen" title="" style="width: 40%;" size="1">
+						<option value="all">{$plugin.mv.lang_select3}</option>
+						{foreach item=sprache from=$sprachen}
+							<option value="{$sprache.mv_lang_id}" {if $tabelle == $sprache.mv_lang_id}selected="selected"{/if}>{$sprache.mv_lang_long}</option>
+						{/foreach}
+					</select>
+				</fieldset>
+				{*<!-- Mainmetaebene für den Import auswählen -->*}
+				<fieldset>
+					<legend>{$plugin.mv.main_metaebene_auswaehlen}</legend>
+					<label for="metaebene">{$plugin.mv.main_meta_auswaehlen}</label>
+					<br />
+					<select name="metaebene" id="metaebene" title="" style="width: 40%;" size="1">
+						{foreach item=metaebene from=$mv_metaebenen}
+							<option value="{$metaebene.mv_meta_id}">{$metaebene.mv_meta_group_name}</option>
+						{/foreach}
+					</select>
+				</fieldset>
+				{*<!-- Metaebenen für den Import auswählen -->*}
+				<fieldset>
+					<legend>{$plugin.mv.metaebene_auswaehlen}</legend>
+					{foreach item=metaebene from=$mv_metaebenen}
+						<input type="checkbox" name="add_metaebenen[]" value="{$metaebene.mv_meta_id}" id="add_metaebenen_{$metaebene.mv_meta_id}">
+						<label for="add_metaebenen_{$metaebene.mv_meta_id}">{$metaebene.mv_meta_group_name}</label>
+						<br />
+					{/foreach}
+				</fieldset>
+				{*<!-- Rechtegruppen für den Import auswählen -->*}
+				<fieldset>
+					<legend>{$plugin.mv.rechtegruppen_auswaehlen}</legend>
+					{foreach item=rechtegruppe from=$mv_rechtegruppen}
+						<input type="checkbox" name="mv_rechtegruppen[]" value="{$rechtegruppe.gruppeid}" id="add_rechtegruppe_{$rechtegruppe.gruppeid}" 
+						{if $rechtegruppe.checked}checked="checked"{/if}>
+						<label for="add_rechtegruppe_{$rechtegruppe.gruppeid}">{$rechtegruppe.gruppenname}</label>
+						<br />
+					{/foreach}
+				</fieldset>
+				{*<!-- Vorlage für die Zuordnung der Felder -->*}
+				<fieldset>
+					<legend>{$plugin.mv.vorlage_zuordnung}</legend>
+					<p>{$plugin.mv.vorlage_zuordnung_text}</p>
+					<label for="myvorlage">{$plugin.mv.vorlage}:</label>
+					<br />
+					<select name="myvorlage" id="myvorlage" title="" style="width: 40%;" size="1">
+						<option value="">(select){$plugin.imex.ausws}</option>
+						{foreach item=vorlage key=tabname from=$vorlage_array}
+							<option value="{$vorlage.imex_id}" 
+							{if $myvorlage == $vorlage.imex_id}selected="selected"{/if}>{$vorlage.imex_name}</option>
+						{/foreach}
+					</select>
+				</fieldset>
+				{*<!-- Format -->*}
+				<fieldset>
+					<legend>Format</legend>
+					<input type="radio"  name="format" id="format1" 
+					{if $format == "csvohne"}checked="checked"{/if} value="csvohne" />
+					<label for="format1">{$plugin.mv.csv_ohne}</label>
+					<br />
+					<input type="radio" name="format" {$csvchecked}
+					{if $format == "csvmit"}checked="checked"{/if} id="format2" value="csvmit" />
+					<label for="format2">{$plugin.mv.csv_mit}</label>
+					{*<br />
+					<input type="radio" {$xmlcheck} name="format" 
+					{if $format == "xml"}checked="checked"{/if} id="format3" value="xml" /> 
+					<label for="format3">{$plugin.mv.xml}</label>*}
+				</fieldset>
+				{*<!-- Neu oder Update -->*}
+				<fieldset>
+					<legend>{$plugin.mv.neu_oder_update}</legend>
+					<p><strong>{$plugin.mv.achtung_feuer}</strong></p>
+					<input type="radio"  name="ins" id="ins_neu" 
+					{if $format == "csvohne"}checked="checked"{/if} value="ins_neu" /> 
+					<label for="ins_neu">{$plugin.mv.neue_hinzufuegen}</label>
+					<br />
+					{*<!-- >
+					<input type="radio" name="ins" {if $format == "csvmit"}checked="checked"{/if} id="ins_upd" value="ins_upd" /> <label for="ins_upd">Einträge Updaten</label>
+					<br /> -->*}
+					<input type="radio" name="ins" 
+					{if $format == "xml"}checked="checked"{/if} id="ins_del_neu" value="ins_del_neu" /> 
+					<label for="ins_del_neu">{$plugin.mv.alle_del_und_neu}</label>
+				</fieldset>
+				{*<!-- Import starten -->*}
+				<fieldset>
+					<legend>{$plugin.mv.import_starten}</legend>
+					<input type="submit" name="startimport" value="{$plugin.mv.import_starten}" />
+				</fieldset>
+				<input type="hidden" name="delete" value=""/>
+			</form>
+		{/if}	
+	{/if}
+	<!-- Rechte Fehlermeldung-->
+	{include file=rechte.html}
+</div>
+{include file=foot.inc.html}

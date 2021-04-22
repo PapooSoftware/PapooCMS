@@ -1,0 +1,79 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+	
+	<h3>Hinweis</h3>
+	<p>
+		Diese Einstellungen beziehen sich nur auf die Zuweisung der Freigabe-Informationen welche im Frontend angezeigt werden.
+		Zugriffsrechte und entsprechende Freigaben m&uuml;ssen per Papoo-Bordmitteln realisiert werden.
+	</p>
+	
+	<form method="post" action="">
+		<input type="hidden" name="action" value="mfe_save" />
+		<fieldset>
+			<legend>Einstellungen der mehrstufigen Freigabe:</legend>
+			
+			<label for="mfe_gruppenid_autor">Autor: </label>
+			<select id="mfe_gruppenid_autor" name="mfe_gruppenid_autor">
+				{foreach item=gruppe from=$plugin.mehrstufige_freigabe.gruppen}
+					<option value="{$gruppe.gruppeid}" {if $plugin.mehrstufige_freigabe.einstellungen.mfe_gruppenid_autor==$gruppe.gruppeid}selected="selected"{/if}>
+						{$gruppe.gruppenname} (ID: {$gruppe.gruppeid})
+					</option>
+				{/foreach}
+			</select><br />
+			(empfohlen: Redakteur (ID: 12)<br />
+			<br />
+			
+			<label for="mfe_gruppenid_pruefer">Pr&uuml;fer: </label>
+			<select id="mfe_gruppenid_pruefer" name="mfe_gruppenid_pruefer">
+				{foreach item=gruppe from=$plugin.mehrstufige_freigabe.gruppen}
+					<option value="{$gruppe.gruppeid}" {if $plugin.mehrstufige_freigabe.einstellungen.mfe_gruppenid_pruefer==$gruppe.gruppeid}selected="selected"{/if}>
+						{$gruppe.gruppenname} (ID: {$gruppe.gruppeid})
+					</option>
+				{/foreach}
+			</select><br />
+			(empfohlen: Chefredakteur (ID: 11)<br />
+			<br />
+			
+			<label for="mfe_gruppenid_freigeber">Freigeber: </label>
+			<select id="mfe_gruppenid_freigeber" name="mfe_gruppenid_freigeber">
+				{foreach item=gruppe from=$plugin.mehrstufige_freigabe.gruppen}
+					<option value="{$gruppe.gruppeid}" {if $plugin.mehrstufige_freigabe.einstellungen.mfe_gruppenid_freigeber==$gruppe.gruppeid}selected="selected"{/if}>
+						{$gruppe.gruppenname} (ID: {$gruppe.gruppeid})
+					</option>
+				{/foreach}
+			</select><br />
+			(empfohlen: Administrator (ID: 1)<br />
+			<br />
+			
+			<br />
+			<input type="submit" name="submit" value=".. speichern" />
+		</fieldset>
+	</form>
+	
+	<h4>Empfehlung f&uuml;r die Papoo-internen Einstellungen:</h4>
+	
+	<h5>Autoren</h5>
+	<p>
+		Autoren sollten der Gruppe "Redakteur" angeh&ouml;ren. Die Gruppe "Redaktuer" sollte das Recht zum ver&ouml;ffentlichen in allen n&ouml;tigen Men&uuml;punkten bekommen.
+		Die Artikel-Freigabe ist dieser Gruppe aber zu untersagen. Die Freigabe erfolgt durch den Gruppenleiter, welcher der Gruppe "Chefredakteur" angeh&ouml;ren sollte.<br />
+	</p>
+	
+	<h5>Pr&uuml;fer</h5>
+	<p>
+		Pr&uuml;fer sollten der Gruppe "Chefredakteur" angeh&ouml;ren. Die Gruppe "Chefredaktuer" sollte wie die Gruppe "Redakteur" Rechte zum ver&ouml;ffentlichen
+		in allen n&ouml;tigen Men&uuml;punkten bekommen.
+		Die Artikel-Freigabe ist dieser Gruppe ebenfalls zu untersagen. Die Freigabe erfolgt durch den Gruppenleiter,welcher der Gruppe "Administrator" angeh&ouml;ren sollte.<br />
+	</p>
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

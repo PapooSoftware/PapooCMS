@@ -1,0 +1,27 @@
+<div class="artikel">
+	<a  id="artikel"></a>
+	
+	{if NOT $loggedin}
+		{if $plugin.userlogin.templateweiche == "LOGIN"}
+			{include file="index.html"}
+			{include file="_module_intern/mod_loginform_content.html"}
+		{/if}
+		
+		{if $plugin.userlogin.templateweiche == "FORGOT"}
+			{include file="_module_intern/mod_vergessen.html"}
+		{/if}
+
+	{elseif $plugin.userlogin.templateweiche == "ACCESS_DENIED"}
+
+		{include file="index.html"}
+
+	{else}
+		{$plugin.userlogin.text_angemeldet}
+		
+		{*<!--
+		<p>evtl LOGOUT <a class="loginlink" href="{$slash}index.php?logoff=1">{$message_2134}</a></p>
+		-->*}
+		
+	{/if}
+	
+</div>

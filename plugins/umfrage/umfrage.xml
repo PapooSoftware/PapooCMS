@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin version="3.6">
+
+<name>Umfragen</name>
+<beschreibung_de><![CDATA[Erstellen Sie auf einfache Art und Weise eigene Umfragen.]]></beschreibung_de>
+<beschreibung_en><![CDATA[Generate polls with just some klicks.]]></beschreibung_en>
+<version>3.0</version>
+<papooid></papooid>
+<datum>10.07.2007</datum>
+
+<autor>
+	<name>Stephan Bergmann</name>
+	<kontakt><![CDATA[Stephan Bergmann
+Rembrandtstr. 10/1
+72768 Reutlingen]]></kontakt>
+	<email>S.Bergmann@XiMiX.de</email>
+	<telefon>07121 / 60 39 88</telefon>
+</autor>
+
+<menue>
+	<eintrag_de>Umfragen</eintrag_de>
+	<eintrag_en>Polls</eintrag_en>
+	<icon>umfrage/bilder/umfrage_backend_icon.gif</icon>
+	<link>plugin:umfrage/templates/umfrage_backend.html</link>
+	<submenue>
+		<eintrag_de>Einbindung</eintrag_de>
+		<eintrag_en>integration</eintrag_en>
+		<icon>umfrage/bilder/umfrage_backend_icon.gif</icon>
+		<link>plugin:umfrage/templates/umfrage_integration.html</link>
+	</submenue>
+</menue>
+
+
+<klasse>
+	<name>umfrage</name>
+	<datei>umfrage/lib/umfrage_class.php</datei>
+</klasse>
+
+<css>umfrage/css/umfrage.css</css>
+
+<datenbank>
+	<installation>umfrage/sql/umfrage_install.sql</installation>
+	<deinstallation>umfrage/sql/umfrage_delete.sql</deinstallation>
+</datenbank>
+
+<modul>
+	<datei>plugin:umfrage/templates/mod_umfrage_plugin.html</datei>
+	<name_de>Umfrage-Modul</name_de>
+	<beschreibung_de>Das Modul des Umfrage-Plugins zur Stimmabgabe.</beschreibung_de>
+	<name_en>poll-modul</name_en>
+	<beschreibung_en>the modul for votings of the poll-pluin.</beschreibung_en>
+</modul>
+
+<messages>umfrage/messages</messages>
+
+</plugin>

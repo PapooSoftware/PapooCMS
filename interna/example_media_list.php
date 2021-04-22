@@ -57,6 +57,9 @@ function do_list_medien()
 	}
 	$export .= ");";
 	$content->template['export_media'] = "nodecode:" . $export;
+
+	// Setze Header, damit der Code im Browser ausgeführt wird; wird z. B. bei MIME-Typen text/html u. U. geblockt
+	header('Content-Type: application/javascript; charset=utf-8');
 }
 
 // benötigte Dateien einbauen

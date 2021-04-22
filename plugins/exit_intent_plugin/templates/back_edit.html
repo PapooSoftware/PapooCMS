@@ -1,0 +1,159 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+
+<link rel="stylesheet" href="{$exit_intent_plugin_css_path}/backend.css" />
+
+
+<div class="artikel">
+    {if $eintragmakeartikelfertig}
+    <!-- Die Artikel wurden durchgeloopt-->
+    <div class="message"><h2>{$plugin_exit_intent_eingetragen}</h2></div>
+    {/if}
+    {$plugin_exit_intent_message2}
+
+    <form action="" method="post">
+        <fieldset>
+            <legend>Exit Intent</legend>
+            <input type="hidden" name="ei_id" value="{$singleItem.0.ei_id}" />
+
+            <div class="labdiv"><label for="exit_intent_ei_linkadresse">{$plugin_exit_intent_ei_linkadresse}{$plugin_error.exit_intent_ei_linkadresse} </label>
+
+                <textarea style="margin-bottom:10px;" rows="10" cols="50" type="text" name="exit_intent_ei_linkadresse" value="" class="exit_intent_ei_linkadresse" id="exit_intent_ei_linkadresse">{$singleItem.0.ei_link}</textarea>
+            </div>
+            {literal}
+            <script type="text/javascript">
+                var editor = CodeMirror.fromTextArea('exit_intent_ei_linkadresse', {
+                    height: "400px",
+                    width: "95%",
+                    //lineNumbers: "on",
+                    parserfile: "parsecss.js",
+                    stylesheet: "css/csscolors.css",
+                    path: "js/"
+                });
+            </script>
+            {/literal}
+            <br />
+            <div class="labdiv"><label for="exit_intent_ei_name">{$plugin_exit_intent_ei_name}{$plugin_error.exit_intent_ei_name} </label>
+
+                <input type="text" name="exit_intent_ei_name" size="4" value="{$singleItem.0.ei_name}" class="exit_intent_ei_name" id="exit_intent_ei_name"/>
+            </div><br />
+            <div class="labdiv"><label for="exit_intent_ei_hoehe_popup">{$plugin_exit_intent_ei_hoehe_popup}{$plugin_error.exit_intent_ei_hoehe_popup} </label>
+
+                <input type="text" name="exit_intent_ei_hoehe_popup" size="4" value="{$singleItem.0.ei_hoehe}" class="exit_intent_ei_hoehe_popup" id="exit_intent_ei_hoehe_popup"/> Pixel
+            </div><br />
+
+            <div class="labdiv"><label for="exit_intent_ei_breite_popup">{$plugin_exit_intent_ei_breite_popup}{$plugin_error.exit_intent_ei_breite_popup} </label>
+
+                <input type="text" name="exit_intent_ei_breite_popup" size="4" value="{$singleItem.0.ei_breite}" class="exit_intent_ei_breite_popup" id="exit_intent_ei_breite_popup"/> Pixel
+            </div><br />
+
+            <div class="labdiv"><label for="exit_intent_ei_delay">{$plugin_exit_intent_ei_delay}{$plugin_error.exit_intent_ei_delay} </label>
+
+                <input type="text" name="exit_intent_ei_delay" value="{$singleItem.0.ei_delay}" class="exit_intent_ei_delay" id="exit_intent_ei_delay"/>
+            </div><br />
+
+            <div class="labdiv"><label for="exit_intent_ei_auslaufdatum">{$plugin_exit_intent_ei_auslaufdatum}{$plugin_error.exit_intent_ei_auslaufdatum} </label>
+
+                <input type="text" name="exit_intent_ei_auslaufdatum" value="{$singleItem.0.ei_auslaufdatum}" class="exit_intent_ei_auslaufdatum" id="exit_intent_ei_auslaufdatum"/>
+            </div><br />
+
+            <div class="labdiv"><label for="exit_intent_ei_css">{$plugin_exit_intent_ei_css}{$plugin_error.exit_intent_ei_css} </label>
+
+                <textarea name="exit_intent_ei_css" value="" class="exit_intent_ei_css" id="exit_intent_ei_css">{$singleItem.0.ei_css_datei_link}</textarea>
+            </div>
+            {literal}
+            <script type="text/javascript">
+                var editor = CodeMirror.fromTextArea('exit_intent_ei_css', {
+                    height: "400px",
+                    width: "95%",
+                    //lineNumbers: "on",
+                    parserfile: "parsecss.js",
+                    stylesheet: "css/csscolors.css",
+                    path: "js/"
+                });
+            </script>
+            {/literal}
+            <br />
+                <input type="hidden" name="exit_intent_ei_cookie_name" value="{$singleItem.0.ei_cookie_name}" class="exit_intent_ei_cookie_name" id="exit_intent_ei_cookie_name"/>
+
+        </fieldset>
+
+        {*<!-- Men�punkt ausw�hlen.-->*}
+        <fieldset>
+            <legend>{$message_167}.</legend>
+            <div style="overflow: hidden;">
+                <label for="menuinput">{$message_168}<!-- [{$formcattext}]--></label>
+                <select id="menuinput" name="inhalt_ar[cattext]" size="1">
+                    <option value="0">({$message_160} )</option>
+                    <option value="all">{$plugin.freiemodule.immer}</option>
+                    {foreach item=kat from=$catlist_data.0}
+                    {if $kat.cat_id>=1}<optgroup label="{$kat.cat_text}">{/if}
+                    {foreach item=menu from=$menulist_data}
+                    {if $kat.cat_id==$menu.cat_cid  or $no_categories==1}
+                    <!--{*{if $menu.menuid != $formmenuid}*}  [ID:{$menu.menuid}]-->
+                    <option value="{$menu.menuid}" class="levelshift_{$menu.level}" {if $menu.menuid == $formcattext}selected="selected"{/if} >{$menu.nummer}: {$menu.menuname} </option>
+                    <!--{*{/if}*}-->
+                    {/if}
+                    {/foreach}
+                    {if $kat.cat_id>=1}</optgroup>{/if}
+                    {/foreach}
+                </select>
+
+
+                <a href="#tmp_sprung" onclick="createInput('menuinput', 'menliste', '{$message_826}');" class="submit_back btn  btn-small  btn-info">{$message_824}</a>
+                <br />
+                <br />
+                <strong class="clearfix">{$message_825}</strong>
+                <ul id="menliste">
+                    {foreach item=menu from=$menulist_data name="outer"}
+                    {foreach item=dat from=$cattext_ar}
+                    {if !$menlistli_all}
+                    {if $dat->menu_id=='all'}
+                    <li class="menlistli" id="liid_all">
+                        <input value="all" id="iniid_all" name="inhalt_ar[cattext_ar][]" type="hidden">
+                        <span>{$plugin.freiemodule.immer}</span>
+                        <a href="#tmp_sprung" onclick="delinput('all');" class="submit_back_del">{$plugin.freiemodule.immer} entfernen / delete</a>
+                    </li>
+                    {/if}
+                    {assign var="menlistli_all" value=true}
+                    {/if}
+                    {/foreach}
+                    {/foreach}
+                    {foreach item=menu from=$menulist_data}
+                    {foreach item=dat from=$cattext_ar}
+                    {if $dat->menu_id==$menu.menuid}
+                    <li class="menlistli" id="liid_{$dat->menu_id}">
+                        <input value="{$dat->menu_id}" id="inid_{$menu.menuid}" name="inhalt_ar[cattext_ar][{$menu.nummer}]" type="hidden" />
+                        <span>{$menu.nummer}[{$menu.menuid}]: {$menu.menuname}</span>
+                        <a href="#tmp_sprung" onclick="delinput('{$menu.menuid}');" class="submit_back_del  btn-small  btn btn-danger">{$menu.nummer}[{$menu.menuid}]: {$menu.menuname} {$message_826}</a>
+                    </li>
+                    {/if}
+                    {/foreach}
+                    {/foreach}
+                </ul>
+            </div>
+        </fieldset>
+        <fieldset>
+            {if !$singleItem}
+            <legend>Speichern</legend>
+
+            <input type="submit" class="btn btn-info" value="Speichern" name="updateExitIntent" />
+            {else}
+            <legend>Ändern/Löschen</legend>
+            <input type="submit" class="btn btn-info" value="Update" name="updateExitIntent" />
+            <input type="submit" class="btn btn-danger" value="L&ouml;schen" name="updateExitIntent" style="float:right;" />
+            {/if}
+        </fieldset>
+
+        <br />
+
+    </form>
+
+
+
+</div>
+
+</body>
+</html>
+{/if}

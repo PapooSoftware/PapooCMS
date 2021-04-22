@@ -1,0 +1,286 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+    {if $del_single_lead=="ok"}
+    <div class="error">
+        {$plugin.form_manager.deloderanders2}
+    </div>
+    {/if}
+
+
+
+    {if $form_single!="ok"}
+<h1>{$plugin.form_manager.vorhandeneleads}{if $lead_eintrag_name} - {$lead_eintrag_name}{/if}</h1>
+    {/if}
+{if $form_single=="ok"}
+    <h2 id="form_manager_daten_des_formulars" class="h2" >{$plugin_form_manager_daten_des_formulars}</h2>
+
+
+    <p id="form_manager_hier_sehen_sie_die_lead_daten_der_anfrage_im_detail" class="h1" >{$plugin_form_manager_hier_sehen_sie_die_lead_daten_der_anfrage_im_detail}</p>
+
+
+{if $del_single_lead=="no"}
+<div class="message">
+{$plugin.form_manager.deloderanders}
+</div> 
+<br />
+{else}
+<a href="javascript:history.go(-1)">{$plugin.form_manager.zurck}</a>
+
+<table style="width:99%;" class="outside  table table-striped table-hover">
+<tr>
+	<th>{$plugin.form_manager.Feldname}</th>
+	<th style="padding-left:30px;">Inhalt</th>
+</tr>
+{foreach item=dat key=dek from=$single_lead}
+{if $dat.form_manager_content_lead_feld_name and $dat.form_manager_content_lead_feld_name!="form_manager_lead_id" and $dat.form_manager_content_lead_feld_name!="form_manager_form_loesch_yn"}
+<tr>
+<td style="width:50%;">{if $dat.plugin_cform_label}{$dat.plugin_cform_label} {else}{$dat.form_manager_content_lead_feld_name}{/if}</td>
+<td style="padding-left:30px;">{$dat.form_manager_content_lead_feld_content}</td>
+</tr>
+{/if}
+{/foreach}
+</table>
+
+
+    <h2 id="form_manager_statistische_daten" class="h2" >{$plugin_form_manager_statistische_daten}</h2>
+
+    <p id="form_manager_hier_sehen_sie_einige" class="h1" >{$plugin_form_manager_hier_sehen_sie_einige}</p>
+
+    <table style="width:99%;" class="outside  table table-striped table-hover">
+        <tr>
+            <th>{$plugin.form_manager.Feldname}</th>
+            <th style="padding-left:30px;">Inhalt</th>
+        </tr>
+        {foreach item=dat key=dek from=$single_lead_stat}
+        {if $dat.form_manager_content_lead_feld_name and $dat.form_manager_content_lead_feld_name!="form_manager_lead_id" and $dat.form_manager_content_lead_feld_name!="form_manager_form_loesch_yn"}
+        <tr>
+            <td style="width:50%;">{if $dat.plugin_cform_label}{$dat.plugin_cform_label} {else}{$dat.form_manager_content_lead_feld_name}{/if}</td>
+            <td style="padding-left:30px;">{$dat.form_manager_content_lead_feld_content}</td>
+        </tr>
+        {/if}
+        {/foreach}
+    </table>
+<a href="javascript:history.go(-1)">{$plugin.form_manager.zurck}</a>
+{/if}
+
+{/if}
+
+
+
+{if $liste=="ok"}
+    <p id="form_manager_eingegangenen_anfragen_ber_" class="h1" >{$plugin_form_manager_eingegangenen_anfragen_ber_}</p>
+    <ul class="nav nav-tabs">
+        <li  class="active"><a href="#tabs-1" data-toggle="tab">Nachrichten finden</a></li>
+        <li><a href="#tabs-2" data-toggle="tab">Nachrichten löschen</a></li>
+        <li><a href="#tabs-3" data-toggle="tab">Nachrichten exportieren</a></li>
+    </ul>
+
+    <div class="tab-content"  style="margin-bottom:-40px;">
+
+
+
+
+
+<div  class="tab-pane active" id="tabs-1" >
+    <form action="" method="get">
+        <input type="hidden" name="menuid" value="{$menuid_aktuell}" />
+        <input type="hidden" name="template" value="form_manager/templates/messages.html" />
+
+        <input placeholder="{$plugin_form_manager_name_form}{$plugin_error.form_manager_name_form}" type="text" name="form_manager_name_form_messages" size="40" style="margin-right:20px;width:auto;" value="{$form_manager_name_form_messages|escape:"html"}" class="form_manager_name_form_messages" id="form_manager_name_form"/>
+
+
+        <select name="form_manager_kategorie_form_message" id="form_manager_kategorie_form_message" size="1" style="padding:7px;margin-right:20px;"/>
+        <option value="0">{$plugin_form_manager_kategorie_form}{$plugin_error.form_manager_kategorie_form} {$message_160}</option>
+        {foreach item=dat from=$formcat_liste}
+        <option value="{$dat.formcat__id}" {if $form_manager_kategorie_form_message==$dat.formcat__id} selected="selected"  {/if}>{$dat.formcat__name_der_kategorie}</option>
+        {/foreach}
+        </select>
+
+
+        <select style="padding:7px;margin-right:20px;" name="form_manager_formsuche" id="form_manager_formsuche" size="1"/><option value="0">{$plugin_form_manager_formsuche}</option>
+        {foreach item=dat from=$list}
+            <option {if $form_manager_formsuche==$dat.form_manager_id}selected="selected"{/if} value="{$dat.form_manager_id}">{$dat.form_manager_name} </option>
+        {/foreach}
+        </select>
+
+
+
+        <input type="submit" name="form_search_now" class="btn btn-info" value="{$plugin_form_manager_anzeigen}">
+    </form>
+
+</div>
+        <div  class="tab-pane" id="tabs-2">
+
+            {literal}
+            <script type="text/javascript">
+                $(function() {
+                    $('#gutschein_nachrichten_lschen_von').datepicker({
+                        dateFormat: 'dd.mm.yy',
+                        changeMonth: true,
+                        changeYear: true,
+                        maxDate: '-1d'
+                    });
+                });
+                $(function() {
+                    $('#gutschein_bis').datepicker({
+                        dateFormat: 'dd.mm.yy',
+                        changeMonth: true,
+                        changeYear: true,
+                        maxDate: '+0d'
+                    });
+                });
+            </script>
+
+            {/literal}
+            <form action="" method="post" name="video" enctype="multipart/form-data">
+
+                <fieldset>
+                    <legend>{$plugin_gutschein_nachrichten_lschen_von} - {$plugin_gutschein_bis}</legend>
+                    <div class="labdivx"><label style="float:left;margin-right:20px;" for="gutschein_nachrichten_lschen_von">{$plugin_gutschein_nachrichten_lschen_von}{$plugin_error.gutschein_nachrichten_lschen_von} </label>
+
+                        <input type="text" style="width:100px;float:left;margin-right:20px;" name="gutschein_nachrichten_lschen_von" value="{$gutschein.0.gutschein_nachrichten_lschen_von|escape:"html"}" class="gutschein_nachrichten_lschen_von" id="gutschein_nachrichten_lschen_von"/>
+                        <label for="gutschein_bis" style="width:30px;float:left;margin-right:20px;">{$plugin_gutschein_bis}{$plugin_error.gutschein_bis} </label>
+
+                        <input type="text" style="width:100px;margin-top:-15px;"  name="gutschein_bis" value="{$gutschein.0.gutschein_bis|escape:"html"}" class="gutschein_bis" id="gutschein_bis"/>
+                        <input type="submit" name="del_fieldplus" class="submit_back_red" value="{$plugin_gutschein_jetzt_lschen}">
+                    </div>
+                </fieldset>
+
+            </form>
+        </div>
+        <div  class="tab-pane" id="tabs-3">
+            {if $form_manager_formsuche}
+
+            <div class="message"><p id="form_manager_die_daten_in_der_csv" class="h1" >{$plugin_form_manager_die_daten_in_der_csv}</p>
+
+            </div>
+            <a href="{$lead_liste_link}&export=now" class="btn btn-info">{$plugin.form_manager.exportieren}</a>
+            <br />  <br />
+            {else}
+            <div class="error">
+                <p id="form_manager_um_daten_zu_exportieren_mssen_sie" class="h1" >{$plugin_form_manager_um_daten_zu_exportieren_mssen_sie}</p>
+
+
+            </div>
+            <br />
+            {/if}
+
+            </div>
+    </div>
+
+
+        {*<!-- weitere Seiten -->*}
+        {include file=weiter.inc.html}
+    <form action="" method="post" name="video" enctype="multipart/form-data">
+    <table  class="outside  table table-striped table-hover" >
+        <tr>
+            <th  style="min-width:30px;">ID <a href="{$fl_link}&order_by=id&sort_order={$sort_orderm}&form_manager_kategorie_form={$form_manager_kategorie_form}&form_manager_name_form={$form_manager_name_form}&form_search_now={$form_search_now}&form_manager_kategorie_form_message={$form_manager_kategorie_form_message}&form_manager_formsuche={$form_manager_formsuche}">{if $sort_orderm=="asc"}<i class="fa fa-sort-numeric-desc"></i>{else}<i class="fa fa-sort-numeric-asc"></i>{/if}</a></th>
+            <th  style="width:80px;">{$plugin_form_manager_name_formlar2}
+                <a href="{$fl_link}&order_by=bezeichnung&sort_order={$sort_orderm}&form_manager_kategorie_form={$form_manager_kategorie_form}&form_manager_name_form={$form_manager_name_form}&form_search_now={$form_search_now}&form_manager_kategorie_form_message={$form_manager_kategorie_form_message}&form_manager_formsuche={$form_manager_formsuche}">{if $sort_orderm=="asc"}<i class="fa fa-sort-alpha-desc"></i>{else}<i class="fa fa-sort-alpha-asc"></i>{/if}</a></th>
+            <th  style="width:80px;">{$plugin_form_manager_kategorie_form} <a href="{$fl_link}&order_by=mesagekategorie&sort_order={$sort_orderm}&form_manager_kategorie_form={$form_manager_kategorie_form}&form_manager_name_form={$form_manager_name_form}&form_search_now={$form_search_now}&form_manager_kategorie_form_message={$form_manager_kategorie_form_message}&form_manager_formsuche={$form_manager_formsuche}">{if $sort_orderm=="asc"}<i class="fa fa-sort-alpha-desc"></i>{else}<i class="fa fa-sort-alpha-asc"></i>{/if}</a></th>
+            <th style="min-width:120px;">{$plugin_form_manager_datum_form} <a href="{$fl_link}&order_by=form_manager_form_datum&sort_order={$sort_orderm}&form_manager_kategorie_form={$form_manager_kategorie_form}&form_manager_name_form={$form_manager_name_form}&form_search_now={$form_search_now}&form_manager_kategorie_form_message={$form_manager_kategorie_form_message}&form_manager_formsuche={$form_manager_formsuche}">{if $sort_orderm=="asc"}<i class="fa fa-sort-numeric-desc"></i>{else}<i class="fa fa-sort-numeric-asc"></i>{/if}</a></th>
+            <th>{$plugin_form_manager_feld_1} </th>
+            <th>{$plugin_form_manager_feld_2} </th>
+            <th>{$plugin_form_manager_feld_3}</th>
+            <!--<th>{$plugin_form_manager_feld_4}</th>
+            <th>{$plugin_form_manager_feld_5}</th>-->
+            <th style="width:50px;">{$plugin.form_manager.nichtleoschen}</th>
+            <th  style="min-width:120px;">{$plugin_form_manager_anfrage_ansehen}</th>
+            <th>{$plugin_form_manager_lschen_anfrage}</th>
+        </tr>
+
+
+        {foreach item=dat from=$lead_liste key=dkey}
+        <tr>
+            <td>{$dat.form_manager_lead_id}</td>
+            <td>{$dat.form_name}</td>
+            <td>{$dat.formcat__name_der_kategorie}</td>
+            <td>{$dat.form_manager_form_datum}</td>
+
+            {foreach item=dat_sub from=$lead_felder_selected.$dkey key=datkey}
+                <td   style="max-width:240px;">{if $dat_sub!="nix"}<em>{$datkey}</em><br style="display:block;"/> {$dat_sub}{else} - {/if}</td>
+            {/foreach}
+            <td><input value="1" {if $dat.form_manager_form_loesch_yn==1}checked="checked"{/if} name="loeschbar[{$dat.form_manager_lead_id}]" type="checkbox"></td>
+            <td><a class="btn btn-info" href="{$fl_link}&form_manager_id={$dat.form_manager_id}&lead_id={$dat.form_manager_lead_id}">anzeigen</a></td>
+            <td><input type="checkbox" value="1" name="loesch[{$dat.form_manager_lead_id}]">
+                <input type="hidden" value="1" name="daten[{$dat.form_manager_lead_id}]"></td>
+        </tr>
+        {/foreach}
+
+    </table>
+        {*<!-- weitere Seiten -->*}
+        {include file=weiter.inc.html}
+    <div style="width:99%;height:80px;">
+        <fieldset style="width:99%;float:right;">
+            {*<!-- Eintragen: -->*}
+            <legend>{$message_224}:</legend>
+            {*<!-- In die Datenbank eintragen -->*}
+            <input type="submit" class="submit_back_green_big" name="submit_all_fields" value="{$plugin.form_manager.aenderungspeichern}" />
+        </fieldset>
+    </div>
+
+    </form>
+
+
+{/if}
+
+
+
+    <!--<h2>{$plugin.form_manager.Liste_form}</h2>-->
+
+
+
+
+
+
+
+
+
+    {if $is_dev}
+
+
+ #start#
+
+
+    </p>
+
+
+    <br />
+
+
+    <span class="ignore"></span>
+    <!-- Der Start Button ist notwendig damit sich das System daran aufh?ngen kann. -->
+    <div class="rapid_form">
+        <form action="" name="" method="POST">
+            <!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+            <input type="hidden" name="tb_name" value="plugin_cform" />
+            <!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+            <input type="hidden" name="php_datei_name" value="form_manager" />
+            <!-- Das Standarpr?fix f?r die Ids -->
+            <input type="hidden" name="praefix" value="form_manager" />
+            <!-- Das Standarpr?fix f?r die Feldernamen und Namen -->
+            <input type="hidden" name="praefix_spezial" value="form_manager" />
+            <!-- Das Tool einbinden -->
+            {include file=../../../plugins/devtools/templates/rapid_felder.htm}
+        </form>
+    </div>
+
+
+</div>
+
+
+
+{/if}
+
+
+</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

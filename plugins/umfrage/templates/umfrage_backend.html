@@ -1,0 +1,239 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+	<h1>{$UMFMSG_PLUGIN_NAME}</h1>
+	{if $umfrage_backendmessage neq ""}
+		<h2>{$umfrage_backendmessage}</h2>
+	{/if}
+
+	{if $umfrage_weiche == "UMFRAGEN LISTE"}
+		<form action="" method="post">
+			<input type="hidden" name="umfrage_switch" value="UMFRAGEN NEU">
+			<input type="submit" class="submit_back_big_white" value="{$UMFMSG_B_BTN_UMFRAGE_NEU}">
+		</form>
+		{$UMFMSG_B_UMFRAGEN_LISTE}
+		<ul>
+			{foreach item=umfrage from=$umfrage_infos}
+				<li>
+					<form action="" method="post" style="display: inline;">
+						<input type="hidden" name="umfrage_switch" value="ANTWORTEN LISTE">
+						<input type="hidden" name="umfrage_id" value="{$umfrage.umf_id}">
+						<input type="submit" class="submit_back_white" value="{$UMFMSG_DETAILS}">
+					</form>
+					<form action="" method="post" style="display: inline;">
+						<input type="hidden" name="umfrage_switch" value="UMFRAGEN EDIT">
+						<input type="hidden" name="umfrage_id" value="{$umfrage.umf_id}">
+					<input type="submit" class="submit_back_white" value="{$UMFMSG_AENDERN}">
+					</form>
+					<form action="" method="post" style="display: inline;">
+						<input type="hidden" name="umfrage_switch" value="UMFRAGEN DELETE">
+						<input type="hidden" name="umfrage_id" value="{$umfrage.umf_id}">
+						<input type="submit" class="submit_back_red_white" value="{$UMFMSG_LOESCHEN}">
+					</form>
+					{$umfrage.umflan_text} 
+					<small>
+						({$UMFMSG_B_TEILNEHMER} {$umfrage.umf_count};
+						{$UMFMSG_B_AKTIV} {if $umfrage.umf_aktiv_janein == "ja"} {$UMFMSG_JA}; {$UMFMSG_B_MENU_ID} {$umfrage.umf_menu} {else} {$UMFMSG_NEIN} {/if})
+					</small>
+				</li>
+			{/foreach}
+		</ul>
+	{/if}
+	
+	{if $umfrage_weiche == "UMFRAGEN NEU_EDIT"}
+		<form action="" method="post" id="umfrage_backend">
+			<input type="hidden" name="umfrage_switch" value="UMFRAGEN SAVE">
+			<fieldset>
+				{if $umfrage_modus == "NEU"}
+					<legend>{$UMFMSG_B_UMFRAGE_NEU}</legend>
+				{else}
+					<input type="hidden" name="umfrage_id" value="{$umfrage_id}">
+					<legend>{$UMFMSG_B_UMFRAGE_AENDERN}</legend>
+				{/if}
+				
+				{*<!--
+				{foreach item=umfrage from=$umfrage_infos}
+					<label for="umfrage_text_{$umfrage.umflan_lan_id}">{$UMFMSG_B_TEXT} ({$UMFMSG_B_SPRACHE} {$umfrage.lang_long}): </label><br />
+					<input type="text" name="umfrage_text[{$umfrage.umflan_lan_id}]" id="umfrage_text_{$umfrage.umflan_lan_id}" value="{$umfrage.umflan_text}"><br />
+				{/foreach}
+				<br />
+				--> *}
+				{foreach item=sprache from=$languageget}
+					<!--
+					Sprache: {$sprache.language}; ID:{$sprache.lang_id}<br />
+					Text aus Loop: <br />
+					-->
+					<br />
+					<label for="umfrage_text_{$sprache.lang_id}">{$UMFMSG_B_TEXT} ({$UMFMSG_B_SPRACHE} {$sprache.language}): </label><br />
+					<input type="text" name="umfrage_text[{$sprache.lang_id}]" id="umfrage_text_{$sprache.lang_id}" 
+						value="{foreach item=umfrage from=$umfrage_infos}{if $sprache.lang_id == $umfrage.umflan_lan_id}{$umfrage.umflan_text}{/if}{/foreach}">
+					<br />
+				{/foreach}
+				<br />
+				
+				<label for="umfrage_aktiv_janein">{$UMFMSG_B_AKTIV}</label>
+				<select name="umfrage_aktiv_janein" id="umfrage_aktiv_janein">
+					<option value="nein" {if $umfrage.umf_aktiv_janein=="nein"} selected="selected" {/if}>{$UMFMSG_NEIN}</option>
+					<option value="ja" {if $umfrage.umf_aktiv_janein=="ja"} selected="selected" {/if}>{$UMFMSG_JA}</option>
+				</select><br />
+				<br />
+				<label for="menuinput">{$message_168} [{$formcattext}]</label>
+						<select id="menuinput" name="cattext" size=1>
+							<!-- ausw&auml;hlen -->
+							<option value="0">(alle )</option>
+							{foreach item=menu from=$menulist_data}
+								{*{if $menu.menuid != $formmenuid}*}
+									<option  value="{$menu.menuid}" class="levelshift_{$menu.level}" {if $menu.menuid == $umfrage_menuid}selected="selected"{/if} >
+										{$menu.nummer}[{$menu.menuid}]: {$menu.menuname}
+									</option>
+								{*{/if}*}
+							{/foreach}
+						</select>
+						<br /><br />
+				{if $umfrage_modus == "NEU"}
+					<input type="submit" class="submit_back_big" name="umfrage_modus_neu" value="{$UMFMSG_B_BTN_UMFRAGE_NEU}">
+				{else}
+					<input type="submit" class="submit_back_big" name="umfrage_modus_edit" value="{$UMFMSG_B_BTN_UMFRAGE_AENDERN}">
+				{/if}
+			</fieldset>
+		</form>
+		<p><a href="">{$UMFMSG_ZURUECK}</a><p>
+	{/if}
+
+	{if $umfrage_weiche == "UMFRAGEN DELETE"}
+		<form action="" method="post" id="umfrage_backend">
+			<input type="hidden" name="umfrage_switch" value="UMFRAGEN DO-DELETE">
+			<input type="hidden" name="umfrage_id" value="{$umfrage_id}">
+			<fieldset>
+				<legend>{$UMFMSG_B_UMFRAGE_LOESCHEN}</legend>
+				{$UMFMSG_B_UMFRAGE_LOESCHEN_FRAGE}<br />
+				<strong>&quot;{$umfrage_name}&quot;</strong>
+				<p>
+					{$UMFMSG_B_UMFRAGE_LOESCHEN_HINWEIS}
+				</p>
+				
+				<input type="submit" class="submit_back_red_big" name="umfrage_modus_delete" value="{$UMFMSG_B_BTN_UMFRAGE_LOESCHEN}">
+			</fieldset>
+		</form>
+		<p><a href="">{$UMFMSG_ZURUECK}</a><p>
+	{/if}
+
+	{if $umfrage_weiche == "ANTWORTEN LISTE"}
+		<h2>{$UMFMSG_B_UMFRAGE} &quot;{$umfrage_name}&quot;</h2>
+		<form action="" method="post">
+			<input type="hidden" name="umfrage_id" value="{$umfrage_id}">
+			<input type="hidden" name="umfrage_switch" value="ANTWORTEN NEU">
+			<input type="submit" class="submit_back_big_white" value="{$UMFMSG_B_BTN_ANTWORT_NEU}">
+		</form>
+		{$UMFMSG_B_ANTWORTEN_LISTE}
+		<ul>
+			{foreach item=antwort from=$umfrage_infos}
+				<li>
+					<form action="" method="post" style="display: inline;">
+						<input type="hidden" name="umfrage_id" value="{$umfrage_id}">
+						<input type="hidden" name="antwort_id" value="{$antwort.umfant_id}">
+						<input type="hidden" name="umfrage_switch" value="ANTWORTEN EDIT">
+						<input type="submit" class="submit_back_white" value="{$UMFMSG_AENDERN}">
+					</form>
+					<form action="" method="post" style="display: inline;">
+						<input type="hidden" name="umfrage_id" value="{$umfrage_id}">
+						<input type="hidden" name="antwort_id" value="{$antwort.umfant_id}">
+						<input type="hidden" name="umfrage_switch" value="ANTWORTEN DELETE">
+						<input type="submit" class="submit_back_red_white" value="{$UMFMSG_LOESCHEN}">
+					</form>
+					{$antwort.umfantlan_text} <small>({$UMFMSG_B_STIMMEN}  {$antwort.umfant_count})</small>
+				</li>
+			{/foreach}
+		</ul>
+		<p><a href="">{$UMFMSG_ZURUECK}</a><p>
+	{/if}
+	
+	{if $umfrage_weiche == "ANTWORTEN NEU_EDIT"}
+		<form action="" method="post" id="umfrage_backend">
+			<input type="hidden" name="umfrage_id" value="{$umfrage_id}">
+			<input type="hidden" name="umfrage_switch" value="ANTWORTEN SAVE">
+			<fieldset>
+				{if $umfrage_modus == "NEU"}
+					<legend>
+						{$UMFMSG_B_UMFRAGE} &quot;{$umfrage_name}&quot; - 
+						{$UMFMSG_B_ANTWORT_NEU}
+					</legend>
+				{else}
+					<input type="hidden" name="antwort_id" value="{$umfrage_antwort_id}">
+					<legend>
+						{$UMFMSG_B_UMFRAGE} &quot;{$umfrage_name}&quot; - 
+						{$UMFMSG_B_ANTWORT_AENDERN}
+					</legend>
+				{/if}
+				<!--
+				{foreach item=antwort from=$umfrage_infos}
+					<label for="antwort_text_{$antwort.umfantlan_lan_id}_">{$UMFMSG_B_TEXT} ({$UMFMSG_B_SPRACHE} {$antwort.lang_long}): </label><br />
+					<input type="text" name="antwort_text[{$antwort.umfantlan_lan_id}]" id="antwort_text_{$antwort.umfantlan_lan_id}" value="{$antwort.umfantlan_text}"><br />
+				{/foreach}
+				-->
+				{foreach item=sprache from=$languageget}
+					<!--
+					Sprache: {$sprache.language}; ID:{$sprache.lang_id}<br />
+					Text aus Loop: <br />
+					-->
+					<br />
+					<label for="antwort_text_{$sprache.lang_id}">{$UMFMSG_B_TEXT} ({$UMFMSG_B_SPRACHE} {$sprache.language}): </label><br />
+					<input type="text" name="antwort_text[{$sprache.lang_id}]" id="antwort_text_{$sprache.lang_id}" 
+						value="{foreach item=antwort from=$umfrage_infos}{if $sprache.lang_id == $antwort.umfantlan_lan_id}{$antwort.umfantlan_text}{/if}{/foreach}">
+					<br />
+				{/foreach}
+				
+				<br />
+				{if $umfrage_modus == "NEU"}
+					<input type="submit" class="submit_back_big" name="umfrage_modus_neu" value="{$UMFMSG_B_BTN_ANTWORT_NEU}">
+				{else}
+					<input type="submit" class="submit_back_big" name="umfrage_modus_edit" value="{$UMFMSG_B_BTN_ANTWORT_AENDERN}">
+				{/if}
+			</fieldset>
+		</form>
+		<p>
+			<form action="" method="post" id="umfrage_backend">
+				<input type="hidden" name="umfrage_id" value="{$umfrage_id}">
+				<input type="hidden" name="umfrage_switch" value="ANTWORTEN LISTE">
+				<input type="submit" class="submit_back_white" value="{$UMFMSG_ZURUECK}">
+			</form>
+		<p>
+	{/if}
+
+	{if $umfrage_weiche == "ANTWORTEN DELETE"}
+		<form action="" method="post" id="umfrage_backend">
+			<input type="hidden" name="umfrage_switch" value="ANTWORTEN DO-DELETE">
+			<input type="hidden" name="antwort_id" value="{$umfrage_antwort_id}">
+			<input type="hidden" name="umfrage_id" value="{$umfrage_id}">
+			<fieldset>
+				<legend>{$UMFMSG_B_ANTWORT_LOESCHEN}</legend>
+				{$UMFMSG_B_ANTWORT_LOESCHEN_FRAGE}<br />
+				<strong>&quot;{$umfrage_antwort_name}&quot;</strong>
+				<p>
+					{$UMFMSG_B_ANTWORT_LOESCHEN_HINWEIS}
+				</p>
+				
+				<input type="submit" class="submit_back_red_big" name="umfrage_modus_delete" value="{$UMFMSG_B_BTN_ANTWORT_LOESCHEN}">
+			</fieldset>
+		</form>
+		<p>
+			<form action="" method="post" id="umfrage_backend">
+				<input type="hidden" name="umfrage_id" value="{$umfrage_id}">
+				<input type="hidden" name="umfrage_switch" value="ANTWORTEN LISTE">
+				<input type="submit" class="submit_back_white" value="{$UMFMSG_ZURUECK}">
+			</form>
+		<p>
+	{/if}
+
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

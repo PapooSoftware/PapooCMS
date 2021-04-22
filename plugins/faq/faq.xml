@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- version: Versions-Nummer papoo für die das Plugin gedacht ist / funktioniert -->
+<plugin version="2.0">
+
+<!-- ALLGEMEINE-INFORMATIONEN -->
+	<!-- name: Name des Plugins -->
+	<name>Faq</name>
+	<!-- beschreibung_de: Kurz-Beschreibung des Plugins auf deutsch (wird im Plugin-Manager angezeigt) -->
+	<beschreibung_de><![CDATA[Frequently asked questions]]></beschreibung_de>
+	<!-- beschreibung_en: Kurz-Beschreibung des Plugins auf englisch (wird im Plugin-Manager angezeigt) -->
+	<beschreibung_en><![CDATA[Frequently asked questions]]></beschreibung_en>
+	<!-- version: Versions-Nummer des Plugins -->
+	<version>1.1.2</version>
+	<!-- papooid: Eindeutige Nummer offizieller papoo-Plugins -->
+	<papooid>4</papooid>
+	<!-- link: z. Z. noch ohne Funktion -->
+	<link>http://www.papoo.de</link>
+	<!-- datum: Erscheinungs-Datum bzw. Stand des Plugins -->
+	<datum>18.01.2009</datum>
+	<!-- AUTOR-INFORMATIONEN -->
+	<!-- autor: Informationen zum Autor (Programmierer) des Plugins -->
+	<autor>
+		<!-- autor.name: Name des Authors -->
+		<name>khmweb</name>
+		<!-- autor.kontakt: postalische Kontakt-Informationen des Autors -->
+		<kontakt><![CDATA[khmweb
+	Sonnleitstr. 6
+	83483 Bischofswiesen]]></kontakt>
+		<!-- autor.email: eMail-Adresse des Autors -->
+		<email>khm@khmweb.de</email>
+		<!-- autor.telefon: Telefon-Nummer des Autors -->
+		<telefon>08652 978487</telefon>
+	</autor>
+<!-- MENÜ-INFORMATIONEN -->
+	<!-- menue: Informationen für den Menü-Eintrag im Backend (papoo/interna) -->
+	<menue>
+		<!-- menue.eintrag_de: Name des Menü-Punktes im Backend auf deutsch -->
+		<eintrag_de>Faq</eintrag_de>
+		<!-- menue.eintrag_en: Name des Menü-Punktes im Backend auf englisch -->
+		<eintrag_en>Faq</eintrag_en>
+		<!-- menue.icon: Pfad zum Menü-Icon des Menü-Punktes im Backend (relativ zum Plugin-Verzeichnis) -->
+		<icon>faq/bilder/faq.gif</icon>
+		<!-- menue.link: Name der Seite auf welche der Menü-Punkt im Backend verweisen soll -->
+		<link>plugin:faq/templates/faq_back.html</link>
+		<!-- menue.submenue: Untermenü-Punkt für diesen Menü-Punkt im Backend, Struktur wie menue -->
+		<submenue>
+			<eintrag_de>Kategorien</eintrag_de>
+			<eintrag_en>Categories</eintrag_en>
+			<icon>faq/bilder/cat_menu.gif</icon>
+			<link>plugin:faq/templates/faq_cat_back_main.html</link>
+		</submenue>
+		<submenue>
+			<eintrag_de>Faq</eintrag_de>
+			<eintrag_en>Faq</eintrag_en>
+			<icon>faq/bilder/faq_menu.gif</icon>
+			<link>plugin:faq/templates/faq_back_main.html</link>
+		</submenue>
+		<submenue>
+			<eintrag_de>Konfiguration</eintrag_de>
+			<eintrag_en>Configuration</eintrag_en>
+			<icon>faq/bilder/config_menu.gif</icon>
+			<link>plugin:faq/templates/config_back.html</link>
+		</submenue>
+        <submenue>
+            <eintrag_de>Import</eintrag_de>
+            <eintrag_en>Import</eintrag_en>
+            <icon>faq/bilder/backup_menu.gif</icon>
+            <link>plugin:faq/templates/faq_import.html</link>
+        </submenue>
+		<submenue>
+			<eintrag_de>Backup</eintrag_de>
+			<eintrag_en>Backup</eintrag_en>
+			<icon>faq/bilder/backup_menu.gif</icon>
+			<link>plugin:faq/templates/backup_back.html</link>
+		</submenue>
+	</menue>
+<!-- KLASSEN-INFORMATIONEN -->
+	<!-- klasse: Informationen der Plugin-Klasse welche eingebunden werden sollen -->
+	<klasse>
+		<!-- klasse.name: Name der Klassen-Instanz / des Objekts (also der Name des Dings, das mit $name = new xx_class(); erzeugt wird) -->
+		<name>faq</name>
+		<!-- klasse.datei: Pfad zur Klassen-Datei (relativ zum Plugin-Verzeichnis) -->
+		<datei>faq/lib/faq_main.php</datei>
+	</klasse>
+
+    <klasse>
+        <!-- klasse.name: Name der Klassen-Instanz / des Objekts (also der Name des Dings, das mit $name = new xx_class(); erzeugt wird) -->
+        <name>faq_import</name>
+        <!-- klasse.datei: Pfad zur Klassen-Datei (relativ zum Plugin-Verzeichnis) -->
+        <datei>faq/lib/faq_import.php</datei>
+    </klasse>
+	<!-- klasse: Es können auch weitere Plugin-Klassen eingebunden werden -->
+<!-- CSS-INFORMATIONEN -->
+	<!-- css: Pfad zur CSS-Datei (relativ zum Plugin-Verzeichnis) -->
+	<css>faq/css/faq.css</css>
+	<!-- DATENBANK-INFORMATIONEN -->
+<!-- ****************** -->
+	<datenbank>
+		<!-- datenbank.installation: Pfad zur SQL-Installations-Datei (relativ zum Plugin-Verzeichnis) -->
+		<installation>faq/sql/faqplugin_install.sql</installation>
+		<!-- datenbank.deinstallation: Pfad zur SQL-Deinstallations-Datei (relativ zum Plugin-Verzeichnis) -->
+		<deinstallation>faq/sql/faqplugin_deinstall.sql</deinstallation>
+	</datenbank>
+
+<!-- Einbindung der Sprach-Daten.
+		In dem hier angegebenen Verzeichnis sollten Dateien mit folgenden Namen liegen:
+		- messages_backend_[de|en|sp| .. etc.].inc.php
+		- messages_frontend_[de|en|sp| .. etc.].inc.php
+	-->
+	<messages>faq/messages</messages>
+</plugin>

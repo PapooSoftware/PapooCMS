@@ -1,0 +1,54 @@
+{if $IS_ADMIN}{*<!-- Wird nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+<div class="artikel">
+	
+{if !$old_news_inhalt}
+	<h2>{$plugin.newsletter.altnewsletter}</h2>
+	{* Löschen?  Dann "...wurde gelöscht" ausgeben *}
+	{if $news_is_del==1}
+		<p class="message">{$message_news_is_del}</p>
+	{/if}
+	{if $issend}
+		<p>{$news_message_2}</p> {* ...wurde verschickt *}
+	{/if}
+	{*<!-- weitere Seiten -->*}
+	{include file=weiter.inc.html}
+	{* Anzeige Archiv *}
+	<div class="news_tool"><a class="news_tool_edit" href="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/newssend.html" title="{$message_20024}"><img src="../plugins/newsletter/bilder/new_nl.gif" width="27" height="22" alt="{$message_20024}" title="{$message_20024}" border="0" align="middle" /><br />Neu</a></div>
+	<p>{$plugin.newsletter.anzahlgefnl} {$anzahl}</p>
+	<script type="text/javascript" src="../plugins/newsletter/js/confirm.js"></script>
+	<table class="news_old">
+	<tr>
+	<th id="inhalt">{$message_20002}</th>
+	<th id="datum" width="130">{$datum}</th>
+	<th id="gruppe" width="130">{$senddate}</th>
+	<th id="abonnenten" style="text-align:right" width="70">{$useranzahl}</th>
+	<th id="send" style="text-align:center">Senden</th>
+	<th id="del" style="text-align:center">{$news_loeschen}</th>
+	</tr>
+	{foreach item=old from=$old_news}
+		<tr class="news_old_row">
+		<td headers="inhalt">
+		<a href="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/newssend.html&news_id={$old.news_id}" title="{$erneut_versenden}">{if $old.news_uberschrift}{$old.news_uberschrift}{else}Betreff fehlt{/if}</a></td>
+		<td nowrap="nowrap" headers="datum">{$old.news_date}</td>
+		<td nowrap="nowrap" headers="gruppe">{$old.news_date_send}</td>
+		<td headers="abonnenten" style="text-align:right">{$old.news_abo}</td>
+		<td headers="send" align="center"><a href="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/newssend.html&news_id={$old.news_id}" title="{$erneut_versenden}"><img src="../plugins/newsletter/bilder/send_nl.gif" alt="{$erneut_versenden}" width="27" height="22" border="0" align="middle" title="{$erneut_versenden}" /></a></td>
+		<td headers="del" align="center">
+				<form action="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/news_old.html&news_del={$old.news_id}" method="post" name="adminForm{$old.news_id}">
+		<a href='javascript: var msg="{$message_20035}"+"\""+"{$old.news_uberschrift}"+"\""+"{$message_20034}"; if (confirm(msg)) submitform("{$old.news_id}");' title="{$news_loeschene}"><img src="../plugins/newsletter/bilder/delete_nl.gif" width="27" height="22" alt="{$news_loeschene}" title="{$news_loeschene}" border="0" /></a></form>
+		</td>
+		</tr>
+	{/foreach}
+	</table>
+	{*<!-- weitere Seiten -->*}
+	<br />{include file=weiter.inc.html}
+{/if}
+</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

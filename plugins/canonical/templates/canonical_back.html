@@ -1,0 +1,73 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+{if $is_eingetragen=="ok"}
+  <div class="message"> {$plugin_fb_plugin_die_daten_wurden_gespeichert}
+
+</div>
+{/if}
+{if $redirect_error}
+<div class="error">{$redirect_error}</div>
+{/if}
+<div class="artikel">
+
+ <h1 id="canonical_plugin_301_redirects_hier_erstellen" class="h1" >{$plugin_canonical_plugin_301_redirects_hier_erstellen}</h1>
+
+ <p id="canonical_plugin_hier_knnen_sie_die_301" class="h1" >{$plugin_canonical_plugin_hier_knnen_sie_die_301}<br />{$plugin_canonical_plugin_alte_webseite_neue_webseite}</p>
+
+ <p id="canonical_plugin_linkbeispiel" class="h1" >{$plugin_canonical_plugin_linkbeispiel}</p>
+
+ <p id="canonical_plugin_sie_knnen_die_daten_einfach_unter" class="h1" >{$plugin_canonical_plugin_sie_knnen_die_daten_einfach_unter}</p>
+
+
+
+
+
+
+
+<form method="post" action="" id="formi" style="width:99%">
+ <fieldset>
+<legend>{$plugin_canonical_plugin_redirekt_liste}</legend>
+ <label for="canonical_plugin_redirect_liste">{$plugin_canonical_plugin_redirect_liste}{$plugin_error.canonical_plugin_redirect_liste} </label><br />
+
+<textarea cols="100" rows="30" style="width:98%;" name="canonical_plugin_redirect_liste"  class="canonical_plugin_redirect_liste" id="canonical_plugin_redirect_liste">{$canonical_plugin_redirect_liste_data|escape:"html"}</textarea>
+<br />
+</fieldset><br />
+
+<fieldset>
+ 	<legend>{$message_70}</legend>
+			<!-- Speichern -->
+	<input  type="submit" class="submit_back_green" value="{$message_70}" name="formSubmit_canonical_settings" />
+			
+		</fieldset>
+    </form>
+    
+ 
+ {if $is_dev}  #start#
+ <span class="ignore"></span>
+  <!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+	 <div class="rapid_form">
+		<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="plugin_301_config" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="canonical_class" />
+		<!-- Das Standarpr�fix f�r die Ids -->
+		<input type="hidden" name="praefix" value="canonical_plugin" />
+		<!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="canonical_plugin" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div>
+
+{/if}
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin name="osm_overlay">
+    <name>Overlay Plugin</name>
+
+    <beschreibung_de><![CDATA[POI-Overlay für OpenStreetMap.]]></beschreibung_de>
+    <beschreibung_en><![CDATA[POI-Overlay for OpenStreetMap.]]></beschreibung_en>
+
+    <version>1.5.4</version>
+
+    <papooid>135</papooid>
+
+    <link>http://www.papoo.de</link>
+
+    <datum>22.06.2017</datum>
+
+    <autor>
+        <name><![CDATA[Yörn Jünger]]></name>
+        <kontakt><![CDATA[Yörn Jünger]]></kontakt>
+        <email>yj@papoo.de</email>
+        <telefon>0228 280 56 68</telefon>
+    </autor>
+
+    <klasse>
+        <name>osm_overlay</name>
+        <datei>osm_overlay/lib/class_osm_overlay.php</datei>
+    </klasse>
+
+    <datenbank>
+        <installation>osm_overlay/sql/install.sql</installation>
+        <deinstallation>osm_overlay/sql/uninstall.sql</deinstallation>
+    </datenbank>
+
+    <menue>
+        <eintrag_de>OpenStreetMap Overlay</eintrag_de>
+        <eintrag_en>OpenStreetMap Overlay</eintrag_en>
+        <link>plugin:osm_overlay/templates/backend.html&amp;submenu=config</link>
+<!--        <submenue>
+            <eintrag_de>Konfiguration</eintrag_de>
+            <eintrag_en>Configuration</eintrag_en>
+            <link>plugin:osm_overlay/templates/backend.html&amp;submenu=config</link>
+        </submenue>
+        <submenue>
+            <eintrag_de>Einträge überprüfen</eintrag_de>
+            <eintrag_en>Check Entries</eintrag_en>
+            <link>plugin:osm_overlay/templates/backend.html&amp;submenu=entries</link>
+        </submenue>-->
+    </menue>
+
+    <modul>
+        <datei>plugin:osm_overlay/templates/mod_osm_overlay.html</datei>
+        <name_de>POI-Overlay Plugin</name_de>
+        <beschreibung_de>POI-Overlay für OpenStreetMap Karten.</beschreibung_de>
+    </modul>
+
+    <css>osm_overlay/css/styles.css</css>
+
+    <messages>osm_overlay/messages</messages>
+</plugin>

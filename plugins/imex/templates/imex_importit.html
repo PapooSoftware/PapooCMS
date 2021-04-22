@@ -1,0 +1,300 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men&uuml; kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+	<h1>Import / Export</h1>
+	<p> Sie k&ouml;nnen hier beliebige Daten als CSV oder als XML Dateien importieren. Jedes Feld wird dabei genau beim Import zugewiesen.</p>
+	<p>Die Zuweisung kann dabei gespeichert werden.</p>
+	{if $no_table_selected}<div class="error">Keine Tabelle ausgew&auml;hlt</div>{/if}
+	{if $is_uploaded_step3}
+	<h2>Die Daten wurden eingetragen.</h2>
+	{else}
+	{if $is_uploaded_step2}
+	{if $vorsaved}
+	<h2>Vorlage wurde gespeichert.</h2>
+	<br />
+	{/if}
+	{if $is_update}
+	<h2>W&auml;hlen Sie die Referenz Zuordnung f&uuml;r das Update aus.</h2>
+	<p>W&auml;hlen Sie hier die Referenz aus die in beiden Datens&auml;tzen gleich sein muß. Anhand dieser Referenz wird das Update durchgef&uuml;hrt.</p>
+	<p>Eintr&auml;ge, die nicht in der Datenbank sind, aber in der CSV/XML Datei, werden hinzugef&uuml;gt.</p>
+	<form method="post" id="formi" action="" >
+	<table>
+	<tr>
+	<th>Felder aus der CSV Datei</th>
+	<th>Felder aus der Datenbank</th>
+	<th>Zuordnen</th>
+	</tr>
+	{if $ref_csv_tabelle}
+	
+		<tr>
+			<td>
+			{$ref_csv_tabelle}
+				</td>
+			<td>
+			{$ref_dat_tabelle}
+				</td>
+				<td>
+					<input type="hidden" name="ref_dat_tabelle" value="{$ref_dat_tabelle_value}"/>
+					<input type="hidden" name="ref_csv_tabelle" value="{$ref_csv_tabelle_value}"/>
+					<input type="submit" class="submit_back" id="{$tabname}_refstartentfernen" name="{$tabname}_refstartentfernen" value="Entfernen" />
+					</td>
+		</tr>	
+	{else}
+	<tr>
+	<td>
+
+  		<label for="refdat_tabelle">Felder aus der Datei</label><br />
+	 <select name="ref_dat_tabelle" id="refdat_tabelle" title="" style="" size="1">
+		  <option value="">- - - (select){$plugin.imex.ausws} - - -</option>
+				{foreach item=sprach key=tabname from=$csv_felder}
+				 <option value="{$tabname}" >{$sprach}</option>
+		  {/foreach}
+		 </select>
+	
+	</td>
+	<td>
+		
+  	<label for="refcsv_tabelle">Felder aus der Datenbank</label><br />
+	 <select name="ref_csv_tabelle" id="refcsv_tabelle" title="" style="" size="1">
+		  <option value="">- - - (select){$plugin.imex.ausws} - - -</option>
+				{foreach item=sprach key=tabname from=$tabelle_felder}
+					<option value="{$tabname}" >{$sprach}</option>
+		 	 {/foreach}
+		</select>
+
+	</td>
+	<td>
+	<input type="hidden" name="tabelle" value="{$tabelle}"/>
+	<input type="hidden" name="is_auswahl" value="1"/>
+	<input type="hidden" name="format" value="{$format}"/>
+	<input type="submit" class="submit_back" id="refstartzuordnen" name="refstartzuordnen" value="Zuordnen" />
+	</td>
+	</tr>
+	</table>
+	{/if}
+	{/if}
+	<h2>W&auml;hlen Sie die Felder Zuordnung aus.</h2>
+	<form method="post" id="formi" action="" >
+	<table>
+	<tr>
+	<th>Felder aus der CSV Datei</th>
+	<th>Felder aus der Datenbank</th>
+	<th>Zuordnen</th>
+	</tr>
+	
+	<tr>
+	<td>
+
+  		<label for="csv_tabelle">Felder aus der Datei</label><br />
+	 <select name="csv_tabelle" id="csv_tabelle" title="" style="" size="1">
+		  <option value="">- - - (select){$plugin.imex.ausws} - - -</option>
+				{foreach item=sprach key=tabname from=$csv_felder}
+				 <option value="{$tabname}" >{$sprach}</option>
+		  {/foreach}
+		 </select>
+	
+	</td>
+	<td>
+		
+  	<label for="dat_tabelle">Felder aus der Datenbank</label><br />
+	 <select name="dat_tabelle" id="dat_tabelle" title="" style="" size="1">
+		  <option value="">- - - (select){$plugin.imex.ausws} - - -</option>
+				{foreach item=sprach key=tabname from=$tabelle_felder}
+					<option value="{$tabname}" >{$sprach}</option>
+		 	 {/foreach}
+		</select>
+
+	</td>
+	<td>
+	<input type="hidden" name="tabelle" value="{$tabelle}"/>
+	<input type="hidden" name="is_auswahl" value="1"/>
+	<input type="hidden" name="format" value="{$format}"/>
+	{if $ref_csv_tabelle}
+	<input type="hidden" name="ref_dat_tabelle" value="{$ref_dat_tabelle_value}"/>
+	<input type="hidden" name="ref_csv_tabelle" value="{$ref_csv_tabelle_value}"/>
+	{/if}
+	   <input type="submit" class="submit_back" id="startzuordnen" name="startzuordnen" value="Zuordnen" />
+	</td>
+	</tr>
+	{foreach item=sprach key=tabname from=$csv_tabelle_daten}
+		<tr>
+			<td>
+			{$sprach.csv}
+				</td>
+			<td>
+			{$sprach.tab}
+				</td>
+				<td>
+					<input type="submit" class="submit_back_red" id="{$tabname}_startentfernen" name="{$tabname}_startentfernen" value="Entfernen" />
+					</td>
+		</tr>	
+	{/foreach}
+	{if $is_update}
+	{if $csv_tabelle_daten and $ref_csv_tabelle}
+	<tr>
+	<td colspan="3">
+	<fieldset>
+  		<legend>Import mit der obigen Zuordnung starten</legend>
+ 				<input type="submit" class="submit_back_green" name="makeimport" value="Update starten" />
+ 		 </fieldset>
+	</td>
+	</tr>
+	<tr>
+	<td colspan="3">
+	<fieldset>
+  		<legend>Zuordnung als Vorlage speichern</legend>
+  		<label for="importvorlage_name">Bezeichnung der Vorlage</label><br />
+  		<input type="text" id="importvorlage_name" size="50" name="importvorlage_name" value="" />
+  		<br /><br />
+ 				<input type="submit" class="submit_back_green" name="makevorlage" value="Als Vorlage speichern" />
+ 		 </fieldset>
+	</td>
+	</tr>
+	{/if}
+	{else}
+	{if $csv_tabelle_daten}
+	<tr>
+	<td colspan="3">
+	<fieldset>
+  		<legend>Import mit der obigen Zuordnung starten</legend>
+ 				<input type="submit" class="submit_back_green" name="makeimport" value="Import starten" />
+ 		 </fieldset>
+	</td>
+	</tr>
+	<tr>
+	<td colspan="3">
+	<fieldset>
+  		<legend>Zuordnung als Vorlage speichern</legend>
+  		<label for="importvorlage_name">Bezeichnung der Vorlage</label><br />
+  		<input type="text" id="importvorlage_name" size="50" name="importvorlage_name" value="" />
+  		<br /><br />
+ 				<input type="submit" class="submit_back_green_big" name="makevorlage" value="Als Vorlage speichern" />
+ 		 </fieldset>
+	</td>
+	</tr>
+	{/if}
+	{/if}
+	</table>
+	</form>
+
+	<strong></strong>
+	{/if}
+	
+	{$errortext}
+	{if $is_start_import}
+	
+	<h2>Datei importieren</h2>
+	<form method="post" id="formi" action="" enctype="multipart/form-data">
+			<fieldset>
+				<legend>Eingabe der Datei:</legend>
+				<label for="myfile">Das Dokument:</label>
+				<input name="myfile" id="myfile" value="" type="file">
+			</fieldset>
+	
+  	
+  	<fieldset>
+  		<legend>Import starten</legend>
+ 				<input type="submit" class="submit_back" name="startupload" value="Datei hochladen" />
+ 		 </fieldset>
+  	<input type="hidden" name="delete" value=""/>
+		</form>
+		<br />
+		{if $vorlage_geloescht}
+	<h2>Vorlage wurde gel$ouml;scht</h2>
+	{/if}
+		<h2>Vorlagen l&ouml;schen</h2>
+		<p>W&auml;hlen Sie eine vorhandene Vorlage aus und l&ouml;schen Sie diese.</p>
+	<form method="post" id="formi" action="" enctype="multipart/form-data">
+			<fieldset>
+					<legend>Vorlage f&uuml;r die Zuordnung der Felder:</legend>
+				<p>Falls Sie eine vorhandene Vorlage f&uuml;r die Zuordnung nutzen wollen, w&auml;hlen Sie diese aus.</p>
+				<label for="myvorlage">Vorlage:</label>
+				<br />
+		  <select name="myvorlage" id="myvorlage" title="" style="width: 40%;" size="1">
+		    <option value="">(select){$plugin.imex.ausws}</option>
+		   
+		  {foreach item=vorlage key=tabname from=$vorlage_array}
+		   <option value="{$vorlage.imex_id}" >{$vorlage.imex_name}</option>
+		  {/foreach}
+		  </select>
+			</fieldset>
+	
+  	
+  	<fieldset>
+  		<legend>Vorlage löschen</legend>
+ 				<input type="submit" class="submit_back_red" name="delete_vorlage" value="Vorlage löschen" />
+ 		 </fieldset>
+
+		</form>
+		
+		{/if}
+		{if $is_uploaded}
+		<h2>Datei wurde hochgeladen</h2>
+		<strong>Die Datei wurde erfolgreich hochgeladen.</strong>
+		<p>Geben Sie jetzt die notwendigen Daten f&uuml;r den Import an.</p>
+		<form method="post" id="formi" action="" enctype="multipart/form-data">
+			<fieldset>
+		  <legend>Tabelle f&uuml;r den Import ausw&auml;hlen</legend>
+		  <label for="tabelle">Tabelle ausw&auml;hlen</label>
+		  <br />
+		  <select name="tabelle" id="tabelle" title="" style="width: 40%;" size="1">
+		    <option value="">(select){$plugin.imex.ausws}</option>
+		   
+		  {foreach item=sprach key=tabname from=$tabtar}
+		   <option value="{$tabname}" {if $tabelle == $tabname}selected="selected"{/if}>{$tabname}</option>
+		  {/foreach}
+		  </select>
+  	</fieldset>
+  	
+<fieldset>
+				<legend>Vorlage f&uuml;r die Zuordnung der Felder:</legend>
+				<p>Falls Sie eine vorhandene Vorlage f&uuml;r die Zuordnung nutzen wollen, w&auml;hlen Sie diese aus.</p>
+				<label for="myvorlage">Vorlage:</label>
+				<br />
+		  <select name="myvorlage" id="myvorlage" title="" style="width: 40%;" size="1">
+		    <option value="">(select){$plugin.imex.ausws}</option>
+		   
+		  {foreach item=vorlage key=tabname from=$vorlage_array}
+		   <option value="{$vorlage.imex_id}" >{$vorlage.imex_name}</option>
+		  {/foreach}
+		  </select>
+  	</fieldset>
+  	
+  	<fieldset>
+	  	<legend>Format</legend>
+			 <input type="radio" {$csvchecked} name="format" id="format1" {if $format == "csvohne"}checked="checked"{/if} value="csvohne" /> <label for="format1">CSV Format ohne Feldernamen</label>
+			 <br />
+			 <input type="radio" name="format" {if $format == "csvmit"}checked="checked"{/if} id="format2" value="csvmit" /> <label for="format2">CSV Format mit Feldernamen</label>
+			 <br />
+			 <input type="radio" {$xmlcheck} name="format" {if $format == "xml"}checked="checked"{/if} id="format3" value="xml" /> <label for="format3">XML Format</label>
+	  </fieldset>
+	  <fieldset>
+	  	<legend>Neu oder Update</legend>
+	  	<p>
+	  	<strong>Beachten Sie das bei der Ersetzung alle! Eintr&auml;ge gel&ouml;scht werden.</strong>
+	  	</p>
+			 <input type="radio"  name="ins" id="ins_neu" {if $format == "csvohne"}checked="checked"{/if} value="ins_neu" /> <label for="ins_neu">Neue hinzuf&uuml;gen</label>
+			 <br />
+			 <input type="radio" name="ins" {if $format == "csvmit"}checked="checked"{/if} id="ins_upd" value="ins_upd" /> <label for="ins_upd">Eintr&auml;ge Updaten</label>
+			 <br />
+			 <input type="radio" name="ins" {if $format == "xml"}checked="checked"{/if} id="ins_del_neu" value="ins_del_neu" /> <label for="ins_del_neu">Alle Eintr&auml;ge l&ouml;schen und neue hinzuf&uuml;gen</label>
+	  </fieldset>
+  	<fieldset>
+  		<legend>Import starten</legend>
+ 				<input type="submit" class="submit_back" name="startimport" value="Import starten" />
+ 		 </fieldset>
+  	<input type="hidden" name="delete" value=""/>
+		</form>
+		{/if}	{/if}
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

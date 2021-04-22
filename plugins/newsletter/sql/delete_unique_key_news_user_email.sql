@@ -1,0 +1,1 @@
+ALTER TABLE `XXX_papoo_news_user` DROP INDEX `news_user_email`; ##b_dump## 

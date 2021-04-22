@@ -1,17 +1,17 @@
 {if $IS_ADMIN}
 	{include file=head.inc.utf8.html}
 	{include file=menu.inc.html}
-	{if $text_error}
-		<div class="error">
-			{$text_error}
-		</div>
-	{/if}
-	{if $user_message_text}
-		<div class="message">
-			{$user_message_text}
-		</div>
-	{/if}
 	<div class="artikel" >
+		{if $text_error}
+			<div class="error">
+				{$text_error}
+			</div>
+		{/if}
+		{if $user_message_text}
+			<div class="message">
+				{$user_message_text}
+			</div>
+		{/if}
 		<div class="aktuell" id="aktuell_{$menuid_aktuell}"></div>
 		{$text}
 		{$logindaten}

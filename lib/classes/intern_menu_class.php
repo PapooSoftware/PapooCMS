@@ -1166,7 +1166,11 @@ class intern_menu_class
 
 		//Hier dann direkt einen Artikel erstellen wenn index.php gewählt
 		if ($formlink == "index.php" && $modus != "EDIT") {
-			$this->create_article_blank($menuid, $url_menuname_insert, $name);
+			$url_menuname_insert_article =
+				$this->check_url_header(
+					$this->menu->replace_uml(strtolower($this->checked->language['formmenuname']['0'])) . $varcount, $langid
+				);
+			$this->create_article_blank($menuid, $url_menuname_insert, $this->checked->language['formmenuname']['0']);
 		}
 
 		// 4. Rechte speichern
@@ -1318,6 +1322,7 @@ class intern_menu_class
 	 */
 	private function create_article_blank($menuid = 0,$url_menuname_insert = "",$name = "")
 	{
+
 		//menuid
 		$temp_menu['menuid'] = $menuid;
 		$temp_menu['url_menuname'] = $url_menuname_insert;
@@ -1345,23 +1350,31 @@ class intern_menu_class
 		}
 		$temp_artikel_url .= ".html";
 
-		// Sprach-Daten
+		// Sprach-Daten loopen
 		// *****************************
-		$sql = sprintf(
-			'INSERT INTO %1$s 
+		$sqlLang = sprintf("SELECT * FROM %s WHERE  more_lang=2 ",
+						DB_PRAEFIX."papoo_name_language");
+		$availableLangs = $this->db->get_results($sqlLang,ARRAY_A);
+
+		foreach ($availableLangs as $k =>$language)
+		{
+			$sql = sprintf(
+				'INSERT INTO %1$s 
 			SET
 				lan_repore_id=\'%2$d\', lang_id=\'%3$d\', header=\'%4$s\', url_header=\'%5$s\',
 				lan_teaser=\'%6$s\', lan_article_sans=\'%7$s\', lan_article=\'%8$s\', publish_yn_lang=\'1\';',
-			DB_PRAEFIX."papoo_language_article",
-			$temp_repore_id,
-			$this->cms->lang_id,
-			$temp_menu['menuname'],
-			$temp_artikel_url,
-			'',
-			'<p>.. INHALT ..</p>',
-			'<p>.. INHALT ..</p>'
-		);
-		$this->db->query($sql);
+				DB_PRAEFIX."papoo_language_article",
+				$temp_repore_id,
+				$language['lang_id'],
+				$temp_menu['menuname'],
+				$temp_artikel_url,
+				'',
+				'<p>.. INHALT ..</p>',
+				'<p>.. INHALT ..</p>'
+			);
+			$this->db->query($sql);
+		}
+
 
 		// Menü-Zuweisung
 		// *****************************

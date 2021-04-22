@@ -1,0 +1,72 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		<h2>{$plugin.newsletter.groups}</h2>
+		{* L�schen?  Dann "...wurde gel�scht" ausgeben *}
+		{if $grp_is_del==1}
+			<div class="message">{$message_news_is_del}</div>
+		{/if}
+		{if $grp_is_del==2 OR $grp_is_edit==2}
+			<div class="message">{$message_news_not_del}</div>
+		{/if}
+		{if !$test_id}
+			<p>{$message_20041}</p>
+		{/if}
+		{include file=weiter.inc.html}
+		{* Anzeige der Gruppen *}
+		<div class="news_tool height40">
+			<a class="news_tool_edit" href="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/news_group_new.html" title="{$message_20027}">
+				<img src="../plugins/newsletter/bilder/new_nl.gif" width="27" height="22" alt="{$message_20027}" title="{$message_20027}" border="0" align="middle" />
+				<br />
+				Neu</a>
+		</div>
+		<p>{$plugin.newsletter.anzahlgefgrp} {$anzahl}</p>
+		<script type="text/javascript" src="../plugins/newsletter/js/confirm.js"></script>
+		<table class="news_old">
+			<tr align="right">
+				<th id="grpname">{$news_grpname}</th>
+				<th id="grpdescript" width="130">{$news_grpdescript}</th>
+				<th id="abonnenten_anz" width="130" style="text-align:right">{$message_20036}</th>
+				<th id="edit" style="text-align:right">{$news_edit}</th>
+				<th id="del" style="text-align:right">{$news_loeschen}</th>
+			</tr>
+			{foreach item=grp from=$grp_data}
+				<tr class="news_old_row">
+					<td headers="grpname">
+						{if $grp.grp_id != 1}
+							<a href="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/news_group_edit.html&grp_edit_id={$grp.grp_id}" title="{$grp_edite}">{$grp.name}</a>
+						{else}
+							{$plugin.newsletter.link.grp_std}
+						{/if}
+					</td>
+					<td headers="grpdescript">
+						{if $grp.grp_id != 1}
+							{$grp.descript}
+						{else}
+							{$plugin.newsletter.link.grp_std_descr}
+						{/if}
+					</td>
+					<td headers="abonnenten_anz" style="text-align:right;">{$grp.anzahl}</td>
+					<td headers="edit" style="text-align:right;">
+						{if $grp.grp_id != 1}
+							<a href="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/news_group_edit.html&grp_edit_id={$grp.grp_id}" title="{$news_edit}">
+								<img src="../plugins/newsletter/bilder/edit_nl.gif" width="27" height="22" alt="{$grp_edite}" title="{$grp_edite}" border="0" /></a>
+						{/if}
+					</td>
+					<td headers="del" style="text-align:right;">
+						<form action="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/news_group.html&grp_del_id={$grp.grp_id}" method="post" name="adminForm{$grp.grp_id}">
+							{if $grp.grp_id != 1}
+								<a href='javascript: var msg="{$message_20033}"+"\""+"{$grp.name}"+"\""+"{$message_20034}"; if (confirm(msg)) submitform("{$grp.grp_id}");' title="{$news_grp_loeschene}">
+									<img src="../plugins/newsletter/bilder/delete_nl.gif" width="27" height="22" alt="{$news_grp_loeschene}" title="{$news_grp_loeschene}" border="0" /></a>
+							{/if}
+						</form>
+					</td>
+				</tr>
+			{/foreach}
+		</table>
+		<p><a href="user.php?menuid=9" alt="Papoogruppen anzeigen" title="Papoogruppen anzeigen">Papoogruppen anzeigen</a></p>
+		{if $weiter}<br />{include file=weiter.inc.html}{/if}
+	</div>
+	{include file=foot.inc.html}
+{/if}

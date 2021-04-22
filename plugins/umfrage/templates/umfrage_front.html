@@ -1,0 +1,46 @@
+<div class="artikel">
+	<div id="artikel_content" class="clearfix">
+		<h3>{$UMFMSG_F_TITEL}: {$umfrage_name}</h3>
+		<ul class="umfrage_ergebnisliste">
+			{assign var="clsidx" value=1}
+			{foreach item=antwort from=$antworten_infos}
+				<li>
+					<strong>{$antwort.text}</strong><br />
+					{$antwort.prozent}% 
+					{if $antwort.stimmen == 1} ({$antwort.stimmen} {$UMFMSG_F_STIMME})
+					{else} ({$antwort.stimmen} {$UMFMSG_F_STIMMEN})
+					{/if}
+					
+					<div >
+						<img src='{$slash}plugins/umfrage/bilder/blank.png' class="umfrage_balken{$clsidx}" width="{$antwort.breite}%" height="2" alt="{$antwort.prozent}% ({$antwort.stimmen}{if $antwort.stimmen == 1}  {$UMFMSG_F_STIMME}) {else}  {$UMFMSG_F_STIMMEN}){/if}" />
+					</div>
+					<br />
+				</li>
+				{math equation="x+y" assign="clsidx" x=$clsidx y=1}
+			{/foreach}
+		</ul>
+		
+		{if $clsidx > 7} <p><strong>{$UMFMSG_F_MSG_WEBMASTER}</strong></p> {/if}
+		
+		<p class="umfrage_statistik">
+			{$UMFMSG_F_SUMME_STIMMEN}: {$umfrage_teilnehmer}<br />
+			{$UMFMSG_F_DATE_START}: {$umf_datum_start|date_format:$lang_dateformat}<br />
+			{$UMFMSG_F_DATE_LAST}: {$umf_datum_letzter|date_format:$lang_dateformat}
+		</p>
+		{if $umfragen_infos|@count > 1}
+			<form method="post" action="" class="umfrage_auswahl">
+				<fieldset>
+					<legend>{$UMFMSG_F_ANDERE_UMFRAGEN}</legend>
+					<select name="umfrage_id">
+						<option value="0">{$UMFMSG_F_AUSWAHL_UMFRAGEN}</option>
+						{foreach item=umfrage from=$umfragen_infos}
+							<option value="{$umfrage.umf_id}">{$umfrage.umflan_text}</option>
+						{/foreach}
+					</select>
+					<input type="submit" value="{$UMFMSG_F_BTN_ERGEBNIS_ANZEIGEN}" />
+					<br /><br />
+				</fieldset>
+			</form>
+		{/if}
+	</div>
+</div>

@@ -1,0 +1,232 @@
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+<div class="artikel">
+	<div class="mv">
+		{if $fragedel}
+			<h2>{$plugin.mv.loeschen4}</h2>
+			<form action="#" method="post">
+				<fieldset>
+					<legend>{$plugin.mv.loeschen5}</legend>
+					<input type="hidden" name="main_weitere_new" value="{$main_weitere_new}"/>
+					<br />
+					<br />
+					<br />
+					<input style="background:red; float:left;margin-right:50px;" type="submit" name="submitdelecht" value="{$plugin.mv.loeschen3}"/>
+				</fieldset>
+			</form>
+		{else}
+			{if $echt_kuendigen_passiert=="ok"}
+				<h1>{$plugin.mv.gekuendigth2}</h1>
+				<div class="message">{$plugin.mv.gekuendigttext}</div>
+				<br /><br />
+				{$plugin.mv.gekuendigttext2}
+			{else}
+				{*<!-- Überschriften je nach dem ob es Treffer gab oder keine -->*}
+				{if $message==""}
+					<h1>{$plugin.mv.suchanfrage}</h1>
+				{elseif $message=="treffer"}
+					<h1>{$plugin.mv.suche_ergebnis}</h1>
+				{elseif $message=="kein_suchtext"}
+					<h1>{$plugin.mv.kein_suchtext}</h1>
+				{elseif $message=="no_content"}
+					<h1>{$plugin.mv.kein_treffer}</h1>
+				{/if}
+				{if $echt_kuendigen=="frage" AND $special_right}
+					<div id="{counter name=css}" class="reiter">
+						<form method="post" action="" name="suche" >
+							<fieldset>
+								<legend>{$plugin.mv.Schnellfunktionen}</legend>
+								{*<!-- DzvHä Sonderknöpfe, wie z.B. Kündiging Mitglied -->*}
+								<div style="width:99%;">
+									{$plugin.mv.schnellfunktionen_text2}<br />
+									<br />
+									{*<!-- Kündigung Mitglied -->*}
+									<input type="submit" class="submit_back_red_xl" value="{$plugin.mv.fb_kuendigung_really}" name="mv_fb_kuendigung_really" />	
+								</div>
+							</fieldset>
+							{foreach item=dat key=k from=$mv_content_id}
+								<input type="hidden" name="mv_content_id[{$k}][mv_content_id]" value="{$dat.mv_content_id}"/>
+							{/foreach}
+						</form>
+					</div>
+				{else}
+					{*<!-- Hier fängt die Suchmaske an -->*}
+					{*<!-- Zähler für die Reiter in der Suchmaske, falls es mehrer Verwaltungen in der Suchmaske gibt -->*}
+					{counter name=css start=100 print=0}
+					{counter name=maske start=1 print=0}
+					<div id="{counter name=css}"  class="reiter">
+						<form method="post" action="" name="suche" >
+							{foreach item=dat key=k from=$mv_content_id}
+								<input type="hidden" name="mv_content_id[{$k}][mv_content_id]" value="{$dat.mv_content_id}"/>
+							{/foreach}
+							<fieldset>
+								<legend>{$plugin.mv.suchtext_legend}</legend>
+								<div class="v_suchfeld_kompl">
+									{foreach item=suchfeld from=$such_felder key=mykey}
+										{if $mykey != "mv_id" OR $mykey=="0"}
+											<div class="v_suchfeld">
+												{if $suchfeld.mvcform_type!="password"
+													&& $suchfeld.mvcform_type!="hidden"}
+													<label for="{$suchfeld.mvcform_name_id}">{$suchfeld.mvcform_label}</label>
+												{/if}
+												{if $suchfeld.mvcform_type=="text"
+													|| $suchfeld.mvcform_type=="textarea"
+													|| $suchfeld.mvcform_type=="textarea_tiny"
+													|| $suchfeld.mvcform_type=="email"}
+													<input name="{$suchfeld.mvcform_name_id}" id="{$suchfeld.mvcform_name_id}" 
+														{if $suchfeld.mvcform_size}size="{$suchfeld.mvcform_size}" 
+														{else} size="20"{/if} 
+														value="{if $suchfeld.value!=""}{$suchfeld.value}{/if}" maxlength="50" />
+												{elseif $suchfeld.mvcform_type=="radio"
+													|| $suchfeld.mvcform_type=="select"
+													|| $suchfeld.mvcform_type=="multiselect"
+													|| $suchfeld.mvcform_type=="check"
+													|| $suchfeld.mvcform_type=="picture"
+													|| $suchfeld.mvcform_type=="galerie"
+													|| $suchfeld.mvcform_type=="file"}
+													<select name="{$suchfeld.mvcform_name_id}" id="{$suchfeld.mvcform_name_id}">
+														{$suchfeld.select_options}
+													</select>
+												{elseif $suchfeld.mvcform_type=="checkbox_type2"}
+													{$suchfeld.select_options}
+												{elseif $suchfeld.mvcform_type=="timestamp"}
+													{$suchfeld.select_options}
+												{elseif $suchfeld.mvcform_type=="zeitintervall"}
+													{$suchfeld.select_options}
+												{elseif $suchfeld.mvcform_type=="preisintervall"}
+													{$suchfeld.select_options}				
+												{/if}
+											</div>
+										{/if}
+									{/foreach}
+								</div>
+								{*<!-- Volltextsuche  -->*}
+								<div class="v_suchfeld_i">
+									<label for="search_mv{$such_felder_mv.mv_id}">{$plugin.mv.suchtext}</label>
+									<input name="search_mv" size="30" id="search_mv{$such_felder_mv.mv_id}" value="{$search_mv}" size="40" maxlength="50" />
+									<input type="hidden" value="{$plugin.mv.finden}" name="mv_submit" />
+									<input type="submit" class="submit_back" value="{$plugin.mv.finden}" name="mv_submit" />
+									<input type="hidden" value="{$mv_id}" name="mv_id" />
+									<input type="hidden" value="{$menuid_aktuell}" name="menuid" />
+									<input type="hidden" value="mv/templates/search_user.html" name="template" />
+								</div>
+							</fieldset>
+							<fieldset>
+								<legend>{$plugin.mv.zuletzt_geaendert}</legend>
+								{*<!-- Suche nach Änderungsdatum -->*}
+								<div style="width:99%;height:50px;">
+									{$mv_changedate}
+								</div>
+							</fieldset>
+							{if $user_darf_schreiben}
+								{if $is_dzvhae_system=="ok"}
+									{if $special_right}
+										{if $mv_id==1}
+											<fieldset>
+												<legend>{$plugin.mv.Schnellfunktionen}</legend>
+												{*<!-- DzvHä Sonderknöpfe, wie z.B. Kündiging Mitglied -->*}
+												<div style="width:99%;">
+													{$plugin.mv.schnellfunktionen_text}
+													<br />
+													<br />
+													{*<!-- Kündiging Mitglied -->*}
+													<input type="submit" class="submit_back_red_big" value="{$plugin.mv.fb_kuendigung}" name="mv_fb_kuendigung" />	
+												</div>
+											</fieldset>
+										{/if}
+									{/if}
+									{*<!-- DzvHä Sonderknöpfe, wie z.B. Hauptebene wechseln -->*}
+									{*<!-- deaktiviert khmweb 27.3.10 <fieldset>
+										<legend>{$plugin.mv.Hauptebenewechseln}</legend>
+										<div style="width:99%;">
+											<label for="main_meta_new">{$plugin.mv.ebenewaehlen}</label>
+											<br />
+											<select name="main_meta_new" id="main_meta_new" size="1">
+												{foreach item=meta from=$meta_gruppen}
+													<option value="{$meta.mv_meta_id}">{$meta.mv_meta_group_name}</option>
+												{/foreach}
+											</select>
+											<input type="submit" value="{$plugin.mv.wechseln}" name="mv_main_ebene_wechseln" />	
+										</div>
+									</fieldset>-->*}
+									<fieldset><legend>{$plugin.mv.weiteremetaebene}</legend>
+										{*<!-- DzvHä Sonderknöpfe, wie z.B. Hauptebene wechseln -->*}
+										<div style="width:99%;">
+											<label for="main_weitere_new">{$plugin.mv.ebenewaehlen}</label>
+											<br />
+											<select name="main_weitere_new" id="main_weitere_new" size="1">
+												{foreach item=meta from=$meta_gruppen}
+													<option value="{$meta.mv_meta_id}">{$meta.mv_meta_group_name}</option>
+												{/foreach}
+											</select>
+											<br />
+											<label for="action_main_weitere_new">{$plugin.mv.ebeneaktion}</label>
+											<br />
+											<select name="action_main_weitere_new" id="action_main_weitere_new" size="1">
+												<option value="delete">{$plugin.mv.weitereloeschen}</option>
+												<option value="update">{$plugin.mv.weiterehinzufuegen}</option>
+											</select><br />
+											<input type="submit" class="submit_back" value="{$plugin.mv.wechseln}" name="mv_weitere_ebene_wechseln" />	
+										</div>
+									</fieldset>
+								{/if}
+								<fieldset>
+									<legend>{$plugin.mv.trefferlisten}</legend>
+									{*<!-- csv Export und Newsletter -->*}
+									<div class="v_suchfeld_i">
+										<br />
+										<a href="{$mv_link_export}&mv_id={$mv_id}&mv_sql=1&mv_meta_id={$mv_meta_id}">{$plugin.mv.treffer_exportieren}</a>
+										<br />
+										{if $mv_art_rechte==2}
+											<a href="{$mv_link_newsletter}&mv_ok=1">{$plugin.mv.treffer_newsletter}</a>
+										{/if}
+									</div>
+								</fieldset>
+							{/if}
+						</form>
+					</div>
+					<br />
+				
+					{*<!-- Fehlermeldungen-->*}
+					{if $error!=""}
+						<strong>{$error}</strong>
+					{/if}
+					{*<!-- Trefferanzahl -->*}
+					{if $such_treffer_anzahl!=""}
+						{$plugin.mv.trefferanzahl_anfang} <strong>{$such_treffer_anzahl}</strong> {$plugin.mv.trefferanzahl_ende}
+					{else}
+						{*<!-- Wenn kein Treffer -->*}
+						{if $message=="no_content"}
+							<strong>{$plugin.mv.kein_treffer}</strong>
+						{/if}
+					{/if}
+					{if !$no_template}
+						{*<!-- Sortierungsfelder -->*}
+						{if $felder_sort}
+							<p>{$plugin.mv.sortierung}
+							{foreach item=feld from=$felder_sort}
+								<a href="{$mv_link_self}{$mv_own_link}&sort_feld={$feld.mvcform_id}">{$feld.mvcform_label}</a> 
+							{/foreach}
+						{/if}
+						<!--weitere Seiten -->
+						{include file="weiter.inc.html}
+						<!-- Hier die Spezialliste, man muß hier die Feldernamen kennen. -->
+						{foreach item=dat from=$mv_template_all}
+							<div class="ergeblistitem">
+								{$dat}
+							</div>
+						{/foreach}
+						<!--weitere Seiten -->
+						{include file="weiter.inc.html}
+					{else}
+						<p>{$plugin.mv.no_template}</p>
+					{/if}
+				{/if}
+			{/if}
+		{/if}
+	</div>
+</div> 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}

@@ -1,0 +1,14 @@
+.swro_img_listing img {
+	max-width:200px;
+	
+}
+.swro_img_single img {
+	max-width:600px;
+	
+}
+.swro_img_single {
+	margin-right:20px;
+	margin-bottom:20px;
+	max-width:600px;
+	float:right;
+}

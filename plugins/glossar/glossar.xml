@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<plugin version="4.x">
+
+<name>Glossar Plugin</name>
+<beschreibung_de><![CDATA[Mit diesem Plugin kann ein Glossar erstellt werden. Die eingegebenen Wörter werden dann auch automatisch in neue Artikel eingebunden. Außerdem kann man hier nach Eingabe eines neuen Begriffes auch alle alten Artikel durchlaufen lassen um die entsprechenden Links erzeugen zu können.]]></beschreibung_de>
+<beschreibung_en><![CDATA[With this Plugin you can Creat a Glossar.]]></beschreibung_en>
+
+<version>1.3</version>
+<papooid>9</papooid>
+
+<link>http://www.papoo.de</link>
+
+<datum>12.02.2010</datum>
+
+
+<autor>
+	<name>Carsten Euwens</name>
+
+	<kontakt><![CDATA[Carsten Euwens, Heerstr. 110, 53111 Bonn
+	Weiterentwicklung (Version 0.3) von Stephan Bergmann]]></kontakt>
+	<email>webwork@papoo.de</email>
+	<telefon>0177/8075846</telefon>
+</autor>
+
+
+<menue>
+	<eintrag_de>Glossar</eintrag_de>
+	<eintrag_en>Glossar</eintrag_en>
+	<icon>glossar/bilder/pic_01.gif</icon>
+	<link>plugin:glossar/templates/glossar_back.html</link>
+	
+	<submenue>
+		<eintrag_de>Einstellungen</eintrag_de>
+		<eintrag_en>Settings</eintrag_en>
+		<icon>glossar/bilder/pic_01.gif</icon>
+		<link>plugin:glossar/templates/glossar_back_set.html</link>
+	</submenue>
+</menue>
+
+<klasse>
+	<name>glossar</name>
+	<datei>glossar/lib/glossar_class.php</datei>
+</klasse>
+
+<css>glossar/css/glossarplugin.css</css>
+
+<datenbank>
+	<installation>glossar/sql/glossar_install.sql</installation>
+	<deinstallation>glossar/sql/glossar_deinstall.sql</deinstallation>
+</datenbank>
+
+
+<messages>glossar/messages</messages>
+
+</plugin>

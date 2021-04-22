@@ -1,0 +1,70 @@
+{if $faq_no_readaccess} {* Leserecht vorhanden? *}
+<p class="bold_red">{$plugin.faq_front.message.no_readaccess}</p><br /> {* Keine Leserechte *}
+{else}
+{* Layout "Linkliste" *}
+{if is_countable($faq_search_data) && $faq_search_data|@count OR $faq_nomatch}
+	{include file=../../plugins/faq/templates/faq_front_search_results_linkliste.html}
+{else} {* Hier keine Suche aktiv *}
+{* Kategorien und Fragen mit Links *}
+
+<br />
+{include file="_module_intern/mod_weiter.html"}
+
+
+
+{* Kategorien und Fragen inklusive Antworten *}
+{if is_countable($cat_data)}
+	{section name=rowct1 start=0 loop=$cat_data|@count step=1}
+	<div class="faq_section" >
+	    {assign var="rowctx1" value=$smarty.section.rowct1.index}
+	    {if $cat_data[$rowctx1].catname}
+
+	    <h3 class="faq_listing_style_4"> {* Kategorie *}
+	        <!--<img src="{$slash}plugins/faq/bilder/cat_menu.gif" width="12" height="10" class="mr_3_no_border" title="{$plugin.faq_front.imgtext.cat}" alt="{$plugin.faq_front.imgtext.cat}" />-->
+	        {$cat_data[$rowctx1].catname}
+	    </h3>
+	    {$cat_data[$rowctx1].catdescript}
+	    <!--{if $faq_user_may_write}
+	        <div class="div_margins">
+	            <a href="{$slash}plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_front_new.html&amp;faq_main_id={$cat_data[$rowctx1].id}" title="{$plugin.faq_front.linktext.faq_new}">{$plugin.faq_front.linktext.faq_new}</a>
+	        </div>
+	        <div class="div_margins">
+	            <a href="{$slash}plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_front_new_question.html&amp;faq_main_id={$cat_data[$rowctx1].id}" title="{$plugin.faq_front.linktext.faq_new_question}">{$plugin.faq_front.linktext.faq_new_question}</a>
+	        </div>
+	    {/if}
+	    <div class="div_margins">{$plugin.faq_front.text.faq_count} {$cat_data[$rowctx1].faq_count_active}</div>-->
+	    {/if}
+		{if is_countable($faq_data[$rowctx1])}
+		    {section name=rowct2 start=0 loop=$faq_data[$rowctx1]|@count step=1}
+			    {assign var="rowctx2" value=$smarty.section.rowct2.index}
+			    {* Frage *}
+			    <a name="c{$cat_data[$rowctx1].id}f{$faq_data[$rowctx1][$rowctx2].id}"></a>
+			    {if $faq_data[$rowctx1][$rowctx2].question}
+			    <div class="faq_item" data-collapse>
+			    <p class="faq_listing_style_5">
+			        <!--<img src="{$slash}plugins/faq/bilder/faq.gif" width="10" height="10" class="mr_3_no_border" title="{$plugin.faq_front.imgtext.faq}" alt="{$plugin.faq_front.imgtext.faq}" />-->
+			        {$faq_data[$rowctx1][$rowctx2].question}
+			    </p>
+			    {if $faq_data[$rowctx1][$rowctx2].answer}
+			    <div><p>{$faq_data[$rowctx1][$rowctx2].answer}</p>
+			        {if $faq_user_may_write}
+			    <span class="div_margins">
+			        <a href="{$slash}plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_front_edit.html&amp;faq_id={$faq_data[$rowctx1][$rowctx2].faq_id}&amp;faq_main_id={$cat_data[$rowctx1].id}" title="{$plugin.faq_front.linktext.faq_edit}">
+			            {$plugin.faq_front.linktext.faq_edit}</a>
+			    </span>
+			        {/if}
+			    </div>
+			    {else}
+			    <div class="div_margins">{$plugin.faq_front.text.no_answer}</div>
+			    {/if}
+			    </div>
+			    {/if}
+		    {/section}
+        {/if}
+	</div>
+	{/section}
+{/if}
+<br /><br />
+{include file="_module_intern/mod_weiter.html"}
+{/if}
+{/if}

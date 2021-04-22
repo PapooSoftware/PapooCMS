@@ -1,0 +1,40 @@
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+<script src='../plugins/mv/js/confirm.js' type='text/javascript'></script>
+<div class="artikel">
+	<h2>{$plugin.mv.pageheader.error_report2}</h2>
+	<p><a href="./plugin.php?menuid={$menuid_aktuell}&amp;template=mv/templates/imex_error_report.html">{$plugin.mv.importprotokoll3}</a></p>
+	<p>Report-Id: {$report_id} Zeitpunkt: {$import_time}</p>
+	<p><strong>{$plugin.mv.error_count2}: {$error_count}</strong></p>
+	<p>{include file=weiter.inc.html}<br /></p>
+		<table width="100%" class="mv_table">
+			<thead>
+				<tr>
+					<th style="text-align:right">{$plugin.mv.error_no}</th>
+					<th style="text-align:right">{$plugin.mv.import_file_record_no}</th>
+					<th style="text-align:right">{$plugin.mv.import_file_field_position}</th>
+					<th>{$plugin.mv.import_file_excel_field_position}</th>
+					<th>{$plugin.mv.import_file_field_name}</th>
+					<th>{$plugin.mv.import_error_msg}</th>
+					<th style="text-align:right">{$plugin.mv.completion_code}</th>
+				</tr>
+			</thead>
+			<tbody>
+				{foreach item=report_details from=$error_report_details}
+					{foreach item=report from=$report_details}
+						<tr>
+							<td align="right">{$report.error_no}</td>
+							<td align="right">{$report.import_file_record_no}</td>
+							<td align="right">{$report.import_file_field_position}</td>
+							<td>{$report.excel}</td>
+							<td>{$report.import_file_field_name}</td>
+							<td>{$report.import_error_msg}</td>
+							<td align="right">{$report.completion_code}</td>
+						</tr>
+				{/foreach}{/foreach}
+			</tbody>
+		</table>
+	</form>
+	<p>{include file=weiter.inc.html}</p>
+	<p><a href="./plugin.php?menuid={$menuid_aktuell}&amp;template=mv/templates/imex_error_report.html">{$plugin.mv.importprotokoll3}</a></p>
+</div>

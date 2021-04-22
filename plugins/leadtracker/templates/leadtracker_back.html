@@ -1,0 +1,56 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+
+ <h1 id="test__leadtracker_plugin" class="h1" >{$plugin_test__leadtracker_plugin}</h1>
+
+ <p id="test__mit_dem_leadtracker" class="h1" >{$plugin_test__mit_dem_leadtracker}</p>
+
+
+    <br />    <br />    <br />    <br />    <br />    <br />    <br />    <br />    <br />    <br />    <br />
+    {if $is_dev}
+    #start#
+	<form name="test_daten" method="post" action="">
+
+			<input type="submit" class="submit_back" name="submit" value="submit" />
+		</fieldset>
+	</form>
+	</p>
+
+
+    <br />
+
+
+    <span class="ignore"></span>
+    <!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+    <div class="rapid_form">
+        <form action="" name="" method="POST">
+            <!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+            <input type="hidden" name="tb_name" value="plugin_test" />
+            <!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+            <input type="hidden" name="php_datei_name" value="test_class" />
+            <!-- Das Standarpr�fix f�r die Ids -->
+            <input type="hidden" name="praefix" value="test_" />
+            <!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+            <input type="hidden" name="praefix_spezial" value="test_" />
+            <!-- Das Tool einbinden -->
+            {include file=../../../plugins/devtools/templates/rapid_felder.htm}
+        </form>
+    </div>
+
+
+</div>
+
+
+
+{/if}
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

@@ -1,0 +1,77 @@
+<div class="flex2mail_form">
+  <form action="" method="POST" id="flex2mail_form" onsubmit="return flex2mail_check_form();">
+    <fieldset>
+      <field>
+        <label for="flex2mail_sender">Ihre EMail-Addresse:</label>
+        <input type="email" name="flex2mail_sender" />
+      </field>
+      <legend>Ihre Nachricht</legend>
+      <field>
+        <label for="flex2mail_subject">Betreff:</label>
+        <input type="text" name="flex2mail_subject" />
+      </field>
+      <field>
+        <label for="flex2mail_message">Nachricht:</label>
+        <textarea name="flex2mail_message"></textarea>
+      </field>
+    </fieldset>
+    <fieldset>
+      <legend>Anh&auml;nge</legend>
+      <button onclick="window.open('{$flex2mail_files}','_blank','width=800, height=600'); return false;" name="flex2mail_attach">Anhang aus Papoo ausw&auml;hlen</button>
+      <div id="flex2mail_attachments">
+      </div>
+    </fieldset>
+    <input type="hidden" name="flex2mail_reciever" value="{$flex2mail_reciever}" />
+    <input type="submit" name="flex2mail_send" value="absenden" />
+  </form>
+</div>
+<script type="text/javascript">
+function flex2mail_create_attachments(attachments) {
+  for (var i = 0; i < attachments.length; i++) {
+    if (!attachments[i].checked)
+      continue;
+    var div = document.createElement('div');
+    div.id = 'flex2mail_attachment_' + attachments[i].getAttribute('data-id');
+    var input = document.createElement('input');
+    var text = document.createTextNode(attachments[i].getAttribute('data-name'));
+    var a = document.createElement('a');
+    var img = document.createElement('img');
+    img.src = './interna/bilder/' + attachments[i].getAttribute('data-icon');
+
+    input.name = 'flex2mail_attachment[' + attachments[i].getAttribute('data-id') + ']';
+    input.value = attachments[i].getAttribute('value');
+    input.type = 'hidden';
+
+    a.href = "javascript:flex2mail_detach(document.getElementById('" +  div.id + "'));";
+    a.text = "entfernen";
+
+    div.appendChild(a);
+    div.appendChild(img);
+    div.appendChild(text);
+    div.appendChild(input);
+
+    document.getElementById('flex2mail_attachments').appendChild(div);
+  }
+}
+function flex2mail_detach(attachment) {
+  document.getElementById('flex2mail_attachments').removeChild(attachment);
+}
+function flex2mail_check_form() {
+  var sender = document.getElementsByName('flex2mail_sender')[0].value;
+  var subject = document.getElementsByName('flex2mail_subject')[0].value;
+  var message = document.getElementsByName('flex2mail_message')[0].value;
+  if (!sender) {
+    alert('Bitte geben Sie Ihre EMail-Addresse ein!');
+    return false;
+  }
+  if (!subject) {
+    alert('Bitte geben Sie einen Betreff ein!');
+    return false;
+  }
+  if (!message) {
+    alert('Bitte geben Sie eine Nachricht ein!');
+    return false;
+  }
+  return true;
+}
+</script>

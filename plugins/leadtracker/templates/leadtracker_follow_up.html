@@ -1,0 +1,242 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+<style type="text/css">{literal}
+form label br {
+    display: inline;
+}
+.with-input-prefix span {
+    color: gray;
+    display: block;
+    float: left;
+    margin: 4px 0px;
+}
+.with-input-prefix input {
+    margin-left: -0.9em;
+    background: transparent;
+    padding-left: 1.1em;
+}
+
+table button.btn {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+table tr.placeholder td {
+    text-align: center;
+}
+
+{/literal}</style>
+
+<link type="text/css" rel="stylesheet" href="{$css_path}/leadtracker.css" />
+
+<div class="artikel">
+    {if $plugin_error}
+    <div class="error">
+    <h2 id="leadtracker_achtung_bitte_eintrge_korrigieren" class="h2" >{$plugin_leadtracker_achtung_bitte_eintrge_korrigieren}</h2>
+    </div>
+    {/if}
+
+    {if $leadtracker_is_del}
+    <div class="error">
+        <h2 id="leadtracker_achtung_bitte_eintrge_korrigieren" class="h2" > {$plugin_leadtracker_der_eintrag_wurde_gelscht}</h2>
+    </div>
+    {/if}
+    {if $is_eingetragen=="ok"}
+    <div class="message">
+    <h2 id="leadtracker_daten_wurden_gespeichert" class="h2" >{$plugin_leadtracker_daten_wurden_gespeichert}</h2>
+    </div>
+    {/if}
+    {if $isdone}
+    <div class="message">
+        <h2 class="h2">{$plugin_leadtracker_followupoverview_isdone}</h2>
+    </div>
+    {/if}
+    {if $itfailed}
+    <div class="error">
+        <h2 class="h2">{$plugin_leadtracker_followupoverview_itfailed}</h2>
+        <h2 class="h2">{$debug_result}</h2>
+    </div>
+    {/if}
+
+
+
+
+
+
+
+
+
+ <h1 id="leadtracker_follow_up_mails" class="h1" >{$plugin_leadtracker_follow_up_mails}</h1>
+
+ <p id="leadtracker_hier_definieren_sie_die_aktionen" class="h1" >{$plugin_leadtracker_hier_definieren_sie_die_aktionen}. {$plugin_leadtracker_whlen_sie_dazu_einfach_eine}</p>
+
+ <p id="leadtracker_zustzlich_knnen_sie_hier_definieren_ob_sie_die_followup_mails_mit" class="h1" >{$plugin_leadtracker_zustzlich_knnen_sie_hier_definieren_ob_sie_die_followup_mails_mit}</p>
+    <!--
+  <h2 id="leadtracker_einstellungen_fum" class="h2" >{$plugin_leadtracker_einstellungen_fum}</h2>
+    {$plugin_leadtracker_follow_up_die_erste_mail_fr_das_jeweilige_doubleoptin_definieren_sie_immer}<br />
+
+  <fieldset>
+ <legend>{$plugin_leadtracker_doubleoptin_nutzen}</legend>
+
+ <div class="labdiv">
+     <input type="checkbox" name="leadtracker_follow_up_doi_nutzen" value="1" {if $leadtracker_follow_up.0.leadtracker_follow_up_doi_nutzen==1}checked="checked"{/if} class="leadtracker_follow_up_doi_nutzen" id="leadtracker_follow_up_doi_nutzen"/><label for="leadtracker_follow_up_doi_nutzen">{$plugin_leadtracker_follow_up_doi_nutzen}{$plugin_error.leadtracker_follow_up_doi_nutzen} </label>
+ </div>
+
+          <input type="submit" class="submit_back" name="submit_follow_up_mails_doi" value="{$plugin_leadtracker_follow_up_einstellunge_speichern}"
+                  />
+
+      </fieldset>
+      <br />
+      </form>
+ -->
+
+
+
+  <h2 id="leadtracker_follow_up_mgliche_aktionen" class="h2" >{$plugin_leadtracker_follow_up_mgliche_aktionen}</h2>
+
+  {$plugin_leadtracker_follow_up_whlen_sie_hier_die_aktion_aus}
+     <table>
+         <tr>
+             <th>ID</th>
+             <th>{$plugin_leadtracker_follow_up_aktion}</th>
+             <th>{$plugin_leadtracker_follow_up_followup_mail_generieren}</th>
+         </tr>
+         <!--<tr>
+             <td>1</td>
+             <td>{$plugin_leadtracker_follow_up_download_einer_datei}</td>
+             <td><a href="{$follow_up_new_link}leadtracker/templates/leadtracker_download_conversions.html">{$plugin_leadtracker_follow_up_followup_mail_generieren}</a></td>
+
+         </tr>-->
+
+         <tr>
+             <td>1</td>
+             <td> {$plugin_leadtracker_follow_up_download_mehrerer_dateien_auf_einmal}</td>
+             <td><a href="{$follow_up_new_link}leadtracker/templates/leadtracker_unique_form.html">{$plugin_leadtracker_follow_up_followup_mail_generieren}</a></td>
+
+         </tr>
+
+ </table>
+
+ <!--<p><a href="{$template_base_path}leadtracker_cronjob.html">{$plugin_leadtracker_follow_up_cronjob_daten}</a></p>-->
+
+ <h2 style="display: inline-block">{$plugin_leadtracker_followupoverview_ueberschrift}</h2>
+    <form method="POST" action="">
+            <input type="hidden"  name="guard_code" value="{$cron_guard}" />
+            <button class="btn btn-danger" style="display: inline-block;" name="send_mails" value="1">{$plugin_leadtracker_cronjob_sendnow}</button>
+    </form>
+
+ <form action="" method="GET" accept-charset="UTF-8">
+    <input type="hidden" name="menuid" value="{$menuid|escape}" />
+    {if $STANDALONE}
+    <input type="hidden" name="standalone" value="yes" />
+    {/if}
+    <input type="hidden" name="template" value="{$template|escape}" />
+    <table>
+        <col /><col /><col /><col style="width: 13ex;" />
+        <thead>
+        {if true}
+        <tr><th colspan="5">{$plugin_leadtracker_followupoverview_searchformail}</th> </tr>
+        <tr>
+            <td colspan="2"><input type="search" name="search_mail" value="{$search_mail|escape}" /></td>
+            <td colspan="2"></td>
+            <td><button class="btn btn-primary" type="submit">{$plugin_leadtracker_statistics_suchen}</button></td>
+        </tr>
+        {/if}
+        <tr><th>{$plugin_leadtracker_followupoverview_mailaddr}</th><th>{$plugin_leadtracker_followupoverview_form}</th><th>{$plugin_leadtracker_followupoverview_mail}</th><th>{$plugin_leadtracker_followupoverview_send}</th><th>{$plugin_leadtracker_followupoverview_action}</th></tr>
+        </thead>
+        <tbody>
+        {if $followups === null}
+         {if $search_mail}
+          <tr class="placeholder"><td colspan="5">{$plugin_leadtracker_followupoverview_nomail1}{$search_mail}{$plugin_leadtracker_followupoverview_nomail2}</td></tr>
+         {else}
+          <tr class="placeholder"><td colspan="5">{$plugin_leadtracker_followupoverview_nodata}</td></tr>
+         {/if}
+        {elseif !$followups}
+         {if $search_mail}
+          <tr class="placeholder"><td colspan="5">{$plugin_leadtracker_followupoverview_nomail1}{$search_mail}{$plugin_leadtracker_followupoverview_nomail2}</td></tr>
+         {else}
+          <tr class="placeholder"><td colspan="5">{$plugin_leadtracker_followupoverview_nodata}</td></tr>
+         {/if}
+        {else}
+        {foreach from=$followups item=data}
+        <tr>
+            <td>{$data.mailaddr|escape}</td>
+            <td>{$data.formname|escape}</td>
+            <td>{$data.mailname|escape}</td>
+            <td>{$data.sendtime}</td>
+            <td><a onClick="ajax_delete_fum(this.id)" class="delete_fum_link" id="{$data.fum_id}" href="{$template_base_path}leadtracker_follow_up.html&amp;post_del=true&amp;fum={$data.fum_id}{if $search_mail}&amp;search_mail={$search_mail}{/if}">{$plugin_leadtracker_followupoverview_delete}</a></td>
+        </tr>
+        {/foreach}
+        {/if}
+        </tbody>
+    </table>
+
+    {if true}<script type="text/javascript" src="{$script_path}/delete_fum.js"></script>{/if}
+
+    {include file=weiter.inc.html}
+    {if $STANDALONE}
+    {include file=../../../interna/templates/standard/weiter.inc.html}
+    {else}
+    {/if}
+ </form>
+
+ <div style="display: block;">
+    <strong>{$plugin_leadtracker_cronjob_autocode}</strong>: <code style="display: block; overflow-x: hidden;">{$template_base_path}leadtracker_follow_up.html&amp;send_mails=1&amp;guard_code={$cron_guard}</code>
+ </div>
+
+ {if $is_dev}
+
+  #start#<br />
+
+
+
+
+ <!--
+     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+     <br />
+     <form name="test_daten" method="post" action="">
+         <fieldset>
+
+             <input type="submit" class="submit_back" name="submit" value="submit" />
+         </fieldset>
+     </form>
+     </p>
+ -->
+
+
+
+    <span class="ignore"></span>
+    <!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+    <div class="rapid_form">
+        <form action="" name="" method="POST">
+            <!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+            <input type="hidden" name="tb_name" value="plugin_leadtracker" />
+            <!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+            <input type="hidden" name="php_datei_name" value="leadtracker_class" />
+            <!-- Das Standarpr�fix f�r die Ids -->
+            <input type="hidden" name="praefix" value="leadtracker_follow_up" />
+            <!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+            <input type="hidden" name="praefix_spezial" value="leadtracker_follow_up" />
+            <!-- Das Tool einbinden -->
+            {include file=../../../plugins/devtools/templates/rapid_felder.htm}
+        </form>
+    </div>
+
+
+
+</div>
+
+
+
+
+
+{/if}
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

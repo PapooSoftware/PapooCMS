@@ -1,0 +1,24 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+
+<link rel="stylesheet" href="{$adwords_kw_css_path}/adwords_kw.css"/>
+
+<div class="artikel">
+    <h1>Telnr eintragen / bearbeiten</h1>
+    <p>{$adwords_kw_6}</p>
+    <form action="" method="post">
+        <fieldset>
+            <legend>Telnr eintragen / bearbeiten</legend>
+            <textarea cols="40" rows="16" id="tel_content_list" name="tel_content_list">{foreach item=dat from=$placeholder_list}{$dat.tel_placeholder};{$dat.tel_org|replace:"<br />":""};{$dat.tel_adwords|replace:"<br />":""}{/foreach}</textarea>
+        </fieldset>
+        <fieldset>
+            <legend>Speichern</legend>
+            <input type="submit" class="btn btn-info" value="Speichern" name="updateAdwordsTel" />
+        </fieldset>
+    </form>
+</div>
+
+</body>
+</html>
+{/if}

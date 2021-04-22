@@ -11,7 +11,7 @@
 #####################################
  */
 
-@error_reporting(E_ALL &~E_NOTICE);
+@error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE & ~E_DEPRECATED);
 date_default_timezone_set("Europe/Berlin");
 $start= microtime();
 if (function_exists("memory_get_usage")) {
@@ -281,7 +281,7 @@ $content->assign();
 
 // Error reporting für smarty senken, weil es pseudofehler sind
 $error_reporting = error_reporting();
-error_reporting($error_reporting & ~E_NOTICE & ~E_STRICT);
+error_reporting($error_reporting & ~E_WARNING & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT);
 
 // templates parsen
 $output = $smarty->fetch($template);
@@ -294,7 +294,13 @@ error_reporting($error_reporting);
 // Im Header Text-Codierung als UTF-8 versenden, da es sonst auf manchen Servern Probleme gibt.
 //if (($template!="link_list.html" and $template!="image_list.html"))
 #{
-header('Content-Type: text/html; charset=utf-8');
+$contentTypeSent = array_reduce(headers_list(), function ($sent, $header) {
+	return $sent || (bool)preg_match('~^Content-Type:~i', trim($header));
+}, false);
+
+if (!$contentTypeSent) {
+	header('Content-Type: text/html; charset=utf-8');
+}
 #}
 // Ausgabe
 
@@ -340,5 +346,7 @@ if ($aria=="standard/") {
 	}
 }
 $pluginintegrator->output_filter_admin();
+
+$output = str_ireplace('</form>','<input type="hidden" name="csrf_token" value="'.$_SESSION['csrf_token'].'"/> </form>',$output);
 
 print $output;

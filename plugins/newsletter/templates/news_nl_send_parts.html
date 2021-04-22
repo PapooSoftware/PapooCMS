@@ -1,0 +1,39 @@
+{if $IS_ADMIN}
+	{include file="head.inc.utf8.html"}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		
+		<h2>{$message_20001}</h2>
+		<div class="centermain">
+			<div class="main">
+				<h3>Papoo Newsletter Versand Bericht</h3>
+				<p>{$text1}</p>
+				{literal}
+				<script language="JavaScript">
+					<!--
+					function news_send_form()
+					{
+						document.nl_send_form.submit();
+					}
+					window.setTimeout("news_send_form()", 10000);
+					//-->
+				</script>
+				{/literal}
+				<form action="plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/news_nl_send_parts.html" method="post" name="nl_send_form">
+					<label>{$plugin.newsletter.text2.mails_per_step}</label>
+					<input name="mails_per_step" value="{$mails_per_step}" size="5" type="text" />
+					<input name="startfrom" value="{$startfrom}" type="hidden" />
+					<input name="timeout" value="{$timeout}" type="hidden" />
+					<input name="news_id" value="{$news_id}" type="hidden" />
+					<br />
+					<br />
+					<input name="send" value="{$plugin.newsletter.submit.send}" type="submit" />
+					<input name="abort" value="{$plugin.newsletter.submit.cancel}" type="button" {literal}onclick="if( confirm( 'Soll der Newsletter-Versand an die restlichen Abonnenten abgebrochen werden?' )) { document.location='plugin.php?cancel=1&menuid=1152&template=newsletter/templates/news_nl_send_parts.html'; }" />{/literal}
+					<p>{$text2}</p>
+				</form>
+			</div>
+		</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

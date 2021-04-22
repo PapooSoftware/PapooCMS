@@ -1,0 +1,67 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+<h2>{$plugin.form_manager.bearbeiten}</h2>
+		<p>
+{if $deleted}
+<strong>{$plugin.form_manager.delete}</strong>
+{/if}
+
+{if $eintragmakeartikelfertig}
+<!-- Die Artikel wurden durchgeloopt-->
+<h2>{$plugin.form_manager.eingetragen}</h2>
+{/if}
+{if $exist}
+<!-- Der Eintrag exisitiert schon-->
+<h2 style="color:red;">{$plugin.form_manager.existiert}</h2>
+{/if}
+
+{if $list}
+{$plugin.form_manager.liste}
+<ol>
+{foreach item=dat from=$list}
+<li>
+
+  <a href="{$fl_link}&form_manager_id={$dat.form_manager_id}">{$dat.form_manager_email} {$plugin.form_manager.bearbeiten2}</a>
+</li>
+{/foreach}
+</ol>
+{/if}
+{if $edit}
+<!-- Es soll ein neuer Eintrag erstellt werden -->
+{include file=../../plugins/form_manager/templates/formeingabe.html}
+ {/if}
+
+{if $fragedel}
+<h2>{$plugin.form_manager.loeschen}</h2>
+<form action="#" method="post">
+
+  <fieldset>
+   <legend>{$plugin.form_manager.loeschen2}
+    </legend>
+<strong>{$form_manager_email}</strong>
+
+  <input type="hidden" name="form_manager_id" value="{$form_manager_id}"/>
+  <br /><br />
+
+  <br />
+  <input style="background:red; float:left;margin-right:50px;" type="submit" name="submitdelecht" value="{$plugin.form_manager.loeschen3}"/>
+
+
+
+
+  </fieldset>
+  </form>
+{/if}
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

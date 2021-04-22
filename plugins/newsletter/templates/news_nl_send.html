@@ -1,0 +1,104 @@
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+<div class="artikel">
+{* {if !$mv_langsel} {* MV-Sprachauswahl ist noch nicht erfolgt *}
+{* {else} *}
+    <h2>{$message_20001}</h2> {* Newsletter verschicken *}
+	<p>{$plugin.newsletter.text2.news_send_tip}</p>
+    {if $langsel}<h2>{$langsel}</h2>{/if}
+    <h2>{$uberschrift}</h2>
+    {if $news_fehltgrp}
+        <div class="error">
+            {if $news_fehltgrp==1}{$news_grpfehlt} {* Keine Gruppe ausgewählt *}{/if}
+            {if $news_fehltgrp==2}{$message_20038} {* Nur "Alle..." oder einzelne Gruppen *}{/if}
+            {if $news_fehltgrp==3}{$message_20039} {* Gruppe Test nur allein *}{/if}
+        </div>
+    {/if}
+    {if $inhalt_html}
+        <!--<link rel="stylesheet" href="../newsletter/nl.css" type="text/css" />
+        <link rel="stylesheet" href="../newsletter/nl2.css" type="text/css" />-->
+        <h3>{$plugin.newsletter.inhalt_html}</h3>
+        {*<div id="newsletter-body" style="resize:both; position:relative; height:200px;border:1px solid #ddd;overflow:auto;padding:0 5px 0 5px">{$inhalt_html}</div>*}
+		<iframe id="newsletter-body" sandbox="allow-popups" src="./plugin.php?menuid={$menuid_aktuell}&amp;template=newsletter/templates/news_nl_send.html&amp;news_id={$news_id}&amp;preview=1" style="resize:both;width: 100%; height:350px;border:1px solid #ddd;overflow:auto;padding:0 5px 0 5px"><em>Die Vorschau kann in Ihrem Browser leider nicht angezeigt werden.</em></iframe>
+    {/if}
+    <h3>{$plugin.newsletter.inhalt_text}</h3>
+	<form name="AdminForm" action="" method="post">
+        <textarea name="inhalt" style="width:99%;height:200px;border:1px solid #ddd;overflow:auto;padding:0 0 0 5px" readonly="readonly">{$inhalt}</textarea>
+        {if $newsletter_file_list}
+            <fieldset>
+                <legend>{$newsmessage_20122a}</legend>
+                {foreach item=file from=$newsletter_file_list}
+                    <div style="height:18px">
+                        <a href="../plugins/newsletter/attachments/{$file.name_stored}" title="{$plugin.newsletter.linktext.news_edit_attachment}" target="_blank">{$file.name}</a> ({$file.name_stored} {$file.size} Bytes)
+                    </div>
+                {/foreach}
+            </fieldset>
+        {/if}
+        <fieldset>
+            <!-- Eingabe: -->
+            <legend>{$message_20021d}</legend>
+            {*<!-- Hier können Gruppen ausgewählt werden. -->*}
+            {*<!-- aa = Alle Abonnenten -->*}
+            {*<!-- Anzeige des Blocks nur sinnvoll, wenn eigene NL Gruppen angelegt wurden -->*}
+           	{if $grp_data}
+            	<p>{$plugin.newsletter.text2.groups_nl_send}</p>
+                {foreach item=gruppe from=$gruppe_data}
+                    {if $gruppe.grp_id == "aa"}
+                        <input type="checkbox" name="gruppe[aa]" id="gruppe_aa" {$gruppe.checked} value="aa" />
+                        <label for="gruppe_aa">{$message_20028}{if $flex}{$message_20030a}{/if} ({$message_20036}{$gesamtanz})</label><br />
+                    {/if}
+                    {if $gruppe.grp_id == "ag"}
+                        {*<!-- ag = Alle NL Gruppen-->*}
+                        <input type="checkbox" name="gruppe[ag]" id="gruppe_ag" {$gruppe.checked} value="ag" />
+                        <label for="gruppe_ag">{$message_20029} ({$message_20036}{$nlanz})</label>
+                    {/if}
+                {/foreach}
+                {*<!-- Liste der NL Gruppen-->*}
+                <p><strong>{$message_20031}:</strong> ({$message_20036}{$nlanz})</p>
+                {foreach item=nlgruppe from=$grp_data}
+                    <input type="checkbox" name="nlgruppe[{$nlgruppe.grp_id}]" id="nlgruppe_{$nlgruppe.grp_id}" {$nlgruppe.checked} value="{$nlgruppe.grp_id}" />
+                    <label for="nlgruppe_{$nlgruppe.grp_id}">{$nlgruppe.name} ({$message_20036}{$nlgruppe.anzahl})</label><br />
+                {/foreach}
+            {/if}
+			{*<!-- Liste der System Gruppen-->*}
+            <p><strong>{$message_20030}{if $flex}{$message_20030a}{/if}:</strong> ({$message_20036}{$sysanz})</p>
+            {foreach item=gruppe from=$gruppe_data}
+                {if $gruppe.grp_id != "aa" and $gruppe.grp_id != "ag"}
+					{if $gruppe.grp_id=="FS" AND $gruppe.name=="" AND $gruppe.checked}
+                    	<input type="checkbox" name="gruppe[{$gruppe.grp_id}]" id="gruppe_{$gruppe.grp_id}" {$gruppe.checked} value="{$gruppe.grp_id}" disabled="true" />
+						<label for="gruppe_{$gruppe.grp_id}">Beim letzten Versand wurde das Flex-Suchergebnis ber&uuml;cksichtigt</label><br />
+					{elseif $gruppe.name!=""}
+						<input type="checkbox" name="gruppe[{$gruppe.grp_id}]" id="gruppe_{$gruppe.grp_id}" {$gruppe.checked} value="{$gruppe.grp_id}" />
+						<label for="gruppe_{$gruppe.grp_id}">{$gruppe.name} ({$message_20036}{$gruppe.sys_anzahl})</label><br />
+					{/if}
+					
+                {/if}
+            {/foreach}
+            <br />
+        </fieldset>
+        {*<!-- Hier kann eine MetaGruppe aus der Flexverwaltung ausgewählt werden.-->*}
+        {if $metagruppen != ""}
+            <fieldset>
+                <legend>{$plugin.mv.news_verschicken}</legend>
+                {foreach item=metagruppe from=$metagruppen}
+                    <input type="checkbox" name="metagruppe[{$metagruppe.meta_id}]" id="metagruppe_{$metagruppe.meta_id}" value="{$metagruppe.meta_id}" />
+                    <label for="metagruppe_{$metagruppe.meta_id}">{$metagruppe.meta_name}</label>
+                    <br />
+                {/foreach}
+            </fieldset>
+        {/if}
+        <fieldset>
+            <!-- Eingabe: -->
+            <legend>{$message_20021}</legend> {* Verschicken *}
+            <input name="submit" class="submit_back_green" type="submit" value="{$message_20021}" />
+            <input name="submit" class="submit_back_red" type="submit" value="{$plugin.newsletter.submit.cancel}" />
+        </fieldset>
+        <input type="hidden" name="news_lang" value="{$news_lang}" />
+	</form>
+{* {/if} *}
+</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}

@@ -1,0 +1,99 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+	
+	
+	
+	{if $deleted}
+		<strong>{$plugin.glossar.deleted}</strong>
+	{/if}
+	
+	{if $eintragmakeartikelfertig}
+		<!-- Die Artikel wurden durchgeloopt-->
+		<h2>{$plugin.glossar.eingetragen}</h2>
+	{/if}
+	
+	{if $exist}
+		<!-- Der Eintrag exisitiert schon-->
+		<h2 style="color:red;">{$plugin.glossar.exist}</h2>
+	{/if}
+	
+	{if $list}
+	<h1 id="glossar_hier_bearbeiten_sie_die_glossareintrge" class="h1" >{$plugin_glossar_hier_bearbeiten_sie_die_glossareintrge}</h1>
+	<p id="glossar_um_einen_neuen_eintrag_zu_erstellen_klicken_sie_auf_den_folgenden_link" class="h1" >{$plugin_glossar_um_einen_neuen_eintrag_zu_erstellen_klicken_sie_auf_den_folgenden_link}</p>
+	<p>
+			<a href="./plugin.php?menuid={$aktive_menuid}&amp;template=glossar/templates/glossar_back.html&amp;glossar_action=neu">.. neuer Eintrag</a>
+		</p>
+		{$plugin.glossar.liste}
+		
+		<ol>
+			{foreach item=dat from=$list_dat}
+				<li>
+					<a href="{$link_glossar}{$dat.glossar_id}">&quot;{$dat.glossar_Wort}&quot; --- {$plugin.glossar.bearbeiten}</a>
+				</li>
+			{/foreach}
+		</ol>
+		
+	{/if}
+	
+	{if $neuereintrag}
+		<!-- Es soll ein neuer Eintrag erstellt werden -->
+		{include file=../../../plugins/glossar/templates/inc_glossar_eingabe.html}
+	{/if}
+	
+	{if $edit}
+		<!-- Es soll ein Eintrag bearbeitet werden -->
+		{include file=../../../plugins/glossar/templates/inc_glossar_eingabe.html}
+	{/if}
+	
+	
+	{if $fragedel}
+		<h2>{$plugin.glossar.fragedel}</h2>
+		<form action="" method="post">
+			<input type="hidden" name="glossar_action" value="loeschen_echt" />
+			<input type="hidden" name="glossarid" value="{$glossarid}" />
+			
+			<fieldset>
+				<legend>{$plugin.glossar.fragedel2}</legend>
+				<strong>{$glossarname}</strong>
+				<br />
+				<br />
+				<input class="submit_back_red" type="submit" name="submitdelecht" value="{$plugin.glossar.loeschen}"/>
+			</fieldset>
+		</form>
+	{/if}
+
+ 
+
+ 
+{if $is_dev}
+ #start#
+	<span class="ignore"></span>
+
+  <!-- Der Start Button ist notwendig damit sich das System daran aufhängen kann. -->
+	 <div class="rapid_form">
+		<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="plugin_glossar" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="glossar_class" />
+		<!-- Das Standarpräfix für die Ids -->
+		<input type="hidden" name="praefix" value="glossar" />
+		<!-- Das Standarpräfix für die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="glossar" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div> {/if}
+	
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

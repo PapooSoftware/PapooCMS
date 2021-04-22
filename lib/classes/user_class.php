@@ -100,6 +100,32 @@ class user_class
 	}
 
 	/**
+	 * @param string $username
+	 * @return bool
+	 */
+	public static function exists(string $username): bool
+	{
+		/** @var cms $cms */
+		global $cms;
+		/** @var ezSQL_mysqli $db */
+		global $db;
+
+		return (bool)$db->query(
+			"SELECT * FROM {$cms->tbname['papoo_user']} WHERE username LIKE '{$db->escape($username)}'"
+		);
+	}
+
+	/**
+	 * @param string $username
+	 * @return string
+	 */
+	public static function makeUniqueUsername(string $username): string
+	{
+		for ($i = 0; self::exists($username.($suffix = $i ?: '')); $i++);
+		return $username.$suffix;
+	}
+
+	/**
 	 * user_class::get_groups
 	 * Holt alle dem User zugehoerigen Gruppen und gibt diese als Array zurueck.
 	 * @param bool $cached If false, a new query is sent to the database server, thus receiving fresh data.
@@ -1415,6 +1441,9 @@ class user_class
 				else {
 					// Template Formular anzeigen
 					if (!empty ($this->checked->loginnow)) {
+						// Benutzereingaben überprüfen
+						$this->check_data();
+
 						if ($this->spamschutz->is_spam) {
 							$this->namefalsch = "1";
 						}

@@ -1,0 +1,73 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+{if $is_eingetragen=="ok"}
+  <div class="message"> {$plugin_fb_plugin_die_daten_wurden_gespeichert}
+
+</div>
+{/if}
+{if $redirect_error}
+<div class="error">{$redirect_error}</div>
+{/if}
+<div class="artikel">
+
+ <h1 id="redirect301_plugin_301_redirects_hier_erstellen" class="h1" >{$plugin_redirect301_plugin_301_redirects_hier_erstellen}</h1>
+
+ <p id="redirect301_plugin_hier_knnen_sie_die_301" class="h1" >{$plugin_redirect301_plugin_hier_knnen_sie_die_301}<br />{$plugin_redirect301_plugin_alte_webseite_neue_webseite}</p>
+
+ <p id="redirect301_plugin_linkbeispiel" class="h1" >{$plugin_redirect301_plugin_linkbeispiel}</p>
+
+ <p id="redirect301_plugin_sie_knnen_die_daten_einfach_unter" class="h1" >{$plugin_redirect301_plugin_sie_knnen_die_daten_einfach_unter}</p>
+
+
+
+
+
+
+
+<form method="post" action="" id="formi" style="width:99%">
+ <fieldset>
+<legend>{$plugin_redirect301_plugin_redirekt_liste}</legend>
+ <label for="redirect301_plugin_redirect_liste">{$plugin_redirect301_plugin_redirect_liste}{$plugin_error.redirect301_plugin_redirect_liste} </label><br />
+
+<textarea cols="100" rows="30" style="width:98%;" name="redirect301_plugin_redirect_liste"  class="redirect301_plugin_redirect_liste" id="redirect301_plugin_redirect_liste">{$redirect301_plugin_redirect_liste_data|escape:"html"}</textarea>
+<br />
+</fieldset><br />
+
+<fieldset>
+ 	<legend>{$message_70}</legend>
+			<!-- Speichern -->
+	<input  type="submit" class="submit_back_green" value="{$message_70}" name="formSubmit_301_settings" />
+			
+		</fieldset>
+    </form>
+    
+ 
+ {if $is_dev}  #start#
+ <span class="ignore"></span>
+  <!-- Der Start Button ist notwendig damit sich das System daran aufhängen kann. -->
+	 <div class="rapid_form">
+		<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="plugin_301_config" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="redirect301_class" />
+		<!-- Das Standarpräfix für die Ids -->
+		<input type="hidden" name="praefix" value="redirect301_plugin" />
+		<!-- Das Standarpräfix für die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="redirect301_plugin" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div>
+
+{/if}
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

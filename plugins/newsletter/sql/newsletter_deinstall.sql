@@ -1,0 +1,13 @@
+DROP TABLE IF EXISTS `XXX_papoo_news_impressum`; ##b_dump##
+DROP TABLE IF EXISTS `XXX_papoo_news_user`; ##b_dump##
+DROP TABLE IF EXISTS `XXX_papoo_newsletter`; ##b_dump##
+DROP TABLE IF EXISTS `XXX_papoo_newsletter_messages`; ##b_dump##
+DROP TABLE IF EXISTS `XXX_papoo_news_imp_lang`; ##b_dump##
+DROP TABLE IF EXISTS `XXX_papoo_news_gruppen`; ##b_dump##
+DROP TABLE IF EXISTS `XXX_papoo_news_attachments`; ##b_dump##
+DROP TABLE IF EXISTS `XXX_papoo_news_protocol_attachments`; ##b_dump##
+DROP TABLE IF EXISTS `XXX_papoo_news_protocol_newsletter`; ##b_dump##
+DROP TABLE IF EXISTS `XXX_papoo_news_protocol_user`; ##b_dump##
+DROP TABLE IF EXISTS `XXX_papoo_news_error_report`; ##b_dump##
+DROP TABLE IF EXISTS `XXX_papoo_news_error_report_details`; ##b_dump##
+DROP TABLE IF EXISTS `XXX_papoo_news_user_lookup_gruppen`; ##b_dump##

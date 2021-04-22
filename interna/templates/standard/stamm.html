@@ -1,12 +1,12 @@
 {if $IS_ADMIN}
 	{include file=head.inc.utf8.html}
 	{include file=menu.inc.html}
-	{if $alerts}
-		{foreach from=$alerts item=alert}
-			<div role="alert" class="{$alert.type}">{$alert.content}</div>
-		{/foreach}
-	{/if}
 	<div class="artikel">
+		{if $alerts}
+			{foreach from=$alerts item=alert}
+				<div role="alert" class="{$alert.type}">{$alert.content}</div>
+			{/foreach}
+		{/if}
 		{if $sysinfo}
 			<fieldset class="storageinfo">
 				<legend>Festplatten-Speicherplatz</legend>

@@ -1,0 +1,61 @@
+<div class="settings-saved message hidden" name="menu">{$message.plugin.noindex.024}</div>
+<div class="settings-saving message hidden" name="menu">{$message.plugin.noindex.023}</div>
+<div class="settings-error error hidden" name="menu">{$message.plugin.noindex.025}</div>
+
+<h1>{$message.plugin.noindex.011}</h1>
+
+{$message.plugin.noindex.006}
+
+<form action="" method="POST" class="noindex_noreload" name="menu" id="noindex_form_menu">
+    <fieldset>
+    <div id="inhalt_menu">
+        {foreach item=kat from=$catlist_data}
+        {if $kat.cat_id>=1}<h2 class="menucat">{$kat.cat_text}</h2>{/if}
+        <ul  class="artikel_sitemap">
+            {foreach item=menu from=$menulist_data}
+            {if $menu.nummer}
+            {if $kat.cat_id==$menu.cat_cid or $no_categories==1}
+            {$menu.shift_anfang}
+            <div>
+                {if $menu.has_rights}
+                    {if $menu.menulink=="shop.php" or $menu.menulink=="shop"}
+                        <i class="fa fa-shopping-cart"></i>
+                    {else}
+                        {if $menu.extern}
+                            <i class="fa fa-share"></i>
+                        {elseif $menu.template}
+                            <i class="fa fa-cog"></i>
+                        {else}
+                            <i class="fa fa-folder-open"></i>
+                        {/if}
+                    {/if}
+
+                <input type="hidden" value="0" name="noindex_menu[{$menu.menuid}]">
+                {$menu.nummer}: {$menu.menuname} <input type="checkbox" value="1" name="noindex_menu[{$menu.menuid}]" {if isset($plugin.noindex.menu_checks[$menu.menuid])}checked{/if}>
+
+                {else}
+                    <a class="no_active_link" href="javascript:return false;" menuid="{$menu.menuid}" title="{$menu.menutitel.text|escape:"html"}"> {if $menu.menulink=="shop.php" or $menu.menulink=="shop"}
+                    <i class="fa fa-shopping-cart"></i>
+                {else}
+                {if $menu.extern}
+                    <i class="fa fa-share"></i>
+                {elseif $menu.template}
+                    <i class="fa fa-cog"></i>
+                {else}
+                    <i class="fa fa-folder-open"></i>
+                {/if}
+                {/if}{$menu.nummer}: {$menu.menuname}</a>
+                {/if}
+            </div>
+            {$menu.shift_ende}
+            {/if}
+            {/if}
+            {/foreach}
+        </ul>
+        {/foreach}
+    </div>
+    </fieldset>
+    <fieldset>
+        <input type="submit" class="btn btn-info" value="{$message_70}">
+    </fieldset>
+</form>

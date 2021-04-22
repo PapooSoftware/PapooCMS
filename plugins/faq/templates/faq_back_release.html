@@ -1,0 +1,44 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		
+		{include file=../../../plugins/faq/templates/faq_menue.html}
+		<h2>{$plugin.faq_back.pageheader.faq_release}</h2>
+		<p>{$plugin.faq_back.text.faq_count} {$faq_anzahl}.<br />{$plugin.faq_back.text.faq_count_release} {$faq_release_anzahl}.</p>
+		<p>{$plugin.faq_back.text.faq_release_text}</p>
+		{if $fehler1}<div class="error">{$plugin.faq_back.errmsg.incorrect_faq_id}</div>{/if}
+		{if $fehler2}<div class="error">{$plugin.faq_back.errmsg.wrong_release2}</div>{/if}
+		{if $faq_is_released == "j"}<div class="message">{$plugin.faq_back.message.faq_released}</div>{/if}
+		{if $faq_order == "question"}<p class="bold_red">{$plugin.faq_back.text.faq_back_sort_question}</p>{/if}
+		{if $faq_order == "created"}<p class="bold_red">{$plugin.faq_back.text.faq_back_sort_created}</p>{/if}
+		{if $faq_order == "createdby"}<p class="bold_red">{$plugin.faq_back.text.faq_back_sort_createdby}</p>{/if}
+		{if $faq_order == "order_id"}<p class="bold_red">{$plugin.faq_back.text.faq_back_sort_user}</p>{/if}
+{* Liste der gesperrten FAQs anzeigen *}
+		<table class="faqs">
+			<tr>
+				<th id="question" {if $faq_order == "question"}class="bold_red"{/if}>{$plugin.faq_back.text.faq_offene_frage}</th>
+				<th id="creation_date" {if $faq_order == "created"}class="bold_red"{/if}>{$plugin.faq_back.text.faq_created}</th>
+				<th id="author" {if $faq_order == "createdby"}class="bold_red"{/if}>{$plugin.faq_back.text.faq_createdby}</th>
+				<th id="release" class="align_center">{$plugin.faq_back.text.faq_rel}</th>
+			</tr>
+			{foreach item=faq_list from=$faq_release}
+			<tr class="cat_row">
+					<td headers="question">
+						<a href="?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_back_edit.html&amp;faq_id={$faq_list.id}" title="{$plugin.faq_back.linktext.faq_edit}">{$faq_list.question}</a>
+						{if $faq_list.orphan} {* Verwaist *}
+							<span class="bold_red"> {$plugin.faq_back.text.faq_orphan}</span>
+						{/if}
+					</td>
+					<td headers="creation_date">{$faq_list.created}</td>
+					<td headers="author">{$faq_list.createdby}</td>
+					<td headers="release" class="align_center"><a href="?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_back_release.html&amp;faq_id={$faq_list.id}&amp;lock=j" title="{$plugin.faq_back.linktext.faq_offene_release}">X</a></td>
+				</tr>
+			{/foreach}
+		</table>
+		{include file=weiter.inc.html}
+	</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

@@ -1,0 +1,461 @@
+#menu_1 {
+		background-image: url(../bilder/home.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_3 {
+		background-image: url(../bilder/forum.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_4 {
+		background-image: url(../bilder/user.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_5 {
+		background-image: url(../bilder/artikel.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_6 {
+		background-image: url(../bilder/gruppe_erstellen.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_7 {
+		background-image: url(../bilder/user_erstellen.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_8 {
+		background-image: url(../bilder/user_aendern.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_9 {
+		background-image: url(../bilder/gruppe_aendern.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_10 {
+		background-image: url(../bilder/artikel_erstellen.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_11 {
+		background-image: url(../bilder/artikel_aendern.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_14 {
+		background-image: url(../bilder/menu.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_15 {
+		background-image: url(../bilder/spalte.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_16 {
+		background-image: url(../bilder/spalte_erstellen.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_17 {
+		background-image: url(../bilder/spalte_aendern.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_18 {
+		background-image: url(../bilder/stamm.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_19 {
+		background-image: url(../bilder/bild.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_20 {
+		background-image: url(../bilder/bild_erstellen.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_21 {
+		background-image: url(../bilder/bild_aendern.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_22 {
+		background-image: url(../bilder/templates.png);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_23 {
+		background-image: url(../bilder/link.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_24 {
+		background-image: url(../bilder/link_erstellen.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_25 {
+		background-image: url(../bilder/link_aendern.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_26 {
+		background-image: url(../bilder/auszeichnung.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_27 {
+		background-image: url(../bilder/abk_erstellen.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_28 {
+		background-image: url(../bilder/abk_aendern.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_29 {
+		background-image: url(../bilder/lang_erstellen.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_30 {
+		background-image: url(../bilder/lang_aendern.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_31 {
+		background-image: url(../bilder/file.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_32 {
+		background-image: url(../bilder/file_open.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_33 {
+		background-image: url(../bilder/file_aendern.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_34 {
+		background-image: url(../bilder/mail_get.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_35 {
+		background-image: url(../bilder/mail_write.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_36 {
+		background-image: url(../bilder/unknown.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_37 {
+		background-image: url(../bilder/list.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_38 {
+		background-image: url(../bilder/edit.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_40 {
+		background-image: url(../bilder/forum_erstellen.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_41 {
+		background-image: url(../bilder/forum_bearbeiten.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_42 {
+		background-image: url(../bilder/forum_bearbeiten.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_43 {
+		background-image: url(../bilder/menu_erstellen.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_44 {
+		background-image: url(../bilder/menu_aendern.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_45 {
+		background-image: url(../bilder/reihe.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_46 {
+		background-image: url(../bilder/reihe.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_47 {
+		background-image: url(../bilder/plugin.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_48 {
+		background-image: url(../bilder/kontakt.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_49 {
+		background-image: url(../bilder/meta.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_50 {
+		background-image: url(../bilder/rechte.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_53 {
+		background-image: url(../bilder/reload.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_54 {
+		background-image: url(../bilder/plugin.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_55 {
+		background-image: url(../bilder/inhalt.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_56 {
+		background-image: url(../bilder/system.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_57 {
+		background-image: url(../bilder/user.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_58 {
+		background-image: url(../bilder/menutop.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_59 {
+		background-image: url(../bilder/automatik.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_61 {
+		background-image: url(../bilder/info.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_62 {
+		background-image: url(../bilder/ordner.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_63 {
+		background-image: url(../bilder/ordner.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_64 {
+		background-image: url(../bilder/info.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_65 {
+		background-image: url(../bilder/info.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_66 {
+		background-image: url(../bilder/cat.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_67 {
+		background-image: url(../bilder/cat.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_68 {
+		background-image: url(../bilder/cat.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_69 {
+		background-image: url(../bilder/cat.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_70 {
+		background-image: url(../bilder/video.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_71 {
+		background-image: url(../bilder/video.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_72 {
+		background-image: url(../bilder/video.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_73 {
+		background-image: url(../bilder/kontakt.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_81 {
+		background-image: url(../bilder/layout.png);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_82 {
+		background-image: url(../bilder/blacklist.png);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_83 {
+		background-image: url(../bilder/content_template.png);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_87 {
+		background-image: url(../bilder/logfiles.png);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_88 {
+		background-image: url(../bilder/video.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1007 {
+		background-image: url(../../plugins/devtools/bilder/newdump_icon.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1008 {
+		background-image: url(../../plugins/devtools/bilder/modlang_icon.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1017 {
+		background-image: url(../../plugins/aktivierung/bilder/aktivierung_plugin.png);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1021 {
+		background-image: url(../../plugins/galerie/bilder/menu_icon.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1022 {
+		background-image: url(../../plugins/galerie/bilder/menu_icon.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1023 {
+		background-image: url(../../plugins/galerie/bilder/menu_icon.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1024 {
+		background-image: url(../../plugins/galerie/bilder/menu_icon.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1025 {
+		background-image: url(../../plugins/galerie/bilder/menu_icon.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1026 {
+		background-image: url(../../plugins/freiemodule/bilder/pic_01.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1027 {
+		background-image: url(../../plugins/freiemodule/bilder/pic_01.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1028 {
+		background-image: url(../../plugins/freiemodule/bilder/pic_01.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1029 {
+		background-image: url(../../plugins/bootstrapdropdown/images/dropdown.png);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1036 {
+		background-image: url(../../plugins/content_manipulator/bilder/pic_01.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1037 {
+		background-image: url(../../plugins/google_maps/bilder/pic_01.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1067 {
+		background-image: url(../../plugins/rssfeed/bilder/logo_klein.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1068 {
+		background-image: url(../../plugins/rssfeed/bilder/logo_klein.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1069 {
+		background-image: url(../../plugins/rssfeed/bilder/logo_klein.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1071 {
+		background-image: url(../../plugins/sprechomat/bilder/sprechomat_backend_icon.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1072 {
+		background-image: url(../../plugins/sprechomat/bilder/sprechomat_backend_icon.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1073 {
+		background-image: url(../../plugins/sprechomat/bilder/sprechomat_backend_icon.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1074 {
+		background-image: url(../../plugins/sprechomat/bilder/sprechomat_backend_icon.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1075 {
+		background-image: url(../../plugins/blogger/bilder/blogger.png);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1076 {
+		background-image: url(../../plugins/);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1077 {
+		background-image: url(../../plugins/);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1080 {
+		background-image: url(../../plugins/pkalender/bilder/cal.png);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1081 {
+		background-image: url(../../plugins/pkalender/bilder/cal2.png);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1082 {
+		background-image: url(../../plugins/pkalender/bilder/date.png);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1083 {
+		background-image: url(../../plugins/devtools/bilder/devtools_icon.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1084 {
+		background-image: url(../../plugins/devtools/bilder/reorder_icon.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1085 {
+		background-image: url(../../plugins/devtools/bilder/debug_icon.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1086 {
+		background-image: url(../../plugins/devtools/bilder/cachecleaner_icon.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1087 {
+		background-image: url(../../plugins/devtools/bilder/versioncleaner_icon.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1088 {
+		background-image: url(../../plugins/devtools/bilder/newdump_icon.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1089 {
+		background-image: url(../../plugins/devtools/bilder/modlang_icon.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1090 {
+		background-image: url(../../plugins/devtools/bilder/autocontent_icon.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1091 {
+		background-image: url(../../plugins/);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1092 {
+		background-image: url(../../plugins/bildwechsler/bilder/menue_icon.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1093 {
+		background-image: url(../../plugins/usefulservices/bilder/logo_klein.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1094 {
+		background-image: url(../../plugins/usefulservices/bilder/logo_klein.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1095 {
+		background-image: url(../../plugins/usefulservices/bilder/logo_klein.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1096 {
+		background-image: url(../../plugins/usefulservices/bilder/logo_klein.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1097 {
+		background-image: url(../../plugins/usefulservices/bilder/logo_klein.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1098 {
+		background-image: url(../../plugins/usefulservices/bilder/logo_klein.gif);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}#menu_1099 {
+		background-image: url(../../plugins/dsgvo/images/dsgvo.png);
+		background-repeat: no-repeat;
+		background-position: 0.2em  0.3em;
+	}

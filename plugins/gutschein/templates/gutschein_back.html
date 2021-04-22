@@ -1,0 +1,84 @@
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+<div class="artikel">
+
+{if $is_send_gutschein}
+<div class="message">
+ {$plugin_gutschein_gutschein_wurde_versendet}
+</div>
+{/if}
+{if $is_no_send_gutschein}
+<div class="error">
+ {$plugin_gutschein_gutschein_wurde_nicht_versendet}
+</div>
+{/if}
+<h1 id="gutschein_gutschein_versenden" class="h1" >{$plugin_gutschein_gutschein_versenden}</h1>
+
+<p id="gutschein_das_plugin_versendet_automatisch_die" class="h1" >{$plugin_gutschein_das_plugin_versendet_automatisch_die}</p>
+
+<p id="gutschein_alternativ" class="h1" >{$plugin_gutschein_alternativ}</p>
+
+<h2 id="gutschein_folgende_gutscheine_nochmal_versenden" class="h2" >{$plugin_gutschein_folgende_gutscheine_nochmal_versenden}</h2>
+
+{include file=weiter.inc.html}
+ <table style="width: 99%;">
+ <tr>
+ <th>{$plugin_gutschein_belegnummer}</th>
+ <th>{$plugin_gutschein_belegdatum}</th>
+ <th>{$plugin_gutschein_vorname}</th>
+ <th>{$plugin_gutschein_nachname}</th>
+ <th>Status</th>
+ <th>{$plugin_gutschein_pdf_anschauen}</th>
+ <th> {$plugin_gutschein_gutschein_jetzt_verschicken}</th>
+ </tr>
+{foreach from=$order_datan item=oit key=keyit name=naorder}
+<tr {if !$oit.gutschein_is_send and $oit.order_is_payd}style="font-weight: bold"{/if} {if !$oit.order_is_payd}style="font-style: italic"{/if}>
+<td>{$oit.order_order_number}</td>
+<td>{$oit.order_last_change}</td>
+<td>{$oit.kunden_order_vorname}</td>
+<td>{$oit.kunden_order_name}</td>
+<td>{if $oit.gutschein_is_send}versandt{elseif $oit.order_is_payd}bezahlt{else}ausstehend{/if}</td>
+<td>
+{foreach from=$oit.products item=prod}
+	<a target="_blank" type="application/pdf" href="./plugin.php?menuid={$menuid_aktuell}&amp;template=gutschein/templates/gutschein_back.html&amp;show_pdf_gutschein={$oit.order_id}&amp;product_id={$prod.produkte_order_produkt_id}">{$prod.produkte_order_produktname}</a>
+{/foreach}
+</td>
+<td>
+	{if $oit.versand_per_mail}
+	<a href="./plugin.php?menuid={$menuid_aktuell}&amp;template=gutschein/templates/gutschein_back.html&amp;send_gutschein={$oit.order_id}">{$plugin_gutschein_gutschein_verschicken}</a></td>
+	{else}
+	<a href="./plugin.php?menuid={$menuid_aktuell}&amp;template=gutschein/templates/gutschein_back.html&amp;to_order_info={$oit.order_id}">Versand per Post</a>
+	{/if}
+
+</tr>
+
+
+
+{/foreach}
+</table>
+{include file=weiter.inc.html}
+{if $is_dev}
+ <span class="ignore"> 
+<br /> 
+
+ #start#
+</span>
+  <!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+	 <div class="rapid_form">
+		<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="plugin_gutschein" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="plugin_gutschein" />
+		<!-- Das Standarpr�fix f�r die Ids -->
+		<input type="hidden" name="praefix" value="gutschein" />
+		<!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="gutschein" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div>
+{/if}
+  </div>
+
+{include file=foot.inc.html}

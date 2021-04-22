@@ -1,0 +1,28 @@
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+<div class="artikel">
+	<h1>{$plugin.mv.import_export}</h1>
+	{*<!-- Gibt das Protokoll als Tabelle aus -->*}
+	<table>
+		<tr>
+			{foreach from=$mv_import_protokoll item=feld name=fe1}
+				{if $smarty.foreach.fe1.first}
+					{foreach key=feldname item=feldwert from=$feld}
+						<th>{$feldname}</th>
+					{/foreach}
+				{/if}
+			{/foreach}
+		</tr>
+		{foreach item=feld from=$mv_import_protokoll}
+			<tr>
+				{foreach key=feldname item=feldwert from=$feld}
+					<td style="text-align:left">{$feldwert}</td>
+				{/foreach}
+			</tr>
+		{/foreach}
+	</table>
+	{*<!-- Rechte Fehlermeldung-->*}
+	{include file=rechte.html}
+</div>
+</body>
+</html>

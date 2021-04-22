@@ -1,0 +1,118 @@
+{if $form=="ok"}
+
+<p>{$plugin.form_manager.eintraegeuebersicht}</p>
+{literal}
+<script type="text/javascript">
+    $(function() {
+        $('#gutschein_nachrichten_lschen_von').datepicker({
+            dateFormat: 'dd.mm.yy',
+            changeMonth: true,
+            changeYear: true,
+            maxDate: '-1d'
+        });
+    });
+    $(function() {
+        $('#gutschein_bis').datepicker({
+            dateFormat: 'dd.mm.yy',
+            changeMonth: true,
+            changeYear: true,
+            maxDate: '+0d'
+        });
+    });
+</script>
+
+{/literal}
+
+<form action="" method="post" name="video" enctype="multipart/form-data">
+
+    <fieldset>
+        <legend>{$plugin_gutschein_nachrichten_lschen_von} - {$plugin_gutschein_bis}</legend>
+        <div class="labdivx"><label style="float:left;margin-right:20px;" for="gutschein_nachrichten_lschen_von">{$plugin_gutschein_nachrichten_lschen_von}{$plugin_error.gutschein_nachrichten_lschen_von} </label>
+
+            <input type="text" style="width:100px;float:left;margin-right:20px;" name="gutschein_nachrichten_lschen_von" value="{$gutschein.0.gutschein_nachrichten_lschen_von|escape:"html"}" class="gutschein_nachrichten_lschen_von" id="gutschein_nachrichten_lschen_von"/>
+            <label for="gutschein_bis" style="width:30px;float:left;margin-right:20px;">{$plugin_gutschein_bis}{$plugin_error.gutschein_bis} </label>
+
+            <input type="text" style="width:100px;"  name="gutschein_bis" value="{$gutschein.0.gutschein_bis|escape:"html"}" class="gutschein_bis" id="gutschein_bis"/>
+            <input type="submit" name="del_fieldplus" class="submit_back_red" value="{$plugin_gutschein_jetzt_lschen}">
+        </div>
+    </fieldset>
+
+</form>
+<br />
+
+
+<a href="javascript:history.go(-1)">{$plugin.form_manager.zurck}</a>
+
+<a href="{$lead_liste_link}&export=now" style="float:right;">{$plugin.form_manager.exportieren}</a>
+
+<form action="" method="post" name="video" enctype="multipart/form-data">
+    <table style="width:99%;" class="outside  table table-striped table-hover">
+        <tr>
+
+            {foreach item=dat from=$lead_felder_selected}
+            <th>{$dat.form_manager_content_lead_feld_name}</th>
+            {/foreach}
+            <th style="width:50px;">{$plugin.form_manager.nichtleoschen}</th>
+
+            <th >{$plugin.form_manager.Bearbeiten}</th>
+            <th style="width:50px;">{$plugin.form_manager.eintragloeschen}</th>
+        </tr>
+        {foreach item=dat from=$lead_list}
+        <tr>
+            {foreach item=lead_name from=$lead_felder_selected}
+            {foreach item=der_name from=$lead_name}
+            <td>{$dat.$der_name}</td>
+            {/foreach}
+            {/foreach}
+            <td><input value="1" {if $dat.form_manager_form_loesch_yn==1}checked="checked"{/if} name="loeschbar[{$dat.form_manager_lead_id}]" type="checkbox"></td>
+            <td><a href="{$lead_liste_link}&lead_id={$dat.form_manager_lead_id}">{$plugin.form_manager.eintragnr} {$dat.form_manager_lead_id} {$plugin.form_manager.anschauen}</a></td>
+            <td><input type="checkbox" value="1" name="loesch[{$dat.form_manager_lead_id}]">
+                <input type="hidden" value="1" name="daten[{$dat.form_manager_lead_id}]">
+            </td>
+
+        </tr>
+
+        {/foreach}
+    </table>
+    <div style="width:99%;height:80px;">
+        <fieldset style="width:99%;float:right;">
+            {*<!-- Eintragen: -->*}
+            <legend>{$message_224}:</legend>
+            {*<!-- In die Datenbank eintragen -->*}
+            <input type="submit" class="submit_back_green_big" name="submit_all_fields" value="{$plugin.form_manager.aenderungspeichern}" />
+        </fieldset>
+    </div>
+
+</form>
+{*<!-- weitere Seiten -->*}
+{include file=weiter.inc.html}
+<h2>{$plugin.form_manager.felderausw}</h2>
+<form action="" method="post" name="video" enctype="multipart/form-data">
+    <fieldset>
+        <legend>{$plugin.form_manager.feldausw}</legend>
+        <label for="form_manager_content_lead_feld_name ">{$plugin.form_manager.wfeldaus}</label><br>
+        <select name="form_manager_content_lead_feld_name" id="form_manager_content_lead_feld_name" size="1">
+
+            <option value="datum">{$plugin.form_manager.Datumdefault}</option>
+            {foreach item=dat key=dk from=$lead_felder_liste}
+            <option value="{$dk}">{$dk}</option>
+            {/foreach}
+        </select>
+    </fieldset>
+    <input type="hidden" name="form_manager_id" value="{$form_manager_id}" />
+
+    <fieldset>
+        {*<!-- Eintragen: -->*}
+        <legend>{$message_719}</legend>
+        <input type="submit" name="del_fieldplus" class="submit_back_red" value="{$message_720}"><br />
+    </fieldset>
+    <fieldset>
+        {*<!-- Eintragen: -->*}
+        <legend>{$message_224}:</legend>
+        {*<!-- In die Datenbank eintragen -->*}
+        <input type="submit" class="submit_back_green" name="submit_fieldplus" value="{$plugin.form_manager.Hinzufgen}" />
+    </fieldset>
+
+</form>
+
+{/if}

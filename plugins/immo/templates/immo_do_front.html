@@ -1,0 +1,37 @@
+<a  id="artikel"></a><span class="ignore">.</span><script>$('#modulmod_newsletter').remove();</script>
+<div class="floatbox artikel_details">
+{if $is_search}
+<div class="form-bg_search">
+<strong>Finden Sie Ihre Immobilie</strong>
+<form id="form1" class="form-style" method="post" action="{$webverzeichnis}objekte/">
+<label><span>Typ</span> 
+<strong class="select1">
+<select name="immotyp">
+<option value="">--Wählen Sie--</option>
+#select_typ#</select>
+</strong> 
+</label> 
+
+<label>
+<span>Region / Ort</span> 
+<strong class="select1">
+<select name="region">
+<option value="">--Wählen Sie--</option>
+#regionen#</select>
+</strong> 
+</label> 
+<label class="searchlabel"><span>Freie Suche</span>
+<input type="text" name="search_immo" class="searchimmo" value="{$search_immo}"/></label>
+<div class="btns"><input type="submit" class="button-1" name="search_button" value="Suche starten" />
+</div>
+</form>
+</div>
+<div class="clear"></div>
+{/if}
+
+{foreach from=$ausgabe_immo item=immo key=kimmo name=nimmo}
+<div class="immo_item">{$immo}</div>
+{/foreach}
+		{*<!--weitere Seiten -->*}
+		{include file="_module_intern/mod_weiter.html}
+</div>

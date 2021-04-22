@@ -1,0 +1,63 @@
+{if $IS_ADMIN}
+	<h1>{$plugin.faq_back.pageheader.faq_main}</h1>
+	<div class="height_70">
+{* Neu *}
+		<div class="faq_tool">
+			<a class="faq_tool_edit" href="./plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_back_new.html" title="{$plugin.faq_back.linktext.faq_create}">
+				<img src="../plugins/faq/bilder/faq_new.gif" width="25" height="27" alt="{$plugin.faq_back.linktext.faq_create}" title="{$plugin.faq_back.linktext.faq_create}" border="0" align="middle" />
+				<br />
+				{$plugin.faq_back.text.faq_new}</a>
+		</div>
+	
+{* Edit *}
+		<div class="faq_tool">
+			<a class="faq_tool_edit" href="./plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_back_edit.html&amp;faq_back_edit_list=1" title="{$plugin.faq_back.linktext.faq_edit}">
+				<img src="../plugins/faq/bilder/faq_edit.gif" width="24" height="27" alt="{$plugin.faq_back.linktext.faq_edit}" title="{$plugin.faq_back.linktext.faq_edit}" border="0" align="middle" />
+				<br />
+				{$plugin.faq_back.text.faq_edit}</a>
+		</div>
+	
+{* Sortieren nur bei benutzerdefinierter Reihenfolge in der Konfiguration *}
+		{if $faq_order == "order_id"}
+			<div class="faq_tool">
+				<a class="faq_tool_edit" href="./plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_back_renum.html" title="{$plugin.faq_back.linktext.faq_renum}">
+					<img src="../plugins/faq/bilder/faq_renumber.gif" width="24" height="27" alt="{$plugin.faq_back.linktext.faq_renum}" title="{$plugin.faq_back.linktext.faq_renum}" border="0" align="middle" />
+					<br />
+					{$plugin.faq_back.text.faq_renum}</a>
+			</div>
+		{/if}
+	
+{* Gesperrte FAQs *}
+		<div class="faq_tool">
+			<a class="faq_tool_edit" href="./plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_back_release.html" title="{$plugin.faq_back.linktext.faq_release}">
+				<img src="../plugins/faq/bilder/faq_release.gif" width="24" height="27" alt="{$plugin.faq_back.linktext.faq_release}" title="{$plugin.faq_back.linktext.faq_release}" border="0" align="middle" />
+				<br />
+				{$plugin.faq_back.text.faq_release}</a>
+		</div>
+	
+{* Neu aus Frontend *}
+		<div class="faq_tool">
+			<a class="faq_tool_edit" href="./plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_back_new_frontend.html" title="{$plugin.faq_back.linktext.faq_new_frontend}">
+				<img src="../plugins/faq/bilder/faq_new.gif" width="25" height="27" alt="{$plugin.faq_back.linktext.faq_new_frontend}" title="{$plugin.faq_back.linktext.faq_new_frontend}" border="0" align="middle" />
+				<br />
+				{$plugin.faq_back.text.faq_new_frontend}</a>
+		</div>
+	
+{* Offene Fragen *}
+		<div class="faq_tool">
+			<a class="faq_tool_edit" href="./plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_back_offene.html" title="{$plugin.faq_back.linktext.faq_offene}">
+			<img src="../plugins/faq/bilder/faq_offene.gif" width="24" height="27" alt="{$plugin.faq_back.linktext.faq_offene}" title="{$plugin.faq_back.linktext.faq_offene}" border="0" align="middle" />
+			<br />
+			{$plugin.faq_back.text.faq_offene}</a>
+		</div>
+	<div class="clearfix"></div>
+{* Suche *}
+		<form id="suche_faq" method="post" action="" class="align_right height_70">
+			<fieldset class="no_bg_no_border">
+				<input type="text" id="search_faq" name="search_faq" size="11" value="{$search_faq}" onblur="if(this.value=='')this.value='{$search_faq}';"
+					onfocus="if(this.value=='{$search_faq}')this.value='';" title="{$message_2136}" />
+				<input class="senden" type="submit" name="find_faq" value="{$message_2135}" title="{$message_2135}" />
+			</fieldset>
+		</form>
+	</div>
+{/if}

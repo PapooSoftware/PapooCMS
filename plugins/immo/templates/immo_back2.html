@@ -1,0 +1,146 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+{if $is_eingetragen=="ok"}
+  <div class="message"> {$plugin_plugin_immo_daten_wurden_gespeichert}</div> 
+{/if}
+{if $is_del=="ok"}
+  <div class="error">  {$plugin_plugin_immo_daten_wurden_gelscht}</div> 
+{/if}
+
+
+
+
+<div class="artikel"> <h2 id="plugin_immo_ausgabe_formatierung" class="h2" >{$plugin_plugin_immo_ausgabe_formatierung}</h2>
+
+ <p id="plugin_immo_hier_definieren_sie_die_ausgabe_der_daten_im_frontend" class="h1" >{$plugin_plugin_immo_hier_definieren_sie_die_ausgabe_der_daten_im_frontend}</p>
+
+ {if $is_immo_typ}
+ <div class="span6">
+
+<form method="POST" id="formi" action="" enctype="multipart/form-data">
+<input type="hidden" name="plugin_immo_typ_id" value="{$is_immo_typ}" />
+  <fieldset>
+<legend>{$plugin_plugin_immo_ausgabe_ansicht_im_bersichtsleasting_fieldset}</legend>
+
+
+<textarea style="width:95%;height:300px;background:#fff;" cols="30" rows="6" name="plugin_immo_uebersicht"  class="plugin_immo_uebersicht" id="plugin_immo_uebersicht">{$plugin_immo.0.plugin_immo_uebersicht|escape:"html"}</textarea>
+<br />
+</fieldset><fieldset>
+<legend>{$plugin_plugin_immo_ausgabe_ausgabe_in_der_einzelansicht__fieldset}</legend>
+
+ <div class="labdiv"><label for="plugin_immo_einzelansicht">{$plugin_plugin_immo_ausgabe_einzelansicht}{$plugin_error.plugin_immo_einzelansicht} </label>
+<br />
+<textarea cols="30" rows="6" name="plugin_immo_einzelansicht" 
+ class="plugin_immo_einzelansicht" id="plugin_immo_einzelansicht" style="width:99%;background:#fff;" >
+{$plugin_immo.0.plugin_immo_einzelansicht|escape:"html"}</textarea>
+</div>
+</fieldset>
+			<fieldset>
+								<legend>Daten speichern:</legend>
+								<input class=" btn btn-info " value="Speichern" name="formSubmitimmo" type="submit" />
+			</fieldset>
+</form>
+</div>
+  {literal} <script type="text/javascript">
+			var editor = CodeMirror.fromTextArea('plugin_immo_uebersicht', {
+			height: "450px",
+			width: "100%",
+			//lineNumbers: "on",
+			parserfile: "parsecss.js",
+			stylesheet: "css/csscolors.css",
+			path: "js/"
+			});
+		</script>
+ {/literal} 
+   {literal} <script type="text/javascript">
+			var editor = CodeMirror.fromTextArea('plugin_immo_einzelansicht', {
+			height: "450px",
+			width: "100%",
+			//lineNumbers: "on",
+			parserfile: "parsecss.js",
+			stylesheet: "css/csscolors.css",
+			path: "js/"
+			});
+		</script>
+ {/literal}
+<div class="span4" >
+
+<div  style="display:block;height: 1000px;overflow-y:auto;overflow-x:hidden;">
+<fieldset>
+<legend>{$plugin_plugin_immo_ausgabe__verfgbare_variablen_als_platzhalter}</legend>
+<ul>
+{foreach from=$plugin_immo_felder item=feld key=kfeld }
+<!-- <li>strong {$kfeld}:/strong #{$kfeld}#br / </li> -->
+<li> #{$kfeld}#</li>
+{/foreach}
+<li>#start_image#</li>
+<li>#galerie_images#</li>
+</ul>
+</fieldset>
+</div>
+</div>
+ 
+ {else}
+ <h2 id="plugin_immo_ausgabe_whlen_sie_hier_deb_typ_fr_die_ausgabe" class="h2" >{$plugin_plugin_immo_ausgabe_whlen_sie_hier_deb_typ_fr_die_ausgabe}</h2>
+<table>
+<tr>
+
+<th>{$plugin_plugin_immo_ausgabe_typkategorie}</th>
+
+</tr>
+{foreach from=$immotypen item=typ key=ktyp name=nametyp}
+<tr>
+<td><a href="{$immo_self}&immo_typ_id={$typ.plugin_immotyp_id}">{$typ.plugin_immotyp_name}</a></td>
+
+</tr>
+
+
+{/foreach}
+
+
+</table>
+{/if}
+
+
+
+
+
+
+<div class="clearfix" ></div>
+
+{if $is_dev}
+ #start#<br />
+<br />
+
+ <span class="ignore"></span>
+  <!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+	 <div class="rapid_form">
+			<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="plugin_immo_ausgabe" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="plugin_immo_ausgabe" />
+		<!-- Das Standarpr�fix f�r die Ids -->
+		<input type="hidden" name="praefix" value="plugin_immo_ausgabe" />
+		<!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="plugin_immo" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div>
+
+
+
+
+ {/if}
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

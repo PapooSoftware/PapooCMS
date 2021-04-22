@@ -1,0 +1,69 @@
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+<h2>{$plugin.linkliste.sortieren}</h2>
+<form action="#" method="post">
+
+  <fieldset>
+   <legend>{$plugin.linkliste.kategorie}
+    </legend>
+
+  <label for="cat_linkliste_id ">{$plugin.linkliste.kategorie2}</label><br />
+  <select name="cat_linkliste_id" size="1">
+     <option value="0" {$checked1}>{$plugin.linkliste.keine}</option>
+    {foreach item=cat from=$result_cat}
+
+
+    <option value="{$cat.cat_id}" {if $cat_id==$cat.cat_id} selected="selected" {/if}>{$cat.cat_name}</option>
+
+      {/foreach}
+
+  </select>
+
+
+
+					   <input class="submit_back" name="submitentry" value="{$plugin.linkliste.auswaehlen}" type="submit">
+
+  </fieldset>
+    </form>
+    
+    <table style="width:99%;">
+<tr>
+<th>{$plugin.linkliste.LLID}</th>
+<th>{$plugin.linkliste.link_bild}</th>
+<th>{$plugin.linkliste.Name}</th>
+<th>{$plugin.linkliste.beschreibung}</th>
+<th>{$plugin.linkliste.order_id}</th>
+<th>{$plugin.linkliste.aendern}</th>
+</tr>
+{foreach item=dat from=$linklist_data}
+<tr style="vertical-align:top;">
+<td>{$dat.linkliste_id}</td>
+<td>{if $dat.paket_logo}<img src="../images/{$dat.paket_logo}" style="max-width:160px;max-height:160px;" alt=""/>{/if}</td>
+<td>{$dat.linkliste_Wort}</td>
+<td style="vertical-align:top;">{$dat.linkliste_descrip|strip_tags}</td>
+<td><form action="" method="post" class="artikel_order_liste_form">
+								<input type="hidden" name="formartikelid" value="{$dat.linkliste_id}" />
+								<input type="hidden" name="formmenuid" value="{$cat_id}" />
+									<input type="hidden" name="cat_linkliste_id" value="{$cat_id}" />
+								<input type="hidden" name="artikelorder_action_plus" value="hoch" />
+								<input type="hidden" name="alt_order_id" value="{$dat.linkliste_order_id}" />
+						<label class="ignore" for="new_order_id">Neue Orderid</label><input type="text" size="2" name="new_order_id" id="new_order_id" value="{$dat.linkliste_order_id}" /></td>
+<td><input type="submit" class="submit_back" name="enterorder" value="{$plugin.linkliste.aendern}" />
+					
+						</form></td>
+</tr>
+{/foreach}
+</table>
+
+
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}

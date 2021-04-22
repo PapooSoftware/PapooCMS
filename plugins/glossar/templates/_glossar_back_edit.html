@@ -1,0 +1,62 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+	
+	
+	
+	{if $deleted}
+		<strong>{$plugin.glossar.deleted}</strong>
+	{/if}
+	
+	{if $eintragmakeartikelfertig}
+		<!-- Die Artikel wurden durchgeloopt-->
+		<h2>{$plugin.glossar.eingetragen}</h2>
+	{/if}
+	
+	{if $exist}
+		<!-- Der Eintrag exisitiert schon-->
+		<h2 style="color:red;">{$plugin.glossar.exist}</h2>
+	{/if}
+	
+	{if $list}
+		{$plugin.glossar.liste}
+		<ol>
+			{foreach item=dat from=$list_dat}
+				<li>
+					<a href="{$link}{$dat.glossar_id}">{$dat.glossar_Wort} {$plugin.glossar.bearbeiten}</a>
+				</li>
+			{/foreach}
+		</ol>
+	{/if}
+	
+	{if $edit}
+		<!-- Es soll ein neuer Eintrag erstellt werden -->
+		{include file=../../../plugins/glossar/templates/glossarformeingabe.html}
+	{/if}
+	
+	{if $fragedel}
+		<h2>{$plugin.glossar.fragedel}</h2>
+		<form action="#" method="post">
+			<fieldset>
+				<legend>{$plugin.glossar.fragedel2}</legend>
+				<strong>{$glossarname}</strong>
+				
+				<input type="hidden" name="glossarid" value="{$glossarid}"/>
+				<br />
+				<br />
+				
+				<br />
+				<input style="background:red; float:left;margin-right:50px;" type="submit" name="submitdelecht" value="{$plugin.glossar.loeschen}"/>
+			</fieldset>
+		</form>
+	{/if}
+</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

@@ -1,0 +1,62 @@
+{if $faq_no_readaccess} {* Leserecht vorhanden? *}
+	<p class="bold_red">{$plugin.faq_front.message.no_readaccess}</p><br /> {* Keine Leserechte *}
+{else}
+
+{* Layout "Linkliste 4" *}
+	<script src='{$slash}plugins/faq/js/confirm.js' type='text/javascript'></script>
+	{$faq_head_text}
+	{if is_countable($faq_search_data) && $faq_search_data|@count OR $faq_nomatch}
+		{include file="../../plugins/faq/templates/faq_front_search_results_Linkliste4.html"}
+	{else}
+
+{* Hier keine Suche aktiv *}
+{* FAQ-Daten *}
+		<div class="div_margins">{$plugin.faq_front.text.faq_count} {$faq_anzahl}</div>
+		<ol class="ll4_ol" start="{$ol_start}">
+			{if is_countable($faq_data[0])}
+				{section name=rowct1 start=0 loop=$faq_data[0]|@count step=1}
+					{assign var="rowctx1" value=$smarty.section.rowct1.index}
+					<li class="ll4_li">
+
+	{* Link auf der Frage aktiviert JS *}
+						<div>
+							<a href="#" title="{$plugin.faq_front.linktext.cat_edit}" onclick="HideShowCat('Faqid_{$faq_data[0][$rowctx1].id}');" class="question">
+							{$faq_data[0][$rowctx1].question}</a>
+						</div>
+
+	{* Die Anzeige des Blocks Antwort, Attachments und Links wird via Link und JS (id) gesteuert *}
+						<div id="Faqid_{$faq_data[0][$rowctx1].id}" class="js_display">
+							{if $faq_data[0][$rowctx1].answer}
+								<div>{$faq_data[0][$rowctx1].answer}</div>
+							{else}
+								<div class="div_margins">{$plugin.faq_front.text.no_answer}</div>
+							{/if}
+
+	{* Attachments *}
+							{if is_countable($faq_attach[0][$rowctx1]) && $faq_attach[0][$rowctx1]|@count}
+								<div class="div_margins"><strong>Attachments:</strong>
+									{foreach item=faq_file from=$faq_attach[0][$rowctx1]}
+										{if $faq_file.file_status} {* Nur vorhandene Dateien listen *}
+											<br/><a href="{$slash}plugins/faq/attachments/{$faq_file.name_stored}" title="{$plugin.faq_front.linktext.faq_edit_attachment}" target="_blank">{$faq_file.name}</a> ({$faq_file[0][$rowctx1][$rowctx2].size} Bytes)
+										{/if}
+									{/foreach}
+								</div>
+							{/if}
+
+	{* Link f�r Edit *}
+							{if $faq_user_may_write}
+								<div class="div_margins">
+									<a href="{$slash}plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_front_edit.html&amp;faq_id={$faq_data[0][$rowctx1].id}&amp;faq_main_id={$cat_data[$rowctx1].id}" title="{$plugin.faq_front.linktext.faq_edit}">
+										{$plugin.faq_front.linktext.faq_edit}</a>
+								</div>
+							{/if}
+						</div>
+					</li>
+				{/section}
+			{/if}
+		</ol>
+	{/if}
+	{include file="_module_intern/mod_weiter.html"}
+	<br />
+	<p>{$faq_footer}</p>
+{/if}

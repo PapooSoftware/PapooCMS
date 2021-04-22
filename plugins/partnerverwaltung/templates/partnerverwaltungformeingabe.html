@@ -1,0 +1,144 @@
+<h1>{$message_148}.</h1>
+{if $fehler}
+<div style="color:red; border:1px solid black;">{$fehler}</div>
+{/if}
+
+<form method="post"  action="#" name="suche"
+ id="formi" style="width:100%" enctype="multipart/form-data">
+<p>
+
+<fieldset>{*<!-- Gruppenname und Password -->*} <legend>Persönliche Daten:</legend>
+
+ <br />
+{*<!--  Firma:   -->*} <label for="user_firma" class="left">Firma:
+{$firmafalsch}</label><br />
+<input type="text" class="inputtext" name="user_firma" id="user_firma"
+ value="{$user.0.user_firma}" size="35" maxlength="50" /> <br />
+ 
+<label for="user_gender">Anrede:
+{$stufefalsch}</label><br />
+<select name="user_gender" id="user_gender" title=""
+ size="1">
+ <option value="1" {if $user.0.user_gender==1} selected="selected" {/if}>Herr </option>
+ <option value="2" {if $user.0.user_gender==2} selected="selected" {/if}>Frau </option>
+</select><br />
+ 
+{*<!--  Vorname:   -->*} <label for="user_vorname" class="left">Vorname:
+{$vornamefalsch}</label><br />
+<input type="text" class="inputtext" name="user_vorname" id="user_vorname"
+ value="{$user.0.user_vorname}" size="35" maxlength="50" /> <br />
+ 
+{*<!--  Nachname:   -->*} <label for="user_nachname" class="left">Nachname:
+{$nachnamefalsch}</label><br />
+<input type="text" class="inputtext" name="user_nachname" id="user_nachname"
+ value="{$user.0.user_nachname}" size="35" maxlength="50" /> <br />
+
+{*<!--  Strasse und Hausnummer:   -->*}
+<label for="user_strasse" class="left">Strasse + Hausnummer: {$strnrfalsch}</label><br />
+<input type="text" class="inputtext" name="user_strasse" id="user_strasse"
+ value="{$user.0.user_strasse}" size="35" maxlength="50" /> <br />
+ 
+ <label for="email">{$message_83}: {$emailfalsch}</label> <br />
+<input id="email" name="email" value="{$user.0.email}" size="35"
+ maxlength="254" type="text" /><br />
+ 
+{*<!--  Postleitzahl:   -->*} <label for="user_plz" class="left">Postleitzahl:
+{$plzfalsch}</label><br />
+<input type="text" class="inputtext" name="user_plz" id="user_plz"
+ value="{$user.0.user_plz}" size="35" maxlength="254" /> <br />
+ 
+{*<!--  Ort:   -->*} <label for="user_ort" class="left">Wohnort: {$ortfalsch}</label><br />
+<input type="text" class="inputtext" id="user_ort" name="user_ort"
+ value="{$user.0.user_ort}" size="35" maxlength="254" /><br />
+ 
+<label for="user_land" class="left">Land: {$landfalsch}</label><br />
+<input type="text" class="inputtext" id="user_land" name="user_land"
+ value="{$user.0.user_land}" size="35" maxlength="254" /><br />
+ 
+ 
+ <label for="user_telefon" class="left">Telefon:</label><br />
+<input type="text" class="inputtext" name="user_telefon" id="user_telefon"
+ value="{$user.0.user_telefon}" size="35" maxlength="50" /> <br />
+ 
+ <label for="user_fax" class="left">Telefax:</label><br />
+<input type="text" class="inputtext" name="user_fax" id="user_fax"
+ value="{$user.0.user_fax}" size="35" maxlength="254" /> <br />
+ 
+ <label for="partner_url" class="left">Url:</label><br />
+<input type="text" class="inputtext" name="partner_url" id="partner_url"
+ value="{$user.0.partner_url}" size="35" maxlength="254" /> <br />
+ 
+</fieldset>
+
+
+<fieldset><legend>Accountdaten</legend>
+ {*<!--  Username:   -->*}
+
+<label for="neuusername" class="left">Benutzername: {$neuusernamefalsch}</label><br />
+<input type="text" class="inputtext" name="neuusername" id="neuusername"
+ value="{$user.0.username}{$user.0.neuusername}" size="35" maxlength="254" />  <br />
+ 
+<label for="formpassword">{$message_62}: {$pass1falsch}</label><br />
+<input name="formpassword" value="{$formpassword}" id="formpassword"
+ type="password" size="40" maxlength="254" /> <br />
+ 
+
+</fieldset>
+
+<!--    Bilddaten   -->
+
+<fieldset><legend>Geben Sie hier das Logo an </legend> <br />
+{if $user} <br />
+<div style="float:right; border:1px solid black;"><img
+ src="../images/thumbs/{$user.0.partner_logo}" alt="Logo" /></div>
+<br />
+<label for="paket_logo2">Wählen Sie ein Bild aus:</label><br />
+<select name="paket_logo2" size="1" id="paket_logo2">
+ <option value=""{$checked1}>keine (default)</option>
+ {foreach item=art from=$bild_data} {if $art.image_name}
+ <option value="{$art.image_name}" {if $art.image_name==$user.0.partner_logo}selected="selected"{/if}>{$art.image_alt}</option>
+ {/if} {/foreach}
+
+</select> <br />
+<label for="paket_logo">Sie können auch ein neues Bild auswählen:</label><br />
+<p>Wenn Sie hingegen das alte Bild behalten wollen, dann lassen Sie
+diese Feld leer.</p>
+{/if} {if $neuereintrag} <label for="paket_logo2">Wählen Sie ein Bild
+aus:</label><br />
+<select name="paket_logo2" size="1" id="paket_logo2">
+ <option value=""{$checked1}>keine (default)</option>
+ {foreach item=art from=$bild_data} {if $art.image_name}
+ <option value="{$art.image_name}">{$art.image_alt}</option>
+ {/if} {/foreach}
+
+</select> <br />
+
+<label for="messe_logo ">Wählen Sie das Bild aus:</label><br />
+
+{/if} <input name="strFile" value="" type="file" /> <br />
+</fieldset>
+{include file=tiny_inc.html}
+
+<fieldset><legend>{$message_89}</legend> <br />
+<label for="text">{$message_89}: </label><br />
+
+{*<!-- Hier bitte die Beschreibung des Users eingeben -->*} <textarea
+ id="ta" name="beschreibung" rows="15" cols="70"
+ title="{$message_129}");" >{$user.0.partner_code}</textarea></fieldset>
+
+
+
+<br />
+<input type="hidden" name="visilex_user_id" value="{$user.0.userid}" /> 
+<input
+ type="hidden" name="gruppemax" value="{$gruppemax}" /> {*<!-- User eintragen -->*}
+<fieldset><legend>{$message_137}</legend> <input type="submit" class="submit_back_green_big"
+ value="{$message_137}" name="formSubmit" /> 
+ 
+ {if $edit} 
+ <input style="float:right" type="submit" class="submit_back_red" value="{$message_106}" name="loeschen" /> 
+ {/if}
+</p>
+</fieldset>
+</form>
+

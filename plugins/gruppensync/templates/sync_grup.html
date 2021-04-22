@@ -1,0 +1,48 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	
+	<div class="artikel">
+		{if $is_eingetragen=="ok"}
+			<div class="message">{$plugin_sync_wurde_eingetragen}</div>
+		{/if}
+		{if $is_eingetragen=="del"}
+			<div class="message">{$plugin_sync_wurde_del}</div>
+		{/if}
+		{if $is_eingetragen=="no"}
+			<div class="error">{$plugin_sync_wurde_nicht_eingetragen}</div>
+		{/if}
+		<h1 id="gruppen_sync_ier_knnen_ie_die_uordnug_einer_ruppe_ndern" class="h1" >{$plugin_gruppen_sync_ier_knnen_ie_die_uordnug_einer_ruppe_ndern}</h1>
+		<a style="float:right;" href="{$sync_self}template=gruppensync/templates/sync.html" id="gruppen_sync_zurck" class="132link" >{$plugin_gruppen_sync_zurck}</a>
+		<p id="gruppen_sync_ie_haben_die_folgende_" class="h1" >
+			{$plugin_gruppen_sync_ie_haben_die_folgende_} 
+			<strong>{$snyc_one_gruppe.0.gruppenname} ({$snyc_one_gruppe.0.gruppeid})</strong>
+		</p>
+		{if $externe_liste|@count}
+			<p id="gruppen_sync_m_die_uordnung_zu_erstellen" class="h1" >{$plugin_gruppen_sync_m_die_uordnung_zu_erstellen}</p>
+			<form action="" name="" method="POST" enctype="multipart/form-data">
+				<input type="hidden" name="gruppen_sync_lookup_lokale_gruppe" value="{$snyc_one_gruppe.0.gruppeid}" />
+				<fieldset>
+					<legend>{$plugin_gruppen_sync_s_stehen_folgende}</legend>
+						{foreach from=$externe_liste item=typ name=xtyp}
+							&nbsp;&nbsp;
+							<input type="checkbox" name="gruppen_sync_lookup_externe_gruppe[{$typ.gruppeid}]" value="1" {$typ.checked} class="gruppen_sync_lookup_externe_gruppe" id="gruppen_sync_lookup_externe_gruppe{$typ.gruppeid}"/>
+							<label for="gruppen_sync_lookup_externe_gruppe{$typ.gruppeid}">{$typ.gruppenname}</label>
+							<br />
+						{/foreach}
+					
+				</fieldset>
+				<fieldset>
+					<legend>{$message_70}</legend>
+					<!-- Speichern -->
+					&nbsp;&nbsp;  &nbsp;&nbsp;
+					<input  type="submit" class="submit_back" value="{$message_70}" name="submit_sync_grup" />
+				</fieldset>
+			</form>
+		{else}
+			<p>Es stehen derzeit keine externen Gruppen zur Verf&uuml;gung.</p>
+		{/if}
+	</div>
+{/if}
+</body>
+</html>

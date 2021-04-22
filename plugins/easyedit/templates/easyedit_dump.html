@@ -1,0 +1,52 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+
+
+{*<!-- Datenbank sicherungen erstellen und einspielen -->*}
+
+{$plugin.easyedit.sicherung}
+<br />
+{*<!-- Um eine Sicherung zu erstellen klicken Sie bitte hier -->*}
+<ul>
+<li>
+<a href="./plugin.php?menuid={$formmenuid}&template=easyedit/templates/easyedit_dump.html&msgid={$ander.news_user_id}&makedump=1">{$plugin.easyedit.make_dump}</a>
+</li>
+</ul>
+{*<!-- Um eine Sicherung einzuspielen klicken Sie hier -->*}
+<br />
+<h3>{$plugin.easyedit.sicherung_einspielen}</h3>
+{if $is_uploaded}
+<strong style="color:red;">{$plugin.easyedit.sicherung_ready}</strong>
+{/if}
+<p>{$plugin.easyedit.hinweis}</p>
+<p><strong style="color:red;">{$plugin.easyedit.warnung}</strong></p>
+
+<form method="POST" id="formi" action="./plugin.php?menuid={$formmenuid}&template=easyedit/templates/easyedit_dump.html&msgid={$ander.news_user_id}&backdump=1" enctype="multipart/form-data">
+  <fieldset>
+{*<!-- Eingabe der Datei:-->*}
+  <legend>{$plugin.easyedit.eingabe_datei}</legend>
+{*<!-- Das Dokument:-->*}
+  <label>{$plugin.easyedit.dokument}</label>
+  <input type="file" name="myfile" value="{$myfilename}" />
+  </fieldset>
+
+  <fieldset>
+{*<!-- Datei hochladen:-->*}
+  <legend>{$plugin.easyedit.datei_upload}</legend>
+{*<!-- hochladen-->*}
+  <input type="submit" class="submit_back" value="{$plugin.easyedit.upload}" name="restore" />
+  </fieldset>
+</form>
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

@@ -1,0 +1,74 @@
+<a href="" name="error" id="error" /></a>
+{if $module_aktiv.form_modul}
+	<div class="form_modul modul">
+		<div id="form_modul_content" class="clearfix">
+			<!-- START FORM -->
+			{if $form_html}
+				{$form_html}
+			{else}
+				{if $formok=='ok'}
+					{$pcfronttext.0.form_manager_toptext_html}
+
+					{if $fehlerliste}
+						<div class="fehlerliste"><a name="error" id="error" ></a>
+							<h2>{$plugin.form_manager.bitte_korrek}</h2>
+							<br />
+							<ul>
+								{foreach  item=dat from=$fehlerliste }
+									<li>{$dat}</li>
+								{/foreach}
+							</ul>
+						</div>
+					{/if}
+					<div class="stwformwrap">
+						<form action="#error" method="post" id="formsub" enctype="multipart/form-data">
+                            <input  type="hidden" name="getlang" value="{$lang_short}" />
+							{foreach item=dat from=$gfliste}
+								<fieldset id="field_{$dat.plugin_cform_group_id}" class="field_class">
+									<legend>{$dat.plugin_cform_group_text}</legend>
+									{foreach item=idat from=$dat.felder}
+										{$idat}
+									{/foreach}
+								</fieldset>
+							{/foreach}
+							{if $form_versende}
+								<fieldset>
+									<legend>{$plugin.form_manager.anwensenden}</legend>
+									<div class="labdiv">
+										<label for="style">{$plugin.form_manager.anwensenden}</label>
+										<select id="sendto" name="sendto" size="1">
+											{$form_versende}
+										</select>
+									</div>
+								</fieldset>
+							{/if}
+                            <input type="text" size="30" name="nicht_ausfuellen" style="display:none;"
+                                   id="plugin_cform_vorname"
+                                   value=""/>
+                            {if $stamm_kontakt_spamschutz && $is_last_page_form=="ok"}
+                            {include file="_module_intern/mod_spamschutz.html}
+                            <br />
+                            {/if}
+                            <fieldset class="send_fieldset  {if $is_last_page_form=="ok"} last_send{/if}">
+                                <input type="hidden" name="form_manager_id" value="{$form_manager_id}" />
+
+                                {if $is_last_page_form=="ok"}
+                                    <legend>{$plugin.form_manager.senden}</legend>
+                                    <input type="submit" name="form_manager_submit" class="send_submit senden_formmanager btn btn-info" value="{$pcfronttext.0.form_manager_lang_button}" />
+                                    <input type="hidden" name="is_last_page" value="1" />
+                                    {$submit_page_break_hidden.$page_count_form}
+                                {else}
+
+                                    {$submit_page_break.$page_count_form}
+                                    {$submit_page_break_hidden.$page_count_form}
+                                {/if}
+                            </fieldset>
+						</form>
+					</div>
+					{$pcfronttext.0.form_manager_bottomtext_html}
+				{/if}
+			{/if}
+			<!-- STOP FORM -->
+		</div>
+	</div>
+{/if}

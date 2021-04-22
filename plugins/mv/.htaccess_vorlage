@@ -1,0 +1,3 @@
+# Zur Nutzung eines sicheren Downloads gehört diese Datei ins Verzeichnis /dokumente/upload.
+Order Deny,Allow
+Deny from all

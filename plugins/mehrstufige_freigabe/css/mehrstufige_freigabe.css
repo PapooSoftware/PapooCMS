@@ -1,0 +1,17 @@
+.mod_mehrstufige_freigabe_informationen {font-family: Arial; padding-bottom: 10px;}
+.mod_mehrstufige_freigabe_informationen .reihe_ueberschrift {font-size: 14pt; font-weight: bold;}
+.mod_mehrstufige_freigabe_informationen .reihe_text1 {font-size: 12pt; font-weight: bold;}
+.mod_mehrstufige_freigabe_informationen .reihe_text2 {font-size: 10pt; font-weight: bold;}
+.mod_mehrstufige_freigabe_informationen .reihe_infos {font-size: 8pt; font-weight: normal;}
+
+
+.mod_mehrstufige_freigabe_informationen .reihe_ueberschrift td,
+.mod_mehrstufige_freigabe_informationen .reihe_text1 td,
+.mod_mehrstufige_freigabe_informationen .reihe_text2 td
+{text-align: center;}
+
+.mod_mehrstufige_freigabe_informationen table {border-collapse: collapse; width: 99%;}
+.mod_mehrstufige_freigabe_informationen table td {padding: 2px; border: 1px solid #666666;}
+
+
+.mod_mehrstufige_freigabe_informationen {display: none;}

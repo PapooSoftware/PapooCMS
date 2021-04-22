@@ -1,0 +1,65 @@
+{* Anzeige der Kategorien *}
+{if $IS_ADMIN}
+	<h2>{$plugin.faq_back.pageheader.faq_search}</h2>
+	<p>{$templ_ergbn} "<strong>{$suchworte}</strong>": {$search_matches} 
+		{if $search_matches == 1}
+			{$plugin.faq_back.text.search_match} {* 1 Resultat *}
+		{else}
+			{$plugin.faq_back.text.search_matches} {* XX Resultate *}
+		{/if}
+	</p>
+	<table class="faqs">
+		<tr>
+			<th id="catname">{$plugin.faq_back.text.cat_name}</th>
+			<th id="catdescript">{$plugin.faq_back.text.cat_descript}</th>
+			<th id="faq_count" width="50" class="align_right">{$plugin.faq_back.text.faq_search_count}</th>
+		</tr>
+		{section name=rowct1 start=0 loop=$cat_data|@count step=1}
+			{assign var="rowctx1" value=$smarty.section.rowct1.index}
+
+{* Nur Kategorien mit Suchergebnissen anzeigen *}
+			{if $faq_search_data[$rowctx1]|@count}
+				{assign var="match_found" value=1} {* Meldung "Keine Treffer..." am Ende ausschalten *}
+				<tr class="cat_row">
+					<td headers="faqname">
+						{if $cat_data[$rowctx1].question}
+
+{* FAQ verwaist *}
+							<a class="faq_lvl_0" href="./plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_back_edit.html&amp;faq_id={$cat_data[$rowctx1].id}" title="{$plugin.faq_back.linktext.faq_edit}"><img src="../plugins/faq/bilder/faq.gif" width="10" height="10" class="mr_3_no_border" title="{$plugin.faq_back.imgtext.faq}" alt="{$plugin.faq_back.imgtext.faq}" /><span class="pl_7_color_red">{$cat_data[$rowctx1].question} {$plugin.faq_back.text.faq_orphan}</span></a>
+						{else}
+							<a class="lvl_{$cat_data[$rowctx1].level}" href="./plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_back_main.html&amp;faq_main_id={$cat_data[$rowctx1].id}&amp;search_faq={$suchworte}&amp;page={$page}" title="{$plugin.faq_back.linktext.cat_sel}"><img src="../plugins/faq/bilder/cat_menu.gif" width="12" height="10" class="mr_3_no_border" title="{$plugin.faq_back.imgtext.cat}" alt="{$plugin.faq_back.imgtext.cat}" />
+							<strong>{$cat_data[$rowctx1].catname}</strong>
+
+{* Kategorie verwaist *}
+							{if $cat_data[$rowctx1].orphan}
+								<span class="bold_red"> {$plugin.faq_back.text.cat_orphan}</span>
+							{/if}
+						{/if}</a>
+					</td>
+					<td headers="catdescript">{$cat_data[$rowctx1].catdescript}</td>
+
+{* Anzahl gefundener FAQs in dieser Kategorie *}
+					<td headers="faq_count" align="right">{if !$cat_data[$rowctx1].question}{$faq_search_data[$rowctx1]|@count}{/if}</td>
+				</tr>
+
+{* Die zur Kategorie gehörenden Fragen finden *}
+				{if $cat_selected_id == $cat_data[$rowctx1].id}
+					{section name=rowct2 start=0 loop=$faq_search_data[$rowctx1]|@count step=1}
+						{assign var="rowctx2" value=$smarty.section.rowct2.index}
+						<tr>
+							<td headers="faqname" colspan="3" class="p_0_no_border">
+								<table class="faqs faq_listing_style_1 width96">
+									<tr>
+										<td class="faq_listing_style_2"><a class="faq_lvl_{$cat_data[$rowctx1].level}" href="./plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_back_edit.html&amp;faq_id={$faq_search_data[$rowctx1][$rowctx2].faq_id}" title="{$plugin.faq_back.linktext.faq_edit}"><img src="../plugins/faq/bilder/faq.gif" width="10" height="10" class="mr_3_no_border" title="{$plugin.faq_back.imgtext.faq}" alt="{$plugin.faq_back.imgtext.faq}" />{$faq_search_data[$rowctx1][$rowctx2].question}</a>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					{/section}
+				{/if}
+			{/if}
+		{/section}
+	</table>
+	{if !$match_found}<p>{$plugin.faq_back.text.no_match_found}</p>{/if}
+{/if}

@@ -1,0 +1,23 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+
+<link rel="stylesheet" href="{$adwords_kw_css_path}/adwords_kw.css"/>
+
+<div class="artikel">
+    <p>{$adwords_kw_back_text2}</p>
+    <form action="" method="post">
+        <fieldset>
+            <legend>Keyword eintragen / bearbeiten</legend>
+            <textarea cols="40" rows="16" id="rapid_content_list" name="rapid_content_list">{foreach item=dat from=$placeholder_list}{$dat.placeholder};{$dat.keyword|replace:"<br />":""};{$dat.parameter|replace:"<br />":""}{/foreach}</textarea>
+        </fieldset>
+        <fieldset>
+            <legend>Speichern</legend>
+            <input type="submit" class="btn btn-info" value="Speichern" name="updateAdwords" />
+        </fieldset>
+    </form>
+</div>
+
+</body>
+</html>
+{/if}

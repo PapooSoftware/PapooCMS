@@ -1,0 +1,93 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+{if $bulk_import_ok}
+<div class="message">{$bulkimport_message_ok}</div>
+{/if}
+
+<div class="artikel">
+
+
+{if $is_singel_flex2sitemap}
+ <h1 id="akquise_bulk_import_stellen_sie_hier_die_daten_fr_die_zuordnung_ein" class="h1" >{$plugin_akquise_bulk_import_stellen_sie_hier_die_daten_fr_die_zuordnung_ein}</h1>
+
+ <p id="akquise_bulk_import_sie_knnen_hier_zuweisen" class="h1" >{$plugin_akquise_bulk_import_sie_knnen_hier_zuweisen}</p>
+<form method="post" action="" id="formi" style="width:99%">
+<input type="hidden" name="plugin_flex2sitemap_menuid" value="{$is_flex_menu_data_menuname.menuid}" />
+ <fieldset>
+<legend>{$plugin_akquise_bulk_import_zuordnung_vornehmen_fr_} {$is_flex_menu_data_menuname.menuname}</legend>
+
+<div class="labdiv"><label for="plugin_flex2sitemap_in_sitemap_erscheinen">{$plugin_plugin_flex2sitemap_in_sitemap_erscheinen}{$plugin_error.plugin_flex2sitemap_in_sitemap_erscheinen} </label> <input type="checkbox" name="plugin_flex2sitemap_in_sitemap_erscheinen" value="1" {if $is_singel_flex_menu_data.0.plugin_flex2sitemap_in_sitemap_erscheinen==1} checked="checked" {/if} class="plugin_flex2sitemap_in_sitemap_erscheinen" id="plugin_flex2sitemap_in_sitemap_erscheinen"/>
+</div><br />
+
+ <div class="labdiv"><label for="plugin_flex2sitemap_feld_auswhlen">{$plugin_plugin_flex2sitemap_feld_auswhlen}{$plugin_error.plugin_flex2sitemap_feld_auswhlen} </label>
+
+<select name="plugin_flex2sitemap_feld_auswhlen" id="plugin_flex2sitemap_feld_auswhlen" size="1"/><option value="0">{$message_160}</option>
+{foreach from=$is_flex_felder_liste item=feld key=kfeld name=nfeld}
+
+<option {if $feld.mvcform_id==$is_singel_flex_menu_data.0.plugin_flex2sitemap_feld_auswhlen} selected="selected" {/if} value="{$feld.mvcform_id}">{$feld.mvcform_label}</option>
+{/foreach}
+</select>
+</div><br />
+
+
+
+</fieldset><br />
+
+<fieldset>
+ 	<legend> {$plugin_plugin_flex2sitemap_daten_speichern}</legend>
+			<!-- Speichern -->
+	<input  type="submit" class="submit_back_green" value=" {$plugin_plugin_flex2sitemap_daten_speichern}" name="flex2sitemap_settings" />
+			
+		</fieldset>
+    </form>
+
+{else}
+ <h1 id="akquise_bulk_import_sitemap_und_flexverwaltung_verbinden" class="h1" >{$plugin_akquise_bulk_import_sitemap_und_flexverwaltung_verbinden}</h1>
+
+ <p id="akquise_bulk_import_hier_werden_die_menpunkte_aufgelistet_die" class="h1" >{$plugin_akquise_bulk_import_hier_werden_die_menpunkte_aufgelistet_die}</p>
+
+ <h2 id="akquise_bulk_import_liste_der_menpunkte" class="h2" >{$plugin_akquise_bulk_import_liste_der_menpunkte}</h2>
+ 
+ <ul>
+ {foreach from=$is_flex_menu_data item=men key=kmen name=nmen}
+ 
+  <li><a href="{$sitemap2flex_self}&menuid2flex={$men.menuid}" id="akquise_bulk_import_men1" class="132link" >{$men.menuname}</a></li>
+
+ {/foreach}
+</ul>
+{/if}
+{if $is_dev}
+ #start#
+ <span class="ignore"></span>
+  <!-- Der Start Button ist notwendig damit sich das System daran aufhängen kann. -->
+	 <div class="rapid_form">
+			<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="plugin_flex2sitemap" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="plugin_flex2sitemap" />
+		<!-- Das Standarpräfix für die Ids -->
+		<input type="hidden" name="praefix" value="plugin_flex2sitemap" />
+		<!-- Das Standarpräfix für die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="plugin_flex2sitemap" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div>
+
+
+
+
+ {/if}
+
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

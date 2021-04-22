@@ -1,0 +1,218 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+    {if $plugin_error}
+    <div class="error">
+    <h2 id="leadtracker_achtung_bitte_eintrge_korrigieren" class="h2" >{$plugin_leadtracker_achtung_bitte_eintrge_korrigieren}</h2>
+    </div>
+    {/if}
+
+    {if $leadtracker_is_del}
+    <div class="error">
+        <h2 id="leadtracker_achtung_bitte_eintrge_korrigieren" class="h2" > {$plugin_leadtracker_der_eintrag_wurde_gelscht}</h2>
+    </div>
+    {/if}
+    {if $is_eingetragen=="ok"}
+    <div class="message">
+    <h2 id="leadtracker_daten_wurden_gespeichert" class="h2" >{$plugin_leadtracker_daten_wurden_gespeichert}</h2>
+    </div>
+    {/if}
+
+    {if $is_new_lead_file}
+    <h1 id="test__downloaddateien_mit_formularen_verknpfen2" class="h1" >{$plugin_test__downloaddateien_mit_formularen_verknpfen2}</h1>
+
+
+
+
+    <form name="test_daten" method="post" action="">
+ <fieldset>
+<legend>{$plugin_leadtracker_verknpfung_herstellen}</legend>
+     <p id="test__die_ausgewhlte_datei" class="h1" >{$plugin_test__die_ausgewhlte_datei}
+     <a target="blank" href="{$webverzeichnis}{$is_new_lead_file_data.0.downloadlink}">{$is_new_lead_file_data.0.downloadname} - {$is_new_lead_file_data.0.downloadlink}</a></p><p>{$plugin_leadtracker_dl_gre}: {$is_new_lead_file_data.0.downloadgroesse} - {$plugin_test__klicks__downloads}: {$is_new_lead_file_data.0.wieoft}</p>
+     <input type="hidden" name="leadtracker_die_downloaddatei" value="{$is_new_lead_file_data.0.downloadid}" class="leadtracker_die_downloaddatei" id="leadtracker_die_downloaddatei"/>
+
+
+     <div class="labdiv"><label for="leadtracker_verknpfen_mit">{$plugin_leadtracker_verknpfen_mit}{$plugin_error.leadtracker_verknpfen_mit} </label>
+
+         <select name="leadtracker_verknpfen_mit" id="leadtracker_verknpfen_mit" size="1"/><option value="">{$message_160}</option>
+         {foreach from=$leadtracker_formulare item=form}
+         <option {if $leadtracker_.0.leadtracker_verknpfen_mit==$form.form_manager_id}selected="selected"{/if} value="{$form.form_manager_id}">{$form.form_manager_name}</option>
+         {/foreach}</select>
+     </div><br />
+<div class="labdiv"><label for="leadtracker_kann_muss">{$plugin_leadtracker_kann_muss}{$plugin_error.leadtracker_kann_muss} </label>
+
+<select name="leadtracker_kann_muss" id="leadtracker_kann_muss" size="1"/><option {if $leadtracker_.0.leadtracker_kann_muss==1}selected="selected"{/if} value="1">kann
+</option><option {if $leadtracker_.0.leadtracker_kann_muss==2}selected="selected"{/if} value="2">muss</option></select>
+</div><br />
+
+</fieldset>
+        <fieldset>
+<legend>    {$plugin_leadtracker_verknpfung_speichern}</legend>
+            <input type="submit" class="submit_back" name="submit_verknuepfung_files" value="{$plugin_leadtracker_verknpfung_speichern}" />
+        </fieldset>
+        <br />
+        </form>
+
+
+
+
+
+    {/if}
+
+
+    {if $leadtracker_liste_files}
+
+
+    <h1 id="test__downloaddateien_mit_formularen_verknpfen" class="h1" >{$plugin_test__downloaddateien_mit_formularen_verknpfen}</h1>
+
+ <p id="test__hier_bestimmen_sie_welche_ihrer_dateien" class="h1" >{$plugin_test__hier_bestimmen_sie_welche_ihrer_dateien}</p>
+    {literal}
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            $( "table a.delicon" ).click(function() {
+                if (confirm("Datei wirklich löschen?"))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            });
+         });
+     </script>
+    {/literal}
+
+
+    <h2 id="leadtracker_verknpfte_dokumente" class="h2" >{$plugin_leadtracker_verknpfte_dokumente}</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>{$plugin_test__verzeichnis_dl}</th>
+            <th>{$plugin_test__name_dl}</th>
+            <th>{$plugin_test__typ_dl}</th>
+            <th>{$plugin_test__aufrufe}</th>
+            <th>{$plugin_test__klicks__downloads}</th>
+            <th>{$plugin_leadtracker_followup_mails_bearbeiten}</th>
+            <th>{$plugin_test__verknpfen}</th>
+            <th>{$plugin_leadtracker_verknpfung_lsen}</th>
+
+
+        </tr>
+        {if $leadtracker_verknuepfte_files}
+        {foreach from=$leadtracker_verknuepfte_files item=file key=file_key}
+        <tr>
+            <td>{$file.downloadid}</td>
+            <td>{$file.dateien_cat_name}</td>
+            <td>{$file.downloadname}</td>
+            <td>{$file.downloadfeature}</td>
+            <td>{$file.wieoft}</td>
+            <td>{$file.wieoft}</td>
+            <td><a href="{$follow_up_standard_basis_link}leadtracker/templates/leadtracker_follow_up_manager.html&set_fum={$file.downloadid}&fum_type=1">{$plugin_leadtracker_followup_mails_bearbeiten}</a></td>
+            <td><a href="{$leadtracker_own_link}&set_new_lead_file={$file.downloadid}">{$plugin_test__verknpfen}</a></td>
+            <td><a class="delicon"  href="{$leadtracker_own_link}&set_new_lead_file_del={$file.downloadid}">{$plugin_leadtracker_verknpfung_lsen}</a></td>
+        </tr>
+        {/foreach}
+        {/if}
+
+
+    </table>
+
+ <h2 id="test__nicht_verknpfte_dokumente" class="h2" >{$plugin_test__nicht_verknpfte_dokumente}</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>{$plugin_test__verzeichnis_dl}</th>
+        <th>{$plugin_test__name_dl}</th>
+        <th>{$plugin_test__typ_dl}</th>
+        <th>{$plugin_test__aufrufe}</th>
+        <th>{$plugin_test__klicks__downloads}</th>
+        <th>{$plugin_test__verknpfen}</th>
+
+
+    </tr>
+    {if $leadtracker_nicht_verknuepfte_files}
+        {foreach from=$leadtracker_nicht_verknuepfte_files item=file key=file_key}
+        <tr>
+        <td>{$file.downloadid}</td>
+        <td>{$file.dateien_cat_name}</td>
+        <td>{$file.downloadname}</td>
+        <td>{$file.downloadfeature}</td>
+        <td>{$file.wieoft}</td>
+        <td>{$file.wieoft}</td>
+        <td><a href="{$leadtracker_own_link}&set_new_lead_file={$file.downloadid}">{$plugin_test__verknpfen}</a></td>
+        </tr>
+        {/foreach}
+    {/if}
+
+</table>
+{/if}
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {if $is_dev}
+
+ #start#
+
+
+
+<!--
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <br />
+	<form name="test_daten" method="post" action="">
+		<fieldset>
+
+			<input type="submit" class="submit_back" name="submit" value="submit" />
+		</fieldset>
+	</form>
+	</p>
+-->
+
+
+
+    <span class="ignore"></span>
+    <!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+    <div class="rapid_form">
+        <form action="" name="" method="POST">
+            <!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+            <input type="hidden" name="tb_name" value="plugin_leadtracker" />
+            <!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+            <input type="hidden" name="php_datei_name" value="leadtracker_class" />
+            <!-- Das Standarpr�fix f�r die Ids -->
+            <input type="hidden" name="praefix" value="leadtracker" />
+            <!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+            <input type="hidden" name="praefix_spezial" value="leadtracker" />
+            <!-- Das Tool einbinden -->
+            {include file=../../../plugins/devtools/templates/rapid_felder.htm}
+        </form>
+    </div>
+
+
+
+</div>
+
+
+
+
+
+{/if}
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

@@ -1,0 +1,85 @@
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+<div class="artikel">
+	<div class="mv">
+		{if $feld_anzeigen==""}
+			<!-- Auflistung alle Felder in der ausgewaehlten Verwaltung ausgeben -->
+			<h2>{$plugin.mv.rechte_felder}</h2>
+			<table>
+				{foreach item=feld from=$liste_felder}
+					<tr>
+						<td>
+							<a href="{$link}&feld_anzeigen=1&feld_id={$feld.mvcform_id}&mv_id={$mv_id}">{$feld.mvcform_label} (ID={$feld.mvcform_id})</a>
+						</td>
+						{foreach item=gruppe from=$admin_gruppen}
+							<td>
+								<input type="checkbox" id="group_read_{$gruppe.group_id}_{$feld.mvcform_id}" name="group_read_{$gruppe.group_id}_{$feld.mvcform_id}"
+								{if $gruppe.group_read[$feld.mvcform_id]==1} checked="checked"{/if} value="1" />
+							</td>
+							<td>
+								<input type="checkbox" id="group_write_{$gruppe.group_id}_{$feld.mvcform_id}" name="group_write_{$gruppe.group_id}_{$feld.mvcform_id}"
+								{if $gruppe.group_write[$feld.mvcform_id]==1} checked="checked"{/if} value="1" />
+							</td>
+						{/foreach}
+						<td>
+							<a href="{$link}&feld_anzeigen=1&feld_id={$feld.mvcform_id}&mv_id={$mv_id}">{$plugin.mv.weitere_gruppen}</a> 
+							{if $feld.keine_rechte}keine Rechte definiert{/if}
+						</td>
+					</tr>
+				{/foreach}
+			</table>
+		{/if}
+		{if $feld_anzeigen=="1"}
+			<!-- Rechtetabelle für ausgewähltes Feld ausgeben -->
+			<h2>{$plugin.mv.rechte_felder1}{$feld_name}(ID={$feld_id}){$plugin.mv.rechte_felder2}</h2>
+			<p><a href="{$link}&mv_id={$mv_id}">{$plugin.mv.zurueck}</a></p>
+			<p>
+				{foreach item=links from=$liste_felder}
+					<a href="{$link}&mv_id={$mv_id}&feld_anzeigen=1&feld_id={$links.mvcform_id}" title="Edit"
+						{if $links.keine_rechte} style="color:red"{/if}>{$links.mvcform_label} ({$links.mvcform_id})</a> | 
+				{/foreach}
+			</p>
+			<strong>{$feld_name} ID={$feld_id}</strong>
+			<form action="" method="post" id="formk" enctype="multipart/form-data">
+				<table style="margin-top:0">
+					<tr>
+						<td>{$plugin.mv.gruppenname}</td>
+						<td>{$plugin.mv.gruppenid}</td>
+						<td>{$plugin.mv.gruppenread}</td>
+						<td>{$plugin.mv.gruppenwrite}</td>
+					</tr>
+					{foreach item=gruppe from=$liste_rights}
+						<tr>
+							<td>{$gruppe.gruppenname}</td>
+							<td>{$gruppe.group_id}</td>
+							<td>
+								<input type="checkbox" id="group_read_{$gruppe.group_id}" name="group_read_{$gruppe.group_id}"
+								{if $gruppe.group_read==1} checked="checked"{/if} value="1" />
+							</td>
+							<td>
+								<input type="checkbox" id="group_write_{$gruppe.group_id}" name="group_write_{$gruppe.group_id}"
+								{if $gruppe.group_write==1} checked="checked"{/if} value="1" />
+							</td>
+						</tr>
+					{/foreach}
+				</table>
+				<fieldset>
+					<legend>{$plugin.mv.senden}</legend>
+					<input type="submit" class="submit_back_green" name="submit_rights" value="{$plugin.mv.senden}" />
+				</fieldset>
+			</form>
+			<p>
+				{foreach item=links from=$liste_felder}
+					<a href="{$link}&mv_id={$mv_id}&feld_anzeigen=1&feld_id={$links.mvcform_id}" title="Edit"
+						{if $links.keine_rechte} style="color:red"{/if}>{$links.mvcform_label} ({$links.mvcform_id})</a> | 
+				{/foreach}
+			</p>
+			<p><a href="{$link}&mv_id={$mv_id}">{$plugin.mv.zurueck}</a></p>
+		{/if}
+	</div>
+	<!-- Rechte Fehlermeldung-->
+	{include file=rechte.html}
+</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}

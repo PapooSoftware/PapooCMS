@@ -258,7 +258,6 @@ class Smarty_Compiler extends Smarty {
         preg_match_all($search, $source_content, $match,  PREG_SET_ORDER);
         $this->_folded_blocks = $match;
         reset($this->_folded_blocks);
-	error_reporting(E_ALL ^ E_NOTICE);
         /* replace special blocks by "{php}" */
 		// @edit 2018-03-02 <papoo:cz> PHP 7.2 Support (create_function ersetzt)
 		$source_content = preg_replace_callback($search, function ($matches) {

@@ -1,0 +1,152 @@
+<!-- START FLEX -->
+{if $leserechte=="ja"}
+	<div class="artikel">
+		<div class="mv">
+			{*<!-- Text oberhalb der Suche für diese Metaebene -->*}
+			{$mv_meta_top_text}
+			{if $message==""}
+				<h2 class="top_mv">{$plugin.mv.suchanfrage}</h2>
+			{elseif $message=="treffer"}
+				<h2 class="top_mv">{$plugin.mv.suche_ergebnis}</h2>
+			{elseif $message=="kein_suchtext"}
+				<h2 class="top_mv">{$plugin.mv.kein_suchtext}</h2>
+			{elseif $message=="no_content"}
+				<h2 class="top_mv">{$plugin.mv.kein_treffer}</h2>
+			{/if}
+			{counter name=css start=100 print=0}
+			{counter name=maske start=1 print=0}
+			{if $such_felder}
+                <div id="id{counter name=css}" class="reiter">
+                    <form method="get" action="{$slash}plugin.php" name="suche" >
+                        <fieldset>
+                            <div class="v_suchfeld_kompl">
+                                {foreach item=suchfeld from=$such_felder key=mykey}
+                                    {if $mykey != "mv_id" AND $mykey != "mvcform_id" AND $mykey != "mvcform_name" AND $mykey != "mvcform_type" OR $mykey=="0"}
+                                        <div class="v_suchfeld" id="such_{$suchfeld.mvcform_name_id}">
+                                            {if $suchfeld.mvcform_type!="password" && $suchfeld.mvcform_type!="hidden"}
+                                                <label for="{$suchfeld.mvcform_name_id}">{$suchfeld.mvcform_label}</label>
+                                            {/if}
+                                            {if $suchfeld.mvcform_type=="text" 
+                                                || $suchfeld.mvcform_type=="textarea" 
+                                                || $suchfeld.mvcform_type=="textarea_tiny"
+                                                || $suchfeld.mvcform_type=="email"}
+                                                <input type="text" name="{$suchfeld.mvcform_name_id}" id="{$suchfeld.mvcform_name_id}" 
+                                                {if $suchfeld.mvcform_size}size="{$suchfeld.mvcform_size}" 
+                                                {else} size="20"{/if} value="{if $suchfeld.value!=""}{$suchfeld.value}{/if}"  maxlength="50" />
+                                            {elseif $suchfeld.mvcform_type=="radio"
+													|| $suchfeld.mvcform_type=="select"
+													|| $suchfeld.mvcform_type=="multiselect"
+													|| $suchfeld.mvcform_type=="check"
+													|| $suchfeld.mvcform_type=="picture"
+													|| $suchfeld.mvcform_type=="galerie"
+													|| $suchfeld.mvcform_type=="file"}
+                                                <select name="{$suchfeld.mvcform_name_id}" id="{$suchfeld.mvcform_name_id}">
+                                                    {$suchfeld.select_options}
+                                                </select>
+											{elseif $suchfeld.mvcform_type=="checkbox_type2"}
+												{$suchfeld.select_options}
+                                            {elseif $suchfeld.mvcform_type=="timestamp"}
+                                                {$suchfeld.select_options}
+                                            {elseif $suchfeld.mvcform_type=="zeitintervall"}
+                                                {$suchfeld.select_options}
+                                            {elseif $suchfeld.mvcform_type=="preisintervall"}
+                                                {$suchfeld.select_options}				
+                                            {/if}
+                                        </div>
+                                    {/if}
+                                {/foreach}
+                            </div>
+                            {*<!-- Volltextsuche  -->*}
+                            <div class="v_suchfeld_i">
+                                <label for="search_mv{$mv_id}">{$plugin.mv.suchtext}</label>
+                                <input type="text" name="search_mv" id="search_mv{$mv_id}" value="{$search_mv}" size="40" maxlength="50" />
+                                <input type="hidden" value="{$plugin.mv.finden}" name="mv_submit" />
+                                <input type="submit" class="submit_back btn btn-info" value="{$plugin.mv.finden}" name="mv_submit" />
+                                <input type="hidden" value="{$mv_id}" name="mv_id" />
+                                <input type="hidden" value="{$extern_meta}" name="extern_meta" />
+                                <input type="hidden" value="{$menuid_aktuell}" name="menuid" />
+                                <input type="hidden" value="{$mv_onemv}" name="onemv" />	
+                                <input type="hidden" value="mv/templates/mv_search_front_onemv.html" name="template" />
+                            </div>
+                        </fieldset>
+                    </form>
+                    {*<!-- Alle Einträge anzeigen -->*}
+                    {*<!--
+                    <br />
+                    <a href="{$link_show_all}&mv_id={$such_felder_mv.mv_id}">{$plugin.mv.link_show_all}</a>
+                    -->*}
+                    {*<!-- Alle eigenen Einträge anzeigen -->*}
+                    {if $mv_anzahl_eigene > 0 AND $loggedin}
+                        <br />
+                        <a  id="link_reset_mv" href="{$link_show_own}&mv_id={$mv_id}&extern_meta={$extern_meta}">{$plugin.mv.link_show_own}</a>
+                    {/if}
+                    <br />
+                    <a  id="link_reset_mv2" href="{$link_new_search}&amp;mv_id={$mv_id}&amp;onemv={$mv_id}&amp;extern_meta={$extern_meta}">{$plugin.mv.new_search}</a>
+                </div>
+                <br />
+                {*<!-- Trefferanzahl -->*}
+                {if $such_treffer_anzahl!="" && $mv_template_all}
+                <div class="treffer_data">
+                	<a  id="mv_treffer" href="{$mv_link_export}&mv_id={$mv_id}&mv_sql=1&mv_meta_id={$mv_meta_id}">{$plugin.mv.treffer_exportieren}</a>
+                    <br />
+                    {$plugin.mv.trefferanzahl_anfang} <strong>{$such_treffer_anzahl}</strong> {$plugin.mv.trefferanzahl_ende}
+                </div>
+                    {/if}
+                {*<!-- Sortierungsfelder -->*}
+                {if $felder_sort && $mv_template_all}
+                <div class="sortier_felder">
+                    <p>
+                        {$plugin.mv.sortierung}
+                        {foreach item=feld from=$felder_sort}
+												<a href="{$link_mv}&amp;mv_id={$mv_id}&amp;search_mv={$smarty.get.search_mv}&amp;sort_feld={$feld.mvcform_id}">{$feld.mvcform_label}</a>
+                        {/foreach}
+                    </p>
+                </div>
+                {/if}
+            {/if}
+            
+            {if $no_search_allowed}<div class="message"><p><strong>{$plugin.mv.no_search_allowed}</strong></p></div>{/if}
+            {*<!-- Wenn kein Treffer -->*}
+            {if $such_treffer_anzahl == "0"}<div class="message"><p><strong>{$plugin.mv.kein_treffer}</strong></p>
+            <div class="hinweis"><span>Rufen Sie uns doch einfach an, evtl. k&ouml;nnen wir Ihnen direkt weiterhelfen.</span></div></div>{/if}
+            {*<!-- Fehlermeldungen-->*}
+            {if trim(strip_tags($error))}<div class="error"><p><strong>{$error}</strong></p></div>{/if}
+                
+    <!--weitere Seiten -->
+			{if $mv_template_all}{include file="_module_intern/mod_weiter.html}{/if}
+			<!-- START-LISTE -->
+			{*<!-- Hier die Spezialliste, man muß hier die Feldernamen kennen. -->*}
+			{if $mv_dz_funktion=="ja"}
+				<table width="98%">
+					<tr>
+						<th>Name</th>
+						<th>Funktion</th>
+						<th>Landesverband</th>
+					</tr>
+					{foreach item=dat from=$mv_template_all}
+						{$dat}
+					{/foreach}
+				</table>
+			{/if}
+			{if $mv_dz_weiterbildung=="ja"}
+				{foreach item=dat from=$mv_template_all}
+					{$dat}
+				{/foreach}
+			{/if}
+			{if $mv_dz_funktion!="ja" 
+				&& $mv_dz_weiterbildung!="ja"}
+				{foreach item=dat from=$mv_template_all}
+					{$dat}
+				{/foreach}
+			{/if}
+			<!-- STOP-LISTE -->
+			<!--weitere Seiten -->
+			{if $mv_template_all}{include file="_module_intern/mod_weiter.html}{/if}
+			{*<!-- Text unterhalb der Suche für diese Metaebene -->*}
+			{$mv_meta_bottom_text}
+		</div>
+	</div>
+{else}
+	{$plugin.mv.keine_leserechte}
+{/if}
+<!-- STOP FLEX -->

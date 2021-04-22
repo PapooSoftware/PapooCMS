@@ -118,6 +118,7 @@ class freiemodule {
 				"JOIN {$this->cms->tbname["papoo_freiemodule_menu_lookup"]} whitelist ON whitelist.freiemodule_mid = module.freiemodule_id ".
 				"LEFT JOIN {$this->cms->tbname["papoo_freiemodule_menu_blacklist"]} blacklist ON blacklist.blacklist_module_id = module.freiemodule_id AND blacklist.blacklist_menu_id = $menuId ".
 				"WHERE ".
+				"(module.freiemodule_menuid != '' OR whitelist.freiemodule_menu_id != 0) AND ".
 				"whitelist.freiemodule_menu_id IN (0, $menuId) AND blacklist.blacklist_menu_id IS NULL AND module.freiemodule_lang = '{$this->db->escape($this->cms->lang_short)}' AND ( ".
 				"	module.freiemodule_start <= '$date' AND module.freiemodule_stop >= '$date' OR ".
 				"	module.freiemodule_start <= '0000-00-00' AND module.freiemodule_stop >= '0000-00-00' ".

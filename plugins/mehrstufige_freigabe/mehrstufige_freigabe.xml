@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin version="3.7">
+
+<name>mehrstufige Freigabe</name> 
+
+<beschreibung_de><![CDATA[Dieses Plugin realisiert mit einfachen Mitteln eine mehrstufige Freigabe für Artikel.
+Im Frontend werden per Modul die Freigabe-Informationen für Autor, Prüfer und Freigeber angezeigt.]]></beschreibung_de>
+
+<version>1.1</version>
+<datum>24.06.2009</datum>
+
+<autor>
+	<name>Stephan Bergmann</name>
+	<kontakt><![CDATA[Stephan Bergmann
+Rembrandtstr. 10/1
+72768 Reutlingen]]></kontakt>
+	<email>S.Bergmann@XiMiX.de</email>
+	<telefon>07121 / 60 39 88</telefon>
+</autor>
+
+<menue>
+	<eintrag_de>mehrstufige Freigabe</eintrag_de>
+	<icon>mehrstufige_freigabe/bilder/menuback_icon.gif</icon>
+	<link>plugin:mehrstufige_freigabe/templates/back.html</link>
+	
+	<submenue>
+		<eintrag_de>Initialisierung</eintrag_de>
+		<icon>mehrstufige_freigabe/bilder/menuback_icon.gif</icon>
+		<link>plugin:mehrstufige_freigabe/templates/back_init.html</link>
+	</submenue>
+</menue>
+
+<klasse>
+	<name>mehrstufige_freigabe</name>
+	<datei>mehrstufige_freigabe/lib/mehrstufige_freigabe_class.php</datei>
+</klasse>
+
+<css>mehrstufige_freigabe/css/mehrstufige_freigabe.css</css>
+
+
+<datenbank>
+	<installation>mehrstufige_freigabe/sql/mehrstufige_freigabe_install.sql</installation>
+	<deinstallation>mehrstufige_freigabe/sql/mehrstufige_freigabe_deinstall.sql</deinstallation>
+</datenbank>
+
+<modul>
+	<datei>plugin:mehrstufige_freigabe/templates/mod_mehrstufige_freigabe_informationen.html</datei>
+	<name_de>mehrstufige Freigabe Informationen</name_de>
+	<beschreibung_de>Zeigt Informationen Autor, Prüfer und Freigeber der mehrstufigen Freigabe für Artikel an.</beschreibung_de>
+</modul>
+
+<messages>mehrstufige_freigabe/messages</messages>
+
+</plugin>

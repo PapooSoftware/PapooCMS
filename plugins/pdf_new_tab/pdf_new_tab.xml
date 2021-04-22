@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<plugin name="pdf_new_tab" version="5.0">
+
+    <name>PDFs-New-Tab</name>
+
+    <beschreibung_de><![CDATA[Dieses Plugin aktiviert lässt alle PDFs in neuen Tabs öffnen.]]></beschreibung_de>
+    <beschreibung_en><![CDATA[This plugin lets every pdf open up in a new tab.]]></beschreibung_en>
+
+    <version>1.0</version>
+
+    <papooid>2305</papooid>
+
+    <datum>28.10.2014</datum>
+
+    <autor>
+        <name>Christoph Zimmer</name>
+        <email>cz@papoo.de</email>
+    </autor>
+
+    <klasse>
+        <name>pdf_new_tab</name>
+        <datei>pdf_new_tab/lib/pdf_new_tab_class.php</datei>
+    </klasse>
+
+    <menue>
+        <eintrag_de>PDFs in neuem Tab</eintrag_de>
+        <eintrag_en>PDFs in new tabs</eintrag_en>
+        <link>plugin:pdf_new_tab/templates/backend.html</link>
+    </menue>
+
+    <messages>pdf_new_tab/messages</messages>
+
+</plugin>

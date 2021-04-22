@@ -1,0 +1,33 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+{$plugin.usefulservices.text}
+
+  <form action="#" method="post" >
+  <fieldset>
+  <legend>{$plugin.usefulservices.eistellungen}
+   </legend>
+   <label for="lexikon_visilex_id">{$plugin.usefulservices.visilex_id}</label><br />
+ <input type="text" name="lexikon_visilex_id" id="lexikon_visilex_id" value="{$visilex.0.lexikon_visilex_id}" size="4"/><br />
+ <label for="lexikon_accesskey">{$plugin.usefulservices.visilex_access}</label><br />
+ <input type="text" name="lexikon_accesskey" id="lexikon_accesskey" value="{$visilex.0.lexikon_accesskey}" size="30"/><br /><br />
+
+  <input type="submit" class="submit_back_green" name="submitlexikon" value="{$plugin.usefulservices.eintragen}"/>
+
+
+  </fieldset>
+  </form>
+
+
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

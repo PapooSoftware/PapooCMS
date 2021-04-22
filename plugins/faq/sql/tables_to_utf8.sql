@@ -1,0 +1,12 @@
+alter table `XXX_ppx07_papoo_faq_attachments` convert to character set utf8 collate utf8_swedish_ci;
+alter table `XXX_ppx07_papoo_faq_categories` convert to character set utf8 collate utf8_swedish_ci;
+alter table `XXX_ppx07_papoo_faq_cat_link` convert to character set utf8 collate utf8_swedish_ci;
+alter table `XXX_ppx07_papoo_faq_cat_link_frontend` convert to character set utf8 collate utf8_swedish_ci;
+alter table `XXX_ppx07_papoo_faq_cat_link_new_question_frontend` convert to character set utf8 collate utf8_swedish_ci;
+alter table `XXX_ppx07_papoo_faq_content` convert to character set utf8 collate utf8_swedish_ci;
+alter table `XXX_ppx07_papoo_faq_content_frontend` convert to character set utf8 collate utf8_swedish_ci;
+alter table `XXX_ppx07_papoo_faq_config` convert to character set utf8 collate utf8_swedish_ci;
+alter table `XXX_ppx07_papoo_faq_new_question_frontend` convert to character set utf8 collate utf8_swedish_ci;
+alter table `XXX_ppx07_papoo_faq_read_privileges` convert to character set utf8 collate utf8_swedish_ci;
+alter table `XXX_ppx07_papoo_faq_versions` convert to character set utf8 collate utf8_swedish_ci;
+alter table `XXX_ppx07_papoo_faq_write_privileges` convert to character set utf8 collate utf8_swedish_ci;

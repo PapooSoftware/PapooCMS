@@ -1,0 +1,37 @@
+{if !$is_life}<!-- START plugins/keywords/templates/keywords_front.html -->{/if}
+<div class="floatbox artikel_details">
+	<h2>{$message_plugin_keywords_schlagworte}</h2>
+	<div class="floatbox keylist" style="">
+		{foreach item=eintrag from=$keywords_liste}
+			<a href="{$slash}{$eintrag.keywords_link}" style="display:block;float:left;font-size:{$eintrag.keywords_font_size}%;margin-right:5px;margin-top:5px;">{$eintrag.keywords_liste_keyword}</a>
+			<span class="ignore">.</span>
+		{/foreach}
+	</div>
+	
+	<h2>{$plugin_keyword_count} {$message.plugin.keywords.schlagwort}{$plugin_keyword_keyword}</h2>
+	<!-- SHOP Daten -->
+	{foreach from=$new_produkte_site item=most name=nc}
+		 <div class="most_item">
+		 		{$most.daten}
+		 </div>
+ {/foreach}
+	<!-- Artikel Daten -->
+	{foreach item=teaser from=$key_daten}
+		<div class="floatbox artikel_liste">
+			<h2>{$teaser.header}</h2>
+			<div style="float:{$teaser.teaser_bild_lr}">{$teaser.lan_teaser_img_fertig}</div>
+			{$teaser.lan_teaser}
+			<br />
+			{if $sp_urls=="ok" or $free_sp_urls}
+				<a href="{$slash}{if $free_sp_urls=="ok"}{$teaser.url_header}{else}{$sulrstrenner}{$teaser.url_header}{/if}"  title="{$message_2012} &quot;{$teaser.header|escape:"html"}&quot; {$message_2013}">{$teaser.header}</a>
+			{else}
+				<a href="{$slash}{$linktext}{$frag_connect}menuid{$gleich_connect}{$teaser.cattextid}{$plus_connect}reporeid{$gleich_connect}{$teaser.reporeid}"  title="{$message_2012} &quot;{$teaser.header|escape:"html"}&quot; {$message_2013}">{$teaser.header}</a>
+			{/if}
+			<br>
+		</div>
+		<br class="break_artikel">
+	{/foreach}
+	{*<!--weitere Seiten -->*}
+	{include file="_module_intern/mod_weiter.html}
+</div>
+{if !$is_life}<!-- STOP plugins/keywords/templates/keywords_front.html -->{/if}

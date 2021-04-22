@@ -1,0 +1,14 @@
+.alphabet_liste
+{
+	list-style-type:none;
+	margin:0px;
+	padding:0px;
+	margin-left:2px;
+	margin-bottom:20px;
+}
+.alphabet_liste li {
+	display: inline;
+	margin:0px;
+	padding:0px;
+	margin-right:2px;
+}

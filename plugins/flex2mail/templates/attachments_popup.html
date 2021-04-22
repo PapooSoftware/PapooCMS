@@ -1,0 +1,24 @@
+<h1>Bitte Anh&auml;nge ausw&auml;hlen:</h1>
+<form id="flex2mail_attachements" action="">
+  <table>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Auswahl</th>
+    </tr>
+    {each}
+    <tr>
+      <td><img src="./interna/bilder/{icon}" /></td>
+      <td>{name}</td>
+      <td><input type="checkbox" data-id="{id}" data-icon="{icon}" value="{filepath}" data-name="{name}" /></td>
+    </tr>
+  {/each}
+  </table>
+  <a href="javascript:flex2mail_send()">&uuml;bernehmen</a>
+</form>
+<script type="text/javascript">
+function flex2mail_send() {
+  opener.flex2mail_create_attachments(document.getElementById('flex2mail_attachements').elements);
+  window.close();
+}
+</script>

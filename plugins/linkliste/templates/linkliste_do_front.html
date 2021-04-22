@@ -1,0 +1,108 @@
+
+<div class="artikel" >
+<a  id="artikel"></a><span class="ignore">.</span>
+
+<div id="artikel_content" class="clearfix">
+<h2>{$plugin.linkliste.linkliste} {if $cataktuellername}{$cataktuellername}{else}{/if}</h2>
+
+{if $show_komplett}
+<div class="glossar_liste_div">{foreach item=catlist from=$categories}
+{if $catlist.cat_name}<h2>{$catlist.cat_name}</h2>{/if}
+<dl>
+	{foreach item=glist from=$catlist.glist}
+
+	<dt><a target="_blank" href="{$glist.linkliste_link}{$glist.linkliste_link_lang}" id="{$glist.linkliste_id}">{$glist.linkliste_Wort}</a></dt>
+	<dd style="margin-left:30px;">{$glist.linkliste_descrip}</dd>
+	{/foreach}
+
+</dl>
+{/foreach}</div>
+{/if}
+
+
+{if $show_link}
+
+{if $catname__nein}
+<a href="{$slash}{$linktext}{$frag_connect}menuid{$gleich_connect}{$menuid_aktuell}{$plus_connect}template{$gleich_connect}{$template2}{$plus_connect}cat_id{$gleich_connect}0{$plus_connect}cat_sub{$gleich_connect}0{$plus_connect}cat_level{$gleich_connect}0">{$plugin.linkliste.start}</a>
+>> {foreach name=catlist item=catlist from=$catname} {if NOT
+$smarty.foreach.catlist.last} <a
+	href="{$slash}{$linktext}{$frag_connect}menuid{$gleich_connect}{$menuid_aktuell}{$plus_connect}template{$gleich_connect}{$template2}{$plus_connect}cat_id{$gleich_connect}{$catlist.cat_id}{$plus_connect}cat_sub{$gleich_connect}{$catlist.cat_sub}{$plus_connect}cat_level{$gleich_connect}{$catlist.cat_level}">{$catlist.cat_name}
+</a><span class="ignore">.</span> >> {else} {$catlist.cat_name} {/if}
+{/foreach}
+{/if}
+
+<div id="catlistdivx">
+
+<br />
+
+	{foreach item=catlist from=$categories} {$catlist.shift_anfang}
+	<a
+		href="{$slash}plugin.php?menuid={$menuid_aktuell}&amp;template={$template2}&amp;cat_id={$catlist.cat_id}&amp;cat_sub={$catlist.cat_sub}&amp;cat_level={$catlist.cat_level}">{$catlist.cat_name}
+	{if $catlist.sub}({$catlist.sub}){/if} </a>
+	<span class="ignore">.</span>
+	{$catlist.shift_ende} {/foreach}
+
+<li>
+<a 	href="{$slash}plugin.php?menuid={$menuid_aktuell}&amp;template={$template2}&amp;cat_id=0&amp;cat_sub=0&amp;cat_level=0">{$plugin.linkliste.keine_kategorie} </a>
+	<span class="ignore">.</span>
+</li>
+</ul>
+
+<hr />
+</div>
+
+
+<div id="linkliste">
+{*<!--weitere Seiten -->*}
+	{include file="_module_intern/mod_weiter.html}
+<br />
+
+<ul class="linklistul">
+	{foreach item=glist from=$result_link} {if $glist.linkliste_Wort}
+	<li>
+	{if $glist.linkliste_lang_header}
+	<div class="linkitem">
+	{else}
+	<div>
+	{/if}
+
+	<div class="linkbilditem">
+	{if $glist.paket_logo}
+	<a {if $glist.extern}target="_blank"
+		{/if} href="{$glist.linkliste_link}{$glist.linkliste_link_lang}" id="ll{$glist.linkliste_id}"><img alt="Screenshot von: {$glist.linkliste_lang_header}" title="{$glist.linkliste_lang_header}" src="{$slash}images/{$glist.paket_logo}" width="160" /></a>
+	{/if}
+	</div>
+
+	<div class="linklist_inhalt">
+	{if $glist.linkliste_lang_header}
+	<h2>{$glist.linkliste_lang_header}</h2>
+	<a {if $glist.extern}target="_blank"
+		{/if} href="{$glist.linkliste_link}{$glist.linkliste_link_lang}" id="bll{$glist.linkliste_id}">{if $glist.linkliste_lang_header}{$glist.linkliste_lang_header} - {/if}{$plugin.linkliste.website}</a><br />
+	{if $glist.partner_name}<strong>{$plugin.linkliste.realisierung}</strong> <a href="{$url_partner}{$glist.partner_id}">{$glist.partner_name}</a>{/if}
+   <div class="decrip">{$glist.linkliste_descrip}</div>
+	{else}
+	<a {if $glist.extern}target="_blank"
+		{/if} href="{$glist.linkliste_link}{$glist.linkliste_link_lang}" id="cll{$glist.linkliste_id}">{$glist.linkliste_link} {$glist.linkliste_link_lang}</a>
+
+	{/if}
+	</div>
+
+	</div>
+	</li>
+	{/if}
+
+	{/foreach}
+
+</ul>
+{*<!--weitere Seiten -->*}
+<br /><br />
+	{include file="_module_intern/mod_weiter.html}
+</div>
+<p>{$plugin.linkliste.anzahl} {$gesamt}</p><p>{$plugin.linkliste.text} <a href="/kontakt.php">{$plugin.linkliste.mail}</a></p>
+{/if} <span class="backlink"><a href="javascript:history.go(-1)">{$plugin.linkliste.zurueck}</a></span><span
+	class="ignore">.</span></div>
+<br />
+<br />
+<br />
+<hr class="clear_columns" />
+</div>

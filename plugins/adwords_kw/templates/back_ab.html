@@ -1,0 +1,25 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+
+<link rel="stylesheet" href="{$adwords_kw_css_path}/adwords_kw.css"/>
+
+<div class="artikel">
+    <form action="" method="post">
+        <fieldset>
+            <legend>A-B Test eintragen / bearbeiten</legend>
+                <label for="ab_script">Das Google-Skript</label>
+                <textarea cols="40" rows="16" id="ab_script" name="ab_script" placeholder="{$adwords_kw_6}">{$ab_script}</textarea>
+                <label for="article_url">Die sprechende URL der original Seite</label>
+                <input type="text" name="article_url" id="article_url" placeholder="{$adwords_kw_5}" value="{if $article_url}{$article_url}{/if}" />
+        </fieldset>
+        <fieldset>
+            <legend>Speichern</legend>
+            <input type="submit" class="btn btn-info" value="Speichern" name="updateAB" />
+        </fieldset>
+    </form>
+</div>
+
+</body>
+</html>
+{/if}

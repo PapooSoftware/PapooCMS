@@ -1,0 +1,33 @@
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+<div class="artikel">
+	<div class="mv">
+		{if $mv_protokoll_liste==""}
+			<h2>{$plugin.mv.no_protokoll}</h2>
+		{else}
+			<h2>{$plugin.mv.protokoll_uebersicht}</h2>
+		{/if}
+		<a href="javascript:history.go(-1)">{$plugin.mv.message_2196}</a>
+		<table>
+			<tr>
+				<th>{$plugin.mv.feldname}</th>
+				<th>{$plugin.mv.alter_feldwert}</th>
+				<th>{$plugin.mv.benutzername}</th>
+				<th>{$plugin.mv.aenderungsdatum}</th>
+			</tr>
+			{foreach item=eintrag from=$mv_protokoll_liste}
+				<tr>
+					<td>{$eintrag.mv_pro_feld_label}</td>
+					<td>{$eintrag.mv_pro_old_content}</td>
+					<td>{$eintrag.username}</td>
+					<td>{$eintrag.mv_pro_date}</td>
+				</tr>
+			{/foreach}
+		</table>
+		<a href="javascript:history.go(-1)">{$plugin.mv.message_2196}</a>
+	</div>
+	<!-- Rechte Fehlermeldung-->
+	{include file=rechte.html}
+</div>
+</body>
+</html>

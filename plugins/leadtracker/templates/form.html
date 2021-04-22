@@ -1,0 +1,68 @@
+<div class="artikel">
+<a  id="artikel"></a>
+	<div id="artikel_content" class="clearfix artikel_details">
+		<!-- START FORM -->
+		<script type="text/javascript" src="{$slash}plugins/form_manager/js/tooltip.js"></script>
+		{if $form_html}
+			{$form_html}
+		{else}
+			{if $formok==ok}
+				{$pcfronttext.0.form_manager_toptext_html}
+				
+				{if $fehlerliste}
+					<div class="error"><a name="error" id="error" ></a>
+						<h2>{$plugin.form_manager.bitte_korrek}</h2>
+						<br />
+						<ul>
+							{foreach  item=dat from=$fehlerliste }
+								<li>{$dat}</li>
+							{/foreach}
+						</ul>
+					</div>
+				{/if}
+				<div class="stwformwrap">
+					<form action="#error" method="post" id="formk" enctype="multipart/form-data">
+						{foreach item=dat from=$gfliste}
+							<fieldset id="field_{$dat.plugin_cform_group_id}" class="field_class">
+								<legend>{$dat.plugin_cform_group_text}</legend>
+								{foreach item=idat from=$dat.felder}
+									{$idat}
+								{/foreach}
+							</fieldset>
+						{/foreach}
+						{if $form_versende}
+							<fieldset>
+								<legend>{$plugin.form_manager.anwensenden}</legend>
+								<div class="labdiv">
+									<label for="sendto" {if $error.sendto} class="form_error"{/if}>{$plugin.form_manager.anwensenden}</label>
+									{$form_versende}
+								</div>
+							</fieldset>
+						{/if}
+                        <input type="text" size="30" name="nicht_ausfuellen" style="display:none;"
+                               id="plugin_cform_vorname"
+                               value=""/>
+
+						<fieldset>
+                            <input type="hidden" name="form_manager_id" value="{$form_manager_id}" />
+                            {if $is_last_page_form=="ok"}
+							<legend>{$plugin.form_manager.senden}</legend>
+                            {if $leadtracker_is_kann_datei}
+                            <input type="submit" name="form_manager_submit_dl_now" class="senden_formmanager btn btn-info button"                                    value="{$download_sofort_link_text}" />
+                            {/if}
+							<input type="submit" name="form_manager_submit" class="senden_formmanager btn btn-info button" value="{$pcfronttext.0.form_manager_lang_button}" />
+                            <input type="hidden" name="is_last_page" value="1" />
+                            {$submit_page_break_hidden.$page_count_form}
+                            {else}
+                            {$submit_page_break.$page_count_form}
+                            {$submit_page_break_hidden.$page_count_form}
+                            {/if}
+						</fieldset>
+					</form>
+				</div>
+				{$pcfronttext.0.form_manager_bottomtext_html}
+			{/if}
+		{/if}
+		<!-- STOP FORM -->
+	</div>
+</div>

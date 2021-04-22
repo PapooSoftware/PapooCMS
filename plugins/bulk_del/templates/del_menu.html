@@ -1,0 +1,77 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+{if $is_del}
+<div class="message"> {$plugin_del_artikel_die_menpunkte_wurden_gelscht}</div>
+{/if}
+ 
+
+
+ <h1 id="del_artikel_whlen_sie_die_menpunkte_die_sie_lschen_wollen" class="h1" >{$plugin_del_artikel_whlen_sie_die_menpunkte_die_sie_lschen_wollen}</h1>
+
+ <p id="del_artikel_whlen_sie_hier_die_" class="h1" >{$plugin_del_artikel_whlen_sie_hier_die_} {$plugin_del_artikel_die_menpunkte_lnn}</p>
+<form action="" method="post">
+{if $has_admin_rights}
+<table>
+<tr>
+<th>{$plugin_del_artikel_berschrift}</th>
+<th> {$plugin_del_artikel_artikel_lschen}</th>
+</tr>
+{foreach from=$menu_del_liste item=artikel key=ka name=artname}
+
+<tr>
+<td><label for="delmenu_{$artikel.menuid}">{$artikel.menuname}</label></td><td><input type="checkbox" id="delmenu_{$artikel.menuid}" name="delmenu[{$artikel.menuid}]" value="1" /></td>
+</tr>
+
+{/foreach}
+</table>
+ <fieldset>
+<legend> {$plugin_del_artikel_ausgewhlte_menpunkte_lschen}</legend>
+
+
+<input type="submit" name="dek_artikel_now" class="btn btn-danger" value=" {$plugin_del_artikel_ausgewhlte_menpunkte_lschen}" onclick="javascript: var msg=&quot; {$plugin_del_artikel_soll_der_artikel_wirklich_gelscht_werden2}&quot;; if (confirm(msg)) return true;else return false;" />
+ </fieldset><br />
+</form>
+{else}
+<div class="error">
+{$plugin_del_artikel_sie_brauchen_adminrechte}
+</div>
+
+{/if}
+
+
+
+{if $is_dev}
+ #start#
+ 
+
+
+ <span class="ignore"></span>
+  <!-- Der Start Button ist notwendig damit sich das System daran aufhängen kann. -->
+	 <div class="rapid_form">
+			<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="plugin_del_artikel_data" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="del_artikel" />
+		<!-- Das Standarpräfix für die Ids -->
+		<input type="hidden" name="praefix" value="del_artikel" />
+		<!-- Das Standarpräfix für die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="del_artikel_data" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div> 
+{/if}
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}
+

@@ -1,0 +1,123 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+
+{if !$STANDALONE}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+{/if}
+
+
+<style type="text/css">{literal}
+	form label br {
+		display: inline;
+	}
+	.with-input-prefix span {
+		color: gray;
+		display: block;
+		float: left;
+		margin: 4px 0px;
+	}
+	.with-input-prefix input {
+		margin-left: -0.9em;
+		background: transparent;
+		padding-left: 1.1em;
+	}
+	
+	table button.btn {
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+	
+	table tr.placeholder td {
+		text-align: center;
+	}
+	
+{/literal}</style>
+
+<link type="text/css" rel="stylesheet" href="{$css_path}/leadtracker.css" />
+
+{if !$STANDALONE}
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+{/if}
+
+<div class="artikel">
+<h1>{$plugin_leadtracker_statistics_ueberschrift}</h1>
+
+<div id="statistics-progress" class="message message-progress" aria-hidden="true" style="display:none">
+    <p id="statistics-progress-pending" aria-hidden="true" style="display:none">{$plugin_leadtracker_statistics_gen_wait}</p>
+    <p id="statistics-progress-done" aria-hidden="true" style="display:none">{$plugin_leadtracker_statistics_gen_success}</p>
+    <p id="statistics-progress-failed" aria-hidden="true" style="display:none">{$plugin_leadtracker_statistics_gen_failed}</p>
+    <ol class="statistics-progress">
+        <li>{$plugin_leadtracker_statistics_gen_step_1}</li>
+        <li>{$plugin_leadtracker_statistics_gen_step_2}</li>
+        <li>{$plugin_leadtracker_statistics_gen_step_3}</li>
+        <li>{$plugin_leadtracker_statistics_gen_step_4}</li>
+        <li>{$plugin_leadtracker_statistics_gen_step_5}</li>
+    </ol>
+</div>
+
+<form action="" method="POST">
+    <input type="hidden" name="last_apikey" value="{$apikey|escape}" />
+    <fieldset><legend>{$plugin_leadtracker_statistics_statistiken_neu_generieren}</legend>
+        {$plugin_leadtracker_statistics_desc_statistiken_neu_generieren}
+        <button class="btn btn-primary" id="btn-generate-statistics" name="generate_statistics" value="1" type="submit">{$plugin_leadtracker_statistics_statistiken_neu_generieren}</button>
+    </fieldset>
+</form>
+
+<script type="text/javascript" src="{$script_path}/generate_statistics.js"></script>
+
+<form action="" method="GET" accept-charset="UTF-8">
+	<input type="hidden" name="menuid" value="{$menuid|escape}" />
+	{if $STANDALONE}
+	<input type="hidden" name="standalone" value="yes" />
+	{/if}
+	<input type="hidden" name="template" value="{$template|escape}" />
+	<table>
+		<col /><col /><col /><col style="width: 13ex;" />
+		<thead>
+			<tr><th>{$plugin_leadtracker_statistics_mailaddr}</th><th>{$plugin_leadtracker_statistics_anzahl_visits}</th><th>{$plugin_leadtracker_statistics_anzahl_forms}</th><th>{$plugin_leadtracker_statistics_letzte_interaktion}</th><th>{$plugin_leadtracker_statistics_aktion}</th></tr>
+			{if $users !== null}
+			<tr>
+				<td><input type="search" name="search_mail" value="{$search_mail|escape}" /></td>
+				<td class="with-input-prefix"><span>&nbsp;≥</span> <input type="number" min="0" name="search_visits" value="{$search_visits|escape}" /></td>
+				<td class="with-input-prefix"><span>&nbsp;≥</span> <input type="number" min="0" name="search_forms" value="{$search_forms|escape}" /></td>
+				<td></td>
+				<td><button class="btn btn-primary" type="submit">{$plugin_leadtracker_statistics_suchen}</button></td>
+			</tr>
+			{/if}
+		</thead>
+		<tbody>
+			{if $users === null}
+			<tr class="placeholder"><td colspan="5">{$plugin_leadtracker_statistics_keine_statistiken}</td></tr>
+			{elseif !$users}
+			<tr class="placeholder"><td colspan="5">{$plugin_leadtracker_statistics_keine_eintraege}</td></tr>
+			{else}
+			{foreach from=$users item=user}
+			<tr>
+				<td>{if $user.mail}{$user.mail|escape}{else}<em>{$plugin_leadtracker_statistics_unbekannt}</em>{/if}</td>
+				<td>{$user.count_visits|escape}</td>
+				<td>{$user.count_forms|escape}</td>
+				<td data-value="{$user.last_visit|date_format:"%Y-%m-%d %H:%M:%S"}">{$user.last_visit|date_format:"%d.%m.%Y&nbsp;%H:%M"}</td>
+				<td><a href="{$template_base_path}leadtracker_backend_details.html&amp;cookie_id={$user.cookie_id}">{$plugin_leadtracker_statistics_details}</a></td>
+			</tr>
+			{/foreach}
+			{/if}
+		</tbody>
+	</table>
+	{if $STANDALONE}
+	{include file=../../../interna/templates/standard/weiter.inc.html}
+	{else}
+	{include file=weiter.inc.html}
+	{/if}
+</form>
+
+</div>
+
+{if !$STANDALONE}
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{else}
+{include file=../../../plugins/leadtracker/templates/standalone_foot.html}
+{/if}
+
+{/if}

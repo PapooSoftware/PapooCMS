@@ -1,0 +1,132 @@
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+<div class="artikel">
+	<h1>{$plugin.mv.import_export}</h1>
+	<p>{$plugin.mv.import_export_text}</p>
+	{if $delete}<h2>{$plugin.mv.datei_geloescht}</h2>{/if}
+	{if $kein_inhalt}<div class="error">{$plugin.mv.kein_inhalt}</div><br />{/if}
+	{if $fehler == 1}<div class="error">{$plugin.mv.no_table}</div><br />{/if}
+	{if $fehler == 2}<div class="error">{$plugin.mv.no_lang}</div><br />{/if}
+	{if $fehler == 3}<div class="error">{$plugin.mv.no_meta}</div><br />{/if}
+	{if $fehler == 4}<div class="error">{$plugin.mv.no_table}</div><br /><div class="error">{$plugin.mv.no_lang}</div><br />{/if}
+	{if $meta_fehlt == "ja" AND !$file AND !$kein_inhalt}
+		<h2>{$plugin.mv.export_erstellen}</h2>
+		<form action="" method="post" id="formi">
+			<!-- Metaeben auswählen -->
+			<fieldset>
+				<legend>{$plugin.mv.metaebene}</legend>
+				<label for="metaebene">{$plugin.mv.metaebene}</label>
+				<select name="metaebene" id="metaebene" title="" style="width: 40%;" size="1">
+					<option value="">(select){$plugin.imex.ausws}</option> 
+					{foreach item=meta from=$metaebenen}
+						<option value="{$meta.mv_meta_id}" 
+							{if $metaebene == $meta.mv_meta_id}selected="selected"{/if}>
+							{$meta.mv_meta_group_name}
+						</option>
+					{/foreach}
+				</select>
+			</fieldset>
+			<!-- Hidden Felder -->
+			<input type="hidden" name="tabelle" value="{$tabelle}" />
+			<input type="hidden" name="format" value="{$format}" />
+			<input type="hidden" name="feld" value="{$feld}" />
+			<input type="hidden" name="tabelle_lang" value="{$tabelle_lang}" />
+			<input type="hidden" name="trenner" value="{$trenner}" />
+			<input type="hidden" name="meta_fehlt" value="{$meta_fehlt}" />
+			<fieldset>
+				<legend>{$plugin.mv.export_starten}</legend>
+				<input type="submit" name="metachoose" value="{$plugin.mv.export_starten}" />
+			</fieldset>
+		</form>
+	{elseif $file}
+		<h2>{$plugin.mv.export_downloaden}</h2>
+		<p>{$plugin.mv.export_downloaden_text}</p>
+		<ul>
+			<li><a href="{$pfad}{$file}">{$file} {$plugin.mv.downloaden}</a></li>
+			<li><a href="{$self}&file={$file}&delfile=ok">{$file} {$plugin.mv.mv_list_del}</a></li>
+		</ul>
+	{else}
+		<h2>{$plugin.mv.export_erstellen}</h2>
+		<form action="" method="post" id="formi">
+			{*<!-- wenn man von der internen Suche kommt, braucht man keine Tabelle und Sprache mehr auswählen -->*}
+			{if $mv_sql!="1"}
+				<!-- Tabelle auswählen -->
+				<fieldset>
+					<legend>{$plugin.mv.tabelle_auswaehlen}</legend>
+					<label for="tabelle">{$plugin.mv.tabelle_auswaehlen}</label>
+					<select name="tabelle" id="tabelle" title="" style="width: 40%;" size="1">
+						<option value="">(select){$plugin.imex.ausws}</option> 
+						{foreach item=sprach key=tabname from=$tabtar}
+							<option value="{$sprach}" {if $tabelle == $sprach}selected="selected"{/if}>{$tabname}</option>
+						{/foreach}
+					</select>
+				</fieldset>
+				<!-- Sprachtabelle auswählen -->
+				<fieldset>
+					<legend>{$plugin.mv.sprachen_import_export}</legend>
+					<label for="tabelle_lang">{$plugin.mv.sprachen_import_export}</label>
+					<select name="tabelle_lang" id="tabelle_lang" title="" style="width: 40%;" size="1">
+						<option value="">(select){$plugin.imex.ausws}</option> 
+						{foreach item=sprache from=$sprachen}
+							<option value="{$sprache.mv_lang_id}" {if $tabelle_lang == $sprache.mv_lang_id}selected="selected"{/if}>{$sprache.mv_lang_long}</option>
+						{/foreach}
+					</select>
+				</fieldset>
+				{*<!-- Alternativtext das die Ergebnisse einerSuche exportiert werden-->*}
+			{else}
+				{$plugin.mv.suche_export}
+				<br />
+				{$plugin.mv.metatext_suchexport}{$mv_meta_group_name}
+				<br />
+				{$plugin.mv.anzahl}{$mv_such_treffer}
+				<input type="hidden" name="mv_sql" value="{$mv_sql}" />
+				<input type="hidden" name="mv_meta_id" value="{$mv_meta_id}" />
+				<input type="hidden" name="metachoose" value="{$mv_meta_id}" />
+				<input type="hidden" name="metaebene" value="{$mv_meta_id}" />
+				<input type="hidden" name="tabelle" value="papoo_mv_content_{$mv_id}" />
+			{/if}
+			<!-- Format -->
+			<input type="hidden" name="format" value="csv" />
+			<!-- Erste Zeile mit Feldnamen oder ohne -->
+			<fieldset>
+				<legend>{$plugin.mv.erste_zeile}</legend>
+				<input type="radio" name="feld" 
+					{if $feld == "ohne"}checked="checked"{/if} 
+					id="feld1" value="ohne" /> 
+				<label for="feld1">{$plugin.mv.ohne_feldnamen}</label>
+				<br />
+				<input type="radio" name="feld" 
+					{if $feld == "mit" OR $feld == ""}checked="checked"{/if}  
+					id="feld2" value="mit" /> 
+				<label for="feld2">{$plugin.mv.mit_feldnamen}</label>
+			</fieldset>
+			<!-- Trenner -->
+			<fieldset>
+				<legend>{$plugin.mv.trenner}</legend>
+				<input type="radio" name="trenner" 
+					{if $trenner == "semi"}checked="checked"{/if} 
+					id="trenner1" value="semi" /> 
+				<label for="trenner1">{$plugin.mv.semi_trenner}</label>
+				<br />
+				<input type="radio" name="trenner" 
+					{if $trenner == "tab" OR $trenner == ""}checked="checked"{/if} 
+					id="trenner2" value="tab" /> 
+				<label for="trenner2">{$plugin.mv.tab_trenner}</label>
+			</fieldset>
+			<!-- Export starten -->
+			<fieldset>
+				<legend>{$plugin.mv.export_starten}</legend>
+				<input type="submit" class="submit_back" name="startexport" value="{$plugin.mv.export_starten}" />
+			</fieldset>
+			<input type="hidden" name="delete" value=""/>
+		</form>
+	{/if}
+	<br />
+	<!-- Rechte Fehlermeldung-->
+	{include file=rechte.html}
+</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<!-- version: Versions-Nummer papoo für die das Plugin gedacht ist / funktioniert -->
+<plugin version="4.x">
+
+<!-- ALLGEMEINE-INFORMATIONEN -->
+<!-- ************************ -->
+<!-- name: Name des Plugins -->
+<name>Papoo-Flexverwaltung</name>
+<mtop>1</mtop>
+<!-- beschreibung_de: Kurz-Beschreibung des Plugins auf deutsch (wird im Plugin-Manager angezeigt) -->
+<beschreibung_de><![CDATA[Mit diesem Plugin kann man eine komplette eigene Datenbankverwaltung aufbauen, es gibt hier kaum Limitierungen.]]></beschreibung_de>
+
+<!-- beschreibung_en: Kurz-Beschreibung des Plugins auf englisch (wird im Plugin-Manager angezeigt) -->
+<beschreibung_en><![CDATA[Manage Data Sources.]]></beschreibung_en>
+
+<!-- version: Versions-Nummer des Plugins -->
+<version>3.0.2</version>
+
+<!-- papooid: Eindeutige Nummer offizieller papoo-Plugins -->
+<papooid>35</papooid>
+
+<!-- link: z.Z. noch ohne Funktion -->
+<link>http://www.papoo.de</link>
+
+<!-- datum: Erscheinungs-Datum bzw. Stand des Plugins -->
+<release_datum>25.09.2007</release_datum>
+<last_datum>24.03.2015</last_datum>
+
+<!-- AUTOR-INFORMATIONEN -->
+<!-- ******************* -->
+<!-- autor: Informationen zum Autor (Programmierer) des Plugins -->
+<autor>
+	<!-- autor.name: Name des Authors -->
+	<name>Carsten Euwens</name>
+
+	<!-- autor.kontakt: postalische Kontakt-Informationen des Autors -->
+	<kontakt><![CDATA[Carsten Euwens, Heerstr. 110, 53111 Bonn]]></kontakt>
+
+	<!-- autor.email: eMail-Adresse des Autors -->
+	<email>webwork@euwens.de</email>
+
+	<!-- autor.telefon: Telefon-Nummer des Autors -->
+	<telefon>0177/8075846</telefon>
+</autor>
+
+
+<!-- MENÜ-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- menue: Informationen für den Menü-Eintrag im Backend (papoo/interna) -->
+<menue>
+	<!-- menue.eintrag_de: Name des Menü-Punktes im Backend auf deutsch -->
+	<eintrag_de>GoFlex</eintrag_de>
+	<!-- menue.eintrag_en: Name des Menü-Punktes im Backend auf englisch -->
+	<eintrag_en>GoFlex</eintrag_en>
+	<!-- menue.icon: Pfad zum Menü-Icon des Menü-Punktes im Backend (relativ zum Plugin-Verzeichnis) -->
+	<icon>mv/bilder/pic_01.gif</icon>
+	<!-- menue.link: Name der Seite auf welche der Menü-Punkt im Backend verweisen soll -->
+	<link>plugin:mv/templates/mv_start.html</link>
+
+	<submenue>
+		<eintrag_de>Verwaltungen</eintrag_de>
+		<eintrag_en>Administrations</eintrag_en>
+		<icon>mv/bilder/pic_01.gif</icon>
+		<link>plugin:mv/templates/manage_forms.html</link>
+
+		<submenue2>
+			<eintrag_de>Neue Verwaltung</eintrag_de>
+			<eintrag_en>New Administration</eintrag_en>
+			<icon>mv/bilder/pic_01.gif</icon>
+			<link>plugin:mv/templates/create_email.html</link>
+		</submenue2>
+		<submenue2>
+			<eintrag_de>Verwaltung bearbeiten</eintrag_de>
+			<eintrag_en>Change Form</eintrag_en>
+			<icon>mv/bilder/pic_01.gif</icon>
+			<link>plugin:mv/templates/change_email.html</link>
+		</submenue2>
+		<submenue2>
+			<eintrag_de>Sprachen</eintrag_de>
+			<eintrag_en>Languages</eintrag_en>
+			<icon>mv/bilder/pic_01.gif</icon>
+			<link>plugin:mv/templates/edit_languages.html</link>
+		</submenue2>		
+    <submenue2>
+			<eintrag_de>Importieren</eintrag_de>
+			<eintrag_en>Import</eintrag_en>
+			<icon>imex/bilder/pic_01_01.gif</icon>
+			<link>plugin:mv/templates/imex_importit.html</link>
+    </submenue2>
+    <submenue2>
+        <eintrag_de>Exportieren</eintrag_de>
+        <eintrag_en>Export</eintrag_en>
+        <icon>imex/bilder/pic_01_01.gif</icon>
+        <link>plugin:mv/templates/imex_exportit.html</link>
+    </submenue2>
+	</submenue>
+	<submenue>
+		<eintrag_de>Datensicherung</eintrag_de>
+		<eintrag_en>Backup</eintrag_en>
+		<icon>mv/bilder/pic_01.gif</icon>
+		<link>plugin:mv/templates/backup.html</link>
+	</submenue>
+</menue>
+
+
+<!-- KLASSEN-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- klasse: Informationen der Plugin-Klasse welche eingebunden werden sollen -->
+<klasse>
+	<!-- klasse.name: Name der Klassen-Instanz / des Objekts (also der Name des Dings, das mit $name = new xx_class(); erzeugt wird) -->
+	<name>mv</name>
+	<!-- klasse.datei: Pfad zur Klassen-Datei (relativ zum Plugin-Verzeichnis) -->
+	<datei>mv/lib/mv.php</datei>
+</klasse>
+<klasse>
+	<!-- klasse.name: Name der Klassen-Instanz / des Objekts (also der Name des Dings, das mit $name = new xx_class(); erzeugt wird) -->
+	<name>imex_mw_class</name>
+	<!-- klasse.datei: Pfad zur Klassen-Datei (relativ zum Plugin-Verzeichnis) -->
+	<datei>mv/lib/imex_class.php</datei>
+</klasse>
+
+<!-- DATENBANK-INFORMATIONEN -->
+<!-- ****************** -->
+<datenbank>
+	<!-- datenbank.installation: Pfad zur SQL-Installations-Datei (relativ zum Plugin-Verzeichnis) -->
+	<installation>mv/sql/mv_install.sql</installation>
+	<!-- datenbank.deinstallation: Pfad zur SQL-Deinstallations-Datei (relativ zum Plugin-Verzeichnis) -->
+	<deinstallation>mv/sql/mv_deinstall.sql</deinstallation>
+</datenbank>
+<!-- Einbindung der Sprach-Daten.
+	In dem hier angegebenen Verzeichnis sollten Dateien mit folgenden Namen liegen:
+	- messages_backend_[de|en|sp| .. etc.].inc.php
+	- messages_frontend_[de|en|sp| .. etc.].inc.php
+-->
+<messages>mv/messages</messages>
+<css>mv/css/mv.css</css>
+
+</plugin>

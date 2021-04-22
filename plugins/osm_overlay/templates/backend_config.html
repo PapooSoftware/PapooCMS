@@ -1,0 +1,167 @@
+<div class="artikel" id="osm_overlay_backend">
+	<link type="text/css" href="{$web_pfad}/plugins/osm_overlay/css/styles.css" rel="stylesheet"></link>
+	{if $osm_message}
+	<div class="alert alert-success">
+		{$osm_message}
+	</div>
+	{/if}
+	{if !$osm_table_exists}
+	<div class="alert alert-error">
+		Die Tabelle {$osm_table_name|escape} existiert nicht!
+	</div>
+	{/if}
+	{if !$osm_exists.json}
+	<div class="alert alert-error">
+		JSON-Daten konnten nicht gefunden werden! {$osm_web.json|escape}
+	</div>
+	{/if}
+	{if !$osm_path.permission}
+	<div class="alert alert-error">
+		Keine Schreibrechte für {$osm_path.data|escape}!
+	</div>
+	{/if}
+	<h2 class="h2">{$plugin_osm_overlay.title}</h2>
+	<p>
+		Dieses Plugin benötigt eine <a href="{$web_pfad}/plugins/osm_overlay/osm_overlay_data.json" info="Beispiel">JSON</a>-Datei. Geben Sie <a href="#osm_json_url_legend" info="Beispiel">hier</a> die Addresse im Internet dazu an. Für den Fall das Sie keine Daten haben, können Sie eine Tabelle aus der Papoo-Datenbank <a href="#osm_import_legend" info="Beispiel">angeben</a> (ohne Prefix!){if $osm_table_exists} und die <a href="#osm_fields_legend" info="Beispiel">Felder</a> für den Import auswählen{/if}.
+	</p>
+		<h2>{$plugin_osm_overlay.header_einbindung_frontend}</h2>
+		<p>{$plugin_osm_overlay.einbindung_info} <code>plugin:osm_overlay/templates/mod_osm_overlay.html</code></p>
+	<form action="" method="post">
+		<fieldset>
+			<legend id="osm_default_legend">{$plugin_osm_overlay.legend_standardwerte}</legend>
+			<p>
+				<label for="osm_lon" id="osm_lon_label">{$plugin_osm_overlay.label_lon}</label>
+				<input id="osm_lon" name="osm_lon" {literal}pattern="-?[0-9]{1,3}(\.[0-9]{1,9})?"{/literal} type="text" inputmode="numeric" value="{$osm_lon|escape}" />
+			</p>
+			<p>
+				<label for="osm_lat" id="osm_lat_label">{$plugin_osm_overlay.label_lat}</label>
+				<input id="osm_lat" name="osm_lat" {literal}pattern="-?[0-9]{1,3}(\.[0-9]{1,9})?"{/literal} type="text" inputmode="numeric" value="{$osm_lat|escape}" />
+			</p>
+			<p>
+				<label for="osm_zoom" id="osm_zoom_label">{$plugin_osm_overlay.label_zoom}</label>
+				<input id="osm_zoom" name="osm_zoom" min="1" max="20" type="number" value="{$osm_zoom|escape}" />
+			</p>
+			<p>
+				<label for="osm_search_zoom" id="osm_search_zoom_label">{$plugin_osm_overlay.label_search_zoom}</label>
+				<input id="osm_search_zoom" name="osm_search_zoom" min="1" max="20" type="number" value="{$osm_search_zoom|escape}" />
+			</p>
+			<p>
+				<label for="osm_header" id="osm_header_label">{$plugin_osm_overlay.label_header}</label>
+				<textarea id="osm_header" name="osm_header">{$osm_header|escape}</textarea>
+			</p>
+			<p>
+				<label for="osm_footer" id="osm_footer_label">{$plugin_osm_overlay.label_footer}</label>
+				<textarea id="osm_footer" name="osm_footer">{$osm_footer|escape}</textarea>
+			</p>
+		</fieldset>
+
+		<fieldset>
+			<legend id="osm_json_url_legend">Internetaddresse zu Ihren POI-Daten</legend>
+			<p>
+				<label for="osm_json_url" id="osm_json_url_label">JSON-URL</label>
+				<input id="osm_json_url" name="osm_json_url" type="text" inputmode="url" value="{$osm_json_url|escape}" />
+			</p>
+		</fieldset>
+
+		<fieldset>
+			<legend id="osm_import_legend">Geben Sie hier die Orte für den Addressenimport ein.</legend>
+			<p>
+				<label for="osm_json_path" id="osm_json_path_label" >Speicherpfad relativ zum Wurzelverzeichnis (muss Schreibrechte besitzen!)</label>
+				<input id="osm_json_path" name="osm_json_path" type="text" inputmode="verbatim" value="{$osm_json_path|escape}" />
+			</p>
+			<p>
+				<label for="osm_table_name" id="osm_table_name_label">Tabellenname</label>
+				<input id="osm_table_name" name="osm_table_name" type="text" inputmode="verbatim" value="{$osm_table_name|escape}" />
+			</p>
+			{if $osm_path.permission}
+			<input class="btn btn-primary" name="import" type="submit" value="Addressen importieren" />
+			{/if}
+		</fieldset>
+
+		{if $osm_table_exists}
+		<fieldset>
+			<legend id="osm_link_legend">Popup-Link</legend>
+			<p>
+				<label for="osm_link" id="osm_link_label">URL</label>
+				<input id="osm_link" name="osm_link" type="text" inputmode="url" value="{$osm_link|escape}" />
+			</p>
+			<p>
+				<label for="osm_link_field" id="osm_link_field_label">Wert aus Feld mit Name den Link als Parameter anhängen</label>
+				<select id="osm_link_field" name="osm_link_field">
+					<option value=""></option>
+					{foreach from=$osm_fields item=field}
+					<option value="{$field|escape}"{if $field == $osm_link_field} selected="selected"{/if}>{$field|escape}</option>
+					{/foreach}
+				</select>
+			</p>
+		</fieldset>
+
+		<fieldset>
+			<legend id="osm_fields_legend">Popup-Felder auswählen</legend>
+			<p>
+				<span>Gefundene Einträge: {$osm_table_count}</span>
+			</p>
+		
+			<table>
+				<tr>
+					<th>Spaltenname</th>
+					<th>Anzeigen</th>
+					<th>als Label</th>
+					<th>zur Lokationsbestimmung verwenden</th>
+					<th>Kategorie</th>
+				</tr>
+				{foreach from=$osm_fields_filtered item=field}
+				<tr>
+					<td>
+						{$field}
+					</td>
+					<td>
+						<input name="osm_active_fields[{$field|escape}]" type="checkbox" {if in_array($field, $osm_active_fields)}checked="checked"{/if} value="{$field}" />
+					</td>
+					<td>
+						<input name="osm_label_field" type="radio" {if $osm_label_field == $field}checked="checked"{/if} value="{$field|escape}" />
+					</td>
+					<td>
+						<input name="osm_loc_fields[{$field|escape}]" type="checkbox" {if in_array($field, $osm_loc_fields)}checked="checked"{/if} value="{$field|escape}"	/>
+					</td>
+					<td>
+						<select name="osm_loc_field_type[{$field}]">
+							<option value=""></option>
+							<option value="street"{if $osm_loc_field_type[$field] == 'street'} selected="selected"{/if}>Straße und Hausnummer</option>
+							<option value="city"{if $osm_loc_field_type[$field] == 'city'} selected="selected"{/if}>Ort</option>
+<!--							 <option value="county"{if $osm_loc_field_type[$field] == 'county'} selected="selected"{/if}></option> -->
+<!--							 <option value="state"{if $osm_loc_field_type[$field] == 'state'} selected="selected"{/if}></option> -->
+							<option value="country"{if $osm_loc_field_type[$field] == 'country'} selected="selected"{/if}>Land</option>
+							<option value="postalcode"{if $osm_loc_field_type[$field] == 'postalcode'} selected="selected"{/if}>Postleitzahl</option>
+						</select>
+					</td>
+				</tr>
+				{/foreach}
+			</table>
+		</fieldset>
+		{/if}
+		<p>
+			<input class="btn btn-success" name="save_config" type="submit" value="Konfiguration speichern" />
+		</p>
+	</form>
+	{if $osm_exists.data}
+	<div class="alert alert-info">
+		Datendatei existiert lokal <a href="{$osm_web.data|escape}">Link</a>
+	</div>
+	{/if}
+	{if $osm_exists.fail_query}
+	<div class="alert alert-info">
+		Anfragenfehlerdatei existiert lokal <a href="{$osm_web.fail_query|escape}">Link</a>
+	</div>
+	{/if}
+	{if $osm_exists.fail_osm}
+	<div class="alert alert-info">
+		Fehlerdatei existiert Lokal <a href="{$osm_web.fail_osm|escape}">Link</a>
+	</div>
+	{/if}
+	{if $osm_exists.data || $osm_exists.fail_query || $osm_exists.fail_osm}
+	<p>
+		<button class="btn btn-small btn-info" onclick="document.location = document.location.href + '&amp;delete_json'" value="delete_data">Dateien löschen</button>
+	</p>
+	{/if}
+</div>

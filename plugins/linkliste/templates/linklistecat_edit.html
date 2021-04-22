@@ -1,0 +1,69 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+{if $deleted}
+<div class="message">
+<strong>{$plugin.linkliste.deleted}</strong>
+</div>
+{/if}
+{if $exist}
+<div class="error">
+<!-- Der Eintrag exisitiert schon-->
+{$plugin.linkliste.exist}
+</div>
+{/if}
+{if $eintragmakeartikelfertig}
+<div class="message">
+<!-- Die Artikel wurden durchgeloopt-->
+{$plugin.linkliste.eingetragen}
+</div>
+{/if}
+<div class="artikel">
+
+
+{if $list}
+{$plugin.linkliste.liste}
+<ol>
+{foreach item=dat from=$list_dat}
+<li>
+
+  <a href="{$ll_link}{$dat.cat_id}">{$dat.cat_name} {$plugin.linkliste.bearbeiten}</a>
+</li>
+{/foreach}
+</ol>
+{/if}
+{if $edit}
+<!-- Es soll ein neuer Eintrag erstellt werden -->
+{include file=../../../plugins/linkliste/templates/linklistecat_form.html}
+ {/if}
+
+{if $fragedel}
+<h2>{$plugin.linkliste.fragedel}</h2>
+<form action="#" method="post">
+
+  <fieldset>
+   <legend>{$plugin.linkliste.fragedel2}
+    </legend>
+<strong>{$linklistename}</strong>
+
+  <input type="hidden" name="cat_id" value="{$cat_id}"/>
+  <br /><br />
+
+  <br />
+  <input style="float:left," class="submit_back_red" type="submit" name="submitdelecht" value="{$plugin.linkliste.loeschen}"/>
+
+
+
+
+  </fieldset>
+  </form>
+{/if}
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

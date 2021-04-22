@@ -1,0 +1,19 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+	<script language="javascript" type="text/javascript" src="./tiny_mce/tiny_mce.js" charset="utf-8"></script>
+	<script language="javascript" type="text/javascript" src="./tiny_mce/FileBrowser.js"></script>
+	
+	<script language="javascript" type="text/javascript">
+	tinyMCE.init({ldelim}
+	mode : "exact",
+	language : "de",
+elements : "form_manager_antwort_html1,form_manager_antwort_html2,form_manager_antwort_html3,form_manager_antwort_html4,form_manager_antwort_html5,form_manager_antwort_html6,form_manager_antwort_html7,form_manager_bottomtext_html1,form_manager_bottomtext_html2,form_manager_bottomtext_html3,form_manager_bottomtext_html4,form_manager_bottomtext_html5,form_manager_bottomtext_html6,form_manager_bottomtext_html7,form_manager_toptext_html1,form_manager_toptext_html2,form_manager_toptext_html3,form_manager_toptext_html4,form_manager_toptext_html5,form_manager_toptext_html6,form_manager_toptext_html7,form_manager_antwort_email_html1,form_manager_antwort_email_html2,form_manager_antwort_email_html3,form_manager_antwort_email_html4,form_manager_antwort_email_html5,form_manager_antwort_email_html6,form_manager_antwort_email_html7,form_manager_antwort_email_html8,form_manager_antwort_email_html9,form_manager_antwort_email_html10",
+	theme : "advanced",
+	{include file=tiny_inc_conf.html}
+	{rdelim} );
+	//function fileBrowserCallBack(field_name, url, type)
+	//{ldelim}
+	// This is where you insert your custom filebrowser logic
+	//	alert("Filebrowser callback: " + field_name + "," + url + "," + type);
+	//{rdelim}
+	</script>
+ {/if}

@@ -1,0 +1,29 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+{if $eintragmakeartikelfertig}
+<!-- Die Artikel wurden durchgeloopt-->
+<h2>{$plugin.linkliste.eingetragen}</h2>
+{/if}
+{if $exist}
+<!-- Der Eintrag exisitiert schon-->
+<h2 style="color:red;">{$plugin.linkliste.exist}</h2>
+{/if}
+
+{if $neuereintrag}
+<!-- Es soll ein neuer Eintrag erstellt werden -->
+{include file=../../../plugins/linkliste/templates/linklisteformeingabe.html}
+
+{/if}
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

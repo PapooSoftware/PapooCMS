@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<!-- version: Versions-Nummer papoo für die das Plugin gedacht ist / funktioniert -->
+<plugin version="3.x">
+
+<!-- ALLGEMEINE-INFORMATIONEN -->
+<!-- ************************ -->
+<!-- name: Name des Plugins -->
+<name>Easyedit</name> 
+
+<!-- beschreibung_de: Kurz-Beschreibung des Plugins auf deutsch (wird im Plugin-Manager angezeigt) -->
+<beschreibung_de><![CDATA[Mit diesem Plugin kann man im Frontend Artikel editieren und managen. ]]></beschreibung_de>
+
+<!-- beschreibung_en: Kurz-Beschreibung des Plugins auf englisch (wird im Plugin-Manager angezeigt) -->
+<beschreibung_en><![CDATA[With this Plugin you can edit articles in the frontend.]]></beschreibung_en>
+
+<!-- version: Versions-Nummer des Plugins -->
+<version>1.2</version>
+
+<!-- papooid: Eindeutige Nummer offizieller papoo-Plugins -->
+<papooid>31</papooid>
+
+<!-- link: z.Z. noch ohne Funktion -->
+<link>http://www.papoo.de</link>
+
+<!-- datum: Erscheinungs-Datum bzw. Stand des Plugins -->
+<datum>23.05.2007</datum>
+
+
+<!-- AUTOR-INFORMATIONEN -->
+<!-- ******************* -->
+<!-- autor: Informationen zum Autor (Programmierer) des Plugins -->
+<autor>
+	<!-- autor.name: Name des Authors -->
+	<name>Carsten Euwens</name>
+
+	<!-- autor.kontakt: postalische Kontakt-Informationen des Autors -->
+	<kontakt><![CDATA[Carsten Euwens, Heerstr. 110, 53111 Bonn]]></kontakt>
+
+	<!-- autor.email: eMail-Adresse des Autors -->
+	<email>info@papoo.de</email>
+
+	<!-- autor.telefon: Telefon-Nummer des Autors -->
+	<telefon>+ 49 228 280 56 68</telefon>
+</autor>
+
+
+<!-- MENÃœ-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- menue: Informationen für den Menü-Eintrag im Backend (papoo/interna) -->
+<menue>
+	<!-- menue.eintrag_de: Name des Menü-Punktes im Backend auf deutsch -->
+	<eintrag_de>Easyedit</eintrag_de>
+	<!-- menue.eintrag_en: Name des Menü-Punktes im Backend auf englisch -->
+	<eintrag_en>Easys edit</eintrag_en>
+	<!-- menue.icon: Pfad zum Menü-Icon des Menü-Punktes im Backend (relativ zum Plugin-Verzeichnis) -->
+	<icon>easyedit/bilder/pic_01.gif</icon>
+	<!-- menue.link: Name der Seite auf welche der Menü-Punkt im Backend verweisen soll -->
+	<link>plugin:easyedit/templates/easyedit.html</link>
+
+	<!-- menue.submenue: Untermenü-Punkt für diesen Menü-Punkt im Backend, Struktur wie menue -->
+
+	<submenue>
+		<eintrag_de>Menüpunkte freischalten</eintrag_de>
+		<eintrag_en>check menu items</eintrag_en>
+		<icon>easyedit/bilder/pic_01.gif</icon>
+		<link>plugin:easyedit/templates/easyedit_create.html</link>
+	</submenue>
+	
+	<submenue>
+		<eintrag_de>Gruppen freischalten</eintrag_de>
+		<eintrag_en>check groups</eintrag_en>
+		<icon>easyedit/bilder/pic_01.gif</icon>
+		<link>plugin:easyedit/templates/easyedit_text.html</link>
+	</submenue>
+
+	<!--
+	<submenue>
+		<eintrag_de>Datenbank Sicherung</eintrag_de>
+		<eintrag_en>Database dump</eintrag_en>
+		<icon>easyedit/bilder/pic_01.gif</icon>
+		<link>plugin:easyedit/templates/easyedit_dump.html</link>
+	</submenue>-->
+</menue>
+
+
+<!-- KLASSEN-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- klasse: Informationen der Plugin-Klasse welche eingebunden werden sollen -->
+<klasse>
+	<!-- klasse.name: Name der Klassen-Instanz / des Objekts (also der Name des Dings, das mit $name = new xx_class(); erzeugt wird) -->
+	<name>easyeditplugin</name>
+	<!-- klasse.datei: Pfad zur Klassen-Datei (relativ zum Plugin-Verzeichnis) -->
+	<datei>easyedit/lib/easyeditplugin_class.php</datei>
+</klasse>
+
+
+
+<!-- CSS-INFORMATIONEN -->
+<!-- ***************** -->
+<!-- css: Pfad zur CSS-Datei (relativ zum Plugin-Verzeichnis) -->
+
+
+
+<!-- DATENBANK-INFORMATIONEN -->
+<!-- ****************** -->
+<datenbank>
+	<!-- datenbank.installation: Pfad zur SQL-Installations-Datei (relativ zum Plugin-Verzeichnis) -->
+	<installation>easyedit/sql/easyeditplugin_install.sql</installation>
+	<!-- datenbank.deinstallation: Pfad zur SQL-Deinstallations-Datei (relativ zum Plugin-Verzeichnis) -->
+	<deinstallation>easyedit/sql/easyeditplugin_deinstall.sql</deinstallation>
+</datenbank>
+
+
+<messages>easyedit/messages</messages>
+</plugin>

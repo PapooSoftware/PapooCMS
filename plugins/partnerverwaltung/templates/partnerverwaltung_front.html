@@ -1,0 +1,104 @@
+<div id="partner">
+{if $partnerverwaltung_text_top}
+<div style="border-bottom:1px solid #ccc;padding-bottom:10px;">
+{$partnerverwaltung_text_top}
+</div>
+{/if}
+{if $ubersicht}
+<br />
+{*<!--weitere Seiten -->*}
+ {include file="_module_intern/mod_weiter.html}
+<br />
+
+
+{foreach item=glist from=$list_dat}
+<div class="pdaten">
+<div class="p_logo">
+ <a href="{$url}{$glist.partner_id}" >
+  <img src="{$slash}images/{$glist.partner_logo}"  /></a>
+</div>
+<div class="p_dat">
+<ul class="pdatlist">
+<li><a href="{$url}{$glist.partner_id}">{$glist.partner_name}</a></li>
+<li>{$glist.user_strasse}</li>
+<li>{$glist.user_plz} {$glist.user_ort}</li>
+<li><a href="mailto:{$glist.email}" >{$glist.email}</a></li>
+<li><a href="{$glist.partner_url}" target="blank">{$glist.partner_url}</a></li>
+<li>{$partner_umsetzungen_bisher} {$glist.count_ref}</li>
+</ul>
+</div>
+
+
+
+<br />
+</div>
+{/foreach}
+
+ 
+ <br />
+{*<!--weitere Seiten -->*}
+ {include file="_module_intern/mod_weiter.html}
+<br />
+{/if}
+{if $partner}
+<h3 style="margin:10px;margin-left:0px;">{$user.0.partner_name}</h3>
+<div class="p_logo">
+  <img src="{$slash}images/{$user.0.partner_logo}"  />
+</div>
+<h3 style="margin:10px;margin-left:0px;">{$plugin.paketverwaltung.Adresse}</h3>
+<ul class="pdatlist">
+<li>{$user.0.partner_name}</li>
+<li>{$user.0.user_strasse}</li>
+<li>{$user.0.user_plz} {$user.0.user_ort}</li>
+<li>{$plugin.paketverwaltung.Telefon}: {$user.0.user_telefon}</li>
+<li>{$plugin.paketverwaltung.Telefax}: {$user.0.user_fax}</li>
+<li><a href="{$user.0.partner_url}" target="blank">{$user.0.partner_url}</a></li>
+</ul>
+<h3 style="margin:10px;margin-left:0px;">{$plugin.paketverwaltung.Ansprechpartner}</h3>
+<ul class="pdatlist">
+<li>{$user.0.user_vorname} {$user.0.user_nachname}</li>
+<li><a href="mailto:{$user.0.email}" >{$user.0.email}</a></li>
+
+</ul>
+<h3 style="margin:10px;margin-left:0px;">{$plugin.paketverwaltung.Beschreibung}</h3>
+{$user.0.partner_code}
+<br />
+{if $result_link}
+<h3>{$plugin.paketverwaltung.Verlinkungen}</h3>
+<ul class="linklistul">
+ {foreach item=glist from=$result_link} {if $glist.linkliste_Wort}
+ <li>
+ {if $glist.linkliste_lang_header}
+ <div class="linkitem">
+ {else}
+ <div>
+ {/if}
+ 
+ <div class="linkbilditem">
+ {if $glist.paket_logo}
+ <a {if $glist.extern}target="_blank"
+  {/if} href="{$glist.linkliste_link}{$glist.linkliste_link_lang}" id="{$glist.linkliste_id}"><img src="{$slash}images/{$glist.paket_logo}" width="160" /></a>
+ {/if}
+ </div>
+ 
+ <div class="linklist_inhalt">
+ {if $glist.linkliste_lang_header}
+ <h2>{$glist.linkliste_lang_header}</h2>
+ <a {if $glist.extern}target="_blank"
+  {/if} href="{$glist.linkliste_link}{$glist.linkliste_link_lang}" id="{$glist.linkliste_id}">{$plugin.paketverwaltung.ZurWebseite}</a><br />
+ <div class="decrip">{$glist.linkliste_descrip}</div>
+ {else}
+ <a {if $glist.extern}target="_blank"
+  {/if} href="{$glist.linkliste_link}{$glist.linkliste_link_lang}" id="{$glist.linkliste_id}">{$glist.linkliste_link} {$glist.linkliste_link_lang}</a>
+ {/if}
+ </div>
+ 
+ </div>
+ </li>
+ {/if} 
+ 
+ {/foreach}
+{/if}
+</ul>
+{/if}
+ </div>

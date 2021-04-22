@@ -1,0 +1,17 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		
+		<h2>Fehlerhafte E-Mail-Adressen</h2>
+		<p>Anzahl fehlerhafter E-Mail-Adressen: {$address_in_error|@count}</p>
+		<ol>
+			{foreach item=adress_error from=$address_in_error}
+				<li>{$adress_error}</li>
+			{/foreach}
+		</ol>
+	</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

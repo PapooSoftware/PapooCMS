@@ -1,0 +1,69 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+    {if $faq_import_ok=="ok"}
+    <div class="message">
+        <h2 id="leadtracker_daten_wurden_gespeichert" class="h2" > {$plugin_faq__anzahl_der_importierten_faq_eintrge} {$counter_faq}</h2>
+    </div>
+    {/if}
+
+    <h1 id="faq__csv_datei_importierenn" class="h1" >{$plugin_faq__csv_datei_importierenn}</h1>
+
+ <p id="faq__importieren_sie_hier" class="h1" >{$plugin_faq__importieren_sie_hier}</p>
+
+ <p id="faq__kateogiimport" class="h1" >{$plugin_faq__kateogiimport}</p>
+
+ <p id="faq__die_4_spalte" class="h1" >{$plugin_faq__die_4_spalte}</p>
+
+ <p id="faq__die_5_spalte_" class="h1" >{$plugin_faq__die_5_spalte_}</p>
+
+
+
+
+    <form method="POST" id="formi" action="" enctype="multipart/form-data">
+        <fieldset>
+            {*<!-- Eingabe der Datei:-->*}
+            <legend>{$message_337}</legend>
+        <input type="file" name="myfile" id="myfile" value="" />
+
+        <input  type="submit" class="submit_back_green" value="{$message_356}" name="formSubmit" />
+        </fieldset>
+    </form>
+
+    {if $is_dev}
+
+    <br />
+    #start#
+
+    <span class="ignore"></span>
+    <!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+    <div class="rapid_form">
+        <form action="" name="" method="POST">
+            <!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+            <input type="hidden" name="tb_name" value="plugin_faq_import" />
+            <!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+            <input type="hidden" name="php_datei_name" value="faq_class" />
+            <!-- Das Standarpr�fix f�r die Ids -->
+            <input type="hidden" name="praefix" value="faq_" />
+            <!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+            <input type="hidden" name="praefix_spezial" value="faq_" />
+            <!-- Das Tool einbinden -->
+            {include file=../../../plugins/devtools/templates/rapid_felder.htm}
+        </form>
+    </div>
+
+
+</div>
+
+
+
+{/if}
+
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

@@ -1,0 +1,53 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+{if $is_del}
+<div class="message"> {$plugin_del_artikel_die_bilder_wurden_gelscht}</div>
+{/if}
+
+<h1 id="del_artikel_whlen_sie_die_bilder_die_sie_lschen_wollen" class="h1" >{$plugin_del_artikel_whlen_sie_die_bilder_aus_die_sie_lschen_wollen}</h1>
+
+<form action="" method="post">
+{if $has_admin_rights}
+<table>
+<tr>
+<th>{$plugin_del_artikel_bilder_berschrift}</th>
+<th> {$plugin_del_artikel_bilder_lschen}</th>
+</tr>
+{foreach from=$image_del_liste item=image key=ka name=image_name}
+
+<tr>
+<td>
+  <label for="delimage_{$image.image_id}">{$image.image_name}</label>
+  <img src="../images/{$image.image_name}" alt="{$image.image_alt}" title="{$image.image_title}" style="max-width: 600px; maz-height: 400px" />
+</td>
+<td>
+  <input type="checkbox" id="delimage_{$image.image_id}" name="delimage[{$image.image_id}]" value="1" />
+<input type="hidden" name="del_image_name[{$image.image_id}]" value="{$image.image_name}" />
+</td>
+</tr>
+
+{/foreach}
+</table>
+ <fieldset>
+<legend> {$plugin_del_artikel_ausgewhlte_bilder_lschen}</legend>
+
+
+<input type="submit" name="del_images_now" class="btn btn-danger" value=" {$plugin_del_artikel_ausgewhlte_bilder_lschen}" onclick="javascript: var msg=&quot; {$plugin_del_artikel_sollen_die_bilder_wirklich_gelscht_werden}&quot;; if (confirm(msg)) return true;else return false;" />
+ </fieldset><br />
+</form>
+{else}
+<div class="error">
+{$plugin_del_artikel_sie_brauchen_adminrechte}
+</div>
+{/if}
+{/if}
+
+
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}

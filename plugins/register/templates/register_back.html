@@ -1,0 +1,78 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+
+<div class="artikel" id="plugin_register_back">
+	
+	<h1>{$message.plugin.register.name}</h1>
+	
+	{if $plugin.register.template_weiche == "REGISTER_LISTE"}
+		{include file="`$pfadhier`plugins/register/templates/inc_register_3spalt.html"}
+		<p>
+			Legende:<br />
+			<span class="register_reg_0">Anzeige in allen Registern</span><br />
+			<span class="register_reg_1">Anzeige nur im Register 1</span><br />
+			<span class="register_reg_2">Anzeige nur im Register 2</span><br />
+		</p>
+		<p>
+			<a href="./plugin.php?menuid={$aktive_menuid}&amp;template=register/templates/register_back.html&amp;action=register_eintrag_neu">.. neuen Eintrag anlegen</a>
+		</p>
+		{include file="`$pfadhier`plugins/register/templates/inc_register_eintraege.html"}
+		
+		<script type="text/javascript" src="../plugins/register/js/register_funktionen.js"> </script>
+	{/if}
+	
+	{if $plugin.register.template_weiche == "REGISTER_EINTRAG_DELETE"}
+		<h2>Wollen Sie diesen Eintrag wirklich l&ouml;schen?</h2>
+		
+		<p>
+			<strong>{$plugin.register.eintrag_data.reg_name}</strong> <small>(ID: {$plugin.register.eintrag_data.reg_id})</small><br />
+			{$plugin.register.eintrag_data.reg_text}
+		</p>
+		<p>
+			<a href="./plugin.php?menuid={$aktive_menuid}&amp;template=register/templates/register_back.html&amp;reg_id={$plugin.register.eintrag_data.reg_id}&amp;action=register_eintrag_delete_do" >
+				.. l&ouml;schen
+			</a>
+		</p>
+	{/if}
+	
+	{if $plugin.register.template_weiche == "REGISTER_EINTRAG_NEU_EDIT"}
+		<form action="" method="post">
+			<input type="hidden" name="action" value="register_eintrag_save" />
+			<input type="hidden" name="save_mode" value="{$plugin.register.modus}" />
+			<input type="hidden" name="reg_id" value="{$plugin.register.eintrag_data.reg_id}" />
+			
+			<fieldset>
+				<legend>Eintrag {$plugin.register.modus}</legend>
+				<label for="reg_name">Name:</label><br />
+				<input type="text" name="reg_name" id="reg_name" size="50" value='{$plugin.register.eintrag_data.reg_name|escape:"html"}' /><br />
+				<br />
+				<script language="javascript" type="text/javascript" src="./tiny_mce/tiny_mce.js" charset="utf-8"></script>	
+				<script language="javascript" type="text/javascript" src="./tiny_mce/FileBrowser.js"></script>
+				<script language="javascript" type="text/javascript">
+						tinyMCE.init({ldelim}
+						mode : "exact",
+						language : "{$lang_back_short}",
+						elements : "reg_text",
+						{include file=tiny_inc_conf.html}
+						{rdelim} );
+				</script>
+				<label for="reg_text">Text:</label><br />
+				<textarea name="reg_text" id="reg_text" cols="80" rows="10">{$plugin.register.eintrag_data.reg_text}</textarea><br />
+				<br />
+				Eintrag anzeigen:<br />
+				<input type="radio" name="reg_reg_id" id="reg_reg_id_0" value="0" {if $plugin.register.eintrag_data.reg_reg_id==0}checked="checked"{/if} /><label for="reg_reg_id_0"> in allen Registern</label><br />
+				<input type="radio" name="reg_reg_id" id="reg_reg_id_1" value="1" {if $plugin.register.eintrag_data.reg_reg_id==1}checked="checked"{/if} /><label for="reg_reg_id_1"> nur im Register 1</label><br />
+				<input type="radio" name="reg_reg_id" id="reg_reg_id_2" value="2" {if $plugin.register.eintrag_data.reg_reg_id==2}checked="checked"{/if} /><label for="reg_reg_id_2"> nur im Register 2</label><br />
+				<br />
+				<br />
+				<input type="submit" class="submit_back_green" value="Eintrag speichern" />
+			</fieldset>
+		</form>
+	{/if}
+	
+</div>
+  
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

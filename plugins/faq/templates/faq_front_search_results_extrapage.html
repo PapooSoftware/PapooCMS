@@ -1,0 +1,109 @@
+{if $faq_no_readaccess} {* Leserecht vorhanden? *}
+	<p class="bold_red">{$plugin.faq_front.message.no_readaccess}</p><br /> {* Keine Leserechte *}
+{else}
+{* Layout "Extrapage" *}
+	{if !$faq_show_extrapage}
+		<div class="floatbox artikel_details">
+			<p>{$templ_ergbn} "<strong>{$suchworte}</strong>": {$search_matches} 
+				{if $search_matches == 1}{$plugin.faq_front.text.search_match} {* 1 Resultat *}
+				{else}{$plugin.faq_front.text.search_matches} {* XX Resultate *}
+				{/if}
+			</p>
+			<div class="floatbox artikel_details">
+{* Kategorie-Daten *}
+				{section name=rowct1 start=0 loop=$cat_data|@count step=1}
+					{assign var="rowctx1" value=$smarty.section.rowct1.index}
+					{if $faq_search_data[$rowctx1]|@count}
+						<div class="div_margins">
+							<a class="lvl_{$cat_data[$rowctx1].level}" href="{$slash}plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_front.html&amp;faq_main_id={$cat_data[$rowctx1].id}&amp;search_faq={$suchworte}&amp;page={$page}" title="{$plugin.faq_front.linktext.faq_show2}">
+							<img src="{$slash}plugins/faq/bilder/cat_menu.gif" width="12" height="10" class="mr_3_no_border" title="{$plugin.faq_front.imgtext.cat}" alt="{$plugin.faq_front.imgtext.cat}" />
+							<strong>{$cat_data[$rowctx1].catname}</strong></a>
+							({$faq_search_data[$rowctx1]|@count} 
+								{if $faq_search_data[$rowctx1]|@count == 1}{$plugin.faq_front.text.search_match}) {* XX Resultate *}
+								{else}{$plugin.faq_front.text.search_matches}) {* XX Resultate *}
+								{/if}
+							<br />
+							{$cat_data[$rowctx1].catdescript}
+						</div>
+{* Die zur Kategorie gehörenden Fragen finden *}
+						{if $cat_selected_id == $cat_data[$rowctx1].id}
+							{if $faq_user_may_write}
+								<div class="div_margins">
+									<a href="{$slash}plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_front_new.html&amp;faq_main_id={$cat_data[$rowctx1].id}" title="{$plugin.faq_front.linktext.faq_new}">{$plugin.faq_front.linktext.faq_new}</a>
+								</div>
+								<div class="div_margins">
+									<a href="{$slash}plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_front_new_question.html&amp;faq_main_id={$cat_data[$rowctx1].id}" title="{$plugin.faq_front.linktext.faq_new_question}">{$plugin.faq_front.linktext.faq_new_question}</a>
+								</div>
+							{/if}
+							{$plugin.faq_front.text.faq_count} {$faq_search_data[$rowctx1]|@count}
+							{section name=rowct2 start=0 loop=$faq_search_data[$rowctx1]|@count step=1}
+								{assign var="rowctx2" value=$smarty.section.rowct2.index}
+								<div class="faq_listing_style_1">
+									<p>
+										<img src="{$slash}plugins/faq/bilder/faq.gif" width="10" height="10" class="mr_3_no_border" title="{$plugin.faq_front.imgtext.faq}" alt="{$plugin.faq_front.imgtext.faq}" />
+										<a{if $cat_data[$rowctx1].level > 0} class="lvl_{$cat_data[$rowctx1].level}" {/if} href="./plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_front.html&amp;faq_main_id={$cat_data[$rowctx1].id}&amp;faq_id={$faq_search_data[$rowctx1][$rowctx2].faq_id}&amp;search_faq={$suchworte}&amp;page={$page}" title="{$plugin.faq_front.linktext.faq_show}">
+											<strong>{$faq_search_data[$rowctx1][$rowctx2].question}</strong></a>
+									</p>
+								</div>
+							{/section}
+						{/if}
+					{/if}
+				{/section}
+				{include file="_module_intern/mod_weiter.html"}
+				<br />
+			</div>
+		</div>
+	{else}
+{* Kategorie-daten: Array mit nur 1 Element - das zur gewählten FAQ gehörende *}
+		<h3 class="div_margins">{$cat_data.0.catname}</h3>
+		{if $cat_data.0.catdescript}<p>{$cat_data.0.catdescript}</p>{/if}
+		{if $faq_user_may_write}
+			<div class="div_margins">
+				<a href="{$slash}plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_front_new.html&amp;faq_main_id={$cat_data[$rowctx1].id}" title="{$plugin.faq_front.linktext.faq_new}">{$plugin.faq_front.linktext.faq_new}</a>
+			</div>
+			<div class="div_margins">
+				<a href="{$slash}plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_front_new_question.html&amp;faq_main_id={$cat_data[$rowctx1].id}" title="{$plugin.faq_front.linktext.faq_new_question}">{$plugin.faq_front.linktext.faq_new_question}</a>
+			</div>
+		{/if}
+{* FAQ-Daten finden *}
+		{foreach item=faq_index from=$faq_search_data}
+			{foreach item=faq from=$faq_index}
+				{if $cat_selected_id == $faq.cat_id AND $faq_selected_id == $faq.faq_id} {* Nur die gesuchte Antwort anzeigen *}
+					<h4 class="div_margins"><strong>{$faq.question}</strong></h4>
+					{if $faq.answer}
+						<div>{$faq.answer}</div>
+					{else}
+						<div>{$plugin.faq_front.text.no_answer}</div>
+					{/if}
+					{if $faq_attach}
+						<div class="div_margins"><strong>Attachments:</strong>
+							{foreach item=faq_file from=$faq_attach}
+								{if $faq_file.file_status} {* Nur vorhandene Dateien listen *}
+									<br /><a href="{$slash}plugins/faq/attachments/{$faq_file.name_stored}" title="{$plugin.faq_front.linktext.faq_edit_attachment}" target="_blank">{$faq_file.name}</a> ({$faq_file.size} Bytes)
+								{/if}
+							{/foreach}
+						</div>
+					{/if}
+					<div class="div_margins">
+						<strong>{$plugin.faq_front.text.created}</strong>
+						{$faq.created} {$faq.createdby}
+					</div>
+					{if $faq.changedd}
+						<div>
+							<strong>{$plugin.faq_front.text.changed}</strong>
+							{$plugin.faq_front.text.version} {$faq.version_id} {$faq.changedd} {$faq.changedby}
+						</div>
+					{/if}
+					{if $faq_user_may_write}
+						<div class="div_margins">
+							<a href="{$slash}plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_front_edit.html&amp;faq_id={$faq.faq_id}&amp;faq_main_id={$faq.cat_id}" title="{$plugin.faq_front.linktext.faq_edit}">
+							{$plugin.faq_front.linktext.faq_edit}</a>
+						</div>
+					{/if}
+					<br />
+				{/if}
+			{/foreach}
+		{/foreach}
+		<p><a href="{$slash}plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_front.html&amp;search_faq={$suchworte}&amp;page={$page}" title="{$plugin.faq_front.linktext.faq_front_overview}">{$plugin.faq_front.linktext.faq_front_overview}</a></p>
+	{/if}
+{/if}

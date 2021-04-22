@@ -1,0 +1,66 @@
+@keyframes schrumpfen {
+    0%
+    {
+        max-height: 2em;
+        margin-bottom: 25px;
+        padding: 18px 35px 18px 14px;
+        opacity: 1.0;
+    }
+    75%
+    {
+        max-height: 2em;
+        margin-bottom: 25px;
+        padding: 18px 35px 18px 14px;
+        opacity: 1.0;
+    }
+    85% {
+        opacity: 0.0;
+    }
+    98%
+    {
+        max-height: 0em; margin-bottom: 0px;
+        padding: 0px 0px 0px 0px;
+        opacity: 0.0;
+    }
+    99%
+    {
+        max-height: 0em; margin-bottom: 0px;
+        padding: 0px 0px 0px 0px;
+        opacity: 0.0;
+        display: none;
+    }
+    100%
+    {
+        max-height: 0em; margin-bottom: 0px;
+        padding: 0px 0px 0px 0px;
+        opacity: 0.0;
+        display: none;
+    }
+}
+
+.vishidden {
+    visibility: hidden;
+}
+
+div.settings-saved {
+    animation-duration: 4s;
+    animation-name: schrumpfen;
+}
+
+div.settings-saved:before {
+    content: "✓";
+    margin-left: 1em;
+    margin-right: 1ex;
+}
+
+div.settings-error:before {
+    content: "✗";
+    margin-left: 1em;
+    margin-right: 1ex;
+}
+
+div.settings-saving:before {
+    content: url(../bilder/loader.gif);
+    margin-left: 1em;
+    margin-right: 1ex;
+}

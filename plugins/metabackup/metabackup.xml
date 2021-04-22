@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<plugin version="3.7">
+
+<name>Metabackup</name>
+<beschreibung_de><![CDATA[Hiermit können Sie Metainformationen Ihrer Artikel als CSV speichern, hochladen und wieder herstellen.]]></beschreibung_de>
+<version>0.1</version>
+
+<datum>15.7.2013</datum>
+
+<autor>
+	<name>Yörn Jünger</name>
+	<email>yj@papoo.de</email>
+</autor>
+
+<menue>
+	<eintrag_de>Meta Backup</eintrag_de>
+	<eintrag_en>Meta Backup</eintrag_en>
+	<link>plugin:metabackup/templates/metabackup_back.html</link>
+</menue>
+
+
+<klasse>
+	<name>metabackup</name>
+	<datei>metabackup/lib/metabackup_class.php</datei>
+</klasse>
+
+</plugin>

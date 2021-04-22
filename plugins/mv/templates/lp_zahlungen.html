@@ -1,0 +1,46 @@
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+ 
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+<div class="mv">
+
+
+{if $mv_keine_datei}
+<div class="error">{$mv_keine_datei}</div>
+{/if}
+{if $mv_lp_zahlungen_values}
+<div class="message">{$plugin.mv.lp_zahlungen_values}</div>
+<table>
+	<tr>
+		<th>Lookup Wert</th>
+		<th>Content Text</th>
+	</tr>
+{foreach key=zahl item=content from=$mv_lp_zahlungen_values}
+	<tr>
+		<td>{$zahl}</td>
+		<td>{$content}</td>
+	</tr>
+{/foreach}
+</table>
+{/if}
+{*<!-- Entwicklerfunktionen: Spezielle Funktionen für den Entwickler, weniger für den User brauchbar ;) -->*}
+<h5>Entwicklerfunktionen (Bitte nicht drücken, wenn man keine Ahnung hat!!!)</h5>
+<ul>
+<li><a href="{$mv_link}&template=mv/templates/mv_update_search.html">Searchtabellen Updaten (Funktion bis auf weiteres deaktiviert)</a> ACHTUNG: Die Timeout Gefahr ist sehr hoch!</li>
+<li><a href="{$mv_link}&template=mv/templates/mv_get_options.html">Alle Options Werte ausgeben</a></li>
+<li><a href="{$mv_link}&template=mv/templates/mv_get_dz_system_ids.html">DzvhÄ System ids ausgeben</a></li>
+<li><a href="{$mv_link}&template=mv/templates/mv_count_files_rows.html">Dateien zählen</a></li>
+<li><a href="{$mv_link}&template=mv/templates/lp_zahlungen.html">csv Datei für DzvhÄ Zahlungsarten in Datenbank einlesen</a></li>
+</ul>
+</div>
+
+
+<!-- Rechte Fehlermeldung-->
+{include file=rechte.html}
+</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}

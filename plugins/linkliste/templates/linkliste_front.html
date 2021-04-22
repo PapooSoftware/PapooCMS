@@ -1,0 +1,48 @@
+
+<div class="artikel" style="height: 1%;">
+
+<div id="artikel_content" class="clearfix">
+{if $glossarid}
+{foreach item=glos from=$result}
+<h2 class="glossar_h">{$glos.glossar_Wort}</h2>
+	<p class="glossar_p">{$glos.glossar_descrip}</p>
+{/foreach}
+
+  {/if}
+
+ {if $modus1}
+  {if $glossarliste}
+  <h2>{$plugin.linkliste.liste}</h2>
+  <div class="glossar_liste_div" >
+	  <ul class="glossar_ul">
+		  {foreach item=glist from=$result}
+		  <li class="glossar_li">
+		   	<a href="{$link_glossar}{$glist.glossar_id}{$link_glossar_2}">{$glist.glossar_Wort}</a>
+		  </li>
+		  {/foreach}
+	  </ul>
+	 </div>
+  {/if}
+ {/if}
+
+
+ {if $modus2}
+ <h2>{$plugin.linkliste.liste}</h2>
+  <div class="glossar_liste_div">
+  <dl>
+  {foreach item=glist from=$result}
+  <a name="{$glist.glossar_id}" id="{$glist.glossar_id}"></a>
+		<dt>{$glist.glossar_Wort}</dt>
+  		<dd>{$glist.glossar_descrip}</dd>
+	{/foreach}
+
+  </dl>
+
+
+  </div>
+  {/if}
+
+<span class="backlink"><a href="javascript:history.go(-1)">{$plugin.linkliste.zurueck}</a></span><span class="ignore">.</span>
+</div>
+<hr class="clear_columns" />
+</div>

@@ -100,6 +100,23 @@ class single_artikel
 	}
 
 	/**
+	 * @param int $id
+	 * @return string|null Der Pfad zum Template, wenn es im Style- oder Pluginverzeichnis gefunden wird; ansonsten null.
+	 */
+	private function findTemplate(int $id)
+	{
+		global $cms;
+		$filename = 'plugins/content_manipulator/scripts/'.basename(__DIR__).'/templates/teaser'.$id.'.html';
+
+		return array_reduce([
+			PAPOO_ABS_PFAD."/styles/{$cms->style_dir}/templates/$filename",
+			PAPOO_ABS_PFAD."/$filename"
+		], function ($template, $filename) {
+			return $template ?? (is_file($filename) ? $filename : $template);
+		}, null);
+	}
+
+	/**
 	 * @param int $reporeid
 	 * @param int $template_var
 	 *
@@ -109,7 +126,8 @@ class single_artikel
 	{
 		global $artikel;
 		global $cms;
-		#global $smarty;
+		/** @var Smarty $smarty */
+		global $smarty;
 		global $content;
 		global $menu;
 		if (!is_numeric($template_var)) {
@@ -159,6 +177,11 @@ class single_artikel
 				IfNotSetNull($datum2['2']);
 				$artikel_daten[$key]['article_datum_tag']=$datum2['2'];
 				#$neu[]=get_object_vars($value);
+
+				$createTimestamp = (int)$value['erstellungsdatum'];
+				$artikel_daten[$key] += [
+					'create_date_dd_mm_yyyy' => date('d.m.Y', $createTimestamp),
+				];
 			}
 		}
 		#$content->template['single_artikel'] =  $artikel_daten;
@@ -166,6 +189,22 @@ class single_artikel
 
 		// templates parsen
 		# $output = $smarty->fetch(PAPOO_ABS_PFAD."/plugins/content_manipulator/scripts/letzte_artikel/templates/teaser".$template.".html");
+
+		// Sofern Template als Smarty-Template gekennzeichnet, alle Artikel in einem Schwung durchreichen.
+		if ($templatePathname = $this->findTemplate((int)$template_var)) {
+			$smartyIdentifier = '{*##SMARTY##*}';
+			if (strpos(file_get_contents($templatePathname, false, null, 0, strlen($smartyIdentifier)), $smartyIdentifier) === 0) {
+				$content->assign();
+				$smarty->assign([
+					'article' => is_array($artikel_daten) ? reset($artikel_daten) ?: [] : [],
+					'modFree' => $cms->mod_free,
+				]);
+
+				$result = $smarty->fetch($templatePathname);
+				$content->assign();
+				return $result;
+			}
+		}
 
 		$return="";
 

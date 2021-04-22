@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin name="wp_importer">
+    <name>WordPress Importer</name>
+
+    <beschreibung_de><![CDATA[Plugin um WordPress Artikel zu importieren.]]></beschreibung_de>
+    <beschreibung_en><![CDATA[Wordpress importer Plugin.]]></beschreibung_en>
+
+    <version>1.5</version>
+
+    <papooid>139</papooid>
+
+    <link>http://www.papoo.de</link>
+
+    <datum>21.04.2016</datum>
+
+    <autor>
+        <name><![CDATA[Yörn Jünger]]></name>
+        <kontakt><![CDATA[Yörn Jünger]]></kontakt>
+        <email>yj@papoo.de</email>
+        <telefon>0228 280 56 68</telefon>
+    </autor>
+
+    <klasse>
+        <name>wp_importer</name>
+        <datei>wp_importer/lib/class_wp_importer.php</datei>
+    </klasse>
+
+    <menue>
+        <eintrag_de>WordPress Importer</eintrag_de>
+        <eintrag_en>WordPress Importer</eintrag_en>
+        <link>plugin:wp_importer/templates/backend.html</link>
+    </menue>
+
+    <css>wp_importer/css/styles.css</css>
+
+    <messages>wp_importer/messages</messages>
+</plugin>

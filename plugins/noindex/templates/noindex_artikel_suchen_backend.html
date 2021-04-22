@@ -1,0 +1,47 @@
+
+{$message.plugin.noindex.002}
+
+<form action="../plugins/noindex/lib/article_search_response.php" method="POST" class="noindex_noreload_update_table" id="noindex_form_artikel_suche" name="noindex_article_table__">
+    <fieldset>
+        <legend>{$message.plugin.noindex.013}</legend>
+
+        <input type="text" id="search" name="search">
+        <input type="submit" class="btn btn-info" value="{$message.plugin.noindex.019}">
+
+    </fieldset>
+</form>
+
+
+<div class="media" id="noindex_article_table__">
+
+    {foreach item=link from=$plugin.noindex.artikel_liste}
+    <div class="media-body">
+
+        <h2  class="media-heading">{$link.ueberschrift}</h2>
+        <div class="artikel_list_teaser_innen">
+            <p>
+            <div class="teaserdat">
+                {$link.teaser}
+            </div>
+
+            <a class="artikel_link_teaser  " href="artikel.php?menuid=11&reporeid={$link.reporeID}&submitlang={$link.lang_id}">{$link.ueberschrift}</a><br />
+            <div class="authormessage ">
+                {$letzte_aenderung}{$link.date_time|date_format:$lang_dateformat} {$letzte_aenderung_von} {$link.username}{$letzte_aenderung_autor} {$link.autor}
+            </div>
+            </p>
+        </div>
+
+        <div class="settings-saved message hidden" name="artikel_{$link.reporeID}">{$message.plugin.noindex.024}</div>
+        <div class="settings-saving message hidden" name="artikel_{$link.reporeID}">{$message.plugin.noindex.023}</div>
+        <div class="settings-error error hidden" name="artikel_{$link.reporeID}">{$message.plugin.noindex.025}</div>
+
+        <form class="noindex_noreload" action="" id="artikel_{$link.reporeID}" method="POST" name="artikel_{$link.reporeID}">
+            <fieldset>
+                <input type="hidden" name="noindex_article[{$link.reporeID}]" value="0">
+                <label><input type="checkbox" name="noindex_article[{$link.reporeID}]" {if $link.noindex}checked{/if} value="1">noindex</label>
+                <input type="submit" class="btn-info" value="{$message_70}">
+            </fieldset>
+        </form>
+    </div>
+    {/foreach}
+</div>

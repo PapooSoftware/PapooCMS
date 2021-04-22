@@ -1,0 +1,17 @@
+{foreach item=register from=$plugin.register.register_liste}
+	{foreach item=eintrag from=$register.eintraege}
+		<div id="register_eintrag_{$eintrag.reg_id}" class="register_eintraege">
+			<h3>{$eintrag.reg_name}</h3>
+			{$eintrag.reg_text}
+			
+			{if $IS_ADMIN}
+				<p>
+					<a href="./plugin.php?menuid={$aktive_menuid}&amp;template=register/templates/register_back.html&amp;reg_id={$eintrag.reg_id}&amp;action=register_eintrag_edit">.. Eintrag bearbeiten</a>
+					oder
+					<a href="./plugin.php?menuid={$aktive_menuid}&amp;template=register/templates/register_back.html&amp;reg_id={$eintrag.reg_id}&amp;action=register_eintrag_delete">.. Eintrag l&ouml;schen</a>
+				</p>
+			{/if}
+		</div>
+	{/foreach}
+{/foreach}
+

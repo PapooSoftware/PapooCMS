@@ -1,0 +1,88 @@
+.center {
+text-align:center;
+}
+.rating_table_back TH,
+.rating_row TD {
+text-align:right;
+width:35px;
+}
+.left {
+text-align:left !important;
+}
+.rating {
+list-style:none;
+margin:5px 0 0 35px;
+padding:0;
+width:125px;
+height:25px;
+position:relative;
+background:url('../plugins/rating/css/images/stars.gif') top left repeat-x;
+border:0 #000;
+text-align:left;
+}
+.rating LI {
+padding:0;
+margin:0;
+float:left;
+border:0 #000;
+}
+.rating LI A {
+display:block;
+width:25px;
+height:25px;
+text-decoration:none;
+text-indent:-9000px;
+z-index:20;
+position:absolute;
+padding:0;
+}
+.rating LI A:HOVER {
+background:url('../plugins/rating/css/images/stars.gif') left bottom;
+z-index:2;
+left:0;
+}
+.rating A.einStern {
+left:0;
+}
+.rating A.einStern:HOVER{
+width:25px;
+}
+.rating A.zweiSterne {
+left:25px;
+}
+.rating A.zweiSterne:HOVER {
+width:50px;
+}
+.rating A.dreiSterne {
+left:50px;
+}
+.rating A.dreiSterne:HOVER {
+width:75px;
+}
+.rating A.vierSterne {
+left:75px;
+}	
+.rating A.vierSterne:HOVER {
+width:100px;
+}
+.rating A.fuenfSterne {
+left:100px;
+}
+.rating A.fuenfSterne:HOVER {
+width:125px;
+}
+.rating LI.rating_curr {
+/*background:url('../plugins/rating/css/images/stars.gif') left center; /* blue stars */
+background:url('../plugins/rating/css/images/stars.gif') left bottom; /* golden stars */
+position:absolute;
+height:25px;
+display:block;
+text-indent:-9000px;
+z-index:1;
+border:0 #000;
+}
+.rating_text {
+clear:both;
+text-align:center;
+margin-top:5px;
+}

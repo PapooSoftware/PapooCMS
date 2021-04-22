@@ -1,0 +1,38 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+{if $free_message}
+<div class="message">{$message.plugin.free_urls.form_testwert_label}</div>
+{/if}
+<div class="artikel">
+
+	{$message.plugin.free_urls.kopf}<br />
+
+	<form name="test_daten" method="post" action="">
+		<fieldset>
+			<legend>{$message.plugin.free_urls.form_legend}</legend>
+			
+			<br />
+			<input type="submit" class="submit_back_big" name="submit_free_urls" value="{$message.plugin.free_urls.form_legend}" />
+		</fieldset>
+	</form>
+    {*
+	<br />
+	<form name="test_daten" method="post" action="">
+		<fieldset>
+			<legend>{$message.plugin.free_urls.form_legend2}</legend>
+			
+			<br />
+			<input type="submit" class="submit_back_big" name="submit_free_urls_reset" value="{$message.plugin.free_urls.form_legend3}" />
+		</fieldset>
+	</form>
+    *}
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

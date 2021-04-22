@@ -1,0 +1,51 @@
+<form id="suche_erw" method="get" action="{$slash}index.php" class="form">
+
+    <input type="text" id="query" name="search" size="20" value="{$search|escape:" html"}" title="{$message_2136}" />
+
+    {if $einschraenkungen_search}
+        <div style="width:160px;float:left;margin-right:10px;">
+            <label for="erw_suchbereich">{$Suchbereich_auswaehlen}</label><br/>
+
+            <select id="erw_suchbereich" size="1">
+                <option {if $erw_suchbereich==0}selected="selected"{/if} value="0">{$Suchbereich_all}</option>
+                {if $einschraenkungen_search.artikel}
+                    <option {if $erw_suchbereich==1}selected="selected"{/if} value="1">{$Suchbereich_text}</option>
+                {/if}
+                {if $einschraenkungen_search.produkte}
+                    <option {if $erw_suchbereich==2}selected="selected"{/if} value="2">{$Suchbereich_shop}</option>
+                {/if}
+                {if $einschraenkungen_search.forum}
+                    <option {if $erw_suchbereich==3}selected="selected"{/if} value="3">{$Suchbereich_forum}</option>
+                {/if}
+                {if $einschraenkungen_search.mv}
+                    <option {if $erw_suchbereich==4}selected="selected"{/if} value="4">{$Suchbereich_flex}</option>
+                {/if}
+                {if $einschraenkungen_search.faq}
+                    <option {if $erw_suchbereich==5}selected="selected"{/if} value="5">{$Suchbereich_faq}</option>
+                {/if}
+                {if $einschraenkungen_search.doc}
+                    <option {if $erw_suchbereich==6}selected="selected"{/if} value="6">{$Suchbereich_doc}</option>
+                {/if}
+            </select>
+        </div>
+    {/if}
+
+    {if $menu_dat_show_search}
+        <label for="banner_menuid">{$plugin_ext_search_spezialsuchmen_menu}</label>
+        <br/>
+        <select name="menuid_search" id="banner_menuid" title="" style="width: 40%;" size="1">
+            <option value="">{$plugin_ext_search_spezialsuchmen_menu}</option>
+            {foreach item=menu from=$data_front_menu}
+                {if $menu.menuid}
+                    <option value="{$menu.menuid}" class="levelshift_{$menu.level}" {if $menu.menuid== $menuid_search_now}selected="selected">{/if}
+                        {$menu.nummer}: {$menu.menuname}
+                    </option>
+                {/if}
+            {/foreach}
+        </select>
+    {/if}
+
+    <input type="hidden" value="{$menuid_aktuell}" name="menuid"/>
+    <input type="submit" name="find" class="erwsuchbutton" value="{$message_2138}" title="{$templ_susst|escape:" html"}" />
+
+</form>

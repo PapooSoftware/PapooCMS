@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS `XXX_papoo_google_sitemap`; ##b_dump##

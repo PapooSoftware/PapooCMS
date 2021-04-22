@@ -914,12 +914,16 @@ class menu_class
 				false
 			);
 
+			$menu['pointsToMenuOrArticle'] = false;
+
 			if (substr($menu["menulinklang"], 0, 1) === "/") {
 				if ($isExtraFreeUrl || in_array($menu["menulinklang"], $urls, true)) {
 					$menu["url_menuname"] = $menu["menulinklang"];
+					$menu['pointsToMenuOrArticle'] = !$isExtraFreeUrl;
 				}
 				else if (in_array($this->cms->mod_rewrite, [2, 3]) && strpos($menu["menulinklang"], $this->cms->surl_urlvar) === 0) {
 					$menu["url_menuname"] = rtrim(substr($menu["menulinklang"], strlen($this->cms->surl_urlvar)), "/");
+					$menu['pointsToMenuOrArticle'] = true;
 				}
 			}
 		}

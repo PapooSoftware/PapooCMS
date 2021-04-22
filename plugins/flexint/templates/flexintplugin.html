@@ -1,0 +1,54 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+{if $flex_message=="fertig_new"}
+<div class="message">Daten wurden neu eingetragen.</div>
+{/if}
+{if $flex_message=="fertig_update"}
+<div class="message">Daten wurden ge&auml;ndert.</div>
+{/if}
+ <h1 id="flexint_xterne_lexverwaltung_einbinden" class="h1" >{$plugin_flexint_xterne_lexverwaltung_einbinden}</h1>
+
+ <p id="flexint_t_ilfe" class="h1" >{$plugin_flexint_t_ilfe}</p>
+
+
+{if $flexliste}
+ <h2 id="flexint_usgabe_der_lexverwaltung_ber_enpunkte" class="h1" >{$plugin_flexint_usgabe_der_lexverwaltung_ber_enpunkte}</h2>
+
+ <p id="flexint_jeweilige_id" class="h1" >{$plugin_flexint_jeweilige_id}</p>
+
+ <h2 id="flexint_eue_lexverwaltung_integrieren" class="h2" >{$plugin_flexint_eue_lexverwaltung_integrieren}</h1>
+
+ <p id="flexint_neue_externe" class="h1" >{$plugin_flexint_neue_externe}</p>
+<a href="./plugin.php?menuid={$menuid_back_aktuell}&template=flexint/templates/flexintplugin.html&flexint_id_new=1">{$plugin_flexint_neue_externe}</a>
+ <h2 id="flexint_estehende_lexverwaltung_bearbeiten" class="h1" >{$plugin_flexint_estehende_lexverwaltung_bearbeiten}</h2>
+
+ <p id="flexint_flex_aendern" class="h1" >{$plugin_flexint_flex_aendern}</p>
+
+<ul>
+{foreach item=flex from=$flexint_result}
+<li>
+<a href="./plugin.php?menuid={$menuid_back_aktuell}&template=flexint/templates/flexintplugin.html&flexint_id={$flex.flexint_id}">Integration der Flexverwaltung {$flex.flexint_name} bearbeiten (Nr. {$flex.flexint_id})</a>
+</li>
+{/foreach}
+</ul>
+{/if}
+{if $flexint_id}
+{include file=../../../plugins/flexint/templates/flexintplugin_form.html}
+{/if}
+{if $flexint_id_new}
+{include file=../../../plugins/flexint/templates/flexintplugin_form.html}
+{/if}
+ 
+
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

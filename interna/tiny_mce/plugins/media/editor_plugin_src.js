@@ -469,7 +469,7 @@
 				}
 
 				// Create flash fallback for video if we have a mp4 source
-				if (mp4Source) {
+				if (false && mp4Source) {
 					addPlayer(mp4Source, posterSrc);
 					typeItem = self.getType('flash');
 				} else

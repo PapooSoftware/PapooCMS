@@ -1,0 +1,31 @@
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+<div class="artikel">
+	<div class="mv">
+		{if $user_darf_schreiben}
+			<h1>{$plugin.mv.rights_editieren}</h1>
+			<ol>
+				<li><a href="{$link}mv/templates/edit_content_rights.html&mv_id={$mv_id}">{$plugin.mv.rechte_content}</a></li>
+				<li><a href="{$link}mv/templates/edit_field_rights.html&mv_id={$mv_id}">{$plugin.mv.rechte_felder}</a></li>
+				<li><a href="{$link}mv/templates/edit_group_rights.html&mv_id={$mv_id}">{$plugin.mv.rechte_gruppen}</a></li>
+				{if $mv_art_rechte==2 AND $is_dzvhae_system}
+					<li><a href="{$link}mv/templates/edit_special_rights1.html&mv_id={$mv_id}">{$plugin.mv.rechte_spezial1}</a></li>
+					<li><a href="{$link}mv/templates/edit_special_rights2.html&mv_id={$mv_id}">{$plugin.mv.rechte_spezial2}</a></li>
+				{/if}
+			</ol>
+			<h2>{$plugin.mv.rights_editieren_bedeutung}</h2>
+			<p>Die Rechtevergabe gilt an dieser Stelle nur für das Frontend.</p>
+			<ol>
+				<li>{$plugin.mv.rights_editieren_bedeutung2}</li>
+				<li>{$plugin.mv.rights_editieren_bedeutung3}</li>
+				<li>{$plugin.mv.rights_editieren_bedeutung4}</li>
+				{if $mv_art_rechte==2 AND $is_dzvhae_system}
+					<li>{$plugin.mv.rights_editieren_bedeutung5}</li>
+				{/if}
+			</ol>
+		{/if}
+	</div>
+	<!-- Rechte Fehlermeldung-->
+	{include file=rechte.html}
+</div>
+{include file=foot.inc.html}

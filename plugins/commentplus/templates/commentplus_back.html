@@ -1,0 +1,86 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+ <h1 id="commentplus_erweiterte_kommentare" class="h1" >{$plugin_commentplus_erweiterte_kommentare}</h1>
+
+ <p id="commentplus_mit_dem_plugin_erweiterte_kommentare" class="h1" >{$plugin_commentplus_mit_dem_plugin_erweiterte_kommentare} <strong>{$plugin_commentplus_um_die_erweiterten_kommentare}</strong>
+
+ <p id="commentplus_erstellen_sie_pro_verwaltung" class="h1" >{$plugin_commentplus_erstellen_sie_pro_verwaltung}</p>
+
+{$plugin_commentplus_sie_bekommen_pro_erstelltem_forum}
+
+{$plugin_commentplus_der_eintrag_id}
+
+ <h2 id="commentplus_vorhandene_foren_mit_platzhaltern" class="h2" >{$plugin_commentplus_vorhandene_foren_mit_platzhaltern}</h2>
+ 
+ <table style="width: 100%;">
+ <tr>
+ <th>{$plugin_commentplus_name_des_forums}</th>
+ <th>{$plugin_commentplus_beschreibung}</th>
+ <th> {$plugin_commentplus_platzhalter}</th>
+ <th>{$plugin_commentplus_platzhalter_count}</th>
+ </tr>
+  <tr>
+	{foreach from=$complus_forum item=forum key=kf name=nf}
+	<td>
+	{$forum.forumname}
+	</td>
+		<td>
+	{$forum.Beschreibung}
+	</td>
+		<td>
+	{$forum.platzhalter}
+	</td>
+	<td>
+	{$forum.count_platzhalter}
+	</td>
+	{/foreach}
+	
+	
+	</tr>
+ </table>
+ 
+ 
+
+ 
+
+ 
+{if $is_dev}
+
+
+ 
+
+ #start#
+ 
+
+
+ <span class="ignore"></span>
+  <!-- Der Start Button ist notwendig damit sich das System daran aufhängen kann. -->
+	 <div class="rapid_form">
+			<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="plugin_commentplus_data" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="commentplus" />
+		<!-- Das Standarpräfix für die Ids -->
+		<input type="hidden" name="praefix" value="commentplus" />
+		<!-- Das Standarpräfix für die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="commentplus_data" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div> 
+{/if}
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}
+

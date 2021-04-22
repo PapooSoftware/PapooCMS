@@ -1,0 +1,64 @@
+<fieldset>
+    <h2>Grundzustand</h2>
+    <p>
+        Wird dem Grundzustand ein Hintergrundbild zugewiesen, so wird dieses immer dann angezeigt, wenn dem aktuellen Menüpunkt kein Bild zugewiesen und auch keins vererbt ist.
+    </p>
+
+    <p>
+        <a href="?menuid={$aktive_menuid}&amp;template=hintergrundbild/templates/backend.html&amp;hgb_menu_id=0&amp;hgb_action=edit">Grundzustand</a>
+        {if $plugins.hintergrundbild.grundzustand}
+            <small>{$plugins.hintergrundbild.grundzustand}</small>
+        {else}
+            <small>Kein Hintergrundbild zugewiesen</small>
+        {/if}
+    </p>
+</fieldset>
+
+<fieldset>
+    <h2>Menübaum</h2>
+
+    <p>
+        Falls einem Menüpunkt ein Hintergrundbild zugewiesen ist, wird der relative Pfad zu der Bilddatei hinter dem Menüpunkt angezeigt.
+    </p>
+
+    {foreach item=kat from=$catlist_data}
+        {if $kat.cat_id>=1}
+            <h2 class="menucat">{$kat.cat_text}</h2>
+        {/if}
+
+        <ul >
+            {foreach item=menu from=$menulist_data_hintergrundbild}
+                {if $menu.nummer}
+                    {if $kat.cat_id==$menu.cat_cid  or $no_categories==1}
+                        {$menu.shift_anfang}
+
+                            {assign var="temp_menu_id" value=$menu.menuid}
+
+                            <a href="?menuid={$aktive_menuid}&amp;template=hintergrundbild/templates/backend.html&amp;hgb_menu_id={$menu.menuid}&amp;hgb_action=edit">{$menu.nummer}: {$menu.menuname}</a> {if $menu.hintergrundbild}<small>{$menu.hintergrundbild}</small>{/if}
+
+                        {$menu.shift_ende}
+                    {/if}
+                {/if}
+            {/foreach}
+        </ul>
+    {/foreach}
+</fieldset>
+
+<form action="" method="post">
+    <fieldset>
+        <h2>Vererbung</h2>
+        <input id="vererbung" {if $plugins.hintergrundbild.vererbung == "1"}checked="checked"{/if} type="checkbox" name="vererbung" value="1"><label for="vererbung">Sollen die Hintergrundbilder nach unten vererbt werden?</label>
+    </fieldset>
+
+    <fieldset>
+        <h2>CSS-Pfad</h2>
+        <p>Bitte geben Sie hier den CSS-Pfad an, welches das Hintergrundbild als Attribut "background-image" bekommen soll.</p>
+        <input type="text" name="css_path" value="{$plugins.hintergrundbild.css_path}">
+    </fieldset>
+
+    <fieldset>
+        <h2>Daten Speichern</h2>
+        <input type="hidden" name="hgb_action" value="save_config" />
+        <input type="submit" class="submit_back_green" name="save_config" value="Speichern">
+    </fieldset>
+</form>

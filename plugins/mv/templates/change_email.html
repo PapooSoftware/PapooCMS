@@ -1,0 +1,90 @@
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+<div class="artikel">
+	<div class="mv">
+		<form action="#" method="post">
+			<input type="hidden" name="mv_id22" value="55555555"/>
+		</form>
+		{if $rights_error==""}
+			<h2>{$plugin.mv.bearbeiten}</h2>
+			<p>
+			{if $deleted}
+				<strong>{$plugin.mv.delete}</strong>
+			{/if}
+			{if $eintragmakeartikelfertig}
+				<!-- Die Artikel wurden durchgeloopt-->
+				<h2>{$plugin.mv.eingetragen}</h2>
+			{/if}
+			{if $exist}
+				<!-- Der Eintrag exisitiert schon-->
+				<h2 style="color:red;">{$plugin.mv.existiert}</h2>
+			{/if}
+			{if $list}
+				{$plugin.mv.liste}
+				<table class="mv_table">
+					<thead>
+						<tr>
+							<th valign="bottom" id="mv_id">ID</th>
+							<th valign="bottom" id="mv_name">Name</th>
+							<th valign="bottom" id="mv_art">Art</th>
+							<th valign="bottom" id="mv_set_group_id">Gruppe</th>
+							<th valign="bottom" id="mv_set_suchmaske">Suchmaske</th>
+							<th valign="bottom" id="edit">Edit</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="mv_row">
+							{foreach item=dat from=$list}
+								<td headers="mv_id" class="align_right">
+									{$dat.mv_id}
+								</td>
+								<td headers="mv_name">
+									{$dat.mv_name}
+								</td>
+								<td headers="mv_art">
+									{if $dat.mv_art==1}1 Standard
+									{elseif $dat.mv_art==2}2 Mitglieder
+									{elseif $dat.mv_art==3}3 Kalender
+									{else}Fehler MV-Art = {$dat.mv_art}
+									{/if}
+								</td>
+								<td headers="mv_set_group_id">
+									{if $dat.gruppenname}{$dat.gruppenname}
+									{else}keine
+									{/if}
+								</td>
+								<td headers="mv_set_suchmaske">
+									{if $dat.mv_set_suchmaske}Ja
+									{else}Nein
+									{/if}
+								</td>
+								<td headers="edit">
+									<a href="{$link}&mv_id={$dat.mv_id}">{$plugin.mv.bearbeiten2}</a> 
+								</td>
+							</tr>
+						{/foreach}
+					</tbody>
+				</table>
+			{/if}
+			{if $edit}
+				<!-- Es soll ein Eintrag geändert werden -->
+				{include file=../../../plugins/mv/templates/edit_create_mv.html}
+			{/if}
+			{if $fragedel}
+				<h2>{$plugin.mv.loeschen}</h2>
+				<form action="#" method="post">
+					<fieldset>
+						<legend>{$plugin.mv.loeschen2}</legend>
+						<strong>{$mv_email}</strong>
+						<input type="hidden" name="mv_id" value="{$mv_id}"/>
+						<br /><br /><br />
+						<input style="float:right" class="submit_back_red" type="submit" name="submitdelecht" value="{$plugin.mv.loeschen3}"/>
+					</fieldset>
+  				</form>
+			{/if}
+		{/if}
+	</div>
+	<!-- Rechte Fehlermeldung-->
+	{include file=rechte.html}
+</div>
+{include file=foot.inc.html}

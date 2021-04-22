@@ -733,11 +733,14 @@ class diverse_class
 	 * @param string $output
 	 *
 	 * @return string
+	 *
+	 * TODO: System-Konfiguration um Einstellung "Youtube-Links durch Video ersetzen" erweitern, um dieses Feature zu de-/aktivieren.
 	 */
 	public function do_videos($output)
 	{
+		// Ersetze Youtube-Links, in denen kein weiteres HTML-Tag vorkommt
 		return preg_replace_callback(
-			'~<a\s[^>]*href="[^"]*youtube.com[^"]*(?:/v/|v=)(?<video_id>[\w-]{10,12}).*?</a>~',
+			'~<a\s[^>]*href="[^"]*youtube.com[^"]*(?:/v/|v=)(?<video_id>[\w-]{10,12})[^<]+</a>~',
 			function ($match) {
 				return '<div class="flex-video">'
 					. '<iframe width="420" height="315" src="https://www.youtube.com/embed/' . $match["video_id"]
@@ -1517,6 +1520,7 @@ class diverse_class
 					$link->href = PAPOO_WEB_PFAD . '/';
 					if ($template['lang_short'] != $template['lang_front_default']) {
 						$link->href .= PAPOO_WEB_PFAD . '/' . $template['lang_short'] . "/";
+						$link->href = preg_replace('~/{2,}~', '/', $link->href);
 					}
 				}
 			}

@@ -1,0 +1,27 @@
+.tweet_container {
+    max-height: 300px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    max-width: 530px;
+}
+.tweet_container > .tweet_header { margin-top: 10px; background-color: #ffffff; padding: 30px 10px 30px 10px; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom: 1px solid #f0f0f0; color: #999999; font-size: 1.5em; text-align: center; }
+.tweet_container .tweet { padding: 10px; margin: 0px; background-color: #ffffff; border-bottom: 1px solid #f0f0f0; }
+.tweet_container .tweet:last-child { border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; border: 0; }
+.tweet_container .tweet > .tweet_image { float: left; }
+.tweet_container .tweet > .items { padding-left: 60px; }
+.tweet_container .tweet > .items > .profile_image { border-radius: 5px; position: relative; margin-top: 5px; }
+.tweet_container .tweet > .items > .user_name { display: inline-block; }
+.tweet_container .tweet > .items > .user_name > a { font-weight: bold; text-decoration: none; color: #000000; font-size: 0.9em !important; }
+.tweet_container .tweet > .items > .user_name > a:hover { text-decoration: underline !important; color: #0084B4; }
+.tweet_container .tweet > .items > .screen_name { color: #999999; font-size: 0.8em !important; display: inline-block; margin-left: 5px; }
+.tweet_container .tweet > .items > .text { font-size: 0.9em; color: #333333; margin-top: 5px; margin-bottom: 5px; }
+.tweet_container .tweet > .items > .created_at { font-size: 0.8em !important; color: #999999; display: inline-block; margin-left: 5px; }
+.tweet_container .tweet > .items > .id_str > a { font-size: 0.8em !important; text-decoration: none; color: #999999; }
+.tweet_container .tweet > .items > .id_str > a:hover { color: #0084B4; }
+
+.followers_container { margin: 0 auto; width: 600px; }
+.followers_container .followers_header { margin-top: 10px; background-color: #ffffff; padding: 30px 10px 30px 10px; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom: 1px solid #f0f0f0; color: #999999; font-size: 1.5em; text-align: center; }
+.followers_container .followers { padding: 10px; margin: 0px; background-color: #ffffff; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; }
+.followers_container .followers_list { padding: 0; margin: 0; list-style-type: none; }
+.followers_container .followers_list > li { display: inline-block; margin: 5px; }
+.followers_container .followers_list > li img { border-radius: 5px; } 

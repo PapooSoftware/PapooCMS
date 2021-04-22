@@ -1,0 +1,31 @@
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+ 
+<!-- Menü kommt hier rein--> 
+{include file=menu.inc.html}
+
+<div class="artikel">
+<div class="mv">
+
+
+{$mv_out}
+
+{foreach key=ordnername item=dateiliste from=$mv_out_liste}
+	<ul><strong>{$ordnername}: {$mv_out_ordner_zeilen.$ordnername}</strong> Zeilen insgesamt
+	{foreach item=dateidaten from=$dateiliste}
+		<li>{$dateidaten.filename} {$dateidaten.zeilen}</li>
+	{/foreach}
+	</ul>
+	<br />
+{/foreach}
+
+</div>
+
+
+<!-- Rechte Fehlermeldung-->
+{include file=rechte.html}
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}

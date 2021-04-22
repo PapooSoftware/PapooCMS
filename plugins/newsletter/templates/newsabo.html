@@ -1,0 +1,340 @@
+{if $IS_ADMIN}{*<!-- Wird nur in der Admin angezeigt -->*}
+	{*<!-- Hier kommt der Kopf rein-->*}
+	{include file=head.inc.utf8.html}
+	<!-- Menue kommt hier rein-->
+	{include file=menu.inc.html}
+	<div class="artikel">
+		{if $import}
+			{if $errortext}<div class="error">{$errortext}</div>{/if}
+			{if $csv_error1}<div class="error">{$plugin.newsletter.feldanzahl}</div>{/if}
+			{if $csv_error2}<div class="error">{$plugin.newsletter.feldnamefalsch}</div>{/if}
+			{if $nl_import_ende}
+				{if $imported_records}
+                    {if $is_import_blacklist}
+                        <h2>{$imported_records} {$plugin.newsletter.daten_del}</h2>
+                    {else}
+					    <h2>{$imported_records} {$plugin.newsletter.daten_eingetragen}</h2>
+                    {/if}
+				{else}
+					<div class="error">{$plugin.newsletter.daten_nicht_eingetragen}</div>
+				{/if}
+				{if $records_in_error
+					AND $imported_records}
+					<div class="error">{$records_in_error} {$plugin.newsletter.daten_nicht_eingetragen2}</div>
+				{/if}
+				<p>
+					<a href="./plugin.php?menuid={$menuid_aktuell}&amp;template=newsletter/templates/news_error_report.html">
+						{$plugin.newsletter.importprotokoll3}</a>
+				</p>
+			{/if}
+			{if $is_start}
+				{if !$is_uploaded}
+					<p>
+						<a href="./plugin.php?menuid={$menuid_aktuell}&amp;template=newsletter/templates/news_error_report.html">
+							{$plugin.newsletter.importprotokoll3}</a>
+					</p>
+					{if $filedata}
+						<form method="post" id="formi" action="" enctype="multipart/form-data">
+							<h2>{$plugin.newsletter.header01}</h2>
+							<p>{$plugin.newsletter.text03}</p>
+							<fieldset>
+								<table>
+									<tr>
+										<td><b>{$plugin.newsletter.used_file}</b></td>
+										<td><b>{$plugin.newsletter.size_text}</b></td>
+										<td><b>{$plugin.newsletter.datum}</b></td>
+										<td><b>{$plugin.newsletter.loeschen3}</b></td>
+									</tr>
+									{foreach item=fd from=$filedata key=mykey}
+										<tr>
+											<td>{$fd.name}</td>
+											<td>{$fd.size}</td>
+											<td>{$fd.date}</td>
+											<td><input type="checkbox" name="file[{$mykey}]" value="{$fd.name}" /></td>
+										</tr>
+									{/foreach}
+								</table>
+								<input type="submit" class="submit_back" name="filedel" value="{$plugin.newsletter.datei_loeschen}" />
+							</fieldset>
+						</form>
+					{/if}
+					<h2>{$plugin.newsletter.datei_importieren}</h2>
+					<p>{$plugin.newsletter.text04}</p>
+					<form method="post" id="formi" action="" enctype="multipart/form-data">
+						{*<!-- Datei ausw�hlen -->*}
+						<fieldset>
+							<legend>{$plugin.newsletter.eingabe_datei}</legend>
+							<label for="myfile">{$plugin.newsletter.das_dokument}</label>
+							<input name="myfile" id="myfile" value="" type="file">
+						</fieldset>
+						{*<!-- Submit Button zum Datei hochladen -->*}
+						<fieldset>
+							<legend>{$plugin.newsletter.import_starten}</legend>
+							<input type="submit" class="submit_back" name="startupload" value="{$plugin.newsletter.datei_hochladen}" />
+						</fieldset>
+					</form>
+					<br />
+				{else}
+					{if !$no_upload_msg}
+						<div class="message">{$plugin.newsletter.datei_ist_oben_text}</div>
+						<h2>{$plugin.newsletter.datei_ist_oben}</h2>
+					{/if}
+					<form method="post" id="formi" action="" enctype="multipart/form-data">
+						{if $smarty.get.blacklist != 1}
+						<fieldset>
+							<legend>{$plugin.newsletter.liste_waehlen}</legend>
+							{foreach item=list from=$mailinglisten_list}
+								<input type="checkbox" name="mailing_list[]" value="{$list.news_gruppe_id}" />
+								<label>{$list.news_gruppe_name}</label>
+							{/foreach}
+						</fieldset>
+						<fieldset>
+							<legend>{$plugin.newsletter.leeren_waehlen}</legend>
+							<input type="checkbox" name="makeimport_leeren" value="1" />
+						</fieldset>
+						{/if}
+						<fieldset>
+							<legend>{$plugin.newsletter.import_starten}</legend>
+							<input type="submit" name="makeimport" value="Import starten" />
+						</fieldset>
+					</form>
+
+				{/if}
+			{/if}
+		{else}
+			{if $case2a}
+				{if $newsletter_inaktive_geloescht}<div class="message">{$plugin_newsletter_inaktive_geloescht}</div>{/if}
+				{if $newsletter_dubletten_geloescht}<div class="message">{$plugin_newsletter_dubletten_geloescht}</div>{/if}
+				<h2>{$message_20008}</h2>
+				{* L�schen?  Dann "...wurde gel�scht" ausgeben *}
+				{if $abo_is_del==1}<div class="message">{$message_news_is_del}</div>{/if}
+				<form method="post" action="" name="suche">
+					<fieldset>
+						{*<!-- Suche nach einem Artikel -->*}
+						<legend>{$kundensuchen}:</legend>
+						<label style="float:left;" for="search">{$kundensuchen}</label><label style="float:left; margin-left:47%;" for="select_group">Verteilerliste</label>
+						<input name="search" id="search" type="text" value="{$search}" size="40" maxlength="200" />
+                        <select id="select_group" name="select_group"><option value="">alle</option>{foreach from=$groupliste item=group key=grk}<option value="{$grk}" {if $selected_group==$grk} selected="selected" {/if}>{$group}</option>{/foreach}</select>
+						<input type="submit" class="btn btn-info" value="{$message_679}" name="suchnewsletterkunde" />
+					</fieldset>
+				</form><br />
+				{*<!-- Einen neuen Abonnenten Hinzufuegen  -->*}
+				<div class="news_tool">
+					<a class="news_tool_edit" href="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/newsabo.html&edit=1{if $sort_email}&sort_email={$sort_email}{elseif $sort_registration_date}&sort_registration_date={$sort_registration_date}{/if}" title="{$message_20009}">
+						<img src="../plugins/newsletter/bilder/new_nl.gif" width="27" height="22" alt="" title="" border="0" align="middle" />
+						<br />
+						Neu
+					</a>
+					<a class="news_tool_edit" href="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/newsabo.html&ndel=inaktiv{if $sort_email}&sort_email={$sort_email}{elseif $sort_registration_date}&sort_registration_date={$sort_registration_date}{/if}" title="{$plugin_newsletter_inaktive_lschen_text}">
+						<img src="../plugins/newsletter/bilder/inactive.gif" width="27" height="22" alt="" title="" border="0" align="middle" />
+						<br />
+						{$plugin_newsletter_inaktive_lschen}
+					</a>
+					<a class="news_tool_edit" href="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/newsabo.html&import=1{if $sort_email}&sort_email={$sort_email}{elseif $sort_registration_date}&sort_registration_date={$sort_registration_date}{/if}" title="{$plugin_newsletter_import_text}">
+						<img src="../plugins/newsletter/bilder/import.gif" width="27" height="22" alt="" title="" border="0" align="middle" />
+						<br />
+						{$plugin_newsletter_import}
+					</a>
+					<a class="news_tool_edit" href="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/newsabo.html&nexp=do_it{if $sort_email}&sort_email={$sort_email}{elseif $sort_registration_date}&sort_registration_date={$sort_registration_date}{/if}" title="{$plugin_newsletter_export_text}">
+						<img src="../plugins/newsletter/bilder/import.gif" width="27" height="22" alt="" title="" border="0" align="middle" />
+						<br />
+						{$plugin_newsletter_export}
+					</a>
+                    <a class="news_tool_edit" href="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/newsabo.html&import=1&blacklist=1{if $sort_email}&sort_email={$sort_email}{elseif $sort_registration_date}&sort_registration_date={$sort_registration_date}{/if}" title="{$plugin_newsletter_inaktive_lschen_text}">
+                        <img src="../plugins/newsletter/bilder/inactive.gif" width="27" height="22" alt="" title="" border="0" align="middle" />
+                        <br />
+                        {$plugin_newsletter_blacklist_lschen}
+                    </a>
+				</div><div class="clearfix"></div>
+				{*<!-- weitere Seiten -->*}
+				{include file=weiter.inc.html}
+	
+				<p>{$plugin.newsletter.anzahlgef} {$anzahl}, 
+					davon aktiv: {$anzahl_aktiv} 
+						({if $anzahl_aktiv AND $anzahl}{math equation = "round(anzahl_aktiv * hund / anzahl, 1)" anzahl = $anzahl anzahl_aktiv = $anzahl_aktiv hund = 100}{else}0{/if} %), 
+					inaktiv: {$anzahl-$anzahl_aktiv} ({if $anzahl_aktiv AND $anzahl}{math equation = "round((anzahl - anzahl_aktiv) * hund / anzahl, 1)" anzahl = $anzahl anzahl_aktiv = $anzahl_aktiv hund = 100}{else}0{/if} %) (exkl. gel&ouml;schter Abonnenten)</p>
+				<p><span style="color:red">Rot</span> gekennzeichnete Adressen wurden gel&ouml;scht und k&ouml;nnen daher nicht ge&auml;ndert werden (beachten Sie hierzu auch die Newsletter Konfiguration). Das endg&uuml;ltige, unwiederbringliche L&ouml;schen und die Funktion <strong>"Doppelte entfernen"</strong> ist nur anhand der Konfigurations-Einstellung m&ouml;glich. Auch gel&ouml;schte, inaktive bleiben von der Funktion <strong>"Inaktive l&ouml;schen"</strong> in diesem Fall unber&uuml;hrt.</p>
+				<p>{$message_20044}</p>
+				<script type="text/javascript" src="../plugins/newsletter/js/confirm.js"></script>
+				<table class="news_old" summary="{$plugin.newsletter.Newsletter_Kunden}">
+				  <tr>
+					<th id="email">
+						<a href="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/newsabo.html&sort_email={if $sort_email=="ASC"}DESC{else}ASC{/if}" title="{$plugin.newsletter.sort}">{$plugin.newsletter.email}
+							{if $sort == "email"}
+								{if $sort_email == "ASC"}
+									<img src="../plugins/newsletter/bilder/pfeil_desc.png" width="11" height="9" border="0" alt="{$plugin.newsletter.desc}" title="{$plugin.newsletter.desc}" />
+								{elseif $sort_email == "DESC"}
+									<img src="../plugins/newsletter/bilder/pfeil_asc.png" width="11" height="9" border="0" alt="{$plugin.newsletter.asc}" title="{$plugin.newsletter.asc}" />
+								{/if}
+							{/if}
+						</a>
+					</th>
+                     <th id="news_group">{$newsletter_verteilerliste} </th>
+					<th id="aktivjn" style="">{$plugin.newsletter.aktivjn}</th>
+					<th id="lang" style="">Sprache</th>
+					<th id="anmeldung" style="">
+						<a href="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/newsabo.html&sort_registration_date={if $sort_registration_date=="ASC"}DESC{else}ASC{/if}" title="{$plugin.newsletter.sort}">{$plugin.newsletter.registration}
+							{if $sort == "date"}
+								{if $sort_registration_date == "ASC"}
+									<img src="../plugins/newsletter/bilder/pfeil_desc.png" width="11" height="9" border="0" alt="{$plugin.newsletter.desc}" title="{$plugin.newsletter.desc}" />
+								{elseif $sort_registration_date == "DESC"}
+									<img src="../plugins/newsletter/bilder/pfeil_asc.png" width="11" height="9" border="0" alt="{$plugin.newsletter.asc}" title="{$plugin.newsletter.asc}" />
+								{/if}
+							{/if}
+						</a>
+					</th>
+					<th id="abmeldung" style="">
+						Abmeldung
+					</th>
+					<th id="edit" style="">{$news_edit}</th>
+					<th id="del" style="">{$news_loeschen}</th>
+				  </tr>
+				  {foreach item=ander key=nummer from=$ander_data}
+					<tr class="news_old_row">
+						<td headers="email">
+							{if !$ander.deleted}
+								<a href="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/newsabo.html&msgid={$ander.news_user_id}{if $sort_email}&sort_email={$sort_email}{elseif $sort_registration_date}&sort_registration_date={$sort_registration_date}{/if}" title="{$abo_edite}">	
+								{$ander.news_user_email}</a>
+							{else}	
+								<span style="color:red">{$ander.news_user_email}</span>
+							{/if}
+						</td>
+                        <td headers="news_group">{$ander.news_gruppen}</td>
+						<td headers="aktivjn" align="right">
+							{if !$ander.deleted}
+								<a href="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/newsabo.html&activate={$ander.news_user_id}{if $sort_email}&sort_email={$sort_email}{elseif $sort_registration_date}&sort_registration_date={$sort_registration_date}{/if}" 
+									{if $ander.news_active==1} 
+										title="{$message_20043}">{$message_20011}
+									{else}
+										title="{$message_20042}">{$message_20012}
+									{/if}</a>
+							{else}
+								{if $ander.news_active==1} 
+									{$message_20011}
+								{else}
+									{$message_20012}
+								{/if}
+							{/if}
+						</td>
+						<td headers="lang" align="center">{$ander.news_user_lang}</td>
+						<td align="right" headers="anmeldung">{$ander.news_signup_date}</td>
+						<td align="right" headers="abmeldung">{$ander.news_unsubscribe_date}</td>
+						<td headers="edit" align="center">
+							{if !$ander.deleted}
+								<a href="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/newsabo.html&msgid={$ander.news_user_id}{if $sort_email}&sort_email={$sort_email}{elseif $sort_registration_date}&sort_registration_date={$sort_registration_date}{/if}" title="{$abo_edite}"><img src="../plugins/newsletter/bilder/edit_nl.gif" width="27" height="22" alt="{$abo_edite}" title="{$abo_edite}" border="0" /></a>
+							{/if}
+						</td>
+						<td headers="del" align="center">
+							{if !$ander.deleted}
+								<form action="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/newsabo.html&delid={$ander.news_user_id}{if $sort_email}&sort_email={$sort_email}{elseif $sort_registration_date}&sort_registration_date={$sort_registration_date}{/if}" method="post" name="adminForm{$ander.news_user_id}">
+									<a href='javascript: var msg="{$message_20037}"+"\""+"{$ander.news_user_email}"+"\""+"{$message_20034}"; if (confirm(msg)) submitform("{$ander.news_user_id}");' title="{$abo_loeschene}"><img src="../plugins/newsletter/bilder/delete_nl.gif" width="27" height="22" alt="{$abo_loeschene}" title="{$abo_loeschene}" border="0" /></a></form>
+							{/if}
+						</td>
+					</tr>
+				  {/foreach}
+				</table>
+				<p><a href="user.php?menuid=8" alt="Papoog-User anzeigen" title="Papoo-User anzeigen">Papoo-User anzeigen</a></p>
+				{*<!-- weitere Seiten -->*}
+				{include file=weiter.inc.html}
+			{/if}
+		{/if}
+		{if $case2b}
+			{*<!-- Abonnent Einstellungen �ndern/neu -->*}
+			<h2>{$message_aboeintragen}</h2>
+			{if $news_fehltgrp}<div class="error">{$news_grpfehlt}</div> {* Keine Gruppe ausgew�hlt *}{/if}
+			<form method="POST" id="formi" action="" >
+				{foreach item=table from=$ander_data}
+					{if $erw_data}
+						<fieldset>
+							<legend>{$plugin.newsletter.daten}</legend>
+							{*<!--  Anrede:   -->*}
+							<label for="neuanrede">{$plugin.newsletter.Anrede}:</label><br />
+							<select name="news_name_gender" title="Anrede" class="select" size="2">
+								<option value="2" title="{$news_front6}"{if $table.news_name_gender eq "2"} selected="selected"{/if}>{$news_front6}</option>
+								<option value="1" title="{$news_front5}"{if $table.news_name_gender eq "1"} selected="selected"{/if}>{$news_front5}</option>
+							</select><br />
+							{*<!--  Vorname:   -->*}
+							<label for="neuvorname">{$plugin.newsletter.vorname} {if $table.fehltvorname}<strong style="color:#f00">{$news_front14}</strong>{/if}</label><br />
+							<input type="text" class="inpt" id="neuvorname" name="news_name_vor" value="{$table.news_name_vor}" size="35" maxlength="50" /><br />
+							{*<!--  Nachname:   -->*}
+							<label for="neunachname" class="left">{$plugin.newsletter.nachname} * {if $table.fehltnachname}<strong style="color:#f00">{$news_front14}</strong>{/if}</label><br />
+							<input type="text" class="inpt" id="neunachname" name="news_name_nach" value="{$table.news_name_nach}" size="35" maxlength="50" /><br />
+							{*<!--  Strasse und Hausnummer:   -->*}
+							<label for="neustrnr">{$plugin.newsletter.strasse} {if $table.fehltnachname}<strong style="color:#f00">{$news_front14}</strong>{/if}</label><br />
+							<input type="text" class="inpt" id="neustrnr" name="news_name_str" value="{$table.news_name_str}" size="35" maxlength="50" /><br />
+							{*<!--  Postleitzahl:   -->*}
+							<label for="neuplz">{$plugin.newsletter.postleitzahl} {if $table.fehltplz==2}<strong style="color:#f00">{$news_front15}</strong>{/if}{if $table.fehltplz==1}<strong style="color:#f00">{$news_front14}</strong>{/if}</label><br />
+							<input type="text" class="inpt" id="neuplz" name="news_name_plz" value="{$table.news_name_plz}" size="35" maxlength="50" /><br />
+							{*<!--  Ort:   -->*}
+							<label for="neuort">{$plugin.newsletter.wohnort} {if $table.fehltort}<strong style="color:#f00">{$news_front14}</strong>{/if}</label><br />
+							<input type="text" class="inpt" id="neuort" name="news_name_ort" value="{$table.news_name_ort}" size="35" maxlength="50" /><br />
+							{*<!--  Staat:   -->*}
+							<label for="neustaat">{$plugin.newsletter.staat} {if $table.fehltstaat}<strong style="color:#f00">{$news_front14}</strong>{/if}</label><br />
+							<input type="text" class="inpt" id="neustaat" name="news_name_staat" value="{$table.news_name_staat}" size="35" maxlength="50" /><br />
+							{*<!--  Telefon:   -->*}
+							<label for="neuphone">{$plugin.newsletter.phone} {if $table.fehltphone}<strong style="color:#f00">{$news_front14}</strong>{/if}</label><br />
+							<input type="text" class="inpt" id="neuphone" name="news_phone" value="{$table.news_phone}" size="35" maxlength="50" /><br />
+							{if $is_iaks}
+								{*<!--  IAKS-Mitglied:   -->*}
+								{$news_front17}<br />        
+								<input type="radio" id="mitglied_ja" name="news_name_mitglied" value="1" {if $table.news_name_mitglied==1}checked{/if} />
+								<label for="mitglied_ja"><span class="label">{$message_20011}</span></label><br />
+								<input type="radio" id="mitglied_nein" name="news_name_mitglied" value="0" {if $table.news_name_mitglied==0 or not $table.news_name_mitglied}checked{/if} />
+								<label for="mitglied_nein"><span class="label">{$message_20012}</span></label><br /><br />
+								{*<!--  sb abonnent:   -->*}
+								{$news_front18}<br />        
+								<input type="radio" id="abonnent_ja" name="news_name_abonnent" value="1" {if $table.news_name_abonnent==1}checked{/if} />
+								<label for="abonnent_ja"><span class="label">{$message_20011}</span></label><br />
+								<input type="radio" id="abonnent_nein" name="news_name_abonnent" value="0" {if $table.news_name_abonnent==0 or not $table.news_name_abonnent}checked{/if} />
+								<label for="abonnent_nein"><span class="label">{$message_20012}</span></label><br /><br />
+							{/if}
+						</fieldset>
+					{/if}
+					<fieldset>
+						{*<!-- Email Adresse  -->*}
+						<legend> {$message_20014}</legend>
+						{*<!-- Email -->*}
+						<label for="email">{$plugin.newsletter.email} * {if $table.fehltemail==2}<strong style="color:#f00">{$news_front15}</strong>{/if}{if $table.fehltemail==3}<strong style="color:#f00">{$news_front16}</strong>{/if}</label>
+						<label for="rechte">{$message_20013}</label>
+						<input type="checkbox" {if $table.news_active==1}checked{/if} name="news_active" id="rechte" value="1" />
+						<input type="text" name="news_user_email" id="email" value="{$table.news_user_email}" size="80"/><br />
+						<input type="hidden" name="news_user_id" value="{$table.news_user_id}" />
+						<input type="hidden" name="new_recipient" value="{$table.new}" />
+					</fieldset>
+					<fieldset>
+						<legend>{$plugin.newsletter.sprache}</legend>
+						<label for="news_user_lang">{$lang.language}</label>
+						<select name="news_user_lang" id="news_user_lang" size="{$selectitems}">
+							{foreach item=lang from=$language_newsd}
+								<option value="{$lang.lang_id}" {if $lang.selected} selected="selected"{/if}>{$lang.language}</option>
+							{/foreach}
+						</select><br />
+					</fieldset>
+					<fieldset>
+						{*<!--NL Gruppen  -->*}
+						<legend>{$news_grpnamen}</legend>
+						{foreach item=gruppe from=$grp_data}
+							<input type="checkbox" {$gruppe.checked} name="grp_active[{$gruppe.grp_id}]" id="gruppe{$gruppe.grp_id}" value="{$gruppe.grp_id}" />
+							<label for="gruppe{$gruppe.grp_id}">{$gruppe.name}</label><br />
+						{/foreach}
+					</fieldset>
+					<fieldset>
+						{*<!--Moderated Freigabe  -->*}
+						<legend>Freigabe für moderierte Verteiler</legend>
+						{foreach item=gruppe from=$grpmoderated_data}
+						<input type="checkbox" {if $gruppe.news_active == 1}checked{/if} name="grp_activefreigabe[{$gruppe.news_gruppe_id}]" id="gruppe_freigabe{$gruppe.news_gruppe_id}" value="{$gruppe.news_gruppe_id}" />
+						<label for="gruppe_freigabe{$gruppe.news_gruppe_id}">{$gruppe.news_gruppe_name}</label><br />
+						{/foreach}
+					</fieldset>
+					<fieldset>
+						<legend>{$message_69}</legend>
+						<input class="right submit_back_green" type="submit" name="submit" value="{$plugin.newsletter.speichern}">
+					</fieldset>
+				{/foreach}
+			</form>
+		{/if}
+	</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

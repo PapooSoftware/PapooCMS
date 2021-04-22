@@ -1,0 +1,13 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		
+		<h1>{$plugin.faq_back.pageheader.faq_back}</h1>
+		<p>{$plugin.faq_back.text.faq_back}</p>
+		<a href="./menu.php?menuid=43" title="{$plugin.faq_back.text.faq_back2}">{$plugin.faq_back.text.faq_back2}</a>
+	</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

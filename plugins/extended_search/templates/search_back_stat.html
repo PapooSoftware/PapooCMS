@@ -1,0 +1,95 @@
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+  <div class="artikel">
+ <h1 id="shop_tatistik_der_erweiterten_uche" class="h1" >{$plugin_shop_tatistik_der_erweiterten_uche}</h1>
+
+ <p id="ext_search_hlen_ie_den_eitraum" class="h1" >{$plugin_ext_search_hlen_ie_den_eitraum}</p>
+{literal}
+<script type="text/javascript">
+	$(function() {
+		$('#einstellungen_lang_ie_letzten').datepicker({
+			dateFormat: 'dd.mm.yy',
+			changeMonth: true,
+			changeYear: true,
+			maxDate: '-1d' 
+		});
+	});
+	$(function() {
+		$('#einstellungen_lang_inheit2').datepicker({
+			dateFormat: 'dd.mm.yy',
+			changeMonth: true,
+			changeYear: true,
+			maxDate: '+0d' 
+		});
+	});
+	</script>
+
+{/literal}
+
+
+ <form method="post" action="" id="formi" style="width:100%">
+  <fieldset>
+<legend> {$plugin_ext_search_eitraum_auswhlen_field}</legend>
+
+<label for="einstellungen_lang_ie_letzten">{$plugin_ext_search_tart} </label>
+
+<input type="text" size="8" name="einstellungen_lang_ie_letzten" value="{$einstellungen_lang_ie_letzten|escape:"htmlall"}" class="einstellungen_lang_ie_letzten" id="einstellungen_lang_ie_letzten"/>
+
+ <label for="einstellungen_lang_inheit2"> {$plugin_ext_search_nde}</label>
+
+<input type="text" size="8" name="einstellungen_lang_inheit2" value="{$einstellungen_lang_inheit2|escape:"htmlall"}" class="einstellungen_lang_inheit2" id="einstellungen_lang_inheit2"/>
+ <input type="checkbox" name="ext_search_stat_ur_zusammengesetzte" value="1" {if $ext_search_stat_ur_zusammengesetzte==1}checked="checked"{/if} class="ext_search_stat_ur_zusammengesetzte" id="ext_search_stat_ur_zusammengesetzte"/><label for="ext_search_stat_ur_zusammengesetzte">{$plugin_ext_search_ur_zusammengesetzte}{$plugin_error.ext_search_stat_ur_zusammengesetzte} </label>
+
+
+	<input  type="submit" class="submit_back" value=" {$plugin_ext_search_anzeigen}" name="formSubmit_stat_dat" />
+</fieldset><br />
+ </form>
+ 
+  <h1 id="ext_search_uchwrter" class="h1" >{$plugin_ext_search_uchwrter}</h1>
+ 
+ <table style="width:99%;vertical-align:top;">
+  <tr style="vertical-align:top;">
+  <th> {$plugin_ext_search_uchwrter}</th>
+	<th> {$plugin_ext_search_nzahl}</th>
+	<th> {$plugin_ext_search_egriff_in_hesaurus_bernehmen}</th>
+	</tr>
+ {foreach from=$ext_search_stat item=typ name=xtyp}
+ <tr>
+ <td>{$typ.ext_search_stat_search|escape:"htmlall"}</td>
+ <td>{$typ.ext_search_count}</td>
+
+ <td><a href="{$thesaurus_self_link}&thes_id=new&ext_search_thesaurus_uchbegriffe={$typ.ext_search_stat_search}&formSubmit_search_thesaurus=1">{$typ.ext_search_stat_search|escape:"htmlall"} {$plugin_ext_search_bernehmen}</a></td>
+ <tr>
+ {/foreach}
+ </table>
+
+
+
+
+ #start#
+{if $is_dev}
+ <span class="ignore"></span>
+  <!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+	 <div class="rapid_form">
+		<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="plugin_ext_search_stat" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="ext_search_class" />
+		<!-- Das Standarpr�fix f�r die Ids -->
+		<input type="hidden" name="praefix" value="ext_search" />
+		<!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="ext_search_stat" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div>
+{/if}
+  </div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}

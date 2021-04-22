@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin version="3.7">
+
+<name>Register</name>
+<beschreibung_de><![CDATA[Informationen sortiert von A-Z.]]></beschreibung_de>
+<version>1.1</version>
+
+<datum>28.04.2009</datum>
+
+<autor>
+	<name>Stephan Bergmann</name>
+	<kontakt><![CDATA[Stephan Bergmann
+Rembrandtstr. 10/1
+72768 Reutlingen]]></kontakt>
+	<email>S.Bergmann@XiMiX.de</email>
+	<telefon>07121 / 60 33 10</telefon>
+</autor>
+
+<menue>
+	<eintrag_de>Register</eintrag_de>
+	<icon>register/bilder/menu_icon.gif</icon>
+	<link>plugin:register/templates/register_back.html</link>
+	
+	<submenue>
+		<eintrag_de>Einbindung</eintrag_de>
+		<icon>register/bilder/menu_icon.gif</icon>
+		<link>plugin:register/templates/register_back_einbindung.html</link>
+	</submenue>
+</menue>
+
+<klasse>
+	<name>register</name>
+	<datei>register/lib/register_class.php</datei>
+</klasse>
+
+
+<css>register/css/register.css</css>
+
+
+<datenbank>
+	<installation>register/sql/register_install.sql</installation>
+	<deinstallation>register/sql/register_deinstall.sql</deinstallation>
+</datenbank>
+
+
+<messages>register/messages</messages>
+
+</plugin>

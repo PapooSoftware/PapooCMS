@@ -1,0 +1,295 @@
+.fehlerliste{
+border:1px solid red;
+background:#eee;
+padding:10px;
+}
+.form_error {
+color:red;
+font-weight:600;
+}
+#liste, #liste td
+{
+	border:1px solid #333333;
+}
+.mv .mv_back_label
+{
+	float:left;
+	width:90%;
+}
+.vwfeld .mv_back_input {
+clear:none !important;
+float:left;
+}
+.mv .mv_float_left
+{
+	float:left;
+	width:90%;
+}
+.metaebene_content_dzvhae
+{
+	width:774px;
+	max-width:774px;
+}
+
+.radio_flex_input
+{
+	float:left;
+	/*margin-left:30%;*/
+}
+.radio_flex_label
+{
+	/*float:right;*/
+	clear:both;
+}
+.mv_picture_edit
+{
+	overflow:scroll;
+	height: 125px;
+	clear:left;
+}
+.mv_zeitintervall
+{
+	display:block;
+	float:right;
+	width:77%;
+	margin-bottom:1em;
+}
+.v_suchfeld,
+.v_suchfeld_i,
+.vwfeld
+{
+	width:98%;
+	min-width:98%;
+	display:block;
+	margin-bottom:1em;
+}
+.v_suchfeld label,
+.v_suchfeld_i label {
+float:left !important;
+width:23% !important;
+}
+.vwfeld {
+font-family:Tahoma,Verdana !important;
+font-size:14px !important;
+}
+.vwfeld label {
+/*width:30% !important;*/
+margin:11px 0 6px 0 !important;
+padding-bottom:0 !important;
+width:auto !important;
+}
+.vwfeld select,
+.vwfeld textarea,
+.vwfeld strong,
+.vwfeld span,
+.vwfeld label,
+.vwfeld input {
+float:left !important;
+clear:both;
+}
+.vwfeld .waehrung {
+float:left !important;
+clear:none !important;
+}
+.metaebene_content_dzvhae .vwfeld label {
+clear:none !important;
+margin:-3px 0 3px 3px !important;
+}
+.vwfeld select,
+.vwfeld textarea,
+.vwfeld strong,
+.vwfeld span,
+.vwfeld input {
+margin:-3px 3px 0 0 !important;
+/*padding:0 !important;*/
+}
+.vwfeld input[type="checkbox"] {
+width:auto !important;
+}
+.vwfeld input[type="button"] {
+clear:none !important;
+}
+.vwfeld ul,
+.vwfeld li {
+padding-left:0 !important;
+clear:left !important;;
+list-style-type:none !important;
+height:auto; /* unbedingt fürs BE */
+margin-left:0 !important;
+margin-bottom:6px;
+}
+.vwfeld li input[type="button"] {
+clear:left !important;
+margin:-3px 10px 0 0 !important;
+}
+#mvcform_required_felder {
+margin-bottom:10px !important;
+}
+.vwfeld .mv_picture {
+clear:none !important;
+margin-top:10px !important;
+}
+div#qTip {
+ padding: 3px;
+ border: 1px solid #666;
+ display: none;
+ background: #FFF4D2;
+ color: #222;
+ position: absolute;
+ z-index: 1000;
+}
+.descrip_img {
+	margin-left:10px !important;
+	margin-bottom:-3px !important;
+	float:left !important;
+}
+.protokoll_error,
+.picture_error,
+.template_error {
+color:red;
+font-weight:bold;
+}
+/* kommt aufs allgemeine Layout drauf an, ob dort schon legend definiert ist
+.mv legend
+{
+	display:block;
+	width:98%
+	min-width:98%
+	margin:1em;
+	padding:0.5em;
+	background: #cccccc;
+	border:1px solid #888888;
+}
+*/
+.mv_table {
+margin:0;
+}
+.mv_table th {
+vertical-align:top;
+}
+.mv_table,
+.mv_table tr,
+.mv_table td {
+border:1px solid #ccc !important;
+}
+.mv_table td {
+padding:4px !important;
+}
+.mv_row A:HOVER,
+.mv_row A:ACTIVE,
+.mv_row A:LINK,
+.mv_row A:VISITED,
+.mv_row A:FOCUS {
+background-color:transparent;
+color:#22599a;
+}
+.mv_row TD {
+padding:4px !important;
+margin:0;
+height:27px !important;
+vertical-align:middle;
+}
+.align_right {
+text-align:right;
+}
+.width100 {
+width:100%;
+/*max-width:1008px;*/
+}
+table, tr, td {
+/*padding:7px 3px !important;*/
+}
+.multilist {
+height:auto !important;
+}
+
+/* CSS Tree menu styles */
+ol.tree
+{
+	padding: 0 0 0 0px;
+	/* width: 300px; */
+}
+.mv-tree-view li
+{
+	position: relative;
+	margin-left: 1rem;
+	list-style: none;
+}
+.mv-tree-view li input
+{
+	position: absolute;
+	left: 0;
+	margin-left: 0;
+	opacity: 0;
+	z-index: 2;
+	cursor: pointer;
+	height: 1em;
+	width: 1em;
+	top: 0;
+}
+.mv-tree-view li input + ol
+{
+	background: url(toggle-small-expand.png) 40px 0 no-repeat;
+	margin: -0.938em 0 0 -44px; /* 15px */
+	height: 1em;
+}
+.mv-tree-view li input ~ ol > li { display: none; margin-left: -14px !important; padding-left: 1px; }
+.mv-tree-view li input ~ label:before
+{
+	content: "\f0da";
+	margin-right: 5px;
+	font-family: FontAwesome;
+}
+
+.mv-tree-view li input:checked ~ ol
+{	
+	margin: -1.25em 0 0 -44px; /* 20px */
+	padding: 1.563em 0 0 80px;
+	height: auto;
+}
+.mv-tree-view li input:checked ~ label:before
+{
+	content: "\f0d7";
+	margin-right: 5px;
+	font-family: FontAwesome;
+}
+.mv-tree-view li input:checked ~ ol > li { display: block; margin: 0 0 0.125em;  /* 2px */}
+.mv-tree-view li input:checked ~ ol > li:last-child { margin: 0 0 0.063em; /* 1px */ }
+
+.mv-tree-view li.mv-tree-view-item {
+	margin: 1rem;
+}
+
+.mv.eintrag_register #letter_index {
+	width: 100%;
+	height: 40px;
+}
+.mv.eintrag_register #letter_index .letter {
+	float: left;
+	border: grey 1px solid;
+	padding: 8px;
+}
+.mv.eintrag_register #letter_index .letter.active {
+	background-color: #78A000;
+}
+.mv.eintrag_register #letter_index .letter.active a {
+	color: white !important;
+}
+.mv.eintrag_register #word_index {
+	float: left;
+	width: auto;
+	margin-right: 8px;
+}
+.mv.eintrag_register #word_index .word {
+	border: 1px grey solid;
+	padding: 3px;
+}
+.mv.eintrag_register #word_index .word.active {
+	background-color: #78A000;
+}
+.mv.eintrag_register #word_index .word.active a {
+	color: white !important;
+}
+.mv.eintrag_register #word_content {
+	overflow: hidden;
+}

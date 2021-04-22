@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- version: Versions-Nummer papoo für die das Plugin gedacht ist / funktioniert -->
+<plugin version="2.0">
+
+<!-- ALLGEMEINE-INFORMATIONEN -->
+<!-- ************************ -->
+<!-- name: Name des Plugins -->
+<name>Newsletter</name>
+
+<!-- beschreibung_de: Kurz-Beschreibung des Plugins auf deutsch (wird im Plugin-Manager angezeigt) -->
+<beschreibung_de><![CDATA[Das ist das Papoo Newsletter Plugin.]]></beschreibung_de>
+
+<!-- beschreibung_en: Kurz-Beschreibung des Plugins auf englisch (wird im Plugin-Manager angezeigt) -->
+<beschreibung_en><![CDATA[The Papoo Newsletter Plugin.]]></beschreibung_en>
+
+<!-- version: Versions-Nummer des Plugins -->
+<version>3.2</version>
+
+<!-- papooid: Eindeutige Nummer offizieller papoo-Plugins -->
+<papooid>4</papooid>
+
+<!-- link: z.Z. noch ohne Funktion -->
+<link>http://www.papoo.de</link>
+
+<!-- datum: Erscheinungs-Datum bzw. Stand des Plugins -->
+<datum>10.12.2009</datum>
+
+
+<!-- AUTOR-INFORMATIONEN -->
+<!-- ******************* -->
+<!-- autor: Informationen zum Autor (Programmierer) des Plugins -->
+<autor>
+	<!-- autor.name: Name des Authors -->
+	<name>Dr. Carsten Euwens, khmweb</name>
+
+	<!-- autor.kontakt: postalische Kontakt-Informationen des Autors -->
+	<kontakt><![CDATA[Carsten Euwens
+Heerstr. 110
+53111 Bonn]]></kontakt>
+
+	<!-- autor.email: eMail-Adresse des Autors -->
+	<email>info@papoo.de</email>
+
+	<!-- autor.telefon: Telefon-Nummer des Autors -->
+	<telefon>0228 280 56 68</telefon>
+</autor>
+
+
+<!-- MENÜ-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- menue: Informationen für den Menü-Eintrag im Backend (papoo/interna) -->
+<menue>
+	<!-- menue.eintrag_de: Name des Menü-Punktes im Backend auf deutsch -->
+	<eintrag_de>Newsletter</eintrag_de>
+	<!-- menue.eintrag_en: Name des Menü-Punktes im Backend auf englisch -->
+	<eintrag_en>Newsletter</eintrag_en>
+	<!-- menue.icon: Pfad zum Menü-Icon des Menü-Punktes im Backend (relativ zum Plugin-Verzeichnis) -->
+	<icon>newsletter/bilder/pic_01.gif</icon>
+	<!-- menue.link: Name der Seite auf welche der Menü-Punkt im Backend verweisen soll -->
+	<link>plugin:newsletter/templates/newsletter_back.html</link>
+	<!-- menue.submenue: Untermenü-Punkt für diesen Menü-Punkt im Backend, Struktur wie menue -->
+	<submenue>
+		<eintrag_de>Newsletter Verwaltung</eintrag_de>
+		<eintrag_en>Newsletter Management</eintrag_en>
+		<icon>newsletter/bilder/pic_01.gif</icon>
+		<link>plugin:newsletter/templates/news_nl_list.html</link>
+	</submenue>
+
+	<submenue>
+		<eintrag_de>Abonnenten</eintrag_de>
+		<eintrag_en>Subscriber</eintrag_en>
+		<icon>newsletter/bilder/pic_01.gif</icon>
+		<link>plugin:newsletter/templates/newsabo.html</link>
+	</submenue>
+
+	<submenue>
+		<eintrag_de>Verteilerlisten</eintrag_de>
+		<eintrag_en>Mailing Lists</eintrag_en>
+		<icon>newsletter/bilder/pic_01.gif</icon>
+		<link>plugin:newsletter/templates/news_group.html</link>
+	</submenue>
+	
+	<submenue>
+		<eintrag_de>Protokolle</eintrag_de>
+		<eintrag_en>Protocols</eintrag_en>
+		<icon>newsletter/bilder/pic_01.gif</icon>
+		<link>plugin:newsletter/templates/news_protocol.html</link>
+	</submenue>
+
+	<submenue>
+		<eintrag_de>Konfiguration</eintrag_de>
+		<eintrag_en>Configuration</eintrag_en>
+		<icon>newsletter/bilder/pic_01.gif</icon>
+		<link>plugin:newsletter/templates/newsimp.html</link>
+	</submenue>
+
+</menue>
+
+<!-- KLASSEN-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- klasse: Informationen der Plugin-Klasse welche eingebunden werden sollen -->
+<klasse>
+	<!-- klasse.name: Name der Klassen-Instanz / des Objekts (also der Name des Dings, das mit $name = new xx_class(); erzeugt wird) -->
+	<name>news</name>
+	<!-- klasse.datei: Pfad zur Klassen-Datei (relativ zum Plugin-Verzeichnis) -->
+	<datei>newsletter/lib/newsletterplugin_class.php</datei>
+</klasse>
+
+<!-- klasse: Es können auch weitere Plugin-Klassen eingebunden werden -->
+
+
+<!-- CSS-INFORMATIONEN -->
+<!-- ***************** -->
+<!-- css: Pfad zur CSS-Datei (relativ zum Plugin-Verzeichnis) -->
+<css>newsletter/css/newsletter.css</css>
+
+
+<!-- DATENBANK-INFORMATIONEN -->
+<!-- ****************** -->
+<datenbank>
+	<!-- datenbank.installation: Pfad zur SQL-Installations-Datei (relativ zum Plugin-Verzeichnis) -->
+	<installation>newsletter/sql/newsletter_install.sql</installation>
+	<!-- datenbank.deinstallation: Pfad zur SQL-Deinstallations-Datei (relativ zum Plugin-Verzeichnis) -->
+	<deinstallation>newsletter/sql/newsletter_deinstall.sql</deinstallation>
+</datenbank>
+
+<!-- MODUL-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- modul: Informationen des Frontend-Moduls -->
+<modul>
+	<!-- modul.datei: Datei-Name des Modul-Templates (relativ zum Plugin-Verzeichnis) -->
+	<datei>plugin:newsletter/templates/subscribe_modul_newsletter.html</datei>
+
+	<!-- modul.name_de: Der deutsche Name des Moduls -->
+	<name_de>Newsletter Anmeldung</name_de>
+	<!-- modul.beschreibung_de: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_de>Anmeldeformular des Newsletters</beschreibung_de>
+
+	<!-- modul.name_en: Der deutsche Name des Moduls -->
+	<name_en>Subscribe Newsletter</name_en>
+	<!-- modul.beschreibung_en: Die deutsche Beschreibung des Moduls -->
+	<beschreibung_en>Form to subscribe to the Newsletter</beschreibung_en>
+
+	<!-- modul.modus: (optional) legt fest, ob das Modul in allen Bereichen, oder nur in einem bestimmten Bereich angezeigt werden kann.
+		mögliche Werte: "var" (default) Anzeige in allen Bereichen möglich, "fix" Anzeige nur in einem bestimmten Bereich möglich -->
+	<modus>var</modus>
+
+</modul>
+<!-- Einbindung der Sprach-Daten.
+	In dem hier angegebenen Verzeichnis sollten Dateien mit folgenden Namen liegen:
+	- messages_backend_[de|en|sp| .. etc.].inc.php
+	- messages_frontend_[de|en|sp| .. etc.].inc.php
+-->
+<messages>newsletter/messages</messages>
+</plugin>

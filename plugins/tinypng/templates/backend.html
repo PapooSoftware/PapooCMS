@@ -1,0 +1,127 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+{if $plugin_tinypng_compression_success}
+	<div class="message">{$plugin_tinypng_compression_success_msg}</div>
+{elseif $plugin_tinypng_restore_success}
+	<div class="message">{$plugin_tinypng_restore_success_msg}</div>
+{elseif $plugin_tinypng_apikey_store_success}
+	<div class="message">{$plugin_tinypng_apikey_store_success_msg}</div>
+{elseif $plugin_tinypng_apikey_purge_success}
+	<div class="message">{$plugin_tinypng_apikey_purge_success_msg}</div>
+{/if}
+
+{if $plugin_tinypng_error}
+	{if $plugin_tinypng_apikey_key_required}
+		<div class="message error">{$plugin_tinypng_apikey_key_required_msg}</div>
+	{elseif $plugin_tinypng_no_write_perms}
+		<div class="message error">{$plugin_tinypng_no_write_perms_msg}</div>
+	{else}
+		<div class="message error">{$plugin_tinypng_error_msg}</div>
+	{/if}
+{/if}
+<div class="artikel">
+	
+	<h1 id="plugin_tinypng_head" class="h1" >{$plugin_tinypng_head}</h1>
+	
+	<p id="plugin_tinypng_description" class="h1" >{$plugin_tinypng_description}</p>
+	
+	<form method="post" id="formi" action="" >
+		<fieldset>
+			<legend>{$plugin_tinypng_apikey}</legend>
+			<div>
+				<label for="plugin_tinypng_apikey_key">API key:</label>
+				<input type="text" name="plugin_tinypng_apikey_key" id="plugin_tinypng_apikey_key" value="{$plugin_tinypng_apikey_key}" />
+			</div>
+			<input type="submit" class="btn btn-info" style="margin-top:0;" id="plugin_tinypng_apikey_store" name="plugin_tinypng_apikey_store" value="{$plugin_tinypng_apikey_store}" />
+			<input type="submit" class="btn btn-danger" id="plugin_tinypng_apikey_purge" name="plugin_tinypng_apikey_purge" value="{$plugin_tinypng_apikey_purge}" {if $plugin_tinypng_apikey_key|strlen == 0}disabled="disabled"{/if} />
+		</fieldset>
+		
+		<fieldset id="tinyFieldsetCompress">
+			<legend>{$plugin_tinypng_compression}</legend>
+			<div>
+				<span id="plugin_tinypng_png_count">{$plugin_tinypng_png_count_compressable}</span>/{$plugin_tinypng_png_count_all} {$plugin_tinypng_png_count_msg}
+			</div>
+			<input type="submit" class="submit_back" id="plugin_tinypng_compression_start" name="plugin_tinypng_compression_start" value="{$plugin_tinypng_compression_start}" disabled="disabled"/>
+		</fieldset>
+		
+		<fieldset id="tinyFieldsetRestore">
+			<legend>{$plugin_tinypng_restore}</legend>
+			<input type="submit" class="submit_back" id="plugin_tinypng_restore_start" name="plugin_tinypng_restore_start" value="{$plugin_tinypng_restore_start}" />
+		</fieldset>
+	</form>
+</div>
+
+<script>
+	var $tinyApiKey = '{$plugin_tinypng_apikey_key}';
+	var $tinyPathImages = '{$plugin_tinypng_images_folder_rel}';
+	var $tinyImages = jQuery.parseJSON('{$plugin_tinypng_images_json}');
+	var $tinyImagesCount = $tinyImages.length;
+	var $tinyAjaxScript = '{$plugin_tinypng_ajax_script_file}';
+	
+	{literal}
+		$(document).ready(function()
+		{
+			if (!$tinyApiKey || !$tinyImagesCount || !$tinyPathImages)
+			{
+				return false;
+			}
+			
+			$('#plugin_tinypng_compression_start').removeProp('disabled').click(function(event) {
+				$(this).prop('disabled', 'disabled');
+				$('#tinyFieldsetRestore').hide();
+				compress(0);
+				// stop click event propagation, so form will not be submitted
+				return false;
+			});
+		});
+		
+		function compress($count)
+		{
+			if ($count >= $tinyImagesCount)
+			{
+				showStatus('.. alle Bilder bearbeitet.');
+				return true;
+			}
+			$tempImage = $tinyImages[$count];
+			showStatus('.. bearbeite Bild '+($count+1)+' von '+$tinyImagesCount+': '+$tempImage);
+			
+			$url = $tinyAjaxScript+'?path='+$tinyPathImages+'&image='+$tempImage+'&apikey='+$tinyApiKey;
+			
+			$.ajax({
+				url: $url
+			})
+			.done(function(data, textStatus, jqXHR) {
+				if(jqXHR.status !== 200)
+				{
+					showError(data);
+				}
+				compress($count+1);
+			})
+			.fail(function(jqXHR, textStatus) {
+				showError(jqXHR.responseText);
+				compress($count+1);
+			});
+		};
+		
+		function showStatus($text)
+		{
+			if (!$('#plugin_tinypng_png_status_box').length) $('#tinyFieldsetCompress').append('<div id="plugin_tinypng_png_status_box" />');
+			$('#plugin_tinypng_png_status_box').html($text);
+		}
+		
+		function showError($text)
+		{
+			if (!$('#plugin_tinypng_png_error_box').length) $('#tinyFieldsetCompress').append('<div id="plugin_tinypng_png_error_box" class="error" />');
+			$('#plugin_tinypng_png_error_box').append('<p><pre>'+$text+'</pre></p>');
+		}
+	{/literal}
+</script>
+
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

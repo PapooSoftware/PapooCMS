@@ -1,0 +1,93 @@
+﻿{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+
+<div class="artikel">
+	<h1>Plugin &quot;User-Login&quot;</h1>
+	
+	<p>
+		Im NICHT-angemeldeten Zustand wird der Artikel angezeigt, welcher dem Plugin-Menü-Punkt zugewiesen ist <small>(es darf nur EIN Artikel sein)</small>. 
+		Für den angemeldeten Zustand kann hier ein entsprechender Text angegeben werden.
+	</p>
+
+	{foreach from=$plugin.userlogin.feedback item=message}
+		<div class="alert alert-success">
+			<strong>{$message}</strong>
+		</div>
+	{/foreach}
+
+	{if $plugin.userlogin.isNew || $plugin.userlogin.isEdit}
+
+	<h2>Text nach erfolgreicher Anmeldung</h2>
+	<form action='' method="post">
+		<input type="hidden" name="userlogin_action" value="text_save" />
+		<fieldset>
+			<legend>Text {$aktulanglong}</legend>
+			
+			{include file=artikel_editor.inc.html}
+		</fieldset>
+		<br />
+
+		<fieldset>
+			<legend>{$plugin.userlogin._available_groups}</legend>
+
+			{foreach from=$plugin.userlogin.groups item=group}
+				<label><input type="checkbox" name="page_groups[]" value="{$group.id}"{if $plugin.userlogin.isEdit && $group.id|in_array:$plugin.userlogin.page_group_ids} checked="checked"{/if}>
+					{$group.name|escape}
+				</label>
+			{/foreach}
+		</fieldset>
+
+		<input type="submit" class="submit_back_green" value=".. speichern" />
+	</form>
+
+	{elseif $plugin.userlogin.isDelete}
+
+		<form action="{$plugin.userlogin.baseUrl}&amp;delete={$plugin.userlogin.pageId}" method="post">
+			<fieldset>
+				<legend>{$plugin.userlogin._confirm_delete_request}</legend>
+
+				<button type="submit" class="btn btn-danger">{$plugin.userlogin._delete_now}</button>
+				<a href="{$plugin.userlogin.baseUrl}"><button type="button" class="btn btn-info">{$plugin.userlogin._abort}</button></a>
+			</fieldset>
+		</form>
+
+	{else}
+
+		<a href="{$plugin.userlogin.baseUrl}&amp;new=1"><button type="button" class="btn btn-success">{$plugin.userlogin._create_page}</button></a>
+
+		<table class="table table-striped table-hover">
+			<thead>
+			<tr>
+				<th>Seite</th>
+				<th>Gruppen</th>
+				<th>Einbindung</th>
+				<th>Aktionen</th>
+			</tr>
+			</thead>
+			<tbody>
+			{foreach from=$plugin.userlogin.pages item=page}
+				<tr>
+					<td>{$page.id}</td>
+					<td>{if $page.group_string|trim|strlen > 0}{$page.group_string|escape:"html"}{else}&ndash;{/if}</td>
+					<td>plugin:userlogin/templates/front.html&amp;page_id={$page.id}</td>
+					<td>
+						<a href="{$plugin.userlogin.baseUrl}&amp;edit={$page.id}"><button type="button" class="btn btn-success">Bearbeiten</button></a>
+						<a href="{$plugin.userlogin.baseUrl}&amp;delete={$page.id}"><button type="button" class="btn btn-danger">Entfernen</button></a>
+					</td>
+				</tr>
+			{/foreach}
+			{if $plugin.userlogin.pages|@count == 0}
+				<tr>
+					<td colspan="4">{$plugin.userlogin._no_pages_exist}</td>
+				</tr>
+			{/if}
+			</tbody>
+		</table>
+
+	{/if}
+	
+</div>
+ 
+</body></html>
+{/if}

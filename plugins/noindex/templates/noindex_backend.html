@@ -1,0 +1,38 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<link rel="stylesheet" type="text/css" href="{$css_path}/backend.css" />
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+    <h1>No Index Plugin</h1>
+    {$message.plugin.noindex.001}
+
+    <div class="tabbable">
+
+        <ul class="nav nav-tabs">
+            <li  class="active"><a href="#tabs-1" data-toggle="tab">{$message.plugin.noindex.009}</a></li>
+            <li><a href="#tabs-2" data-toggle="tab">{$message.plugin.noindex.010}</a></li>
+            <li><a href="#tabs-3" data-toggle="tab">{$message.plugin.noindex.011}</a></li>
+            <li><a href="#tabs-4" data-toggle="tab">{$message.plugin.noindex.012}</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="tabs-1">{include file=../../../plugins/noindex/templates/noindex_artikel_backend.html}</div>
+            <div class="tab-pane" id="tabs-2">{include file=../../../plugins/noindex/templates/noindex_forum_backend.html}</div>
+            <div class="tab-pane"  id="tabs-3">{include file=../../../plugins/noindex/templates/noindex_menu_backend.html}</div>
+            <div class="tab-pane" id="tabs-4">{include file=../../../plugins/noindex/templates/noindex_spezielles_backend.html}</div>
+        </div>
+    </div>
+
+
+</div>
+
+<script src="../plugins/noindex/lib/form_ajax.js" type="text/javascript"></script>
+
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

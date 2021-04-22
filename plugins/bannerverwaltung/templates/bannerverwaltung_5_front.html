@@ -1,0 +1,7 @@
+{foreach item=banner from=$banner_result}
+{if $banner.banner_modulid==5}
+	<div class="banner_modul_5"  id="mod_banner_{$banner.banner_id}">
+	{$banner.banner_code}
+	</div>
+{/if}
+{/foreach}

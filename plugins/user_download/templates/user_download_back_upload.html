@@ -1,0 +1,97 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+
+{include file=head.inc.utf8.html}
+{literal}
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
+    <script src="http://malsup.github.com/jquery.form.js"></script> 
+	<script type="text/javascript">
+        // wait for the DOM to be loaded 
+        $(document).ready(function() { 
+			
+            // bind 'myForm' and provide a simple callback function 
+            $('#upform').ajaxForm({ 
+				target: '#htmlTarget', 
+				success: function() { 
+					$('#htmlTarget').fadeIn('slow'); 
+				document.getElementById('formBtn').disabled = true;
+        } 				
+            }); 
+        }); 
+    </script> 
+	</script>
+{/literal}
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel"> 
+<h1>{$plugin_user_download__title}</h1>
+<div id="HTML5Error"></div>
+<form action="" method="post" enctype="multipart/form-data" name="upform">
+<fieldset id="upfield">
+<legend>{$plugin_user_download__fieldset_upload}</legend>
+{$plugin_user_download__files}: <div id="fileselect"><input type="file" name="up[]" multiple="multiple" /></div> 
+<div id="fallback"></div> <br />
+<input id="formBtn" name="formSubmit" type="submit" class="submit_back_xxl" value="{$plugin_user_download__submit}" />
+</fieldset>
+</form>
+<p>{$plugin.user_download.text_01}</p>
+{literal}
+	<script type="text/javascript">
+		function IsAttributeSupported(tagName, attrName)
+		{
+			var val = false;
+			var input = document.createElement(tagName);
+			if (attrName in input) {
+				val = true;
+			}
+			delete input;
+			return val;
+		}
+		function addInput()
+		{
+			try
+			{
+				inp = document.createElement('<input name="up[]">');
+			}
+			catch(e)
+			{	
+				var inp = document.createElement('input');
+				inp.name ='up[]';
+			}
+			inp.setAttribute('type','file');
+			var br = document.createElement('br');
+			document.getElementById("fileselect").appendChild(br);
+            br = document.createElement('br');
+			document.getElementById("fileselect").appendChild(br);
+			document.getElementById("fileselect").appendChild(inp);
+
+		}
+		if (!IsAttributeSupported("input", "multiple")) {
+			// Do something special here
+            var p = document.createElement('strong');
+			var text = document.createTextNode('{/literal}{$plugin_user_download__HTML5Error}{literal}');
+            p.appendChild(text);
+            document.getElementById('HTML5Error').appendChild(p);
+			var a = document.createElement('a');
+			a.href='javascript:addInput()';
+			a.appendChild(document.createTextNode('{/literal}{$plugin_user_download__fallback_add_input}{literal}'))
+			document.getElementById("fallback").appendChild(a);
+		}
+		
+
+		
+	</script>
+{/literal}
+<div id="htmlTarget"></div>
+</div>
+
+
+</div>
+</div>
+
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

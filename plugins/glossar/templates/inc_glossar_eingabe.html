@@ -1,0 +1,100 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+
+{if $neuereintrag}
+	<h2>{$plugin.glossar.eintrag_neu}</h2>
+{/if}
+{if $altereintrag}
+	<h2>{$plugin.glossar.eintrag_aendern}</h2>
+{/if}
+
+{$plugin.glossar.eintrag_text}
+
+<form action="" method="post">
+	<input type="hidden" name="glossarid" value="{$glossarid}"/>
+	<fieldset>
+		<legend>{$plugin.glossar.glossareintrag}</legend>
+		
+		{*<!--
+		<label for="direkt">{$plugin.glossar.inallen}</label>
+		<input type="checkbox" name="direkt" id="direkt" {$checked}  value="ok"/><br />
+		<br /> 
+		-->*}
+		
+		<label for="glossarname">{$plugin.glossar.eintrag}</label><br />
+		<input type="text" name="glossarname" id="glossarname" value="{$glossarname}" size="40" maxlength="254"/>
+		<br />
+		<label for="glossarname_alt">{$plugin.glossar.eintrag_alt}</label><br />
+		<textarea name="glossarname_alt" id="glossarname_alt" rows="5">{$glossarname_alt}</textarea>
+		<br /><br />
+		
+		{*<!--
+		<label for="glossardaten">{$plugin.glossar.bedeutung}</label><br />
+		<textarea name="glossardaten" id="glossardaten" rows="4" cols="50" >{$glossardaten}</textarea><br />
+		-->*}
+		
+		{include file=artikel_editor.inc.html}
+		
+		<br />
+		
+{*<!--
+		<label for="glossar_gramatinfo">{$plugin.glossar.glossar_gramatinfo}</label><br />
+		<textarea name="glossar_gramatinfo" id="glossar_gramatinfo" rows="4" cols="50" >{$glossar_gramatinfo}</textarea><br />
+		<br />
+		<label for="glossar_abk">{$plugin.glossar.glossar_abk}</label><br />
+		<textarea name="glossar_abk" id="glossar_abk" rows="4" cols="50" >{$glossar_abk}</textarea><br />
+		<br />
+		<label for="glossar_sachgebiet">{$plugin.glossar.glossar_sachgebiet}</label><br />
+		<textarea name="glossar_sachgebiet" id="glossar_sachgebiet" rows="4" cols="50" >{$glossar_sachgebiet}</textarea><br />
+		<br />
+		<label for="glossar_definition">{$plugin.glossar.glossar_definition}</label><br />
+		<textarea name="glossar_definition" id="glossar_definition" rows="4" cols="50" >{$glossar_definition}</textarea><br />
+		<br />
+		<label for="glossar_anwendungsbeispiel">{$plugin.glossar.glossar_anwendungsbeispiel}</label><br />
+		<textarea name="glossar_anwendungsbeispiel" id="glossar_anwendungsbeispiel" rows="4" cols="50" >{$glossar_anwendungsbeispiel}</textarea><br />
+		<br />
+		<label for="glossar_siehe">{$plugin.glossar.glossar_siehe}</label><br />
+		<textarea name="glossar_siehe" id="glossar_siehe" rows="4" cols="50" >{$glossar_siehe}</textarea><br />
+		<br />  
+	</fieldset>
+	<fieldset>
+		<legend>{$plugin.glossar.synonyme}</legend>
+		
+		<label for="glossar_synonym1">{$plugin.glossar.glossar_synonym1}</label><br />
+		<textarea name="glossar_synonym1" id="glossar_synonym1" rows="4" cols="50" >{$glossar_synonym1}</textarea><br />
+		<br />
+		<label for="glossar_synonym2">{$plugin.glossar.glossar_synonym2}</label><br />
+		<textarea name="glossar_synonym2" id="glossar_synonym2" rows="4" cols="50" >{$glossar_synonym2}</textarea><br />
+		<br />
+		<label for="glossar_synonym3">{$plugin.glossar.glossar_synonym3}</label><br />
+		<textarea name="glossar_synonym3" id="glossar_synonym3" rows="4" cols="50" >{$glossar_synonym3}</textarea><br />
+		<br />
+		<label for="glossar_synonym4">{$plugin.glossar.glossar_synonym4}</label><br />
+		<textarea name="glossar_synonym4" id="glossar_synonym4" rows="4" cols="50" >{$glossar_synonym4}</textarea><br />
+		<br />
+		<label for="glossar_synonym5">{$plugin.glossar.glossar_synonym5}</label><br />
+		<textarea name="glossar_synonym5" id="glossar_synonym5" rows="4" cols="50" >{$glossar_synonym5}</textarea><br />
+		<br />
+-->*}
+
+	</fieldset>
+	<fieldset>
+		<!-- Meta Inforamtionen -->
+		<legend>{$plugin.glossar.meta_info}</legend>
+		<!-- Seitentitle-->
+		<label for="metatitel">{$plugin.glossar.meta_titel}</label><br />
+		<input type="text" name="metatitel" id="metatitel" value="{$metatitel}" size="40" maxlength="255"/><br />
+		
+		<!-- Meta Description-->
+		<label for="metadescrip">{$plugin.glossar.meta_besch}</label><br />
+		<textarea name="metadescrip" id="metadescrip" rows="3" cols="50" >{$metadescrip}</textarea><br />
+		<!-- Meta keywords-->
+		<label for="metakey">{$plugin.glossar.meta_key}</label><br />
+		<textarea name="metakey" id="metakey" rows="2" cols="50" >{$metakey}</textarea><br />
+		<br />
+		<input class="submit_back_green"  type="submit" name="submitentry" value="{$plugin.glossar.eintragen}"/>
+		{if $altereintrag}
+			<input class="submit_back_red" style="float:right" type="submit" name="submitdel" value="{$plugin.glossar.loeschen}"/>
+		{/if}
+	</fieldset>
+</form>
+{/if}

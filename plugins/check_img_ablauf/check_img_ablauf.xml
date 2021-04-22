@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<plugin version="5.0">
+
+    <name>Bilder Ablaufdatums-Check</name>
+
+    <beschreibung_de><![CDATA[Dieses Plugin durchsucht den Seiteninhalt, noch bevor er zum Client gesendet wird, nach Bildern, die abgelaufen sind und entfernt diese.]]></beschreibung_de>
+    <beschreibung_en><![CDATA[This plugin parses the generated site for images that are expired and removes them before the output is sent to the user.]]></beschreibung_en>
+
+    <version>1.0</version>
+
+    <!--Verstehe dieses Attribut nicht-->
+    <papooid>201</papooid>
+
+    <datum>15.08.2014</datum>
+
+    <autor>
+        <name>Christoph Zimmer</name>
+    </autor>
+
+    <menue>
+        <eintrag_de>Bilder-Ablaufdatumscheck</eintrag_de>
+        <eintrag_en>Images expiry date check</eintrag_en>
+        <link>plugin:check_img_ablauf/templates/check_img_ablauf_back.html</link>
+    </menue>
+
+    <klasse>
+        <name>check_img_ablauf</name>
+        <datei>check_img_ablauf/lib/check_img_ablauf_class.php</datei>
+    </klasse>
+
+    <messages>check_img_ablauf/messages</messages>
+
+</plugin>

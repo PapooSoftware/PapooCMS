@@ -1,0 +1,86 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		<h1>{$plugin.rating_back.backtitel}</h1>
+		{$plugin.rating_back.kopf3}
+		{if $rating_data}
+			<p>{$plugin.rating_back.number_of_votes}: {$sum_ratings_all}<br />
+			{$plugin.rating_back.number_of_voted_pages}: {$anzahl}<br />
+			{$plugin.rating_back.number_of_stars_total}: {$sum_stars_all}<br />
+			{$plugin.rating_back.total_rating_all_pages}: {$rating_all}</p>
+			{include file="weiter.inc.html}
+			<form method="post" action="#">
+				<table class="rating_table_back">
+					<thead>
+						<tr>
+							<th valign="bottom" id="rating_id">ID</th>
+							<th valign="bottom" id="rating_page" class="left">{$plugin.rating_back.page}</th>
+							<th valign="bottom" id="rating_ratings">{$plugin.rating_back.ratings}</th>
+							<th valign="bottom" id="rating_sum">{$plugin.rating_back.sum}</th>
+							<th valign="bottom" id="rating_result">{$plugin.rating_back.result}</th>
+							<th valign="bottom" id="rating_one_star">*</th>
+							<th valign="bottom" id="rating_two_stars">**</th>
+							<th valign="bottom" id="rating_three_stars">***</th>
+							<th valign="bottom" id="rating_four_stars">****</th>
+							<th valign="bottom" id="rating_five_stars">*****</th>
+							<th valign="bottom" id="rating_del">{$plugin.rating_back.delete}</th>
+							<th valign="bottom" id="rating_suppress">{$plugin.rating_back.dont_show}</th>
+						</tr>
+					</thead>
+					<tbody>
+						{foreach item=dat from=$rating_data}
+							<tr class="rating_row">
+								<td headers="rating_id">
+									{$dat.rating_id}
+								</td>
+								<td headers="rating_article" class="left">
+									<a href="{$dat.uri}" target="blank" title="{$dat.uri}">{$dat.page_title|strip_tags|substr:0:48}{if strlen($dat.page_title) > 47} ...{/if}{if $dat.article_id} ({$dat.article_id}){/if}</a>
+								</td>
+								<td headers="rating_ratings">
+									{$dat.rating_count}
+								</td>
+								<td headers="rating_sum">
+									{$dat.sum_ratings}
+								</td>
+								<td headers="rating_result">
+									{$dat.rating_value}
+								</td>
+								<td headers="rating_one_star" title="*">
+									{$dat.one_star}
+								</td>
+								<td headers="rating_two_stars" title="**">
+									{$dat.two_stars}
+								</td>
+								<td headers="rating_three_stars" title="***">
+									{$dat.three_stars}
+								</td>
+								<td headers="rating_four_stars" title="****">
+									{$dat.four_stars}
+								</td>
+								<td headers="rating_five_stars" title="*****">
+									{$dat.five_stars}
+								</td>
+								<td headers="rating_del">
+									<input type="checkbox" value="1" name="rating_del_id[{$dat.rating_id}]" />
+								</td>
+								<td headers="rating_suppress">
+								{* Auch 0-Wert unbedingt übertragen, sonst kann einmal gesetzter Wert nie 0 werden *}
+									<input type="hidden" value="0" name="rating_suppress_id[{$dat.rating_id}]" />
+									<input type="checkbox" {if $dat.dont_show}checked="checked" {/if}value="1" name="rating_suppress_id[{$dat.rating_id}]" />
+								</td>
+							</tr>
+						{/foreach}
+					</tbody>
+				</table>
+				<p><input type="submit" value="{$plugin.rating_back.save}" name="rating_save" />
+				<b>{$plugin.rating_back.delete_text2}</b></p>
+			</form>
+			{include file="weiter.inc.html}
+		{else}
+			<p>{$plugin.rating_back.no_ratings_yet}</p>
+		{/if}
+	</div>
+	{*<!-- Hier kommt der Fuss rein-->*}
+	{include file=foot.inc.html}
+{/if}

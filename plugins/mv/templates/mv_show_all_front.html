@@ -1,0 +1,22 @@
+<!-- START FLEX -->
+
+<div class="artikel">
+<div class="mv">
+<!--weitere Seiten -->
+{include file="_module_intern/mod_weiter.html} 
+
+<!-- HIer die Spezialliste, man muß hier die Feldernamen kennen. -->
+{foreach item=dat from=$mv_template_all}
+<div class="ergeblistitem">
+	{$dat}
+</div>
+{/foreach}
+
+<!--weitere Seiten -->
+{include file="_module_intern/mod_weiter.html} 
+
+<br /><br />
+</div>
+</div>
+
+<!-- STOP FLEX -->

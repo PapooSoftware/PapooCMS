@@ -1,0 +1,117 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+
+<div class="hidden" id="krakenplugin_is_optimizing_div"> {$message.plugin.krakenplugin.is_optimizing} </div>
+
+
+
+<div class="artikel">
+
+    {if $plugin.krakenplugin.is_optimizing == 2}
+    <div class="message">
+        Optimiervorgang erfolgreich!<br>
+        Optimierte Dateien: {$plugin.krakenplugin.optinfo.num_opt_files}<br>
+        Nicht optimierbare Dateien: {$plugin.krakenplugin.optinfo.num_failed_files}<br>
+        Bereits optimierte Dateien: {$plugin.krakenplugin.optinfo.already_optimized_files}<br>
+        Originale Dateigröße aller Dateien: {$plugin.krakenplugin.optinfo.org_size}<br>
+        Optimierte Dateigröße aller Dateien: {$plugin.krakenplugin.optinfo.kraked_size}<br>
+        Ersparte Bytes: {$plugin.krakenplugin.optinfo.saved_bytes} ({$plugin.krakenplugin.optinfo.saved_bytes_perc}%)<br>
+    </div>
+    {elseif is_string($plugin.krakenplugin.is_optimizing)}
+    <div class="error">
+        Kraken.io meldet einen Fehler: {$plugin.krakenplugin.is_optimizing}
+    </div>
+    {/if}
+
+    {if $plugin.krakenplugin.settings_entered == "ok"}
+    <div class="message"> {$message.plugin.krakenplugin.datasaved} </div>
+    {elseif $plugin.krakenplugin.settings_entered == "missing_code"}
+    <div class="error"> {$message.plugin.krakenplugin.missingcode} </div>
+    {elseif $plugin.krakenplugin.settings_entered == "missing_secret"}
+    <div class="error"> {$message.plugin.krakenplugin.missingsecret} </div>
+    {elseif $plugin.krakenplugin.settings_entered == "missing_code_secret"}
+    <div class="error"> {$message.plugin.krakenplugin.missingcodesecret} </div>
+    {/if}
+
+
+    {$message.plugin.krakenplugin.head}<br />
+    {$message.plugin.krakenplugin.body}<br /><br>
+
+    <form action="#" method="POST">
+        <fieldset>
+            <legend>{$message.plugin.krakenplugin.settings}</legend>
+
+            <label><input type="checkbox" id="kraken_optimize_aktiv" name="kraken_optimize_aktiv" {if $plugin.krakenplugin.current_settings.active}checked{/if} />{$message.plugin.krakenplugin.active}</label>
+
+            <input type="hidden" name="kraken_submitted1" value="1" />
+
+            <label for="kraken_api_code">{$message.plugin.krakenplugin.apicode}</label>
+            <input type="text" id="kraken_api_code" name="kraken_api_code" value="{$plugin.krakenplugin.current_settings.key}" />
+            <label for="kraken_api_secret">{$message.plugin.krakenplugin.apisecret}</label>
+            <input type="text" id="kraken_api_secret" name="kraken_api_secret" value="{$plugin.krakenplugin.current_settings.secret}" />
+
+        </fieldset>
+        <fieldset>
+            <legend>{$message.plugin.krakenplugin.lossy}</legend>
+            <p>{$message.plugin.krakenplugin.lossy_text}</p>
+            <label for="lossless">auswählen</label><br />
+            <select id="lossless" name="lossless" size="1">
+                <option value="1" {if $plugin.krakenplugin.current_settings.lossless == 1}selected="selected"{/if}> Lossy </option>
+                <option value="2" {if $plugin.krakenplugin.current_settings.lossless == 2}selected="selected"{/if} > Lossless </option>
+            </select>
+
+
+        </fieldset>
+        <fieldset>
+            <legend>{$message.plugin.krakenplugin.save}</legend>
+            <input type="submit" class="btn btn-info" value="{$message.plugin.krakenplugin.save}" />
+        </fieldset>
+    </form>
+
+    <form action="#" method="POST">
+        <fieldset>
+            <legend>{$message.plugin.krakenplugin.optimize_all}</legend>
+            {$message.plugin.krakenplugin.optimize_all_text}
+
+            <label><input type="checkbox" id="kraken_optimize_1" name="kraken_optimize_1" />{$message.plugin.krakenplugin.cms}</label>
+
+            {if $plugin.krakenplugin.shop_plugin_exists}
+            <label><input type="checkbox" id="kraken_optimize_2" name="kraken_optimize_2" />{$message.plugin.krakenplugin.shop}</label>
+            {/if}
+            {if $plugin.krakenplugin.galery_plugin_exists}
+            <label><input type="checkbox" id="kraken_optimize_3" name="kraken_optimize_3" />{$message.plugin.krakenplugin.galery}</label>
+            {/if}
+
+            <input type="hidden" name="kraken_submitted2" value="2" />
+
+            {$plugin.krakenplugin.optimiert}
+        </fieldset>
+        <fieldset>
+            <legend>{$message.plugin.krakenplugin.optimize_now}</legend>
+            <input type="submit" class="btn btn-info" value="{$message.plugin.krakenplugin.optimize_now}" onclick="ShowWorkingMessage()">
+
+            {literal}
+            <script>
+                function ShowWorkingMessage()
+                {
+                    // Wird optimiert Nachricht anzeigen
+                    document.getElementById("krakenplugin_is_optimizing_div").className = "message";
+                }
+            </script>
+            {/literal}
+
+        </fieldset>
+    </form>
+
+
+</div>
+
+
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

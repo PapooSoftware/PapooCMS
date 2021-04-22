@@ -1,0 +1,226 @@
+
+.flex-video .two-click-video {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.two-click-video {
+	position: relative;
+	background-color: black;
+	max-width: 100%;
+	width: 420px;
+	height: 315px;
+	clear: left;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	
+}
+.flex-video {
+	padding-bottom: 52.5%;
+	overflow:visible;
+}
+
+.two-click-video .video--preview {
+	width: 100%;
+	max-height: 100%;
+	height:auto;
+	object-fit:cover;
+	filter: blur(0px);
+	transition: filter 0.2s;
+}
+
+.two-click-video .video--play {
+	position: absolute;
+	z-index: 4;
+	margin: auto;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	width: 99%;
+	height: 92%;
+	background: transparent none;
+	border: 0 none transparent;
+	color: rgba(5,5,5,0.6);
+}
+
+.two-click-video .video--play .video-play-icon::after {
+	position: relative;
+	font-family: FontAwesome;
+	font-size: 66px;
+	transition: color 0.2s;
+	content: '\f144';
+}
+
+.two-click-video .video--play .video-play-icon::before {
+	position: absolute;
+	font-family: FontAwesome;
+	font-size: 35px;
+	transition: color 0.2s;
+	color: rgba(255,255,255,0.95);
+	content: '\f04b';
+	margin-left: 19px;
+	margin-top: 16px;
+}
+
+.two-click-video .video--play:hover,
+.two-click-video .video--play:focus,
+.two-click-video .video--play:active {
+	color: rgba(5,5,5,0.95);
+}
+
+.two-click-video.video--youtube .video--play:hover,
+.two-click-video.video--youtube .video--play:focus,
+.two-click-video.video--youtube .video--play:active {
+	color: rgba(255,0,0,0.95);
+}
+
+.two-click-video.video--youtube .video--play::-moz-focus-inner {
+  border: 0;
+}
+
+.two-click-video.video--youtube .video--play .video-play-icon::after {
+	content: '\f16a';
+}
+
+.two-click-video.video--youtube .video--play .video-play-icon::before {
+	font-size: 34px;
+	margin-left: 24px;
+	margin-top: 17px;
+}
+
+/* Titel des Videos (oben links) */
+.two-click-video .video--title {
+	display:block;
+	position: absolute;
+	z-index: 5;
+	margin: auto;
+	height: 3.3em;
+	left: 0em;
+	right: 0em;
+	top: 0ex;
+	padding-top:20px;
+	padding-left:20px;
+	color: white;
+	font-size: 1.29em;
+	font-family: "YouTube Noto", Roboto, Arial, Helvetica, sans-serif;
+	text-align: left;
+	line-height: 1.3;
+	font-weight: 400;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	background-color:#111;
+	opacity: 0.8;
+	filter: alpha(opacity=80); /* For IE8 and earlier */
+	pointer-events: none;
+}
+
+/* Container für Abfrage-Box */
+.two-click-video .video--info-box-container {
+	display: none;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	min-width:500px;
+}
+
+/* Abfrage-Box */
+.two-click-video .video--info-box {
+	display: block;
+	color: white;
+	background-color: black;
+	padding: 1.5em 2.2em 2.2em;
+	z-index: 6;
+	margin: 3%;
+	border: 0px none transparent;
+	border-radius: 1ex;
+	box-shadow: 1px 1px 12px -1px #222;
+	max-width: 35rem;
+	font-family: "Helvetica Neue", "Helvetica", sans-serif;
+}
+
+/* Sonderregeln für Box-bei-Hover */
+.two-click-video.show-box .video--play,
+.two-click-video.single-confirm .video--play {
+	cursor: default;
+}
+
+.two-click-video.show-box .video--info-box-container,
+.two-click-video.single-confirm:hover .video--info-box-container,
+.two-click-video.single-confirm:focus .video--info-box-container {
+	display: flex;
+}
+
+.two-click-video.show-box .video--play > *,
+.two-click-video.single-confirm:hover .video--play > *,
+.two-click-video.single-confirm:focus .video--play > * {
+	display: none;
+}
+
+.two-click-video.show-box .video--preview,
+.two-click-video.single-confirm:hover .video--preview,
+.two-click-video.single-confirm:focus .video--preview {
+	filter: blur(1px) contrast(92%) brightness(105%) grayscale(30%);
+}
+
+
+.two-click-video .video--info-box p {
+	color: inherit !important;
+	text-align: center;
+}
+
+.two-click-video .video--info-box p:last-child {
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
+.two-click-video .video--info-box legend {
+	display: block;
+	position: static;
+	text-align: center;
+	width: 99%;
+	padding-top: 3em;
+	margin: 4em 1ex 0.2ex 1ex;
+	font-size: 1.2rem;
+	font-family: inherit;
+	text-transform: uppercase;
+	background: none transparent;
+	color: inherit;
+}
+
+.two-click-video .video--info-box button {
+	border: 0 none transparent;
+	border-radius: 1.7em;
+	padding: 1.1em;
+	margin: 0;
+	width: 45%;
+	font-size: inherit;
+	font-family: inherit;
+	vertical-align: middle;
+	background: transparent;
+	color: black;
+}
+
+.two-click-video .video--info-box a {
+	color:#fff;
+	text-decoration:underline;
+	}
+.two-click-video .video--info-box .activate-button {
+	margin-right: 5%;
+}
+
+.two-click-video .video--info-box .dismiss-button {
+	color: #1b93b9
+}

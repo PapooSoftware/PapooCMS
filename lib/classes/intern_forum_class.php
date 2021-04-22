@@ -130,7 +130,7 @@ class intern_forum
 			$select = "SELECT forumid FROM " . $this->cms->papoo_forums . " WHERE forumname='" . $this->db->escape($this->checked->forname) . "'";
 			$result = $this->db->get_results($select);
 			// Wenn nicht, dann
-			if (count($result) > 0) {
+			if (is_array($result) && count($result) > 0) {
 				$this->content->template['text'] = $this->content->template['message_16'];
 				$exist = 1;
 			}

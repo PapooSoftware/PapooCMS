@@ -1,0 +1,10 @@
+﻿Update der 3.6.1
+Die Änderungen betreffen die folgenden Einträge:
+Neue Menüpunkte in der Admin
+- Blacklist
+- Layout auf der obersten Ebene
+- Templates mit Unterpunkten
+- CSS und Modulmanager werden zu Layout verschoben
+- Neue Haken in den Stammdaten
+
+Neue Felder in Stammdaten und Sprachdateien für Artikel

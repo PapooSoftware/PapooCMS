@@ -1,0 +1,63 @@
+{if !$altereintrag}
+	<h2>{$plugin.mv.emailadresse}</h2>
+{/if}
+{if $fehler}
+	<div style="color:red; border:1px solid black;">{$fehler}</div>
+{/if}
+<form method="post"  action="#" name="suche" id="formi" style="width:100%" enctype="multipart/form-data">
+	<p>
+		<fieldset>
+			{*<!--  Name der Verwaltung:   -->*}
+			<legend>{$plugin.mv.nameform}</legend>
+			<label for="mv_name">{$plugin.mv.nameeingeb}</label>
+            <br />
+			<input id="mv_name" name="mv_name" value="{$mv_name}" type="text" />
+		</fieldset>
+		{*<!--  Suchmaske:   -->*}
+		<fieldset>
+			<legend>{$plugin.mv.suchmaske}</legend>
+			<label for="mv_suchmaske">
+				<input type="checkbox" id="mv_suchmaske" name="mv_suchmaske" {if $mv_suchmaske==1}checked="checked"{/if} value="1" />
+				{$plugin.mv.mvsuchmaske_ja_nein}
+			</label>
+		</fieldset>
+		{*<!--  Art der Verwaltung:   -->*}
+		<fieldset>
+			<legend>{$plugin.mv.mv_art}</legend>
+			<label for="mv_art">{$plugin.mv.mv_art_waehlen}</label>
+            <br />
+			<select name="mv_art" id="mv_art" size="1">
+				<option value="1"{if $mv_art==1} selected="selected"{/if}>{$plugin.mv.normal}</option>
+				<option value="2"{if $mv_art==2} selected="selected"{/if}>{$plugin.mv.mitglied}</option>
+				<option value="3"{if $mv_art==3} selected="selected"{/if}>{$plugin.mv.kalender_verwaltung}</option>
+			</select>
+		</fieldset>
+		{*<!--  Gruppenverknüpfung der Verwaltung:   -->*}
+		<fieldset><legend>{$plugin.mv.is_group_sys}</legend>
+			<label for="group_name">{$plugin.mv.group_name}</label>
+			<select name="group_name" id="group_name" size="1">
+				<option value="">{$plugin.mv.keine}</option>
+				{foreach item=dat from=$groupies}
+					<option value="{$dat}"{if $dat == $group_name} selected="selected"{/if}>{$dat}</option>
+				{/foreach}
+			</select>
+			<br />
+			<label for="group_id">{$plugin.mv.group_id}</label>
+			<input name="group_id" id="group_id" value="{$group_id}" size="3" maxlength="3" readonly/>
+		</fieldset>
+		<fieldset>
+			<p><strong>{$plugin.mv.verwaltung_change_hint}</strong></p>
+			<input type="hidden" name="mv_id" value="{$mv_id}" />
+			{*<!-- damit der neue Menupunkt auch erscheint, wenn man 2 oder mehr Verwaltungen hintereinander erstellt -->*}
+			<input type="hidden" name="fertig" value="0" />
+			{if !$altereintrag}
+				<input type="submit" class="submit_back_green" value="{$plugin.mv.erstellen}" name="mv_submit" />
+			{else}
+				<input type="submit" class="submit_back_green" value="{$plugin.mv.aendern}" name="mv_submit" />
+				{if $is_admin=="ok"}
+					<input style="float:right" class="submit_back_red" type="submit" name="submitdel" value="{$plugin.mv.loeschen3}"/>
+				{/if}
+            {/if}
+		</fieldset>
+	</p>
+</form>

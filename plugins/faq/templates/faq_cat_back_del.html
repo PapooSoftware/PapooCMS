@@ -1,0 +1,80 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		
+		{include file=../../../plugins/faq/templates/faq_cat_menue.html}
+      
+		<h2 >{$plugin.faq_back.pageheader.cat_delete_select}</h2>
+		{if $fehler1}<div class="error">{$plugin.faq_back.errmsg.incorrect_cat_id}</div>{/if}
+		{if $cat_is_del}<div class="message">{$plugin.faq_back.message.cat_is_del}</div>{/if}
+        <p>{$plugin.faq_back.text.cat_count} {$anzahl_faq_cats}</p>
+{* L�schen Ja / Nein *}
+		{if $delete}
+			<form name="catdel" action="" method="post" id="faq_back_catdel_form">
+				<fieldset>
+					<legend>{$plugin.faq_back.formtext.legend_cats_delete}</legend>
+					<label for="faq_back_meta_title"><strong>{$plugin.faq_back.formtext.label_question_delete}</strong></label><br />
+					<input type="submit" value="{$plugin.faq_back.submit.delete_yes}" name="submit" title="{$plugin.faq_back.submit.delete_yes2}" />
+					<input type="submit" value="{$plugin.faq_back.submit.delete_no}" name="submit" title="{$plugin.faq_back.submit.delete_no2}" />
+					{foreach item=cat_del_id from=$cat_delete}
+						<input type="hidden" value="{$cat_del_id}" name="cat_delete[{$cat_del_id}]" />
+					{/foreach}
+				</fieldset>
+			</form>
+		{else}
+{* Formular anzeigen *}
+			{if $cat_data}
+				<p>{$plugin.faq_back.text.cat_delete_top}</p>
+				<form name="cat_del" action="" method="post" id="cat_del_form">
+					<fieldset>
+						<legend>{$plugin.faq_back.formtext.legend_cats_delete}</legend>
+						<p>{$plugin.faq_back.formtext.label_delete}</p>
+						<ul class="ul_no_style">
+						{foreach item=cats_chkbox from=$cat_data}
+							<li class="width100">
+							<input type="checkbox" id="cat_delete{$cats_chkbox.id}" name="cat_delete[{$cats_chkbox.id}]" value="{$cats_chkbox.id}" {$checkeddel} />
+							<label class="lvl_{$cats_chkbox.level}" for="cat_delete{$cats_chkbox.id}">
+								{$cats_chkbox.catname} (Anzahl FAQs {$cats_chkbox.faq_count})
+								{* verwaist *}
+								{if $cats_chkbox.orphan}
+									<span class="bold_red">{$plugin.faq_back.text.cat_orphan}</span>
+									<input type="hidden" name="cats_orphan[{$cats_chkbox.id}]" value ="1" />
+								{/if}
+							</label>
+							{if $cats_chkbox.parent}
+								<ul id="Catid_{$cats_chkbox.id}" class="ul_no_style">
+							{else}
+								</li>
+							{/if}
+							{if $cats_chkbox.parent && $cats_chkbox.lastchild}
+								{assign var="extra" value=1}
+							{else}
+								{if $cats_chkbox.lastchild}
+									</ul></li>
+									{if $extra}
+										</ul></li>
+										{assign var="extra" value=0}
+									{/if}
+								{/if}
+							{/if}
+						{/foreach}
+						</ul>
+						<img src="../plugins/faq/bilder/arrow.png" width="38" height="22" alt="{$plugin.faq_back.imgtext.cat_select}" title="{$plugin.faq_back.imgtext.cat_select}" />
+						<a href="{$self}&amp;checkalldel=1{if $checkedadd}&amp;checkalladd=1{/if}"
+						title="{$plugin.faq_back.linktext.cat_select_all}">{$plugin.faq_back.linktext.cat_select_all}</a> /
+						<a href="{$self}{if $checkedadd}&amp;checkalladd=1{/if}"
+						title="{$plugin.faq_back.linktext.cat_deselect_all}">{$plugin.faq_back.linktext.cat_deselect_all}</a>
+						<br /><br />
+						<input type="submit" value="{$plugin.faq_back.submit.cat_delete}" name="submit" title="{$plugin.faq_back.imgtext.cat_select}" />
+						<input type="hidden" value="catdelete" name="catdelete" />
+					</fieldset>
+				</form>
+			{/if}
+		{/if}
+        <br />
+	</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

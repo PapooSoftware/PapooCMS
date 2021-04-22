@@ -1,0 +1,21 @@
+<!-- START FLEX -->
+{if $leserechte=="ja"}
+	<div class="artikel">
+		<div class="mv">
+			<!--weitere Seiten -->
+			{include file="_module_intern/mod_weiter.html} 
+			{foreach item=dat from=$mv_template_all}
+				{if $dat}
+					<div class="ergeblistitem">
+						{$dat}
+					</div>
+				{/if}
+			{/foreach}
+			<!--weitere Seiten -->
+			{include file="_module_intern/mod_weiter.html} 
+		</div>
+	</div>
+{else}
+	{$plugin.mv.keine_leserechte}
+{/if}
+<!-- STOP FLEX -->

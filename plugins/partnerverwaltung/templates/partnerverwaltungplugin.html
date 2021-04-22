@@ -1,0 +1,44 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+<h1>{$partner_message_1}</h1>
+{$partner_message_2}<br /><br />
+  <strong>plugin:partnerverwaltung/templates/partnerverwaltung_front.html</strong>
+  {$partner_message_5}
+  <script language="javascript" type="text/javascript" src="./tiny_mce/tiny_mce.js" charset="utf-8"></script>	
+<script language="javascript" type="text/javascript">
+	tinyMCE.init({ldelim}
+	mode : "exact",
+	language : "de",
+	elements : "partnerverwaltung_text_top",
+	{include file=tiny_inc_conf.html}
+	{rdelim} );
+	//function fileBrowserCallBack(field_name, url, type)
+	//{ldelim}
+	// This is where you insert your custom filebrowser logic
+	//	alert("Filebrowser callback: " + field_name + "," + url + "," + type);
+	//{rdelim}
+	</script>
+<form action="" method="post">
+
+<fieldset>
+<legend>{$partner_message_3}</legend>
+<textarea name="partnerverwaltung_text_top" id="partnerverwaltung_text_top" rows="20" cols="80">{$partner_pref_daten.0.partnerverwaltung_text_top}</textarea>
+</fieldset>
+<fieldset>
+<legend>{$partner_message_4}</legend>
+ <input type="submit" class="submit_back_green" name="submitentry" value="{$partner_message_4}"/>
+</fieldset>
+  </form>
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

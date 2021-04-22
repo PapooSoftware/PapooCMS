@@ -1,0 +1,1 @@
+﻿UPDATE `XXX_papoo_news_protocol_user` SET `news_type` ='NL' WHERE `news_type`=1; ##b_dump##

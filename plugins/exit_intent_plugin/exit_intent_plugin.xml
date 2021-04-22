@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<plugin version="4">
+
+    <name>Exit Intent Plugin</name>
+
+    <beschreibung_de><![CDATA[ Plugin zur Verwaltung eines  oder mehrerer  Popups.]]>
+    </beschreibung_de>
+
+    <version>1.0</version>
+    <datum></datum>
+
+    <autor>
+        <name></name>
+        <email></email>
+    </autor>
+
+    <menue>
+        <eintrag_de>Exit Intent Plugin</eintrag_de>
+        <eintrag_en></eintrag_en>
+        <icon>exit_intent_plugin/bilder/menue_icon.gif</icon>
+        <link>plugin:exit_intent_plugin/templates/back.html</link>
+
+        <submenue>
+            <eintrag_de>Neu erstellen</eintrag_de>
+            <eintrag_en></eintrag_en>
+            <icon>exit_intent_plugin/bilder/pic_01.gif</icon>
+            <link>plugin:exit_intent_plugin/templates/back_edit.html</link>
+        </submenue>
+
+
+        <submenue>
+            <eintrag_de>Exit Intent auflisten</eintrag_de>
+            <eintrag_en></eintrag_en>
+            <icon>exit_intent_plugin/bilder/pic_01.gif</icon>
+            <link>plugin:exit_intent_plugin/templates/back_list.html</link>
+        </submenue>
+
+    </menue>
+
+    <klasse>
+        <name>exit_intent_plugin_class</name>
+        <datei>exit_intent_plugin/lib/exit_intent_plugin_class.php</datei>
+    </klasse>
+
+    <datenbank>
+        <installation>exit_intent_plugin/sql/exit_intent_plugin_install.sql</installation>
+        <deinstallation>exit_intent_plugin/sql/exit_intent_plugin_deinstall.sql</deinstallation>
+    </datenbank>
+
+    <messages>exit_intent_plugin/messages</messages>
+    <css>exit_intent_plugin/css/exit_intent_plugin.css</css>
+
+</plugin>

@@ -1,0 +1,24 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+
+<form action="" method="post" name="video" enctype="multipart/form-data" >
+		<input type="hidden" name="filename" value="{$dateiname}" />
+		<input type="hidden" name="exist" value="{$video_id}" />
+		<fieldset>
+			<legend>{$plugin.form_manager.couponserstellen}</legend>
+			<label for="plugin_formmanager_coupons">{$plugin.form_manager.couponslabel} {if $ffcoupons}<span style="color:red;">***</span>{/if}</label><br />
+			<textarea name="plugin_formmanager_coupons" id="plugin_formmanager_coupons" rows="50" cols="35">{$couponlist}</textarea>
+		</fieldset>
+		
+		<fieldset>
+			{*<!-- Eintragen: -->*}
+			<legend>{$message_224}:</legend>
+			{*<!-- In die Datenbank eintragen -->*}
+			<input type="submit" class="submit_back_green_xl" name="submit_coupons" value="{$message_224}" />
+		</fieldset>
+
+		<input type="hidden" name="form_manager_id" value="{$form_manager_id}" />
+		
+</form>
+
+
+{/if}

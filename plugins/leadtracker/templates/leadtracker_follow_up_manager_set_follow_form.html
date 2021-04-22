@@ -1,0 +1,80 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+    {if $is_eingetragen=="ok"}
+    <div class="message">
+        <h2 id="leadtracker_daten_wurden_gespeichert" class="h2" >{$plugin_leadtracker_daten_wurden_gespeichert}</h2>
+    </div>
+    {/if}
+
+
+<h2 id="leadtracker_formular_fr_neuauswahl" class="h2" >{$plugin_leadtracker_formular_fr_neuauswahl}</h2>
+
+ <p id="leadtracker_das_formular_fr_neuauswahl_kommt_dann_zum_tragen_wenn_der" class="h1" >{$plugin_leadtracker_das_formular_fr_neuauswahl_kommt_dann_zum_tragen_wenn_der}</p>
+
+ <p id="leadtracker_kopie_anlegen" class="h1" >{$plugin_leadtracker_kopie_anlegen}</p>
+    <a href="{$follow_up_standard_basis_link}leadtracker/templates/leadtracker_unique_form.html" id="leadtracker_zurck_zur_bersicht_formneu" class="btn button btn-info btn-small " >{$plugin_leadtracker_zurck_zur_bersicht_formneu}</a>
+ <h3 id="leadtracker_formular_verknpfen_neu" class="h3" >{$plugin_leadtracker_formular_verknpfen_neu}</h3>
+
+    <form name="fum_daten" method="post" action="">
+        <input type="hidden" value="{$aktu_form_id}" name="aktu_form_id" />
+ <fieldset>
+<legend>{$plugin_leadtracker_das_formular_auswhlen}</legend>
+     <div class="labdiv"> {$plugin_leadtracker_achtung1}</div>
+<div class="labdiv"><label for="leadtracker_formular_fr_neuauswahl_form">{$plugin_leadtracker_formular_fr_neuauswahl_form}{$plugin_error.leadtracker_formular_fr_neuauswahl_form} </label>
+
+<select name="leadtracker_formular_fr_neuauswahl_form" id="leadtracker_formular_fr_neuauswahl_form" size="1"/>
+    {foreach from=$all_forms item=form key=file_key}
+    <option value="{$form.form_manager_id}"  {if $form.form_manager_id==$aktu_form_id_select}selected="selected"{/if} >{$form.form_manager_name}
+    </option>
+    {/foreach}
+
+    </select>
+</div><br />
+     <div class="labdiv"> <input type="checkbox" name="leadtracker_formular_direkt_neu_laden" value="1" {if $leadtracker_formular_direkt_neu_laden==1}checked="checked"{/if} class="leadtracker_formular_direkt_neu_laden" id="leadtracker_formular_direkt_neu_laden"/><label for="leadtracker_formular_direkt_neu_laden">{$plugin_leadtracker_formular_direkt_neu_laden}{$plugin_error.leadtracker_formular_direkt_neu_laden} </label>
+     </div>
+
+</fieldset>   <fieldset>
+    <legend>{$plugin_leadtracker_daten_speichern_fum_maske}</legend>
+    <input type="submit" class="submit_back" name="submit_neu_form" value="{$plugin_leadtracker_daten_speichern_fum_maske}" />
+</fieldset>
+    <br />
+    </form>
+
+
+
+
+
+
+ #start#
+
+    <span class="ignore"></span>
+    <!-- Der Start Button ist notwendig damit sich das System daran aufh�ngen kann. -->
+    <div class="rapid_form">
+        <form action="" name="" method="POST">
+            <!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+            <input type="hidden" name="tb_name" value="plugin_leadtracker" />
+            <!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+            <input type="hidden" name="php_datei_name" value="leadtracker_class" />
+            <!-- Das Standarpr�fix f�r die Ids -->
+            <input type="hidden" name="praefix" value="leadtracker" />
+            <!-- Das Standarpr�fix f�r die Feldernamen und Namen -->
+            <input type="hidden" name="praefix_spezial" value="leadtracker" />
+            <!-- Das Tool einbinden -->
+            {include file=../../../plugins/devtools/templates/rapid_felder.htm}
+        </form>
+    </div>
+
+
+    {if $is_dev}
+{/if}
+</div>
+
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

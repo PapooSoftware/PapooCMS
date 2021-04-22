@@ -548,10 +548,19 @@ class cache_class
 	 */
 	function cache_speichern()
 	{
+		/** @var cms $cms */
+		global $cms;
+
+		/**
+		 * @var int $spamMode (1) Bild-Zahlenfolge, (2) Rechenaufgabe, (3) Zeichen sortieren, (4) Google reCAPTCHA
+		 */
+		$spamMode = (int)$cms->spamschutz_modus;
+
 		//Sonderfall - was dynamisches mit Spamschutz... nicht cachen
 		global $output;
 
-		if (stristr($output,"Spam-Schutz")) {
+		// Spamfrage für Formulare nicht cachen, au0er es wird Google reCAPTCHA verwendet
+		if (stristr($output,"Spam-Schutz") && $spamMode != 4) {
 			$this->aktiv = false;
 		}
 

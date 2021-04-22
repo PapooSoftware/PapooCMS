@@ -1,0 +1,73 @@
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+<div class="artikel">
+
+ <h2 id="html2pdf_html2pdf" class="h2" >{$plugin_html2pdf_html2pdf}</h2>
+
+ <p id="html2pdf_mit_diesem_plugin_erweitern_sie_das_cms_um_eine_automatische_pdf_erstellung" class="h1" >{$plugin_html2pdf_mit_diesem_plugin_erweitern_sie_das_cms_um_eine_automatische_pdf_erstellung}</p>
+
+ <h3 id="html2pdf_plugin_einrichten" class="h3" >{$plugin_html2pdf_plugin_einrichten}</h3>
+
+ <p id="html2pdf_um_das_plugin_einzurichten" class="h1" >{$plugin_html2pdf_um_das_plugin_einzurichten}</p>
+
+ <h2 id="html2pdf_konfiguration" class="h3" >{$plugin_html2pdf_konfiguration}</h2>
+{if $error_upload}
+<div class="error">{$error_upload}</div>
+{/if}
+{if $message_upload}
+<div class="message">{$message_upload}</div>
+
+{/if}
+<form method="POST" id="formi" action="" enctype="multipart/form-data">
+ <fieldset>
+<legend>{$plugin_html2pdf_das_pdf_template}</legend>
+ <div class="labdiv2"><label for="ext_search_pdf_template_file">{$plugin_html2pdf_pdf_template_file}{$plugin_error.ext_search_pdf_template_file} </label>
+<br />
+<input type="file" accept="pdf/*" name="ext_search_pdf_template_file" value="{$ext_search.0.ext_search_pdf_template_file}" class="ext_search_pdf_template_file" id="ext_search_pdf_template_file"/>
+</div>
+ <p id="html2pdf_derzeit_genutzte_pdf_datei" class="h1" >{$plugin_html2pdf_derzeit_genutzte_pdf_datei}: <a href="../dokumente/upload/{$ext_search.0.ext_search_pdf_template_file |escape:"html"}">{$ext_search.0.ext_search_pdf_template_file |escape:"html"}</a></p>
+
+ </fieldset><fieldset>
+<legend>{$plugin_html2pdf_css_formatierung_des_inhalts}</legend>
+<p id="html2pdf_css_formatierung" class="h1" >{$plugin_html2pdf_css_formatierung}</p>
+<div class="labdiv2"><label for="ext_search_css_daten">{$plugin_html2pdf_css_daten}{$plugin_error.ext_search_css_daten} </label>
+<br />
+<textarea cols="60" rows="12" name="ext_search_css_daten"  class="ext_search_css_daten" id="ext_search_css_daten">{$ext_search.0.ext_search_css_daten|escape:"html"}</textarea>
+</div><br />
+
+ 
+
+
+ <p id="html2pdf_sie_knnen_im_prinzip" class="h1" >{$plugin_html2pdf_sie_knnen_im_prinzip}</p>
+
+</fieldset><fieldset>
+ 	<legend>{$message_70}</legend>
+			<!-- Speichern -->
+	<input  type="submit" class="submit_back_green" value="{$message_70}" name="formSubmit_pdf_settings" />
+			
+		</fieldset>
+    </form>
+
+{if $is_dev}
+ <span class="ignore">  #start#
+<br />
+</span>
+  <!-- Der Start Button ist notwendig damit sich das System daran aufhängen kann. -->
+	 <div class="rapid_form">
+		<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="plugin_html2pdf" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="plugin_html2pdf" />
+		<!-- Das Standarpräfix für die Ids -->
+		<input type="hidden" name="praefix" value="html2pdf" />
+		<!-- Das Standarpräfix für die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="html2pdf" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div>
+{/if}
+  </div>
+
+{include file=foot.inc.html}

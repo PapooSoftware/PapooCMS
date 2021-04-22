@@ -1,0 +1,51 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+{*<!-- Datenbank sicherungen erstellen und einspielen -->*}
+
+<h3>Sicherung der Datenbank erstellen</h3>
+<p> Sie können hier eine Sicherung der Datenbank erstellen, die Sie nach einer Neuinstallation oder zu einem beliebigen andern Zeitpunkt wieder einspielen können.</p>
+<br />
+{*<!-- Um eine Sicherung zu erstellen klicken Sie bitte hier -->*}
+<ul>
+<li>
+<a href="./plugin.php?menuid={$aktive_menuid}&template=partnerverwaltung/templates/partnerverwaltungplugin_dump.html&msgid={$ander.news_user_id}&makedump=1">Jetzt eine Sicherung erstellen</a>
+</li>
+</ul>
+{*<!-- Um eine Sicherung einzuspielen klicken Sie hier -->*}
+<br />
+<h3>Eine Sicherung einspielen</h3>
+{if $is_uploaded}
+<strong style="color:red;">Sicherungs Datei wurde eingespielt.</strong>
+{/if}
+<p>Um eine Sicherung einzuspielen wählen Sie bitte die Sicherungsdatei aus:</p>
+<p><strong style="color:red;">ACHTUNG - Wenn Sie eine Sicherung einspielen werden alle aktuellen Daten unwiederruflich gelöscht. Erstellen Sie daher vorher unbedingt eine Sicherung!</strong></p>
+
+<form method="POST" id="formi" action="./plugin.php?menuid={$aktive_menuid}&template=partnerverwaltung/templates/partnerverwaltungplugin_dump.html&msgid={$ander.news_user_id}&backdump=1" enctype="multipart/form-data">
+  <fieldset>
+{*<!-- Eingabe der Datei:-->*}
+  <legend>{$message_337}</legend>
+{*<!-- Das Dokument:-->*}
+  <label>{$message_338}</label>
+  <input type="file" name="myfile" value="{$myfilename}" />
+  </fieldset>
+
+  <fieldset>
+{*<!-- Datei hochladen:-->*}
+  <legend>{$message_344}</legend>
+{*<!-- hochladen-->*}
+  <input type="submit" class="submit_back" value="{$message_356}" name="restore" />
+  </fieldset>
+</form>
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

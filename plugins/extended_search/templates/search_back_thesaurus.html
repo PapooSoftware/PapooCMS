@@ -1,0 +1,109 @@
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+  <div class="artikel">
+  {if $is_eingetragen=="ok"}
+  <div class="message">  {$plugin_ext_search_thesaurus_ie_aten_wurden_eingetragen}
+
+</div>
+  {/if}
+  {if $is_eingetragen=="del"}
+  <div class="message"> {$plugin_ext_search_thesaurus_er_intrag_wurde_gelscht}
+</div>
+  {/if}
+  
+  {if $is_eingetragen=="no"}
+  <div class="error">
+ {$plugin_ext_search_thesaurus_ie_aten_wurden_nicht_eingetragen}</div>
+  {/if}
+  {if $is_new_thesaurus}
+  
+  <h1 id="ext_search_thesaurus_rstellen__earbeiten_eines_neuen" class="h1" >{$plugin_ext_search_thesaurus_rstellen__earbeiten_eines_neuen}</h1>
+
+ <p id="ext_search_thesaurus_ragen_ie_hier_den" class="h1" >{$plugin_ext_search_thesaurus_ragen_ie_hier_den}</p>
+<form method="post" action="" id="formi" style="width:100%">
+<input type="hidden" name="thes_id" value="{$thes_id}" />
+ <fieldset>
+<legend>{$plugin_ext_search_thesaurus_hesaurus_intrag_bearbeiten}</legend>
+
+<label for="ext_search_thesaurus_uchbegriffe">{$plugin_ext_search_thesaurus_uchbegriffe}{$plugin_error.ext_search_thesaurus_uchbegriffe} </label>
+<br />
+<textarea cols="30" rows="6" name="ext_search_thesaurus_uchbegriffe"  class="ext_search_thesaurus_uchbegriffe" id="ext_search_thesaurus_uchbegriffe">{$ext_search_thesaurus.0.ext_search_thesaurus_uchbegriffe}</textarea>
+<br />
+
+ <label for="ext_search_thesaurus_einten_ie_vielleicht_egriff">{$plugin_ext_search_thesaurus_einten_ie_vielleicht_egriff}{$plugin_error.ext_search_thesaurus_einten_ie_vielleicht_egriff} </label>
+<br />
+<input type="text" name="ext_search_thesaurus_einten_ie_vielleicht_egriff" value="{$ext_search_thesaurus.0.ext_search_thesaurus_einten_ie_vielleicht_egriff}" class="ext_search_thesaurus_einten_ie_vielleicht_egriff" id="ext_search_thesaurus_einten_ie_vielleicht_egriff"/>
+<br />
+
+</fieldset><fieldset>
+ 	<legend>{$message_70}</legend>
+			<!-- Speichern -->
+	<input  type="submit" class="submit_back_green" value="{$message_70}" name="formSubmit_search_thesaurus" />
+			
+		</fieldset>
+     {if $is_edit_thesaurus_now}
+    <fieldset>
+ 	<legend>{$plugin_ext_search_thesaurus_schen}</legend>
+			<!-- Löschen -->
+	<input  type="submit" class="submit_back_red" value="{$plugin_ext_search_thesaurus_schen}" name="formSubmit_delete_thesaurus" />
+			
+		</fieldset>
+    {/if}
+    </form>
+  {else}
+ <h1 id="shop_hesaurus_bearbeiten" class="h1" >{$plugin_shop_hesaurus_bearbeiten}</h1>
+
+ <p id="shop_ier_knnen_ie_die_aten_im_hesaurus" class="h1" >{$plugin_shop_ier_knnen_ie_die_aten_im_hesaurus}</p>
+
+ <a href="{$thesaurus_self_link}&thes_id=new" id="shop_rstellen_ie_hier_einen_neuen_intrag" class="132link" >{$plugin_shop_rstellen_ie_hier_einen_neuen_intrag}</a>
+
+ <h1 id="shop_ier_finden_ie_die_bersicht" class="h1" >{$plugin_shop_ier_finden_ie_die_bersicht}</h1>
+
+  <table style="width:99%;vertical-align:top;">
+  <tr style="vertical-align:top;">
+  <th> {$plugin_shop_esuchtes_ort}</th>
+	<th> {$plugin_shop_einten_ie_vielleicht}</th>
+	<th> {$plugin_shop_earbeiten}</th>
+	</tr>
+ {foreach from=$ext_search_thesaurus item=typ name=xtyp}
+ <tr>
+ <td>{$typ.ext_search_thesaurus_uchbegriffe}</td>
+ <td>{$typ.ext_search_thesaurus_einten_ie_vielleicht_egriff}</td>
+
+ <td><a href="{$thesaurus_self_link}&thes_id={$typ.ext_search_thesaurus_id}">{$typ.ext_search_thesaurus_einten_ie_vielleicht_egriff} - {$plugin_ext_search_thesaurus_bearbete}</a></td>
+ <tr>
+ {/foreach}
+ </table>
+ {/if}
+{if $is_dev}
+
+
+ 
+
+ #start#
+
+ <span class="ignore"></span>
+  <!-- Der Start Button ist notwendig damit sich das System daran aufhängen kann. -->
+	 <div class="rapid_form">
+		<form action="" name="" method="POST">
+		<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+		<input type="hidden" name="tb_name" value="plugin_ext_search_thesaurus" />
+		<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+		<input type="hidden" name="php_datei_name" value="thesaurus" />
+		<!-- Das Standarpräfix für die Ids -->
+		<input type="hidden" name="praefix" value="ext_search_thesaurus" />
+		<!-- Das Standarpräfix für die Feldernamen und Namen -->
+		<input type="hidden" name="praefix_spezial" value="ext_search_thesaurus" />
+		<!-- Das Tool einbinden -->
+			{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+    </form>
+   </div>
+{/if}
+  </div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}

@@ -148,6 +148,11 @@ class pluginintegrator_class
 				$name = $klasse->pluginclass_name;
 				global ${ $name };
 				$plugin_klasse = & ${$name};
+
+				if (is_object($plugin_klasse) == false) {
+					continue;
+				}
+
 				// 2. Test auf function post_papoo()
 				$methoden_array = get_class_methods($plugin_klasse);
 				if (!empty($methoden_array)) {
@@ -177,6 +182,10 @@ class pluginintegrator_class
 				$name = $klasse->pluginclass_name;
 				global ${ $name };
 				$plugin_klasse = & ${$name};
+
+				if (is_object($plugin_klasse) == false) {
+					continue;
+				}
 
 				// 2. Test auf function post_papoo()
 				$methoden_array = get_class_methods($plugin_klasse);
@@ -213,6 +222,10 @@ class pluginintegrator_class
 				$name = $klasse->pluginclass_name;
 				global ${ $name };
 				$plugin_klasse = & ${$name};
+
+				if (is_object($plugin_klasse) == false) {
+					continue;
+				}
 
 				// 2. Test auf function post_papoo()
 				$methoden_array = get_class_methods($plugin_klasse);

@@ -1,0 +1,39 @@
+{if $module_aktiv.mod_mehrstufige_freigabe_informationen OR $handbuchdruck_freigabe_anzeigen}
+	<!-- MODUL: mehrstufige_freigabe_informationen -->
+	<div class="mod_mehrstufige_freigabe_informationen">
+		<table>
+			<tr class="reihe_ueberschrift">
+				<td colspan="3">
+					NUKEM Technologies GmbH
+				</td>
+				
+				<td rowspan="4" style="vertical-align: center;">
+					<img src="{$slash}plugins/mehrstufige_freigabe/bilder/nukem_head.jpg" width="128px" height="18px" />
+				</td>
+			</tr>
+			<tr class="reihe_text1">
+				<td colspan="3">
+					{$plugin_mehrstufige_freigabe_menu_top}
+				</td>
+			</tr>
+			<tr class="reihe_text2">
+				<td colspan="3">
+					{$plugin_mehrstufige_freigabe_menu_aktu}
+				</td>
+			</tr>
+			
+			<tr class="reihe_infos">
+				<td>
+					erstellt: {$plugin_mehrstufige_freigabe_informationen.mf_autor_name} am {$plugin_mehrstufige_freigabe_informationen.mf_autor_date|date_format:"%d.%m.%G"}
+				</td>
+				<td>
+					gepr&uuml;ft: {$plugin_mehrstufige_freigabe_informationen.mf_pruefer_name} am {$plugin_mehrstufige_freigabe_informationen.mf_pruefer_date|date_format:"%d.%m.%G"}
+				</td>
+				<td>
+					freigegeben: {$plugin_mehrstufige_freigabe_informationen.mf_freigeber_name} am {$plugin_mehrstufige_freigabe_informationen.mf_freigeber_date|date_format:"%d.%m.%G"}
+				</td>
+			</tr>
+		</table>
+	</div>
+	<!-- ENDE MODUL: mehrstufige_freigabe_informationen -->
+{/if}

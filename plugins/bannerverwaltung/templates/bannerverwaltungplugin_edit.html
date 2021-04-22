@@ -1,0 +1,77 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+{if $deleted}
+<strong>{$plugin.bannerverwaltung.deleted}</strong>
+{/if}
+
+{if $eintragmakeartikelfertig}
+<!-- Die Artikel wurden durchgeloopt-->
+<h2>{$plugin.bannerverwaltung.eingetragen}</h2>
+{/if}
+{if $exist}
+<!-- Der Eintrag exisitiert schon-->
+<h2 style="color:red;">{$plugin.bannerverwaltung.exist}</h2>
+{/if}
+
+{if $list}
+{$plugin.bannerverwaltung.liste}
+<table style="width:99%;">
+<tr>
+<th>ID</th>
+<th>{$plugin.bannerverwaltung.bannername}</th>
+<th>{$plugin.bannerverwaltung.vom}</th>
+<th>{$plugin.bannerverwaltung.bis}</th>
+<th>{$plugin.bannerverwaltung.bannerviews}</th>
+<th>{$plugin.bannerverwaltung.bannerclicks}</th>
+</tr>
+{foreach item=dat from=$list_dat}
+<tr>
+<td>{$dat.banner_id}</td>
+<td><a href="{$banner_link}{$dat.banner_id}">{$dat.banner_name} {$plugin.bannerverwaltung.bearbeiten}</a></td>
+<td>{$dat.banner_start}</td>
+<td>{$dat.banner_stop}</td>
+<td>{$dat.banner_views}</td>
+<td>{$dat.banner_clicks}</td>
+</tr>
+{/foreach}
+</table>
+{/if}
+{if $edit}
+<!-- Es soll ein neuer Eintrag erstellt werden -->
+{include file=../../../plugins/bannerverwaltung/templates/bannerverwaltungformeingabe.html}
+ {/if}
+
+{if $fragedel}
+<h2>{$plugin.bannerverwaltung.fragedel}</h2>
+<form action="#" method="post">
+
+  <fieldset>
+   <legend>{$plugin.bannerverwaltung.fragedel2}
+    </legend>
+<strong>{$banner_name}</strong>
+
+  <input type="hidden" name="banner_id" value="{$banner_id}"/>
+  <br /><br />
+
+  <br />
+  <input type="submit" class="submit_back_red" name="submitdelecht" value="{$plugin.bannerverwaltung.loeschen}"/>
+
+
+
+
+  </fieldset>
+  </form>
+{/if}
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

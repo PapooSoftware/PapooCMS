@@ -1,0 +1,54 @@
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+<div class="artikel">
+	<div class="mv">
+		{*<!-- {include file=hilfe.html} -->*}
+		<h1>{$plugin.mv.ausgabe_editieren}</h1>
+		{if $user_darf_schreiben}
+			<form action="" method="post" id="formk" enctype="multipart/form-data">
+				{*<!-- Template für die Einzelansicht im Frontend -->*}	
+				<fieldset>
+					<legend>{$plugin.mv.template_one}</legend>
+					<label for="mv_template_one">{$plugin.mv.template_one_label}</label>
+					<br />
+					<textarea cols="60" rows="10" name="mv_template_one" id="mv_template_one" >{$mv_template_one}</textarea>	
+				</fieldset>
+				{*<!-- Template für die Übersicht im Frontend -->*}	
+				<fieldset>
+					<legend>{$plugin.mv.template_all}</legend>
+					<label for="mv_template_all">{$plugin.mv.template_all_label}</label><br />
+					<textarea cols="60" rows="10" name="mv_template_all" id="mv_template_all" >{$mv_template_all}</textarea>
+				</fieldset>
+				{*<!-- Template für die Flex-Verknuepfungsauswahluebersicht -->*}	
+				<fieldset>
+					<legend>{$plugin.mv.edit_template_flex_link_selection}</legend>
+					<label for="mv_template_all">{$plugin.mv.edit_template_flex_link_selection_label}</label><br />
+					<textarea cols="60" rows="10" name="mv_edit_template_flex_link_selection" id="mv_edit_template_flex_link_selection" >{$mv_edit_template_flex_link_selection}</textarea>
+				</fieldset>
+				{*<!-- Template für die Baumansicht (Verknuepfte Flexen) -->*}	
+				<fieldset>
+					<legend>{$plugin.mv.edit_template_flex_link_tree}</legend>
+					<label for="mv_template_all">{$plugin.mv.edit_template_flex_link_tree_label}</label><br />
+					<textarea cols="60" rows="10" name="mv_edit_template_flex_link_tree" id="mv_edit_template_flex_link_tree" >{$mv_edit_template_flex_link_tree}</textarea>
+				</fieldset>
+				{*<!-- Feldernamen und die dazugehörigen Platzhalter -->*}	
+				<fieldset>
+					<legend>{$plugin.mv.template_plain}</legend>
+					<label for="mv_template_plain">{$plugin.mv.template_plain_label}</label>
+					<br />
+					<textarea readonly cols="60" rows="10" name="mv_template_plain" id="mv_template_plain" >{$mv_template_plain}</textarea>
+				</fieldset>
+				{*<!-- Ändern Button mit Hidden Feldern -->*}	
+				<fieldset>
+					<legend>{$plugin.mv.senden}</legend>
+					<input type="hidden" name="mv_id" value="{$mv_id}" />
+					<input type="hidden" name="zweiterunde" value="ja" />
+					<input type="submit" class="submit_back_green" name="mv_submit" value="{$plugin.mv.senden}" />
+				</fieldset>
+			</form>
+		{/if}
+	</div>
+	<!-- Rechte Fehlermeldung-->
+	{include file=rechte.html}
+</div>
+{include file=foot.inc.html}

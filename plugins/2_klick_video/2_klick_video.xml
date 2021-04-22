@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin version="17.12">
+	<name>2-Klick-Video</name>
+	<beschreibung_de><![CDATA[Dieses Plugin ermöglicht es zu verhindern, dass Daten über die Websitebesucher vor einem Klick auf ein eingebettetes Video an den Video-Anbieter gesendet werden. Aktuell werden nur Youtube-Videos unterstützt.]]></beschreibung_de>
+	<beschreibung_en><![CDATA[This plugin allows to avoid sending visitor data to video providers before a click on an embedded video. Currently only Youtube is supported.]]></beschreibung_en>
+	<version>1.1</version>
+	<papooid>95102</papooid>
+	<link>https://www.papoo.de</link>
+	<datum>13.09.2018</datum>
+	<autor>
+		<!-- autor.name: Name des Authors -->
+		<name>Christoph Grenz</name>
+		<!-- autor.kontakt: postalische Kontakt-Informationen des Autors -->
+		<kontakt><![CDATA[Papoo Software & Media GmbH
+	Auguststr. 4
+	53229 Bonn]]></kontakt>
+		<!-- autor.email: eMail-Adresse des Autors -->
+		<email>support@papoo.de</email>
+		<!-- autor.telefon: Telefon-Nummer des Autors -->
+		<telefon>0228 / 280 56 68</telefon>
+	</autor>
+	<menue>
+		<eintrag_de>2-Klick-Video</eintrag_de>
+		<eintrag_en>2-Click-Video</eintrag_en>
+		<icon>2_klick_video/images/icon.png</icon>
+		<link>plugin:2_klick_video/templates/back/index.html</link>
+	</menue>
+	<klasse>
+		<name>TwoClickVideo</name>
+		<datei>2_klick_video/lib/TwoClickVideo.php</datei>
+	</klasse>
+	<datenbank>
+		<installation>2_klick_video/sql/install.sql</installation>
+		<deinstallation>2_klick_video/sql/uninstall.sql</deinstallation>
+	</datenbank>
+	<messages>2_klick_video/messages</messages>
+	<css>2_klick_video/css/2_klick_video.css</css>
+</plugin>

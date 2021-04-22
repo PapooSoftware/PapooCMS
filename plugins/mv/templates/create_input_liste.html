@@ -1,0 +1,197 @@
+<h3>{$plugin.mv.liste_feld_gruppen}</h3>
+{*<!-- <a href="{$link}&mv_id={$mv_id}&reorder_select=ja">reorder</a> -->*}
+<form method="post" action="" id="form1" name="form1">
+	<input type="hidden" name="mv_id" value="{$mv_id}" />
+	<table summary="{$message_707}" style="width:99%;">
+		{foreach item=dat from=$gfliste}
+			<tr style="background:#eee;line-height:20px;height:20px;font-size:150%;">
+				<td colspan="15">
+					<a name="#anker{$dat.mvcform_group_id}"></a>
+					<a href="#top">{$plugin.mv.nach_oben}</a>
+					{if $dat.mvcform_group_id=="xx"}
+				  		{$plugin.mv.grupfield} {$dat.mvcform_group_text}
+					{else}
+			 			<a href="{$link}&mv_id={$mv_id}&grupid={$dat.mvcform_group_id}"> {$plugin.mv.grupfield} {$dat.mvcform_group_text} {$plugin.mv.bearbeiten2}</a>
+					{/if}
+				</td>
+				<td>
+					<input id="mvcform_group_order_id_{$dat.mvcform_group_id}" name="mvcform_group_order_id_{$dat.mvcform_group_id}" type="text" value="{$dat.mvcform_group_order_id}" size="1" />
+				</td>
+				<td>
+					{if $user_darf_schreiben}<input type="submit" name="submitorder_gr_{$dat.mvcform_group_id}" value="{$plugin.mv.send}" />{/if}
+				</td>
+			</tr>
+			{if $dat.felder}
+				<tr>
+					<td></td>
+					<td>{$plugin.mv.admin_pflicht}</td>
+					<td>{$plugin.mv.pflicht}</td>
+					<td>{$plugin.mv.pflicht_back}</td>
+					<td>{$plugin.mv.auflisten}</td>
+					<td>{$plugin.mv.list_front}</td>
+					<td>{$plugin.mv.normaler_user}</td>
+					<td>{$plugin.mv.protokoll}</td>
+					<td>{$plugin.mv.search}</td>
+					<td>{$plugin.mv.search_back}</td>
+					<td>{$plugin.mv.kalender}</td>
+					<td>{$plugin.mv.filter_front}</td>
+					<td>{$plugin.mv.defaulttreeviewname}</td>
+					<td>{$plugin.mv.aktiv}</td>
+					<td title="{$plugin.mv.lang_depend_title}">{$plugin.mv.lang_depend}</td>
+					<td>Feldlabel/Feldname</td>
+					<td>Feldart</td>
+					<td>Orderid</td>
+					<td>{$plugin.mv.anzahl_felder}{$dat.felder|@count}</td>
+				</tr>
+				{foreach item=idat from=$dat.felder}
+					<tr>
+						<td><a href="#anker_row_{$idat.mvcform_id}" onclick="markAllRows({$idat.mvcform_id});">all</a></td>
+						<td>
+							{*<!-- wenn es ein Amdin ist, dann darf er auch die Pflichtwerte ändern -->*}
+							{if $is_admin=="ok"}
+								<input type="checkbox" id="mvcform_admin_must_{$idat.mvcform_id}" name="mvcform_admin_must_{$idat.mvcform_id}"
+								{if $idat.mvcform_admin_must==1} checked="checked"{/if} value="1" />
+							{else}
+								<img src="../plugins/mv/bilder/kasten_{if $idat.mvcform_admin_must==1}mit{else}ohne{/if}.gif" />
+							{/if}
+						</td>
+						<td>
+							<input type="checkbox" id="mvcform_must_{$idat.mvcform_id}" name="mvcform_must_{$idat.mvcform_id}"
+							{if $idat.mvcform_must==1} checked="checked"{/if} value="1" {if $idat.mvcform_type == "galerie"}disabled="true"{/if} />
+						</td>
+						<td>
+							<input type="checkbox" id="mvcform_must_back_{$idat.mvcform_id}" name="mvcform_must_back_{$idat.mvcform_id}"
+							{if $idat.mvcform_must_back==1} checked="checked"{/if} value="1" {if $idat.mvcform_type == "galerie"}disabled="true"{/if} />
+						</td>
+						<td>
+							<input type="checkbox" id="mvcform_list_{$idat.mvcform_id}" name="mvcform_list_{$idat.mvcform_id}"
+							{if $idat.mvcform_list==1} checked="checked"{/if} value="1" />
+						</td>
+						<td>
+							<input type="checkbox" id="mvcform_list_front_{$idat.mvcform_id}" name="mvcform_list_front_{$idat.mvcform_id}"
+							{if $idat.mvcform_list_front==1} checked="checked"{/if} value="1" />
+						</td>
+						<td>
+							<input type="checkbox" id="mvcform_normaler_user_{$idat.mvcform_id}" name="mvcform_normaler_user_{$idat.mvcform_id}"
+							{if $idat.mvcform_normaler_user==1} checked="checked"{/if} value="1" />
+						</td>
+						<td>
+							<input type="checkbox" id="mvcform_protokoll_{$idat.mvcform_id}" name="mvcform_protokoll_{$idat.mvcform_id}"
+							{if $idat.mvcform_protokoll==1} checked="checked"{/if} value="1" />
+						</td>
+						<td>
+							<input type="checkbox" id="mvcform_search_{$idat.mvcform_id}" name="mvcform_search_{$idat.mvcform_id}"
+							{if $idat.mvcform_search==1} checked="checked"{/if} value="1" />
+						</td>
+						<td>
+							<input type="checkbox" id="mvcform_search_back_{$idat.mvcform_id}" name="mvcform_search_back_{$idat.mvcform_id}"
+							{if $idat.mvcform_search_back==1} checked="checked"{/if} value="1" />
+						</td>
+						<td>
+							<input type="checkbox" id="mvcform_kalender_{$idat.mvcform_id}" name="mvcform_kalender_{$idat.mvcform_id}"
+							{if $idat.mvcform_kalender==1} checked="checked"{/if} value="1" />
+						</td>
+						<td>
+							<input type="checkbox" id="mvcform_filter_front_{$idat.mvcform_id}" name="mvcform_filter_front_{$idat.mvcform_id}"
+							{if $idat.mvcform_filter_front==1} checked="checked"{/if} value="1" />
+						</td>
+						<td>
+							<input type="radio" name="mvcform_defaulttreeviewname"
+						   {if $idat.mvcform_defaulttreeviewname==1} checked="checked"{/if} value="{$idat.mvcform_id}" />
+						</td>
+						<td>
+							<input type="checkbox" id="mvcform_aktiv_{$idat.mvcform_id}" name="mvcform_aktiv_{$idat.mvcform_id}"
+							{if $idat.mvcform_aktiv==1} checked="checked"{/if} value="1" />
+						</td>
+						<td align="center">
+							{if $idat.mvcform_name == "Benutzername" OR $idat.mvcform_name == "passwort" OR $idat.mvcform_name == "email"
+								 OR $idat.mvcform_name == "antwortmail" OR $idat.mvcform_name == "newsletter" OR $idat.mvcform_name == "board"
+								 OR $idat.mvcform_name == "active" OR $idat.mvcform_name == "signatur"} N
+							{elseif $idat.mvcform_lang_dependence}
+								N
+							{else}
+								J
+							{/if}
+						</td>
+						<td>Label: <a href="{$link}&mv_id={$mv_id}&feldid={$idat.mvcform_id}">{$idat.mvcform_label|escape:"html"}</a><br />Name: {$idat.mvcform_name}</td>
+						<td>{$idat.mvcform_type}</td>
+						<td>
+							<input id="mvcform_order_id_{$idat.mvcform_id}" name="mvcform_order_id_{$idat.mvcform_id}" type="text" value="{$idat.mvcform_order_id}" size="1" />
+						</td>
+						<td>{if $user_darf_schreiben}<input type="submit" name="submitorder_fld_{$idat.mvcform_id}" value="{$plugin.mv.send}" />{/if}</td>
+					</tr>
+				{/foreach}
+				<tr>
+					<td></td>
+					<td>
+						{if $is_admin=="ok"}
+							<a href="#anker{$dat.mvcform_group_id}" onclick="markAllCols('mvcform_admin_must_', {$dat.ids_anfang}, {$dat.ids_ende});">all</a>
+						{/if}
+					</td>
+					<td><a href="#anker{$dat.mvcform_group_id}" onclick="markAllCols('mvcform_must_', {$dat.ids_anfang}, {$dat.ids_ende});">all</a></td>
+					<td><a href="#anker{$dat.mvcform_group_id}" onclick="markAllCols('mvcform_must_back_', {$dat.ids_anfang}, {$dat.ids_ende});">all</a></td>
+					<td><a href="#anker{$dat.mvcform_group_id}" onclick="markAllCols('mvcform_list_', {$dat.ids_anfang}, {$dat.ids_ende});">all</a></td>
+					<td><a href="#anker{$dat.mvcform_group_id}" onclick="markAllCols('mvcform_list_front_', {$dat.ids_anfang}, {$dat.ids_ende});">all</a></td>
+					<td><a href="#anker{$dat.mvcform_group_id}" onclick="markAllCols('mvcform_normaler_user_', {$dat.ids_anfang}, {$dat.ids_ende});">all</a></td>
+					<td><a href="#anker{$dat.mvcform_group_id}" onclick="markAllCols('mvcform_protokoll_', {$dat.ids_anfang}, {$dat.ids_ende});">all</a></td>
+					<td><a href="#anker{$dat.mvcform_group_id}" onclick="markAllCols('mvcform_search_', {$dat.ids_anfang}, {$dat.ids_ende});">all</a></td>
+					<td><a href="#anker{$dat.mvcform_group_id}" onclick="markAllCols('mvcform_search_back_', {$dat.ids_anfang}, {$dat.ids_ende});">all</a></td>
+					<td><a href="#anker{$dat.mvcform_group_id}" onclick="markAllCols('mvcform_kalender_', {$dat.ids_anfang}, {$dat.ids_ende});">all</a></td>
+					<td><a href="#anker{$dat.mvcform_group_id}" onclick="markAllCols('mvcform_filter_front_', {$dat.ids_anfang}, {$dat.ids_ende});">all</a></td>
+					<td><a href="#anker{$dat.mvcform_group_id}" onclick="markAllCols('mvcform_aktiv_', {$dat.ids_anfang}, {$dat.ids_ende});">all</a></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			{else}
+				<tr>
+					<td colspan="16">{$plugin.mv.no_fields}</td>
+				</tr>
+			{/if}
+		{/foreach}
+	</table>
+	<input type="hidden" id="mv_id" name="mv_id" value="{$mv_id}">
+	{if $user_darf_schreiben}<input type="submit" class="submit_back_big" id="submitmust_or_list" name="submitmust_or_list" value="{$plugin.mv.must_or_list}" />{/if}
+</form>
+{literal}
+	<script type="text/javascript" charset="iso-8859-1">
+		function markAllRows(id)
+		{
+			kasten = new Array({/literal}{if $is_admin=="ok"}"mvcform_admin_must_", {/if}{literal}"mvcform_must_", "mvcform_must_back_", "mvcform_list_", "mvcform_list_front_", "mvcform_normaler_user_", "mvcform_protokoll_", "mvcform_search_", "mvcform_search_back_", "mvcform_kalender_", "mvcform_aktiv_");
+			
+			if(document.getElementById(kasten[0] + id).checked==true)
+			{
+				hin_und_her = false
+			}
+			else
+			{
+				hin_und_her = true;
+			}
+			for(var y=0; y<{/literal}{if $is_admin=="ok"}11{else}10{/if}{literal}; y++)
+			{
+				document.getElementById(kasten[y] + id ).checked = hin_und_her
+			}			
+		}
+		function markAllCols(mvcform_id, anfang, ende) 
+		{
+			if(document.getElementById(mvcform_id + anfang).checked==true)
+			{
+				hin_und_her = false
+			}
+			else
+			{
+				hin_und_her = true;
+			}
+			for(var i = anfang; i<(ende+1); i++) 
+			{
+				id = mvcform_id + i;
+				checkbox = document.getElementById(id);
+				if(checkbox)
+				{
+					checkbox.checked = hin_und_her;		
+				}
+			}
+		}
+	</script>
+{/literal}

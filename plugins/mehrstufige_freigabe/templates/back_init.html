@@ -1,0 +1,151 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+	
+	
+	<h3>Initialiserung der Freigabe</h3>
+	
+	{if $plugin.mehrstufige_freigabe.template_weiche == "start" OR $plugin.mehrstufige_freigabe.template_weiche == "pruefung"}
+		<p>
+			Zuweisung von Freigabe-Infomation f&uuml;r Artikel bei denen noch keine oder nur unvollst&auml;ndige Freigabe-Informationen vorhanden sind.
+			Unvollst&auml;ndige Freigabe-Informationen werden durch die hier angegebenen Werte erg&auml;nzt. Bereits eingegebene Informationen werden also nicht &uuml;berschrieben.
+		</p>
+		<p>
+			<strong>
+				Dieser Vorgang kann nicht R&uuml;ckg&auml;ngig gemacht werden !!!
+			</strong>
+		</p>
+	{/if}
+	
+	{if $plugin.mehrstufige_freigabe.template_weiche == "start"}
+		<form method="post" action="">
+			<input type="hidden" name="action" value="mfi_init" />
+			<fieldset>
+				<legend>Einstellungen der mehrstufigen Freigabe:</legend>
+				
+				{if $plugin.mehrstufige_freigabe.error.mfi_autor_userid}
+					<p style="color: #FF0000; font-weight: bold;">W&auml;hlen Sie einen Autor aus.</p>
+				{/if}
+				{if $plugin.mehrstufige_freigabe.error.mfi_autor_datum}
+					<p style="color: #FF0000; font-weight: bold;">Korrigieren Sie das Autoren-Datum.</p>
+				{/if}
+				<label for="mfi_autor_userid">Autor: </label>
+				<select id="mfi_autor_userid" name="mfi_autor_userid">
+					<option value="0">.. bitte Benutzer w&auml;hlen</option>
+					{foreach item=user from=$plugin.mehrstufige_freigabe.user}
+						<option value="{$user.userid}" {if $plugin.mehrstufige_freigabe.init.mfi_autor_userid==$user.userid}selected="selected"{/if}>
+							{$user.username} (ID: {$user.userid})
+						</option>
+					{/foreach}
+				</select>
+				Datum (TT/MM/JJJJ):
+				<input type="text" name="mfi_autor_tag" id="mfi_autor_tag" size="3" maxlength="2" value='{$plugin.mehrstufige_freigabe.init.mfi_autor_tag|escape:"html"}' />
+				<input type="text" name="mfi_autor_monat" id="mfi_autor_monat" size="3" maxlength="2" value='{$plugin.mehrstufige_freigabe.init.mfi_autor_monat|escape:"html"}' />
+				<input type="text" name="mfi_autor_jahr" id="mfi_autor_jahr" size="5" maxlength="4" value='{$plugin.mehrstufige_freigabe.init.mfi_autor_jahr|escape:"html"}' />
+				<br />
+				<br />
+				
+				{if $plugin.mehrstufige_freigabe.error.mfi_pruefer_userid}
+					<p style="color: #FF0000; font-weight: bold;">W&auml;hlen Sie einen Pr&uuml;fer aus.</p>
+				{/if}
+				{if $plugin.mehrstufige_freigabe.error.mfi_pruefer_datum}
+					<p style="color: #FF0000; font-weight: bold;">Korrigieren Sie das Pr&uuml;f-Datum.</p>
+				{/if}
+				<label for="mfi_pruefer_userid">Pr&uuml;fer: </label>
+				<select id="mfi_pruefer_userid" name="mfi_pruefer_userid">
+					<option value="0">.. bitte Benutzer w&auml;hlen</option>
+					{foreach item=user from=$plugin.mehrstufige_freigabe.user}
+						<option value="{$user.userid}" {if $plugin.mehrstufige_freigabe.init.mfi_pruefer_userid==$user.userid}selected="selected"{/if}>
+							{$user.username} (ID: {$user.userid})
+						</option>
+					{/foreach}
+				</select>
+				Datum (TT/MM/JJJJ):
+				<input type="text" name="mfi_pruefer_tag" id="mfi_pruefer_tag" size="3" maxlength="2" value='{$plugin.mehrstufige_freigabe.init.mfi_pruefer_tag|escape:"html"}' />
+				<input type="text" name="mfi_pruefer_monat" id="mfi_pruefer_monat" size="3" maxlength="2" value='{$plugin.mehrstufige_freigabe.init.mfi_pruefer_monat|escape:"html"}' />
+				<input type="text" name="mfi_pruefer_jahr" id="mfi_pruefer_jahr" size="5" maxlength="4" value='{$plugin.mehrstufige_freigabe.init.mfi_pruefer_jahr|escape:"html"}' />
+				<br />
+				<br />
+				
+				{if $plugin.mehrstufige_freigabe.error.mfi_freigeber_userid}
+					<p style="color: #FF0000; font-weight: bold;">W&auml;hlen Sie einen Freigeber aus.</p>
+				{/if}
+				{if $plugin.mehrstufige_freigabe.error.mfi_freigeber_datum}
+					<p style="color: #FF0000; font-weight: bold;">Korrigieren Sie das Freigabe-Datum.</p>
+				{/if}
+				<label for="mfi_freigeber_userid">Freigeber: </label>
+				<select id="mfi_freigeber_userid" name="mfi_freigeber_userid">
+					<option value="0">.. bitte Benutzer w&auml;hlen</option>
+					{foreach item=user from=$plugin.mehrstufige_freigabe.user}
+						<option value="{$user.userid}" {if $plugin.mehrstufige_freigabe.init.mfi_freigeber_userid==$user.userid}selected="selected"{/if}>
+							{$user.username} (ID: {$user.userid})
+						</option>
+					{/foreach}
+				</select>
+				Datum (TT/MM/JJJJ):
+				<input type="text" name="mfi_freigeber_tag" id="mfi_freigeber_tag" size="3" maxlength="2" value='{$plugin.mehrstufige_freigabe.init.mfi_freigeber_tag|escape:"html"}' />
+				<input type="text" name="mfi_freigeber_monat" id="mfi_freigeber_monat" size="3" maxlength="2" value='{$plugin.mehrstufige_freigabe.init.mfi_freigeber_monat|escape:"html"}' />
+				<input type="text" name="mfi_freigeber_jahr" id="mfi_freigeber_jahr" size="5" maxlength="4" value='{$plugin.mehrstufige_freigabe.init.mfi_freigeber_jahr|escape:"html"}' />
+				<br />
+				<br />
+				
+				<br />
+				<input type="submit" name="submit" value=".. initialisieren" />
+			</fieldset>
+		</form>
+	{/if}
+	
+	{if $plugin.mehrstufige_freigabe.template_weiche == "pruefung"}
+		<form method="post" action="">
+			<input type="hidden" name="action" value="mfi_init_do" />
+			<fieldset>
+				<legend>Krontrolle Ihrer Angaben:</legend>
+				
+				<input type="hidden" name="mfi_autor_userid" id="mfi_autor_userid" value='{$plugin.mehrstufige_freigabe.init.mfi_autor_userid|escape:"html"}' />
+				<input type="hidden" name="mfi_autor_tag" id="mfi_autor_tag" value='{$plugin.mehrstufige_freigabe.init.mfi_autor_tag|escape:"html"}' />
+				<input type="hidden" name="mfi_autor_monat" id="mfi_autor_monat" value='{$plugin.mehrstufige_freigabe.init.mfi_autor_monat|escape:"html"}' />
+				<input type="hidden" name="mfi_autor_jahr" id="mfi_autor_jahr" value='{$plugin.mehrstufige_freigabe.init.mfi_autor_jahr|escape:"html"}' />
+				Autor: {$plugin.mehrstufige_freigabe.init.mfi_autor_username} (ID: {$plugin.mehrstufige_freigabe.init.mfi_autor_userid});
+				Datum: {$plugin.mehrstufige_freigabe.init.mfi_autor_datum}
+				<br />
+				<br />
+				<input type="hidden" name="mfi_pruefer_userid" id="mfi_pruefer_userid" value='{$plugin.mehrstufige_freigabe.init.mfi_pruefer_userid|escape:"html"}' />
+				<input type="hidden" name="mfi_pruefer_tag" id="mfi_pruefer_tag" value='{$plugin.mehrstufige_freigabe.init.mfi_pruefer_tag|escape:"html"}' />
+				<input type="hidden" name="mfi_pruefer_monat" id="mfi_pruefer_monat" value='{$plugin.mehrstufige_freigabe.init.mfi_pruefer_monat|escape:"html"}' />
+				<input type="hidden" name="mfi_pruefer_jahr" id="mfi_pruefer_jahr" value='{$plugin.mehrstufige_freigabe.init.mfi_pruefer_jahr|escape:"html"}' />
+				Pr&uuml;fer: {$plugin.mehrstufige_freigabe.init.mfi_pruefer_username} (ID: {$plugin.mehrstufige_freigabe.init.mfi_pruefer_userid});
+				Datum: {$plugin.mehrstufige_freigabe.init.mfi_pruefer_datum}
+				<br />
+				<br />
+				<input type="hidden" name="mfi_freigeber_userid" id="mfi_freigeber_userid" value='{$plugin.mehrstufige_freigabe.init.mfi_freigeber_userid|escape:"html"}' />
+				<input type="hidden" name="mfi_freigeber_tag" id="mfi_freigeber_tag" value='{$plugin.mehrstufige_freigabe.init.mfi_freigeber_tag|escape:"html"}' />
+				<input type="hidden" name="mfi_freigeber_monat" id="mfi_freigeber_monat" value='{$plugin.mehrstufige_freigabe.init.mfi_freigeber_monat|escape:"html"}' />
+				<input type="hidden" name="mfi_freigeber_jahr" id="mfi_freigeber_jahr" value='{$plugin.mehrstufige_freigabe.init.mfi_freigeber_jahr|escape:"html"}' />
+				Freigeber: {$plugin.mehrstufige_freigabe.init.mfi_freigeber_username} (ID: {$plugin.mehrstufige_freigabe.init.mfi_freigeber_userid});
+				Datum: {$plugin.mehrstufige_freigabe.init.mfi_freigeber_datum}
+				<br />
+				<br />
+				
+				<br />
+				<input type="submit" name="submit" value=".. initialisieren" />
+			</fieldset>
+		</form>
+	{/if}
+	
+	{if $plugin.mehrstufige_freigabe.template_weiche == "fertig"}
+		<p>
+			Freigabe-Informationen wurden initialisiert.
+		</p>
+	{/if}
+	
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

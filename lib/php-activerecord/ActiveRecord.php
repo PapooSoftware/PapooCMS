@@ -38,7 +38,7 @@ function activerecord_autoload($class_name)
 		foreach ($namespaces as $directory)
 			$directories[] = $directory;
 
-		$namespace_directory = DIRECTORY_SEPARATOR . implode($directories, DIRECTORY_SEPARATOR);
+		$namespace_directory = DIRECTORY_SEPARATOR . implode(DIRECTORY_SEPARATOR, $directories);
 	}
 	$paths = count($paths) ? $paths : array('.');
 	

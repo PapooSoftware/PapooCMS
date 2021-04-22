@@ -1,0 +1,131 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		
+		{include file=../../../plugins/faq/templates/faq_cat_menue.html}
+{* Daten einer einzelnen Kategorie zum Bearbeiten anzeigen *}
+		<h2 >{$plugin.faq_back.pageheader.cat_edit}</h2>
+		<p>{$plugin.faq_back.text.cat_count} {$anzahl_faq_cats}</p>
+		{if $fehler2}<div class="error">{$plugin.faq_back.errmsg.incorrect_cat_id}</div>{/if}
+		{if $fehler3}<div class="error">{$plugin.faq_back.errmsg.move_gleich}</div>{/if}
+		{if $fehler4}<div class="error">{$plugin.faq_back.errmsg.move_gleich2}</div>{/if}
+		{if $cat_edit_id}
+{* Nur eine Kategorie bearbeiten *}
+			{if $cat_is_edit}<div class="message">{$plugin.faq_back.message.cat_is_edit}</div>{/if}
+			<form action="" method="post">
+				<fieldset>
+					<legend>{$plugin.faq_back.formtext.legend_cat_edit} {$cat_edit_name_name}</legend>
+					<label for="cat_edit_sel">{$plugin.faq_back.formtext.label_cat_edit_sel}</label><br />
+					<select name="cat_move_to_id" size="1" id="cat_edit_sel" >
+						<option value="0"{if $cat_0_selected_from} selected="selected" {/if}>{$plugin.faq_back.formtext.option_cat_edit_maincat}</option>
+
+						{foreach item=catedit from=$cat_data}
+							<option value="{$catedit.id}" {if $catedit.cat_selected} selected="selected" {/if}
+							{* verwaist *}
+							{if $catedit.orphan}
+								class="lvl_{$catedit.level} bold_red">{$catedit.catname} {$plugin.faq_back.text.cat_orphan}
+							{else}
+								class="lvl_{$catedit.level}">{$catedit.catname}
+							{/if}
+							</option>
+						{/foreach}
+					</select>
+					<input type="hidden" name="cat_edit_id" value="{$cat_edit_id}" />
+					<input type="hidden" name="cat_move_from_id" value="{$cat_move_from_id}" />
+					<br />
+					<label for="cat_edit_name_id">{$plugin.faq_back.formtext.label_cat_name}</label><br />
+					<input name="cat_edit_name_name" id="cat_edit_name_id" accept="" type="text" size="30" value="{$cat_edit_name_name|escape:"html"}" />
+					{if $fehler1==1} <span class="errmsg">{$plugin.faq_back.errmsg.catname_fehlt}</span>{/if}<br />
+					<label for="cat_edit_descript_id">{$plugin.faq_back.formtext.label_cat_descript}</label><br />
+					<textarea name="cat_edit_descript_name" id="cat_edit_descript_id" class="faq_new_edit_textarea" cols="3" rows="5">{$cat_edit_descript_name|escape:"html"}</textarea><br />
+					<input name="submit" value="{$plugin.faq_back.submit.cat_edit}" type="submit" title="{$plugin.faq_back.submit.cat_edit}" />
+				</fieldset>
+			</form>
+		{else}
+{* Daten der zuvor ausgew�hlten Kategorien zum Bearbeiten anzeigen *}
+			{if $cats_data}
+				{* Message nur nach dem Speichern ausgeben *}
+				{if $form_submitted}
+					{if !$fehler1}
+						<div class="message">{$plugin.faq_back.message.cat_is_edit}</div>
+					{else}
+						<div class="error">{$plugin.faq_back.message.cat_not_edit}</div>
+					{/if}
+				{/if}
+				<form action="" method="post">
+					{foreach item=cats_forms from=$cats_data}
+						<fieldset>
+							<legend>{$plugin.faq_back.formtext.legend_cat_edit} {$cats_forms.cat_edit_name_name}</legend>
+							<label for="cat_edit_name_id_{$cats_forms.id}">{$plugin.faq_back.formtext.label_cat_name}</label><br />
+							<input name="cat_edit_name_name[{$cats_forms.id}]" id="cat_edit_name_id_{$cats_forms.id}" accept="" type="text" size="30" value="{$cats_forms.cat_edit_name_name|escape:"html"}" />
+							{* Message nur nach dem Speichern ausgeben *}
+							{if $form_submitted}
+								{if $cats_forms.fehler1==1}
+									<span class="errmsg">{$plugin.faq_back.errmsg.catname_fehlt}</span>
+								{else}
+									<span>Kategoriedaten gespeichert</span>
+								{/if}
+							{/if}
+							<br />
+							<label for="cat_edit_descript_id_{$cats_forms.id}">{$plugin.faq_back.formtext.label_cat_descript}</label><br />
+							<textarea name="cat_edit_descript_name[{$cats_forms.id}]" id="cat_edit_descript_id_{$cats_forms.id}" class="faq_new_edit_textarea" cols="3" rows="5">{$cats_forms.cat_edit_descript_name|escape:"html"}</textarea>
+							<input type="hidden" name="cats_edit_id[{$cats_forms.id}]" value="{$cats_forms.id}" /><br />
+							<input name="submit" value="{$plugin.faq_back.submit.cat_edit}" type="submit" title="{$plugin.faq_back.submit.cat_edit}" />
+						</fieldset>
+					{/foreach}
+				</form>
+			{else}
+				{if $cat_data}
+					{* Kategorieauswahl f�r die nachfolgende Bearbeitung *}
+					<h2 class="clear_left">{$plugin.faq_back.pageheader.cat_edit_select}</h2>
+					<form name="cat_edit_select" action="" method="post" id="cat_edit_select_form">
+						<fieldset>
+							<legend>{$plugin.faq_back.formtext.legend_cats_edit_select}</legend>
+							<p>{$plugin.faq_back.formtext.label_edit}</p>
+							<ul class="ul_no_style">
+							{foreach item=cats_chkbox from=$cat_data}
+								<li class="width100">
+									<input type="checkbox" id="cat_edit_select{$cats_chkbox.id}" name="cat_edit_select[{$cats_chkbox.id}]" value="{$cats_chkbox.id}" {$checkeddel} />
+									<label class="lvl_{$cats_chkbox.level}" for="cat_edit_select{$cats_chkbox.id}">		
+										{$cats_chkbox.catname} (Anzahl FAQs {$cats_chkbox.faq_count})
+										{* verwaist *}
+										{if $cats_chkbox.orphan}
+											<span class="bold_red">{$plugin.faq_back.text.cat_orphan}</span>
+										{/if}
+									</label>
+								{if $cats_chkbox.parent}
+									<ul id="Catid_{$cats_chkbox.id}" class="ul_no_style">
+								{else}
+									</li>
+								{/if}
+								{if $cats_chkbox.parent && $cats_chkbox.lastchild}
+									{assign var="extra" value=1}
+								{else}
+									{if $cats_chkbox.lastchild}
+										</ul></li>
+										{if $extra}
+											</ul></li>
+											{assign var="extra" value=0}
+										{/if}
+									{/if}
+								{/if}
+							{/foreach}
+							</ul>
+							<img src="../plugins/faq/bilder/arrow.png" width="38" height="22" alt="{$plugin.faq_back.imgtext.cat_select}" title="{$plugin.faq_back.imgtext.cat_select}" />
+							<a href="{$self}&amp;checkalldel=1{if $checkedadd}&amp;checkalladd=1{/if}"
+							title="{$plugin.faq_back.linktext.cat_select_all}">{$plugin.faq_back.linktext.cat_select_all}</a> /
+							<a href="{$self}{if $checkedadd}&amp;checkalladd=1{/if}"
+							title="{$plugin.faq_back.linktext.cat_deselect_all}">{$plugin.faq_back.linktext.cat_deselect_all}</a>
+							<br /><br />
+							<input type="submit" value="{$plugin.faq_back.submit.cat_edit_select}" name="submit" title="{$plugin.faq_back.submit.cat_edit_select}" />
+						</fieldset>
+					</form>
+				{/if}
+			{/if}
+		{/if}
+	</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

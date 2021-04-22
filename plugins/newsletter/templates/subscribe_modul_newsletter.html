@@ -1,0 +1,17 @@
+<div class="modul" id="modulmod_newsletter">
+	<div class="mod_title"><h3>{$message_20018_a}</h3></div>
+	<div class="inner_mod">
+		<form method="post" action="">
+			<fieldset>
+				<legend>{$news_front4}</legend>
+				{*<!--  Emailadresse:  -->*}
+				<label for="modulnewsletter_neuemail"> {$message_2100} * {if $table.fehltemail}{$news_front15}{/if}</label>
+				<input type="text" class="inpt" id="modulnewsletter_neuemail" name="newsletter_neuemail" value="{$message_20014}" size="20" maxlength="50" onblur="if(this.value=='')this.value='{$message_20014|escape:"html"}';" onfocus="if(this.value=='{$message_20014}')this.value='';" />
+				<input type="hidden" value="new_user" name="news_message" />
+				{*<!--  Vorbelegung: Neuen Abonnenten immer der NL Standard Gruppe zuordnen  -->*}
+				<input type="hidden" name="nlgruppe[1]" id="nlgruppe_1" value="1" />
+				<input type="submit" class="newssenden" value="{$message_20020}" name="loginnow" />
+			</fieldset>
+		</form>
+	</div>
+</div>

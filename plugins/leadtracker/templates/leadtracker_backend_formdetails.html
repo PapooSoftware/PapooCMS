@@ -1,0 +1,82 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+
+{if !$STANDALONE}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+{else}
+{include file=../../../plugins/leadtracker/templates/standalone_head.html}
+{/if}
+
+<style type="text/css">{literal}
+	table tr.placeholder td {
+		text-align: center;
+	}
+{/literal}</style>
+
+{if !$STANDALONE}
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+{/if}
+
+<div class="artikel">
+	{if !$STANDALONE}<h2>{$plugin_leadtracker_statistics_ueberschrift}</h2>{/if}
+	<a href="{$template_base_path}leadtracker_backend_details.html&amp;cookie_id={$cookie_id|escape}&amp;tab=forms" class="btn btn-primary pull-right" rel="up">{$plugin_leadtracker_statistics_zurueck}</a>
+	<h3>{$plugin_leadtracker_statistics_formdetails}</h3>
+	
+	{if $lead}
+	<p>{$lead.datum|date_format:$plugin_leadtracker_statistics_date_format} &ndash; {$lead.ip_sender}</p>
+	{/if}
+	
+	<table>
+		<col style="width:30%" /><col />
+		<thead>
+			<tr><th>{$plugin_leadtracker_statistics_feldname}</th><th>{$plugin_leadtracker_statistics_feldwert}</th></tr>
+		</thead>
+		<tbody>
+			{if !$formdata}
+			<tr class="placeholder"><td colspan="2">{$plugin_leadtracker_statistics_keine_eintraege}</td></tr>
+			{else}
+			{foreach from=$formdata item=item}
+			<tr>
+				{if $item.label !== null}
+				<td title="{$item.name|escape} ({$item.type|escape})">{$item.label|escape}</td>
+				{else}
+				<td title="{$item.name|escape} ({$item.type|escape})">{$item.name|escape}</td>
+				{/if}
+				<td>{$item.content|escape}</td>
+			</tr>
+			{/foreach}
+			{/if}
+		</tbody>
+	</table>
+	
+	<h4>{$plugin_leadtracker_statistics_metadaten}</h4>
+	<table>
+		<col style="width:30%" /><col />
+		<thead>
+			<th>{$plugin_leadtracker_statistics_schluessel}</th><th>{$plugin_leadtracker_statistics_wert}</th></tr>
+		</thead>
+		<tbody>
+			{if !$metadata}
+			<tr class="placeholder"><td colspan="2">{$plugin_leadtracker_statistics_keine_eintraege}</td></tr>
+			{else}
+			{foreach from=$metadata item=item}
+			<tr>
+				<td>{$item.name|escape}</td>
+				<td>{$item.content|escape}</td>
+			</tr>
+			{/foreach}
+			{/if}
+		</tbody>
+	</table>
+</div>
+
+
+{if !$STANDALONE}
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{else}
+{include file=../../../plugins/leadtracker/templates/standalone_foot.html}
+{/if}
+
+{/if}

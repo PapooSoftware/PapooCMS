@@ -1,0 +1,98 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		
+		{if $case2} <!-- Newsletter Einstellungen  -->
+			<h2>{$message_20005}</h2>
+			<form name="artikel" action="" method="post" id="formi">
+				<fieldset style="padding-bottom:15px">
+					<legend style="margin-bottom:6px">{$message_20016a}</legend> {*<!-- Adresse mit der gesendet wird -->*}
+					<label for="email">{$message_20016}</label>
+					<br />
+					<input type="text" id="email" name="email" size="30" value="{$email}" title="" style="margin-bottom:10px" />
+					<br />
+					<label for="email_name">{$message_20017}</label>
+					<br />
+					<input type="text" id="email_name" name="email_name" size="30" value="{$email_name}" title="" style="margin-bottom:10px" />
+					<br />
+					<label for="faq_back_orderid_stepsize">{$plugin.newsletter.label.timeout}</label>
+					<br />
+					<input type="text" name="mails_per_step" id="mails_per_step" size="8" value="{$mails_per_step}" />
+					<br />
+					<br /><div class="clearfix"></div>
+					<input type="checkbox" id="erw" name="erw" value="1" {$checkederw} />
+					<label for="erw">{$plugin.newsletter.userdaten}</label>
+					<br />
+					<input type="checkbox" id="news_sprachwahl" name="news_sprachwahl" value="1" {$checkednews_sprachwahl} />
+					<label for="news_sprachwahl">{$plugin.newsletter.sprachwahl}</label>
+					<br />
+					<input type="checkbox" id="news_anzeig_message" name="news_anzeig_message" value="1" {$checkednews_anzeig_message} />
+					<label for="news_anzeig_message">{$plugin.newsletter.text}</label>
+					<br />
+					<input type="checkbox" id="news_html" name="news_html" value="1" {$checkednews_html} />
+					<label for="news_html">{$plugin.newsletter.html_mails}</label>
+					<br />
+					<input type="checkbox" id="wyswig" name="wyswig" value="1" {$checkedwyswig} />
+					<label for="wyswig">{$plugin.newsletter.editor}</label>
+					<br />
+					<br />
+					<input type="checkbox" id="allow_delete" name="allow_delete" value="1" {$checked_allow_delete} />
+					<label for="allow_delete">{$plugin.newsletter.allow_delete}</label>
+					<br />
+				</fieldset>
+				<fieldset>
+				<legend>{$news_message3}</legend>
+				<p>{$plugin.newsletter.label.language}</p>
+				{foreach item=lang from=$language_newsd}
+					<input type="checkbox" {if $lang.selected}checked{/if} name ="lang[{$lang.lang_id}]" id="lang{$lang.lang_id}" value="{$lang.lang_id}" />
+					<label for="lang{$lang.lang_id}">{$lang.language}</label>
+					<br />
+				{/foreach}
+				<br />
+				</fieldset>
+				{foreach item=lang from=$language_newsd}
+					{if $lang.selected}
+						<fieldset style="padding-bottom:15px"><!-- Inhalt des Impressums: -->
+							<legend>{$message_20006} {$lang.language}</legend>
+							{if $checkedwyswig}
+								<script language="javascript" type="text/javascript" src="./tiny_mce/FileBrowser.js"></script>
+								<script language="javascript" type="text/javascript" src="./tiny_mce/tiny_mce.js" charset="utf-8"></script>	
+								<script language="javascript" type="text/javascript">
+									tinyMCE.init({ldelim}
+									mode : "exact",
+									language : "{$lang_back_short}",
+									elements : "inhalt_html[1],inhalt_html[2],inhalt_html[3],inhalt_html[4],inhalt_html[5],inhalt_html[6],inhalt_html[7],inhalt_html[8],inhalt_html[9],inhalt_html[10]",
+									{include file=tiny_inc_conf.html},
+									inline_styles : false,
+									convert_fonts_to_spans : false
+									{rdelim} );
+								</script>
+							{/if}
+							{*<!-- Inhalt HTML  -->*}
+							{if $checkednews_html or $checkedwyswig}
+								<label for="inhalt_html[{$lang.lang_id}]" style="line-height:30px"><strong>{$newsletter_texthtml}</strong></label>
+								<textarea type="text" name="inhalt_html[{$lang.lang_id}]" id="inhalt_html[{$lang.lang_id}]" rows="20" cols="50" style="width:90%;">{$inhalt_html[$lang.lang_id]}</textarea>
+								<br />
+							{/if}
+							{*<!-- Inhalt Text  -->*}
+							<label for="inhalt[{$lang.lang_id}]" style="line-height:30px"><strong style="padding-bottom:10px">{$message_20004} {$lang.language}</strong></label>
+							<textarea type="text" name="inhalt[{$lang.lang_id}]" id="inhalt[{$lang.lang_id}]" rows="15" cols="50" style="width:90%;">{$inhalt[$lang.lang_id]}</textarea>
+							<br />
+						</fieldset>
+					{/if}
+				{/foreach}
+				{if $news_addon_file}
+					{include file=$news_addon_file}
+				{/if}
+				<fieldset><!-- Eingabe: -->
+					<legend>{$message_70}  </legend>
+					<input type="submit" class="submit_back_green" value="{$message_70}" name="submit" />
+				</fieldset>
+			</form>
+		{/if}
+	</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

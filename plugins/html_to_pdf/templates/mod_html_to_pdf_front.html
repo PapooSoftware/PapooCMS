@@ -1,0 +1,39 @@
+{if $module_aktiv.mod_html_to_pdf_front}
+<!-- MODUL (intern): mod_artikel_optionen  -->
+<div class="modul floatbox" id="mod_html2pdf">
+	{*<!--Optionen zu diesem Artikel:
+	<h5>{$message_2014}</h5>-->*}
+	<ul class="html2pdf">
+		
+	<!-- MODUL: simplex3_content2pdf_front -->
+
+        <li class="html2pdf_li">
+				{*<!-- Artikel als PDF -->*}
+				<a target="blank" href="{$aktue_pdf_uri}"><img src="{$slash}plugins/html_to_pdf/images/pdf_button.gif" alt="PDF" title="PDF" /></a>
+			</li>
+
+        <!-- END MODUL: simplex3_content2pdf_front -->  
+	
+  {if $anzeig_versende && $reporeid_print}
+			<li class="html2pdf_li">
+				{*<!--Sie können diesen Artikel Versenden/Empfehlen-->*}
+				<a rel="nofollow" href="{$slash}index.php?menuid={$menuid_aktuell}&amp;reporeid_send=1&amp;reporeid_print={$reporeid_print}"><img src="{$slash}plugins/html_to_pdf/images/email_button.gif" alt="{$message_2015}" title="{$message_2015}" /></a>
+			</li>
+   {/if}
+				
+        {if $anzeig_drucken && $urldatself}
+	
+			<li class="html2pdf_li">
+				{*<!--DruckVersion dieses Artikels-->*}
+                <a rel="nofollow" href="{$slash}index.php?{$urldatprint}print=ok"><img src="{$slash}plugins/html_to_pdf/images/print_button.gif" alt="{$message_2016}" title="{$message_2016}" /></a>
+				
+			</li>
+{/if}
+	{if $editlink}
+			<li class="html2pdf_li"><a rel="nofollow" href="{$editlink}"><img src="{$slash}plugins/html_to_pdf/images/edit_button.gif" alt="{$plugin.html2pdf.image_edit_title}" title="{$plugin.html2pdf.image_edit_title}" /></a></li>
+			{/if}
+	
+	</ul>
+</div>
+<!-- ENDE MODUL (intern): mod_artikel_optionen  -->
+{/if}

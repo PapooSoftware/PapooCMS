@@ -1,0 +1,39 @@
+
+
+#mod_simplex3_content2pdf_front input{border: 0px solid red;}
+.mod_simplex3_content2pdf_front_clear{
+	clear: right;
+	display:none;
+}
+.s3_c2pdf_backend_label{
+	width: 20%;
+	font-weight: bold;
+
+}
+.s3_c2pdf_backend_input{
+	width: 50%;
+	margin-left: 0.2em;
+
+}
+.s3_showdiv{
+visibility: visible;
+height:0px;
+}
+.s3_hidediv{
+visibility: hidden;
+height:auto;
+}
+#mod_simplex3_article_properties ul li a img{border: 0px solid lime;}
+.simplex3_article_properties .simplex3_article_properties_li{
+	display: inline;
+	list-style-type: none;
+	margin-left: 0px;
+
+}
+#mod_simplex3_article_properties{
+	text-align: right;
+}
+.container_12 ul.html2pdf li  {
+display:inline;
+	
+}

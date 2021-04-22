@@ -1,0 +1,26 @@
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+ 
+<!-- Menü kommt hier rein--> 
+{include file=menu.inc.html}
+
+<div class="artikel">
+<div class="mv">
+
+
+{*<!-- Ausgabe der Dzvhä System Ids -->*}
+<ol>
+{foreach item=system_id from=$mv_liste}
+	<li>{$system_id}</li>
+{/foreach}
+</ol>
+</div>
+
+
+<!-- Rechte Fehlermeldung-->
+{include file=rechte.html}
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}

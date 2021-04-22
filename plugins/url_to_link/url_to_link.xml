@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- version: Papoo-Versions-Nummer für die das Plugin gedacht ist / funktioniert -->
+<plugin version="3.5">
+	<!-- ALLGEMEINE-INFORMATIONEN -->
+	<!-- ************************ -->
+	<!-- name: Name des Plugins -->
+	<name><![CDATA[Link to url]]></name>
+	<!-- beschreibung_de: Kurz-Beschreibung des Plugins auf deutsch (wird im Plugin-Manager angezeigt) -->
+	<beschreibung_de><![CDATA[Dieses Plugin ermöglicht es Platzhalter dynamisch zu ersetzen um eine dynamische Verlinkung erstellen zu können.]]></beschreibung_de>
+	<!-- beschreibung_en: Kurz-Beschreibung des Plugins auf englisch (wird im Plugin-Manager angezeigt) -->
+	<beschreibung_en><![CDATA[Dieses Plugin ermöglicht es Leads im Papoo System zu tracken, automatische Mails rauszusenden aufgrund von Benutzeraktionen, Verknüpfung von Downloads mit Formularen uvm..]]></beschreibung_en>
+	<!-- version: Versions-Nummer des Plugins -->
+	<version>1.0.1</version>
+	<!-- papooid: Eindeutige Nummer offizieller papoo-Plugins -->
+	<papooid>0</papooid>
+	<!-- link: z.Z. noch ohne Funktion -->
+	<link>http://www.papoo.de</link>
+	<!-- datum: Erscheinungs-Datum bzw. Stand des Plugins -->
+	<datum>07.10.2014</datum>
+	<!-- AUTOR-INFORMATIONEN -->
+	<!-- ******************* -->
+	<!-- autor: Informationen zum Autor (Programmierer) des Plugins -->
+	<autor>
+		<!-- autor.name: Name des Authors -->
+		<name><![CDATA[Dr. Carsten Euwens]]></name>
+		<!-- autor.email: eMail-Adresse des Autors -->
+		<email><![CDATA[info@papoo.de]]></email>
+		<!-- autor.kontakt: postalische Kontakt-Informationen des Autors -->
+		<kontakt><![CDATA[Dr. Carsten Euwens Auguststr. 4 53229 Bonn]]></kontakt>
+		<!-- autor.telefon: Telefon-Nummer des Autors -->
+		<telefon><![CDATA[0228 / 280 56 68]]></telefon>
+	</autor>
+	<!-- MENÜ-INFORMATIONEN -->
+	<!-- ****************** -->
+	<!-- menue: Informationen für den Menü-Eintrag im Backend (papoo/interna) -->
+	<menue>
+		<!-- menue.eintrag_de: Name des Menü-Punktes im Backend auf deutsch -->
+		<eintrag_de>Link to url</eintrag_de>
+		<!-- menue.eintrag_en: Name des Menü-Punktes im Backend auf englisch -->
+		<eintrag_en>Link to url</eintrag_en>
+		<!-- menue.icon: Pfad zum Menü-Icon des Menü-Punktes im Backend (relativ zum Plugin-Verzeichnis) -->
+		<icon>url_to_link/bilder/pic_01.gif</icon>
+		<!-- menue.link: Name der Seite auf welche der Menü-Punkt im Backend verweisen soll -->
+		<link>plugin:url_to_link/templates/ltu_back.html</link>
+		<!-- menue.submenue: Untermenü-Punkt für diesen Menü-Punkt im Backend, Struktur wie menue -->
+	</menue>
+	<!-- KLASSEN-INFORMATIONEN -->
+	<!-- ****************** -->
+	<!-- klasse: Informationen der Plugin-Klasse welche eingebunden werden sollen -->
+	<klasse>
+		<!-- klasse.name: Name der Klassen-Instanz / des Objekts (also der Name des Dings, das mit $name = new xx_class(); erzeugt wird) -->
+		<name>ltu_class</name>
+		<!-- klasse.datei: Pfad zur Klassen-Datei (relativ zum Plugin-Verzeichnis) -->
+		<datei>url_to_link/lib/ltu_class.php</datei>
+	</klasse>
+	<!-- CSS-INFORMATIONEN -->
+	<!-- ***************** -->
+	<!-- css: Pfad zur CSS-Datei (relativ zum Plugin-Verzeichnis) -->
+	<css>url_to_link/css/ltu.css</css>
+	<!-- DATENBANK-INFORMATIONEN -->
+	<!-- ****************** -->
+	<datenbank>
+		<!-- datenbank.installation: Pfad zur SQL-Installations-Datei (relativ zum Plugin-Verzeichnis) -->
+		<installation>url_to_link/sql/ltu_install.sql</installation>
+		<!-- datenbank.deinstallation: Pfad zur SQL-Deinstallations-Datei (relativ zum Plugin-Verzeichnis) -->
+		<deinstallation>url_to_link/sql/ltu_deinstall.sql</deinstallation>
+	</datenbank>
+	<!-- Einbindung der Sprach-Dateien.
+		In dem hier angegebenen Verzeichnis sollten Dateien mit folgenden Namen liegen:
+		- messages_backend_[de|en|fr| .. etc.].inc.php
+		- messages_frontend_[de|en|fr| .. etc.].inc.php
+	-->
+	<messages>url_to_link/messages</messages>
+</plugin>

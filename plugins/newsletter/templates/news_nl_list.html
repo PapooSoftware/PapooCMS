@@ -1,0 +1,54 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		{if !$old_news_inhalt}
+			<h2>{$plugin.newsletter.altnewsletter}</h2>
+			{* Löschen?  Dann "...wurde gelöscht" ausgeben *}
+			{if $news_is_del==1}<div class="message">{$message_news_is_del}</div>{/if}
+			{if $issend}<div class="message">{$news_message_2}</div> {* ...wurde verschickt *}{/if}
+			{if $is_saved}<div class="message">{$plugin.newsletter.message.nl_saved}</div> {* ...wurden gespeichert *}{/if}
+			{if $text1}<div class="message">{$text1}</div>{/if}
+			{if $mie}<div class="error">Es gibt fehlerhafte E-Mail-Adressen in der DB -> <a href="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/news_address_in_error.html" title="">Anzeigen</a></div>{/if}
+			{* Anzeige Archiv *}
+			<div class="news_tool height40"><a class="news_tool_edit" href="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/news_nl_new.html" title="{$message_20024}"><img src="../plugins/newsletter/bilder/new_nl.gif" width="27" height="22" alt="{$message_20024}" title="{$message_20024}" border="0" align="middle" /><br />Neu</a></div>
+			{if $anzahl}
+				<p>{$plugin.newsletter.anzahlgefnl} {$anzahl}, 
+				davon nicht gesendet: {$anzahl-$anzahl_gesendet} ({if $anzahl_gesendet AND $anzahl}{math equation = "round((anzahl - anzahl_gesendet) * hund / anzahl, 1)" anzahl = $anzahl anzahl_gesendet = $anzahl_gesendet hund = 100}{else}0{/if} %),
+				gesendet: {$anzahl_gesendet} ({if $anzahl_gesendet AND $anzahl}{math equation = "round(anzahl_gesendet * hund / anzahl, 1)" anzahl = $anzahl anzahl_gesendet = $anzahl_gesendet hund = 100}{else}0{/if} %)</p>
+			{/if}
+			{if $weiter}<div class="nl_weiter">{include file=weiter.inc.html}<br /></div>{/if}
+			<script type="text/javascript" src="../plugins/newsletter/js/confirm.js"></script>
+			<table class="news_old">
+				<tr>
+					<th id="inhalt">{$message_20002}</th>
+					<th id="lang" style="text-align:center">Sprache</th>
+					<th id="datum" style="text-align:center">{$datum}</th>
+					<th id="senddate" style="text-align:center">{$senddate}</th>
+					<th id="att_count" style="text-align:right"># Att.</th>
+					<th id="abonnenten" style="text-align:right">{$useranzahl}</th>
+					<th id="send" style="text-align:center">Senden</th>
+					<th id="del" style="text-align:center">{$news_loeschen}</th>
+				</tr>
+				{foreach item=old from=$old_news}
+					<tr class="news_old_row">
+						<td headers="inhalt">
+						<a href="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/news_nl_edit.html&news_id={$old.news_id}" title="{$news_edite}">{if $old.news_uberschrift}{$old.news_uberschrift}{else}Betreff fehlt{/if}</a></td>
+						<td headers="lang" align="center">{$old.news_inhalt_lang}</td>
+						<td nheaders="datum" align="right">{$old.news_date}</td>
+						<td headers="senddate" align="right">{$old.news_date_send}</td>
+						<td headers="att_count" align="right">{$old.att_count}</td>
+						<td headers="abonnenten" style="text-align:right">{$old.news_abo}</td>
+						<td headers="send" align="center"><a href="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/news_nl_send.html&news_id={$old.news_id}" title="{$erneut_versenden}"><img src="../plugins/newsletter/bilder/send_nl.gif" alt="{$erneut_versenden}" width="27" height="22" border="0" align="middle" title="{$erneut_versenden}" /></a></td>
+						<td headers="del" align="center">
+								<form action="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/news_nl_list.html&news_del={$old.news_id}" method="post" name="adminForm{$old.news_id}">
+									<a href='javascript: var msg="{$message_20035}"+"\""+"{$old.news_uberschrift|regex_replace:'~(\'|")~':''}"+"\""+"{$message_20034}"; if (confirm(msg)) submitform("{$old.news_id}");' title="{$news_loeschene}"><img src="../plugins/newsletter/bilder/delete_nl.gif" width="27" height="22" alt="{$news_loeschene}" title="{$news_loeschene}" border="0" /></a></form>
+						</td>
+					</tr>
+				{/foreach}
+			</table>
+			{if $weiter}<br /><div class="nl_weiter">{include file=weiter.inc.html}</div>{/if}
+		{/if}
+	</div>
+	{include file=foot.inc.html}
+{/if}

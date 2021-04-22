@@ -1,0 +1,142 @@
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+	
+{* {if !$mv_langsel} {* MV-Sprachauswahl ist noch nicht erfolgt *}
+
+{* {else} *}
+{* Eingabe von Betreff, Nachricht (HTML/Text) und Sprache *}
+    {if $upload_error}<div class="error">{$upload_error}</div>{/if}
+    {if $nobetreff}<div class="error">{$message_20023}</div> {* Betreff fehlt *}{/if}
+    {if $nomessage}<div class="error">{$message_20025}</div> {* Nachricht fehlt *}{/if}
+    {if $nolang}<div class="error">{$message_20026}</div> {* Sprache nicht ausgew�hlt *}{/if}
+    {if $fehler4}<div class="error">{$plugin.newsletter.errmsg.kein_filename}</div>{/if}
+    {if $fehler5}<div class="error">{$fehler5}</div>{/if} {* Upload-Fehler Attachments; Textinhalt ist variabel *}
+    {if $fehler9}<div class="error">{$plugin.newsletter.errmsg.attachment_already_exist}<br />{$fehler7}</div>{/if}
+    {if $attachment_loaded}<div class="message">{$plugin.newsletter.message.attachment_loaded}</div>{/if}
+    {if $attachment_is_del}<div class="message">{$plugin.newsletter.message.attachment_deleted}</div>{/if}
+    <h2>{$plugin.newsletter.text2.news_edit}</h2> {* Newsletter bearbeiten *}
+    <form name="artikel" action="" method="post" id="formi" enctype="multipart/form-data">
+        <fieldset>
+            <!-- Betreff -->
+            <legend>{$message_20002}</legend> {* Betreff *}
+            <!-- Bezeichnung -->
+            <label for="linkname" style="display:none">{$message_20002}</label> {* Betreff *}
+            <input id="linkname" type="text"  name="linkname" size="30" value="{$uberschrift}" style="width:90%;"/>
+            <br />
+        </fieldset>
+        <link rel="stylesheet" href="../newsletter/nl.css" type="text/css" />
+        <fieldset>
+            <!-- Inhalt des Newsletters: -->
+            <legend>{$message_20003}</legend> {* Inhalt des Newsletters: *}
+            {if $wyswig}
+                <script language="javascript" type="text/javascript" src="./tiny_mce/tiny_mce.js" charset="utf-8"></script>	
+		
+				<script language="javascript" type="text/javascript" src="./tiny_mce/FileBrowser.js"></script>
+                <script language="javascript" type="text/javascript">
+                    tinyMCE.init({ldelim}
+                    mode : "exact",
+                    language : "{$lang_back_short}",
+                    elements : "inhalt_html",
+                    	theme : "advanced",
+	plugins : "fullpage,safari,loremipsum,imgmap,flvplayer,galerie,safari,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,pagebreak,wordcount,advlist,spellchecker,fontawesome",
+	theme_advanced_buttons1_add_before : "save,newdocument,|",
+	//theme_advanced_buttons1_add : "fontselect,fontsizeselect",
+	//theme_advanced_buttons1_add : "forecolor,backcolor",
+	theme_advanced_buttons1_add : "|,insertdate,inserttime,preview,",
+	//theme_advanced_buttons2_add : "",
+	theme_advanced_buttons2: "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,indent,outdent,|,undo,redo,|,imgmap,link,unlink,|,anchor,image,cleanup,help,code",
+	theme_advanced_buttons3_add_before : "tablecontrols,|",
+	theme_advanced_buttons3_add : "iespell,media,|,flvplayer,galerie,fullpage",
+	theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,blockquote,print,advhr,|,loremipsum,visualaid",
+	theme_advanced_buttons1_add_before : "save,newdocument,|",
+	//theme_advanced_buttons1_add : "fontselect,fontsizeselect",
+	//theme_advanced_buttons1_add : "forecolor,backcolor",
+	theme_advanced_buttons1_add : "|,insertdate,inserttime,preview,",
+	//theme_advanced_buttons2_add : "",
+	theme_advanced_buttons2: "cut,copy,paste,pastetext,pasteword,selectall,|,search,replace,|,bullist,numlist,|,indent,outdent,|,undo,redo,|,imgmap,link,unlink,|,anchor,image,cleanup,help,code",
+	theme_advanced_buttons3_add_before : "tablecontrols,|",
+	theme_advanced_buttons3_add : "iespell,media,|,flvplayer,|,fontawesome,galerie",
+	theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,blockquote,print,advhr,|,loremipsum,visualaid",
+	theme_advanced_toolbar_location : "top",
+	theme_advanced_toolbar_align : "left",
+	theme_advanced_path_location : "bottom",
+                    content_css : '../css/normal/_index.css,./css/hintergrund.css,../newsletter/nl.css',
+               
+external_link_list_url : "./example_link_list.php?tinymce_lang_id=1",
+template_external_list_url : "./example_template_list.php?tinymce_lang_id=1",
+valid_elements : "*[*]",
+theme_advanced_styles: 'artikelbox_left=artikelbox_left;artikelbox_right=artikelbox_right;artikelbox_left_ohne_border=artikelbox_left_ohne_border;artikelbox_right_ohne_border=artikelbox_right_ohne_border',
+keep_styles : false,
+file_browser_callback : 'myFileBrowser'
+		
+{literal}
+});{/literal}                  </script>
+            {/if}
+            {*<!-- Inhalt  HTML -->*}
+            {if $news_html or $wyswig}
+                <label for="inhalt_html"><strong style="line-height:23px;">{$newsletter_texthtml}</strong></label>
+                <textarea type="text" name="inhalt_html" id="inhalt_html" rows="20" cols="50" style="width:90%;">{$inhalt_html}</textarea><br />
+            {/if}
+            {*<!-- Inhalt  Text -->*}
+            <label for="inhalt" style="line-height:23px;"><strong>{$message_20004}</strong></label>
+            <textarea type="text" name="inhalt" id="inhalt" rows="15" cols="50" style="width:90%;margin-bottom:0px">{$inhalt}</textarea>
+            <br /><br />
+            <input type="hidden" name="rootid" value="{$reporeid}" />
+        </fieldset>
+        <fieldset>
+            <!-- Eingabe: -->
+            <legend>{$newsmessage_20122}</legend>
+            <label> </label>
+            <fieldset>
+                {*<!-- Eingabe der Datei:-->*}
+                <legend>{$message_337}</legend>
+                {*<!-- Das Dokument:-->*}
+                <label for="myfile">{$message_338}</label>
+                <input type="file" name="myfile" id="myfile" value="" />
+                <input  type="submit" class="submit_back" value="{$message_356}" name="submit_file" /> {* hochladen *}
+            </fieldset>
+            {if $newsletter_file_list}
+                <h2>{$newsmessage_20122a}</h2>
+                {* Ein Attachment ist nicht mehr im Verzeichnis vorhanden *}
+                {if $fehler8}
+                    <p>{$plugin.newsletter.text2.news_edit_attachment2}</p>
+                {/if}
+                {foreach item=file from=$newsletter_file_list}
+                    <div>
+                        <a href="../plugins/newsletter/attachments/{$file.name_stored}" title="{$plugin.newsletter.linktext.news_edit_attachment}" target="_blank">{$file.name}</a> ({$file.name_stored} {$file.size} Bytes)
+                    {* Dieses Attachment ist nicht mehr im Verzeichnis vorhanden *}
+                        {if !$file.file_status}
+                            <span class="bold_red">{$plugin.newsletter.errmsg.file_fehlt}</span>
+                        {/if}
+                        <button type="submit" class="btn btn-danger" src="../plugins/newsletter/bilder/news_attachment_del.gif" name="submit_del" value="{$file.id}" title="{$plugin.newsletter.imgtext.news_edit_attachment} {$file.name}">x</button>
+                    </div>
+                {/foreach}
+            {/if}
+        </fieldset>
+        <fieldset>
+            <legend>{$news_message3}</legend> {* Sprache *}
+            <label for="news_lang">{$lang.language}</label>
+            <select name="news_lang" id="news_lang" size="{$selectitems}">
+                {foreach item=lang from=$language_newsd}
+                    <option value="{$lang.lang_id}" {if $lang.selected} selected="selected"{/if}>{$lang.language}</option>
+                {/foreach}
+            </select><br />
+        </fieldset>
+        <fieldset>
+            <!-- Eingabe: -->
+            <legend>{$plugin.newsletter.submit.save} / {$plugin.newsletter.submit.cancel}</legend> {* Vorschau *}
+            <label> </label>
+             <input type="submit" class="submit_back_green" value="{$plugin.newsletter.submit.save}" name="submit"  />
+             <input type="submit" class="submit_back_red" value="{$plugin.newsletter.submit.cancel}" name="submit"  />
+        </fieldset>
+    </form>
+{* {/if} *}
+</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}

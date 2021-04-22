@@ -40,4 +40,12 @@ class style_hooks
 	public function onFormManagerLeadSaved(array $lead): void
 	{
 	}
+
+	/**
+	 * Diese Methode wird ausgeführt, sobald das Markup für Felder eines Formulars gebaut wurde.
+	 * @param array $fieldsets pass by reference
+	 */
+	public function onFormManagerFieldsLoaded(array &$fieldsets): void
+	{
+	}
 }

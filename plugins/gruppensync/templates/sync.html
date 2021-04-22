@@ -1,0 +1,99 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men¸ kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+{if $is_eingetragen=="ok"}
+  <div class="message">{$plugin_sync_wurde_eingetragen}</div>
+{/if}
+{if $is_eingetragen=="del"}
+  <div class="message">{$plugin_sync_wurde_del}</div>
+{/if}
+
+{if $is_eingetragen=="no"}
+  <div class="error">{$plugin_sync_wurde_nicht_eingetragen}</div>
+{/if}
+
+ <h1 id="gruppen_sync_ie_knnen_hier_die_" class="h1" >{$plugin_gruppen_sync_ie_knnen_hier_die_}</h1>
+
+ <p id="gruppen_sync_t_dieser_" class="h1" >{$plugin_gruppen_sync_t_dieser_}</p>
+
+ <h2 id="gruppen_sync_tellen_ie_hier_ein_" class="h1" >{$plugin_gruppen_sync_tellen_ie_hier_ein_}</h2>
+
+ <p id="gruppen_sync_tellen_ie_hier_ein_die_ver" class="h1" >{$plugin_gruppen_sync_tellen_ie_hier_ein_die_ver}</p>
+<form action="" name="" method="POST" enctype="multipart/form-data">
+ <fieldset>
+<legend>{$plugin_gruppen_sync_lugin_instellungen}</legend>
+
+<label for="gruppen_sync_lang_hlen_ie_die_erwendung_aus">{$plugin_gruppen_sync_hlen_ie_die_erwendung_aus}{$plugin_error.gruppen_sync_lang_hlen_ie_die_erwendung_aus} </label>
+<br />
+<select name="gruppen_sync_lang_hlen_ie_die_erwendung_aus" id="gruppen_sync_lang_hlen_ie_die_erwendung_aus" size="1"/><option value="0">{$message_160}</option><option {if $gruppen_sync_lang.0.gruppen_sync_lang_hlen_ie_die_erwendung_aus==1}selected="selected"{/if} value="1">Plugin soll Daten zur Verf√ºgung stellen (Server Funktion)
+</option><option {if $gruppen_sync_lang.0.gruppen_sync_lang_hlen_ie_die_erwendung_aus==2}selected="selected"{/if} value="2">Plugin soll Daten abrufen (Client Funktion)</option></select>
+
+
+
+<input  type="submit" class="submit_back_green" value="{$message_70}" name="submit_sync_back" />
+
+</fieldset>
+</form>
+{if $gruppen_sync_lang.0.gruppen_sync_lang_hlen_ie_die_erwendung_aus==1}
+ <h2 id="gruppen_sync_lugin_fungiert_als_erver" class="h1" >{$plugin_gruppen_sync_lugin_fungiert_als_erver}</h2>
+
+ <p id="gruppen_sync_iese_rl_mu_bei_den_lienten_eiten_als_erver_dresse_eingetragen_werden" class="h1" >{$plugin_gruppen_sync_iese_rl_mu_bei_den_lienten_eiten_als_erver_dresse_eingetragen_werden}</p>
+ <textarea cols="60" style="width:90%;" rows="2">{$gruppen_sync_server_url}</textarea>
+ {/if}
+ {if $gruppen_sync_lang.0.gruppen_sync_lang_hlen_ie_die_erwendung_aus==2}
+ <h2 id="gruppen_sync_lugin_fungiert_als_lient" class="h1" >{$plugin_gruppen_sync_lugin_fungiert_als_lient}</h2>
+
+ <p id="gruppen_sync_ragen_sie_hier_dann_die" class="h1" >{$plugin_gruppen_sync_ragen_sie_hier_dann_die}</p>
+<form action="" name="" method="POST" enctype="multipart/form-data">
+<input type="hidden" name="gruppen_sync_lang_hlen_ie_die_erwendung_aus" value="{$gruppen_sync_lang.0.gruppen_sync_lang_hlen_ie_die_erwendung_aus}" />
+ <fieldset>
+<legend>{$plugin_gruppen_sync_ie_rl_des_ervers}</legend>
+
+<label for="gruppen_sync_lang_ier_bitte_die_rl_eintragen_wo_die_aten">{$plugin_gruppen_sync_ier_bitte_die_rl_eintragen_wo_die_aten}{$plugin_error.gruppen_sync_lang_ier_bitte_die_rl_eintragen_wo_die_aten} </label>
+<br />
+<textarea cols="60" style="width:90%;" rows="2" name="gruppen_sync_lang_ier_bitte_die_rl_eintragen_wo_die_aten"  class="gruppen_sync_lang_ier_bitte_die_rl_eintragen_wo_die_aten" id="gruppen_sync_lang_ier_bitte_die_rl_eintragen_wo_die_aten">{$gruppen_sync_lang.0.gruppen_sync_lang_ier_bitte_die_rl_eintragen_wo_die_aten}</textarea>
+<br />
+
+</fieldset> 
+<fieldset>
+<legend>{$message_70}</legend>
+		<!-- Speichern -->
+<input  type="submit" class="submit_back" value="{$message_70}" name="submit_sync_back" />
+
+</fieldset>
+</form>
+
+<h1 id="gruppen_sync_ier_sehen_ie_die_ruppenliste" class="h1" >{$plugin_gruppen_sync_ier_sehen_ie_die_ruppenliste}</h1>
+
+ <p id="gruppen_sync_ie_sehen_in_der_bersicht" class="h1" >{$plugin_gruppen_sync_ie_sehen_in_der_bersicht}</p>
+
+ <p id="gruppen_sync_iese_echte_werden_automatisch" class="h1" >{$plugin_gruppen_sync_iese_echte_werden_automatisch}</p>
+<table style="width:99%;vertical-align:top;">
+  <tr style="vertical-align:top;">
+  <th>{$plugin_gruppen_sync_okale_gruppen}</th>
+	<th>{$plugin_gruppen_sync_ugeordnete_ruppen}</th>
+	<th>{$plugin_gruppen_sync_inbtrag_bearebtieten}</th>
+	
+	</tr>
+ {foreach from=$gruppen_liste item=typ name=xtyp}
+ <tr>
+ <td>{$typ.gruppenname}</td>
+ <td><ul style="padding:0px;margin:0px;">{foreach from=$typ.externe_gruppe item=typ2 name=xtyp2}<li style="list-style-type:none;">{$typ2}</li>{/foreach}</ul></td>
+ <td><a href="{$sync_self}template=gruppensync/templates/sync_grup.html&sync_gruppe_id={$typ.gruppeid}">{$typ.gruppenname} -> {$plugin_gruppen_sync_inbtrag_bearebtieten}</a></td>
+ <tr>
+ {/foreach}
+ </table>
+{/if}
+
+
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

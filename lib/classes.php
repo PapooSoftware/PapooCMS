@@ -18,7 +18,7 @@ if (strstr( $_SERVER['PHP_SELF'],'classes.php')) die('You are not allowed to see
 require_once(__DIR__ . "/classes/third-party/simple_html_dom.php");
 require_once(__DIR__ . "/classes/third-party/Browser.php");
 // Third-Party Libaries per Composer Autoload laden
-require_once __DIR__ . '/classes/third-party/composer/autoload.php';
+require_once __DIR__ . '/classes/third-party/composer/vendor/autoload.php';
 
 if (phpversion() >= 5.3) {
 	//Klasse ImageWorkshop zu Bildbearbeitung

@@ -1,0 +1,14 @@
+{if $IS_ADMIN}
+  {include file=head.inc.html}
+  {include file=menu.inc.html}
+
+  {if $submenu == 'config'}
+    {include file=../../../plugins/osm_overlay/templates/backend_config.html}
+  {elseif $submenu == 'entries'}
+    {include file=../../../plugins/osm_overlay/templates/backend_entries.html}
+  {else}
+    {include file=../../../plugins/osm_overlay/templates/backend_info.html}
+  {/if}
+
+  {include file=foot.inc.html}
+{/if}

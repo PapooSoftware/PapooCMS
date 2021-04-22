@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<!-- version: Versions-Nummer papoo für die das Plugin gedacht ist / funktioniert -->
+<plugin version="3.0">
+
+<!-- ALLGEMEINE-INFORMATIONEN -->
+<!-- ************************ -->
+<!-- name: Name des Plugins -->
+<name>Nuetzliche Services</name>
+
+<!-- beschreibung_de: Kurz-Beschreibung des Plugins auf deutsch (wird im Plugin-Manager angezeigt) -->
+<beschreibung_de><![CDATA[Nützliche Services wie SNAP, ClaimID, Google Analytics, Verify und Yahoo Verify  in Papoo nutzen.]]></beschreibung_de>
+
+<!-- beschreibung_en: Kurz-Beschreibung des Plugins auf englisch (wird im Plugin-Manager angezeigt) -->
+<beschreibung_en><![CDATA[Use some Useful sevices like SNAP, ClaimID,Google Analytics, Verify and Yahoo Verify within Papoo]]></beschreibung_en>
+
+<!-- version: Versions-Nummer des Plugins -->
+<version>0.3</version>
+
+<!-- papooid: Eindeutige Nummer offizieller papoo-Plugins -->
+<papooid>93</papooid>
+
+<!-- link: z.Z. noch ohne Funktion -->
+<link>http://www.tschoessow.com</link>
+
+<!-- datum: Erscheinungs-Datum bzw. Stand des Plugins -->
+<datum>10.07.2007</datum>
+
+
+<!-- AUTOR-INFORMATIONEN -->
+<!-- ******************* -->
+<!-- autor: Informationen zum Autor (Programmierer) des Plugins -->
+<autor>
+        <!-- autor.name: Name des Authors -->
+        <name>Thomas Schoessow</name>
+
+        <!-- autor.kontakt: postalische Kontakt-Informationen des Autors -->
+        <kontakt><![CDATA[Thomas Schoessow]]></kontakt>
+
+        <!-- autor.email: eMail-Adresse des Autors -->
+        <email>posteingang@tschoessow.org</email>
+
+        <!-- autor.telefon: Telefon-Nummer des Autors -->
+        <telefon></telefon>
+</autor>
+
+
+<!-- MENÜ-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- menue: Informationen für den Menü-Eintrag im Backend (papoo/interna) -->
+<menue>
+        <!-- menue.eintrag_de: Name des Menü-Punktes im Backend auf deutsch -->
+        <eintrag_de>Nuetzliche Services</eintrag_de>
+        <!-- menue.eintrag_en: Name des Menü-Punktes im Backend auf englisch -->
+        <eintrag_en>Useful services</eintrag_en>
+        <!-- menue.icon: Pfad zum Menü-Icon des Menü-Punktes im Backend (relativ zum Plugin-Verzeichnis) -->
+        <icon>usefulservices/bilder/logo_klein.gif</icon>
+        <!-- menue.link: Name der Seite auf welche der Menü-Punkt im Backend verweisen soll -->
+        <link>plugin:usefulservices/templates/usefulservicespluginstart.html</link>
+        <submenue>
+                <eintrag_de>snap.com</eintrag_de>
+                <eintrag_en>snap.com</eintrag_en>
+                <icon>usefulservices/bilder/logo_klein.gif</icon>
+                <link>plugin:usefulservices/templates/usefulservicessnap.html</link>
+        </submenue>
+        <submenue>
+                <eintrag_de>claimID.com</eintrag_de>
+                <eintrag_en>claimID.com</eintrag_en>
+                <icon>usefulservices/bilder/logo_klein.gif</icon>
+                <link>plugin:usefulservices/templates/usefulservicesclaimid.html</link>
+        </submenue>
+       <submenue>
+                <eintrag_de>Google Analytics</eintrag_de>
+                <eintrag_en>Google anlytics</eintrag_en>
+                <icon>usefulservices/bilder/logo_klein.gif</icon>
+                <link>plugin:usefulservices/templates/usefulservicesanalytics.html</link>
+        </submenue>
+       <submenue>
+                <eintrag_de>Google Verify</eintrag_de>
+                <eintrag_en>Google verify</eintrag_en>
+                <icon>usefulservices/bilder/logo_klein.gif</icon>
+                <link>plugin:usefulservices/templates/usefulservicesgoogleverify.html</link>
+        </submenue>
+       <submenue>
+                <eintrag_de>Yahoo Verify</eintrag_de>
+                <eintrag_en>Yahoo verify</eintrag_en>
+                <icon>usefulservices/bilder/logo_klein.gif</icon>
+                <link>plugin:usefulservices/templates/usefulservicesyahooverify.html</link>
+        </submenue>
+
+
+
+</menue>
+<!-- KLASSEN-INFORMATIONEN -->
+<!-- ****************** -->
+<!-- klasse: Informationen der Plugin-Klasse welche eingebunden werden sollen -->
+<klasse>
+        <!-- klasse.name: Name der Klassen-Instanz / des Objekts (also der Name des Dings, das mit $name = new xx_class(); erzeugt wird) -->
+        <name>usefulservicesplugin</name>
+        <!-- klasse.datei: Pfad zur Klassen-Datei (relativ zum Plugin-Verzeichnis) -->
+        <datei>usefulservices/lib/usefulservicesplugin_class.php</datei>
+</klasse>
+
+<!-- CSS-INFORMATIONEN -->
+<!-- ***************** -->
+<!-- css: Pfad zur CSS-Datei (relativ zum Plugin-Verzeichnis) -->
+<css>usefulservices/css/usefulservices.css</css>
+
+
+<!-- DATENBANK-INFORMATIONEN -->
+<!-- ****************** -->
+<datenbank>
+        <!-- datenbank.installation: Pfad zur SQL-Installations-Datei (relativ zum Plugin-Verzeichnis) -->
+        <installation>usefulservices/sql/usefulservicesplugin_install.sql</installation>
+        <!-- datenbank.deinstallation: Pfad zur SQL-Deinstallations-Datei (relativ zum Plugin-Verzeichnis) -->
+        <deinstallation>usefulservices/sql/usefulservicesplugin_deinstall.sql</deinstallation>
+</datenbank>
+<!-- Einbindung der Sprach-Daten.
+	In dem hier angegebenen Verzeichnis sollten Dateien mit folgenden Namen liegen:
+	- messages_backend_[de|en|sp| .. etc.].inc.php
+	- messages_frontend_[de|en|sp| .. etc.].inc.php
+-->
+<messages>usefulservices/messages</messages>
+</plugin>

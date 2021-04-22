@@ -1,0 +1,43 @@
+<div class="labdiv labdiv_select" id="labdiv_{$field.plugin_cform_name|escape}">
+	<label for="plugin_cform_{$field.plugin_cform_name|escape}"{if $error} class="form_error"{/if}>
+		{if $error}
+			{$field.plugin_cform_descrip|default:$plugin.form_manager.fehlermeldung}
+		{/if}
+
+		{$field.plugin_cform_label}
+
+		{if $field.plugin_cform_must}
+			<span class="must_stern"> *</span>
+		{/if}
+
+		{if $field.plugin_cform_label_img}
+			<br />
+			<img class="form_labelimg" src="{$slash}images/{$field.plugin_cform_label_img|escape}" alt="" title="{$field.plugin_cform_label|escape}" />
+		{/if}
+
+		{if $field.plugin_cform_tooltip}
+			<div data-tooltip aria-haspopup="true" class="has-tip" title="{$field.plugin_cform_tooltip|escape}"
+				 style="display:inline-block;width:16px;height:16px;background-image:url('{$slash}plugins/form_manager/bilder/info.gif');"
+			></div>
+		{/if}
+	</label>
+
+	<select name="{$field.plugin_cform_name|escape}" id="plugin_cform_{$field.plugin_cform_name|escape}"
+			{if $field.plugin_cform_must}
+				required="required" aria-required="true"
+			{/if}
+	>
+		{foreach item=option from=$options name=option}
+			{if $smarty.foreach.option.first && $field.plugin_cform_must}
+				<option value=""{if not $value || $value == $option.value} selected="selected"{/if}
+						disabled="disabled" aria-disabled="true">
+					{$option.value|escape}
+				</option>
+			{else}
+				<option value="{$option.value|escape}"{if $option.selected} selected="selected"{/if}>
+					{$option.value|escape}
+				</option>
+			{/if}
+		{/foreach}
+	</select>
+</div>

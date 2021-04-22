@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<plugin name="hintergrundbild" version="5.0">
+
+    <name>Hintergrundbild</name>
+
+    <beschreibung_de><![CDATA[Mit diesem Plugin können sie jedem Menüpunkt ein anderes Hintergrundbild zuordnen.]]></beschreibung_de>
+    <beschreibung_en><![CDATA[This plugin can be used to select a certain background image for each menu item.]]></beschreibung_en>
+
+    <version>1.0</version>
+
+    <papooid>2300</papooid>
+
+    <datum>18.12.2014</datum>
+
+    <autor>
+        <name>Martin Güthler</name>
+        <email>mg@papoo.de</email>
+    </autor>
+
+    <klasse>
+        <name>hintergrundbild</name>
+        <datei>hintergrundbild/lib/Hintergrundbild.php</datei>
+    </klasse>
+
+    <menue>
+        <eintrag_de>Hintergrundbild</eintrag_de>
+        <eintrag_en>Background Image</eintrag_en>
+        <link>plugin:hintergrundbild/templates/backend.html</link>
+    </menue>
+
+    <messages>hintergrundbild/messages</messages>
+
+    <datenbank>
+        <installation>hintergrundbild/sql/hintergrundbild_install.sql</installation>
+        <deinstallation>hintergrundbild/sql/hintergrundbild_deinstall.sql</deinstallation>
+    </datenbank>
+
+</plugin>

@@ -1,0 +1,104 @@
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+<div class="artikel">
+	<div class="mv">
+		{*<!-- Systemmessage was zuletzt gemacht wurde -->*}
+		{if $mv_system_msg!=""}
+			<div class="message">{$mv_system_msg}</div>
+		{/if}
+		{*<!-- Fehlermeldung Allgemein -->*}
+		{if $mv_system_error!=""}
+			<div class="error">{$mv_system_error}</div>
+            <br />
+		{/if}
+		<h2>{$plugin.mv.metaebene} {$mv_meta_name} [ID = {$mv_meta_id}] {$plugin.mv.editieren}</h2>
+		<form method="post"  action="#" name="suche" id="formi" style="width:100%" enctype="multipart/form-data">
+			{*<!-- Name der Metaebene -->*}
+			<fieldset>
+				<legend>{$plugin.mv.name_der_metaebene}</legend>
+				<input id="mv_meta_name" name="mv_meta_name" value="{$mv_meta_name}" size="35" maxlength="254" type="text" />
+                <br />
+			</fieldset>
+			{*<!--  Rechte Einstellungen der Metaebene:   -->*}
+			<fieldset>
+				<legend>{$plugin.mv.meta_rechte1}</legend>
+				<input id="mv_meta_allow_frontend" name="mv_meta_allow_frontend" value="1" {if $mv_meta_allow_frontend==1}checked="checked"{/if} type="checkbox" /> 
+                <label for="mv_meta_allow_frontend">{$plugin.mv.meta_rechte1_allow_frontend} {$mv_meta_allow_frontend_falsch}</label>
+                <br />
+                <br />
+				<input id="mv_meta_allow_direct_entry" name="mv_meta_allow_direct_entry" value="1" {if $mv_meta_allow_direct_entry==1}checked="checked"{/if} type="checkbox" /> 
+                <label for="mv_meta_allow_direct_entry">{$plugin.mv.meta_rechte1_allow_direct_entry} {$mv_meta_allow_direct_entry_falsch}</label>
+                <br />
+                <br />
+				<input id="mv_meta_allow_direct_unlock" name="mv_meta_allow_direct_unlock" value="1" {if $mv_meta_allow_direct_unlock==1}checked="checked"{/if} type="checkbox" /> 
+                <label for="mv_meta_allow_direct_unlock">{$plugin.mv.meta_rechte1_allow_sichtbar} {$mv_meta_allow_direct_unlock_falsch}</label>
+                <br />
+			</fieldset>
+			{*<!--  Emailadresse der Metaebene:   -->*}
+			<fieldset>
+				<legend>{$plugin.mv.emailan}</legend>
+				<label for="mv_meta_emails">{$message_83} - {$plugin.mv.mehrere} {$emailfalsch}</label>
+                <br />
+				<textarea id="mv_meta_emails" name="mv_meta_emails" rows="5" cols="60" title="{$plugin.mv.meta_emails}" >{$mv_meta_emails}</textarea>
+                <br />
+			</fieldset>
+			{*<!--  Text oberhalb der Verwaltung:   -->*}
+			<fieldset>
+				<legend>{$plugin.mv.textoberhalb} </legend>
+				{*<!--  Antwort_html:   -->*}
+				<label for="mv_meta_top_text">{$plugin.mv.meta_top_text} </label>
+                <br />
+				<textarea id="mv_meta_top_text" name="mv_meta_top_text" rows="15" cols="60" title="{$plugin.mv.meta_top_text}" >{$mv_meta_top_text}</textarea>
+                <br />
+			</fieldset>
+			{*<!--  Text unterhalb der Verwaltung:   -->*}
+			<fieldset>
+				<legend>{$plugin.mv.textunterhalb}</legend>
+				<label for="mv_meta_bottom_text">{$plugin.mv.meta_bottom_text} </label>
+                <br />
+				<textarea id="mv_meta_bottom_text" name="mv_meta_bottom_text" rows="15" cols="60" title="{$plugin.mv.meta_bottom_text}" >{$mv_meta_bottom_text}</textarea>
+                <br />
+			</fieldset>
+			{*<!--  Antwort nach dem Eintragen: Danke-Seite  -->*}
+			<fieldset>
+				<legend>{$plugin.mv.antwortnachversenden}</legend>
+                <br />
+				<textarea id="mv_meta_antwort_text" name="mv_meta_antwort_text" rows="15" cols="60">{$mv_meta_antwort_text}</textarea>
+                <br />
+			</fieldset>
+            
+            {*<!--  Mail-Text für den User nach dem Eintragen  -->*}
+            <fieldset>
+            	<legend>{$plugin.mv.mv_mail_text_create_user}</legend>
+                <br />
+				<textarea id="mv_mail_text_create_user" name="mv_mail_text_create_user" rows="15" cols="60">{$mv_mail_text_create_user}</textarea>
+                <br />
+			</fieldset>
+            {*<!--  Mail-Text für Admin(s) nach dem Eintragen  -->*}
+            <fieldset>
+            	<legend>{$plugin.mv.mv_mail_text_create_admin}</legend>
+                <br />
+				<textarea id="mv_mail_text_create_admin" name="mv_mail_text_create_admin" rows="15" cols="60">{$mv_mail_text_create_admin}</textarea>
+                <br />
+			</fieldset>
+            {*<!--  Mail-Text für den User nach Edit -->*}
+            <fieldset>
+            	<legend>{$plugin.mv.mv_mail_text_change_user}</legend>
+                <br />
+				<textarea id="mv_mail_text_change_user" name="mv_mail_text_change_user" rows="15" cols="60">{$mv_mail_text_change_user}</textarea>
+                <br />
+			</fieldset>
+             <fieldset>
+            	<legend>{$plugin.mv.mv_mail_text_change_admin}</legend>
+                <br />
+				<textarea id="mv_mail_text_change_admin" name="mv_mail_text_change_admin" rows="15" cols="60">{$mv_mail_text_change_admin}</textarea>
+                <br />
+				<input type="hidden" name="mv_id" id="mv_id" value="{$mv_id}">
+				<input type="hidden" name="mv_meta_id" id="mv_meta_id" value="{$mv_meta_id}">
+				<input type="submit" class="submit_back_green" name="submit_mv_meta" value="{$plugin.mv.senden}" />
+			</fieldset>
+		</form>
+	</div>
+{include file=rechte.html}
+</div> 
+{include file=foot.inc.html}

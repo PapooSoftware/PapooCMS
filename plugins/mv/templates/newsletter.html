@@ -1,0 +1,49 @@
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+ 
+<!-- Menü kommt hier rein--> 
+{include file=menu.inc.html}
+
+<div class="artikel">
+<div class="mv">
+
+
+<!-- Sortierung der Treffer bei der Suche -->
+<h3>{$plugin.mv.sortierung}</h3>
+{$plugin.mv.sortierung_text}
+
+<!-- Sortierungsfelder -->
+<ul>
+{foreach item=feld from=$felder_sort}
+	<li>{$feld.mvcform_name} {if $is_admin=="ok"}<a href="{$link}&mv_id={$mv_id}&feld_del={$feld.mvcform_id}&submit_del_field=del">{$plugin.mv.loeschen3}</a>{/if}</li>
+{/foreach}
+</ul>
+
+<form action="" method="post" id="formk" enctype="multipart/form-data">
+<!-- Felder im Angebot-->
+<fieldset>
+<legend>{$plugin.mv.feld_waehlen}</legend>
+<label for="felder">{$plugin.mv.feld_waehlen}</label>
+huhu: {$mv_newsletter}
+{*<!--<select name="felder" id="felder" size="1">
+	<option value="">{$plugin.mv.bittewaehlen}</option>
+{foreach item=feld from=$felder}
+	<option value="{$feld.mvcform_id}">{$feld.mvcform_name} (ID={$feld.mvcform_id})</option>
+{/foreach}
+</select>
+<input type="submit" name="submit_new_field" value="{$plugin.mv.hinzufuegen}" />
+<input type="hidden" name="mv_id" id="mv_id" value="{$mv_id}">
+-->*}
+</fieldset>
+
+</form>
+</div>
+
+
+<!-- Rechte Fehlermeldung-->
+{include file=rechte.html}
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}

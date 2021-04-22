@@ -28,6 +28,16 @@ class checked_class
 	 */
 	function __construct()
 	{
+		/**
+		 * BEI GET brauchen wir dann einen Positiv liste... aber das geht nicht weil in Plugins alle möglichen Variablen drin sind
+		 * IM Frontend auch...
+		 * Code überall umschreiben? nicht machbar... Wochen an Aufwand - das bricht uns das Genick
+		 * man könnte bei Update / Insert Statements drauf checken... kommen da welche nur per GET?
+		 *  - counter
+		 *  -
+		 *
+		 */
+
 		/*
 		* Alle $_GET durchloopen die reinkommen
 		* Die Variablen werden Überprüft ob sie numerisch, string oder Array sind
@@ -64,11 +74,27 @@ class checked_class
 			}
 		}
 
+		/**
+		 * csrf Token check - hier easy...  $_SESSION['csrf_token']
+		 * Nur wenn ein Formular abgeschickt wurde - dann auf csrf checken...
+		 */
+		if(!empty($_POST))
+		{
+			if (!empty($_SESSION['sessionusername']) and $_POST['csrf_token'] != $_SESSION['csrf_token'])
+			{
+				$_SESSION['csrf_token_fail_count']++;
+				$_POST = array();
+				print_r('<div class="alert-danger">Achtung - CSRF-Token stimmen nicht überein - Formular wurde abgelehnt!</div>');
+			}
+		}
+
+
 		/*
 		 * Alle $_POST durchloopen die reinkommen
 		 * Die Variablen werden Überprüft ob sie numerisch, string oder Array sind
 		 */
 		foreach ($_POST as $key => $val) {
+
 			/*
 				  * Wenn der Inhalt numerisch ist einfach zuweisen
 				  */
@@ -100,10 +126,6 @@ class checked_class
 			}
 		}
 
-		// TODO: Ist deprecated, sollte entfernt werden
-		if (@get_magic_quotes_gpc()) {
-			$this->remove_magicquotes();
-		}
 		// Nochmal checken
 		$this->do_check();
 	}
@@ -267,43 +289,6 @@ class checked_class
 			}
 		}
 		return $neuar;
-	}
-
-	/**
-	 * Bei aktivem MagicQuotes die Escape-Zeichen entfernen
-	 */
-	function remove_magicquotes()
-	{
-		// Elemente durchgehen
-		if (!empty($this)) {
-			foreach ($this as $name => $wert) {
-				// Array-Element in die Rekursion schicken
-				if (is_array($wert)) $this->$name = $this->remove_magicquotes_array($wert);
-				// sonstige Werte mit Stripslasehs bearbeiten
-				else $this->$name = stripslashes($wert);
-			}
-		}
-	}
-
-	/**
-	 * Rekursive Funktion für die Abarbeitung von Arrays.
-	 *
-	 * @param $data
-	 * @return array
-	 */
-	function remove_magicquotes_array($data)
-	{
-		$temp_array = array();
-		// Elemente durchgehen
-		if (!empty($data)) {
-			foreach ($data as $name => $wert) {
-				// Array-Element in die Rekursion schicken
-				if (is_array($wert)) $temp_array[$name] = $this->remove_magicquotes_array($wert);
-				// sonstige Werte mit Stripslasehs bearbeiten
-				else $temp_array[$name] = stripslashes($wert);
-			}
-		}
-		return $temp_array;
 	}
 }
 

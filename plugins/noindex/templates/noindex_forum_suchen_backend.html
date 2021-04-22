@@ -1,0 +1,48 @@
+{$message.plugin.noindex.004}
+
+<form method="POST" action="../plugins/noindex/lib/forum_search_response.php" class="noindex_noreload_update_table" id="noindex_forum_message_suche" name="noindex_forum_messages_table">
+    <fieldset>
+        <legend>{$message.plugin.noindex.015}</legend>
+
+        <input type="text" id="search" name="search">
+        <input type="submit" class="btn btn-info" value="{$message.plugin.noindex.019}">
+
+    </fieldset>
+</form>
+
+<div class="settings-saved hidden" name="forum_messages">{$message.plugin.noindex.024}</div>
+<div class="settings-saving hidden" name="forum_messages">{$message.plugin.noindex.023}</div>
+<div class="settings-error hidden" name="forum_messages">{$message.plugin.noindex.025}</div>
+
+<form action="" method="post" class="noindex_noreload" name="forum_messages">
+
+    <table style="width:100%;" class="table table-striped table-hover" id="noindex_forum_messages_table">
+        <tr>
+            <th>ID</th>
+            <th>{$system_messages_BetreffdesEintrages}</th>
+            <th> {$system_messages_BenutzernamedesEintrages}</th>
+            <th> {$system_messages_DatumdesEintrages}</th>
+            <th> {$system_messages_Wieoftangesehen}</th>
+            <th> NoIndex</th>
+        </tr>
+        {foreach item=message from=$plugin.noindex.message_data_such}
+        <tr>
+            <td>{$message.msgid}</td>
+            <td style="width:30%;"><div><a href="./forum.php?msgid={$message.msgid}&amp;menuid=42">{$message.thema}</a></div><div>{$message.messagetext|substr:0:120}...</div></td>
+            <td><i> {$message.username}</i></td>
+            <td>{$message.zeitstempel}</td>
+            <td>{$message.counten} x </td>
+            <td>
+                <input type="hidden" name="noindex_forum_message[{$message.msgid}]" value="0"/>
+                <input type="checkbox" name="noindex_forum_message[{$message.msgid}]" {if $message.noindex}checked="checked" {/if} value="1"/>
+            </td>
+        </tr>
+        {/foreach}
+    </table>
+
+    <fieldset>
+        <legend>{$message_70}</legend>
+        <!-- Speichern -->
+        <input  type="submit" class="submit_back" style="float:right;" value="{$message_70}"/>
+    </fieldset>
+</form>

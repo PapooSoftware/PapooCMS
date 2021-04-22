@@ -1,0 +1,38 @@
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+<div class="artikel width100">
+	<div class="mv">
+		{if $message=="no_content"}
+			<h1>{$plugin.mv.no_content}</h1>
+		{else}
+			<h1>{$plugin.mv.mitgliederliste}</h1>
+			{$plugin.mv.anzahl_eintraege1}{$anzahl}
+			{if $anzahl == 1}{$plugin.mv.anzahl_eintraege2singular}
+			{else}{$plugin.mv.anzahl_eintraege2}
+			{/if}
+			<br />
+			<br />
+		{/if}
+		{if $fertig=="del"}<div class="message">{$plugin.mv.delete}</div>{/if}
+		{if $fertig=="1"}<div class="message">{$plugin.mv.saved}</div>{/if}
+		{if $fertig=="saved"}<div class="message">{$plugin.mv.daten_eingetragen}</div>{/if}
+		<!--weitere Seiten -->
+		{include file="weiter.inc.html} 
+		{if $mv_liste}
+			<div class="userlist">
+				<form action="#" method="post">
+					<table id="liste" border="1" color="#333333">
+						<tr>{$mv_liste_keys}</tr>
+						{$mv_liste}
+					</table>
+				<input type="submit" name="mv_activate" value="S&auml;tze sperren/freigeben" />
+				</form>
+			</div>
+		{/if}
+		<!--weitere Seiten -->
+		{include file="weiter.inc.html} 
+	</div>
+	<!-- Rechte Fehlermeldung-->
+	{include file=rechte.html}
+</div>
+{include file=foot.inc.html}

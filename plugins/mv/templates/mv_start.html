@@ -1,0 +1,25 @@
+{include file=head.inc.utf8.html}
+{include file=menu.inc.html}
+<div class="artikel">
+	<div class="mv">
+		{$plugin.mv.start}
+		{if $gruppen_mv}
+			{$plugin.mv.hinweis01}
+			<form action="" method="post" id="form_new_field" name="form_new_field" enctype="multipart/form-data">
+				<fieldset>
+					<legend>{$plugin.mv.admin_def}</legend>
+					<select name="group_name" id="group_name" size="1">
+						{foreach item=gruppe from=$gruppen_mv}
+							<option value="{$gruppe.gruppeid}" {if $gruppe.gruppeid==$admin_id}selected{/if}>{$gruppe.gruppenname}</option>
+						{/foreach}
+					</select>
+					<input type="submit" class="submit_back_green" name="submit_admin_id" value="{$plugin.mv.senden}" />
+				</fieldset>
+			</form>
+		{/if}
+	</div>
+	<!-- Rechte Fehlermeldung-->
+	{include file=rechte.html}
+</div>
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}

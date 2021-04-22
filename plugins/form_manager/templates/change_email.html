@@ -1,0 +1,180 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Men� kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+<h1>{$plugin.form_manager.bearbeiten} {if $form_manager_name}- {$form_manager_name}{/if}</h1>
+	
+ <p id="form_manager_hier_knnen_sie_die_einzelnen_formulare_erstellen_bearbeiten" class="h1" >{$plugin_form_manager_hier_knnen_sie_die_einzelnen_formulare_erstellen_bearbeiten}</p>
+
+		<p>
+{if $deleted}
+<div class="message">{$plugin.form_manager.delete}</div>
+{/if}
+{if $uebersicht}
+
+    {if $eintragmakeartikelfertig}
+    <!-- Die Artikel wurden durchgeloopt-->
+    <h2>{$plugin.form_manager.eingetragen}</h2>
+    {/if}
+    {if $exist}
+    <!-- Der Eintrag exisitiert schon-->
+    <h2 style="color:red;">{$plugin.form_manager.existiert}</h2>
+    {/if}
+
+    <ul class="nav nav-tabs">
+        <li  class="active"><a href="#tabs-1" data-toggle="tab">{$plugin.form_manager.liste}</a></li>
+        <li><a href="#tabs-2" data-toggle="tab">{$plugin_form_manager_neues_formular_erstellen}</a></li>
+    </ul>
+
+    <div class="tab-content"  style="margin-bottom:-40px;">
+
+        <div  class="tab-pane active" id="tabs-1" >
+
+<form action="" method="post" style="margin-bottom:-10px;">
+<input placeholder="{$plugin_form_manager_name_form}{$plugin_error.form_manager_name_form}" type="text" name="form_manager_name_form" size="40" style="margin-right:20px;width:auto;" value="{$form_manager_name_form|escape:"html"}" class="form_manager_name_form" id="form_manager_name_form"/>
+<select name="form_manager_kategorie_form" id="form_manager_kategorie_form" size="1" style="padding:7px;margin-right:20px;"/>
+<option value="0">{$plugin_form_manager_kategorie_form}{$plugin_error.form_manager_kategorie_form} {$message_160}</option>
+{foreach item=dat from=$formcat_liste}
+			<option value="{$dat.formcat__id}" {if $form_manager_kategorie_form==$dat.formcat__id} selected="selected"  {/if}>{$dat.formcat__name_der_kategorie}</option>
+		{/foreach}
+</select>
+<input type="submit" name="form_search_now" class="btn btn-info" value="{$plugin_form_manager_anzeigen}">
+</form>
+{$plugin.form_manager.liste2}
+ <table  class="outside  table table-striped table-hover" >
+        <tr>
+            <th>ID <a href="{$fl_link}&order_by=id&sort_order={$sort_order}&form_manager_kategorie_form={$form_manager_kategorie_form}&form_manager_name_form={$form_manager_name_form}&form_search_now={$form_search_now}">{if $sort_order=="asc"}<i class="fa fa-sort-numeric-desc"></i>{else}<i class="fa fa-sort-numeric-asc"></i>{/if}</a></th>
+            <th>{$plugin_form_manager_name_formlar} 
+            <a href="{$fl_link}&order_by=bezeichnung&sort_order={$sort_order}&form_manager_kategorie_form={$form_manager_kategorie_form}&form_manager_name_form={$form_manager_name_form}&form_search_now={$form_search_now}">{if $sort_order=="asc"}<i class="fa fa-sort-alpha-desc"></i>{else}<i class="fa fa-sort-alpha-asc"></i>{/if}</a></th>
+            <th>{$plugin_form_manager_kategorie_form}</th>
+
+            <th>{$plugin_form_manager_erstellt_am} <a href="{$fl_link}&order_by=plugin_form_manager_erstellt_am&sort_order={$sort_order}&form_manager_kategorie_form={$form_manager_kategorie_form}&form_manager_name_form={$form_manager_name_form}&form_search_now={$form_search_now}">{if $sort_order=="asc"}<i class="fa fa-sort-numeric-desc"></i>{else}<i class="fa fa-sort-numeric-asc"></i>{/if}</a></th>
+            <th>{$plugin_form_manager_letzte_nderung} <a href="{$fl_link}&order_by=plugin_form_manager_letzte_nderung&sort_order={$sort_order}&form_manager_kategorie_form={$form_manager_kategorie_form}&form_manager_name_form={$form_manager_name_form}&form_search_now={$form_search_now}">{if $sort_order=="asc"}<i class="fa fa-sort-numeric-desc"></i>{else}<i class="fa fa-sort-numeric-asc"></i>{/if}</a></th>
+            <th>{$plugin_form_manager_anfragen}</th>
+            <th>{$plugin_form_manager_letzte_nutzung}</th>
+            <th>{$plugin_form_manager_felder}</th>
+            <th>{$plugin_form_manager_felder_erstellen__bearbeiten}</th>
+            <th>{$plugin.form_manager.kop}</th>
+            <th>{$plugin.form_manager.export}</th>
+			<th>{$plugin_form_manager_bearbeiten}</th>
+            
+        </tr>
+    
+
+{foreach item=dat from=$list}
+        <tr>
+            <td>{$dat.form_manager_id}</td>
+            <td>{$dat.form_manager_name}</td>
+            <td>{foreach item=dat2 from=$formcat_liste}{if $dat.form_manager_kategorie==$dat2.formcat__id}{$dat2.formcat__name_der_kategorie}{/if}{/foreach}{if !$dat.form_manager_kategorie} - {/if}</td>
+
+            <td>{$dat.form_manager_erstellt}</td>
+            <td>{$dat.form_manager_geaendert}</td>
+            <td>{if $dat.anzahl_anfragen}<a href="{$fl_link_messages}&form_manager_id={$dat.form_manager_id}">{$dat.anzahl_anfragen}</a>{else} 0 {/if} </td>            
+            <td>{if $dat.letzte_anfrage_id}<a href="{$fl_link_messages}&form_manager_id={$dat.form_manager_id}&lead_id={$dat.letzte_anfrage_id}">{$dat.letzte_anfrage}</a>{else} - {/if}</td>
+            <td><a href="{$fl_link_felder}&form_manager_id={$dat.form_manager_id}">{$dat.anzahl_felder}</a></td>
+            <td><a class="" href="{$fl_link_felder}&form_manager_id={$dat.form_manager_id}">{$plugin_form_manager_felder_erstellen__bearbeiten}</a></td>
+            <td><a href="{$fl_link}&form_manager_cop_id={$dat.form_manager_id}">{$plugin.form_manager.kop}</a></td>
+            <td><a href="{$fl_link}&form_manager_export_id={$dat.form_manager_id}">{$plugin.form_manager.export}</a></td>
+            <td><a class="delicon"  href="{$fl_link}&form_manager_id={$dat.form_manager_id}">{$plugin_form_manager_bearbeiten}</a></td>
+        </tr>
+        {/foreach}
+        
+    </table>
+    
+    {if !$list}
+<div class="error">Kein Eintrag vorhanden</div>
+
+{/if}
+        </div>
+
+        <div  class="tab-pane" id="tabs-2" >
+            <p id="form_manager_klicken_sie_auf_den_button" class="h1" >{$plugin_form_manager_klicken_sie_auf_den_button}</p>
+
+            <a href="{$fl_link_create}" id="form_manager_neues_formular_erstellen_link" class="132link btn btn-info" >{$plugin_form_manager_neues_formular_erstellen_link}</a>
+
+        </div>
+    </div>
+
+    {/if}
+
+{if $edit}
+<!-- Es soll ein neuer Eintrag erstellt werden -->
+{include file=../../../plugins/form_manager/templates/formeingabe.html}
+ {/if}
+
+{if $fragedel}
+<h2>{$plugin.form_manager.loeschen}</h2>
+<form action="" method="post">
+
+  <fieldset>
+   <legend>{$plugin.form_manager.loeschen2}
+    </legend>
+<strong>{$form_manager_email}</strong>
+
+  <input type="hidden" name="form_manager_id" value="{$form_manager_id}"/>
+  <br /><br />
+
+  <br />
+  <input style="background:red; float:left;margin-right:50px;" type="submit" name="submitdelecht" value="{$plugin.form_manager.loeschen3}"/>
+
+
+
+
+  </fieldset>
+  </form>
+{/if}
+ 
+
+ 
+
+
+
+
+    {if $is_dev}
+
+ #start#
+
+
+	</p>
+
+
+<br />    
+
+
+    <span class="ignore"></span>
+    <!-- Der Start Button ist notwendig damit sich das System daran aufh?ngen kann. -->
+    <div class="rapid_form">
+        <form action="" name="" method="POST">
+            <!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+            <input type="hidden" name="tb_name" value="plugin_cform" />
+            <!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+            <input type="hidden" name="php_datei_name" value="form_manager" />
+            <!-- Das Standarpr?fix f?r die Ids -->
+            <input type="hidden" name="praefix" value="form_manager" />
+            <!-- Das Standarpr?fix f?r die Feldernamen und Namen -->
+            <input type="hidden" name="praefix_spezial" value="form_manager" />
+            <!-- Das Tool einbinden -->
+            {include file=../../../plugins/devtools/templates/rapid_felder.htm}
+        </form>
+    </div>
+
+
+</div>
+
+
+
+
+{/if}
+
+
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

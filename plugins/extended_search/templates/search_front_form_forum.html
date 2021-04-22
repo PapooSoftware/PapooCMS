@@ -1,0 +1,29 @@
+	<form id="suche_erw" method="get" action="{$slash}index.php" class="form">
+  			<fieldset>
+				<legend>{$templ_Erweiterte} {$message_2135}</legend>
+				{*<!-- Suche-->*}
+				  <div style="width:99%;float:left;">
+				 <div style="width:150px;float:left;margin-right:10px;">
+				<label for="search_erw" >{$message_2135}</label><br />
+				{*<!-- Suchbegriff hier eingeben-->*}
+				<input type="text" id="query" name="search" size="20" value="{$search|escape:"html"}" onblur="if(this.value=='')this.value='Suchbegriff';"
+						onfocus="if(this.value=='Suchbegriff')this.value='';"
+						title="{$message_2035}" title="{$message_2136}"  />
+				<!-- wird angezeigt wenn Shop vorhanden ist -->
+				</div>
+				
+<div style="width:160px;float:left;margin-right:10px;">
+				<label for="erw_suchbereich">{$Suchbereich_auswaehlen}</label><br />
+
+		<select  name="erw_suchbereich" size="1">
+							<option  {if $erw_suchbereich==3}selected="selected"{/if} value="3">{$Suchbereich_forum}</option>
+
+					</select>
+</div>
+					<input type="hidden" value="{$menuid_aktuell}" name="menuid" />
+ 			
+				
+ 			  <input type="submit" class="erwforumsearchbutton" name="find" value="{$message_2138}" title="{$templ_susst|escape:"html"}" />
+ 			  </div>
+    			</fieldset>
+ 			</form>

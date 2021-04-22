@@ -675,7 +675,7 @@ class intern_stamm_class {
 					$wartungstext = 'nodecode:'.$this->preload_wartung();
 				}
 				else {
-					$wartungstext = 'nodecode:'.$row->wartungstext;
+					$wartungstext = 'nodecode:' . $row->wartungstext;
 				}
 
 				if ($row->rechte_spalte_internet == 1) {

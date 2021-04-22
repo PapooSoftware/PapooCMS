@@ -1,0 +1,37 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+{$plugin.bannerverwaltung.bearbeiten3}
+{*<!--<p>Sie können die Verwaltung so einstellen, dass die Banner zufällig oder in der eingetragenen Reihenfolge durchlaufen werden.<br />SIe können außerdem festlegen ob Daten exportiert werden oder importiert werden sollen. Die Aktualisierung erfolgt alle 2 Stunden.</p>-->*}
+{$plugin.bannerverwaltung.bearbeiten2}
+   <form action="#" method="post" >
+
+  <fieldset>
+  <legend>{$plugin.bannerverwaltung.wieviel_anzeigen}
+   </legend>
+   {$plugin.bannerverwaltung.wieviel_text}
+   <label for="bannerverwaltung_wieviel">{$plugin.bannerverwaltung.wieviel}</label>
+   <input type="text"  size="3" name="bannerverwaltung_wieviel"  id="bannerverwaltung_wieviel" value="{$xml_result.0.bannerverwaltung_wieviel}" />
+   <br />
+
+  </fieldset>
+
+   <fieldset>
+  <legend>{$plugin.bannerverwaltung.eintragen}
+   </legend>
+   <input type="submit" class="submit_back_green" name="submitbanner" value="{$plugin.bannerverwaltung.eintragen}"/>
+   </fieldset>
+  </form>
+
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

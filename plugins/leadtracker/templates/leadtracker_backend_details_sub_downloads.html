@@ -1,0 +1,37 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+<form action="" method="GET">
+	<input type="hidden" name="menuid" value="{$menuid|escape}" />
+	<input type="hidden" name="template" value="{$template|escape}" />
+	<table>
+		<col style="width: 19ex" /><col /><col />
+		<thead>
+			<tr><th>{$plugin_leadtracker_statistics_datum}</th><th>{$plugin_leadtracker_statistics_download}</th><th>{$plugin_leadtracker_statistics_link}</th></tr>
+		</thead>
+		<tbody>
+			{if !$downloads}
+			<tr class="placeholder"><td colspan="3">{$plugin_leadtracker_statistics_keine_eintraege}</td></tr>
+			{else}
+			{foreach from=$downloads item=download}
+			<tr>
+				{if $download.type == 'check_replace'}
+				<td>{$download.timestamp|date_format:$plugin_leadtracker_statistics_date_format}</td>
+				<td title="{$download.downloadname_internal}"><a href="{$backend_base_path|escape}form_manager/templates/create_input.html&amp;menuid={$download.menu_id}&amp;form_manager_id={$download.form_id}&amp;feldid={$download.downloadid}">{$download.downloadname|escape}</a></td>
+				<td><a href="{$download.downloadlink|escape}">{$download.downloadlink|escape}</a></td>
+				{else}
+				<td>{$download.timestamp|date_format:$plugin_leadtracker_statistics_date_format}</td>
+				<td><a href="{$backend_root|escape}upload.php?menuid=33&amp;id={$download.downloadid|escape}">{if $download.downloadname}{$download.downloadname|escape}{else}&lt;{$download.downloadid|escape}&gt;{/if}</a></td>
+				<td><a href="{$download.downloadlink|escape}">{$download.downloadlink|escape}</a></td>
+				{/if}
+			</tr>
+			{/foreach}
+			{/if}
+		</tbody>
+	</table>
+	{if $STANDALONE}
+	{include file=../../../interna/templates/standard/weiter.inc.html}
+	{else}
+	{include file=weiter.inc.html}
+	{/if}
+</form>
+</div>
+{/if}

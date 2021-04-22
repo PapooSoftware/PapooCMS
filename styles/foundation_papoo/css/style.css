@@ -440,6 +440,13 @@ input[type="submit"].erwsuchbutton {
 	padding: 7px 10px 7px 10px;
 }
 
+ol.searchol .searchh3 {
+	margin-bottom:0.625rem;
+}
+ol.searchol .ext_search_block {
+	margin-bottom:1.25rem;
+}
+
 /** sitemap **/
 #inhalt_sitemap ul,
 #inhalt_sitemap li {

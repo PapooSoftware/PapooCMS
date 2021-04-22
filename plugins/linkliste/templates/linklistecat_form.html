@@ -1,0 +1,45 @@
+{if $IS_ADMIN}
+<!-- Wir nur in der Admin angezeigt -->
+<form action="#" method="post">
+
+<fieldset><legend>{$plugin.linkliste.eintrag_angabe} </legend> <label
+	for="cat_sub ">{$plugin.linkliste.unterkategorie}</label><br />
+<select name="cat_sub" size="1">
+	<option value="0"{$checked1}>{$plugin.linkliste.keine}</option>
+	{foreach item=cat from=$result_cat} {if $cat_id!=$cat.cat_id}
+	<option value="{$cat.cat_id}" {if $cat_sub==$cat.cat_id}
+		selected="selected"{/if}>{$cat.cat_name}</option>
+	{/if} {/foreach}
+
+</select> <input type="hidden" name="cat_id" value="{$cat_id}" /></fieldset>
+
+{foreach item=lang from=$language_dat} {if $lang.selected}
+<fieldset><legend>{$plugin.linkliste.kategorie_name} {$lang.language} </legend> <label
+	for="cat_name">{$plugin.linkliste.name_angabe}</label><br />
+<input type="text" name="cat_name[{$lang.lang_id}]" id="cat_name"
+	value="{$cat_name[$lang.lang_id]}" size="40" maxlength="254" /> <br />
+
+</fieldset>
+<!-- Meta Inforamtionen -->
+<fieldset><legend>{$message_435} in {$lang.language} </legend> <!-- Seitentitle--> <label
+	for="cat_title[{$lang.lang_id}]">{$message_436}</label><br />
+<input type="text" name="cat_title[{$lang.lang_id}]" id="cat_title[{$lang.lang_id}]" value="{$cat_title[$lang.lang_id]}"
+	size="40" maxlength="255" /> <!-- Meta Description--> <br />
+<label for="cat_description[{$lang.lang_id}]">{$message_437}</label><br />
+<textarea name="cat_description[{$lang.lang_id}]" id="cat_description[{$lang.lang_id}]" rows="3" cols="50">{$cat_description[$lang.lang_id]}</textarea>
+<!-- Meta keywords--> <br />
+<label for="cat_keywords[{$lang.lang_id}]">{$message_438}</label><br />
+<textarea name="cat_keywords[{$lang.lang_id}]" id="cat_keywords[{$lang.lang_id}]" rows="2" cols="50">{$cat_keywords[$lang.lang_id]}</textarea>
+</fieldset>
+
+{/if} {/foreach}
+<fieldset><legend>{$plugin.linkliste.eintragen}</legend> <br />
+<br />
+{if $altereintrag} <br />
+<input style="float:right;" type="submit" class="submit_back_red" name="submitdel" value="{$plugin.linkliste.loeschen}" /> {/if}
+<input class="submit_back_green" type="submit" name="submitentry"
+	value="{$plugin.linkliste.eintragen}" /></fieldset>
+
+
+</form>
+{/if}

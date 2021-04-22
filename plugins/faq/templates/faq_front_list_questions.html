@@ -1,0 +1,28 @@
+{* Mitteilungen oben *}
+{if $faq_header}<h1>{$faq_header}</h1>{/if}
+{if $description}<div>{$description}</div>{/if}
+<br />
+<h2>{$plugin.faq_front.pageheader.faq_list_questions}</h2>
+{if $faq_no_readaccess} {* Leserecht vorhanden? *}
+	<p class="bold_red">{$plugin.faq_front.message.no_readaccess}</p><br /> {* Keine Leserechte *}
+{else}
+{*  *}
+	<div class="div_margins">
+		<p>{$plugin.faq_front.text.faq_offene_count} {$faq_offene_anzahl}</p>
+		<p>{$plugin.faq_front.text.faq_offene_waiting_count} {$faq_offene_anzahl_waiting}</p>
+		<br />
+		<ul class="faq_ul_list_questions">
+			{foreach item=question from=$faq_questions}
+				<li><img src="{$slash}plugins/faq/bilder/faq.gif" width="10" height="10" class="mr_3_no_border" title="{$plugin.faq_front.imgtext.question}" alt="{$plugin.faq_front.imgtext.question}" />
+				{if $faq_user_may_write}
+					<a href="{$slash}plugin.php?menuid={$menuid_aktuell}&amp;template=faq/templates/faq_front_answer_a_question.html&amp;faq_id={$question.id}&amp;faq_main_id={$question.cat_id}&amp;src={$question.id1}" title="{$plugin.faq_front.linktext.faq_question}">
+				{/if}
+				<strong>{$question.question}</strong>
+				{if $faq_user_may_write}</a>{/if}
+				</li>
+			{/foreach}
+		</ul>
+	</div>
+	<br />
+	{include file="_module_intern/mod_weiter.html"}
+{/if}

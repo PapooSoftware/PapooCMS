@@ -1,0 +1,33 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+<h2>{$message_5820}</h2>
+<p>{$message_5821}</p>
+<p>{$message_5822}</p>
+
+  <form action="#" method="post" >
+  <fieldset> 
+  <legend>{$message_5823}
+   </legend>
+  <label for="usefulservices_analytics_key">{$message_5824}</label><br />
+ <textarea cols="60" rows="10" name="usefulservices_analytics_key" id="usefulservices_analytics_key">{$usefulservices_analytics_key}</textarea><br /><br />
+  
+  <input type="submit" class="submit_back_green" name="submitanalytics" value="{$message_5825}"/>
+ 
+  
+  </fieldset>
+  </form>
+  
+
+</div>
+ 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

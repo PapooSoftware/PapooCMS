@@ -1,0 +1,34 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel"> 
+<h1>{$plugin_user_download__title}</h1>
+<p>{$plugin_user_download__kurz}</p>
+<form method="post" action="">
+<fieldset>
+<legend>{$plugin_user_download__search}</legend>
+<p>{$plugin_user_download__search_kurz}</p>
+<input type="text" name="suchstring" />
+<input type="submit" value="{$plugin_user_download__search}" />
+</fieldset>
+</form>
+<table style="width: 100%;">
+<tr><th>{$plugin_user_download__username}</th><th>{$plugin_user_download__firstname}</th><th>{$plugin_user_download__surname}</th><th>{$plugin_user_download__email}</th><th>{$plugin_user_download__files}</th></tr>
+{$plugin.user_download.user_liste}
+</table>
+</div>
+
+
+</div>
+</div>
+
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

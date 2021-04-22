@@ -1,0 +1,92 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+	<h3>{$message.plugin.lang_export.head}</h3>
+	{if $plugin.lang_export.template_weiche == "KOPOK"}
+	{$message.plugin.lang_export.kopok_text}
+	{/if}
+	
+	{if $plugin.lang_export.template_weiche == "START"}
+		<p>
+			{$message.plugin.lang_export.start_text}
+		</p>
+		<form name="test_daten" method="post" action="">
+			<fieldset>
+				<legend>{$message.plugin.lang_export.form1_legend}</legend>
+				
+				<label for="lang_select_id">{$message.plugin.lang_export.form1_label}:</label>
+				<select id="lang_select_id" name="lang_select_id" size="1">
+					{foreach item=lang from=$languageget}
+						<option value="{$lang.lang_id}">
+							{$lang.language} ({$lang.lang_id})
+						</option>
+					{/foreach}
+				</select><br />
+				<br />
+				<input type="submit" class="submit_back_big" name="submit" value="{$message.plugin.lang_export.form1_submit}" />
+			</fieldset>
+		</form>
+		<p>
+			{$message.plugin.lang_export.start_text2}
+		</p>
+		<form name="test_daten" method="post" action="">
+			<fieldset>
+				<legend>{$message.plugin.lang_export.form1_legend}</legend>
+				
+				<label for="lang_select_id_ref">{$message.plugin.lang_export.formi2_label}:</label><br />
+				<select id="lang_select_id_ref" name="lang_select_id_ref" size="1">
+					{foreach item=lang from=$languageget}
+						<option value="{$lang.lang_id}">
+							{$lang.language} ({$lang.lang_id})
+						</option>
+					{/foreach}
+				</select><br />
+				<label for="lang_select_id_into">{$message.plugin.lang_export.formi3_label}:</label><br />
+				<select id="lang_select_id_into" name="lang_select_id_into" size="1">
+					{foreach item=lang from=$languageget}
+						<option value="{$lang.lang_id}">
+							{$lang.language} ({$lang.lang_id})
+						</option>
+					{/foreach}
+				</select><br />
+				<br />
+				<input type="submit" class="submit_back_xl" name="ref_submit" value="{$message.plugin.lang_export.form1_submit2}" />
+			</fieldset>
+		</form>
+	{/if}
+	
+	{if $plugin.lang_export.template_weiche == "DOWNLOAD"}
+		<p>
+			{$message.plugin.lang_export.download_text}:<br />
+			<br />
+			<a href="{$plugin.lang_export.dump_filename}">{$message.plugin.lang_export.download_link}</a><br />
+			<a href="./templates_c/{$export_csv_menu_file}">{$message.plugin.lang_export.download_link_men}</a><br />
+			<a href="./templates_c/{$export_csv_artikel_file}">{$message.plugin.lang_export.download_link_artikel}</a><br />
+			<br />
+		</p>
+		<form name="test_daten" method="post" action="">
+			<fieldset>
+				<legend>{$message.plugin.lang_export.form2_legend}</legend>
+				
+				<label for="lang_select_id">{$message.plugin.lang_export.form2_label}:</label>
+				<input type="submit" name="lang_export_delete" id="lang_export_delete" value="{$message.plugin.lang_export.form2_submit}" />
+			</fieldset>
+		</form>
+	{/if}
+	
+	{if $plugin.lang_export.template_weiche == "END"}
+		<p>
+			{$message.plugin.lang_export.end_text}
+		</p>
+	{/if}
+</div>
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

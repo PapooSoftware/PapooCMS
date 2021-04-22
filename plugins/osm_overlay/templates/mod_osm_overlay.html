@@ -1,0 +1,33 @@
+<section id="osm_overlay">
+	<link type="text/css" href="{$web_pfad}/plugins/osm_overlay/js/OpenLayers-5.3/ol.css" rel="stylesheet" />
+	<link type="text/css" href="{$web_pfad}/plugins/osm_overlay/css/styles.css" rel="stylesheet" />
+	{if !$config_jquery_aktivieren_label}
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	{/if}
+	<script type="text/javascript" defer="defer" src="{$web_pfad}/plugins/osm_overlay/js/OpenLayers-5.3/ol.js"></script>
+	<script type="text/javascript" defer="defer" src="{$web_pfad}/plugins/osm_overlay/js/osm_overlay.js"></script>
+
+	<div class="osm-overlay-footer">{$osm_header}</div>
+	<form class="osm-overlay-search input-group">
+		<input class="form-control" inputmode="numeric" id="osm_overlay_search" {literal}pattern="[0-9]{5}"{/literal} placeholder="{$osm_overlay_placeholder}" type="text" />
+		<button class="btn input-group-addon" type="submit">Suche...</button>
+	</form>
+
+	<div
+		class="osm-overlay-map"
+		data-lon="{$osm_lon|escape}"
+		data-lat="{$osm_lat|escape}"
+		data-zoom="{$osm_zoom|escape}"
+		data-search-zoom="{$osm_search_zoom|escape}"
+		data-source="{$web_pfad}/plugin.php?menuid={$menuid}&amp;template=osm_overlay/templates/markers.geojson">
+	</div>
+	<div class="osm-overlay-popup ol-popup">
+		<a href="#" class="ol-popup-closer" aria-label="Schließen"></a>
+		<div class="popup-content">
+			<h3 class="popup-title"></h3>
+			<p class="popup-description"></p>
+		</div>
+	</div>
+
+	<div class="osm-overlay-footer">{$osm_footer}</div>
+</section>

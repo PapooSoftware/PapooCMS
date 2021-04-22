@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Versionsnummer von Papoo Software -->
+<plugin version="3.0">
+
+<!-- ==================================================== -->
+<!-- ============= ALLGEMEINE INFORMATIONEN ============= -->
+<!-- ==================================================== -->
+<!-- Name des Plugins -->
+<name>Twitter Plugin</name>
+
+<!-- Versionsnummer des Plugins -->
+<version>1.0</version>
+
+<!-- Erscheinungsdatum des Plugins -->
+<datum>03.04.2014</datum>
+
+<!-- Kurzbeschreibung des Plugins -->
+<beschreibung_de><![CDATA[Dieses Plugin ermoeglicht es Ihnen Tweets oder Followers von einem bestimmten Twitter Benutzer ausgeben zulassen und Tweets zu einem bestimmten Hashtag.]]></beschreibung_de>
+<beschreibung_en><![CDATA[This Plugin is only for tests]]></beschreibung_en>
+
+<!-- Eindeutige Nummer offizieller papoo-Plugins -->
+<papooid></papooid>
+
+<!-- Link -->
+<link>http://www.papoo.de</link>
+
+
+<!-- ==================================================== -->
+<!-- ============= AUTOR INFORMATIONEN ================== -->
+<!-- ==================================================== -->
+<!-- Informationen zum Autor des Plugins -->
+<autor>
+    <!-- Name des Autors -->
+    <name>Sebastian Hartmann</name>
+    
+    <!-- Postalische Kontaktinformationen des Autors -->
+    <kontakt>
+        <![CDATA[Sebastian Hartmann
+        Auf dem Acker 18
+        53757, Sankt Augustin]]>
+    </kontakt>
+    
+    <!-- Email Adresse des Autors -->
+    <email>s.hartmann@i2media.biz</email>
+    
+    <!-- Telefonnummer des Autors -->
+    <telefon>02241 / 31 91 08</telefon>
+</autor>
+
+
+<!-- ==================================================== -->
+<!-- ============= MENUE INFORMATIONEN ================== -->
+<!-- ==================================================== -->
+<menue>
+    <!-- Name des Menuepunktes im Backend -->
+    <eintrag_de>Twitter Plugin</eintrag_de>
+    <eintrag_en>Twitter Plugin</eintrag_en>
+    
+    <!-- Pfad zum Menueicon des Menuepunktes im Backend (relativ)
+    (18x18 Pixel) -->
+    <icon>twitter/bilder/twitter-icon.png</icon>
+    
+    <!-- Name der Seite auf welche der Menuepunkt im Backend verweisen soll -->
+    <link>plugin:twitter/templates/twitter_back.html</link>
+    
+    <!-- Untermenuepunkt fuer diesen Menuepunkt im Backend -->
+    <!-- <submenue>
+        <eintrag_de>Submenue 1_1</eintrag_de>
+        <eintrag_en>Submenue 1_1</eintrag_en>
+        <icon></icon>
+        <link>plugin:twitter/templates/twitter_back.html</link>
+    </submenue> -->
+</menue>
+
+
+<!-- ==================================================== -->
+<!-- ============= KLASSEN INFORMATIONEN ================ -->
+<!-- ==================================================== -->
+<!-- Informationen des Pluginklasse welche eingebunde nwerden sollen -->
+<klasse>
+    <!-- Name der Klasseninstanz -->
+    <name>twitter</name>
+    
+    <!-- Pfad zur Klassendatei (relativ) -->
+    <datei>twitter/lib/twitter.class.php</datei>  
+</klasse>
+
+
+<!-- ==================================================== -->
+<!-- ============= CSS INFORMATIONEN ==================== -->
+<!-- ==================================================== -->
+<!-- Pfad zur CSS-Datei (relativ) -->
+<css>twitter/css/styles.css</css>
+
+
+<!-- ==================================================== -->
+<!-- ============= DATENBANK INFORMATIONEN ============== -->
+<!-- ==================================================== -->
+<datenbank>
+    <!-- Pfad zur Installtionsdatei (relativ) -->
+    <installation>twitter/sql/install.sql</installation>
+    
+    <!-- Pfad zur Deinstallationsdatei (relativ) -->
+    <deinstallation>twitter/sql/deinstall.sql</deinstallation>
+</datenbank>
+
+
+<!-- ==================================================== -->
+<!-- ============= MODUL INFORMATIONEN ================== -->
+<!-- ==================================================== -->
+<!-- Informationen des Fronted-Moduls -->
+
+
+<!-- Einbindung der Sprachdateien -->
+<messages>twitter/messages</messages>
+</plugin>

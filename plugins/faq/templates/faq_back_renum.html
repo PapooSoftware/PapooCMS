@@ -1,0 +1,56 @@
+{if $IS_ADMIN}
+	{include file=head.inc.utf8.html}
+	{include file=menu.inc.html}
+	<div class="artikel">
+		
+		{include file=../../../plugins/faq/templates/faq_menue.html}
+		<h2 class="clear_left">{$plugin.faq_back.pageheader.faq_order}</h2>
+		{if $fehler1}<div class="error">{$plugin.faq_back.errmsg.cat_fehlt}</div>{/if}
+		{if $not_numeric}<div class="error">{$plugin.faq_back.errmsg.order_notnumeric}</div>{/if}
+		{if $faq_is_renumbered}<div class="message">{$plugin.faq_back.message.faq_is_renumbered}</div>{/if}
+		{if !$cat_data}<div class="message">{$plugin.faq_back.message.no_cats}</div>{/if}
+		<p>{$plugin.faq_back.text.faq_order}</p>
+		<p>{$plugin.faq_back.text.faq_count} {$faq_anzahl}</p>
+		{if $cat_data}
+			<form action="" method="post">
+				<fieldset>
+					<legend>{$plugin.faq_back.formtext.legend_cat_select}</legend>
+					<label for="cat_sel" class="renum_cat_sel">{$plugin.faq_back.formtext.faq_order1}</label><br />
+					<select name="cat_sel_id" size="1" id="cat_sel" >
+						{foreach item=catopt from=$cat_data}
+							{* verwaist *}
+							<option value="{$catopt.id}" {if $catopt.cat_selected} selected="selected" {/if}
+								{if $catopt.orphan}
+									class="lvl_{$catopt.level} bold_red">{$catopt.catname} {$plugin.faq_back.text.cat_orphan}
+								{else}
+									class="lvl_{$catopt.level}">{$catopt.catname}
+								{/if}
+							</option>
+						{/foreach}
+					</select>
+					<input name="submit" value="{$plugin.faq_back.submit.cat_select}" type="submit" title="{$plugin.faq_back.submit.cat_select}" />
+				</fieldset>
+			{/if}
+			{if $faq_data}
+				{* Nummerieren *}
+					<fieldset class="width100">
+						<legend>{$plugin.faq_back.formtext.legend_faq_order} {$cat_name}</legend>
+						{foreach item=faq_order from=$faq_data}
+							<input type="text" name="faq_order_name[{$faq_order.id}]" value="{$faq_order.order_id}" id="faq_order_{$faq_order.id}" class="renum_faq_cat_input" />
+							<label for="faq_order_{$faq_order.id}" class="lvl_{$faq_order.level} ml_0">
+								{$faq_order.question}
+								{if $faq_order.not_numeric}
+									<span class="bold_red">{$plugin.faq_back.errmsg.order_notnumeric2}</span>
+								{/if}
+							 </label>
+							<br />
+						 {/foreach}
+					 </fieldset>
+					 <input name="submit" value="{$plugin.faq_back.submit.faq_order}" type="submit" title="{$plugin.faq_back.submit.faq_order_title}" />
+			{/if}
+		</form>
+	</div> 
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

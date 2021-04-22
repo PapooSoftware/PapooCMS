@@ -1,0 +1,63 @@
+.fehlerliste
+{
+	border: 1px solid red;
+	background: #eee;
+	padding: 10px 0px 0px 10px;
+	margin-bottom: 10px;
+}
+.form_error
+{
+	color:red;
+	font-weight:600;
+}
+
+/*
+.labdiv
+{
+	float:left;
+	margin:2px;
+	margin-bottom:5px;
+	width:99%;
+}
+*/
+.labdiv {overflow: hidden;}
+
+.labdiv label
+{
+	display:block;
+	float:left;
+	margin-top:0px;
+	width:30%;
+}
+
+.labdiv label.checkboxlabel
+{
+	display:inline;
+	float:none;
+	margin-left:10px;
+}
+
+div#qTip
+{
+	padding: 3px;
+	border: 1px solid #666;
+	display: none;
+	background: #FFF4D2;
+	color: #222;
+	
+	position: absolute;
+	z-index: 1000;
+}
+
+.descrip_img
+{
+	margin-left:10px;
+	margin-bottom:-3px;
+}
+
+fieldset.field_class table {
+	width: 100%;
+}
+fieldset.field_class td {
+	padding-right: 0.3ex;
+}

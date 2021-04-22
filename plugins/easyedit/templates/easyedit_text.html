@@ -1,0 +1,44 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+
+<div class="artikel">
+
+
+
+<h1>{$plugin.easyedit.aktivieren}</h1>
+<p>{$plugin.easyedit.grktivieern}</p>
+<h2>{$plugin.easyedit.grfreischalten}</h2>
+<form action="" method="post">
+<table style="width:89%;" summary="{$plugin.easyedit.lstemnue}">
+<tr>
+<td>{$plugin.easyedit.grname}</td>
+<td>{$plugin.easyedit.greasyedit}</td>
+<td></td>
+</tr>
+{foreach item=menu from=$gruppen}
+<tr style="background:#{$menu.style};">
+
+<td>{$menu.gruppenname}</td>
+<td>
+<input type="checkbox" {if $menu.easy_geasy_ok=="1"}checked="checked"{/if} name ="easy_geasy_ok[{$menu.gruppeid}]" value="1" />
+</td>
+<td></td>
+</tr>
+{/foreach}
+</table>
+<br />
+<fieldset>
+<legend>{$plugin.easyedit.eintragen1}</legend>
+<input type="submit" class="submit_back_green" name="entergr" value="{$plugin.easyedit.eintragen2}" />
+</fieldset>
+</form>
+</div>
+
+ 
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}
