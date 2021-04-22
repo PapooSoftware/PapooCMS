@@ -1,0 +1,17 @@
+.idea
+.svn
+cache/mpdf/*
+dokumente/backup/index.html
+dokumente/index.html
+dokumente/logs/index.html
+dokumente/upload/index.html
+images/index.html
+images/thumbs/index.html
+interna/templates_c/index.html
+templates_c/index.html
+templates_c/shariff.json
+interna/templates_c/*
+lib/site_conf.php
+dokumente/logs/*.zip
+lib/classes/third-party/composer/vendor/
+templates_c/
