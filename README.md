@@ -7,6 +7,7 @@ The Webpage can be found here: https://www.papoo.de - their you can find additio
 ## Installation
 The Installation is realy simple, unzip a version or copy the repo somewhere to your apache www folder where you can open it. 
 Afterwards open the /setup/ Folder in your Browser, follow the instructions :-).
+A complete installation guide can be found here in german: https://www.papoo.de/installation-cms-papoo.html
 
 ## What you need
 You need at least Apache Webserver and a running mysql Database. Thats it.
