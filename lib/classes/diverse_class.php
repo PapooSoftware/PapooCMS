@@ -1601,6 +1601,38 @@ class diverse_class
 
 		return (bool)preg_match($pattern, $subject);
 	}
+
+	/**
+	 * @param string $html
+	 * @return string
+	 */
+	public function injectCsrfTokenIntoForms(string $html): string
+	{
+		// Textareas vorübergehend verschleiern, damit das CSRF-Token nicht in TinyMCE-Instanzen inkludiert wird
+		$textareas = [];
+		$html = preg_replace_callback(
+			'~<(?<tag>(?(R)[^\s/>]+|textarea(?=[\s/>])))(?>[^>]*)(?<sc>(?<=/))?>(?<fot>(?>[^<]*)(?(?=<!--)(?>.+?-->)(?>(?&fot)*)))(?(sc)|(?R)*</\g{tag}>(?(R)(?>(?&fot)*)|))~i',
+			function ($match) use (&$textareas) {
+				$id = uniqid('textarea__');
+				$textareas[] = [
+					'id' => $id,
+					'html' => $match[0],
+				];
+				return $id;
+			},
+			$html
+		) ?? $html;
+
+		// CSRF-Token integrieren
+		$html = str_ireplace('</form>', '<input type="hidden" name="csrf_token" value="'.$_SESSION['csrf_token'].'"/></form>', $html);
+
+		// Textareas wiederherstellen
+		$html = array_reduce($textareas, function ($html, $textarea) {
+			return str_replace($textarea['id'], $textarea['html'], $html);
+		}, $html);
+
+		return $html;
+	}
 }
 
 $diverse = new diverse_class();

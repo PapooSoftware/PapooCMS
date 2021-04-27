@@ -347,6 +347,6 @@ if ($aria=="standard/") {
 }
 $pluginintegrator->output_filter_admin();
 
-$output = str_ireplace('</form>','<input type="hidden" name="csrf_token" value="'.$_SESSION['csrf_token'].'"/> </form>',$output);
+$output = $diverse->injectCsrfTokenIntoForms((string)$output);
 
 print $output;
