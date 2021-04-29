@@ -2039,4 +2039,16 @@ $this->content->template['abort_process'] = 'Vorgang abbrechen';
 
 $this->content->template['label__rename_uploaded_file']='Alten Dateinamen beibehalten';
 
+$this->content->template['message']['stamm']['smtp'] = [
+	'title' => "SMTP-Einstellungen (Nur für Admin E-Mail-Adresse)",
+	'activate' => "SMTP für den E-Mail-Versand aktivieren",
+	'host' => "Hostname",
+	'port' => "Port",
+	'user' => "Benutzer",
+	'password' => "Passwort",
+	'nosmtp' => "Kein SMTP Verwenden",
+	'customsmtp' => "Benutzerdefinierte SMTP-Einstellungen verwenden",
+	'system' => "System-Einstellungen verwenden"
+];
+
  #start#s

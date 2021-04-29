@@ -1290,3 +1290,15 @@ $this->content->template['system_config_jquery_aktivieren2']='Javascript Einstel
 $this->content->template['system_config_jquery_aktivieren_label']='JQuery aktivieren';
 $this->content->template['system_config_jquery_colorbox_aktivieren']='Jquery Colorbox aktivieren';
 $this->content->template['system_config_basis_js_funktionen_frontend']='Basis JS Funktionen Frontend z.B. BBCode Editor f&uuml;r das Forum';
+
+$this->content->template['message']['stamm']['smtp'] = [
+	'title' => "Paramètres SMTP (Adresse électronique de l'administrateur uniquement)",
+	'activate' => "Activez le SMTP pour l'envoi d'adresse électronique",
+	'host' => "Nom d'hôte",
+	'port' => "Port",
+	'user' => "Identifiant",
+	'password' => "Mot de passe",
+	'nosmtp' => "Ne pas utiliser le SMTP",
+	'customsmtp' => "Utiliser des paramètres SMTP personnalisés",
+	'system' => "Utiliser les paramètres du système"
+];

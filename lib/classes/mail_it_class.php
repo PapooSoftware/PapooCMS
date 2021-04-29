@@ -167,11 +167,17 @@ class mail_it
 
 	/**
 	 * Diese Methode sendet die Mail, und gibt zurück ob es geklappt hat oder nicht.
+	 * @param array $smtpSettings Optionale eigene SMTP-Einstellungen. Folgende Schlüssel müssen im Array vorhanden sein:
+	 *  settingsType: Welcher Mail-Type verwendet werden soll: system (Systemeinstellungen), smtp (Eigene SMTP-Einstellungen), sendmail (Kein SMTP)
+	 *  smtp_host: Der SMTP Host
+	 *  smtp_port: Der SMTP Port
+	 *  smtp_user: Der SMTP Benutzer
+	 *  smtp_pass: Das SMTP Passwort
 	 * @return string|void
 	 *
 	 * @throws phpmailerException
 	 */
-	function do_mail()
+	function do_mail(array $smtpSettings = [])
 	{
 		if (!empty($this->from_text)) {
 			$this->from_text="";
@@ -189,7 +195,25 @@ class mail_it
 		if ($true1 == true and $true2 == true) {
 			// Neue mail Klasse initialisieren
 			require_once(PAPOO_ABS_PFAD."/lib/classes/class.phpmailer.php");
+			require_once(PAPOO_ABS_PFAD."/lib/classes/class.smtp.php");
 			$mail = new PHPMailer();
+
+			if($smtpSettings['settingsType'] == 'system' || empty($smtpSettings)) {
+				$smtpSettings = $this->cms->getSmtpConfig();
+			}
+
+			if($smtpSettings['settingsType'] == 'sendmail') {
+				$mail->SMTPAuth   = false;
+			}
+			elseif ($smtpSettings['settingsType'] == 'smtp') {
+				$mail->IsSMTP();
+				$mail->Host       = $smtpSettings['host'];
+				$mail->SMTPAuth   = true;
+				$mail->Username   = $smtpSettings['user'];
+				$mail->Password   = $smtpSettings['password'];
+				$mail->SMTPSecure = "tls";
+				$mail->Port       = $smtpSettings['port'];
+			}
 
 			$mail->CharSet = "utf-8";
 			//$mail->IsMail(); // ???
