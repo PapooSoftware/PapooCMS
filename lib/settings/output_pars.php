@@ -28,7 +28,8 @@ do {
 	$output = preg_replace($find, $replace, $output);
 } while($len < strlen($output));
 $output = str_replace("&amp;amp;", "&amp;", $output);
-$output = str_ireplace('</form>','<input type="hidden" name="csrf_token" value="'.$_SESSION['csrf_token'].'"/> </form>',$output);
+
+$output = $diverse->injectCsrfTokenIntoForms((string)$output);
 
 // pkalender-Einbindung Cache-Klasse
 $cache->cache_speichern();

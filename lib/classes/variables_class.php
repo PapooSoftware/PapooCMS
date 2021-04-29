@@ -88,6 +88,9 @@ class checked_class
 			}
 		}
 
+		if (is_array($_POST)) {
+			self::removeCsrfTokenFromUserInput($_POST);
+		}
 
 		/*
 		 * Alle $_POST durchloopen die reinkommen
@@ -128,6 +131,26 @@ class checked_class
 
 		// Nochmal checken
 		$this->do_check();
+	}
+
+	/**
+	 * Diese Methode entfernt input[type="hidden"][name="csrf_token"]-Felder, die Formularen
+	 * innerhalb einer TinyMCE-Instanz hinzugefügt wurden.
+	 * @param mixed|array|string $data Call by reference
+	 *
+	 * @deprecated Soll nur noch bereits betroffene Artikel automatisch säubern.
+	 * @see diverse_class::injectCsrfTokenIntoForms()
+	 */
+	private static function removeCsrfTokenFromUserInput(&$data): void
+	{
+		if (is_string($data)) {
+			$data = preg_replace('~<input type="hidden" name="csrf_token"[^>]+>~', '', $data);
+		}
+		elseif (is_array($data)) {
+			foreach ($data as &$value) {
+				self::removeCsrfTokenFromUserInput($value);
+			}
+		}
 	}
 
 	/**
