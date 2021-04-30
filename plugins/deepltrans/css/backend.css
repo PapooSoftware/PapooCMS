@@ -1,0 +1,24 @@
+div.artikel > div.rapid_form {
+    margin: 5px 5px 5px 5px;
+    border: 1px #EEE solid;
+    border-top:26px #EEE solid;
+    padding: 15px;
+}
+
+div.artikel > div.rapid_form legend {
+    width: calc(100% + 22px);
+}
+
+div.artikel > div.rapid_form .rapid_dev_help_button {
+    float: right;
+    background-color: #095a94;
+    border: 2px solid #095a74;
+    border-radius: 50%;
+    width: 31px;
+    height: 31px;
+    font-weight: bold;
+    font-size: large;
+    color: white;
+    margin: 10px 20px 0 0;
+}
+
