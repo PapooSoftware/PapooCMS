@@ -49,10 +49,16 @@
       <link>plugin:deepltrans/templates/setdeepl_backend.html</link>
     </submenue>
     <submenue>
-      <eintrag_de><![CDATA[Übersetzungen]]></eintrag_de>
-      <eintrag_en><![CDATA[Übersetzungen]]></eintrag_en>
+      <eintrag_de><![CDATA[Sprach Dateien]]></eintrag_de>
+      <eintrag_en><![CDATA[Language Files]]></eintrag_en>
       <icon/>
       <link>plugin:deepltrans/templates/bersetzungen_backend.html</link>
+    </submenue>
+    <submenue>
+      <eintrag_de><![CDATA[Content]]></eintrag_de>
+      <eintrag_en><![CDATA[Content]]></eintrag_en>
+      <icon/>
+      <link>plugin:deepltrans/templates/content_bersetzungen_backend.html</link>
     </submenue>
   </menue>
   <!-- KLASSEN-INFORMATIONEN -->

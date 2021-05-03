@@ -1,13 +1,5 @@
-<?php
-/**
+<?php 
+$this->content->template['message']['plugin']['kontrastwechsler']['kontrast'] = "Contrast:"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['font_size'] = "Fontsize:"; 
 
-Englische Text-Daten des Plugins "Kontrastwechsler" für das Frontend
-
-
-*/
-
-#start#
-$this->content->template['message']['plugin']['kontrastwechsler'] = array(
-    "kontrast" => "Contrast:",
-    "font_size" => "Fontsize:"
-);
+ ?>

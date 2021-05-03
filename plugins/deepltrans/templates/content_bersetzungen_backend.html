@@ -1,0 +1,80 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+	{*<!-- Hier kommt der Kopf rein-->*}
+	{include file=head.inc.utf8.html}
+
+	<!-- Menrein-->
+	{include file=menu.inc.html}
+
+
+	<link rel="stylesheet" type="text/css" href="{$css_path}/backend.css" />
+	<link rel="stylesheet" type="text/css" href="{$css_path}/../../plugincreator/css/backend.css" />
+
+	<div class="artikel">
+		<h1 id="deepltrans_bersetzungen_starten" class="h1" >{$plugin_deepltrans_bersetzungen_starten}</h1>
+
+ <p id="deepltrans_hier_knnen_sie_die_bersetzung_der_einzelnen_elemente_starten" class="h1" >{$plugin_deepltrans_hier_knnen_sie_die_bersetzung_der_einzelnen_elemente_starten}</p>
+
+ <p id="deepltrans_die_bersetzung_erfolgt_in_alle_aktivierten_sprachen" class="h1" >{$plugin_deepltrans_die_bersetzung_erfolgt_in_alle_aktivierten_sprachen}</p>
+
+
+		<div class="results">
+			<p id="startresult"></p>
+		</div>
+		<div id="loaded" style="display:none;">FERTIG</div>
+
+		<h2 id="deepltrans_sprachdateien_bersetzen" class="h2" >{$plugin_deepltrans_sprachdateien_bersetzen}</h2>
+
+		<table class="outside  table table-striped table-hover">
+			<tr>
+				<th>{$plugin_deepltrans_sprache}</th>
+				<th> {$plugin_deepltrans_bersetzt}</th>
+				<th>{$plugin_deepltrans_translate} </th>
+			</tr>
+			{foreach item=language from=$languages}
+			<tr>
+				<td>{$language.lang_long}</td>
+				<td>{$language.mainBackend} %</td>
+				<td>
+					{if $language.mainBackend < 99}
+					<a href="{$translink}&trans=main&what=backend&lang={$language.lang_short}" id="deepltrans_bersetzungen_jetzt_starten_bvar" class="btn btn-info" >{$plugin_deepltrans_bersetzungen_jetzt_starten_bvar}</a>
+					{else}
+					<p class="btn">{$translateddeepl}</p>
+					{/if}
+				</td>
+
+			</tr>
+			{/foreach}
+		</table>
+
+
+		{if $plugin_creator_is_dev}
+
+ #start#
+			<span class="ignore"></span>
+			<!-- Der Start Button ist notwendig damit sich das System daran aun kann. -->
+			<div id="rapid_form_slot">
+				<div class="rapid_form">
+					{include file=../../../plugins/plugincreator/templates/help_icon.html}
+					<form action="" name="" method="POST">
+						<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
+						{assign var="tb_name_tpl" value="plugin_deepltrans_bersetzung_form"}
+						<input type="hidden" name="tb_name" value="{$tb_name_tpl}" />
+						<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
+						<input type="hidden" name="php_datei_name" value="deepltrans_class" />
+						<!-- Das Standarpie Ids -->
+						<input type="hidden" name="praefix" value="deepltrans" />
+						<!-- Das Standarpre Feldernamen und Namen -->
+						<input type="hidden" name="praefix_spezial" value="deepltrans" />
+						<!-- Das Tool einbinden -->
+						{include file=../../../plugins/devtools/templates/rapid_felder.htm}
+					</form>
+				</div>
+			</div>
+
+
+		{/if}
+	</div>
+	<script src="../plugins/deepltrans/js/trans.js" type="text/javascript" ></script>
+	{*<!-- Hier kommt der Fuss rein-->*}
+	{include file=foot.inc.html}
+{/if}

@@ -1,9 +1,3 @@
-<?php
-/**Englische Text-Daten des Plugins "CookiePlugin" für das Frontend
+<?php 
 
-!! Diese Datei muss im Format "UTF-8 (NoBOM)" gespeichert werden !!!
-
- */
-
-
-?>
+ ?>

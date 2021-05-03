@@ -1,13 +1,71 @@
-<?php
-/**
+<?php 
+$this->content->template['plugin_plugin_zentrale_inhalte_verwalten_sie_hier_zentral_inhalte'] = "Manage content centrally here"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_mit_diesem_plugin_knnen_sie'] = "With this plugin you can centrally set which menu items with which content should be mirrored on which domains. All contents are customizable via placeholders."; 
+$this->content->template['plugin_plugin_zentrale_inhalte_stammdaten'] = "The contents of the master page are edited normally via the article / menu management. For working with placeholders, these must then also be entered here for the master page."; 
+$this->content->template['plugin_plugin_zentrale_inhalte_verwaltung_der_domains'] = "Domain management"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_hier_knnen_sie_die_domains'] = "Here you can manage the domains, keys and wildcards"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_neue_domain_eintragen'] = "Register new domain"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_vorhandene_domains'] = "Existing domains"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_name_der_domain'] = "Domain name"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_schlssel'] = "Key"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_platzhalter'] = "Placeholder"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_bearbeiten'] = "edit"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_lschen'] = "delete"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_domaindaten_bearbeiten'] = "Edit domain data"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_hier_bearbeiten_sie_die_daten_einer_domain'] = "Here you edit the data of a domain"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_name_der_domainf'] = "Domain name"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_domainkey'] = "Domainkey(will be generated automatically)"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_daten_speichern'] = "Store data"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_jetzt_speichern'] = "Save now"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_daten_wurden_gespeichert'] = "Data was saved"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_daten_wurden_gelscht'] = "Data has been erased"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_inhalte_fr_die_domains_verwalten'] = "Manage content for the domains"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_hier_stellen_sie_ein_welche'] = "Here you set which contents the individual domains should receive."; 
+$this->content->template['plugin_plugin_zentrale_inhalte_liste_der_domains'] = "List of domains"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_weisen_sie_hier_die_inhalte'] = "Assign the contents of the respective domain here"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_sie_sehen_hier_die_'] = "Here you can see the list of menu items that are available, simply check the box for the menu items that should be installed on the client domain."; 
+$this->content->template['plugin_plugin_zentrale_inhalte_daten_zuweisen'] = "Assign data"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_menpunkt'] = "Menu item"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_zuweisen'] = "Assign"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_menupunkte'] = "menupoints"; 
+$this->content->template['plugin_plugin_immo_immoscout24_einbindung'] = "Immoscout24 integration"; 
+$this->content->template['plugin_plugin_immo_hier_knnen_sie_die_verbindung_zu_ihrem_immoscout24'] = "Here you can connect to your Immoscout24 account"; 
+$this->content->template['plugin_plugin_immo_klicken_sie_hier_um_die_seite_mit_ihrem_immoscout_account_zu_verknpfen'] = "Click here to link the site to your ImmoScout account."; 
+$this->content->template['plugin_plugin_immo_die_seite_ist_verknpft'] = "The page is linked."; 
+$this->content->template['plugin_plugin_immo_diese_seite_ist_derzeit_mit_ihrem_immoscout24_account_verknpft'] = "This page is currently linked to your ImmoScout24 account. However, you can start the link again."; 
+$this->content->template['plugin_plugin_immo_klicken_sie_dafr_diesen_link'] = "Click this link"; 
+$this->content->template['plugin_plugin_immo_synchronisierung_starten'] = "Start synchronization"; 
+$this->content->template['plugin_plugin_immo_klicken_sie_hier_um_die_synchronisierung_zu_starten'] = "Click here to start the synchronization"; 
+$this->content->template['plugin_plugin_immo_objekte'] = "Objects"; 
+$this->content->template['plugin_plugin_immo_typen_und_links'] = "Types and links"; 
+$this->content->template['plugin_plugin_immo_einbindung_in_das_frontend'] = "Here you find the list of available urls for the integration into the frontend"; 
+$this->content->template['plugin_plugin_immo_ausgabe_formatierung'] = "Output formatting"; 
+$this->content->template['plugin_plugin_immo_hier_definieren_sie_die_ausgabe_der_daten_im_frontend'] = "Here you define the output of the data in the frontend, i.e. on the website itself."; 
+$this->content->template['plugin_plugin_immo_ausgabe_uebersicht'] = "Overview leasing"; 
+$this->content->template['plugin_plugin_immo_ausgabe_einzelansicht'] = "Output in single view"; 
+$this->content->template['plugin_plugin_immo_ausgabe_typkategorie'] = "Type / Category"; 
+$this->content->template['plugin_plugin_immo_ausgabe_lnik_fr_menpunkt'] = "Link for menu item"; 
+$this->content->template['plugin_plugin_immo_ausgabe_ansicht_im_bersichtsleasting_fieldset'] = "Enter view in overview leasting"; 
+$this->content->template['plugin_plugin_immo_ausgabe_ausgabe_in_der_einzelansicht__fieldset'] = "Enter output in single view"; 
+$this->content->template['plugin_plugin_immo_ausgabe__verfgbare_variablen_als_platzhalter'] = " Available placeholders"; 
+$this->content->template['plugin_plugin_immo_ausgabe_userid_eintragen'] = "Enter Userid"; 
+$this->content->template['plugin_plugin_immo_config_userid'] = "Enter Userid"; 
+$this->content->template['plugin_plugin_immo_config_damit_alle_daten_auch'] = "So that all data can be read out of your account, we need your UserID"; 
+$this->content->template['plugin_plugin_immo_config_userid_speichern_ummo'] = "Save"; 
+$this->content->template['plugin_plugin_immo_ausgabe_whlen_sie_hier_deb_typ_fr_die_ausgabe'] = "Select the type for the output here"; 
+$this->content->template['plugin_plugin_immo_ausgabe_objektliste'] = "Object list"; 
+$this->content->template['plugin_plugin_immo_ausgabe_hier_finden_sie_alle_objekte_aus_der_immoscout'] = "Here you can find all objects from the Immoscout database that are activated for the homepage."; 
+$this->content->template['plugin_plugin_immo_ausgabe_is24_id'] = "IS24 ID"; 
+$this->content->template['plugin_plugin_immo_ausgabe_title'] = "Headline"; 
+$this->content->template['plugin_plugin_immo_ausgabe_bild'] = "Image"; 
+$this->content->template['plugin_plugin_immo_ausgabe_top_listeing'] = "TOP Listing"; 
+$this->content->template['plugin_plugin_immo_ausgabe_sperren'] = "Lock"; 
+$this->content->template['plugin_plugin_immo_ausgabe_referenz'] = "Take reference"; 
+$this->content->template['plugin_plugin_immo_lookup_toplisting'] = "TOP Listing"; 
+$this->content->template['plugin_plugin_immo_lookup_sperren1'] = "Lock"; 
+$this->content->template['plugin_plugin_immo_lookup_ref'] = "Reference"; 
+$this->content->template['plugin_plugin_immo_lookup_typ_immosuche'] = "Type"; 
+$this->content->template['plugin_plugin_immo_lookup_suche'] = "Search"; 
+$this->content->template['plugin_plugin_immo_lookup_objekte_durchsuchen'] = "Search objects"; 
 
-Deutsche Text-Daten des Plugins "test" für das Backend
-
-!! Diese Datei muss im Format "UTF-8 (NoBOM)" gespeichert werden !!!
-
-*/
-
-#start#
-
-
-?>
+ ?>

@@ -9,7 +9,7 @@ class transdeepl
 	/**
 	 * @var auth_key = Enthält den Api KEy für deepl
 	 */
-	private $auth_key = "bd92f36e-5f5e-3c4a-d91f-2317c51bdcff";
+	private $auth_key = "xxx";
 
 	/**
 	 * Enthält den zu übersetzenden Text
@@ -71,7 +71,7 @@ class transdeepl
 	 *
 	 */
 	public function set_aut_key(){
-		$this->auth_key = "bd92f36e-5f5e-3c4a-d91f-2317c51bdcff";
+		$this->auth_key = "xxx";
 
 	}
 
@@ -83,6 +83,11 @@ class transdeepl
 	 */
 	public function translate($target_lang="en",$text="")
 	{
+		$return['used_time'] 	= 	1;
+		$return['trans_text'] 	= 	"TRANS - ".$text;
+
+		//übersetzten Text zurückgeben
+		return $return;
 		//startzeit
 		$start 					= microtime(true);
 

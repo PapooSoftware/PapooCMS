@@ -6,7 +6,7 @@ Deutsche Text-Daten des Plugins "test" für das Frontend
 !! Diese Datei muss im Format "Utf-8 (NoBOM)" gespeichert werden !!!
 
 */
-require_once PAPOO_ABS_PFAD."/plugins/pkalender/messages/messages_backend_de.inc.php";
+
 $this->content->template['message_paket_mo'] ='Lun';
 $this->content->template['message_paket_di'] ='Mar';
 $this->content->template['message_paket_mi'] ='Mer';

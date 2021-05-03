@@ -22,7 +22,7 @@ function ajaxcall(text="")
 {
     return $.ajax({
         method: "GET",
-        url: "./plugin.php?menuid=1193&template=deepltrans/templates/bersetzungen_backend.html&ajax=true&ajax_count="+text,
+        url: "./plugin.php?menuid=1107&template=deepltrans/templates/bersetzungen_backend.html&ajax=true&ajax_count="+text,
         cache: false
     });
 }

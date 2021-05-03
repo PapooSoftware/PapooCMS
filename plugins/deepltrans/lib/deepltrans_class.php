@@ -41,6 +41,7 @@ class deepltrans_class
 			$transdeepl = new transdeepl();
 
 			if ( $template != 'login.utf8.html' ) {
+				$this->content->template['plugin_creator_is_dev'] = true;
 				if(stristr($template2, "deepltrans") ){
 					// Pfad zum css Ordner zur Einbindung des backend css
 					$this->content->template['css_path'] = $css_path = PAPOO_WEB_PFAD.'/plugins/deepltrans/css';
@@ -82,10 +83,94 @@ class deepltrans_class
 		}
 	}
 
+	public function setLangFiles()
+	{
+		$this->content->template['translink']="plugin.php?menuid=".$this->checked->menuid."&template=deepltrans/templates/bersetzungen_backend.html";
+		$sql = sprintf("SELECT * FROM %s",
+								DB_PRAEFIX.'papoo_name_language');
+		//print_r($sql);
+		$result = $this->db->get_results($sql,ARRAY_A);
+
+		//Base entry is german
+		$translationState = $this->getState();
+		//print_r($translationState);
+
+		//Translation checkn
+		foreach($result as $k => $lang)
+		{
+			if($lang['lang_short']=="de")
+			{
+				unset($result[$k]);
+			}
+			$result[$k]['mainBackend']=$translationState['backend']['main'][$lang['lang_short']]['prozent'];
+			$result[$k]['mainFrontend']=$translationState['frontend']['main'][$lang['lang_short']]['prozent'];
+
+			$result[$k]['pluginBackend']=$translationState['backend']['plugin'][$lang['lang_short']]['prozent'];
+			$result[$k]['pluginFrontend']=$translationState['frontend']['plugin'][$lang['lang_short']]['prozent'];
+
+		}
+		//print_r($result);
+		//languages
+		$this->content->template['languages'] = $result;
+		//exit();
+	}
+
+	public function getState()
+	{
+		//ini_set("display_errors", true);
+		//error_reporting(E_ALL);
+
+		$dir=(str_ireplace("lib","api",__DIR__));
+		$apiKey = md5($dir);
+		$url = $_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST']."/".PAPOO_WEB_PFAD."/plugins/deepltrans/api/tpapoo.php?compare=true&apiKey=".$apiKey;
+		$curl = curl_init($url);
+		//print_r($url);exit();
+		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 240);
+		curl_setopt($curl, CURLOPT_TIMEOUT, 240);
+		$returndata = curl_exec($curl);
+		//print_r($returndata);
+		//$code = @curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
+		//$curlerror = @curl_error($curl);
+
+		return json_decode($returndata,true);
+	}
+
+	public function translateNow()
+	{
+		$deeplKey = $this->get_key();
+		$transData = urlencode(json_encode(array("lang"=>$this->checked->lang,"backfront"=>$this->checked->what,"pluginOrMain"=>$this->checked->trans,"deeplKey"=>$deeplKey)));
+		$dir=(str_ireplace("lib","api",__DIR__));
+		$apiKey = md5($dir);
+		$url = $_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST']."/".PAPOO_WEB_PFAD."/plugins/deepltrans/api/tpapoo.php?translate=true&apiKey=".$apiKey."&transData=".$transData;
+		//print_r($url);exit();
+		$curl = curl_init($url);
+		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 600);
+		curl_setopt($curl, CURLOPT_TIMEOUT, 600);
+		$returndata = curl_exec($curl);
+		//$code = @curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
+		//$curlerror = @curl_error($curl);
+
+		return json_decode($returndata,true);
+	}
+
 	/**
 	 * @return bool
 	 */
 	private function make_trans(){
+
+		if(!empty($this->checked->trans))
+		{
+			$this->translateNow();
+		}
+
+		//verfügbare Sprachen
+		$this->setLangFiles();
+
+
 
 		//Es ist ein Ajax Call - also müssen wir nur die Daten realisieren
 		if ($this->checked->ajax=="true")
@@ -105,6 +190,12 @@ class deepltrans_class
 					// Inhalt anzeigen
 					$translate->translate_menu();
 					break;
+
+				case "2":
+					// Inhalt anzeigen
+					//$translate->translate_freie_module();
+					break;
+
 
 			}
 			exit("");
@@ -126,6 +217,7 @@ class deepltrans_class
 		$result = $this->db_abs->select($xsql);
 		//print_r($result);
 		$this->content->template['deepltrans'] = $result;
+		return $result['0']['deepltrans_deepl_key_input'];
 	}
 
 	/**
@@ -248,7 +340,7 @@ class deepltrans_class
 	private function rapid_dev()
 	{
 		$this->rapid_dev_insert("deepltrans");
-$this->rapid_dev_templify("deepltrans");
+		$this->rapid_dev_templify("deepltrans");
 		$this->rapid_dev_insert("einstellungen");
 		$this->rapid_dev_templify("einstellungen");
 		$this->rapid_dev_insert("bersetzungen");

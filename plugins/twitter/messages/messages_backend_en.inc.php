@@ -1,17 +1,8 @@
-<?php
-/**
+<?php 
+$this->content->template['message']['twitter']['test']['name'] = "Plugin \"Test"; 
+$this->content->template['message']['twitter']['test']['kopf'] = "<h1>Backend of the test plugin</h1><p>This template is not accessible, but it makes no sense and is not X-HTML compliant. Nevertheless, it should be useful for explaining the programming of Papoo plugins.</p><p>The different menu items of this plugin are also meaningless. They always refer to the same template \"test_back.html\". The points are only to show how menu points can be created in the plugin XML file.</p><p>The integration of the frontend template works as follows: Create a new menu item. Enter there under \"Integration of the link or file.\" (at the bottom) enter the following: <strong>plugin:test/templates/test_front.html</strong>. Now the template is available in the frontend.</p><p>The modules contained in this template can be inserted with the module manager here in the administration. For all those who have not yet discovered the thing, it can be found under \"System -&gt; Module Manager\".</p>"; 
+$this->content->template['message']['twitter']['test']['form_kopf'] = "And here's a little form:"; 
+$this->content->template['message']['twitter']['test']['form_legend'] = "Test value"; 
+$this->content->template['message']['twitter']['test']['form_testwert_label'] = "Pass a test value via POST"; 
 
-Deutsche Text-Daten des Plugins "test" für das Backend
-
-!! Diese Datei muss im Format "UTF-8 (NoBOM)" gespeichert werden !!!
-
-*/
-
-$this->content->template['message']['plugin']['twitter']['name']='Plugin “twitter” ';
-$this->content->template['message']['plugin']['twitter']['kopf']='<h1>Baking the test Plugins</h1><p>This Template is not barrier-free, but however sense-free and not X-HTML-conformal. Nothing the defiance should carry it out for the explanation of the programming of Papoo Plugins serve-rich assistance.</p><p>The different menu options of this Plugins are likewise sense-free. They always refer to the same Template “test_back.html”. The points are to be shown only over, how in the Plugin XML file menu options can be put on.</p><p>The integration of the Frontend Templates goes as follows: Provide a new menu option. Enter there under form left (completely down) the following: <strong>plugin: test/templates/test_front.html</strong>. Thus the Template is available in front-ends.</p><p>The modules contained in this Template can be inserted with the module manager here in the administration. For all those did not discover the thing yet, to find are it under “system - &gt; module manager”.</p> ';
-$this->content->template['message']['plugin']['twitter']['form_kopf']='And here a small form: ';
-$this->content->template['message']['plugin']['twitter']['form_legend']='Test value ';
-$this->content->template['message']['plugin']['twitter']['form_testwert_label']='A test value by POST OFFICE hand over ';
-
-
-?>
+ ?>
