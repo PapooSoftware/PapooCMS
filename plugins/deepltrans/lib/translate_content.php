@@ -90,6 +90,10 @@ class translate_content extends deepltrans_class
 		 */
 		//$this->translateBackendMenu($langData);
 
+		/**
+		 * Start Translation Frontend
+		 */
+
 		//$this->translateFrontendMenu($langData);
 		//$this->translateStartPage($langData);
 		//$this->translateArticle($langData);
@@ -103,12 +107,156 @@ class translate_content extends deepltrans_class
 		//$this->translateVideo($langData);
 		//$this->translateCategories($langData);
 		//$this->translateLinklisten($langData);
-		$this->translateLinklistenCat($langData);
+		//$this->translateLinklistenCat($langData);
+		//$this->translateLinklistenCatPref($langData);
+		//$this->translateModule($langData);
+		$this->translateModule($langData);
+		//$this->translatePlugins($langData);
+		//$this->translateKalender($langData);
+		//$this->translateKalenderEntries($langData);
+		//$this->translateFreieModule($langData);
+
 
 		//TODO die Alternativtexte der Bilder müssen noch ersetzt werden
 		//
 
+		//TODO die freien Module und
+
+		//TODO die Moduklstruktur muss auch noch translatedd werden...
+
 		$this->db->csrfok = false;
+	}
+	//papoo_module_language
+
+	public function translateFreieModule($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"freiemodule_name",
+			"freiemodule_code"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "papoo_freiemodule_daten";
+		$idName = "freiemodule_id";
+		$langIdName = "freiemodule_lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
+
+
+	public function translateKalenderEntries($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"pkal_date_titel_des_termins",
+			"pkal_date_terminbeschreibung"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "plugin_kalender_date";
+		$idName = "pkal_date_id";
+		$langIdName = "pkal_date_lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
+
+	public function translateKalender($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"kalender_bezeichnung_des_kalenders",
+			"kalender_text_oberhalb"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "plugin_kalender";
+		$idName = "kalender_id";
+		$langIdName = "kalender_lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
+
+
+	public function translatePlugins($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"pluginlang_beschreibung"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "papoo_plugin_language";
+		$idName = "pluginlang_plugin_id";
+		$langIdName = "modlang_lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
+
+	/**
+	 * @param array $langData
+	 * @return bool
+	 */
+	public function translateModule($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"modlang_name",
+			"modlang_beschreibung"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "papoo_module_language";
+		$idName = "modlang_mod_id";
+		$langIdName = "modlang_lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
+
+	/**
+	 * @param array $langData
+	 * @return bool
+	 */
+	public function translateLinklistenCatPref($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"linkliste_lang",
+			"linkliste_title",
+			"linkliste_description",
+			"linkliste_keywords"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "papoo_linkliste_lang_pref";
+		$idName = "linkliste_id_id";
+		$langIdName = "linkliste_lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
 	}
 
 	public function translateLinklistenCat($langData=array())

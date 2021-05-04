@@ -72,7 +72,7 @@ class freiemodule {
 			if ( $template != "login.utf8.html" ) {
 				switch ($template2) {
 
-					//Die Standardeinstellungen werden bearbeitet
+					//Die Standardeinstellungen werden bearbeitet - does not exist here...
 				case "freiemodule/templates/freiemodule.html" :
 					$this->check_pref();
 					break;
@@ -119,24 +119,26 @@ class freiemodule {
 				"LEFT JOIN {$this->cms->tbname["papoo_freiemodule_menu_blacklist"]} blacklist ON blacklist.blacklist_module_id = module.freiemodule_id AND blacklist.blacklist_menu_id = $menuId ".
 				"WHERE ".
 				"(module.freiemodule_menuid != '' OR whitelist.freiemodule_menu_id != 0) AND ".
-				"whitelist.freiemodule_menu_id IN (0, $menuId) AND blacklist.blacklist_menu_id IS NULL AND module.freiemodule_lang = '{$this->db->escape($this->cms->lang_short)}' AND ( ".
+				"whitelist.freiemodule_menu_id IN (0, $menuId) AND blacklist.blacklist_menu_id IS NULL AND module.freiemodule_lang_id = '{$this->db->escape($this->cms->lang_id)}' AND ( ".
 				"	module.freiemodule_start <= '$date' AND module.freiemodule_stop >= '$date' OR ".
 				"	module.freiemodule_start <= '0000-00-00' AND module.freiemodule_stop >= '0000-00-00' ".
 				") ".
 				"GROUP BY module.freiemodule_id";
+			//print_r($sql);
 			$result_menu = $this->db->get_results($sql, ARRAY_A);
+			//print_r($result_menu);
 			//Alle Eintr�ge zum Artikel
 			if (!empty($this->checked->reporeid)) {
 				$sql = sprintf("SELECT * FROM %s
 								WHERE freiemodule_artikelid='%s' AND freiemodule_start<='%s' AND freiemodule_stop>='%s' AND freiemodule_lang='%s'
-								OR freiemodule_artikelid='%s' AND freiemodule_start<='0000-00-00' AND freiemodule_stop>='0000-00-00'  AND freiemodule_lang='%s'  ",
+								OR freiemodule_artikelid='%s' AND freiemodule_start<='0000-00-00' AND freiemodule_stop>='0000-00-00'  AND freiemodule_lang_id='%s'  ",
 
 					$this->cms->tbname['papoo_freiemodule_daten'],
 
 					$this->db->escape($this->checked->reporeid),
 					$date,
 					$date,
-					$this->db->escape($this->cms->lang_short),
+					$this->db->escape($this->cms->lang_id),
 
 					$this->db->escape($this->checked->reporeid),
 					$this->db->escape($this->cms->lang_short)
@@ -224,25 +226,52 @@ class freiemodule {
 
 			$rawOutput = (bool)($this->checked->freiemodule_raw_output ?? false);
 
-			$sql = sprintf("INSERT INTO %s SET freiemodule_name='%s', freiemodule_code='%s', freiemodule_menuid='%s', freiemodule_artikelid='%s',
-							freiemodule_raw_output = %d,
-							freiemodule_modulid='%s', freiemodule_start='%s', freiemodule_stop='%s',freiemodule_lang='%s' ",
-				$this->cms->tbname['papoo_freiemodule_daten'],
-				$this->db->escape($this->checked->freiemodule_name),
-				$this->db->escape($this->checked->freiemodule_code),
-				$this->db->escape($this->checked->freiemodule_menuid),
-				$this->db->escape($this->checked->freiemodule_artikelid),
+			//Get Last freiemodule_id?
+			$sql = sprintf("SELECT MAX(freiemodule_id) FROM %s",DB_PRAEFIX."papoo_freiemodule_daten");
+			$max = $this->db->get_var($sql);
+			$max++;
 
-				$this->db->escape($rawOutput ? 1 : 0),
+			//Get Languages of the system
+			$sql = sprintf("SELECT * FROM %s",
+				DB_PRAEFIX.'papoo_name_language');
+			//print_r($sql);
+			$result = $this->db->get_results($sql,ARRAY_A);
 
-				$this->db->escape($this->checked->freiemodule_modulid),
-				$this->db->escape($this->checked->freiemodule_start),
-				$this->db->escape($this->checked->freiemodule_stop),
-				$this->db->escape($this->checked->banner_lang)
-			);
+			foreach ($result as $k =>$v)
+			{
+				$sql = sprintf("INSERT INTO %s SET 
+										freiemodule_id = '%d',
+										freiemodule_name='%s', 
+										freiemodule_code='%s', 
+										freiemodule_menuid='%s', 
+										freiemodule_artikelid='%s',
+										freiemodule_raw_output = %d,
+										freiemodule_modulid='%s', 
+                   						freiemodule_start='%s', 
+                   						freiemodule_stop='%s',
+                   						freiemodule_lang='%s',
+              							freiemodule_lang_id = '%d' ",
+					$this->cms->tbname['papoo_freiemodule_daten'],
+					$max,
+					$this->db->escape($this->checked->freiemodule_name),
+					$this->db->escape($this->checked->freiemodule_code),
+					$this->db->escape($this->checked->freiemodule_menuid),
+					$this->db->escape($this->checked->freiemodule_artikelid),
 
-			$this->db->query($sql);
-			$insertid2=$this->db->insert_id;
+					$this->db->escape($rawOutput ? 1 : 0),
+
+					$this->db->escape($this->checked->freiemodule_modulid),
+					$this->db->escape($this->checked->freiemodule_start),
+					$this->db->escape($this->checked->freiemodule_stop),
+					$this->db->escape($this->checked->banner_lang),
+					$v['lang_id']
+				);
+
+				$this->db->query($sql);
+			}
+			//exit();
+
+			$insertid2=$max;
 
 			//Die Lookups f�r Men�punkte eintragen
 			if (is_array($this->checked->inhalt_ar['cattext_ar'])) {
@@ -384,7 +413,8 @@ class freiemodule {
 					freiemodule_raw_output = %d,
 					freiemodule_start='%s',
 					freiemodule_stop='%s',
-					freiemodule_lang='%s'
+					freiemodule_lang='%s',
+              		freiemodule_lang_id = '%d'
 					WHERE freiemodule_id='%s' ",
 				$this->cms->tbname['papoo_freiemodule_daten'],
 				$this->db->escape($this->checked->freiemodule_name),
@@ -395,7 +425,8 @@ class freiemodule {
 				$this->db->escape($this->checked->freiemodule_start),
 				$this->db->escape($this->checked->freiemodule_stop),
 				$this->db->escape($this->checked->banner_lang),
-				$this->db->escape($this->checked->freiemodule_id)
+				$this->db->escape($this->checked->freiemodule_id),
+				$this->cms->freiemodule_lang_id
 			);
 			$this->db->query($sql);
 			$insertid=$this->db->escape($this->checked->cat_id);
@@ -441,7 +472,10 @@ class freiemodule {
 			}
 
 			// Namen der freien Module in der Papoo-Module-Tabelle aktualisieren
-			$modul_id = (int)$this->db->get_var("SELECT freiemodule_modulid FROM `{$this->cms->tbname["papoo_freiemodule_daten"]}` WHERE freiemodule_id = ".(int)$this->checked->freiemodule_id);
+			$modul_id = (int)$this->db->get_var("SELECT freiemodule_modulid FROM 
+                                				`{$this->cms->tbname["papoo_freiemodule_daten"]}` 
+												WHERE freiemodule_id = ".(int)$this->checked->freiemodule_id);
+
 			$this->db->query("UPDATE `{$this->cms->tbname["papoo_module_language"]}` SET modlang_name = '{$this->db->escape($this->checked->freiemodule_name)}' WHERE modlang_mod_id = {$modul_id}");
 
 			$location_url = $_SERVER['PHP_SELF']."?menuid=".$this->checked->menuid."&template=".$this->checked->template."&bannerid=".$this->checked->bannerid."&fertig=drin";
@@ -458,9 +492,10 @@ class freiemodule {
 
 		if (!empty ($this->checked->bannerid)) {
 			//Nach id aus der Datenbank holen
-			$sql = sprintf("SELECT * FROM %s WHERE freiemodule_id='%s'",
+			$sql = sprintf("SELECT * FROM %s WHERE freiemodule_id='%s' AND freiemodule_lang_id = '%d' ",
 				$this->cms->tbname['papoo_freiemodule_daten'],
-				$this->db->escape($this->checked->bannerid)
+				$this->db->escape($this->checked->bannerid),
+				$this->cms->lang_id
 			);
 
 			$result = $this->db->get_results($sql);
@@ -476,10 +511,11 @@ class freiemodule {
 					$this->content->template['freiemodule_modulid'] = $glos->freiemodule_modulid;
 					$this->content->template['freiemodule_start'] = $glos->freiemodule_start;
 					$this->content->template['freiemodule_stop'] = $glos->freiemodule_stop;
-					$this->content->template['edit'] = "ok";
-					$this->content->template['altereintrag'] = "ok";
+
 				}
 			}
+			$this->content->template['edit'] = "ok";
+			$this->content->template['altereintrag'] = "ok";
 			preg_match("/(\d+)-(\d+)-(\d+)/",$this->content->template['freiemodule_start'],$res);
 			$this->content->template['freiemodule_start']=$res[3].".".$res[2].".".$res[1];
 			preg_match("/(\d+)-(\d+)-(\d+)/",$this->content->template['freiemodule_stop'],$res);
@@ -502,9 +538,11 @@ class freiemodule {
 		else {
 			//Daten rausholen und als Liste anbieten
 			$this->content->template['list'] = "ok";
-			$sql = sprintf("SELECT * FROM %s ORDER BY freiemodule_name ASC",
-				$this->cms->tbname['papoo_freiemodule_daten']
+			$sql = sprintf("SELECT * FROM %s WHERE freiemodule_lang_id = '%d' ORDER BY freiemodule_name ASC",
+				$this->cms->tbname['papoo_freiemodule_daten'],
+				$this->cms->lang_id
 			);
+			//print_r($sql);
 			$result = $this->db->get_results($sql, ARRAY_A);
 			//Daten f�r das Template zuweisen
 			$this->content->template['list_dat'] = $result;
@@ -529,7 +567,10 @@ class freiemodule {
 		if ($this->checked->fertig == "del") {
 			$this->content->template['deleted'] = "ok";
 		}
-		//Soll  gel�scht werden
+		/**
+		 * OK - lets DELETE This FThing...
+		 * A whole Bunch to do-..
+		 */
 		if (!empty($this->checked->submitdelecht)) {
 			// Blacklist saeubern
 			$moduleId = (int)$this->checked->freiemodule_id;
