@@ -121,12 +121,17 @@ class translate_content extends deepltrans_class
 		$this->translateFormLang($langData);
 		$this->translateGlossar($langData);
 		$this->translateGlossarPref($langData);
+		$this->translateMVForms($langData);
+		$this->translateMVFormsFelder($langData);
+		$this->translateMVContents($langData);
+		$this->translateMVTemplate($langData);
+		$this->translateMVMetaLang($langData);
+		$this->translateMVLang($langData);
 		 **/
 
-		$this->translateGlossar($langData);
-		$this->translateGlossarPref($langData);
+		$this->translateBanner($langData);
 
-		//FAQ, Flex, Shop noch offen...
+		//FAQ,  Shop, Banner noch offen...
 
 
 		//TODO die Alternativtexte der Bilder müssen noch ersetzt werden
@@ -136,6 +141,196 @@ class translate_content extends deepltrans_class
 		$this->db->csrfok = false;
 	}
 
+	public function translateBanner($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"banner_name",
+			"banner_code"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "papoo_bannerverwaltung_daten";
+		$idName = "banner_id";
+		$langIdName = "banner_lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
+
+	public function translateMVLang($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"mv_name_label"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "papoo_mv_lang";
+		$idName = "mv_id_id";
+		$langIdName = "mv_lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
+
+	public function translateMVMetaLang($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"mv_meta_top_text",
+			"mv_meta_bottom_text",
+			"mv_meta_antwort_text"
+		);
+
+		$felderMitLang = array();
+
+		$idName = "mv_meta_lang_id";
+		$langIdName = "mv_meta_lang_lang_id";
+
+		//Die MVs raus suchen -... müssen ja alle
+		$sql = sprintf("SELECT * FROM %s ",DB_PRAEFIX."papoo_mv");
+		$mvs = $this->db->get_results($sql,ARRAY_A);
+
+		if(!empty($mvs))
+		{
+			foreach($mvs as $mv)
+			{
+				//Die Base Tabelle der Daten...
+				$tbName = "papoo_mv_meta_lang_".$mv['mv_id'];
+
+				//Dann übersetzen und in DB schreiben.
+				$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+			}
+		}
+
+		return true;
+	}
+
+	public function translateMVTemplate($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"template_content_all",
+			"template_content_one",
+			"template_content_flex_link_selection",
+			"template_content_flex_link_tree"
+		);
+
+		$felderMitLang = array();
+
+		$idName = "id";
+		$langIdName = "lang_id";
+
+		//Die MVs raus suchen -... müssen ja alle
+		$sql = sprintf("SELECT * FROM %s ",DB_PRAEFIX."papoo_mv");
+		$mvs = $this->db->get_results($sql,ARRAY_A);
+
+		if(!empty($mvs))
+		{
+			foreach($mvs as $mv)
+			{
+				//Die Base Tabelle der Daten...
+				$tbName = "papoo_mv_template_".$mv['mv_id'];
+
+				//Dann übersetzen und in DB schreiben.
+				$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+			}
+		}
+
+		return true;
+	}
+
+	public function translateMVContents($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felderNot = array(
+			"mv_content_id",
+			"mv_content_owner",
+			"mv_content_userid",
+			"mv_content_search",
+			"mv_content_sperre",
+			"mv_content_teaser",
+			"mv_content_create_date",
+			"mv_content_edit_date",
+			"mv_content_create_owner",
+			"mv_content_edit_user"
+		);
+
+		$felderMitLang = array();
+
+		$idName = "mv_content_id";
+		$langIdName = "xxx";
+
+		//Die MVs raus suchen -... müssen ja alle
+		$sql = sprintf("SELECT * FROM %s ",DB_PRAEFIX."papoo_mv");
+		$mvs = $this->db->get_results($sql,ARRAY_A);
+
+		if(!empty($mvs))
+		{
+			foreach($mvs as $mv)
+			{
+				//Die Base Tabelle der Daten...
+				$tbName = "papoo_mv_content_".$mv['mv_id']."_search_1";
+
+				//Dann übersetzen und in DB schreiben.
+				$this->translateLangTableFlex($tbName,$idName,$felderNot,$langData,$felderMitLang,$langIdName);
+			}
+		}
+
+		return true;
+	}
+
+	public function translateMVFormsFelder($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"mvcform_label",
+			"mvcform_content_list",
+			"mvcform_descrip",
+			"mvcform_lang_header",
+			"mvcform_lang_tooltip"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "papoo_mvcform_lang";
+		$idName = "mvcform_lang_id";
+		$langIdName = "mvcform_lang_lang";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
+
+	public function translateMVForms($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"mvcform_group_lang_meta",
+			"mvcform_group_text",
+			"mvcform_group_text_intern"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "papoo_mvcform_group_lang";
+		$idName = "mvcform_group_lang_id";
+		$langIdName = "mvcform_group_lang_lang";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
+
 	public function translateGlossarPref($langData=array())
 	{
 		//erstmal die Daten festlegen der Felder und CO.
@@ -143,7 +338,7 @@ class translate_content extends deepltrans_class
 			"glosspref_introtext_de"
 		);
 
-		$felderMitLang = array("glossar_link"=>true);
+		$felderMitLang = array();
 
 		$tbName = "glossar_pref_html";
 		$idName = "glosspref_id_id";
@@ -171,7 +366,7 @@ class translate_content extends deepltrans_class
 			"form_manager_text_html"
 		);
 
-		$felderMitLang = array("glossar_link"=>true);
+		$felderMitLang = array();
 
 		$tbName = "glossar_daten";
 		$idName = "glossar_id";
@@ -817,6 +1012,60 @@ class translate_content extends deepltrans_class
 			$xsql['must'] = array($idName,$langIdName);
 			$this->db_abs->insert( $xsql,$show);
 			//exit();
+		}
+	}
+
+	public function translateLangTableFlex($tbName,$idName,$felder,$langData,$felderMitLang=array(),$langIdName="lang_id",$show=false)
+	{
+		$xsql = array();
+		$xsql['dbname'] = $tbName;
+		$xsql['select_felder'] = array("*");
+		$xsql['where_data'] = array($idName => "%%");
+		$xsql['where_data_like'] = true;
+		$Items = $this->db_abs->select($xsql);
+		//print_r($Items);exit();
+
+		foreach($Items as $item)
+		{
+			//save org data for later use...
+			$org = $item;
+			// here unset because this are NOT felder
+			foreach($felder as $feld)
+			{
+				unset($item[$feld]);
+			}
+			$transData = $item;
+			$transText = $this->transDeeplNow->translateArray($langData['0'],$transData);
+
+			$tbNameTarget = str_ireplace("search_1","search_".$langData['1'],$tbName);
+
+			//alten Eintrag raus
+			$xsql=array();
+			$xsql['dbname']         = $tbNameTarget;
+			$xsql['limit']          = " LIMIT 1";
+			$xsql['del_where_wert'] = " ".$idName."='".$org[$idName]."' ";
+			$this->db_abs->delete( $xsql ,1);
+
+			//Daten für neuen Eintrag
+			foreach($org as $feld=>$feldValue)
+			{
+				$this->checked->$feld=$feldValue;
+			}
+			//translated Data
+			$i =0;
+			foreach ($item as $k=>$feld)
+			{
+				$this->checked->$k=$transText['trans_text']['translations'][$i]['text'];
+				$i++;
+			}
+
+			//set target langid
+			$this->checked->$langIdName=$langData['1'];
+			//neuen Eintrag rein
+			$xsql=array();
+			$xsql['dbname'] = $tbNameTarget;
+			$xsql['must'] = array($idName);
+			$this->db_abs->insert( $xsql,$show);
 		}
 	}
 

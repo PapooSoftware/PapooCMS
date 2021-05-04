@@ -15,6 +15,10 @@ CREATE TABLE `XXX_glossar_pref_html` (
                                          `glosspref_id_id` int NOT NULL DEFAULT '1',
                                          `glosspref_lang_id` int NOT NULL DEFAULT '1',
                                          `glosspref_introtext_de` longtext
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 ; ##b_dump##
+) ; ##b_dump##
 INSERT INTO `XXX_glossar_pref_html` SET `glosspref_id_id`='1', `glosspref_lang_id`='1', `glosspref_introtext_de`='<h2>Glossar-Überschrift</h2><p>.. Text</p>'  ; ##b_dump##
+ALTER TABLE `XXX_papoo_bannerverwaltung_daten` ADD `banner_lang_id` INT(11) NOT NULL DEFAULT '1' AFTER `banner_id`; ##b_dump##
+ALTER TABLE `XXX_papoo_bannerverwaltung_daten` CHANGE `banner_id` `banner_id` INT NOT NULL; ##b_dump##
+ALTER TABLE `XXX_papoo_bannerverwaltung_daten` DROP PRIMARY KEY; ##b_dump##
+
 
