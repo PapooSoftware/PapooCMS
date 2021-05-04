@@ -93,7 +93,7 @@ class translate_content extends deepltrans_class
 		/**
 		 * Start Translation Frontend
 		 */
-		/**
+
 		$this->translateFrontendMenu($langData);
 		$this->translateStartPage($langData);
 		$this->translateArticle($langData);
@@ -131,8 +131,6 @@ class translate_content extends deepltrans_class
 		$this->translateFAQCats($langData);
 		$this->translateFAQQuestions($langData);
 		$this->translateFAQConfig($langData);
-		 **/
-
 		$this->translateFAQConfig($langData);
 		//Shop noch offen...
 

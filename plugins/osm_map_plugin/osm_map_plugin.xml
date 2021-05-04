@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin name="osm_overlay">
+    <name>OpenStreetMap Karten-Plugin</name>
+
+    <beschreibung_de><![CDATA[OpenStreetMap Karten-Plugin]]></beschreibung_de>
+    <beschreibung_en><![CDATA[OpenStreetMap map plugin]]></beschreibung_en>
+
+    <version>1.1.0</version>
+
+    <papooid></papooid>
+
+    <link>http://www.papoo.de</link>
+
+    <datum>04.09.2018</datum>
+
+    <autor>
+        <name><![CDATA[Raphael Bergmann]]></name>
+        <kontakt><![CDATA[Raphael Bergmann]]></kontakt>
+        <email>info@papoo.de</email>
+        <telefon>+49 (0)228 - 629 17 640</telefon>
+    </autor>
+
+    <menue>
+        <eintrag_de>OpenStreetMap Karten-Plugin</eintrag_de>
+        <eintrag_en>OpenStreetMap map plugin</eintrag_en>
+        <link>plugin:osm_map_plugin/templates/backend.html&amp;submenu=config</link>
+    </menue>
+
+    <klasse>
+        <name>osm_map_plugin</name>
+        <datei>osm_map_plugin/lib/osm_map_plugin_class.php</datei>
+    </klasse>
+
+    <css>osm_map_plugin/css/styles.css</css>
+
+    <datenbank>
+        <installation>osm_map_plugin/sql/osm_map_plugin_install.sql</installation>
+        <deinstallation>osm_map_plugin/sql/osm_map_plugin_deinstall.sql</deinstallation>
+    </datenbank>
+
+    <messages>osm_map_plugin/messages</messages>
+</plugin>

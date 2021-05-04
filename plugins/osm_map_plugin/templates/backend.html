@@ -1,0 +1,122 @@
+{if $IS_ADMIN}
+    {include file=head.inc.utf8.html}
+    {include file=menu.inc.html}
+    <div class="artikel">
+        <h1>{$plugin.osm_map_plugin.text.plugin_headline}</h1>
+        <div>{$plugin.osm_map_plugin.text.plugin_description}</div>
+        {if $osm_map_plugin.errors}
+            <div class="osm-plugin-warning" style="position:relative;display:flex;margin-top:1.5rem;">
+                <div style="width:0;height:0;border-left:20px solid transparent;border-right:20px solid transparent;border-bottom:33px solid red;">
+                    <span style="position:relative;top:5px;left:-2px;color:white;font-weight:bold;">!</span>
+                </div>
+                <div style="margin-left:1rem;">
+                    {foreach item=error from=$osm_map_plugin.errors}
+                        <span class="osm-plugin-warning__item">{$error}</span><br />
+                    {/foreach}
+                </div>
+            </div>
+        {/if}
+        {if $osm_map_plugin.successes}
+            <div class="osm-plugin-success">
+                {foreach item=success from=$osm_map_plugin.successes}
+                    <span class="osm-plugin-success__item">{$success}</span><br />
+                {/foreach}
+            </div>
+        {/if}
+        <fieldset>
+            <legend>{$plugin.osm_map_plugin.text.legend_delete_cache}</legend>
+            <div style="display:flex;justify-content:flex-start;align-items:baseline;">
+            <a href="#" class="btn btn-danger"
+               id="osm-map-plugin__delete-cache" style="margin-right:1rem;color:white;">{$plugin.osm_map_plugin.text.button_delete_cache}</a>
+            {$plugin.osm_map_plugin.text.description_delete_cache}
+            </div>
+        </fieldset>
+        <div class="osm-plugin__settings">
+            <form method="post" action="">
+                <fieldset>
+                    <legend>{$plugin.osm_map_plugin.text.legend_settings}</legend>
+                    <div class="osm-plugin__settings__map-properties">
+                        {$plugin.osm_map_plugin.text.description_map_settings}
+                    </div>
+                    <div class="osm-plugin-backend-form-group osm-plugin__settings__height"
+                         id="osm-plugin__settings__height">
+                        <label>{$plugin.osm_map_plugin.text.label_settings_height}</label>
+                        <input name="osm_map_height" class="osm-plugin__settings__height__input" type="text"
+                               value="{$plugin.osm_map_plugin.config.map_hoehe}"/>
+                    </div>
+                    <div class="osm-plugin-backend-form-group osm-plugin__settings__width"
+                         id="osm-plugin__settings__width">
+                        <label>{$plugin.osm_map_plugin.text.label_settings_width}</label>
+                        <input name="osm_map_width" class="osm-plugin__settings__width__input" type="text"
+                               value="{$plugin.osm_map_plugin.config.map_breite}"/>
+                    </div>
+                    <div class="osm-plugin-backend-form-group osm-plugin__settings__zoom"
+                         id="osm-plugin__settings__zoom">
+                        <label>{$plugin.osm_map_plugin.text.label_settings_zoom}</label>
+                        <input name="osm_map_zoom_level" class="osm-plugin__settings__zoom__input" type="number"
+                               min="0" max="19" step="1" value="{$plugin.osm_map_plugin.config.map_zoom}"/>
+                    </div>
+                    <div class="osm-plugin-backend-form-group osm-plugin__settings__cache-time"
+                         id="osm-plugin__settings__cache-time">
+                        <label>{$plugin.osm_map_plugin.text.label_settings_cache_time}</label>
+                        <input name="osm_map_cache_time" class="osm-plugin__settings__cache-time__input" type="number"
+                               min="1" step="1" value="{$plugin.osm_map_plugin.config.nominatim_cache_lifetime}"/>
+                    </div>
+                    <div class="osm-plugin-backend-form-group osm-plugin__settings__cache-unit"
+                         id="osm-plugin__settings__cache-unit">
+                        <label>{$plugin.osm_map_plugin.text.label_settings_cache_unit}</label>
+                        <select name="osm_map_cache_unit" class="osm-plugin__settings__cache-unit__input">
+                            {foreach key=key item=unit from=$plugin.osm_map_plugin.text.select_cache_units}
+                                <option value="{$key}"{if $plugin.osm_map_plugin.config.nominatim_cache_lifetime_unit == $key} selected="selected"{/if}>
+                                    {$unit}
+                                </option>
+                            {/foreach}
+                        </select>
+                    </div>
+                    <div class="osm-plugin-backend-form-group osm-plugin__settings__submit"
+                         id="osm-plugin__settings__submit">
+                        <button name="osm_map_submit_config"
+                                class="btn btn-success osm-plugin__settings__submit__button"
+                                type="submit" value="submit">{$plugin.osm_map_plugin.text.button_settings_save}</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+        {literal}
+        $('#osm-map-plugin__delete-cache').on('click', function(evt){
+            evt.preventDefault();
+            if (confirm('{/literal}{$plugin.osm_map_plugin.text.question_delete_cache}{literal}')) {
+                $.ajax({
+                    url: '{/literal}{$slash}{literal}interna/plugin.php',
+                    method: 'GET',
+                    dataType: 'json',
+                    data: {
+                        template: 'osm_map_plugin/templates/deleteCache.json'
+                    },
+                    success: function(response) {
+                        if (response.success === true) {
+                            alert('{/literal}{$plugin.osm_map_plugin.success.cache_deleted}{literal}');
+                        }
+                        else {
+                            switch (response.reason) {
+                                case 'empty_folder':
+                                    alert('{/literal}{$plugin.osm_map_plugin.error.cache_folder_empty}{literal}');
+                                    break;
+                                case 'unknown_error':
+                                    alert('{/literal}{$plugin.osm_map_plugin.error.unknown_error}{literal}');
+                                    break;
+                            }
+                        }
+                    }
+                });
+            }
+            else {
+                alert('{/literal}{$plugin.osm_map_plugin.text.cache_not_deleted}{literal}');
+            }
+        });
+        {/literal}
+    </script>
+    {include file=foot.inc.html}
+{/if}

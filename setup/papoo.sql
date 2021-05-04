@@ -1,8 +1,8 @@
 DROP TABLE IF EXISTS `XXX_bildwechsler`; ##b_dump##
 CREATE TABLE `XXX_bildwechsler` (
-  `bw_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `bw_menu_id` bigint(20) DEFAULT NULL,
-  `bw_order_id` int(11) DEFAULT NULL,
+  `bw_id` bigint NOT NULL,
+  `bw_menu_id` bigint DEFAULT NULL,
+  `bw_order_id` int DEFAULT NULL,
   `bw_bild` text,
   `bw_link` text,
   `bw_text` text,
@@ -10,8 +10,7 @@ CREATE TABLE `XXX_bildwechsler` (
   `bw_noch_mehr_text` text,
   `bw_extra_link` text,
   `bw_extra_link_text` text,
-  `bw_lang_id` int(11) NOT NULL,
-  PRIMARY KEY (`bw_id`),
+  `bw_lang_id` int NOT NULL,
   KEY `bw_menuid` (`bw_menu_id`),
   KEY `bw_order_id` (`bw_order_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 ; ##b_dump##
@@ -20,7 +19,7 @@ INSERT INTO `XXX_bildwechsler` SET `bw_id`='12', `bw_menu_id`='1', `bw_order_id`
 INSERT INTO `XXX_bildwechsler` SET `bw_id`='11', `bw_menu_id`='1', `bw_order_id`='10', `bw_bild`='src=\"../images/10_slide5.jpg\" alt=\"Erdbeere\" title=\"Erdbeere\" width=\"1200\" height=\"473\"', `bw_link`='', `bw_text`='Weitere Subheadline', `bw_ueberschrift`='Die Headline Nr 2', `bw_noch_mehr_text`='', `bw_extra_link`='http://www.google.de', `bw_extra_link_text`='Der Linktext', `bw_lang_id`='1'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_bildwechsler_config`; ##b_dump##
 CREATE TABLE `XXX_bildwechsler_config` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `bw_template_name` varchar(32) DEFAULT NULL,
   `use_ancestors_as_fallback` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
@@ -28,24 +27,24 @@ CREATE TABLE `XXX_bildwechsler_config` (
 INSERT INTO `XXX_bildwechsler_config` SET `id`='1', `bw_template_name`='slick', `use_ancestors_as_fallback`='1'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_content_manipulator_tabelle`; ##b_dump##
 CREATE TABLE `XXX_content_manipulator_tabelle` (
-  `cm_id` int(11) NOT NULL AUTO_INCREMENT,
-  `cm_zahl` int(11) DEFAULT NULL,
+  `cm_id` int NOT NULL AUTO_INCREMENT,
+  `cm_zahl` int DEFAULT NULL,
   `cm_string` varchar(255) DEFAULT NULL,
   `cm_text` text,
   PRIMARY KEY (`cm_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_galerie_bilder`; ##b_dump##
 CREATE TABLE `XXX_galerie_bilder` (
-  `bild_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `bild_id` bigint NOT NULL AUTO_INCREMENT,
   `bild_datei` varchar(255) NOT NULL,
-  `bild_gal_id` bigint(20) NOT NULL,
-  `bild_nummer` int(11) NOT NULL,
+  `bild_gal_id` bigint NOT NULL,
+  `bild_nummer` int NOT NULL,
   `bild_format` varchar(50) NOT NULL,
-  `bild_breite` int(11) NOT NULL,
-  `bild_breite_thumb` int(11) NOT NULL,
-  `bild_hoehe` int(11) NOT NULL,
-  `bild_hoehe_thumb` int(11) NOT NULL,
-  `bild_diashow_timeout` int(11) NOT NULL DEFAULT '5',
+  `bild_breite` int NOT NULL,
+  `bild_breite_thumb` int NOT NULL,
+  `bild_hoehe` int NOT NULL,
+  `bild_hoehe_thumb` int NOT NULL,
+  `bild_diashow_timeout` int NOT NULL DEFAULT '5',
   PRIMARY KEY (`bild_id`),
   KEY `bild_gal_id` (`bild_gal_id`),
   KEY `bild_nummer` (`bild_nummer`)
@@ -82,8 +81,8 @@ INSERT INTO `XXX_galerie_bilder` SET `bild_id`='414', `bild_datei`='258.jpg', `b
 INSERT INTO `XXX_galerie_bilder` SET `bild_id`='415', `bild_datei`='268.jpg', `bild_gal_id`='12', `bild_nummer`='22', `bild_format`='JPG', `bild_breite`='800', `bild_breite_thumb`='240', `bild_hoehe`='600', `bild_hoehe_thumb`='180', `bild_diashow_timeout`='5'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_galerie_bilder_language`; ##b_dump##
 CREATE TABLE `XXX_galerie_bilder_language` (
-  `bildlang_bild_id` bigint(20) NOT NULL,
-  `bildlang_lang_id` int(11) NOT NULL,
+  `bildlang_bild_id` bigint NOT NULL,
+  `bildlang_lang_id` int NOT NULL,
   `bildlang_name` varchar(255) NOT NULL,
   `bildlang_beschreibung` longtext NOT NULL,
   PRIMARY KEY (`bildlang_bild_id`,`bildlang_lang_id`)
@@ -149,25 +148,25 @@ INSERT INTO `XXX_galerie_bilder_language` SET `bildlang_bild_id`='415', `bildlan
 INSERT INTO `XXX_galerie_bilder_language` SET `bildlang_bild_id`='415', `bildlang_lang_id`='2', `bildlang_name`='268.jpg', `bildlang_beschreibung`='268.jpg'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_galerie_einstellungen`; ##b_dump##
 CREATE TABLE `XXX_galerie_einstellungen` (
-  `galset_thumb_breite` int(11) NOT NULL DEFAULT '150',
-  `galset_thumb_hoehe` int(11) NOT NULL DEFAULT '150',
-  `galset_diashow_id` int(11) NOT NULL DEFAULT '1',
-  `galset_diashow_timeout` int(11) NOT NULL DEFAULT '5',
-  `galset_lightbox` int(11) NOT NULL DEFAULT '1',
-  `galset_diashow` int(11) NOT NULL DEFAULT '1',
-  `galset_diashow_window` int(11) NOT NULL DEFAULT '1',
-  `galset_gps_view` INT(11) NOT NULL DEFAULT '1'
+  `galset_thumb_breite` int NOT NULL DEFAULT '150',
+  `galset_thumb_hoehe` int NOT NULL DEFAULT '150',
+  `galset_diashow_id` int NOT NULL DEFAULT '1',
+  `galset_diashow_timeout` int NOT NULL DEFAULT '5',
+  `galset_lightbox` int NOT NULL DEFAULT '1',
+  `galset_diashow` int NOT NULL DEFAULT '1',
+  `galset_diashow_window` int NOT NULL DEFAULT '1',
+  `galset_gps_view` int NOT NULL DEFAULT '1'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
-INSERT INTO `XXX_galerie_einstellungen` SET `galset_thumb_breite`='240', `galset_thumb_hoehe`='240', `galset_diashow_id`='1', `galset_diashow_timeout`='5', `galset_lightbox`='1', `galset_diashow`='1', `galset_diashow_window`='1', `galset_gps_view` = '0'  ; ##b_dump##
+INSERT INTO `XXX_galerie_einstellungen` SET `galset_thumb_breite`='240', `galset_thumb_hoehe`='240', `galset_diashow_id`='1', `galset_diashow_timeout`='5', `galset_lightbox`='1', `galset_diashow`='1', `galset_diashow_window`='1', `galset_gps_view`='0'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_galerie_galerien`; ##b_dump##
 CREATE TABLE `XXX_galerie_galerien` (
-  `gal_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `parent_id` int(11) NOT NULL DEFAULT '999999999',
-  `gal_bilderanzahl` int(11) NOT NULL DEFAULT '0',
+  `gal_id` bigint NOT NULL AUTO_INCREMENT,
+  `parent_id` int NOT NULL DEFAULT '999999999',
+  `gal_bilderanzahl` int NOT NULL DEFAULT '0',
   `gal_verzeichnis` varchar(255) NOT NULL,
-  `gal_aktiv_janein` int(1) NOT NULL DEFAULT '0',
-  `gal_bild_id` bigint(20) NOT NULL DEFAULT '1',
-  `gal_order_id` int(11) NOT NULL,
+  `gal_aktiv_janein` int NOT NULL DEFAULT '0',
+  `gal_bild_id` bigint NOT NULL DEFAULT '1',
+  `gal_order_id` int NOT NULL,
   PRIMARY KEY (`gal_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_galerie_galerien` SET `gal_id`='11', `parent_id`='14', `gal_bilderanzahl`='7', `gal_verzeichnis`='SpieleKlassiker', `gal_aktiv_janein`='1', `gal_bild_id`='24', `gal_order_id`='2'  ; ##b_dump##
@@ -176,8 +175,8 @@ INSERT INTO `XXX_galerie_galerien` SET `gal_id`='13', `parent_id`='0', `gal_bild
 INSERT INTO `XXX_galerie_galerien` SET `gal_id`='14', `parent_id`='0', `gal_bilderanzahl`='0', `gal_verzeichnis`='', `gal_aktiv_janein`='0', `gal_bild_id`='1', `gal_order_id`='22'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_galerie_galerien_language`; ##b_dump##
 CREATE TABLE `XXX_galerie_galerien_language` (
-  `gallang_gal_id` bigint(20) NOT NULL,
-  `gallang_lang_id` bigint(20) NOT NULL,
+  `gallang_gal_id` bigint NOT NULL,
+  `gallang_lang_id` bigint NOT NULL,
   `gallang_name` varchar(255) NOT NULL,
   `gallang_beschreibung` longtext NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
@@ -187,14 +186,21 @@ INSERT INTO `XXX_galerie_galerien_language` SET `gallang_gal_id`='12', `gallang_
 INSERT INTO `XXX_galerie_galerien_language` SET `gallang_gal_id`='12', `gallang_lang_id`='2', `gallang_name`='Greece', `gallang_beschreibung`='Greece'  ; ##b_dump##
 INSERT INTO `XXX_galerie_galerien_language` SET `gallang_gal_id`='13', `gallang_lang_id`='1', `gallang_name`='Urlaub', `gallang_beschreibung`=''  ; ##b_dump##
 INSERT INTO `XXX_galerie_galerien_language` SET `gallang_gal_id`='14', `gallang_lang_id`='1', `gallang_name`='Freizeit', `gallang_beschreibung`=''  ; ##b_dump##
+DROP TABLE IF EXISTS `XXX_glossar_pref_html`; ##b_dump##
+CREATE TABLE `XXX_glossar_pref_html` (
+  `glosspref_id_id` int NOT NULL DEFAULT '1',
+  `glosspref_lang_id` int NOT NULL DEFAULT '1',
+  `glosspref_introtext_de` longtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ; ##b_dump##
+INSERT INTO `XXX_glossar_pref_html` SET `glosspref_id_id`='1', `glosspref_lang_id`='1', `glosspref_introtext_de`='<h2>Glossar-Überschrift</h2><p>.. Text</p>'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_abk`; ##b_dump##
 CREATE TABLE `XXX_papoo_abk` (
-  `abk_id` int(11) NOT NULL AUTO_INCREMENT,
+  `abk_id` int NOT NULL AUTO_INCREMENT,
   `abk_abk` varchar(255) NOT NULL,
   `abk_meaning` mediumtext NOT NULL,
   `abk_deutsch` mediumtext NOT NULL,
-  `abk_abkuerzung` int(11) NOT NULL DEFAULT '0',
-  `abk_acronym` int(11) NOT NULL DEFAULT '0',
+  `abk_abkuerzung` int NOT NULL DEFAULT '0',
+  `abk_acronym` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`abk_id`),
   KEY `abk_abk` (`abk_abk`)
 ) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 ; ##b_dump##
@@ -206,7 +212,7 @@ INSERT INTO `XXX_papoo_abk` SET `abk_id`='6', `abk_abk`=' pdf', `abk_meaning`='P
 INSERT INTO `XXX_papoo_abk` SET `abk_id`='7', `abk_abk`=' RTF', `abk_meaning`='Rich Text Format ', `abk_deutsch`='', `abk_abkuerzung`='0', `abk_acronym`='0'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_blacklist`; ##b_dump##
 CREATE TABLE `XXX_papoo_blacklist` (
-  `black_id` int(11) NOT NULL AUTO_INCREMENT,
+  `black_id` int NOT NULL AUTO_INCREMENT,
   `black_name` text NOT NULL,
   PRIMARY KEY (`black_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 ; ##b_dump##
@@ -219,8 +225,8 @@ INSERT INTO `XXX_papoo_blacklist` SET `black_id`='14', `black_name`='sex'  ; ##b
 INSERT INTO `XXX_papoo_blacklist` SET `black_id`='15', `black_name`='Sex'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_bookmarks`; ##b_dump##
 CREATE TABLE `XXX_papoo_bookmarks` (
-  `book_user` int(11) NOT NULL,
-  `book_menuid` int(11) NOT NULL,
+  `book_user` int NOT NULL,
+  `book_menuid` int NOT NULL,
   `book_link` mediumtext NOT NULL,
   `book_name` varchar(255) NOT NULL,
   PRIMARY KEY (`book_user`,`book_menuid`)
@@ -231,7 +237,7 @@ INSERT INTO `XXX_papoo_bookmarks` SET `book_user`='10', `book_menuid`='11', `boo
 INSERT INTO `XXX_papoo_bookmarks` SET `book_user`='10', `book_menuid`='8', `book_link`='./user.php?menuid=8', `book_name`='User bearbeiten'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_cache`; ##b_dump##
 CREATE TABLE `XXX_papoo_cache` (
-  `cache_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `cache_id` bigint NOT NULL AUTO_INCREMENT,
   `cache_url` varchar(255) NOT NULL,
   `cache_lang_short` varchar(255) NOT NULL,
   `cache_filename` mediumtext NOT NULL,
@@ -242,28 +248,28 @@ CREATE TABLE `XXX_papoo_cache` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_cache_dat`; ##b_dump##
 CREATE TABLE `XXX_papoo_cache_dat` (
-  `cache_id` int(100) NOT NULL AUTO_INCREMENT,
-  `cache_user_id` int(11) NOT NULL,
+  `cache_id` int NOT NULL AUTO_INCREMENT,
+  `cache_user_id` int NOT NULL,
   `cache_array_name` mediumtext NOT NULL,
   `cache_array_dat` longtext NOT NULL,
   PRIMARY KEY (`cache_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_category`; ##b_dump##
 CREATE TABLE `XXX_papoo_category` (
-  `cat_id` int(11) NOT NULL AUTO_INCREMENT,
-  `cat_order_id` int(11) NOT NULL,
-  `cat_sub` int(11) NOT NULL DEFAULT '0',
-  `cat_level` int(11) NOT NULL DEFAULT '0',
-  `cat_startseite_ok` int(11) NOT NULL,
-  `cat_startseite_anzahl` int(11) NOT NULL,
+  `cat_id` int NOT NULL AUTO_INCREMENT,
+  `cat_order_id` int NOT NULL,
+  `cat_sub` int NOT NULL DEFAULT '0',
+  `cat_level` int NOT NULL DEFAULT '0',
+  `cat_startseite_ok` int NOT NULL,
+  `cat_startseite_anzahl` int NOT NULL,
   PRIMARY KEY (`cat_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_category` SET `cat_id`='1', `cat_order_id`='1', `cat_sub`='0', `cat_level`='0', `cat_startseite_ok`='0', `cat_startseite_anzahl`='0'  ; ##b_dump##
 INSERT INTO `XXX_papoo_category` SET `cat_id`='2', `cat_order_id`='2', `cat_sub`='0', `cat_level`='0', `cat_startseite_ok`='0', `cat_startseite_anzahl`='0'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_category_lang`; ##b_dump##
 CREATE TABLE `XXX_papoo_category_lang` (
-  `cat_lang_id` int(11) NOT NULL,
-  `cat_lang_lang` int(11) NOT NULL,
+  `cat_lang_id` int NOT NULL,
+  `cat_lang_lang` int NOT NULL,
   `cat_text` mediumtext NOT NULL,
   `cat_text_intern` mediumtext NOT NULL,
   `cat_descrip` mediumtext NOT NULL,
@@ -275,22 +281,22 @@ INSERT INTO `XXX_papoo_category_lang` SET `cat_lang_id`='2', `cat_lang_lang`='1'
 INSERT INTO `XXX_papoo_category_lang` SET `cat_lang_id`='2', `cat_lang_lang`='2', `cat_text`='Kategorie 2', `cat_text_intern`='Kategorie 2', `cat_descrip`='', `cat_lang_header`=''  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_category_lookup`; ##b_dump##
 CREATE TABLE `XXX_papoo_category_lookup` (
-  `cat_lid` int(11) NOT NULL DEFAULT '0',
-  `cat_lgruppe` int(11) NOT NULL,
+  `cat_lid` int NOT NULL DEFAULT '0',
+  `cat_lgruppe` int NOT NULL,
   PRIMARY KEY (`cat_lid`,`cat_lgruppe`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_category_lookup_read`; ##b_dump##
 CREATE TABLE `XXX_papoo_category_lookup_read` (
-  `cat_rlid` int(11) NOT NULL DEFAULT '0',
-  `cat_rlgruppe` int(11) NOT NULL,
+  `cat_rlid` int NOT NULL DEFAULT '0',
+  `cat_rlgruppe` int NOT NULL,
   PRIMARY KEY (`cat_rlid`,`cat_rlgruppe`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_category_lookup_read` SET `cat_rlid`='1', `cat_rlgruppe`='10'  ; ##b_dump##
 INSERT INTO `XXX_papoo_category_lookup_read` SET `cat_rlid`='2', `cat_rlgruppe`='10'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_category_lookup_write`; ##b_dump##
 CREATE TABLE `XXX_papoo_category_lookup_write` (
-  `cat_wlid` int(11) NOT NULL DEFAULT '0',
-  `cat_wlgruppe` int(11) NOT NULL,
+  `cat_wlid` int NOT NULL DEFAULT '0',
+  `cat_wlgruppe` int NOT NULL,
   PRIMARY KEY (`cat_wlid`,`cat_wlgruppe`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_category_lookup_write` SET `cat_wlid`='1', `cat_wlgruppe`='11'  ; ##b_dump##
@@ -298,10 +304,10 @@ INSERT INTO `XXX_papoo_category_lookup_write` SET `cat_wlid`='2', `cat_wlgruppe`
 INSERT INTO `XXX_papoo_category_lookup_write` SET `cat_wlid`='2', `cat_wlgruppe`='12'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_cform`; ##b_dump##
 CREATE TABLE `XXX_papoo_cform` (
-  `cform_id` int(11) NOT NULL AUTO_INCREMENT,
-  `cform_order_id` int(11) NOT NULL,
+  `cform_id` int NOT NULL AUTO_INCREMENT,
+  `cform_order_id` int NOT NULL,
   `cform_name` varchar(255) NOT NULL,
-  `cform_must` int(11) NOT NULL DEFAULT '0',
+  `cform_must` int NOT NULL DEFAULT '0',
   `cform_type` varchar(255) NOT NULL DEFAULT 'text',
   PRIMARY KEY (`cform_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ; ##b_dump##
@@ -311,8 +317,8 @@ INSERT INTO `XXX_papoo_cform` SET `cform_id`='3', `cform_order_id`='30', `cform_
 INSERT INTO `XXX_papoo_cform` SET `cform_id`='4', `cform_order_id`='40', `cform_name`='IhreNachricht', `cform_must`='0', `cform_type`='textarea'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_cform_lang`; ##b_dump##
 CREATE TABLE `XXX_papoo_cform_lang` (
-  `cform_lang_id` int(11) NOT NULL,
-  `cform_lang_lang` int(11) NOT NULL,
+  `cform_lang_id` int NOT NULL,
+  `cform_lang_lang` int NOT NULL,
   `cform_text` mediumtext NOT NULL,
   `cform_text_intern` mediumtext NOT NULL,
   `cform_descrip` mediumtext NOT NULL,
@@ -328,12 +334,12 @@ INSERT INTO `XXX_papoo_cform_lang` SET `cform_lang_id`='4', `cform_lang_lang`='1
 INSERT INTO `XXX_papoo_cform_lang` SET `cform_lang_id`='4', `cform_lang_lang`='2', `cform_text`='Ihre Nachricht', `cform_text_intern`='', `cform_descrip`='', `cform_lang_header`=''  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_collum3`; ##b_dump##
 CREATE TABLE `XXX_papoo_collum3` (
-  `inhalt_id` int(11) NOT NULL AUTO_INCREMENT,
+  `inhalt_id` int NOT NULL AUTO_INCREMENT,
   `inhalt_bb` mediumtext NOT NULL,
   `gruppe_id` varchar(255) NOT NULL DEFAULT 'g1,',
-  `col_order_id` int(11) NOT NULL,
+  `col_order_id` int NOT NULL,
   `col_name` varchar(255) NOT NULL DEFAULT '1',
-  `intranet_yn` int(11) NOT NULL,
+  `intranet_yn` int NOT NULL,
   `inhalt` mediumtext NOT NULL,
   `col_menuid` varchar(255) NOT NULL DEFAULT '0',
   PRIMARY KEY (`inhalt_id`)
@@ -341,7 +347,7 @@ CREATE TABLE `XXX_papoo_collum3` (
 INSERT INTO `XXX_papoo_collum3` SET `inhalt_id`='1', `inhalt_bb`='', `gruppe_id`='', `col_order_id`='10', `col_name`='1', `intranet_yn`='0', `inhalt`='', `col_menuid`='ok'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_config`; ##b_dump##
 CREATE TABLE `XXX_papoo_config` (
-  `config_id` int(11) NOT NULL AUTO_INCREMENT,
+  `config_id` int NOT NULL AUTO_INCREMENT,
   `config_metatagszusatz` text,
   `config_maximale_bildgrel` text,
   `config_maximale_bildgroesse_in_kb` text,
@@ -366,8 +372,8 @@ CREATE TABLE `XXX_papoo_config` (
 INSERT INTO `XXX_papoo_config` SET `config_id`='1', `config_metatagszusatz`='', `config_maximale_bildgrel`='4000x4000', `config_maximale_bildgroesse_in_kb`='', `config_jpg_komprimierungsfaktor_feld_`='80', `config_thumbnailgroesse`='240x240', `config_paginierung`='10', `config_session_lifetime`='432000', `config_memory_limit_feld`='256', `config_skriptlaufzeit_feld`='900', `config_upload_dateigre_feld`='10000000', `config_404_benutzen_feld`='', `config_adresse_der_404_seite`='', `config_404_benutzen_check`='0', `config_jquery_aktivieren_label`='1', `config_basis_js_funktionen_frontend`='1', `config_jquery_colorbox_aktivieren`='1', `config_html_tidy_funktionaktivieren`='0', `config_uplaod_hide_praefix`='0', `config_tiny_advimg_filelist`='0'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_content_templates`; ##b_dump##
 CREATE TABLE `XXX_papoo_content_templates` (
-  `ctempl_id` int(11) NOT NULL AUTO_INCREMENT,
-  `ctempl_lang_id` int(11) NOT NULL,
+  `ctempl_id` int NOT NULL AUTO_INCREMENT,
+  `ctempl_lang_id` int NOT NULL,
   `ctempl_name` mediumtext NOT NULL,
   `ctempl_content` mediumtext NOT NULL,
   PRIMARY KEY (`ctempl_id`)
@@ -376,33 +382,33 @@ INSERT INTO `XXX_papoo_content_templates` SET `ctempl_id`='1', `ctempl_lang_id`=
 INSERT INTO `XXX_papoo_content_templates` SET `ctempl_id`='2', `ctempl_lang_id`='2', `ctempl_name`='test en', `ctempl_content`='\r\n<a href=\"\">test</a>\r\n\r\n'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_counter`; ##b_dump##
 CREATE TABLE `XXX_papoo_counter` (
-  `counter_id` int(11) NOT NULL AUTO_INCREMENT,
+  `counter_id` int NOT NULL AUTO_INCREMENT,
   `counter_ip` varchar(255) NOT NULL,
   `counter_stamp` varchar(255) NOT NULL,
   PRIMARY KEY (`counter_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=76 DEFAULT CHARSET=utf8 ; ##b_dump##
-INSERT INTO `XXX_papoo_counter` SET `counter_id`='75', `counter_ip`='::1', `counter_stamp`='1528816519'  ; ##b_dump##
+) ENGINE=MyISAM AUTO_INCREMENT=77 DEFAULT CHARSET=utf8 ; ##b_dump##
+INSERT INTO `XXX_papoo_counter` SET `counter_id`='76', `counter_ip`='::1', `counter_stamp`='1620161414'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_daten`; ##b_dump##
 CREATE TABLE `XXX_papoo_daten` (
-  `datenid` int(11) NOT NULL AUTO_INCREMENT,
+  `datenid` int NOT NULL AUTO_INCREMENT,
   `seitenname` varchar(80) NOT NULL,
   `seitenbeschreibung` varchar(255) NOT NULL,
   `seitenstich` mediumtext NOT NULL,
   `seitentitel` mediumtext NOT NULL,
   `autor_seite` mediumtext NOT NULL,
-  `gesamtcount` bigint(20) NOT NULL DEFAULT '0',
-  `rechte_spalte` int(11) NOT NULL DEFAULT '1',
-  `einloggen` int(11) NOT NULL DEFAULT '1',
-  `einloggen_internet` int(11) NOT NULL DEFAULT '1',
-  `forum` int(11) NOT NULL DEFAULT '0',
+  `gesamtcount` bigint NOT NULL DEFAULT '0',
+  `rechte_spalte` int NOT NULL DEFAULT '1',
+  `einloggen` int NOT NULL DEFAULT '1',
+  `einloggen_internet` int NOT NULL DEFAULT '1',
+  `forum` int NOT NULL DEFAULT '0',
   `admin_email` varchar(255) NOT NULL DEFAULT 'root@localhost.de',
   `startseite_top_text` mediumtext NOT NULL,
-  `style_switcher` int(11) NOT NULL DEFAULT '0',
-  `intranet_yn` int(11) NOT NULL DEFAULT '0',
-  `rechte_spalte_internet` int(11) NOT NULL DEFAULT '0',
-  `style_switcher_internet` int(11) NOT NULL DEFAULT '0',
-  `forum_internet` int(11) NOT NULL DEFAULT '0',
-  `editor` int(11) NOT NULL DEFAULT '3',
+  `style_switcher` int NOT NULL DEFAULT '0',
+  `intranet_yn` int NOT NULL DEFAULT '0',
+  `rechte_spalte_internet` int NOT NULL DEFAULT '0',
+  `style_switcher_internet` int NOT NULL DEFAULT '0',
+  `forum_internet` int NOT NULL DEFAULT '0',
+  `editor` int NOT NULL DEFAULT '3',
   `artikel_yn` varchar(255) NOT NULL DEFAULT '1',
   `artikel_lang_yn` varchar(255) NOT NULL DEFAULT '1',
   `comment_yn` varchar(255) NOT NULL DEFAULT '1',
@@ -410,20 +416,20 @@ CREATE TABLE `XXX_papoo_daten` (
   `author_link_yn` varchar(255) NOT NULL DEFAULT '1',
   `mod_rewrite` varchar(255) NOT NULL DEFAULT '1',
   `mod_mime` varchar(255) NOT NULL DEFAULT '1',
-  `mod_free` int(11) NOT NULL,
+  `mod_free` int NOT NULL,
   `version` varchar(255) NOT NULL DEFAULT '0.2.186',
   `top_title` mediumtext NOT NULL,
   `lang_frontend` varchar(255) NOT NULL DEFAULT 'de',
   `lang_backend` varchar(255) NOT NULL DEFAULT 'de',
   `cache_yn` varchar(255) NOT NULL DEFAULT 'no',
-  `feed_num` int(11) NOT NULL DEFAULT '0',
-  `forum_board` int(11) NOT NULL DEFAULT '0',
+  `feed_num` int NOT NULL DEFAULT '0',
+  `forum_board` int NOT NULL DEFAULT '0',
   `daten_menuintcss` varchar(255) NOT NULL,
   `daten_pluginscss` varchar(255) NOT NULL,
-  `suchbox` int(11) NOT NULL DEFAULT '0',
-  `suchbox_intra` int(11) NOT NULL DEFAULT '0',
-  `forum_letzte_modus` int(11) NOT NULL DEFAULT '0',
-  `spamschutz_modus` int(11) NOT NULL DEFAULT '0',
+  `suchbox` int NOT NULL DEFAULT '0',
+  `suchbox_intra` int NOT NULL DEFAULT '0',
+  `forum_letzte_modus` int NOT NULL DEFAULT '0',
+  `spamschutz_modus` int NOT NULL DEFAULT '0',
   `renr` varchar(255) NOT NULL,
   `kontakt_text` mediumtext NOT NULL,
   `kontakt_text_sans` mediumtext NOT NULL,
@@ -448,50 +454,50 @@ CREATE TABLE `XXX_papoo_daten` (
   `stamm_artikel_rechte_chef` varchar(255) NOT NULL DEFAULT '1',
   `lang_autodetect` varchar(255) NOT NULL DEFAULT '1',
   `lang_dateformat` varchar(255) NOT NULL DEFAULT '1',
-  `stamm_kontakt_spamschutz` int(4) NOT NULL DEFAULT '0',
+  `stamm_kontakt_spamschutz` int NOT NULL DEFAULT '0',
   `categories` varchar(255) NOT NULL DEFAULT '0',
   `off_yn` varchar(255) NOT NULL DEFAULT '0',
   `wartungstext` mediumtext NOT NULL,
   `stamm_limit_zahl` varchar(255) NOT NULL DEFAULT '1',
   `stamm_cat_startseite_ok` varchar(255) NOT NULL DEFAULT '1',
   `stamm_surls_trenner` varchar(255) NOT NULL DEFAULT '1',
-  `do_replace` int(11) NOT NULL,
-  `gaestebuch_msg_frei` int(11) NOT NULL,
-  `showpapoo` int(11) NOT NULL DEFAULT '1',
-  `show_menu_all` int(11) NOT NULL DEFAULT '0',
-  `stamm_cat_sub_ok` int(11) NOT NULL DEFAULT '0',
-  `stamm_artikel_order` int(11) NOT NULL DEFAULT '0',
-  `stamm_benach_artikelfreigabe_email` int(4) NOT NULL DEFAULT '0',
-  `stamm_documents_change_backup` int(4) NOT NULL DEFAULT '0',
-  `anzeig_filter` int(11) DEFAULT '0',
+  `do_replace` int NOT NULL,
+  `gaestebuch_msg_frei` int NOT NULL,
+  `showpapoo` int NOT NULL DEFAULT '1',
+  `show_menu_all` int NOT NULL DEFAULT '0',
+  `stamm_cat_sub_ok` int NOT NULL DEFAULT '0',
+  `stamm_artikel_order` int NOT NULL DEFAULT '0',
+  `stamm_benach_artikelfreigabe_email` int NOT NULL DEFAULT '0',
+  `stamm_documents_change_backup` int NOT NULL DEFAULT '0',
+  `anzeig_filter` int DEFAULT '0',
   `twitter_handle` varchar(16) NOT NULL DEFAULT '',
   `captcha_sitekey` varchar(255) NOT NULL,
   `captcha_secret` varchar(255) NOT NULL,
   PRIMARY KEY (`datenid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ; ##b_dump##
-INSERT INTO `XXX_papoo_daten` SET `datenid`='2', `seitenname`='www.ihre_seite.de', `seitenbeschreibung`='', `seitenstich`='', `seitentitel`='', `autor_seite`='Ihre Name', `gesamtcount`='14', `rechte_spalte`='0', `einloggen`='0', `einloggen_internet`='0', `forum`='1', `admin_email`='info@ihre_seite.de', `startseite_top_text`='', `style_switcher`='0', `intranet_yn`='0', `rechte_spalte_internet`='0', `style_switcher_internet`='0', `forum_internet`='1', `editor`='0', `artikel_yn`='0', `artikel_lang_yn`='0', `comment_yn`='', `breadcrumb_yn`='1', `author_link_yn`='1', `mod_rewrite`='1', `mod_mime`='1', `mod_free`='1', `version`='x', `top_title`='', `lang_frontend`='de', `lang_backend`='', `cache_yn`='', `feed_num`='1', `forum_board`='1', `daten_menuintcss`='1528899767_menuint.css', `daten_pluginscss`='1528899767_plugins.css', `suchbox`='0', `suchbox_intra`='0', `forum_letzte_modus`='0', `spamschutz_modus`='2', `renr`='', `kontakt_text`='', `kontakt_text_sans`='', `news`='', `newsnr`='3', `anzeig_besucher`='1', `anzeig_autor`='1', `anzeig_pageviews`='1', `anzeig_versende`='1', `anzeig_drucken`='1', `anzeig_menue_komplett`='0', `benach_email`='info@ihre_seite.de', `benach_neueruser`='1', `benach_neu_gaestebuch`='1', `benach_neu_kommentar`='1', `benach_neu_forum`='1', `usability`='', `stamm_artikel_rechte_jeder`='1', `stamm_veroffen_yn`='1', `stamm_listen_yn`='', `stamm_menu_rechte_jeder`='1', `stamm_artikel_rechte_chef`='1', `lang_autodetect`='1', `lang_dateformat`='0', `stamm_kontakt_spamschutz`='1', `categories`='', `off_yn`='', `wartungstext`='<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"de\" lang=\"de\">\r\n<head>\r\n<title>Wartungsarbeiten</title>\r\n<style type=\"text/css\">\r\n* {\r\n	font-family: \"Trebuchet MS\", Arial, Helvetica, sans-serif;\r\n}\r\nbody {\r\n	margin:0 auto;\r\n	padding: 0;\r\n	background: #EFEFEF;\r\n	font-size: 0.8em;\r\n	color: #444;\r\n}\r\nh1, h2, h3, h4, h5, h6 {\r\n	margin: 0;\r\n	padding: 0;\r\n	text-transform: lowercase;\r\n	font-weight: normal;\r\n	color: #000000;\r\n}\r\n#content {\r\nmargin:0 auto;\r\nwidth:400px;\r\nbackground:#fff;\r\nborder:1px solid black;\r\npadding:30px;\r\nmargin-top:15%;\r\n}\r\n#colone {\r\nmargin-top:30px;\r\n}\r\n</style>\r\n</head>\r\n<body>\r\n<div id=\"content\">\r\n<div id=\"headertpl\" style=\"\">\r\n<h1 class=\"weiter\">Die Seite wird gewartet</h1>\r\n</div>\r\n<div id=\"colone\">\r\nBitte besuchen Sie diese Seite in wenigen Minuten wieder.\r\n<p>Wir führen derzeit dringende Wartungsarbeiten durch.</p>\r\n</div>\r\n</div>\r\n</body>\r\n</html>\r\n		', `stamm_limit_zahl`='1', `stamm_cat_startseite_ok`='', `stamm_surls_trenner`='cms', `do_replace`='1', `gaestebuch_msg_frei`='1', `showpapoo`='1', `show_menu_all`='0', `stamm_cat_sub_ok`='0', `stamm_artikel_order`='1', `stamm_benach_artikelfreigabe_email`='0', `stamm_documents_change_backup`='0', `anzeig_filter`='0', `twitter_handle`='', `captcha_sitekey`='', `captcha_secret`=''  ; ##b_dump##
+INSERT INTO `XXX_papoo_daten` SET `datenid`='2', `seitenname`='www.ihre_seite.de', `seitenbeschreibung`='', `seitenstich`='', `seitentitel`='', `autor_seite`='Ihre Name', `gesamtcount`='15', `rechte_spalte`='0', `einloggen`='0', `einloggen_internet`='0', `forum`='1', `admin_email`='info@ihre_seite.de', `startseite_top_text`='', `style_switcher`='0', `intranet_yn`='0', `rechte_spalte_internet`='0', `style_switcher_internet`='0', `forum_internet`='1', `editor`='0', `artikel_yn`='0', `artikel_lang_yn`='0', `comment_yn`='', `breadcrumb_yn`='1', `author_link_yn`='1', `mod_rewrite`='1', `mod_mime`='1', `mod_free`='1', `version`='x', `top_title`='', `lang_frontend`='de', `lang_backend`='', `cache_yn`='', `feed_num`='1', `forum_board`='1', `daten_menuintcss`='1620162309_menuint.css', `daten_pluginscss`='1620162309_plugins.css', `suchbox`='0', `suchbox_intra`='0', `forum_letzte_modus`='0', `spamschutz_modus`='2', `renr`='', `kontakt_text`='', `kontakt_text_sans`='', `news`='', `newsnr`='3', `anzeig_besucher`='1', `anzeig_autor`='1', `anzeig_pageviews`='1', `anzeig_versende`='1', `anzeig_drucken`='1', `anzeig_menue_komplett`='0', `benach_email`='info@ihre_seite.de', `benach_neueruser`='1', `benach_neu_gaestebuch`='1', `benach_neu_kommentar`='1', `benach_neu_forum`='1', `usability`='', `stamm_artikel_rechte_jeder`='1', `stamm_veroffen_yn`='1', `stamm_listen_yn`='', `stamm_menu_rechte_jeder`='1', `stamm_artikel_rechte_chef`='1', `lang_autodetect`='1', `lang_dateformat`='0', `stamm_kontakt_spamschutz`='1', `categories`='', `off_yn`='', `wartungstext`='<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"de\" lang=\"de\">\r\n<head>\r\n<title>Wartungsarbeiten</title>\r\n<style type=\"text/css\">\r\n* {\r\n	font-family: \"Trebuchet MS\", Arial, Helvetica, sans-serif;\r\n}\r\nbody {\r\n	margin:0 auto;\r\n	padding: 0;\r\n	background: #EFEFEF;\r\n	font-size: 0.8em;\r\n	color: #444;\r\n}\r\nh1, h2, h3, h4, h5, h6 {\r\n	margin: 0;\r\n	padding: 0;\r\n	text-transform: lowercase;\r\n	font-weight: normal;\r\n	color: #000000;\r\n}\r\n#content {\r\nmargin:0 auto;\r\nwidth:400px;\r\nbackground:#fff;\r\nborder:1px solid black;\r\npadding:30px;\r\nmargin-top:15%;\r\n}\r\n#colone {\r\nmargin-top:30px;\r\n}\r\n</style>\r\n</head>\r\n<body>\r\n<div id=\"content\">\r\n<div id=\"headertpl\" style=\"\">\r\n<h1 class=\"weiter\">Die Seite wird gewartet</h1>\r\n</div>\r\n<div id=\"colone\">\r\nBitte besuchen Sie diese Seite in wenigen Minuten wieder.\r\n<p>Wir führen derzeit dringende Wartungsarbeiten durch.</p>\r\n</div>\r\n</div>\r\n</body>\r\n</html>\r\n		', `stamm_limit_zahl`='1', `stamm_cat_startseite_ok`='', `stamm_surls_trenner`='cms', `do_replace`='1', `gaestebuch_msg_frei`='1', `showpapoo`='1', `show_menu_all`='0', `stamm_cat_sub_ok`='0', `stamm_artikel_order`='1', `stamm_benach_artikelfreigabe_email`='0', `stamm_documents_change_backup`='0', `anzeig_filter`='0', `twitter_handle`='', `captcha_sitekey`='', `captcha_secret`=''  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_download`; ##b_dump##
 CREATE TABLE `XXX_papoo_download` (
-  `downloadid` int(20) NOT NULL AUTO_INCREMENT,
+  `downloadid` int NOT NULL AUTO_INCREMENT,
   `downloadname` varchar(255) NOT NULL,
   `downloadlink` varchar(255) NOT NULL,
   `downloadgroesse` varchar(255) NOT NULL,
   `downloadkategorie` varchar(255) NOT NULL,
   `downloadfeature` mediumtext NOT NULL,
   `downloadrechte` mediumtext NOT NULL,
-  `downloaduserid` int(11) NOT NULL DEFAULT '0',
+  `downloaduserid` int NOT NULL DEFAULT '0',
   `zeitpunkt` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `wieoft` int(11) NOT NULL DEFAULT '0',
+  `wieoft` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`downloadid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_download` SET `downloadid`='1', `downloadname`='', `downloadlink`='/dokumente/upload/0d77a_091028_impfstellenliste.pdf', `downloadgroesse`='11060', `downloadkategorie`='1', `downloadfeature`='x', `downloadrechte`='', `downloaduserid`='10', `zeitpunkt`='2013-04-03 17:39:42', `wieoft`='1'  ; ##b_dump##
 INSERT INTO `XXX_papoo_download` SET `downloadid`='2', `downloadname`='', `downloadlink`='/dokumente/upload/4f9c7_091028_reseller-vertrag_papoo.odt', `downloadgroesse`='32717', `downloadkategorie`='1', `downloadfeature`='x', `downloadrechte`='', `downloaduserid`='10', `zeitpunkt`='2009-12-21 18:23:11', `wieoft`='0'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_download_versionen`; ##b_dump##
 CREATE TABLE `XXX_papoo_download_versionen` (
-  `dv_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `dv_downloadid` bigint(20) DEFAULT NULL,
+  `dv_id` bigint NOT NULL AUTO_INCREMENT,
+  `dv_downloadid` bigint DEFAULT NULL,
   `dv_downloadlink` varchar(255) DEFAULT NULL,
-  `dv_downloaduserid` int(11) DEFAULT NULL,
+  `dv_downloaduserid` int DEFAULT NULL,
   `dv_zeitpunkt` varchar(50) DEFAULT NULL,
   `dv_org_filename` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`dv_id`),
@@ -500,16 +506,16 @@ CREATE TABLE `XXX_papoo_download_versionen` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_forums`; ##b_dump##
 CREATE TABLE `XXX_papoo_forums` (
-  `forumid` int(11) NOT NULL AUTO_INCREMENT,
+  `forumid` int NOT NULL AUTO_INCREMENT,
   `forumname` varchar(80) NOT NULL,
   `zeitstempel` varchar(255) NOT NULL,
   `Beschreibung` mediumtext NOT NULL,
   `lese_rechte` varchar(255) NOT NULL DEFAULT 'g1,',
   `schreib_rechte` varchar(255) NOT NULL DEFAULT 'g1,',
-  `intranet_yn` int(11) NOT NULL DEFAULT '0',
-  `forum_last` int(11) NOT NULL DEFAULT '0',
-  `forum_threads` int(11) NOT NULL DEFAULT '0',
-  `forum_beitr` int(11) NOT NULL DEFAULT '0',
+  `intranet_yn` int NOT NULL DEFAULT '0',
+  `forum_last` int NOT NULL DEFAULT '0',
+  `forum_threads` int NOT NULL DEFAULT '0',
+  `forum_beitr` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`forumid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_forums` SET `forumid`='10', `forumname`='Kommentare', `zeitstempel`='', `Beschreibung`='Comments', `lese_rechte`='g1,', `schreib_rechte`='g1,', `intranet_yn`='0', `forum_last`='8', `forum_threads`='1', `forum_beitr`='2'  ; ##b_dump##
@@ -517,7 +523,7 @@ INSERT INTO `XXX_papoo_forums` SET `forumid`='20', `forumname`='Gästebuch', `ze
 INSERT INTO `XXX_papoo_forums` SET `forumid`='21', `forumname`='Dies ist ein Testforum', `zeitstempel`='', `Beschreibung`='Hier können Sie alles diksutieren was auch immer Sie möchten.', `lese_rechte`='g1,', `schreib_rechte`='g1,', `intranet_yn`='0', `forum_last`='1', `forum_threads`='1', `forum_beitr`='1'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_freiemodule_daten`; ##b_dump##
 CREATE TABLE `XXX_papoo_freiemodule_daten` (
-  `freiemodule_id` int(11) NOT NULL AUTO_INCREMENT,
+  `freiemodule_id` int NOT NULL,
   `freiemodule_name` text NOT NULL,
   `freiemodule_code` text NOT NULL,
   `freiemodule_menuid` varchar(255) NOT NULL DEFAULT '',
@@ -526,30 +532,30 @@ CREATE TABLE `XXX_papoo_freiemodule_daten` (
   `freiemodule_stop` date NOT NULL,
   `freiemodule_modulid` varchar(255) NOT NULL DEFAULT '',
   `freiemodule_lang` varchar(255) NOT NULL DEFAULT '',
-  `freiemodule_raw_output` TINYINT(1) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`freiemodule_id`)
+  `freiemodule_raw_output` tinyint(1) NOT NULL DEFAULT '0',
+  `freiemodule_lang_id` int NOT NULL DEFAULT '1'
 ) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ; ##b_dump##
-INSERT INTO `XXX_papoo_freiemodule_daten` SET `freiemodule_id`='1', `freiemodule_name`='Kopflogo', `freiemodule_code`='<div id=\"kopflogo\" class=\"span3\"><p><a title=\"Startseite\" href=\"#webverzeichnis#/\"><img src=\"../images/10-crop-10-logo-green.png\" alt=\"Papoo Logo\" title=\" \" width=\"332\" height=\"73\" /></a></p></div>', `freiemodule_menuid`='all', `freiemodule_artikelid`='', `freiemodule_start`='2010-01-01', `freiemodule_stop`='2050-01-01', `freiemodule_modulid`='36', `freiemodule_lang`='de'  ; ##b_dump##
-INSERT INTO `XXX_papoo_freiemodule_daten` SET `freiemodule_id`='2', `freiemodule_name`='Startseite Kopf', `freiemodule_code`='', `freiemodule_menuid`='1', `freiemodule_artikelid`='', `freiemodule_start`='2010-01-01', `freiemodule_stop`='2050-01-01', `freiemodule_modulid`='37', `freiemodule_lang`='de'  ; ##b_dump##
-INSERT INTO `XXX_papoo_freiemodule_daten` SET `freiemodule_id`='3', `freiemodule_name`='Footer', `freiemodule_code`='<div class=\"large-3 medium-3 columns\"><h2><i class=\"fa fa-map-marker\"> </i>Hier sind wir zu finden</h2><p>Auguststr. 4<br />53229 Bonn</p><p></p><p><i class=\"fa fa-phone\"></i>  0228 / 280 56 68</p><p><i class=\"fa fa-envelope\">  </i><a href=\"mailto:info@papoo.de\">info@papoo.de</a></p><p><i class=\"fa fa-facebook\"></i>   <a target=\"_blank\" href=\"https://www.facebook.com/cms.papoo\">Facebook</a></p><p><i class=\"fa fa-home\"></i> <a target=\"_blank\" href=\"http://www.papoo.de\">Webseite</a></p></div><div class=\"large-5 medium-5 columns\"><address>Auguststr. 4<br /> 53229 Bonn</address></div>', `freiemodule_menuid`='all', `freiemodule_artikelid`='', `freiemodule_start`='2010-01-01', `freiemodule_stop`='2050-01-01', `freiemodule_modulid`='38', `freiemodule_lang`='de'  ; ##b_dump##
+INSERT INTO `XXX_papoo_freiemodule_daten` SET `freiemodule_id`='1', `freiemodule_name`='Kopflogo', `freiemodule_code`='<div id=\"kopflogo\" class=\"span3\"><p><a title=\"Startseite\" href=\"#webverzeichnis#/\"><img src=\"../images/10-crop-10-logo-green.png\" alt=\"Papoo Logo\" title=\" \" width=\"332\" height=\"73\" /></a></p></div>', `freiemodule_menuid`='all', `freiemodule_artikelid`='', `freiemodule_start`='2010-01-01', `freiemodule_stop`='2050-01-01', `freiemodule_modulid`='36', `freiemodule_lang`='de', `freiemodule_raw_output`='0', `freiemodule_lang_id`='1'  ; ##b_dump##
+INSERT INTO `XXX_papoo_freiemodule_daten` SET `freiemodule_id`='2', `freiemodule_name`='Startseite Kopf', `freiemodule_code`='', `freiemodule_menuid`='1', `freiemodule_artikelid`='', `freiemodule_start`='2010-01-01', `freiemodule_stop`='2050-01-01', `freiemodule_modulid`='37', `freiemodule_lang`='de', `freiemodule_raw_output`='0', `freiemodule_lang_id`='1'  ; ##b_dump##
+INSERT INTO `XXX_papoo_freiemodule_daten` SET `freiemodule_id`='3', `freiemodule_name`='Footer', `freiemodule_code`='<div class=\"large-3 medium-3 columns\"><h2><i class=\"fa fa-map-marker\"> </i>Hier sind wir zu finden</h2><p>Auguststr. 4<br />53229 Bonn</p><p></p><p><i class=\"fa fa-phone\"></i>  0228 / 280 56 68</p><p><i class=\"fa fa-envelope\">  </i><a href=\"mailto:info@papoo.de\">info@papoo.de</a></p><p><i class=\"fa fa-facebook\"></i>   <a target=\"_blank\" href=\"https://www.facebook.com/cms.papoo\">Facebook</a></p><p><i class=\"fa fa-home\"></i> <a target=\"_blank\" href=\"http://www.papoo.de\">Webseite</a></p></div><div class=\"large-5 medium-5 columns\"><address>Auguststr. 4<br /> 53229 Bonn</address></div>', `freiemodule_menuid`='all', `freiemodule_artikelid`='', `freiemodule_start`='2010-01-01', `freiemodule_stop`='2050-01-01', `freiemodule_modulid`='38', `freiemodule_lang`='de', `freiemodule_raw_output`='0', `freiemodule_lang_id`='1'  ; ##b_dump##
+DROP TABLE IF EXISTS `XXX_papoo_freiemodule_menu_blacklist`; ##b_dump##
+CREATE TABLE `XXX_papoo_freiemodule_menu_blacklist` (
+  `blacklist_menu_id` int NOT NULL,
+  `blacklist_module_id` int NOT NULL,
+  PRIMARY KEY (`blacklist_menu_id`,`blacklist_module_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_freiemodule_menu_lookup`; ##b_dump##
 CREATE TABLE `XXX_papoo_freiemodule_menu_lookup` (
-  `freiemodule_mid` int(11) NOT NULL,
+  `freiemodule_mid` int NOT NULL,
   `freiemodule_menu_id` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_freiemodule_menu_lookup` SET `freiemodule_mid`='3', `freiemodule_menu_id`='0'  ; ##b_dump##
 INSERT INTO `XXX_papoo_freiemodule_menu_lookup` SET `freiemodule_mid`='2', `freiemodule_menu_id`='1'  ; ##b_dump##
 INSERT INTO `XXX_papoo_freiemodule_menu_lookup` SET `freiemodule_mid`='1', `freiemodule_menu_id`='0'  ; ##b_dump##
 INSERT INTO `XXX_papoo_freiemodule_menu_lookup` SET `freiemodule_mid`='5', `freiemodule_menu_id`='0'  ; ##b_dump##
-DROP TABLE IF EXISTS `XXX_papoo_freiemodule_menu_blacklist`; ##b_dump##
-CREATE TABLE IF NOT EXISTS `XXX_papoo_freiemodule_menu_blacklist` (
-	`blacklist_menu_id` INT(11) NOT NULL,
-	`blacklist_module_id` INT(11) NOT NULL,
-	PRIMARY KEY (`blacklist_menu_id`, `blacklist_module_id`)
-); ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_freiemodule_pref`; ##b_dump##
 CREATE TABLE `XXX_papoo_freiemodule_pref` (
-  `freiemodule_id` int(11) NOT NULL AUTO_INCREMENT,
+  `freiemodule_id` int NOT NULL AUTO_INCREMENT,
   `freiemodule_rotation` varchar(255) NOT NULL DEFAULT '',
   `freiemodule_export` varchar(255) NOT NULL DEFAULT '',
   `freiemodule_import` varchar(255) NOT NULL DEFAULT '',
@@ -558,39 +564,27 @@ CREATE TABLE `XXX_papoo_freiemodule_pref` (
   PRIMARY KEY (`freiemodule_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_freiemodule_pref` SET `freiemodule_id`='1', `freiemodule_rotation`='', `freiemodule_export`='', `freiemodule_import`='', `freiemodule_url`='', `freiemodule_wieviel`='3'  ; ##b_dump##
-DROP TABLE IF EXISTS `XXX_papoo_google_maps_tabelle`; ##b_dump##
-CREATE TABLE `XXX_papoo_google_maps_tabelle` (
-  `gmap_id` int(11) NOT NULL AUTO_INCREMENT,
-  `gmap_apikey` text,
-  `gmap_apikey_2` text,
-  `gmap_typ` varchar(255) DEFAULT NULL,
-  `gmap_breite` varchar(255) DEFAULT NULL,
-  `gmap_hoehe` varchar(255) DEFAULT NULL,
-  `gmap_zoom` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`gmap_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ; ##b_dump##
-INSERT INTO `XXX_papoo_google_maps_tabelle` SET `gmap_id`='1', `gmap_apikey`='', `gmap_apikey_2`='', `gmap_typ`='ROADMAP', `gmap_breite`='450', `gmap_hoehe`='180', `gmap_zoom`='15'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_google_sitemap`; ##b_dump##
 CREATE TABLE `XXX_papoo_google_sitemap` (
-  `google_sitemap_id` int(11) NOT NULL DEFAULT '0',
-  `datum` varchar(255) COLLATE latin1_german1_ci NOT NULL,
-  `changefreq` varchar(255) COLLATE latin1_german1_ci NOT NULL,
-  `priority` varchar(255) COLLATE latin1_german1_ci NOT NULL
+  `google_sitemap_id` int NOT NULL DEFAULT '0',
+  `datum` varchar(255) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `changefreq` varchar(255) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `priority` varchar(255) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci ; ##b_dump##
 INSERT INTO `XXX_papoo_google_sitemap` SET `google_sitemap_id`='1', `datum`='0', `changefreq`='always', `priority`='0.5'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_gruppe`; ##b_dump##
 CREATE TABLE `XXX_papoo_gruppe` (
-  `gruppeid` int(11) NOT NULL AUTO_INCREMENT,
+  `gruppeid` int NOT NULL AUTO_INCREMENT,
   `gruppenname` varchar(255) NOT NULL,
-  `gruppenleiter` int(10) NOT NULL DEFAULT '0',
-  `elterngruppe` int(11) NOT NULL DEFAULT '1',
+  `gruppenleiter` int NOT NULL DEFAULT '0',
+  `elterngruppe` int NOT NULL DEFAULT '1',
   `offenfuergruppeid` varchar(255) NOT NULL DEFAULT '1',
   `gruppen_beschreibung` mediumtext NOT NULL,
-  `allow_internet` int(11) NOT NULL DEFAULT '0',
-  `allow_intranet` int(11) NOT NULL DEFAULT '0',
-  `intranet` int(11) NOT NULL,
-  `admin_zugriff` int(11) NOT NULL,
-  `publish_user` int(11) NOT NULL DEFAULT '0',
+  `allow_internet` int NOT NULL DEFAULT '0',
+  `allow_intranet` int NOT NULL DEFAULT '0',
+  `intranet` int NOT NULL,
+  `admin_zugriff` int NOT NULL,
+  `publish_user` int NOT NULL DEFAULT '0',
   `user_konfiguration_des_tinymce` text NOT NULL,
   PRIMARY KEY (`gruppeid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 ; ##b_dump##
@@ -600,16 +594,16 @@ INSERT INTO `XXX_papoo_gruppe` SET `gruppeid`='12', `gruppenname`='Redakteure', 
 INSERT INTO `XXX_papoo_gruppe` SET `gruppeid`='11', `gruppenname`='Chefredakteure', `gruppenleiter`='10', `elterngruppe`='1', `offenfuergruppeid`='g1,g2,', `gruppen_beschreibung`='Interne Gruppe für die Chefredakteure.', `allow_internet`='1', `allow_intranet`='0', `intranet`='0', `admin_zugriff`='1', `publish_user`='10', `user_konfiguration_des_tinymce`=''  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_images`; ##b_dump##
 CREATE TABLE `XXX_papoo_images` (
-  `image_id` int(11) NOT NULL AUTO_INCREMENT,
+  `image_id` int NOT NULL AUTO_INCREMENT,
   `image_name` varchar(255) NOT NULL,
   `image_alt` varchar(255) NOT NULL,
   `image_title` varchar(255) NOT NULL,
   `image_longdesc` mediumtext NOT NULL,
   `image_dir` varchar(255) NOT NULL DEFAULT '0',
   `image_extern_link` mediumtext NOT NULL,
-  `image_width` int(11) NOT NULL DEFAULT '0',
-  `image_height` int(11) NOT NULL DEFAULT '0',
-  `intranet_yn` int(11) NOT NULL,
+  `image_width` int NOT NULL DEFAULT '0',
+  `image_height` int NOT NULL DEFAULT '0',
+  `intranet_yn` int NOT NULL,
   `image_user` varchar(255) NOT NULL,
   `schreibrechte` varchar(255) NOT NULL DEFAULT 'g1,',
   `leserechte` varchar(255) NOT NULL DEFAULT 'g1,',
@@ -637,22 +631,22 @@ INSERT INTO `XXX_papoo_images` SET `image_id`='59', `image_name`='10_slide4.jpg'
 INSERT INTO `XXX_papoo_images` SET `image_id`='60', `image_name`='10_slide5.jpg', `image_alt`='', `image_title`='', `image_longdesc`='', `image_dir`='0', `image_extern_link`='', `image_width`='1200', `image_height`='473', `intranet_yn`='0', `image_user`='', `schreibrechte`='g1,', `leserechte`='g1,'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_kategorie_bilder`; ##b_dump##
 CREATE TABLE `XXX_papoo_kategorie_bilder` (
-  `bilder_cat_id` int(11) NOT NULL AUTO_INCREMENT,
+  `bilder_cat_id` int NOT NULL AUTO_INCREMENT,
   `bilder_cat_name` varchar(255) NOT NULL,
   `bilder_cat_sonstiges` varchar(255) NOT NULL,
-  `image_sub_cat_von` int(11) NOT NULL,
-  `image_sub_cat_level` int(11) NOT NULL,
+  `image_sub_cat_von` int NOT NULL,
+  `image_sub_cat_level` int NOT NULL,
   PRIMARY KEY (`bilder_cat_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_kategorie_bilder` SET `bilder_cat_id`='1', `bilder_cat_name`='Bilder Kategorie 1', `bilder_cat_sonstiges`='', `image_sub_cat_von`='0', `image_sub_cat_level`='0'  ; ##b_dump##
 INSERT INTO `XXX_papoo_kategorie_bilder` SET `bilder_cat_id`='17', `bilder_cat_name`='Layoutbilder', `bilder_cat_sonstiges`='', `image_sub_cat_von`='0', `image_sub_cat_level`='0'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_kategorie_dateien`; ##b_dump##
 CREATE TABLE `XXX_papoo_kategorie_dateien` (
-  `dateien_cat_id` int(11) NOT NULL AUTO_INCREMENT,
+  `dateien_cat_id` int NOT NULL AUTO_INCREMENT,
   `dateien_cat_name` varchar(255) NOT NULL,
   `dateien_cat_sonstiges` varchar(255) NOT NULL,
-  `dateien_sub_cat_von` int(11) NOT NULL,
-  `dateien_sub_cat_level` int(11) NOT NULL,
+  `dateien_sub_cat_von` int NOT NULL,
+  `dateien_sub_cat_level` int NOT NULL,
   PRIMARY KEY (`dateien_cat_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_kategorie_dateien` SET `dateien_cat_id`='1', `dateien_cat_name`='Download Kategorie 1', `dateien_cat_sonstiges`='', `dateien_sub_cat_von`='0', `dateien_sub_cat_level`='0'  ; ##b_dump##
@@ -660,17 +654,17 @@ INSERT INTO `XXX_papoo_kategorie_dateien` SET `dateien_cat_id`='5', `dateien_cat
 INSERT INTO `XXX_papoo_kategorie_dateien` SET `dateien_cat_id`='6', `dateien_cat_name`='subkat', `dateien_cat_sonstiges`='', `dateien_sub_cat_von`='0', `dateien_sub_cat_level`='0'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_kategorie_video`; ##b_dump##
 CREATE TABLE `XXX_papoo_kategorie_video` (
-  `video_cat_id` int(11) NOT NULL AUTO_INCREMENT,
+  `video_cat_id` int NOT NULL AUTO_INCREMENT,
   `video_cat_name` varchar(255) NOT NULL DEFAULT '',
   `video_cat_sonstiges` varchar(255) NOT NULL DEFAULT '',
-  `video_sub_cat_von` int(11) NOT NULL,
-  `video_sub_cat_level` int(11) NOT NULL,
+  `video_sub_cat_von` int NOT NULL,
+  `video_sub_cat_level` int NOT NULL,
   PRIMARY KEY (`video_cat_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_kategorie_video` SET `video_cat_id`='1', `video_cat_name`='Video Kategorie 1', `video_cat_sonstiges`='', `video_sub_cat_von`='0', `video_sub_cat_level`='0'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_lang_en`; ##b_dump##
 CREATE TABLE `XXX_papoo_lang_en` (
-  `lang_id` int(11) NOT NULL AUTO_INCREMENT,
+  `lang_id` int NOT NULL AUTO_INCREMENT,
   `lang_word` varchar(255) NOT NULL,
   PRIMARY KEY (`lang_id`),
   KEY `lang_word` (`lang_word`)
@@ -880,8 +874,8 @@ INSERT INTO `XXX_papoo_lang_en` SET `lang_id`='203', `lang_word`='yesterday'  ; 
 INSERT INTO `XXX_papoo_lang_en` SET `lang_id`='204', `lang_word`='you'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_language_article`; ##b_dump##
 CREATE TABLE `XXX_papoo_language_article` (
-  `lan_repore_id` int(11) NOT NULL DEFAULT '0',
-  `lang_id` int(11) NOT NULL DEFAULT '0',
+  `lan_repore_id` int NOT NULL DEFAULT '0',
+  `lang_id` int NOT NULL DEFAULT '0',
   `header` mediumtext NOT NULL,
   `lan_teaser` mediumtext NOT NULL,
   `lan_teaser_link` mediumtext NOT NULL,
@@ -894,10 +888,10 @@ CREATE TABLE `XXX_papoo_language_article` (
   `lan_metatitel` mediumtext NOT NULL,
   `lan_metadescrip` mediumtext NOT NULL,
   `lan_metakey` mediumtext NOT NULL,
-  `lan_rss_yn` int(11) NOT NULL DEFAULT '0',
+  `lan_rss_yn` int NOT NULL DEFAULT '0',
   `url_header` mediumtext NOT NULL,
   `lan_article_search` longtext,
-  `publish_yn_lang` int(11) NOT NULL DEFAULT '0',
+  `publish_yn_lang` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`lan_repore_id`,`lang_id`),
   FULLTEXT KEY `lan_article_search` (`lan_article_search`),
   FULLTEXT KEY `lan_article_search_2` (`lan_article_search`),
@@ -917,8 +911,8 @@ INSERT INTO `XXX_papoo_language_article` SET `lan_repore_id`='11', `lang_id`='1'
 INSERT INTO `XXX_papoo_language_article` SET `lan_repore_id`='12', `lang_id`='1', `header`='Datenschutzerklärung', `lan_teaser`='', `lan_teaser_link`='', `lan_teaser_img_alt`='', `lan_teaser_img_title`='', `lan_teaser_img_fertig`='', `lan_article`='<p>Hier erstellen Sie Ihre Datenschutzerklärung.</p>', `lan_article_sans`='<p>Hier erstellen Sie Ihre Datenschutzerklärung.</p>', `lan_article_markdown`='', `lan_metatitel`='Datenschutzerklärung', `lan_metadescrip`='Datenschutzerklärung', `lan_metakey`='Datenschutzerklärung', `lan_rss_yn`='1', `url_header`='/datenschutzerklaerung.html', `lan_article_search`='/datenschutzerklaerung.html   Hier erstellen Sie Ihre Datenschutzerklärung. ', `publish_yn_lang`='1'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_language_collum3`; ##b_dump##
 CREATE TABLE `XXX_papoo_language_collum3` (
-  `collum_id` int(11) NOT NULL DEFAULT '0',
-  `lang_id` int(11) NOT NULL DEFAULT '0',
+  `collum_id` int NOT NULL DEFAULT '0',
+  `lang_id` int NOT NULL DEFAULT '0',
   `name` varchar(255) NOT NULL,
   `article` mediumtext NOT NULL,
   `article_sans` mediumtext NOT NULL,
@@ -928,8 +922,8 @@ INSERT INTO `XXX_papoo_language_collum3` SET `collum_id`='1', `lang_id`='2', `na
 INSERT INTO `XXX_papoo_language_collum3` SET `collum_id`='1', `lang_id`='1', `name`='3. Spalte Beispielinhalt', `article`='<h2><i class=\"fa fa-th\"></i> Aktuelles</h2><p>#last_artikel_7_4_20#</p>', `article_sans`='<h2><i class=\"fa fa-th\"></i> Aktuelles</h2><p>#last_artikel_7_4_20#</p>'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_language_download`; ##b_dump##
 CREATE TABLE `XXX_papoo_language_download` (
-  `download_id` int(11) NOT NULL DEFAULT '0',
-  `lang_id` int(11) NOT NULL DEFAULT '0',
+  `download_id` int NOT NULL DEFAULT '0',
+  `lang_id` int NOT NULL DEFAULT '0',
   `downloadname` mediumtext NOT NULL,
   PRIMARY KEY (`download_id`,`lang_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
@@ -939,8 +933,8 @@ INSERT INTO `XXX_papoo_language_download` SET `download_id`='2', `lang_id`='1', 
 INSERT INTO `XXX_papoo_language_download` SET `download_id`='1', `lang_id`='1', `downloadname`='test'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_language_image`; ##b_dump##
 CREATE TABLE `XXX_papoo_language_image` (
-  `lan_image_id` int(11) NOT NULL DEFAULT '0',
-  `lang_id` int(11) NOT NULL DEFAULT '0',
+  `lan_image_id` int NOT NULL DEFAULT '0',
+  `lang_id` int NOT NULL DEFAULT '0',
   `alt` mediumtext NOT NULL,
   `title` mediumtext NOT NULL,
   `longdesc` mediumtext NOT NULL,
@@ -995,14 +989,14 @@ INSERT INTO `XXX_papoo_language_image` SET `lan_image_id`='64', `lang_id`='2', `
 INSERT INTO `XXX_papoo_language_image` SET `lan_image_id`='65', `lang_id`='1', `alt`='test', `title`='test', `longdesc`=''  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_language_stamm`; ##b_dump##
 CREATE TABLE `XXX_papoo_language_stamm` (
-  `stamm_id` int(11) NOT NULL DEFAULT '0',
-  `lang_id` int(11) NOT NULL DEFAULT '0',
+  `stamm_id` int NOT NULL DEFAULT '0',
+  `lang_id` int NOT NULL DEFAULT '0',
   `head_title` mediumtext NOT NULL,
   `start_text` mediumtext NOT NULL,
   `start_text_sans` mediumtext NOT NULL,
   `beschreibung` mediumtext NOT NULL,
   `stichwort` mediumtext NOT NULL,
-  `intranet_yn` int(11) NOT NULL DEFAULT '0',
+  `intranet_yn` int NOT NULL DEFAULT '0',
   `seitentitle` varchar(255) NOT NULL,
   `kontakt_text` longtext NOT NULL,
   `kontakt_text_sans` longtext NOT NULL,
@@ -1012,8 +1006,8 @@ INSERT INTO `XXX_papoo_language_stamm` SET `stamm_id`='2', `lang_id`='1', `head_
 INSERT INTO `XXX_papoo_language_stamm` SET `stamm_id`='2', `lang_id`='2', `head_title`='', `start_text`='<h1>Welcome to    <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">       you</span>               Website.</h1><p>Congratulations. The installation of        <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">       you</span>                      <a href=\"http://www.papoo.de/\" title=\"Papoo\">          <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">    <acronym class=\"acronym\" title=\"Barrierefreies  CMS\">Papoo</acronym></span></a>               edition is successfully completed.        <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">       You</span>               can        <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">       use</span>               the        <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">       accessible</span>               CMS        <a href=\"http://www.papoo.de/\" title=\"Papoo\">          <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">    <acronym class=\"acronym\" title=\"Barrierefreies  CMS\">Papoo</acronym></span></a>                      <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">       now.</span></p><p> </p>                      <p>This        <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">       content</span>               here        <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">       you</span>               can         edit in the administration        <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">       under</span>               the menu items content/startpage-content. There can        <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">       you</span>               also edit the         standard metadata and the sitetitle of        <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">       you</span>               page.</p><p> </p>                      <h2><span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">       Support</span></h2><p>If        <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">       you</span>               have         questions        <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">       about</span>               your brandnew        <a href=\"http://www.papoo.de/\" title=\"Papoo\">          <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">    <acronym class=\"acronym\" title=\"Barrierefreies CMS\">Papoo</acronym></span></a>               System        <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">       you</span>               are welcome in our        <a href=\"http://www.papoo.de/forum/menuid/138\">       community Board</a>             . We         have a special        <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">       English</span>               Board for        <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">       English</span>               speaking  <span class=\"lang_en\" lang=\"en\" xml:lang=\"en\">people.</span></p><p> </p>                      <p>Additionaly we have for our        <a href=\"http://www.papoo.de/\" title=\"Papoo\">          <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">    <acronym class=\"acronym\" title=\"Barrierefreies CMS\">Papoo</acronym></span></a>               Plus, Pro and        <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">       Business</span>               customers the possibility to ask us via E-Mail and Phone         with our         Hotline.</p><p> </p>                      <p>If        <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">       you</span>               have more questions like        <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">       about</span>               an individual        <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">       Design</span>               or special programming requests, please let us                <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">       know.</span>               Call us         +49 2204 308 88 265 in Germany.</p><p> </p><p> </p>                      <h2><span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">       Design</span></h2><p>The Base of our CSS Designs ist the CSS Framework YAML, please         consider the        <a href=\"http://www.yaml.de/artikel/hinweise/nutzung.html\" title=\"Linkziel liegt in einem neuen Fenster\" target=\"_blank\">       Licence    </a>               and        <a href=\"../../versionen/302/papoo_pro_302/index.php?menuid=6&amp;reporeid=6\">       further informations</a>             .</p><p> </p><p>If        <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">       you</span>               want an individual        <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">       Design</span>               oder an         Overview        <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">       about</span>               the existing        <a href=\"http://www.papoo.de/\" title=\"Papoo\">          <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">    <acronym class=\"acronym\" title=\"Barrierefreies CMS\">Papoo</acronym></span></a>               Designs or an         Overview        <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">       what</span>               we         have done so far for our customers please visit our        <a href=\"http://www.papoo.de/index/menuid/200\">       Designpage</a>             .</p><p> </p>                      <p><span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">       Good</span>               success with your        <a href=\"http://www.papoo.de/\" title=\"Papoo\"><span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">    </span></a><span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"><acronym class=\"acronym\" title=\"Barrierefreies  CMS\">          <a href=\"http://www.papoo.de/\" title=\"Papoo\">          <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">    <acronym class=\"acronym\" title=\"Barrierefreies CMS\">Papoo</acronym></span></a></acronym></span>               CMS System!</p>', `start_text_sans`='<h1>Welcome to <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> you</span> Website.</h1><p>Congratulations. The installation of <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> you</span> <a href=\"http://www.papoo.de/\" title=\"Papoo\"> <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> <acronym class=\"acronym\" title=\"Barrierefreies  CMS\">Papoo</acronym></span></a> edition is successfully completed. <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> You</span> can <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> use</span> the <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> accessible</span> CMS <a href=\"http://www.papoo.de/\" title=\"Papoo\"> <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> <acronym class=\"acronym\" title=\"Barrierefreies  CMS\">Papoo</acronym></span></a> <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> now.</span></p><p> </p> <p>This <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> content</span> here <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> you</span> can  edit in the administration <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> under</span> the menu items content/startpage-content. There can <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> you</span> also edit the  standard metadata and the sitetitle of <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> you</span> page.</p><p> </p> <h2><span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> Support</span></h2><p>If <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> you</span> have  questions <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> about</span> your brandnew <a href=\"http://www.papoo.de/\" title=\"Papoo\"> <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> <acronym class=\"acronym\" title=\"Barrierefreies CMS\">Papoo</acronym></span></a> System <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> you</span> are welcome in our <a href=\"http://www.papoo.de/forum/menuid/138\"> community Board</a>. We  have a special <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> English</span> Board for <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> English</span> speaking people.</p><p> </p> <p>Additionaly we have for our <a href=\"http://www.papoo.de/\" title=\"Papoo\"> <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> <acronym class=\"acronym\" title=\"Barrierefreies CMS\">Papoo</acronym></span></a> Plus, Pro and <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> Business</span> customers the possibility to ask us via E-Mail and Phone  with our  Hotline.</p><p> </p> <p>If <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> you</span> have more questions like <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> about</span> an individual <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> Design</span> or special programming requests, please let us  <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> know.</span> Call us  +49 2204 308 88 265 in Germany.</p><p> </p><p> </p> <h2><span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> Design</span></h2><p>The Base of our CSS Designs ist the CSS Framework YAML, please  consider the <a href=\"http://www.yaml.de/artikel/hinweise/nutzung.html\" title=\"Linkziel liegt in einem neuen Fenster\" target=\"_blank\"> Licence </a> and <a href=\"../../versionen/302/papoo_pro_302/index.php?menuid=6&amp;reporeid=6\"> further informations</a>.</p><p> </p><p>If <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> you</span> want an individual <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> Design</span> oder an  Overview <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> about</span> the existing <a href=\"http://www.papoo.de/\" title=\"Papoo\"> <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> <acronym class=\"acronym\" title=\"Barrierefreies CMS\">Papoo</acronym></span></a> Designs or an  Overview <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> what</span> we  have done so far for our customers please visit our <a href=\"http://www.papoo.de/index/menuid/200\"> Designpage</a>.</p><p> </p> <p><span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> Good</span> success with your <a href=\"http://www.papoo.de/\" title=\"Papoo\"><span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> </span></a><span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"><acronym class=\"acronym\" title=\"Barrierefreies  CMS\"> <a href=\"http://www.papoo.de/\" title=\"Papoo\"> <span class=\"lang_en\" xml:lang=\"en\" lang=\"en\"> <acronym class=\"acronym\" title=\"Barrierefreies CMS\">Papoo</acronym></span></a></acronym></span> CMS System!</p>', `beschreibung`='Die Metabeschreibung Ihrer Seite, zu finden unter System / Konfiguration / Metatags. Dieser Eintrag wird genutzt wenn nirgendwo im System sonst ein Metaeintrag verwendet wird. Ansonsten werden die jeweils speziellen Einträge genutzt.', `stichwort`='Die Metabstichwörter Ihrer Seite, zu finden unter System / Konfiguration / Metatags.', `intranet_yn`='0', `seitentitle`='Barrierefreies CMS Papoo', `kontakt_text`='', `kontakt_text_sans`=''  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_language_video`; ##b_dump##
 CREATE TABLE `XXX_papoo_language_video` (
-  `lan_video_id` int(11) NOT NULL DEFAULT '0',
-  `video_lang_id` int(11) NOT NULL DEFAULT '0',
+  `lan_video_id` int NOT NULL DEFAULT '0',
+  `video_lang_id` int NOT NULL DEFAULT '0',
   `video_alt` text NOT NULL,
   `video_title` text NOT NULL,
   `video_longdesc` text NOT NULL,
@@ -1032,25 +1026,25 @@ INSERT INTO `XXX_papoo_language_video` SET `lan_video_id`='25', `video_lang_id`=
 INSERT INTO `XXX_papoo_language_video` SET `lan_video_id`='25', `video_lang_id`='2', `video_alt`='ertzretzertz', `video_title`='', `video_longdesc`=''  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_linkliste_cat`; ##b_dump##
 CREATE TABLE `XXX_papoo_linkliste_cat` (
-  `cat_id` int(11) NOT NULL AUTO_INCREMENT,
-  `cat_order_id` int(11) NOT NULL,
-  `cat_sub` int(11) NOT NULL DEFAULT '0',
-  `cat_level` int(11) NOT NULL DEFAULT '0',
+  `cat_id` int NOT NULL AUTO_INCREMENT,
+  `cat_order_id` int NOT NULL,
+  `cat_sub` int NOT NULL DEFAULT '0',
+  `cat_level` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`cat_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_linkliste_daten`; ##b_dump##
 CREATE TABLE `XXX_papoo_linkliste_daten` (
-  `linkliste_id` int(11) NOT NULL AUTO_INCREMENT,
-  `linkliste_order_id` int(11) NOT NULL,
-  `cat_linkliste_id` int(11) NOT NULL,
-  `paket_logo` text COLLATE latin1_german1_ci NOT NULL,
-  `linkliste_link` text COLLATE latin1_german1_ci NOT NULL,
-  `linkliste_link_art` text COLLATE latin1_german1_ci NOT NULL,
-  `linkliste_descrip` text COLLATE latin1_german1_ci NOT NULL,
-  `linkliste_meta_title` text COLLATE latin1_german1_ci NOT NULL,
-  `linkliste_meta_descrip` text COLLATE latin1_german1_ci NOT NULL,
-  `linkliste_meta_key` text COLLATE latin1_german1_ci NOT NULL,
-  `linkliste_real` text COLLATE latin1_german1_ci NOT NULL,
+  `linkliste_id` int NOT NULL AUTO_INCREMENT,
+  `linkliste_order_id` int NOT NULL,
+  `cat_linkliste_id` int NOT NULL,
+  `paket_logo` text CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `linkliste_link` text CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `linkliste_link_art` text CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `linkliste_descrip` text CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `linkliste_meta_title` text CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `linkliste_meta_descrip` text CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `linkliste_meta_key` text CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `linkliste_real` text CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
   PRIMARY KEY (`linkliste_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci ; ##b_dump##
 INSERT INTO `XXX_papoo_linkliste_daten` SET `linkliste_id`='1', `linkliste_order_id`='1', `cat_linkliste_id`='0', `paket_logo`='', `linkliste_link`='http://www.papoo.de', `linkliste_link_art`='', `linkliste_descrip`='', `linkliste_meta_title`='', `linkliste_meta_descrip`='', `linkliste_meta_key`='', `linkliste_real`=''  ; ##b_dump##
@@ -1058,50 +1052,50 @@ INSERT INTO `XXX_papoo_linkliste_daten` SET `linkliste_id`='2', `linkliste_order
 INSERT INTO `XXX_papoo_linkliste_daten` SET `linkliste_id`='3', `linkliste_order_id`='1', `cat_linkliste_id`='0', `paket_logo`='', `linkliste_link`='http://www.spiegel.de', `linkliste_link_art`='', `linkliste_descrip`='', `linkliste_meta_title`='', `linkliste_meta_descrip`='', `linkliste_meta_key`='', `linkliste_real`=''  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_linkliste_daten_lang`; ##b_dump##
 CREATE TABLE `XXX_papoo_linkliste_daten_lang` (
-  `linkliste_lang_id` int(11) NOT NULL,
-  `linkliste_lang_lang` int(11) NOT NULL,
-  `linkliste_Wort` text COLLATE latin1_german1_ci NOT NULL,
-  `linkliste_link_lang` text COLLATE latin1_german1_ci NOT NULL,
-  `linkliste_descrip` text COLLATE latin1_german1_ci NOT NULL,
-  `linkliste_lang_header` text COLLATE latin1_german1_ci NOT NULL
+  `linkliste_lang_id` int NOT NULL,
+  `linkliste_lang_lang` int NOT NULL,
+  `linkliste_Wort` text CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `linkliste_link_lang` text CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `linkliste_descrip` text CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `linkliste_lang_header` text CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci ; ##b_dump##
 INSERT INTO `XXX_papoo_linkliste_daten_lang` SET `linkliste_lang_id`='1', `linkliste_lang_lang`='1', `linkliste_Wort`='http://www.papoo.de', `linkliste_link_lang`='', `linkliste_descrip`='', `linkliste_lang_header`=''  ; ##b_dump##
 INSERT INTO `XXX_papoo_linkliste_daten_lang` SET `linkliste_lang_id`='2', `linkliste_lang_lang`='1', `linkliste_Wort`='http://www.google.de', `linkliste_link_lang`='', `linkliste_descrip`='', `linkliste_lang_header`=''  ; ##b_dump##
 INSERT INTO `XXX_papoo_linkliste_daten_lang` SET `linkliste_lang_id`='3', `linkliste_lang_lang`='1', `linkliste_Wort`='http://www.spiegel.de', `linkliste_link_lang`='', `linkliste_descrip`='', `linkliste_lang_header`=''  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_linkliste_lang_cat`; ##b_dump##
 CREATE TABLE `XXX_papoo_linkliste_lang_cat` (
-  `cat_id_idx` int(11) NOT NULL AUTO_INCREMENT,
-  `cat_id_id` int(11) NOT NULL DEFAULT '0',
-  `cat_lang_id` int(11) NOT NULL DEFAULT '0',
-  `cat_name` text COLLATE latin1_german1_ci NOT NULL,
-  `cat_title` text COLLATE latin1_german1_ci NOT NULL,
-  `cat_description` text COLLATE latin1_german1_ci NOT NULL,
-  `cat_keywords` text COLLATE latin1_german1_ci NOT NULL,
+  `cat_id_idx` int NOT NULL AUTO_INCREMENT,
+  `cat_id_id` int NOT NULL DEFAULT '0',
+  `cat_lang_id` int NOT NULL DEFAULT '0',
+  `cat_name` text CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `cat_title` text CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `cat_description` text CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `cat_keywords` text CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
   PRIMARY KEY (`cat_id_idx`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_linkliste_lang_pref`; ##b_dump##
 CREATE TABLE `XXX_papoo_linkliste_lang_pref` (
-  `linkliste_id_id` varchar(255) COLLATE latin1_german1_ci NOT NULL,
-  `linkliste_lang_id` int(11) NOT NULL,
-  `linkliste_lang` text COLLATE latin1_german1_ci NOT NULL,
-  `linkliste_title` text COLLATE latin1_german1_ci NOT NULL,
-  `linkliste_description` text COLLATE latin1_german1_ci NOT NULL,
-  `linkliste_keywords` text COLLATE latin1_german1_ci NOT NULL
+  `linkliste_id_id` varchar(255) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `linkliste_lang_id` int NOT NULL,
+  `linkliste_lang` text CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `linkliste_title` text CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `linkliste_description` text CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `linkliste_keywords` text CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_linkliste_pref`; ##b_dump##
 CREATE TABLE `XXX_papoo_linkliste_pref` (
-  `linkliste_id` int(11) NOT NULL DEFAULT '0',
-  `linkliste_liste` varchar(255) COLLATE latin1_german1_ci NOT NULL,
-  `linkliste_daten` text COLLATE latin1_german1_ci NOT NULL,
-  `linkliste_xml_yn` varchar(255) COLLATE latin1_german1_ci NOT NULL,
-  `linkliste_xml_link` text COLLATE latin1_german1_ci NOT NULL,
-  `linkliste_lang` text COLLATE latin1_german1_ci NOT NULL,
-  `linkliste_show` varchar(255) COLLATE latin1_german1_ci NOT NULL
+  `linkliste_id` int NOT NULL DEFAULT '0',
+  `linkliste_liste` varchar(255) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `linkliste_daten` text CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `linkliste_xml_yn` varchar(255) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `linkliste_xml_link` text CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `linkliste_lang` text CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `linkliste_show` varchar(255) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_german1_ci ; ##b_dump##
 INSERT INTO `XXX_papoo_linkliste_pref` SET `linkliste_id`='1', `linkliste_liste`='', `linkliste_daten`='0', `linkliste_xml_yn`='', `linkliste_xml_link`='', `linkliste_lang`='0;1', `linkliste_show`='1'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_links`; ##b_dump##
 CREATE TABLE `XXX_papoo_links` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
   `link_name` mediumtext NOT NULL,
   `group_name` varchar(60) NOT NULL,
   `link_title` mediumtext NOT NULL,
@@ -1111,9 +1105,9 @@ CREATE TABLE `XXX_papoo_links` (
 INSERT INTO `XXX_papoo_links` SET `id`='1', `link_name`='Papoo', `group_name`='Papoo', `link_title`='Papoo', `link_body`='http://www.papoo.de'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_lookup_art_cat`; ##b_dump##
 CREATE TABLE `XXX_papoo_lookup_art_cat` (
-  `lart_id` int(11) NOT NULL AUTO_INCREMENT,
-  `lcat_id` int(11) NOT NULL,
-  `lart_order_id` int(11) NOT NULL,
+  `lart_id` int NOT NULL AUTO_INCREMENT,
+  `lcat_id` int NOT NULL,
+  `lart_order_id` int NOT NULL,
   PRIMARY KEY (`lart_id`,`lcat_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_lookup_art_cat` SET `lart_id`='1', `lcat_id`='6', `lart_order_id`='10'  ; ##b_dump##
@@ -1134,8 +1128,8 @@ INSERT INTO `XXX_papoo_lookup_art_cat` SET `lart_id`='11', `lcat_id`='20', `lart
 INSERT INTO `XXX_papoo_lookup_art_cat` SET `lart_id`='12', `lcat_id`='1', `lart_order_id`='1'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_lookup_article`; ##b_dump##
 CREATE TABLE `XXX_papoo_lookup_article` (
-  `article_id` int(11) NOT NULL DEFAULT '0',
-  `gruppeid_id` int(11) NOT NULL DEFAULT '0',
+  `article_id` int NOT NULL DEFAULT '0',
+  `gruppeid_id` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`article_id`,`gruppeid_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_lookup_article` SET `article_id`='0', `gruppeid_id`='1'  ; ##b_dump##
@@ -1161,8 +1155,8 @@ INSERT INTO `XXX_papoo_lookup_article` SET `article_id`='11', `gruppeid_id`='10'
 INSERT INTO `XXX_papoo_lookup_article` SET `article_id`='12', `gruppeid_id`='1'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_lookup_cat_dateien`; ##b_dump##
 CREATE TABLE `XXX_papoo_lookup_cat_dateien` (
-  `dateien_cat_id_id` int(11) NOT NULL DEFAULT '0',
-  `gruppeid_id` int(11) NOT NULL DEFAULT '0',
+  `dateien_cat_id_id` int NOT NULL DEFAULT '0',
+  `gruppeid_id` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`dateien_cat_id_id`,`gruppeid_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_lookup_cat_dateien` SET `dateien_cat_id_id`='1', `gruppeid_id`='1'  ; ##b_dump##
@@ -1176,8 +1170,8 @@ INSERT INTO `XXX_papoo_lookup_cat_dateien` SET `dateien_cat_id_id`='6', `gruppei
 INSERT INTO `XXX_papoo_lookup_cat_dateien` SET `dateien_cat_id_id`='6', `gruppeid_id`='12'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_lookup_cat_images`; ##b_dump##
 CREATE TABLE `XXX_papoo_lookup_cat_images` (
-  `bilder_cat_id_id` int(11) NOT NULL DEFAULT '0',
-  `gruppeid_id` int(11) NOT NULL DEFAULT '0',
+  `bilder_cat_id_id` int NOT NULL DEFAULT '0',
+  `gruppeid_id` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`bilder_cat_id_id`,`gruppeid_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_lookup_cat_images` SET `bilder_cat_id_id`='1', `gruppeid_id`='1'  ; ##b_dump##
@@ -1188,8 +1182,8 @@ INSERT INTO `XXX_papoo_lookup_cat_images` SET `bilder_cat_id_id`='17', `gruppeid
 INSERT INTO `XXX_papoo_lookup_cat_images` SET `bilder_cat_id_id`='17', `gruppeid_id`='12'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_lookup_cat_video`; ##b_dump##
 CREATE TABLE `XXX_papoo_lookup_cat_video` (
-  `video_cat_id_id` int(11) NOT NULL DEFAULT '0',
-  `gruppeid_id` int(11) NOT NULL DEFAULT '0',
+  `video_cat_id_id` int NOT NULL DEFAULT '0',
+  `gruppeid_id` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`video_cat_id_id`,`gruppeid_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_lookup_cat_video` SET `video_cat_id_id`='1', `gruppeid_id`='1'  ; ##b_dump##
@@ -1197,8 +1191,8 @@ INSERT INTO `XXX_papoo_lookup_cat_video` SET `video_cat_id_id`='1', `gruppeid_id
 INSERT INTO `XXX_papoo_lookup_cat_video` SET `video_cat_id_id`='1', `gruppeid_id`='12'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_lookup_download`; ##b_dump##
 CREATE TABLE `XXX_papoo_lookup_download` (
-  `download_id_id` int(11) NOT NULL DEFAULT '0',
-  `gruppen_id_id` int(11) NOT NULL DEFAULT '0',
+  `download_id_id` int NOT NULL DEFAULT '0',
+  `gruppen_id_id` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`download_id_id`,`gruppen_id_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_lookup_download` SET `download_id_id`='1', `gruppen_id_id`='1'  ; ##b_dump##
@@ -1207,8 +1201,8 @@ INSERT INTO `XXX_papoo_lookup_download` SET `download_id_id`='2', `gruppen_id_id
 INSERT INTO `XXX_papoo_lookup_download` SET `download_id_id`='2', `gruppen_id_id`='10'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_lookup_forum_read`; ##b_dump##
 CREATE TABLE `XXX_papoo_lookup_forum_read` (
-  `forumid` int(11) NOT NULL DEFAULT '0',
-  `gruppenid` int(11) NOT NULL DEFAULT '0',
+  `forumid` int NOT NULL DEFAULT '0',
+  `gruppenid` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`forumid`,`gruppenid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_lookup_forum_read` SET `forumid`='10', `gruppenid`='1'  ; ##b_dump##
@@ -1216,8 +1210,8 @@ INSERT INTO `XXX_papoo_lookup_forum_read` SET `forumid`='20', `gruppenid`='1'  ;
 INSERT INTO `XXX_papoo_lookup_forum_read` SET `forumid`='21', `gruppenid`='10'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_lookup_forum_write`; ##b_dump##
 CREATE TABLE `XXX_papoo_lookup_forum_write` (
-  `forumid` int(11) NOT NULL DEFAULT '0',
-  `gruppenid` int(11) NOT NULL DEFAULT '0',
+  `forumid` int NOT NULL DEFAULT '0',
+  `gruppenid` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`forumid`,`gruppenid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_lookup_forum_write` SET `forumid`='10', `gruppenid`='1'  ; ##b_dump##
@@ -1225,14 +1219,14 @@ INSERT INTO `XXX_papoo_lookup_forum_write` SET `forumid`='20', `gruppenid`='1'  
 INSERT INTO `XXX_papoo_lookup_forum_write` SET `forumid`='21', `gruppenid`='10'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_lookup_image`; ##b_dump##
 CREATE TABLE `XXX_papoo_lookup_image` (
-  `image_id_id` int(11) NOT NULL DEFAULT '0',
-  `gruppeid_id` int(11) NOT NULL DEFAULT '0',
+  `image_id_id` int NOT NULL DEFAULT '0',
+  `gruppeid_id` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`image_id_id`,`gruppeid_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_lookup_me_all_ext`; ##b_dump##
 CREATE TABLE `XXX_papoo_lookup_me_all_ext` (
-  `menuid_id` int(11) NOT NULL DEFAULT '0',
-  `gruppeid_id` int(11) NOT NULL DEFAULT '0',
+  `menuid_id` int NOT NULL DEFAULT '0',
+  `gruppeid_id` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`menuid_id`,`gruppeid_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_lookup_me_all_ext` SET `menuid_id`='1', `gruppeid_id`='1'  ; ##b_dump##
@@ -1265,16 +1259,16 @@ INSERT INTO `XXX_papoo_lookup_me_all_ext` SET `menuid_id`='20', `gruppeid_id`='1
 INSERT INTO `XXX_papoo_lookup_me_all_ext` SET `menuid_id`='20', `gruppeid_id`='10'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_lookup_men_collum3`; ##b_dump##
 CREATE TABLE `XXX_papoo_lookup_men_collum3` (
-  `collum_col_id` int(11) NOT NULL DEFAULT '0',
-  `collum_men_id` int(11) NOT NULL DEFAULT '0',
+  `collum_col_id` int NOT NULL DEFAULT '0',
+  `collum_men_id` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`collum_col_id`,`collum_men_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_lookup_men_collum3` SET `collum_col_id`='1', `collum_men_id`='2'  ; ##b_dump##
 INSERT INTO `XXX_papoo_lookup_men_collum3` SET `collum_col_id`='1', `collum_men_id`='9'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_lookup_men_ext`; ##b_dump##
 CREATE TABLE `XXX_papoo_lookup_men_ext` (
-  `menuid` int(11) NOT NULL DEFAULT '0',
-  `gruppenid` int(11) NOT NULL DEFAULT '0',
+  `menuid` int NOT NULL DEFAULT '0',
+  `gruppenid` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`menuid`,`gruppenid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_lookup_men_ext` SET `menuid`='1', `gruppenid`='1'  ; ##b_dump##
@@ -1300,8 +1294,8 @@ INSERT INTO `XXX_papoo_lookup_men_ext` SET `menuid`='19', `gruppenid`='1'  ; ##b
 INSERT INTO `XXX_papoo_lookup_men_ext` SET `menuid`='20', `gruppenid`='1'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_lookup_men_int`; ##b_dump##
 CREATE TABLE `XXX_papoo_lookup_men_int` (
-  `menuid` int(11) NOT NULL DEFAULT '0',
-  `gruppenid` int(11) NOT NULL DEFAULT '0',
+  `menuid` int NOT NULL DEFAULT '0',
+  `gruppenid` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`menuid`,`gruppenid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_lookup_men_int` SET `menuid`='1', `gruppenid`='1'  ; ##b_dump##
@@ -1468,7 +1462,6 @@ INSERT INTO `XXX_papoo_lookup_men_int` SET `menuid`='1027', `gruppenid`='1'  ; #
 INSERT INTO `XXX_papoo_lookup_men_int` SET `menuid`='1028', `gruppenid`='1'  ; ##b_dump##
 INSERT INTO `XXX_papoo_lookup_men_int` SET `menuid`='1029', `gruppenid`='1'  ; ##b_dump##
 INSERT INTO `XXX_papoo_lookup_men_int` SET `menuid`='1036', `gruppenid`='1'  ; ##b_dump##
-INSERT INTO `XXX_papoo_lookup_men_int` SET `menuid`='1037', `gruppenid`='1'  ; ##b_dump##
 INSERT INTO `XXX_papoo_lookup_men_int` SET `menuid`='1067', `gruppenid`='1'  ; ##b_dump##
 INSERT INTO `XXX_papoo_lookup_men_int` SET `menuid`='1068', `gruppenid`='1'  ; ##b_dump##
 INSERT INTO `XXX_papoo_lookup_men_int` SET `menuid`='1069', `gruppenid`='1'  ; ##b_dump##
@@ -1499,10 +1492,11 @@ INSERT INTO `XXX_papoo_lookup_men_int` SET `menuid`='1096', `gruppenid`='1'  ; #
 INSERT INTO `XXX_papoo_lookup_men_int` SET `menuid`='1097', `gruppenid`='1'  ; ##b_dump##
 INSERT INTO `XXX_papoo_lookup_men_int` SET `menuid`='1098', `gruppenid`='1'  ; ##b_dump##
 INSERT INTO `XXX_papoo_lookup_men_int` SET `menuid`='1099', `gruppenid`='1'  ; ##b_dump##
+INSERT INTO `XXX_papoo_lookup_men_int` SET `menuid`='1100', `gruppenid`='1'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_lookup_mencat`; ##b_dump##
 CREATE TABLE `XXX_papoo_lookup_mencat` (
-  `menuid_cid` int(11) NOT NULL DEFAULT '0',
-  `cat_cid` int(11) NOT NULL DEFAULT '0',
+  `menuid_cid` int NOT NULL DEFAULT '0',
+  `cat_cid` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`menuid_cid`,`cat_cid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_lookup_mencat` SET `menuid_cid`='1', `cat_cid`='1'  ; ##b_dump##
@@ -1545,14 +1539,14 @@ INSERT INTO `XXX_papoo_lookup_mencat` SET `menuid_cid`='40', `cat_cid`='6'  ; ##
 INSERT INTO `XXX_papoo_lookup_mencat` SET `menuid_cid`='41', `cat_cid`='6'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_lookup_nomen_collum3`; ##b_dump##
 CREATE TABLE `XXX_papoo_lookup_nomen_collum3` (
-  `collumno_col_id` int(11) NOT NULL DEFAULT '0',
-  `collumno_men_id` int(11) NOT NULL DEFAULT '0',
+  `collumno_col_id` int NOT NULL DEFAULT '0',
+  `collumno_men_id` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`collumno_col_id`,`collumno_men_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_lookup_ug`; ##b_dump##
 CREATE TABLE `XXX_papoo_lookup_ug` (
-  `userid` int(11) NOT NULL DEFAULT '0',
-  `gruppenid` int(11) NOT NULL DEFAULT '0',
+  `userid` int NOT NULL DEFAULT '0',
+  `gruppenid` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`userid`,`gruppenid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_lookup_ug` SET `userid`='10', `gruppenid`='1'  ; ##b_dump##
@@ -1560,8 +1554,8 @@ INSERT INTO `XXX_papoo_lookup_ug` SET `userid`='10', `gruppenid`='10'  ; ##b_dum
 INSERT INTO `XXX_papoo_lookup_ug` SET `userid`='11', `gruppenid`='10'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_lookup_write_article`; ##b_dump##
 CREATE TABLE `XXX_papoo_lookup_write_article` (
-  `article_wid_id` int(11) NOT NULL DEFAULT '0',
-  `gruppeid_wid_id` int(11) NOT NULL DEFAULT '0',
+  `article_wid_id` int NOT NULL DEFAULT '0',
+  `gruppeid_wid_id` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`article_wid_id`,`gruppeid_wid_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_lookup_write_article` SET `article_wid_id`='0', `gruppeid_wid_id`='1'  ; ##b_dump##
@@ -1586,15 +1580,15 @@ INSERT INTO `XXX_papoo_lookup_write_article` SET `article_wid_id`='11', `gruppei
 INSERT INTO `XXX_papoo_lookup_write_article` SET `article_wid_id`='12', `gruppeid_wid_id`='1'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_mail`; ##b_dump##
 CREATE TABLE `XXX_papoo_mail` (
-  `mail_id` int(11) NOT NULL AUTO_INCREMENT,
+  `mail_id` int NOT NULL AUTO_INCREMENT,
   `mail_head` varchar(255) NOT NULL,
   `mail_text` mediumtext NOT NULL,
-  `mail_from_user` int(11) NOT NULL DEFAULT '0',
-  `mail_to_user` int(11) NOT NULL DEFAULT '0',
-  `mail_archiv` int(11) NOT NULL DEFAULT '0',
-  `mail_read` int(11) NOT NULL DEFAULT '0',
+  `mail_from_user` int NOT NULL DEFAULT '0',
+  `mail_to_user` int NOT NULL DEFAULT '0',
+  `mail_archiv` int NOT NULL DEFAULT '0',
+  `mail_read` int NOT NULL DEFAULT '0',
   `mail_date` varchar(255) NOT NULL,
-  `intranet_yn` int(11) NOT NULL,
+  `intranet_yn` int NOT NULL,
   PRIMARY KEY (`mail_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_mail` SET `mail_id`='16', `mail_head`='Artikel muss veroeffentlicht werden', `mail_text`='Der folgende Artikel soll veroeffentlicht werden, bitte ueberpruefen und freigeben:\r\n		<br />\r\n		<a href=\"./artikel.php?menuid=11&reporeid=9\">Artikel oeffnen</a>', `mail_from_user`='10', `mail_to_user`='10', `mail_archiv`='0', `mail_read`='0', `mail_date`='2014-07-11 17:03:09', `intranet_yn`='0'  ; ##b_dump##
@@ -1603,22 +1597,22 @@ INSERT INTO `XXX_papoo_mail` SET `mail_id`='18', `mail_head`='Artikel muss veroe
 INSERT INTO `XXX_papoo_mail` SET `mail_id`='19', `mail_head`='Artikel muss veroeffentlicht werden', `mail_text`='Der folgende Artikel soll veroeffentlicht werden, bitte ueberpruefen und freigeben:\r\n		<br />\r\n		<a href=\"./artikel.php?menuid=11&reporeid=12\">Artikel oeffnen</a>', `mail_from_user`='10', `mail_to_user`='10', `mail_archiv`='0', `mail_read`='0', `mail_date`='2018-06-11 17:06:02', `intranet_yn`='0'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_me_nu`; ##b_dump##
 CREATE TABLE `XXX_papoo_me_nu` (
-  `menuid` int(11) NOT NULL AUTO_INCREMENT,
+  `menuid` int NOT NULL AUTO_INCREMENT,
   `menuname` varchar(100) NOT NULL DEFAULT '',
   `menulink` text NOT NULL,
   `menutitel` varchar(255) NOT NULL DEFAULT '',
-  `untermenuzu` int(11) NOT NULL DEFAULT '0',
-  `level` int(11) NOT NULL DEFAULT '0',
+  `untermenuzu` int NOT NULL DEFAULT '0',
+  `level` int NOT NULL DEFAULT '0',
   `lese_rechte` varchar(255) NOT NULL DEFAULT 'g1,',
   `schreibrechte` varchar(255) NOT NULL DEFAULT 'g1,',
-  `intranet_yn` int(11) NOT NULL DEFAULT '0',
-  `order_id` int(11) NOT NULL DEFAULT '0',
+  `intranet_yn` int NOT NULL DEFAULT '0',
+  `order_id` int NOT NULL DEFAULT '0',
   `extra_css_file` text NOT NULL,
   `extra_css_sub` varchar(255) NOT NULL DEFAULT '0',
   `menu_image` text NOT NULL,
-  `menu_subteaser` int(11) NOT NULL DEFAULT '0',
-  `menu_spez_layout` int(11) NOT NULL DEFAULT '0',
-  `artikel_sort` int(11) DEFAULT '0',
+  `menu_subteaser` int NOT NULL DEFAULT '0',
+  `menu_spez_layout` int NOT NULL DEFAULT '0',
+  `artikel_sort` int DEFAULT '0',
   PRIMARY KEY (`menuid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_me_nu` SET `menuid`='1', `menuname`='Startseite', `menulink`='index.php', `menutitel`='Hier geht es zur Startseite', `untermenuzu`='0', `level`='0', `lese_rechte`='g1,g10,', `schreibrechte`='', `intranet_yn`='0', `order_id`='10', `extra_css_file`='startseite.css', `extra_css_sub`='', `menu_image`='', `menu_subteaser`='0', `menu_spez_layout`='0', `artikel_sort`='1'  ; ##b_dump##
@@ -1636,10 +1630,10 @@ INSERT INTO `XXX_papoo_me_nu` SET `menuid`='19', `menuname`='', `menulink`='inde
 INSERT INTO `XXX_papoo_me_nu` SET `menuid`='20', `menuname`='', `menulink`='index.php', `menutitel`='', `untermenuzu`='0', `level`='0', `lese_rechte`='g1,', `schreibrechte`='g1,', `intranet_yn`='0', `order_id`='60', `extra_css_file`='', `extra_css_sub`='', `menu_image`='', `menu_subteaser`='0', `menu_spez_layout`='0', `artikel_sort`='1'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_men_uint_language`; ##b_dump##
 CREATE TABLE `XXX_papoo_men_uint_language` (
-  `lang_id` int(11) NOT NULL DEFAULT '1',
-  `menuid_id` int(11) NOT NULL DEFAULT '0',
+  `lang_id` int NOT NULL DEFAULT '1',
+  `menuid_id` int NOT NULL DEFAULT '0',
   `menuname` mediumtext NOT NULL,
-  `back_front` int(11) NOT NULL DEFAULT '1',
+  `back_front` int NOT NULL DEFAULT '1',
   `lang_title` mediumtext NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_men_uint_language` SET `lang_id`='1', `menuid_id`='1', `menuname`='Start', `back_front`='1', `lang_title`=''  ; ##b_dump##
@@ -2164,14 +2158,10 @@ INSERT INTO `XXX_papoo_men_uint_language` SET `lang_id`='5', `menuid_id`='1036',
 INSERT INTO `XXX_papoo_men_uint_language` SET `lang_id`='6', `menuid_id`='1036', `menuname`='Content Manipulator', `back_front`='1', `lang_title`=''  ; ##b_dump##
 INSERT INTO `XXX_papoo_men_uint_language` SET `lang_id`='7', `menuid_id`='1036', `menuname`='Content Manipulator', `back_front`='1', `lang_title`=''  ; ##b_dump##
 INSERT INTO `XXX_papoo_men_uint_language` SET `lang_id`='8', `menuid_id`='1036', `menuname`='Content Manipulator', `back_front`='1', `lang_title`=''  ; ##b_dump##
-INSERT INTO `XXX_papoo_men_uint_language` SET `lang_id`='1', `menuid_id`='1037', `menuname`='Google Maps API', `back_front`='1', `lang_title`=''  ; ##b_dump##
-INSERT INTO `XXX_papoo_men_uint_language` SET `lang_id`='2', `menuid_id`='1037', `menuname`='Google Maps API', `back_front`='1', `lang_title`=''  ; ##b_dump##
-INSERT INTO `XXX_papoo_men_uint_language` SET `lang_id`='3', `menuid_id`='1037', `menuname`='Google Maps Api', `back_front`='1', `lang_title`=''  ; ##b_dump##
-INSERT INTO `XXX_papoo_men_uint_language` SET `lang_id`='4', `menuid_id`='1037', `menuname`='Google Maps Api', `back_front`='1', `lang_title`=''  ; ##b_dump##
-INSERT INTO `XXX_papoo_men_uint_language` SET `lang_id`='5', `menuid_id`='1037', `menuname`='Google Maps Api', `back_front`='1', `lang_title`=''  ; ##b_dump##
-INSERT INTO `XXX_papoo_men_uint_language` SET `lang_id`='6', `menuid_id`='1037', `menuname`='Google Maps Api', `back_front`='1', `lang_title`=''  ; ##b_dump##
-INSERT INTO `XXX_papoo_men_uint_language` SET `lang_id`='7', `menuid_id`='1037', `menuname`='Google Maps Api', `back_front`='1', `lang_title`=''  ; ##b_dump##
-INSERT INTO `XXX_papoo_men_uint_language` SET `lang_id`='8', `menuid_id`='1037', `menuname`='Google Maps Api', `back_front`='1', `lang_title`=''  ; ##b_dump##
+INSERT INTO `XXX_papoo_men_uint_language` SET `lang_id`='4', `menuid_id`='1100', `menuname`='OpenStreetMap map plugin', `back_front`='1', `lang_title`=''  ; ##b_dump##
+INSERT INTO `XXX_papoo_men_uint_language` SET `lang_id`='3', `menuid_id`='1100', `menuname`='OpenStreetMap map plugin', `back_front`='1', `lang_title`=''  ; ##b_dump##
+INSERT INTO `XXX_papoo_men_uint_language` SET `lang_id`='2', `menuid_id`='1100', `menuname`='OpenStreetMap map plugin', `back_front`='1', `lang_title`=''  ; ##b_dump##
+INSERT INTO `XXX_papoo_men_uint_language` SET `lang_id`='1', `menuid_id`='1100', `menuname`='OpenStreetMap Karten-Plugin', `back_front`='1', `lang_title`=''  ; ##b_dump##
 INSERT INTO `XXX_papoo_men_uint_language` SET `lang_id`='1', `menuid_id`='1067', `menuname`='RSS-Feed', `back_front`='1', `lang_title`=''  ; ##b_dump##
 INSERT INTO `XXX_papoo_men_uint_language` SET `lang_id`='2', `menuid_id`='1067', `menuname`='RSS-Feed', `back_front`='1', `lang_title`=''  ; ##b_dump##
 INSERT INTO `XXX_papoo_men_uint_language` SET `lang_id`='3', `menuid_id`='1067', `menuname`='RSS-Feed', `back_front`='1', `lang_title`=''  ; ##b_dump##
@@ -2404,18 +2394,22 @@ INSERT INTO `XXX_papoo_men_uint_language` SET `lang_id`='4', `menuid_id`='1099',
 INSERT INTO `XXX_papoo_men_uint_language` SET `lang_id`='3', `menuid_id`='1099', `menuname`='GDPR', `back_front`='1', `lang_title`=''  ; ##b_dump##
 INSERT INTO `XXX_papoo_men_uint_language` SET `lang_id`='2', `menuid_id`='1099', `menuname`='GDPR', `back_front`='1', `lang_title`=''  ; ##b_dump##
 INSERT INTO `XXX_papoo_men_uint_language` SET `lang_id`='1', `menuid_id`='1099', `menuname`='DSGVO', `back_front`='1', `lang_title`=''  ; ##b_dump##
+INSERT INTO `XXX_papoo_men_uint_language` SET `lang_id`='5', `menuid_id`='1100', `menuname`='OpenStreetMap map plugin', `back_front`='1', `lang_title`=''  ; ##b_dump##
+INSERT INTO `XXX_papoo_men_uint_language` SET `lang_id`='6', `menuid_id`='1100', `menuname`='OpenStreetMap map plugin', `back_front`='1', `lang_title`=''  ; ##b_dump##
+INSERT INTO `XXX_papoo_men_uint_language` SET `lang_id`='7', `menuid_id`='1100', `menuname`='OpenStreetMap map plugin', `back_front`='1', `lang_title`=''  ; ##b_dump##
+INSERT INTO `XXX_papoo_men_uint_language` SET `lang_id`='8', `menuid_id`='1100', `menuname`='OpenStreetMap map plugin', `back_front`='1', `lang_title`=''  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_menu_language`; ##b_dump##
 CREATE TABLE `XXX_papoo_menu_language` (
-  `lang_id` int(11) NOT NULL DEFAULT '1',
-  `menuid_id` int(11) NOT NULL DEFAULT '0',
+  `lang_id` int NOT NULL DEFAULT '1',
+  `menuid_id` int NOT NULL DEFAULT '0',
   `menuname` text NOT NULL,
-  `back_front` int(11) NOT NULL DEFAULT '1',
+  `back_front` int NOT NULL DEFAULT '1',
   `lang_title` text NOT NULL,
   `url_menuname` text NOT NULL,
   `menulinklang` text NOT NULL,
   `url_metadescrip` text NOT NULL,
   `url_metakeywords` text NOT NULL,
-  `publish_yn_lang_men` int(11) NOT NULL DEFAULT '0'
+  `publish_yn_lang_men` int NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_menu_language` SET `lang_id`='1', `menuid_id`='1', `menuname`='Startseite', `back_front`='1', `lang_title`='Hier geht es zur Startseite', `url_menuname`='/startseite/', `menulinklang`='index.php', `url_metadescrip`='Metabeschreibung des Menüpunktes Startseite.', `url_metakeywords`='Metastichwörter des Menüpunktes Startseite.', `publish_yn_lang_men`='1'  ; ##b_dump##
 INSERT INTO `XXX_papoo_menu_language` SET `lang_id`='1', `menuid_id`='2', `menuname`='Übersicht', `back_front`='1', `lang_title`='Übersicht', `url_menuname`='/uebersicht/', `menulinklang`='index.php', `url_metadescrip`='Übersicht', `url_metakeywords`='Übersicht', `publish_yn_lang_men`='1'  ; ##b_dump##
@@ -2441,17 +2435,17 @@ INSERT INTO `XXX_papoo_menu_language` SET `lang_id`='2', `menuid_id`='12', `menu
 INSERT INTO `XXX_papoo_menu_language` SET `lang_id`='2', `menuid_id`='2', `menuname`='Overview', `back_front`='1', `lang_title`='Overview', `url_menuname`='/en/overview/', `menulinklang`='index.php', `url_metadescrip`='', `url_metakeywords`='', `publish_yn_lang_men`='0'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_menuint`; ##b_dump##
 CREATE TABLE `XXX_papoo_menuint` (
-  `menuid` int(11) NOT NULL AUTO_INCREMENT,
+  `menuid` int NOT NULL AUTO_INCREMENT,
   `menuname` varchar(100) NOT NULL,
   `menulink` varchar(255) NOT NULL,
   `menutitel` varchar(255) NOT NULL,
-  `untermenuzu` int(11) NOT NULL DEFAULT '0',
+  `untermenuzu` int NOT NULL DEFAULT '0',
   `lese_rechte` varchar(255) NOT NULL,
-  `level` int(11) NOT NULL DEFAULT '0',
+  `level` int NOT NULL DEFAULT '0',
   `schreibrechte` varchar(255) NOT NULL,
-  `intranet_yn` int(11) NOT NULL DEFAULT '0',
+  `intranet_yn` int NOT NULL DEFAULT '0',
   `menu_icon` varchar(255) NOT NULL,
-  `order_id` int(11) NOT NULL DEFAULT '0',
+  `order_id` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`menuid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1134 DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_menuint` SET `menuid`='3', `menuname`='Forum verwalten', `menulink`='forum.php', `menutitel`='Administrierung des Forums', `untermenuzu`='55', `lese_rechte`='g1,', `level`='1', `schreibrechte`='', `intranet_yn`='0', `menu_icon`='../bilder/forum.gif', `order_id`='15'  ; ##b_dump##
@@ -2548,7 +2542,7 @@ INSERT INTO `XXX_papoo_menuint` SET `menuid`='1029', `menuname`='Bootstrap-Dropd
 INSERT INTO `XXX_papoo_menuint` SET `menuid`='1082', `menuname`='Manage Dates', `menulink`='plugin:pkalender/templates/pkalender_back_date.html', `menutitel`='', `untermenuzu`='1080', `lese_rechte`='1', `level`='2', `schreibrechte`='1', `intranet_yn`='0', `menu_icon`='../../plugins/pkalender/bilder/date.png', `order_id`='1830'  ; ##b_dump##
 INSERT INTO `XXX_papoo_menuint` SET `menuid`='1092', `menuname`='Bildwechsler', `menulink`='plugin:bildwechsler/templates/back.html', `menutitel`='', `untermenuzu`='54', `lese_rechte`='1', `level`='1', `schreibrechte`='1', `intranet_yn`='0', `menu_icon`='../../plugins/bildwechsler/bilder/menue_icon.gif', `order_id`='1930'  ; ##b_dump##
 INSERT INTO `XXX_papoo_menuint` SET `menuid`='1036', `menuname`='Content Manipulator', `menulink`='plugin:content_manipulator/templates/content_manipulator_back.html', `menutitel`='', `untermenuzu`='54', `lese_rechte`='1', `level`='1', `schreibrechte`='1', `intranet_yn`='0', `menu_icon`='../../plugins/content_manipulator/bilder/pic_01.gif', `order_id`='1370'  ; ##b_dump##
-INSERT INTO `XXX_papoo_menuint` SET `menuid`='1037', `menuname`='Google Maps Api', `menulink`='plugin:google_maps/templates/google_maps_back.html', `menutitel`='', `untermenuzu`='54', `lese_rechte`='1', `level`='1', `schreibrechte`='1', `intranet_yn`='0', `menu_icon`='../../plugins/google_maps/bilder/pic_01.gif', `order_id`='1380'  ; ##b_dump##
+INSERT INTO `XXX_papoo_menuint` SET `menuid`='1100', `menuname`='OpenStreetMap map plugin', `menulink`='plugin:osm_map_plugin/templates/backend.html&submenu=config', `menutitel`='', `untermenuzu`='54', `lese_rechte`='1', `level`='1', `schreibrechte`='1', `intranet_yn`='0', `menu_icon`='../../plugins/', `order_id`='2010'  ; ##b_dump##
 INSERT INTO `XXX_papoo_menuint` SET `menuid`='1077', `menuname`='Blog modules', `menulink`='plugin:blogger/templates/backend.html&submenu=shortcut', `menutitel`='', `untermenuzu`='1075', `lese_rechte`='1', `level`='2', `schreibrechte`='1', `intranet_yn`='0', `menu_icon`='../../plugins/', `order_id`='1780'  ; ##b_dump##
 INSERT INTO `XXX_papoo_menuint` SET `menuid`='1075', `menuname`='Blog Plugin', `menulink`='plugin:blogger/templates/backend.html', `menutitel`='', `untermenuzu`='54', `lese_rechte`='1', `level`='1', `schreibrechte`='1', `intranet_yn`='0', `menu_icon`='../../plugins/blogger/bilder/blogger.png', `order_id`='1760'  ; ##b_dump##
 INSERT INTO `XXX_papoo_menuint` SET `menuid`='1076', `menuname`='Pingservice', `menulink`='plugin:blogger/templates/backend.html&submenu=trackback', `menutitel`='', `untermenuzu`='1075', `lese_rechte`='1', `level`='2', `schreibrechte`='1', `intranet_yn`='0', `menu_icon`='../../plugins/', `order_id`='1770'  ; ##b_dump##
@@ -2571,10 +2565,10 @@ INSERT INTO `XXX_papoo_menuint` SET `menuid`='1098', `menuname`='Yahoo verify', 
 INSERT INTO `XXX_papoo_menuint` SET `menuid`='1099', `menuname`='GDPR', `menulink`='plugin:dsgvo/templates/back/index.html', `menutitel`='', `untermenuzu`='54', `lese_rechte`='1', `level`='1', `schreibrechte`='1', `intranet_yn`='0', `menu_icon`='../../plugins/dsgvo/images/dsgvo.png', `order_id`='2000'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_menutop`; ##b_dump##
 CREATE TABLE `XXX_papoo_menutop` (
-  `menutop_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `menutop_order_id` bigint(20) NOT NULL,
+  `menutop_id` bigint NOT NULL AUTO_INCREMENT,
+  `menutop_order_id` bigint NOT NULL,
   `menutop_link` varchar(255) NOT NULL,
-  `menutop_extern` smallint(6) NOT NULL DEFAULT '0',
+  `menutop_extern` smallint NOT NULL DEFAULT '0',
   PRIMARY KEY (`menutop_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_menutop` SET `menutop_id`='1', `menutop_order_id`='50', `menutop_link`='index.php?menuid=1&amp;reporeid=2', `menutop_extern`='0'  ; ##b_dump##
@@ -2587,8 +2581,8 @@ INSERT INTO `XXX_papoo_menutop` SET `menutop_id`='7', `menutop_order_id`='30', `
 INSERT INTO `XXX_papoo_menutop` SET `menutop_id`='8', `menutop_order_id`='40', `menutop_link`='index.php?menuid=1&amp;reporeid=12', `menutop_extern`='0'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_menutop_language`; ##b_dump##
 CREATE TABLE `XXX_papoo_menutop_language` (
-  `mtlang_menutop_id` bigint(20) NOT NULL,
-  `mtlang_lang_id` int(11) NOT NULL,
+  `mtlang_menutop_id` bigint NOT NULL,
+  `mtlang_lang_id` int NOT NULL,
   `mtlang_name` varchar(255) NOT NULL,
   `mtlang_title` varchar(255) NOT NULL,
   `mtlang_link` varchar(255) NOT NULL,
@@ -2604,24 +2598,24 @@ INSERT INTO `XXX_papoo_menutop_language` SET `mtlang_menutop_id`='7', `mtlang_la
 INSERT INTO `XXX_papoo_menutop_language` SET `mtlang_menutop_id`='8', `mtlang_lang_id`='1', `mtlang_name`='Datenschutzerklärung', `mtlang_title`='', `mtlang_link`=''  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_message`; ##b_dump##
 CREATE TABLE `XXX_papoo_message` (
-  `msgid` int(11) NOT NULL AUTO_INCREMENT,
-  `userid` int(11) NOT NULL DEFAULT '0',
-  `forumid` int(11) NOT NULL DEFAULT '0',
-  `parentid` int(11) NOT NULL DEFAULT '0',
-  `rootid` int(11) NOT NULL DEFAULT '0',
+  `msgid` int NOT NULL AUTO_INCREMENT,
+  `userid` int NOT NULL DEFAULT '0',
+  `forumid` int NOT NULL DEFAULT '0',
+  `parentid` int NOT NULL DEFAULT '0',
+  `rootid` int NOT NULL DEFAULT '0',
   `thema` varchar(80) NOT NULL,
   `messagetext` mediumtext NOT NULL,
   `messagetext_bbcode` mediumtext NOT NULL,
-  `level` int(11) NOT NULL DEFAULT '0',
+  `level` int NOT NULL DEFAULT '0',
   `zeitstempel` varchar(255) NOT NULL,
   `ordnung` varchar(255) NOT NULL,
-  `counten` int(11) NOT NULL DEFAULT '0',
-  `comment_article` int(11) NOT NULL DEFAULT '0',
-  `intranet_yn` int(11) NOT NULL DEFAULT '0',
+  `counten` int NOT NULL DEFAULT '0',
+  `comment_article` int NOT NULL DEFAULT '0',
+  `intranet_yn` int NOT NULL DEFAULT '0',
   `username_guest` varchar(255) NOT NULL,
-  `answers` int(11) NOT NULL DEFAULT '0',
+  `answers` int NOT NULL DEFAULT '0',
   `letzter_beitrag_zeit` varchar(250) NOT NULL,
-  `letzter_beitrag_id` int(20) NOT NULL,
+  `letzter_beitrag_id` int NOT NULL,
   `msg_frei` varchar(255) NOT NULL,
   `email` varchar(78) DEFAULT NULL,
   `artikelurl` varchar(255) DEFAULT NULL,
@@ -2635,10 +2629,10 @@ INSERT INTO `XXX_papoo_message` SET `msgid`='7', `userid`='10', `forumid`='10', 
 INSERT INTO `XXX_papoo_message` SET `msgid`='8', `userid`='10', `forumid`='10', `parentid`='7', `rootid`='7', `thema`='Re: Kommentar zu Artikel Menüpunkt 1', `messagetext`='Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar', `messagetext_bbcode`='Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar Das ist noch ein Kommentar', `level`='1', `zeitstempel`='2014-07-23 17:08:49', `ordnung`='1406128129.7623', `counten`='1', `comment_article`='0', `intranet_yn`='0', `username_guest`='', `answers`='0', `letzter_beitrag_zeit`='', `letzter_beitrag_id`='0', `msg_frei`='', `email`='', `artikelurl`=''  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_module`; ##b_dump##
 CREATE TABLE `XXX_papoo_module` (
-  `mod_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `mod_aktiv` int(11) DEFAULT NULL,
-  `mod_bereich_id` int(11) DEFAULT NULL,
-  `mod_order_id` int(11) DEFAULT NULL,
+  `mod_id` bigint NOT NULL AUTO_INCREMENT,
+  `mod_aktiv` int DEFAULT NULL,
+  `mod_bereich_id` int DEFAULT NULL,
+  `mod_order_id` int DEFAULT NULL,
   `mod_modus` varchar(10) DEFAULT NULL,
   `mod_datei` varchar(255) NOT NULL,
   `mod_style_id` varchar(10) DEFAULT NULL,
@@ -2681,8 +2675,8 @@ INSERT INTO `XXX_papoo_module` SET `mod_id`='78', `mod_aktiv`='0', `mod_bereich_
 INSERT INTO `XXX_papoo_module` SET `mod_id`='85', `mod_aktiv`='0', `mod_bereich_id`='0', `mod_order_id`='0', `mod_modus`='', `mod_datei`='plugin:freiemodule/templates/freiemodule_front.html', `mod_style_id`='', `mod_echt_id`=''  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_module_language`; ##b_dump##
 CREATE TABLE `XXX_papoo_module_language` (
-  `modlang_mod_id` bigint(20) NOT NULL,
-  `modlang_lang_id` int(11) NOT NULL,
+  `modlang_mod_id` bigint NOT NULL,
+  `modlang_lang_id` int NOT NULL,
   `modlang_name` varchar(255) NOT NULL,
   `modlang_beschreibung` text NOT NULL,
   KEY `modlang_mod_id` (`modlang_mod_id`),
@@ -2946,10 +2940,10 @@ INSERT INTO `XXX_papoo_module_language` SET `modlang_mod_id`='85', `modlang_lang
 INSERT INTO `XXX_papoo_module_language` SET `modlang_mod_id`='85', `modlang_lang_id`='8', `modlang_name`='[en] Kopflogo', `modlang_beschreibung`='Freies Modul'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_name_language`; ##b_dump##
 CREATE TABLE `XXX_papoo_name_language` (
-  `lang_id` int(11) NOT NULL AUTO_INCREMENT,
+  `lang_id` int NOT NULL AUTO_INCREMENT,
   `lang_short` mediumtext NOT NULL,
   `lang_long` mediumtext NOT NULL,
-  `more_lang` int(11) NOT NULL DEFAULT '1',
+  `more_lang` int NOT NULL DEFAULT '1',
   `lang_img` mediumtext NOT NULL,
   `lang_dir` varchar(255) NOT NULL DEFAULT 'ltr',
   `lang_dateformat_short` varchar(50) NOT NULL DEFAULT '%m.%d.%Y; %H:%M:%S h',
@@ -2964,10 +2958,21 @@ INSERT INTO `XXX_papoo_name_language` SET `lang_id`='5', `lang_short`='fr', `lan
 INSERT INTO `XXX_papoo_name_language` SET `lang_id`='6', `lang_short`='pt', `lang_long`='Português', `more_lang`='1', `lang_img`='port.jpg', `lang_dir`='ltr', `lang_dateformat_short`='%m.%d.%Y; %H:%M:%S h', `lang_dateformat_long`='%A, %B %d, %Y; %H:%M:%S h'  ; ##b_dump##
 INSERT INTO `XXX_papoo_name_language` SET `lang_id`='7', `lang_short`='nl', `lang_long`='Nederlands', `more_lang`='1', `lang_img`='nl.jpg', `lang_dir`='ltr', `lang_dateformat_short`='%m.%d.%Y; %H:%M:%S h', `lang_dateformat_long`='%A, %B %d, %Y; %H:%M:%S h'  ; ##b_dump##
 INSERT INTO `XXX_papoo_name_language` SET `lang_id`='8', `lang_short`='tr', `lang_long`='Türkisch', `more_lang`='1', `lang_img`='', `lang_dir`='ltr', `lang_dateformat_short`='%m.%d.%Y; %H:%M:%S h', `lang_dateformat_long`='%A, %B %d, %Y; %H:%M:%S h'  ; ##b_dump##
+DROP TABLE IF EXISTS `XXX_papoo_osm_map_plugin_config`; ##b_dump##
+CREATE TABLE `XXX_papoo_osm_map_plugin_config` (
+  `id` tinyint NOT NULL DEFAULT '1',
+  `map_breite` varchar(255) DEFAULT NULL,
+  `map_hoehe` varchar(255) DEFAULT NULL,
+  `map_zoom` int DEFAULT NULL,
+  `nominatim_cache_lifetime` int DEFAULT '1',
+  `nominatim_cache_lifetime_unit` enum('day','week','month','year') DEFAULT 'month',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
+INSERT INTO `XXX_papoo_osm_map_plugin_config` SET `id`='1', `map_breite`='100%', `map_hoehe`='300px', `map_zoom`='17', `nominatim_cache_lifetime`='1', `nominatim_cache_lifetime_unit`='month'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_plugin_language`; ##b_dump##
 CREATE TABLE `XXX_papoo_plugin_language` (
-  `pluginlang_lang_id` int(11) NOT NULL DEFAULT '1',
-  `pluginlang_plugin_id` int(11) NOT NULL DEFAULT '0',
+  `pluginlang_lang_id` int NOT NULL DEFAULT '1',
+  `pluginlang_plugin_id` int NOT NULL DEFAULT '0',
   `pluginlang_beschreibung` mediumtext NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_plugin_language` SET `pluginlang_lang_id`='1', `pluginlang_plugin_id`='15', `pluginlang_beschreibung`='Mit diesem Plugin kann man erweiterte User Daten bearbeiten.'  ; ##b_dump##
@@ -3113,14 +3118,12 @@ INSERT INTO `XXX_papoo_plugin_language` SET `pluginlang_lang_id`='5', `pluginlan
 INSERT INTO `XXX_papoo_plugin_language` SET `pluginlang_lang_id`='6', `pluginlang_plugin_id`='195', `pluginlang_beschreibung`='Content Manipulator'  ; ##b_dump##
 INSERT INTO `XXX_papoo_plugin_language` SET `pluginlang_lang_id`='7', `pluginlang_plugin_id`='195', `pluginlang_beschreibung`='Content Manipulator'  ; ##b_dump##
 INSERT INTO `XXX_papoo_plugin_language` SET `pluginlang_lang_id`='8', `pluginlang_plugin_id`='195', `pluginlang_beschreibung`='Content Manipulator'  ; ##b_dump##
-INSERT INTO `XXX_papoo_plugin_language` SET `pluginlang_lang_id`='1', `pluginlang_plugin_id`='196', `pluginlang_beschreibung`='Mit diesem Plugin kann man an beliebiger Stelle aus einer Adresse oder Koordinaten eine Karte mit Google Maps einbinden.'  ; ##b_dump##
-INSERT INTO `XXX_papoo_plugin_language` SET `pluginlang_lang_id`='2', `pluginlang_plugin_id`='196', `pluginlang_beschreibung`='Content Manipulator'  ; ##b_dump##
-INSERT INTO `XXX_papoo_plugin_language` SET `pluginlang_lang_id`='3', `pluginlang_plugin_id`='196', `pluginlang_beschreibung`='Content Manipulator'  ; ##b_dump##
-INSERT INTO `XXX_papoo_plugin_language` SET `pluginlang_lang_id`='4', `pluginlang_plugin_id`='196', `pluginlang_beschreibung`='Content Manipulator'  ; ##b_dump##
-INSERT INTO `XXX_papoo_plugin_language` SET `pluginlang_lang_id`='5', `pluginlang_plugin_id`='196', `pluginlang_beschreibung`='Content Manipulator'  ; ##b_dump##
-INSERT INTO `XXX_papoo_plugin_language` SET `pluginlang_lang_id`='6', `pluginlang_plugin_id`='196', `pluginlang_beschreibung`='Content Manipulator'  ; ##b_dump##
-INSERT INTO `XXX_papoo_plugin_language` SET `pluginlang_lang_id`='7', `pluginlang_plugin_id`='196', `pluginlang_beschreibung`='Content Manipulator'  ; ##b_dump##
-INSERT INTO `XXX_papoo_plugin_language` SET `pluginlang_lang_id`='8', `pluginlang_plugin_id`='196', `pluginlang_beschreibung`='Content Manipulator'  ; ##b_dump##
+INSERT INTO `XXX_papoo_plugin_language` SET `pluginlang_lang_id`='5', `pluginlang_plugin_id`='235', `pluginlang_beschreibung`='OpenStreetMap map plugin'  ; ##b_dump##
+INSERT INTO `XXX_papoo_plugin_language` SET `pluginlang_lang_id`='6', `pluginlang_plugin_id`='235', `pluginlang_beschreibung`='OpenStreetMap map plugin'  ; ##b_dump##
+INSERT INTO `XXX_papoo_plugin_language` SET `pluginlang_lang_id`='4', `pluginlang_plugin_id`='235', `pluginlang_beschreibung`='OpenStreetMap map plugin'  ; ##b_dump##
+INSERT INTO `XXX_papoo_plugin_language` SET `pluginlang_lang_id`='3', `pluginlang_plugin_id`='235', `pluginlang_beschreibung`='OpenStreetMap map plugin'  ; ##b_dump##
+INSERT INTO `XXX_papoo_plugin_language` SET `pluginlang_lang_id`='2', `pluginlang_plugin_id`='235', `pluginlang_beschreibung`='OpenStreetMap map plugin'  ; ##b_dump##
+INSERT INTO `XXX_papoo_plugin_language` SET `pluginlang_lang_id`='1', `pluginlang_plugin_id`='235', `pluginlang_beschreibung`='OpenStreetMap Karten-Plugin'  ; ##b_dump##
 INSERT INTO `XXX_papoo_plugin_language` SET `pluginlang_lang_id`='3', `pluginlang_plugin_id`='212', `pluginlang_beschreibung`='Creates a RSS-Feed from Papoo-Articles and shows upto 10 RSS-Feeds as pages in Papoo'  ; ##b_dump##
 INSERT INTO `XXX_papoo_plugin_language` SET `pluginlang_lang_id`='2', `pluginlang_plugin_id`='212', `pluginlang_beschreibung`='Creates a RSS-Feed from Papoo-Articles and shows upto 10 RSS-Feeds as pages in Papoo'  ; ##b_dump##
 INSERT INTO `XXX_papoo_plugin_language` SET `pluginlang_lang_id`='1', `pluginlang_plugin_id`='212', `pluginlang_beschreibung`='Erstellt einen RSS-Feed aus Papoo-Artikeln und kann bis zu 10 RSS-Feeds als Seiten in Papoo anzeigen'  ; ##b_dump##
@@ -3169,14 +3172,16 @@ INSERT INTO `XXX_papoo_plugin_language` SET `pluginlang_lang_id`='4', `pluginlan
 INSERT INTO `XXX_papoo_plugin_language` SET `pluginlang_lang_id`='3', `pluginlang_plugin_id`='229', `pluginlang_beschreibung`='This plugin is the control center to make settings for various modules of the CMS. Among other things, it serves to comply with the General Data Protection Regulation.'  ; ##b_dump##
 INSERT INTO `XXX_papoo_plugin_language` SET `pluginlang_lang_id`='2', `pluginlang_plugin_id`='229', `pluginlang_beschreibung`='This plugin is the control center to make settings for various modules of the CMS. Among other things, it serves to comply with the General Data Protection Regulation.'  ; ##b_dump##
 INSERT INTO `XXX_papoo_plugin_language` SET `pluginlang_lang_id`='1', `pluginlang_plugin_id`='229', `pluginlang_beschreibung`='Dieses Plugin ist die Steuerzentrale, um Einstellungen für diverse Module des CMS vorzunehmen. Es dient u. a. der Einhaltung der Datenschutz-Grundverordnung.'  ; ##b_dump##
+INSERT INTO `XXX_papoo_plugin_language` SET `pluginlang_lang_id`='7', `pluginlang_plugin_id`='235', `pluginlang_beschreibung`='OpenStreetMap map plugin'  ; ##b_dump##
+INSERT INTO `XXX_papoo_plugin_language` SET `pluginlang_lang_id`='8', `pluginlang_plugin_id`='235', `pluginlang_beschreibung`='OpenStreetMap map plugin'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_pluginclasses`; ##b_dump##
 CREATE TABLE `XXX_papoo_pluginclasses` (
-  `pluginclass_id` int(11) NOT NULL AUTO_INCREMENT,
-  `pluginclass_plugin_id` int(11) NOT NULL,
+  `pluginclass_id` int NOT NULL AUTO_INCREMENT,
+  `pluginclass_plugin_id` int NOT NULL,
   `pluginclass_name` varchar(255) NOT NULL,
   `pluginclass_datei` varchar(255) NOT NULL,
   PRIMARY KEY (`pluginclass_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=333 DEFAULT CHARSET=utf8 ; ##b_dump##
+) ENGINE=MyISAM AUTO_INCREMENT=334 DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_pluginclasses` SET `pluginclass_id`='318', `pluginclass_plugin_id`='223', `pluginclass_name`='devtool_modlang', `pluginclass_datei`='devtools/lib/modlang_class.php'  ; ##b_dump##
 INSERT INTO `XXX_papoo_pluginclasses` SET `pluginclass_id`='317', `pluginclass_plugin_id`='223', `pluginclass_name`='newdump', `pluginclass_datei`='devtools/lib/newdump_class.php'  ; ##b_dump##
 INSERT INTO `XXX_papoo_pluginclasses` SET `pluginclass_id`='316', `pluginclass_plugin_id`='223', `pluginclass_name`='versioncleaner', `pluginclass_datei`='devtools/lib/versioncleaner_class.php'  ; ##b_dump##
@@ -3189,7 +3194,7 @@ INSERT INTO `XXX_papoo_pluginclasses` SET `pluginclass_id`='272', `pluginclass_p
 INSERT INTO `XXX_papoo_pluginclasses` SET `pluginclass_id`='275', `pluginclass_plugin_id`='190', `pluginclass_name`='bootstrapdropdown', `pluginclass_datei`='bootstrapdropdown/lib/bootstrapdropdown_class.php'  ; ##b_dump##
 INSERT INTO `XXX_papoo_pluginclasses` SET `pluginclass_id`='322', `pluginclass_plugin_id`='224', `pluginclass_name`='bildwechsler', `pluginclass_datei`='bildwechsler/lib/bildwechsler_class.php'  ; ##b_dump##
 INSERT INTO `XXX_papoo_pluginclasses` SET `pluginclass_id`='280', `pluginclass_plugin_id`='195', `pluginclass_name`='content_manipulator', `pluginclass_datei`='content_manipulator/lib/content_manipulator.php'  ; ##b_dump##
-INSERT INTO `XXX_papoo_pluginclasses` SET `pluginclass_id`='281', `pluginclass_plugin_id`='196', `pluginclass_name`='google_maps', `pluginclass_datei`='google_maps/lib/google_maps.php'  ; ##b_dump##
+INSERT INTO `XXX_papoo_pluginclasses` SET `pluginclass_id`='333', `pluginclass_plugin_id`='235', `pluginclass_name`='osm_map_plugin', `pluginclass_datei`='osm_map_plugin/lib/osm_map_plugin_class.php'  ; ##b_dump##
 INSERT INTO `XXX_papoo_pluginclasses` SET `pluginclass_id`='300', `pluginclass_plugin_id`='212', `pluginclass_name`='rssfeed', `pluginclass_datei`='rssfeed/lib/rssfeed_class.php'  ; ##b_dump##
 INSERT INTO `XXX_papoo_pluginclasses` SET `pluginclass_id`='304', `pluginclass_plugin_id`='215', `pluginclass_name`='blogger_shortcut', `pluginclass_datei`='blogger/lib/blogger_shortcut_class.php'  ; ##b_dump##
 INSERT INTO `XXX_papoo_pluginclasses` SET `pluginclass_id`='303', `pluginclass_plugin_id`='215', `pluginclass_name`='blogger_trackback', `pluginclass_datei`='blogger/lib/blogger_trackback_class.php'  ; ##b_dump##
@@ -3202,26 +3207,26 @@ INSERT INTO `XXX_papoo_pluginclasses` SET `pluginclass_id`='325', `pluginclass_p
 INSERT INTO `XXX_papoo_pluginclasses` SET `pluginclass_id`='327', `pluginclass_plugin_id`='229', `pluginclass_name`='DSGVO', `pluginclass_datei`='dsgvo/lib/DSGVO.php'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_plugins`; ##b_dump##
 CREATE TABLE `XXX_papoo_plugins` (
-  `plugin_id` int(11) NOT NULL AUTO_INCREMENT,
+  `plugin_id` int NOT NULL AUTO_INCREMENT,
   `plugin_name` varchar(255) NOT NULL,
   `plugin_version` varchar(255) NOT NULL,
-  `plugin_papoo_id` int(11) NOT NULL DEFAULT '0',
+  `plugin_papoo_id` int NOT NULL DEFAULT '0',
   `plugin_menuids` mediumtext NOT NULL,
   `plugin_css` varchar(255) NOT NULL,
   `plugin_db_deinstall` varchar(255) NOT NULL,
   `plugin_modulids` mediumtext NOT NULL,
   `plugin_messages` varchar(255) NOT NULL,
   PRIMARY KEY (`plugin_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=235 DEFAULT CHARSET=utf8 ; ##b_dump##
+) ENGINE=MyISAM AUTO_INCREMENT=236 DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_plugins` SET `plugin_id`='223', `plugin_name`='devtools', `plugin_version`='2.1', `plugin_papoo_id`='0', `plugin_menuids`=' 1083 1084 1085 1086 1087 1088 1089 1090 1091', `plugin_css`='devtools/css/devtools.css', `plugin_db_deinstall`='', `plugin_modulids`='', `plugin_messages`='devtools/messages'  ; ##b_dump##
 INSERT INTO `XXX_papoo_plugins` SET `plugin_id`='183', `plugin_name`='Bilder-Galerie', `plugin_version`='3.8', `plugin_papoo_id`='0', `plugin_menuids`=' 1021 1022 1023 1024 1025', `plugin_css`='galerie/css/galerie.css', `plugin_db_deinstall`='galerie/sql/galerie_deinstall.sql', `plugin_modulids`='', `plugin_messages`='galerie/messages'  ; ##b_dump##
 INSERT INTO `XXX_papoo_plugins` SET `plugin_id`='181', `plugin_name`='Aktivierungs - Plugin', `plugin_version`='1.0.1', `plugin_papoo_id`='68', `plugin_menuids`=' 1017', `plugin_css`='aktivierung/css/aktivierung_plugin.css', `plugin_db_deinstall`='aktivierung/sql/aktivierung_plugin_deinstall.sql', `plugin_modulids`='', `plugin_messages`='aktivierung/messages'  ; ##b_dump##
-INSERT INTO `XXX_papoo_plugins` SET `plugin_id`='187', `plugin_name`='Freie Module', `plugin_version`='1.0', `plugin_papoo_id`='45', `plugin_menuids`=' 1026 1027 1028', `plugin_css`='', `plugin_db_deinstall`='freiemodule/sql/freiemoduleplugin_deinstall.sql', `plugin_modulids`=' 36  37  38  49  85 ', `plugin_messages`='freiemodule/messages'  ; ##b_dump##
+INSERT INTO `XXX_papoo_plugins` SET `plugin_id`='187', `plugin_name`='Freie Module', `plugin_version`='1.0.1', `plugin_papoo_id`='45', `plugin_menuids`=' 1026 1027 1028', `plugin_css`='', `plugin_db_deinstall`='freiemodule/sql/freiemoduleplugin_deinstall.sql', `plugin_modulids`=' 36  37  38  49  85 ', `plugin_messages`='freiemodule/messages'  ; ##b_dump##
 INSERT INTO `XXX_papoo_plugins` SET `plugin_id`='190', `plugin_name`='Bootstrap-Dropdown', `plugin_version`='1.1', `plugin_papoo_id`='97', `plugin_menuids`=' 1029', `plugin_css`='', `plugin_db_deinstall`='bootstrapdropdown/sql/bootstrapdropdown_deinstall.sql', `plugin_modulids`=' 41 ', `plugin_messages`='bootstrapdropdown/messages'  ; ##b_dump##
 INSERT INTO `XXX_papoo_plugins` SET `plugin_id`='214', `plugin_name`='Sprechomat', `plugin_version`='1.96', `plugin_papoo_id`='4', `plugin_menuids`=' 1071 1072 1073 1074', `plugin_css`='sprechomat/css/sprechomat.css', `plugin_db_deinstall`='sprechomat/sql/sprechomat_deinstall.sql', `plugin_modulids`='', `plugin_messages`='sprechomat/messages'  ; ##b_dump##
 INSERT INTO `XXX_papoo_plugins` SET `plugin_id`='224', `plugin_name`='Bildwechsler', `plugin_version`='2.0', `plugin_papoo_id`='0', `plugin_menuids`=' 1092', `plugin_css`='', `plugin_db_deinstall`='bildwechsler/sql/bildwechsler_deinstall.sql', `plugin_modulids`=' 84 ', `plugin_messages`='bildwechsler/messages'  ; ##b_dump##
 INSERT INTO `XXX_papoo_plugins` SET `plugin_id`='195', `plugin_name`='Content Manipulator-Plugin', `plugin_version`='3.2', `plugin_papoo_id`='45', `plugin_menuids`=' 1036', `plugin_css`='content_manipulator/css/content_manipulator.css', `plugin_db_deinstall`='content_manipulator/sql/content_manipulator_deinstall.sql', `plugin_modulids`=' 43 ', `plugin_messages`='content_manipulator/messages'  ; ##b_dump##
-INSERT INTO `XXX_papoo_plugins` SET `plugin_id`='196', `plugin_name`=' Google Maps Plugin', `plugin_version`='1.0.1', `plugin_papoo_id`='46', `plugin_menuids`=' 1037', `plugin_css`='google_maps/css/google_maps.css', `plugin_db_deinstall`='google_maps/sql/google_maps_deinstall.sql', `plugin_modulids`='', `plugin_messages`='google_maps/messages'  ; ##b_dump##
+INSERT INTO `XXX_papoo_plugins` SET `plugin_id`='235', `plugin_name`='OpenStreetMap Karten-Plugin', `plugin_version`='1.1.0', `plugin_papoo_id`='0', `plugin_menuids`=' 1100', `plugin_css`='osm_map_plugin/css/styles.css', `plugin_db_deinstall`='osm_map_plugin/sql/osm_map_plugin_deinstall.sql', `plugin_modulids`='', `plugin_messages`='osm_map_plugin/messages'  ; ##b_dump##
 INSERT INTO `XXX_papoo_plugins` SET `plugin_id`='212', `plugin_name`='RSS-Feed', `plugin_version`='0.9.6', `plugin_papoo_id`='99', `plugin_menuids`=' 1067 1068 1069', `plugin_css`='rssfeed/css/rssfeed.css', `plugin_db_deinstall`='rssfeed/sql/test_deinstall.sql', `plugin_modulids`=' 76  77  78 ', `plugin_messages`='rssfeed/messages'  ; ##b_dump##
 INSERT INTO `XXX_papoo_plugins` SET `plugin_id`='215', `plugin_name`='Blog Plugin', `plugin_version`='1.60', `plugin_papoo_id`='82', `plugin_menuids`=' 1075 1076 1077', `plugin_css`='blogger/css/blogger.css', `plugin_db_deinstall`='blogger/sql/blogger_deinstall.sql', `plugin_modulids`=' 80  81  82 ', `plugin_messages`='blogger/messages'  ; ##b_dump##
 INSERT INTO `XXX_papoo_plugins` SET `plugin_id`='218', `plugin_name`='Kalender-Plugin', `plugin_version`='3.6', `plugin_papoo_id`='45', `plugin_menuids`=' 1080 1081 1082', `plugin_css`='pkalender/css/pkalender.css', `plugin_db_deinstall`='pkalender/sql/pkalender_deinstall.sql', `plugin_modulids`='', `plugin_messages`='pkalender/messages'  ; ##b_dump##
@@ -3229,27 +3234,27 @@ INSERT INTO `XXX_papoo_plugins` SET `plugin_id`='227', `plugin_name`='Nuetzliche
 INSERT INTO `XXX_papoo_plugins` SET `plugin_id`='229', `plugin_name`='DSGVO', `plugin_version`='1.0', `plugin_papoo_id`='95101', `plugin_menuids`=' 1099', `plugin_css`='', `plugin_db_deinstall`='dsgvo/sql/uninstall.sql', `plugin_modulids`='', `plugin_messages`='dsgvo/messages'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_pref_files`; ##b_dump##
 CREATE TABLE `XXX_papoo_pref_files` (
-  `file_pref_id` int(11) NOT NULL DEFAULT '0',
+  `file_pref_id` int NOT NULL DEFAULT '0',
   `file_export` varchar(255) NOT NULL,
   `file_import` mediumtext NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_pref_images`; ##b_dump##
 CREATE TABLE `XXX_papoo_pref_images` (
-  `image_pref_id` int(11) NOT NULL DEFAULT '0',
+  `image_pref_id` int NOT NULL DEFAULT '0',
   `image_export` varchar(255) NOT NULL,
   `image_import` mediumtext NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_pref_images` SET `image_pref_id`='1', `image_export`='0', `image_import`='0'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_repore`; ##b_dump##
 CREATE TABLE `XXX_papoo_repore` (
-  `reporeID` int(11) NOT NULL AUTO_INCREMENT,
+  `reporeID` int NOT NULL AUTO_INCREMENT,
   `text` mediumtext NOT NULL,
   `text_bbcode` mediumtext NOT NULL,
-  `cattextid` int(11) NOT NULL,
-  `dokuser` int(11) NOT NULL DEFAULT '1',
-  `dokgruppe` int(11) NOT NULL DEFAULT '1',
+  `cattextid` int NOT NULL,
+  `dokuser` int NOT NULL DEFAULT '1',
+  `dokgruppe` int NOT NULL DEFAULT '1',
   `dokschreibengrid` varchar(255) NOT NULL DEFAULT '1',
-  `dokschreiben_userid` int(11) NOT NULL DEFAULT '1',
+  `dokschreiben_userid` int NOT NULL DEFAULT '1',
   `doklesengrid` varchar(255) NOT NULL DEFAULT 'g1,',
   `ueberschrift` varchar(255) NOT NULL,
   `uberschrift_hyn` varchar(255) NOT NULL DEFAULT '1',
@@ -3263,10 +3268,10 @@ CREATE TABLE `XXX_papoo_repore` (
   `pub_wohin` varchar(255) NOT NULL,
   `pub_danach_aktiv` varchar(255) NOT NULL,
   `pub_dauerhaft` varchar(255) NOT NULL DEFAULT '1',
-  `publish_yn` int(11) NOT NULL DEFAULT '0',
-  `publish_yn_intra` int(11) NOT NULL DEFAULT '0',
-  `intranet_yn` int(11) NOT NULL,
-  `count` int(11) NOT NULL DEFAULT '0',
+  `publish_yn` int NOT NULL DEFAULT '0',
+  `publish_yn_intra` int NOT NULL DEFAULT '0',
+  `intranet_yn` int NOT NULL,
+  `count` int NOT NULL DEFAULT '0',
   `teaser` mediumtext NOT NULL,
   `teaser_list` varchar(255) NOT NULL DEFAULT '1',
   `teaser_bbcode` mediumtext NOT NULL,
@@ -3277,24 +3282,24 @@ CREATE TABLE `XXX_papoo_repore` (
   `teaser_bild_lr` varchar(255) NOT NULL,
   `teaser_atyn` varchar(255) NOT NULL,
   `count_download` varchar(255) NOT NULL,
-  `allow_publish` int(11) NOT NULL DEFAULT '0',
-  `comment_yn` int(11) NOT NULL DEFAULT '0',
-  `allow_other` int(11) NOT NULL DEFAULT '0',
-  `order_id` int(11) NOT NULL DEFAULT '0',
-  `allow_comment` int(11) NOT NULL DEFAULT '0',
+  `allow_publish` int NOT NULL DEFAULT '0',
+  `comment_yn` int NOT NULL DEFAULT '0',
+  `allow_other` int NOT NULL DEFAULT '0',
+  `order_id` int NOT NULL DEFAULT '0',
+  `allow_comment` int NOT NULL DEFAULT '0',
   `list_site` varchar(255) NOT NULL,
   `artikel_news_list` varchar(255) NOT NULL DEFAULT '0',
   `teaser_bild_groesse` varchar(255) NOT NULL DEFAULT '0',
   `teaser_menu` varchar(255) NOT NULL,
   `teaser_sub_menu` varchar(255) NOT NULL,
   `teaser_artikel` varchar(255) NOT NULL,
-  `order_id_start` int(11) NOT NULL DEFAULT '0',
+  `order_id_start` int NOT NULL DEFAULT '0',
   `stamptime` varchar(255) NOT NULL,
-  `dokuser_last` int(11) NOT NULL,
-  `dok_teaserfix` int(11) NOT NULL,
-  `dok_show_teaser_link` int(11) NOT NULL,
-  `dok_show_teaser_teaser` int(11) NOT NULL,
-  `cat_category_id` int(11) NOT NULL,
+  `dokuser_last` int NOT NULL,
+  `dok_teaserfix` int NOT NULL,
+  `dok_show_teaser_link` int NOT NULL,
+  `dok_show_teaser_teaser` int NOT NULL,
+  `cat_category_id` int NOT NULL,
   PRIMARY KEY (`reporeID`),
   KEY `abk_abk` (`reporeID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 ; ##b_dump##
@@ -3310,12 +3315,12 @@ INSERT INTO `XXX_papoo_repore` SET `reporeID`='11', `text`='', `text_bbcode`='',
 INSERT INTO `XXX_papoo_repore` SET `reporeID`='12', `text`='', `text_bbcode`='', `cattextid`='1', `dokuser`='10', `dokgruppe`='1', `dokschreibengrid`='', `dokschreiben_userid`='1', `doklesengrid`='g1,', `ueberschrift`='', `uberschrift_hyn`='1', `timestamp`='2018-06-11 17:06:02', `erstellungsdatum`='2018-06-11 17:06:02', `verfall`='', `pub_verfall`='0', `pub_start`='0', `pub_verfall_page`='0', `pub_start_page`='0', `pub_wohin`='0', `pub_danach_aktiv`='', `pub_dauerhaft`='1', `publish_yn`='1', `publish_yn_intra`='0', `intranet_yn`='0', `count`='0', `teaser`='', `teaser_list`='0', `teaser_bbcode`='', `teaser_text`='', `teaser_bild`='', `teaser_bild_html`='', `teaser_link`='', `teaser_bild_lr`='', `teaser_atyn`='1', `count_download`='', `allow_publish`='1', `comment_yn`='0', `allow_other`='0', `order_id`='1', `allow_comment`='0', `list_site`='', `artikel_news_list`='', `teaser_bild_groesse`='x', `teaser_menu`='', `teaser_sub_menu`='', `teaser_artikel`='', `order_id_start`='1', `stamptime`='1528729562', `dokuser_last`='10', `dok_teaserfix`='0', `dok_show_teaser_link`='0', `dok_show_teaser_teaser`='1', `cat_category_id`='0'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_styles`; ##b_dump##
 CREATE TABLE `XXX_papoo_styles` (
-  `style_id` int(11) NOT NULL AUTO_INCREMENT,
+  `style_id` int NOT NULL AUTO_INCREMENT,
   `style_name` varchar(255) NOT NULL,
   `style_pfad` varchar(255) NOT NULL,
   `style_dir` varchar(255) DEFAULT NULL,
   `html_datei` varchar(255) DEFAULT NULL,
-  `standard_style` int(11) NOT NULL DEFAULT '0',
+  `standard_style` int NOT NULL DEFAULT '0',
   `style_cc` mediumtext,
   UNIQUE KEY `style_id_2` (`style_id`),
   KEY `style_id` (`style_id`)
@@ -3323,10 +3328,10 @@ CREATE TABLE `XXX_papoo_styles` (
 INSERT INTO `XXX_papoo_styles` SET `style_id`='576', `style_name`='foundation_papoo', `style_pfad`='foundation_papoo', `style_dir`='', `html_datei`='', `standard_style`='1', `style_cc`=''  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_styles_module`; ##b_dump##
 CREATE TABLE `XXX_papoo_styles_module` (
-  `stylemod_style_id` bigint(20) NOT NULL,
-  `stylemod_mod_id` bigint(20) DEFAULT NULL,
-  `stylemod_bereich_id` int(11) DEFAULT NULL,
-  `stylemod_order_id` int(11) DEFAULT NULL,
+  `stylemod_style_id` bigint NOT NULL,
+  `stylemod_mod_id` bigint DEFAULT NULL,
+  `stylemod_bereich_id` int DEFAULT NULL,
+  `stylemod_order_id` int DEFAULT NULL,
   KEY `stylemod_style_id` (`stylemod_style_id`),
   KEY `stylemod_mod_id` (`stylemod_mod_id`),
   KEY `stylemod_bereich_id` (`stylemod_bereich_id`),
@@ -3767,17 +3772,17 @@ INSERT INTO `XXX_papoo_styles_module` SET `stylemod_style_id`='576', `stylemod_m
 INSERT INTO `XXX_papoo_styles_module` SET `stylemod_style_id`='576', `stylemod_mod_id`='85', `stylemod_bereich_id`='1', `stylemod_order_id`='20'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_teaser_lookup_art`; ##b_dump##
 CREATE TABLE `XXX_papoo_teaser_lookup_art` (
-  `t_a_reporeid` int(11) NOT NULL DEFAULT '0',
-  `t_a_articleid` int(11) NOT NULL DEFAULT '0',
-  `ta_order_id` int(11) NOT NULL DEFAULT '0'
+  `t_a_reporeid` int NOT NULL DEFAULT '0',
+  `t_a_articleid` int NOT NULL DEFAULT '0',
+  `ta_order_id` int NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_teaser_lookup_art` SET `t_a_reporeid`='0', `t_a_articleid`='0', `ta_order_id`='1'  ; ##b_dump##
 INSERT INTO `XXX_papoo_teaser_lookup_art` SET `t_a_reporeid`='3', `t_a_articleid`='6', `ta_order_id`='2'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_teaser_lookup_men`; ##b_dump##
 CREATE TABLE `XXX_papoo_teaser_lookup_men` (
-  `t_reporeid` int(11) NOT NULL DEFAULT '0',
-  `t_menuid` int(11) NOT NULL DEFAULT '0',
-  `tm_order_id` int(11) NOT NULL DEFAULT '0'
+  `t_reporeid` int NOT NULL DEFAULT '0',
+  `t_menuid` int NOT NULL DEFAULT '0',
+  `tm_order_id` int NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_teaser_lookup_men` SET `t_reporeid`='0', `t_menuid`='0', `tm_order_id`='3'  ; ##b_dump##
 INSERT INTO `XXX_papoo_teaser_lookup_men` SET `t_reporeid`='5', `t_menuid`='6', `tm_order_id`='4'  ; ##b_dump##
@@ -3791,15 +3796,15 @@ INSERT INTO `XXX_papoo_teaser_lookup_men` SET `t_reporeid`='10', `t_menuid`='2',
 INSERT INTO `XXX_papoo_teaser_lookup_men` SET `t_reporeid`='10', `t_menuid`='5', `tm_order_id`='1'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_updates`; ##b_dump##
 CREATE TABLE `XXX_papoo_updates` (
-  `update_id` int(11) NOT NULL AUTO_INCREMENT,
-  `update_version` int(11) NOT NULL DEFAULT '0',
+  `update_id` int NOT NULL AUTO_INCREMENT,
+  `update_version` int NOT NULL DEFAULT '0',
   `update_name` varchar(255) NOT NULL,
   `update_descrip` mediumtext NOT NULL,
   PRIMARY KEY (`update_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_usefulservices_pref`; ##b_dump##
 CREATE TABLE `XXX_papoo_usefulservices_pref` (
-  `usefulservices_id` int(11) NOT NULL DEFAULT '0',
+  `usefulservices_id` int NOT NULL DEFAULT '0',
   `usefulservices_data_1` text,
   `usefulservices_data_2` varchar(255) DEFAULT '',
   `usefulservices_data_3` varchar(255) DEFAULT '',
@@ -3815,15 +3820,15 @@ INSERT INTO `XXX_papoo_usefulservices_pref` SET `usefulservices_id`='6', `useful
 INSERT INTO `XXX_papoo_usefulservices_pref` SET `usefulservices_id`='7', `usefulservices_data_1`='', `usefulservices_data_2`='', `usefulservices_data_3`='', `usefulservices_data_4`='', `usefulservices_data_5`=''  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_user`; ##b_dump##
 CREATE TABLE `XXX_papoo_user` (
-  `userid` int(100) NOT NULL AUTO_INCREMENT,
+  `userid` int NOT NULL AUTO_INCREMENT,
   `gruppenid` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `password_org` mediumtext NOT NULL,
-  `beitraege` int(11) NOT NULL DEFAULT '0',
+  `beitraege` int NOT NULL DEFAULT '0',
   `zeitstempel` varchar(255) NOT NULL,
-  `antwortmail` int(11) NOT NULL DEFAULT '0',
+  `antwortmail` int NOT NULL DEFAULT '0',
   `beschreibung` mediumtext NOT NULL,
   `user_firma` varchar(255) NOT NULL,
   `user_land` varchar(255) NOT NULL,
@@ -3834,13 +3839,13 @@ CREATE TABLE `XXX_papoo_user` (
   `user_ort` varchar(255) NOT NULL,
   `user_telefon` varchar(255) NOT NULL,
   `user_fax` varchar(255) NOT NULL,
-  `editor` int(11) NOT NULL DEFAULT '3',
+  `editor` int NOT NULL DEFAULT '3',
   `user_plz` varchar(255) NOT NULL DEFAULT '0',
   `confirm_code` mediumtext NOT NULL,
-  `user_style_id` int(11) NOT NULL DEFAULT '0',
-  `dauer_einlogg` int(11) NOT NULL DEFAULT '0',
-  `active` int(11) NOT NULL DEFAULT '0',
-  `board` int(11) NOT NULL DEFAULT '0',
+  `user_style_id` int NOT NULL DEFAULT '0',
+  `dauer_einlogg` int NOT NULL DEFAULT '0',
+  `active` int NOT NULL DEFAULT '0',
+  `board` int NOT NULL DEFAULT '0',
   `user_kontonr` varchar(255) NOT NULL,
   `user_blz` varchar(255) NOT NULL,
   `user_bankname` mediumtext NOT NULL,
@@ -3859,19 +3864,19 @@ CREATE TABLE `XXX_papoo_user` (
   `signatur_html` mediumtext NOT NULL,
   `user_lang_front` varchar(255) NOT NULL,
   `user_lang_back` varchar(255) NOT NULL,
-  `user_mv_id` int(11) NOT NULL,
-  `user_content_tree_show_all` int(4) NOT NULL DEFAULT '0',
-  `news_hardbounce` int(2) NOT NULL DEFAULT '0',
+  `user_mv_id` int NOT NULL,
+  `user_content_tree_show_all` int NOT NULL DEFAULT '0',
+  `news_hardbounce` int NOT NULL DEFAULT '0',
   `news_hardbounce_time` date NOT NULL,
   `user_last_login` varchar(30) NOT NULL,
   `user_konfiguration_des_tinymce` text,
   PRIMARY KEY (`userid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_user` SET `userid`='11', `gruppenid`='g10,', `username`='jeder', `email`='', `password`='', `password_org`='', `beitraege`='0', `zeitstempel`='2003.11.11 13:18:00', `antwortmail`='0', `beschreibung`='.', `user_firma`='', `user_land`='', `user_vorname`='', `user_nachname`='', `user_strasse`='', `user_hausnummer`='', `user_ort`='', `user_telefon`='', `user_fax`='', `editor`='3', `user_plz`='', `confirm_code`='', `user_style_id`='0', `dauer_einlogg`='0', `active`='1', `board`='0', `user_kontonr`='0', `user_blz`='0', `user_bankname`='', `user_confirm_abbuchung`='0', `user_club_stufe`='0', `user_agb_ok`='0', `wie_oft_login`='0', `zeitsperre`='0', `user_bbsid`='0', `user_gender`='0', `user_no_skript`='', `user_list_artikel`='0', `user_timestamp`='0', `user_newsletter`='0', `signatur`='', `signatur_html`='', `user_lang_front`='de', `user_lang_back`='de', `user_mv_id`='0', `user_content_tree_show_all`='0', `news_hardbounce`='0', `news_hardbounce_time`='2016-01-01', `user_last_login`='', `user_konfiguration_des_tinymce`=''  ; ##b_dump##
-INSERT INTO `XXX_papoo_user` SET `userid`='10', `gruppenid`='g1,', `username`='root', `email`='info@1234.de', `password`='$2y$12$.JMR6wOmqsvt3jk8xWX9D.xvAtAa7FKmBPT8lcr2ARZ4/ybr88hYO', `password_org`='', `beitraege`='4', `zeitstempel`='2004.11.11 13.19:00', `antwortmail`='1', `beschreibung`='.', `user_firma`='', `user_land`='', `user_vorname`='', `user_nachname`='', `user_strasse`='', `user_hausnummer`='', `user_ort`='', `user_telefon`='', `user_fax`='', `editor`='3', `user_plz`='', `confirm_code`='', `user_style_id`='0', `dauer_einlogg`='0', `active`='1', `board`='1', `user_kontonr`='0', `user_blz`='0', `user_bankname`='', `user_confirm_abbuchung`='0', `user_club_stufe`='0', `user_agb_ok`='0', `wie_oft_login`='0', `zeitsperre`='0', `user_bbsid`='0', `user_gender`='0', `user_no_skript`='', `user_list_artikel`='', `user_timestamp`='0', `user_newsletter`='ok', `signatur`='', `signatur_html`='', `user_lang_front`='', `user_lang_back`='', `user_mv_id`='0', `user_content_tree_show_all`='1', `news_hardbounce`='0', `news_hardbounce_time`='2016-01-01', `user_last_login`='1528899545', `user_konfiguration_des_tinymce`=''  ; ##b_dump##
+INSERT INTO `XXX_papoo_user` SET `userid`='10', `gruppenid`='g1,', `username`='root', `email`='info@1234.de', `password`='098f6bcd4621d373cade4e832627b4f6', `password_org`='', `beitraege`='4', `zeitstempel`='2004.11.11 13.19:00', `antwortmail`='1', `beschreibung`='.', `user_firma`='', `user_land`='', `user_vorname`='', `user_nachname`='', `user_strasse`='', `user_hausnummer`='', `user_ort`='', `user_telefon`='', `user_fax`='', `editor`='3', `user_plz`='', `confirm_code`='', `user_style_id`='0', `dauer_einlogg`='0', `active`='1', `board`='1', `user_kontonr`='0', `user_blz`='0', `user_bankname`='', `user_confirm_abbuchung`='0', `user_club_stufe`='0', `user_agb_ok`='0', `wie_oft_login`='0', `zeitsperre`='', `user_bbsid`='0', `user_gender`='0', `user_no_skript`='', `user_list_artikel`='', `user_timestamp`='0', `user_newsletter`='ok', `signatur`='', `signatur_html`='', `user_lang_front`='', `user_lang_back`='', `user_mv_id`='0', `user_content_tree_show_all`='1', `news_hardbounce`='0', `news_hardbounce_time`='2016-01-01', `user_last_login`='1528899545', `user_konfiguration_des_tinymce`=''  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_version_article`; ##b_dump##
 CREATE TABLE `XXX_papoo_version_article` (
-  `version_art_id` int(255) NOT NULL AUTO_INCREMENT,
+  `version_art_id` int NOT NULL AUTO_INCREMENT,
   `version_art_reporeid` varchar(255) NOT NULL,
   `version_art_time` varchar(255) NOT NULL,
   `version_art_fix` varchar(255) NOT NULL DEFAULT '0',
@@ -3966,14 +3971,14 @@ CREATE TABLE `XXX_papoo_version_language_article` (
   `lan_metatitel` mediumtext NOT NULL,
   `lan_metadescrip` mediumtext NOT NULL,
   `lan_metakey` mediumtext NOT NULL,
-  `lan_rss_yn` int(11) NOT NULL DEFAULT '0',
-  `version_langart_id` int(11) NOT NULL DEFAULT '0',
+  `lan_rss_yn` int NOT NULL DEFAULT '0',
+  `version_langart_id` int NOT NULL DEFAULT '0',
   `lan_repore_id` varchar(255) NOT NULL,
   `lang_id` varchar(255) NOT NULL,
-  `versionid` int(11) NOT NULL AUTO_INCREMENT,
+  `versionid` int NOT NULL AUTO_INCREMENT,
   `version_art_fix` varchar(255) NOT NULL DEFAULT '0',
   `url_header` mediumtext NOT NULL,
-  `publish_yn_lang` int(11) NOT NULL DEFAULT '0',
+  `publish_yn_lang` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`versionid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=193 DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_version_language_article` SET `header`='Artikel Unterpunkt 1', `lan_teaser`='<p><img src=\"../images/10_designs.jpg\" width=\"300\" height=\"245\" alt=\"Design Varianten\" title=\"Design Varianten\" /> Textinhalte im Inhaltsbereich der Webseite nennen wir bei Papoo Artikel, entlehnt aus dem Begriff Zeitungsartikel.</p>', `lan_teaser_link`='', `lan_article`='<p>Textinhalte im Inhaltsbereich der Webseite nennen wir bei    <a href=\"http://www.papoo.de\" title=\"Papoo\"  >Papoo</a>       Artikel, entlehnt aus dem Bereich der Printmedien.</p><h3>Maximale Freiheit<a rel=\"lightbox\" title=\"Freiheit für Artikel\" href=\"../images/10_freiheitartikel.jpg\"><img style=\"margin: 2px 10px; float: right;\" title=\"Freiheit für Artikel\" alt=\"Freiheit für Artikel\" src=\"../images/10_freiheit.gif\" height=\"305\" width=\"379\" /></a></h3><p>Bei diesen Artikeln haben Sie alle Freiheitsgrade die man sich vorstellen kann. Mit Hilfe unserer starken Erweiterungen für den Wordähnlichen Editor TInyMce© können Sie völlig flexibel Ihre Inhalte auf die Webseite bringen, und das ganz ohne Programmierkenntnisse.</p><h3>Alles einfach per Klick integrieren</h3><p>Völlig egal ob es sich um gut zu formatierende Texte, um tolle Bilder oder Videos handelt. Alles können Sie einfach per Klick innerhalb der Administration hochladen und genauso einfach auch in die Webseite hineinbringen.</p><h3>Klar - volle Rechte und Kontrolle</h3><p>Sämtliche Artikel unterliegen natürlich der für Papoo üblichen Rechtesystematik, Sie können also Inhalte nur für bestimmte Benutzergruppen freischalten, eine Zeitsteuerung aktivieren, die Artikel mehreren Menüpunkten zuweisen und natürlich auch auf der Start oder den Unterseiten anteasern.</p>', `lan_article_sans`='<p>Textinhalte im Inhaltsbereich der Webseite nennen wir bei Papoo Artikel, entlehnt aus dem Bereich der Printmedien.</p><h3>Maximale Freiheit<a rel=\"lightbox\" title=\"Freiheit für Artikel\" href=\"../images/10_freiheitartikel.jpg\"><img style=\"margin: 2px 10px; float: right;\" title=\"Freiheit für Artikel\" alt=\"Freiheit für Artikel\" src=\"../images/10_freiheit.gif\" height=\"305\" width=\"379\" /></a></h3><p>Bei diesen Artikeln haben Sie alle Freiheitsgrade die man sich vorstellen kann. Mit Hilfe unserer starken Erweiterungen für den Wordähnlichen Editor TInyMce© können Sie völlig flexibel Ihre Inhalte auf die Webseite bringen, und das ganz ohne Programmierkenntnisse.</p><h3>Alles einfach per Klick integrieren</h3><p>Völlig egal ob es sich um gut zu formatierende Texte, um tolle Bilder oder Videos handelt. Alles können Sie einfach per Klick innerhalb der Administration hochladen und genauso einfach auch in die Webseite hineinbringen.</p><h3>Klar - volle Rechte und Kontrolle</h3><p>Sämtliche Artikel unterliegen natürlich der für Papoo üblichen Rechtesystematik, Sie können also Inhalte nur für bestimmte Benutzergruppen freischalten, eine Zeitsteuerung aktivieren, die Artikel mehreren Menüpunkten zuweisen und natürlich auch auf der Start oder den Unterseiten anteasern.</p>', `lan_article_markdown`='', `lan_metatitel`='Artikel Unterpunkt 1', `lan_metadescrip`='Textinhalte im Inhaltsbereich der Webseite nennen wir bei Papoo Artikel, entlehnt aus dem Begriff Zeitungsartikel....', `lan_metakey`='', `lan_rss_yn`='0', `version_langart_id`='92', `lan_repore_id`='3', `lang_id`='1', `versionid`='92', `version_art_fix`='1', `url_header`='artikel-unterpunkt-1', `publish_yn_lang`='1'  ; ##b_dump##
@@ -4056,9 +4061,9 @@ INSERT INTO `XXX_papoo_version_language_article` SET `header`='Bildergalerien', 
 INSERT INTO `XXX_papoo_version_language_article` SET `header`='Layout & Design des Papoo CMS Systems', `lan_teaser`='<p><img src=\"../images/10_slide3.jpg\" alt=\"Über Dubai\" title=\"Über Dubai\" width=\"1200\" height=\"478\" />Das Papoo CMS System nutzt standardmäßig das Bootstrap CSS Framework von Twitter. Bootstrap ist das optimale Framework wenn Sie Ihre Webseiten auch für mobile Geräte optimieren wollen. Seit der Version 4.2.0 ist Bootstrap für Administration und Frontend die Grundlage aller Layouts.</p>', `lan_teaser_link`='', `lan_article`='<p>Das        <a href=\"/papoo_trunk/www.papoo.de.html\" title=\"Papoo\">Papoo</a>               CMS System nutzt standardmäßig das Foundation Framework.Foundation ist das optimale Framework wenn Sie Ihre Webseiten auch für mobile Geräte optimieren wollen. Seit der Version 4.2.0 ist Bootstrap für die Administration die Grundlage aller Layouts.</p><p>##akkordion_platzhalter_1##</p><h2>Startseite Layout</h2><p>Das Layout der Startseite beabeiten Sie unter Inhalte -&gt; Startseite. Die einzelnen Module werden dort etwas anders dargestellt damit diese besser bearbeitet werden können. Alternativ können Sie auch das Layout für die Startseite abschalten indem Sie den Menüpunkt Startseite bearbeiten und dort den Eintrag zu Startseite.css entfernen.</p><h2>Die CSS Layouts sind optimiert für</h2><ul><li><span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">Desktop</span>               Browser</li><li>Mobile Geräte</li><li>I-Phone</li><li>I-Pad</li><li>usw.</li></ul><h2>1 fertige Volagen</h2><p>Wir haben eine Vorlage vorinstalliert - in jeder Version sind dann eine Reihe von kostenlosen Designs mit dabei.</p><p></p><p></p>', `lan_article_sans`='<p>Das <a href=\"/papoo_trunk/www.papoo.de.html\" title=\"Papoo\">Papoo</a> CMS System nutzt standardmäßig das Foundation Framework.Foundation ist das optimale Framework wenn Sie Ihre Webseiten auch für mobile Geräte optimieren wollen. Seit der Version 4.2.0 ist Bootstrap für die Administration die Grundlage aller Layouts.</p><p>##akkordion_platzhalter_1##</p><h2>Startseite Layout</h2><p>Das Layout der Startseite beabeiten Sie unter Inhalte -&gt; Startseite. Die einzelnen Module werden dort etwas anders dargestellt damit diese besser bearbeitet werden können. Alternativ können Sie auch das Layout für die Startseite abschalten indem Sie den Menüpunkt Startseite bearbeiten und dort den Eintrag zu Startseite.css entfernen.</p><h2>Die CSS Layouts sind optimiert für</h2><ul><li><span class=\"lang_en\" xml:lang=\"en\" lang=\"en\">Desktop</span> Browser</li><li>Mobile Geräte</li><li>I-Phone</li><li>I-Pad</li><li>usw.</li></ul><h2>1 fertige Volagen</h2><p>Wir haben eine Vorlage vorinstalliert - in jeder Version sind dann eine Reihe von kostenlosen Designs mit dabei.</p><p></p><p></p>', `lan_article_markdown`='', `lan_metatitel`='Layout & Design', `lan_metadescrip`='Layout & Design von Papoo', `lan_metakey`='', `lan_rss_yn`='1', `version_langart_id`='192', `lan_repore_id`='8', `lang_id`='1', `versionid`='192', `version_art_fix`='1', `url_header`='/layout-und-design.html', `publish_yn_lang`='1'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_version_lookup_art_cat`; ##b_dump##
 CREATE TABLE `XXX_papoo_version_lookup_art_cat` (
-  `lart_id` int(11) NOT NULL AUTO_INCREMENT,
-  `lcat_id` int(11) NOT NULL,
-  `lart_order_id` int(11) NOT NULL,
+  `lart_id` int NOT NULL AUTO_INCREMENT,
+  `lcat_id` int NOT NULL,
+  `lart_order_id` int NOT NULL,
   PRIMARY KEY (`lart_id`,`lcat_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=193 DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_version_lookup_art_cat` SET `lart_id`='92', `lcat_id`='8', `lart_order_id`='0'  ; ##b_dump##
@@ -4234,9 +4239,9 @@ INSERT INTO `XXX_papoo_version_lookup_art_cat` SET `lart_id`='192', `lcat_id`='1
 INSERT INTO `XXX_papoo_version_lookup_art_cat` SET `lart_id`='192', `lcat_id`='20', `lart_order_id`='0'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_version_lookup_article`; ##b_dump##
 CREATE TABLE `XXX_papoo_version_lookup_article` (
-  `version_lookup_article_id` int(11) NOT NULL DEFAULT '0',
-  `article_id` int(11) NOT NULL DEFAULT '0',
-  `gruppeid_id` int(11) NOT NULL DEFAULT '0',
+  `version_lookup_article_id` int NOT NULL DEFAULT '0',
+  `article_id` int NOT NULL DEFAULT '0',
+  `gruppeid_id` int NOT NULL DEFAULT '0',
   `version_art_fix` varchar(255) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_version_lookup_article` SET `version_lookup_article_id`='92', `article_id`='3', `gruppeid_id`='10', `version_art_fix`='1'  ; ##b_dump##
@@ -4397,9 +4402,9 @@ INSERT INTO `XXX_papoo_version_lookup_article` SET `version_lookup_article_id`='
 INSERT INTO `XXX_papoo_version_lookup_article` SET `version_lookup_article_id`='192', `article_id`='8', `gruppeid_id`='1', `version_art_fix`='1'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_version_lookup_write_article`; ##b_dump##
 CREATE TABLE `XXX_papoo_version_lookup_write_article` (
-  `version_lookup_article_id` int(11) NOT NULL DEFAULT '0',
-  `article_wid_id` int(11) NOT NULL DEFAULT '0',
-  `gruppeid_wid_id` int(11) NOT NULL DEFAULT '0',
+  `version_lookup_article_id` int NOT NULL DEFAULT '0',
+  `article_wid_id` int NOT NULL DEFAULT '0',
+  `gruppeid_wid_id` int NOT NULL DEFAULT '0',
   `version_art_fix` varchar(255) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_version_lookup_write_article` SET `version_lookup_article_id`='124', `article_wid_id`='0', `gruppeid_wid_id`='1', `version_art_fix`='1'  ; ##b_dump##
@@ -4423,15 +4428,15 @@ INSERT INTO `XXX_papoo_version_lookup_write_article` SET `version_lookup_article
 INSERT INTO `XXX_papoo_version_lookup_write_article` SET `version_lookup_article_id`='186', `article_wid_id`='4', `gruppeid_wid_id`='11', `version_art_fix`='1'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_version_repore`; ##b_dump##
 CREATE TABLE `XXX_papoo_version_repore` (
-  `reporeID` bigint(20) NOT NULL DEFAULT '0',
-  `versionid` bigint(20) NOT NULL AUTO_INCREMENT,
+  `reporeID` bigint NOT NULL DEFAULT '0',
+  `versionid` bigint NOT NULL AUTO_INCREMENT,
   `text` mediumtext NOT NULL,
   `text_bbcode` mediumtext NOT NULL,
-  `cattextid` int(11) NOT NULL,
-  `dokuser` int(11) NOT NULL DEFAULT '1',
-  `dokgruppe` int(11) NOT NULL DEFAULT '1',
+  `cattextid` int NOT NULL,
+  `dokuser` int NOT NULL DEFAULT '1',
+  `dokgruppe` int NOT NULL DEFAULT '1',
   `dokschreibengrid` varchar(255) NOT NULL DEFAULT '1',
-  `dokschreiben_userid` int(11) NOT NULL DEFAULT '1',
+  `dokschreiben_userid` int NOT NULL DEFAULT '1',
   `doklesengrid` varchar(255) NOT NULL DEFAULT 'g1,',
   `ueberschrift` varchar(255) NOT NULL,
   `uberschrift_hyn` varchar(255) NOT NULL DEFAULT '1',
@@ -4444,10 +4449,10 @@ CREATE TABLE `XXX_papoo_version_repore` (
   `pub_wohin` varchar(255) NOT NULL,
   `pub_danach_aktiv` varchar(255) NOT NULL,
   `pub_dauerhaft` varchar(255) NOT NULL DEFAULT '1',
-  `publish_yn` int(11) NOT NULL DEFAULT '0',
-  `publish_yn_intra` int(11) NOT NULL DEFAULT '0',
-  `intranet_yn` int(11) NOT NULL,
-  `count` int(11) NOT NULL DEFAULT '0',
+  `publish_yn` int NOT NULL DEFAULT '0',
+  `publish_yn_intra` int NOT NULL DEFAULT '0',
+  `intranet_yn` int NOT NULL,
+  `count` int NOT NULL DEFAULT '0',
   `teaser` mediumtext NOT NULL,
   `teaser_list` varchar(255) NOT NULL DEFAULT '1',
   `teaser_bbcode` mediumtext NOT NULL,
@@ -4458,24 +4463,24 @@ CREATE TABLE `XXX_papoo_version_repore` (
   `teaser_bild_lr` varchar(255) NOT NULL,
   `teaser_atyn` varchar(255) NOT NULL,
   `count_download` varchar(255) NOT NULL,
-  `allow_publish` int(11) NOT NULL DEFAULT '0',
-  `comment_yn` int(11) NOT NULL DEFAULT '0',
-  `allow_other` int(11) NOT NULL DEFAULT '0',
-  `order_id` int(11) NOT NULL DEFAULT '0',
-  `allow_comment` int(11) NOT NULL DEFAULT '0',
+  `allow_publish` int NOT NULL DEFAULT '0',
+  `comment_yn` int NOT NULL DEFAULT '0',
+  `allow_other` int NOT NULL DEFAULT '0',
+  `order_id` int NOT NULL DEFAULT '0',
+  `allow_comment` int NOT NULL DEFAULT '0',
   `list_site` varchar(255) NOT NULL,
   `artikel_news_list` varchar(255) NOT NULL DEFAULT '0',
   `teaser_bild_groesse` varchar(255) NOT NULL DEFAULT '0',
   `teaser_menu` varchar(255) NOT NULL,
   `teaser_sub_menu` varchar(255) NOT NULL,
   `teaser_artikel` varchar(255) NOT NULL,
-  `version_repo_id` int(11) NOT NULL DEFAULT '0',
+  `version_repo_id` int NOT NULL DEFAULT '0',
   `version_art_fix` varchar(255) NOT NULL DEFAULT '0',
-  `cat_category_id` int(11) NOT NULL,
-  `dokuser_last` int(11) NOT NULL,
-  `dok_teaserfix` int(11) NOT NULL,
-  `dok_show_teaser_link` int(11) NOT NULL,
-  `dok_show_teaser_teaser` int(11) NOT NULL,
+  `cat_category_id` int NOT NULL,
+  `dokuser_last` int NOT NULL,
+  `dok_teaserfix` int NOT NULL,
+  `dok_show_teaser_link` int NOT NULL,
+  `dok_show_teaser_teaser` int NOT NULL,
   PRIMARY KEY (`versionid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=193 DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_version_repore` SET `reporeID`='3', `versionid`='92', `text`='', `text_bbcode`='', `cattextid`='8', `dokuser`='10', `dokgruppe`='1', `dokschreibengrid`='', `dokschreiben_userid`='1', `doklesengrid`='g1,', `ueberschrift`='', `uberschrift_hyn`='1', `timestamp`='2014-07-14 12:27:00', `verfall`='', `pub_verfall`='0', `pub_start`='0', `pub_verfall_page`='0', `pub_start_page`='0', `pub_wohin`='0', `pub_danach_aktiv`='', `pub_dauerhaft`='1', `publish_yn`='1', `publish_yn_intra`='0', `intranet_yn`='0', `count`='0', `teaser`='', `teaser_list`='0', `teaser_bbcode`='', `teaser_text`='', `teaser_bild`='', `teaser_bild_html`='', `teaser_link`='', `teaser_bild_lr`='', `teaser_atyn`='', `count_download`='', `allow_publish`='1', `comment_yn`='0', `allow_other`='0', `order_id`='1', `allow_comment`='0', `list_site`='', `artikel_news_list`='', `teaser_bild_groesse`='x', `teaser_menu`='', `teaser_sub_menu`='', `teaser_artikel`='', `version_repo_id`='92', `version_art_fix`='1', `cat_category_id`='0', `dokuser_last`='10', `dok_teaserfix`='0', `dok_show_teaser_link`='0', `dok_show_teaser_teaser`='0'  ; ##b_dump##
@@ -4558,24 +4563,24 @@ INSERT INTO `XXX_papoo_version_repore` SET `reporeID`='10', `versionid`='191', `
 INSERT INTO `XXX_papoo_version_repore` SET `reporeID`='8', `versionid`='192', `text`='', `text_bbcode`='', `cattextid`='2', `dokuser`='10', `dokgruppe`='1', `dokschreibengrid`='', `dokschreiben_userid`='1', `doklesengrid`='g1,', `ueberschrift`='', `uberschrift_hyn`='1', `timestamp`='2018-06-13 13:51:58', `verfall`='', `pub_verfall`='0', `pub_start`='0', `pub_verfall_page`='0', `pub_start_page`='0', `pub_wohin`='0', `pub_danach_aktiv`='', `pub_dauerhaft`='1', `publish_yn`='1', `publish_yn_intra`='0', `intranet_yn`='0', `count`='0', `teaser`='', `teaser_list`='0', `teaser_bbcode`='', `teaser_text`='', `teaser_bild`='', `teaser_bild_html`='', `teaser_link`='', `teaser_bild_lr`='', `teaser_atyn`='', `count_download`='', `allow_publish`='1', `comment_yn`='0', `allow_other`='0', `order_id`='1', `allow_comment`='0', `list_site`='', `artikel_news_list`='', `teaser_bild_groesse`='x', `teaser_menu`='', `teaser_sub_menu`='', `teaser_artikel`='', `version_repo_id`='192', `version_art_fix`='1', `cat_category_id`='0', `dokuser_last`='10', `dok_teaserfix`='0', `dok_show_teaser_link`='0', `dok_show_teaser_teaser`='0'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_video`; ##b_dump##
 CREATE TABLE `XXX_papoo_video` (
-  `video_id` int(11) NOT NULL AUTO_INCREMENT,
+  `video_id` int NOT NULL AUTO_INCREMENT,
   `video_file_name` text NOT NULL,
-  `video_width` int(11) NOT NULL DEFAULT '0',
-  `video_height` int(11) NOT NULL DEFAULT '0',
+  `video_width` int NOT NULL DEFAULT '0',
+  `video_height` int NOT NULL DEFAULT '0',
   `video_user` varchar(255) NOT NULL DEFAULT '',
   `video_kat` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`video_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_plugin_aktivierung_config`; ##b_dump##
 CREATE TABLE `XXX_plugin_aktivierung_config` (
-  `aktiv_plugin_id` int(11) NOT NULL AUTO_INCREMENT,
+  `aktiv_plugin_id` int NOT NULL AUTO_INCREMENT,
   `aktiv_plugin_ihre_rechnungsnummer` text,
   `aktiv_plugin_installationen_auf_localhost` text,
   PRIMARY KEY (`aktiv_plugin_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_plugin_blogger_shortcut_config`; ##b_dump##
 CREATE TABLE `XXX_plugin_blogger_shortcut_config` (
-  `blogger_shortcut_config_id` int(11) NOT NULL AUTO_INCREMENT,
+  `blogger_shortcut_config_id` int NOT NULL AUTO_INCREMENT,
   `blogger_shortcut_config_name` varchar(255) NOT NULL,
   `blogger_shortcut_config_value` varchar(255) NOT NULL,
   `blogger__feldtypen_fuer_schlagworte` varchar(255) NOT NULL,
@@ -4584,17 +4589,17 @@ CREATE TABLE `XXX_plugin_blogger_shortcut_config` (
 INSERT INTO `XXX_plugin_blogger_shortcut_config` SET `blogger_shortcut_config_id`='1', `blogger_shortcut_config_name`='wordcloud_count', `blogger_shortcut_config_value`='10', `blogger__feldtypen_fuer_schlagworte`='a:5:{i:1;s:1:\"1\";i:2;s:1:\"1\";i:3;s:1:\"1\";i:4;s:1:\"1\";i:5;s:1:\"1\";}'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_plugin_blogger_shortcuts`; ##b_dump##
 CREATE TABLE `XXX_plugin_blogger_shortcuts` (
-  `blogger_shortcuts_id` int(11) NOT NULL AUTO_INCREMENT,
-  `blogger_shortcuts_menuid` int(11) NOT NULL,
-  `blogger_shortcuts_calendar` int(1) NOT NULL,
-  `blogger_shortcuts_wordcloud` int(1) NOT NULL,
-  `blogger_shortcuts_month` int(11) NOT NULL,
+  `blogger_shortcuts_id` int NOT NULL AUTO_INCREMENT,
+  `blogger_shortcuts_menuid` int NOT NULL,
+  `blogger_shortcuts_calendar` int NOT NULL,
+  `blogger_shortcuts_wordcloud` int NOT NULL,
+  `blogger_shortcuts_month` int NOT NULL,
   PRIMARY KEY (`blogger_shortcuts_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_plugin_blogger_shortcuts` SET `blogger_shortcuts_id`='1', `blogger_shortcuts_menuid`='20', `blogger_shortcuts_calendar`='1', `blogger_shortcuts_wordcloud`='1', `blogger_shortcuts_month`='1'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_plugin_blogger_trackback_config`; ##b_dump##
 CREATE TABLE `XXX_plugin_blogger_trackback_config` (
-  `blogger_plugin_id` int(11) NOT NULL AUTO_INCREMENT,
+  `blogger_plugin_id` int NOT NULL AUTO_INCREMENT,
   `blogger_plugin_ping_service_aktivieren` varchar(255) NOT NULL,
   `blogger_plugin_trackback_aktivieren` varchar(255) NOT NULL,
   `blogger_plugin_mail_an_admin_wenn_neuer_tb_erstellt_wurde` varchar(255) NOT NULL,
@@ -4603,10 +4608,10 @@ CREATE TABLE `XXX_plugin_blogger_trackback_config` (
 INSERT INTO `XXX_plugin_blogger_trackback_config` SET `blogger_plugin_id`='1', `blogger_plugin_ping_service_aktivieren`='1', `blogger_plugin_trackback_aktivieren`='0', `blogger_plugin_mail_an_admin_wenn_neuer_tb_erstellt_wurde`='0'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_plugin_blogger_trackbacks`; ##b_dump##
 CREATE TABLE `XXX_plugin_blogger_trackbacks` (
-  `blogger_plugin_tb_id` int(11) NOT NULL AUTO_INCREMENT,
+  `blogger_plugin_tb_id` int NOT NULL AUTO_INCREMENT,
   `blogger_plugin_tb_my_url` text NOT NULL,
   `blogger_plugin_tb_remote_url` text NOT NULL,
-  `blogger_plugin_tb_count` int(11) NOT NULL,
+  `blogger_plugin_tb_count` int NOT NULL,
   PRIMARY KEY (`blogger_plugin_tb_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=140 DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_plugin_blogger_trackbacks` SET `blogger_plugin_tb_id`='1', `blogger_plugin_tb_my_url`='http://www.ihre_seite.de/papoo_trunk?index.php?menuid=8&reporeid=3', `blogger_plugin_tb_remote_url`='../images/10_freiheitartikel.jpg', `blogger_plugin_tb_count`='1'  ; ##b_dump##
@@ -4750,9 +4755,9 @@ INSERT INTO `XXX_plugin_blogger_trackbacks` SET `blogger_plugin_tb_id`='138', `b
 INSERT INTO `XXX_plugin_blogger_trackbacks` SET `blogger_plugin_tb_id`='139', `blogger_plugin_tb_my_url`='http://www.ihre_seite.de/papoo_trunk/layout-und-design.html', `blogger_plugin_tb_remote_url`='/papoo_trunk/www.papoo.de.html', `blogger_plugin_tb_count`='1'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_plugin_blogger_word_article_lookup`; ##b_dump##
 CREATE TABLE `XXX_plugin_blogger_word_article_lookup` (
-  `blogger_word_article_lookup_id` int(11) NOT NULL AUTO_INCREMENT,
-  `blogger_word_article_lookup_word_id` int(11) NOT NULL,
-  `blogger_word_article_lookup_lan_repore_id` int(11) NOT NULL,
+  `blogger_word_article_lookup_id` int NOT NULL AUTO_INCREMENT,
+  `blogger_word_article_lookup_word_id` int NOT NULL,
+  `blogger_word_article_lookup_lan_repore_id` int NOT NULL,
   PRIMARY KEY (`blogger_word_article_lookup_id`),
   KEY `blogger_word_article_lookup_word_id` (`blogger_word_article_lookup_word_id`),
   KEY `blogger_word_article_lookup_lan_repore_id` (`blogger_word_article_lookup_lan_repore_id`)
@@ -4776,9 +4781,9 @@ INSERT INTO `XXX_plugin_blogger_word_article_lookup` SET `blogger_word_article_l
 INSERT INTO `XXX_plugin_blogger_word_article_lookup` SET `blogger_word_article_lookup_id`='781', `blogger_word_article_lookup_word_id`='542', `blogger_word_article_lookup_lan_repore_id`='11'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_plugin_blogger_wordlist`; ##b_dump##
 CREATE TABLE `XXX_plugin_blogger_wordlist` (
-  `blogger_wordlist_id` int(11) NOT NULL AUTO_INCREMENT,
+  `blogger_wordlist_id` int NOT NULL AUTO_INCREMENT,
   `blogger_wordlist_word` varchar(255) NOT NULL,
-  `blogger_wordlist_count` int(11) NOT NULL,
+  `blogger_wordlist_count` int NOT NULL,
   PRIMARY KEY (`blogger_wordlist_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=543 DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_plugin_blogger_wordlist` SET `blogger_wordlist_id`='533', `blogger_wordlist_word`='content', `blogger_wordlist_count`='21'  ; ##b_dump##
@@ -4793,9 +4798,9 @@ INSERT INTO `XXX_plugin_blogger_wordlist` SET `blogger_wordlist_id`='541', `blog
 INSERT INTO `XXX_plugin_blogger_wordlist` SET `blogger_wordlist_id`='542', `blogger_wordlist_word`='incididunt', `blogger_wordlist_count`='11'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_plugin_dsgvo_external_resources`; ##b_dump##
 CREATE TABLE `XXX_plugin_dsgvo_external_resources` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `url` varchar(1024) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `url_hash` varchar(32) CHARACTER SET ascii NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `url` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `url_hash` varchar(32) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
   `last_encounter` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `url_hash` (`url_hash`)
@@ -4806,18 +4811,18 @@ DROP TABLE IF EXISTS `XXX_plugin_dsgvo_settings`; ##b_dump##
 CREATE TABLE `XXX_plugin_dsgvo_settings` (
   `id` tinyint(1) NOT NULL DEFAULT '1',
   `logfile_autoremove` tinyint(1) NOT NULL DEFAULT '0',
-  `logfile_autoremove_interval` int(10) unsigned NOT NULL DEFAULT '30',
+  `logfile_autoremove_interval` int unsigned NOT NULL DEFAULT '30',
   `youtube_nocookie` tinyint(1) NOT NULL DEFAULT '1',
-  `cookie_lifetime` int(10) unsigned NOT NULL DEFAULT '7',
+  `cookie_lifetime` int unsigned NOT NULL DEFAULT '7',
   `formdata_autoremove` tinyint(1) NOT NULL DEFAULT '0',
-  `formdata_autoremove_interval` int(10) unsigned NOT NULL DEFAULT '365',
+  `formdata_autoremove_interval` int unsigned NOT NULL DEFAULT '365',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ; ##b_dump##
 INSERT INTO `XXX_plugin_dsgvo_settings` SET `id`='1', `logfile_autoremove`='1', `logfile_autoremove_interval`='10', `youtube_nocookie`='1', `cookie_lifetime`='1', `formdata_autoremove`='0', `formdata_autoremove_interval`='365'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_plugin_kalender`; ##b_dump##
 CREATE TABLE `XXX_plugin_kalender` (
-  `kalender_id` int(11) NOT NULL AUTO_INCREMENT,
-  `kalender_lang_id` int(11) NOT NULL,
+  `kalender_id` int NOT NULL,
+  `kalender_lang_id` int NOT NULL,
   `kalender_bezeichnung_des_kalenders` text,
   `kalender_eintrge_von_aussen` varchar(255) NOT NULL,
   `kalender_direkt_freischalten` varchar(255) NOT NULL,
@@ -4825,20 +4830,19 @@ CREATE TABLE `XXX_plugin_kalender` (
   `kalender_text_oberhalb` text,
   `kalender_whlen_sie_hier_den_termin_aus` text,
   `kalender_kategorien_im_kalender_jede_zeile_eine_kategorie` text,
-  `kalender_modul_id` int(11) NOT NULL,
+  `kalender_modul_id` int NOT NULL,
   `kalender_email_versenden_bei_neuen_eintrag_von_auen` varchar(255) NOT NULL,
   `kalender_email_adresse_fr_den_versand_dieser_mail` text,
-  `kalender_modul_liste_id` int(11) NOT NULL,
+  `kalender_modul_liste_id` int NOT NULL,
   `kalender_anzahl_der_eintrge_im_modul_aktuellste_eintrge` text,
-  `kalender_xml_google` text,
-  PRIMARY KEY (`kalender_id`)
+  `kalender_xml_google` text
 ) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_plugin_kalender` SET `kalender_id`='25', `kalender_lang_id`='1', `kalender_bezeichnung_des_kalenders`='Kalender 1', `kalender_eintrge_von_aussen`='0', `kalender_direkt_freischalten`='0', `kalender_kalender_benutzt_kategorien`='', `kalender_text_oberhalb`='<p>Kalender 1</p>', `kalender_whlen_sie_hier_den_termin_aus`='', `kalender_kategorien_im_kalender_jede_zeile_eine_kategorie`='Kategorie 1\r\nKategorie 2', `kalender_modul_id`='53', `kalender_email_versenden_bei_neuen_eintrag_von_auen`='0', `kalender_email_adresse_fr_den_versand_dieser_mail`='', `kalender_modul_liste_id`='54', `kalender_anzahl_der_eintrge_im_modul_aktuellste_eintrge`='10', `kalender_xml_google`=''  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_plugin_kalender_date`; ##b_dump##
 CREATE TABLE `XXX_plugin_kalender_date` (
-  `pkal_date_id` int(11) NOT NULL AUTO_INCREMENT,
-  `pkal_date_lang_id` int(11) NOT NULL,
-  `pkal_date_kalender_id` int(11) NOT NULL,
+  `pkal_date_id` int NOT NULL,
+  `pkal_date_lang_id` int NOT NULL,
+  `pkal_date_kalender_id` int NOT NULL,
   `pkal_date_titel_des_termins` text,
   `pkal_date_terminbeschreibung` text,
   `pkal_date_kategorie_im_kalender` varchar(255) NOT NULL,
@@ -4849,41 +4853,40 @@ CREATE TABLE `XXX_plugin_kalender_date` (
   `pkal_date_veranstaltung_wiederholt_sich_so_oft` text,
   `pkal_date_an_jedem` varchar(255) NOT NULL,
   `pkal_date_link_zu_terminfeld` text,
-  `pkal_date_eintrag_im_frontend_freischalten` varchar(255) NOT NULL,
-  PRIMARY KEY (`pkal_date_id`)
+  `pkal_date_eintrag_im_frontend_freischalten` varchar(255) NOT NULL
 ) ENGINE=MyISAM AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_plugin_kalender_date` SET `pkal_date_id`='36', `pkal_date_lang_id`='1', `pkal_date_kalender_id`='25', `pkal_date_titel_des_termins`='Papoo CMS Release', `pkal_date_terminbeschreibung`='<p>Papoo CMS Release</p>', `pkal_date_kategorie_im_kalender`='2', `pkal_date_start_datum`='1416697200', `pkal_date_end_datum`='1416697200', `pkal_date_uhrzeit_beginn`='', `pkal_date_uhrzeit_ende`='', `pkal_date_veranstaltung_wiederholt_sich_so_oft`='', `pkal_date_an_jedem`='', `pkal_date_link_zu_terminfeld`='', `pkal_date_eintrag_im_frontend_freischalten`='1'  ; ##b_dump##
 INSERT INTO `XXX_plugin_kalender_date` SET `pkal_date_id`='37', `pkal_date_lang_id`='1', `pkal_date_kalender_id`='25', `pkal_date_titel_des_termins`='asdasd', `pkal_date_terminbeschreibung`='<p>asdasd</p>', `pkal_date_kategorie_im_kalender`='2', `pkal_date_start_datum`='1416697200', `pkal_date_end_datum`='1416697200', `pkal_date_uhrzeit_beginn`='', `pkal_date_uhrzeit_ende`='', `pkal_date_veranstaltung_wiederholt_sich_so_oft`='', `pkal_date_an_jedem`='', `pkal_date_link_zu_terminfeld`='', `pkal_date_eintrag_im_frontend_freischalten`='1'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_plugin_kalender_lookup_cats`; ##b_dump##
 CREATE TABLE `XXX_plugin_kalender_lookup_cats` (
-  `kalender_cid_id` int(11) NOT NULL,
-  `cat_id` int(11) NOT NULL,
+  `kalender_cid_id` int NOT NULL,
+  `cat_id` int NOT NULL,
   `cat_name` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_plugin_kalender_lookup_cats` SET `kalender_cid_id`='25', `cat_id`='2', `cat_name`='Kategorie 2'  ; ##b_dump##
 INSERT INTO `XXX_plugin_kalender_lookup_cats` SET `kalender_cid_id`='25', `cat_id`='1', `cat_name`='Kategorie 1'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_plugin_kalender_lookup_read`; ##b_dump##
 CREATE TABLE `XXX_plugin_kalender_lookup_read` (
-  `kalender_id_id` int(11) NOT NULL,
-  `kalender_gruppe_lese_id` int(11) NOT NULL
+  `kalender_id_id` int NOT NULL,
+  `kalender_gruppe_lese_id` int NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_plugin_kalender_lookup_read` SET `kalender_id_id`='25', `kalender_gruppe_lese_id`='10'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_plugin_kalender_lookup_read_date`; ##b_dump##
 CREATE TABLE `XXX_plugin_kalender_lookup_read_date` (
-  `date_id_id` int(11) NOT NULL,
-  `date_gruppe_lese_id` int(11) NOT NULL
+  `date_id_id` int NOT NULL,
+  `date_gruppe_lese_id` int NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_plugin_kalender_lookup_read_date` SET `date_id_id`='36', `date_gruppe_lese_id`='10'  ; ##b_dump##
 INSERT INTO `XXX_plugin_kalender_lookup_read_date` SET `date_id_id`='37', `date_gruppe_lese_id`='10'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_plugin_kalender_lookup_write`; ##b_dump##
 CREATE TABLE `XXX_plugin_kalender_lookup_write` (
-  `kalender_wid_id` int(11) NOT NULL,
-  `kalender_gruppe_write_id` int(11) NOT NULL
+  `kalender_wid_id` int NOT NULL,
+  `kalender_gruppe_write_id` int NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_plugin_kalender_lookup_write` SET `kalender_wid_id`='25', `kalender_gruppe_write_id`='1'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_rss_feed_config`; ##b_dump##
 CREATE TABLE `XXX_rss_feed_config` (
-  `rss_feed_id` int(11) NOT NULL,
+  `rss_feed_id` int NOT NULL,
   `rss_feedtitle` varchar(255) DEFAULT NULL,
   `rss_feeddesc` varchar(255) DEFAULT NULL,
   `rss_feedcount` varchar(255) DEFAULT NULL,
@@ -4893,7 +4896,7 @@ CREATE TABLE `XXX_rss_feed_config` (
 INSERT INTO `XXX_rss_feed_config` SET `rss_feed_id`='1', `rss_feedtitle`='Papoo Software - Testfeed', `rss_feeddesc`='Papoo Software - Testinstallation', `rss_feedcount`='15', `rss_feedlang`='1', `rss_feedprefix`='http://'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_rss_feed_url`; ##b_dump##
 CREATE TABLE `XXX_rss_feed_url` (
-  `rss_feed_id` int(11) NOT NULL AUTO_INCREMENT,
+  `rss_feed_id` int NOT NULL AUTO_INCREMENT,
   `rss_feed_url` varchar(255) DEFAULT NULL,
   `rss_feed_short` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`rss_feed_id`)
@@ -4902,23 +4905,23 @@ INSERT INTO `XXX_rss_feed_url` SET `rss_feed_id`='1', `rss_feed_url`='http://faq
 INSERT INTO `XXX_rss_feed_url` SET `rss_feed_id`='2', `rss_feed_url`='http://www.tschoessow.org/feed', `rss_feed_short`='FEED2'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_sprechomat`; ##b_dump##
 CREATE TABLE `XXX_sprechomat` (
-  `sprechomat_id` int(11) NOT NULL AUTO_INCREMENT,
-  `sprechomat_aktiv_yn` int(11) DEFAULT '0',
+  `sprechomat_id` int NOT NULL AUTO_INCREMENT,
+  `sprechomat_aktiv_yn` int DEFAULT '0',
   `sprechomat_serverurl` varchar(255) DEFAULT NULL,
   `sprechomat_devloginid` varchar(50) DEFAULT NULL,
   `sprechomat_domainid` varchar(50) DEFAULT NULL,
   `sprechomat_registerlink` varchar(255) DEFAULT NULL,
   `sprechomat_lokalurl` varchar(255) DEFAULT NULL,
-  `sprechomat_aktiv_starttext_yn` int(11) NOT NULL DEFAULT '1',
-  `sprechomat_aktiv_artikel_yn` int(11) NOT NULL DEFAULT '1',
-  `sprechomat_aktiv_kommentare_yn` int(11) NOT NULL DEFAULT '1',
-  `sprechomat_aktiv_gaestebuch_yn` int(11) NOT NULL DEFAULT '1',
-  `sprechomat_aktiv_forum_yn` int(11) NOT NULL DEFAULT '1',
+  `sprechomat_aktiv_starttext_yn` int NOT NULL DEFAULT '1',
+  `sprechomat_aktiv_artikel_yn` int NOT NULL DEFAULT '1',
+  `sprechomat_aktiv_kommentare_yn` int NOT NULL DEFAULT '1',
+  `sprechomat_aktiv_gaestebuch_yn` int NOT NULL DEFAULT '1',
+  `sprechomat_aktiv_forum_yn` int NOT NULL DEFAULT '1',
   PRIMARY KEY (`sprechomat_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_sprechomat` SET `sprechomat_id`='1', `sprechomat_aktiv_yn`='0', `sprechomat_serverurl`='http://maschine01.sprechomat.de/index.php', `sprechomat_devloginid`='', `sprechomat_domainid`='', `sprechomat_registerlink`='http://www.sprechomat.de/', `sprechomat_lokalurl`='', `sprechomat_aktiv_starttext_yn`='1', `sprechomat_aktiv_artikel_yn`='1', `sprechomat_aktiv_kommentare_yn`='1', `sprechomat_aktiv_gaestebuch_yn`='1', `sprechomat_aktiv_forum_yn`='1'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_sprechomat_artikelausschluss`; ##b_dump##
 CREATE TABLE `XXX_sprechomat_artikelausschluss` (
-  `sprechomat_artikelausschluss_id` bigint(20) DEFAULT NULL,
-  `sprechomat_artikelausschluss_lang_id` int(11) DEFAULT NULL
+  `sprechomat_artikelausschluss_id` bigint DEFAULT NULL,
+  `sprechomat_artikelausschluss_lang_id` int DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##

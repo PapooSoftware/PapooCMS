@@ -22,4 +22,6 @@ ALTER TABLE `XXX_papoo_bannerverwaltung_daten` CHANGE `banner_id` `banner_id` IN
 ALTER TABLE `XXX_papoo_bannerverwaltung_daten` DROP PRIMARY KEY; ##b_dump##
 ALTER TABLE `XXX_papoo_faq_categories` CHANGE `id` `id` INT NOT NULL; ##b_dump##
 ALTER TABLE `XXX_papoo_faq_categories` DROP PRIMARY KEY; ##b_dump##
+ALTER TABLE `XXX_papoo_faq_content` CHANGE `id` `id` INT NOT NULL; ##b_dump##
+ALTER TABLE `XXX_papoo_faq_content` DROP PRIMARY KEY; ##b_dump##
 
