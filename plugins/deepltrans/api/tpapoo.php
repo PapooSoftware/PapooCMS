@@ -20,7 +20,7 @@ $trans = new transdeepl();
 $transpapoo = new transpapoo_vars();
 
 //zu übersetzende Sprachen "en", "fr","es",
-$langs = array("en", "fr", "es", "pt", "it", "nl", "pl", "ru");
+$langs = array("en", "fr", "es", "pt", "it", "nl", "pl", "ru","zh");
 
 /**
  * zuerst mal vergleichen

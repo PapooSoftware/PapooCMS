@@ -17,3 +17,6 @@ ADD `bw_extra_link_text` text default NULL; ##b_dump##
 ALTER TABLE `XXX_bildwechsler_config` ADD COLUMN `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST; ##b_dump##
 ALTER TABLE `XXX_bildwechsler_config` ADD COLUMN `use_ancestors_as_fallback` TINYINT(1) NOT NULL DEFAULT 1; ##b_dump##
 DELETE FROM `XXX_bildwechsler_config` WHERE `id` > 1; ##b_dump##
+
+ALTER TABLE `XXX_bildwechsler` CHANGE `bw_id` `bw_id` BIGINT NOT NULL;
+ALTER TABLE `XXX_bildwechsler` DROP PRIMARY KEY;

@@ -93,40 +93,62 @@ class translate_content extends deepltrans_class
 		/**
 		 * Start Translation Frontend
 		 */
-
-		//$this->translateFrontendMenu($langData);
-		//$this->translateStartPage($langData);
-		//$this->translateArticle($langData);
-		//$this->translateCollum3($langData);
-		//$this->translateImages($langData);
-		//$this->translateTopMenu($langData);
-		//$this->translateGalImages($langData);
-		//$this->translateGaleries($langData);
-		//$this->translateCForm($langData);
-		//$this->translateDownload($langData);
-		//$this->translateVideo($langData);
-		//$this->translateCategories($langData);
-		//$this->translateLinklisten($langData);
-		//$this->translateLinklistenCat($langData);
-		//$this->translateLinklistenCatPref($langData);
-		//$this->translateModule($langData);
+		/** **/
+		$this->translateFrontendMenu($langData);
+		$this->translateStartPage($langData);
+		$this->translateArticle($langData);
+		$this->translateCollum3($langData);
+		$this->translateImages($langData);
+		$this->translateTopMenu($langData);
+		$this->translateGalImages($langData);
+		$this->translateGaleries($langData);
+		$this->translateCForm($langData);
+		$this->translateDownload($langData);
+		$this->translateVideo($langData);
+		$this->translateCategories($langData);
+		$this->translateLinklisten($langData);
+		$this->translateLinklistenCat($langData);
+		$this->translateLinklistenCatPref($langData);
 		$this->translateModule($langData);
-		//$this->translatePlugins($langData);
-		//$this->translateKalender($langData);
-		//$this->translateKalenderEntries($langData);
-		//$this->translateFreieModule($langData);
+		$this->translateModule($langData);
+		$this->translatePlugins($langData);
+		$this->translateKalender($langData);
+		$this->translateKalenderEntries($langData);
+		$this->translateFreieModule($langData);
+		$this->translateBildwechsler($langData);
+
+
 
 
 		//TODO die Alternativtexte der Bilder müssen noch ersetzt werden
 		//
 
-		//TODO die freien Module und
-
-		//TODO die Moduklstruktur muss auch noch translatedd werden...
 
 		$this->db->csrfok = false;
 	}
-	//papoo_module_language
+	//
+	public function translateBildwechsler($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"bw_text",
+			"bw_ueberschrift",
+			"bw_noch_mehr_text",
+			"bw_extra_link_text"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "bildwechsler";
+		$idName = "bw_id";
+		$langIdName = "bw_lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
+
 
 	public function translateFreieModule($langData=array())
 	{
@@ -201,7 +223,7 @@ class translate_content extends deepltrans_class
 
 		$tbName = "papoo_plugin_language";
 		$idName = "pluginlang_plugin_id";
-		$langIdName = "modlang_lang_id";
+		$langIdName = "pluginlang_lang_id";
 
 		//Dann übersetzen und in DB schreiben.
 		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
