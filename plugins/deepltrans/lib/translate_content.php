@@ -39,8 +39,8 @@ class translate_content extends deepltrans_class
 	{
 		$this->content->template['translinkContent']="plugin.php?menuid=".$this->checked->menuid."&template=deepltrans/templates/content_bersetzungen_backend.html";
 		//exit();
-		ini_set("display_errors", true);
-		error_reporting(E_ALL);
+		#ini_set("display_errors", true);
+		#error_reporting(E_ALL);
 		if(!empty($this->checked->transcontent))
 		{
 			$langId = $this->getLangId($this->checked->lang);
@@ -93,7 +93,7 @@ class translate_content extends deepltrans_class
 		/**
 		 * Start Translation Frontend
 		 */
-		/** **/
+		/**
 		$this->translateFrontendMenu($langData);
 		$this->translateStartPage($langData);
 		$this->translateArticle($langData);
@@ -116,8 +116,17 @@ class translate_content extends deepltrans_class
 		$this->translateKalenderEntries($langData);
 		$this->translateFreieModule($langData);
 		$this->translateBildwechsler($langData);
+		$this->translateFormCformLang($langData);
+		$this->translateFormGroupLang($langData);
+		$this->translateFormLang($langData);
+		$this->translateGlossar($langData);
+		$this->translateGlossarPref($langData);
+		 **/
 
+		$this->translateGlossar($langData);
+		$this->translateGlossarPref($langData);
 
+		//FAQ, Flex, Shop noch offen...
 
 
 		//TODO die Alternativtexte der Bilder müssen noch ersetzt werden
@@ -126,6 +135,126 @@ class translate_content extends deepltrans_class
 
 		$this->db->csrfok = false;
 	}
+
+	public function translateGlossarPref($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"glosspref_introtext_de"
+		);
+
+		$felderMitLang = array("glossar_link"=>true);
+
+		$tbName = "glossar_pref_html";
+		$idName = "glosspref_id_id";
+		$langIdName = "glosspref_lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
+
+	public function translateGlossar($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"glossar_descrip",
+			"glossar_descrip_sans",
+			"glossar_link",
+			"glossar_Wort",
+			"glossar_Wort_alt",
+			"glossar_meta_title",
+			"form_manager_lang_button",
+			"glossar_meta_descrip",
+			"glossar_meta_key",
+			"form_manager_text_html"
+		);
+
+		$felderMitLang = array("glossar_link"=>true);
+
+		$tbName = "glossar_daten";
+		$idName = "glossar_id";
+		$langIdName = "glossar_lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
+
+	public function translateFormLang($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"form_manager_antwort_html",
+			"form_manager_toptext_html",
+			"form_manager_bottomtext_html",
+			"form_manager_antwort_email_betreff",
+			"form_manager_antwort_email",
+			"form_manager_antwort_email_html",
+			"form_manager_lang_button",
+			"mail_an_betreiber_betreff",
+			"mail_an_betreiber_inhalt",
+			"form_manager_text_html"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "papoo_form_manager_lang";
+		$idName = "form_manager_id_id";
+		$langIdName = "form_manager_lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
+
+	public function translateFormGroupLang($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"plugin_cform_group_text",
+			"plugin_cform_group_text_intern"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "papoo_plugin_cform_group_lang";
+		$idName = "plugin_cform_group_lang_id";
+		$langIdName = "plugin_cform_group_lang_lang";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
+
+	public function translateFormCformLang($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"plugin_cform_label",
+			"plugin_cform_descrip",
+			"plugin_cform_tooltip",
+			"plugin_cform_lang_header",
+			"plugin_cform_content_list"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "papoo_plugin_cform_lang";
+		$idName = "plugin_cform_lang_id";
+		$langIdName = "plugin_cform_lang_lang";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
+
+
 	//
 	public function translateBildwechsler($langData=array())
 	{

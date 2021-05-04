@@ -69,7 +69,7 @@ class glossar_class
 
 				$this->praeferenzen_laden();
 				$this->praeferenzen['glosspref_introtext_de'] = $this->helper_frontend_texte_ersetzungen($this->praeferenzen['glosspref_introtext_de']);
-
+				//print_r($this->praeferenzen);
 				$this->glossar_front($temp_glossar_id);
 			}
 			if ($this->praeferenzen['glossar_mit_popup']==1) {
@@ -226,8 +226,16 @@ class glossar_class
 	{
 		$sql = sprintf("SELECT * FROM %s", $this->db_praefix."glossar_pref");
 		$this->praeferenzen = $this->db->get_row($sql, ARRAY_A);
+		$this->content->template['plugin']['glossar']['praeferenzen'] = $this->praeferenzen;
 
-		$this->content->template['plugin']['glossar']['praeferenzen'] = &$this->praeferenzen;
+		$sql = sprintf("SELECT glosspref_introtext_de FROM %s WHERE glosspref_lang_id='%d' ", $this->db_praefix."glossar_pref_html",$this->cms->lang_id);
+		$glosspref_introtext_de = $this->db->get_var($sql);
+		$this->praeferenzen['glosspref_introtext_de'] = $glosspref_introtext_de;
+		//print_r($sql);
+		$this->content->template['plugin']['glossar']['praeferenzen']['glosspref_introtext_de'] = $glosspref_introtext_de;
+		//print_r($this->content->template['plugin']['glossar']['praeferenzen']);
+		//exit();
+
 	}
 
 	/**
@@ -239,12 +247,14 @@ class glossar_class
 	function glossar_front($glossar_id = 0)
 	{
 		if ($this->praeferenzen['glosspref_liste'] == "1") {
+
 			//Wenn ein Eintrag ausgew�hlt ist
 			if (!empty($glossar_id)) {
 				//Daten aus der Datenbank holen
-				$sql = sprintf("SELECT * FROM %s WHERE glossar_id='%d' ",
+				$sql = sprintf("SELECT * FROM %s WHERE glossar_id='%d' AND glossar_lang_id='%d' ",
 					$this->db_praefix."glossar_daten",
-					$glossar_id
+					$glossar_id,
+					$this->cms->lang_id
 				);
 				$result=$this->db->get_row($sql, ARRAY_A);
 
@@ -268,8 +278,9 @@ class glossar_class
 			else {
 				$this->content->template['modus1']="ok";
 				//Alle W�rter aus der Datenbank holen
-				$sql = sprintf("SELECT * FROM %s WHERE glossar_lang_id='%d' ORDER BY glossar_Wort ASC",
+				$sql = sprintf("SELECT * FROM %s WHERE glossar_lang_id='%d' AND glossar_lang_id='%d' ORDER BY glossar_Wort ASC",
 					$this->db_praefix."glossar_daten",
+					$this->cms->lang_id,
 					$this->cms->lang_id
 				);
 				//und die Links erzeugen
@@ -469,6 +480,7 @@ $(document).ready(function() {
 			$this->db->escape($this->checked->glossar_tabs)
 		);
 		$this->db->query($sql);
+
 	}
 
 	/**
@@ -479,13 +491,17 @@ $(document).ready(function() {
 	function praeferenzen_text_sichern()
 	{
 		$this->helper_tinymce_post_encode();
-
+		//ini_set("display_errors", true);
+		//error_reporting(E_ALL);
 		$sql = sprintf("UPDATE %s SET glosspref_introtext_de='%s'
-						WHERE glosspref_id='1'",
-			$this->db_praefix."glossar_pref",
-			$this->db->escape($this->checked->inhalt_ar['inhalt'])
+						WHERE glosspref_id_id='1' AND glosspref_lang_id='%d' ",
+			$this->db_praefix."glossar_pref_html",
+			$this->db->escape($this->checked->inhalt_ar['inhalt']),
+			$this->cms->lang_id
 		);
+		//print_r($sql);
 		$this->db->query($sql);
+		//exit();
 	}
 
 	/**
@@ -533,8 +549,19 @@ $(document).ready(function() {
 				}
 				$temp_text_ausgezeichnet = $this->replace->do_glossar($this->checked->inhalt_ar['inhalt'], $this->praeferenzen['glosspref_menu_pfad']);
 
-				//Daten eintragen in Datenbank
-				$sql = sprintf("INSERT INTO %s SET 
+				$sql = sprintf("SELECT MAX(glossar_id) FROM %s",DB_PRAEFIX."glossar_daten");
+				$max = $this->db->get_var($sql);
+				$max++;
+
+				$sql = sprintf("SELECT * FROM %s",
+					DB_PRAEFIX.'papoo_name_language');
+				//print_r($sql);
+				$result = $this->db->get_results($sql,ARRAY_A);
+
+				//Create for all possible languages...
+				foreach ($result as $lang) {
+//Daten eintragen in Datenbank
+					$sql = sprintf("INSERT INTO %s SET 
 								glossar_Wort='%s',
 								glossar_Wort_alt='%s',
 								glossar_lang_id='%d', 
@@ -558,33 +585,36 @@ $(document).ready(function() {
 								glossar_synonym3='%s',
 								glossar_synonym4='%s',
 								glossar_synonym5='%s'",
-					$this->db_praefix."glossar_daten",
-					$this->db->escape($this->checked->glossarname),
-					$this->db->escape($this->checked->glossarname_alt),
-					$this->db->escape($this->cms->lang_back_content_id),
-					//$this->db->escape($this->checked->glossardaten),
-					$this->db->escape($temp_text_ausgezeichnet),
-					$this->db->escape($this->checked->inhalt_ar['inhalt']),
+						$this->db_praefix."glossar_daten",
+						$this->db->escape($this->checked->glossarname),
+						$this->db->escape($this->checked->glossarname_alt),
+						$this->db->escape($lang['lang_id']),
+						//$this->db->escape($this->checked->glossardaten),
+						$this->db->escape($temp_text_ausgezeichnet),
+						$this->db->escape($this->checked->inhalt_ar['inhalt']),
 
-					$this->db->escape($this->checked->metatitel),
-					$this->db->escape($this->checked->metadescrip),
-					$this->db->escape($this->checked->metakey),
+						$this->db->escape($this->checked->metatitel),
+						$this->db->escape($this->checked->metadescrip),
+						$this->db->escape($this->checked->metakey),
 
-					$this->db->escape($this->checked->glossar_gramatinfo),
-					$this->db->escape($this->checked->glossar_abk),
-					$this->db->escape($this->checked->glossar_sachgebiet),
-					$this->db->escape($this->checked->glossar_frequenz),
-					$this->db->escape($this->checked->glossar_definition),
-					$this->db->escape($this->checked->glossar_anwendungsbeispiel),
-					$this->db->escape($this->checked->glossar_siehe),
+						$this->db->escape($this->checked->glossar_gramatinfo),
+						$this->db->escape($this->checked->glossar_abk),
+						$this->db->escape($this->checked->glossar_sachgebiet),
+						$this->db->escape($this->checked->glossar_frequenz),
+						$this->db->escape($this->checked->glossar_definition),
+						$this->db->escape($this->checked->glossar_anwendungsbeispiel),
+						$this->db->escape($this->checked->glossar_siehe),
 
-					$this->db->escape($this->checked->glossar_synonym1),
-					$this->db->escape($this->checked->glossar_synonym2),
-					$this->db->escape($this->checked->glossar_synonym3),
-					$this->db->escape($this->checked->glossar_synonym4),
-					$this->db->escape($this->checked->glossar_synonym5)
-				);
-				$this->db->query($sql);
+						$this->db->escape($this->checked->glossar_synonym1),
+						$this->db->escape($this->checked->glossar_synonym2),
+						$this->db->escape($this->checked->glossar_synonym3),
+						$this->db->escape($this->checked->glossar_synonym4),
+						$this->db->escape($this->checked->glossar_synonym5)
+					);
+					$this->db->query($sql);
+				}
+
+
 
 				//Direkt alle Eintr�ge durchloopen und ersetzen
 				/*
@@ -784,7 +814,7 @@ $(document).ready(function() {
 							glossar_frequenz='%s', glossar_definition='%s', glossar_anwendungsbeispiel='%s', glossar_siehe='%s',
 							glossar_synonym1='%s', glossar_synonym2='%s', glossar_synonym3='%s', glossar_synonym4='%s', glossar_synonym5='%s' 
 							
-							WHERE glossar_id='%s'",
+							WHERE glossar_id='%s' AND glossar_lang_id='%s'",
 				$this->db_praefix."glossar_daten",
 
 				$this->db->escape($this->checked->glossarname),
@@ -812,8 +842,8 @@ $(document).ready(function() {
 				$this->db->escape($this->checked->glossar_synonym3),
 				$this->db->escape($this->checked->glossar_synonym4),
 				$this->db->escape($this->checked->glossar_synonym5),
-
-				$this->db->escape($this->checked->glossarid)
+				$this->db->escape($this->checked->glossarid),
+				$this->db->escape($this->cms->lang_id)
 			);
 			$this->db->query($sql);
 
@@ -879,9 +909,10 @@ $(document).ready(function() {
 			//Daten rausholen und als Liste anbieten
 			$this->content->template['list'] = "ok";
 			//Daten rausholen
-			$sql = sprintf("SELECT * FROM %s WHERE glossar_lang_id='%d' ORDER BY glossar_Wort ASC",
+			$sql = sprintf("SELECT * FROM %s WHERE glossar_lang_id='%d' AND glossar_lang_id='%d' ORDER BY glossar_Wort ASC",
 				$this->db_praefix."glossar_daten",
-				$this->db->escape($this->cms->lang_back_content_id)
+				$this->db->escape($this->cms->lang_back_content_id),
+				$this->cms->lang_id
 			);
 			$result = $this->db->get_results($sql, ARRAY_A);
 			//Daten f�r das Template zuweisen

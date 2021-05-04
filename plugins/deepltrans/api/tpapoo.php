@@ -19,8 +19,8 @@ $trans = new transdeepl();
 //transpapoo ini
 $transpapoo = new transpapoo_vars();
 
-//zu übersetzende Sprachen "en", "fr","es",
-$langs = array("en", "fr", "es", "pt", "it", "nl", "pl", "ru","zh");
+//zu übersetzende Sprachen "en", "fr","es","pl",
+$langs = array("en", "fr", "es", "pt", "it", "nl", "ru", "zh");
 
 /**
  * zuerst mal vergleichen
