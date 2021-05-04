@@ -129,19 +129,44 @@ class translate_content extends deepltrans_class
 		$this->translateMVLang($langData);
 		$this->translateBanner($langData);
 		$this->translateFAQCats($langData);
+		$this->translateFAQQuestions($langData);
+		$this->translateFAQConfig($langData);
 		 **/
 
-
-		$this->translateFAQQuestions($langData);
-
-		//FAQ,  Shop, Banner noch offen...
-
+		$this->translateFAQConfig($langData);
+		//Shop noch offen...
 
 		//TODO die Alternativtexte der Bilder müssen noch ersetzt werden
 		//
-
-
 		$this->db->csrfok = false;
+	}
+
+	/**
+	 * @param array $langData
+	 * @return bool
+	 */
+	public function translateFAQConfig($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"title",
+			"descript",
+			"keywords",
+			"faq_header",
+			"faq_head_text",
+			"faq_footer"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "papoo_faq_config";
+		$idName = "id";
+		$langIdName = "lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
 	}
 
 	/**
