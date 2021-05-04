@@ -96,9 +96,8 @@ class bannerverwaltung {
 		if (!defined("admin")) {
 			$datum = date("Y-m-d",time());
 			//Rausbekommen ob zuf�llig oder linear
-			$sql=sprintf("SELECT * FROM %s  WHERE banner_lang_id='%d' ",
-				$this->cms->tbname['papoo_bannerverwaltung_pref'],
-			$this->cms->lang_id
+			$sql=sprintf("SELECT * FROM %s   ",
+				$this->cms->tbname['papoo_bannerverwaltung_pref']
 			);
 			$result=$this->db->get_results($sql,ARRAY_A);
 			if (empty($result[0]['bannerverwaltung_wieviel']) or $result[0]['bannerverwaltung_wieviel'] == 0 ){

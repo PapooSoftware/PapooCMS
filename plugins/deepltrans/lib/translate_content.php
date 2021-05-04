@@ -127,9 +127,12 @@ class translate_content extends deepltrans_class
 		$this->translateMVTemplate($langData);
 		$this->translateMVMetaLang($langData);
 		$this->translateMVLang($langData);
+		$this->translateBanner($langData);
+		$this->translateFAQCats($langData);
 		 **/
 
-		$this->translateBanner($langData);
+
+		$this->translateFAQQuestions($langData);
 
 		//FAQ,  Shop, Banner noch offen...
 
@@ -139,6 +142,55 @@ class translate_content extends deepltrans_class
 
 
 		$this->db->csrfok = false;
+	}
+
+	/**
+	 * @param array $langData
+	 * @return bool
+	 */
+	public function translateFAQQuestions($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"question",
+			"answer"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "papoo_faq_content";
+		$idName = "id";
+		$langIdName = "lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
+
+
+	/**
+	 * @param array $langData
+	 * @return bool
+	 */
+	public function translateFAQCats($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"catname",
+			"catdescript"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "papoo_faq_categories";
+		$idName = "id";
+		$langIdName = "lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
 	}
 
 	public function translateBanner($langData=array())

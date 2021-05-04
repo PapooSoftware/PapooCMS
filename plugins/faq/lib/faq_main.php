@@ -265,20 +265,35 @@ class faq {
 				// H�chste vorhandene order_id ermitteln und mit +$_SESSION['faq']['FAQ_RENUM_STEP'] addiert speichern
 				// Da die neue Kategorie als Unterkategorie zur vorgegebenen Kategorie eingef�gt wird,
 				// muss die n�chste order_id der max. order_id+$_SESSION['faq']['FAQ_RENUM_STEP'] von der parent_id entsprechen
-				$sql = sprintf("INSERT INTO %s
-								SET catname = '%s',
+				$sql = sprintf("SELECT MAX(id) FROM %s",DB_PRAEFIX."papoo_faq_categories");
+				$max = $this->db->get_var($sql);
+				$max++;
+
+				//Get Languages of the system
+				$sql = sprintf("SELECT * FROM %s",
+					DB_PRAEFIX.'papoo_name_language');
+				//print_r($sql);
+				$result = $this->db->get_results($sql,ARRAY_A);
+				$orderId=$this->getNextOrderId($this->checked->cat_new_sel_id, "", 0);
+
+				foreach ($result as $k =>$v) {
+					$sql = sprintf("INSERT INTO %s
+								SET id='%d',
+									catname = '%s',
 									catdescript = '%s',
 									parent_id = '%d',
 									order_id = '%d',
 									lang_id = '%d'",
-					$this->cms->tbname['papoo_faq_categories'],
-					$this->db->escape($this->checked->cat_new_name_name),
-					$this->db->escape($this->checked->cat_new_descript_name),
-					$this->db->escape($this->checked->cat_new_sel_id),
-					$this->db->escape($this->getNextOrderId($this->checked->cat_new_sel_id, "", 0)),
-					$this->db->escape($this->cms->lang_back_content_id)
-				);
-				$this->db->query($sql);
+						$this->cms->tbname['papoo_faq_categories'],
+						$max,
+						$this->db->escape($this->checked->cat_new_name_name),
+						$this->db->escape($this->checked->cat_new_descript_name),
+						$this->db->escape($this->checked->cat_new_sel_id),
+						$this->db->escape($orderId),
+						$this->db->escape($v['lang_id'])
+					);
+					$this->db->query($sql);
+				}
 				$this->fetchAllCategories($this->checked->cat_new_sel_id, ""); // Kategorien anzeigen & letzte Auswahl markieren
 				$this->content->template['cat_is_new'] = 1; // Meldung �ber das erfolgreiche Anlegen einer neuen Kategorie
 			}
@@ -1532,9 +1547,22 @@ class faq {
 				// Freigabe-Status der FAQ active or not
 				$this->checked->faq_new_release ? $release = "j" : $release = "n";
 
-				// Speichern der FAQ Daten
-				$sql = sprintf("INSERT INTO %s
-								SET question = '%s',
+				$sql = sprintf("SELECT MAX(id) FROM %s",DB_PRAEFIX."papoo_faq_content");
+				$max = $this->db->get_var($sql);
+				$max++;
+
+				//Get Languages of the system
+				$sql = sprintf("SELECT * FROM %s",
+					DB_PRAEFIX.'papoo_name_language');
+				//print_r($sql);
+				$result = $this->db->get_results($sql,ARRAY_A);
+
+				foreach ($result as $k =>$v) {
+					// Speichern der FAQ Daten
+					$sql = sprintf("INSERT INTO %s
+								SET 
+								id='%s',
+								question = '%s',
 								answer = '%s',
 								active = '%s',
 								created = '%s',
@@ -1542,17 +1570,19 @@ class faq {
 								lang_id = '%d',
 								version_id = 0,
 								upload_count = 0",
-					$this->cms->tbname['papoo_faq_content'],
-					$this->db->escape(trim($this->checked->faq_question)),
-					$this->db->escape($answer),
-					$this->db->escape($release),
-					date('YmdHis'),
-					$this->db->escape($this->user->username),
-					$this->db->escape($this->cms->lang_back_content_id)
-				);
-				$this->db->query($sql);
+						$this->cms->tbname['papoo_faq_content'],
+						$max,
+						$this->db->escape(trim($this->checked->faq_question)),
+						$this->db->escape($answer),
+						$this->db->escape($release),
+						date('YmdHis'),
+						$this->db->escape($this->user->username),
+						$this->db->escape($v['lang_id'])
+					);
+					$this->db->query($sql);
+				}
 				// Die neue Record-ID merken
-				$faq_id = $this->db->insert_id;
+				$faq_id = $max;
 				//erweiterte Suche
 				$this->ext_search($faq_id);
 				$_SESSION['faq']['new_version_inwork'] = 0; // sicherheitshalber, m�sste aber 0 sein

@@ -1,1 +1,2 @@
-UPDATE `XXX_papoo_menuint` SET menulink = 'plugin:faq/templates/faq_cat_back_main.html' WHERE menulink LIKE 'plugin:faq/templates/cat_back_main.html'; ##b_dump##
+ALTER TABLE `XXX_papoo_faq_categories` CHANGE `id` `id` INT NOT NULL; ##b_dump##
+ALTER TABLE `XXX_papoo_faq_categories` DROP PRIMARY KEY; ##b_dump##
