@@ -29,5 +29,6 @@ $this->content->template['translateddeepl']='Vollständig Übersetzt';
 $this->content->template['plugin_deepltrans_bersetzt']='&uuml;bersetzt';
 
 
+ $this->content->template['plugin_deepltrans_letzte_bersetzung_am']='Letzte &Uuml;bersetzung am';
  #start#
 ?>

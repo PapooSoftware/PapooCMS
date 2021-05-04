@@ -65,8 +65,20 @@ class deepltrans_class
 
 				}
 
+				if(stristr($template2, "content_bersetzungen_backend"))
+				{
+					require_once __DIR__."/transdeepl.php";
+					require_once __DIR__."/translate_content.php";
+					$translateContent = new translate_content();
+
+					$translateContent->translateAll();
+
+					$this->setLangFiles("content");
+
+				}
+
 				//hier werden die Übersetzungen durchgeführt.
-				if(stristr($template2, "bersetzungen"))
+				if(stristr($template2, "bersetzungen") && !stristr($template2, "content_bersetzungen_backend"))
 				{
 					// Pfad zum css Ordner zur Einbindung des backend css
 					$this->content->template['css_path'] = $css_path = PAPOO_WEB_PFAD.'/plugins/deepltrans/css';
@@ -83,13 +95,17 @@ class deepltrans_class
 		}
 	}
 
-	public function setLangFiles()
+	/**
+	 * @param string $content
+	 */
+	public function setLangFiles($content="")
 	{
 		$this->content->template['translink']="plugin.php?menuid=".$this->checked->menuid."&template=deepltrans/templates/bersetzungen_backend.html";
 		$sql = sprintf("SELECT * FROM %s",
 								DB_PRAEFIX.'papoo_name_language');
 		//print_r($sql);
 		$result = $this->db->get_results($sql,ARRAY_A);
+
 
 		//Base entry is german
 		$translationState = $this->getState();
@@ -102,14 +118,15 @@ class deepltrans_class
 			{
 				unset($result[$k]);
 			}
+			if(empty($content))
+			{
 			$result[$k]['mainBackend']=$translationState['backend']['main'][$lang['lang_short']]['prozent'];
 			$result[$k]['mainFrontend']=$translationState['frontend']['main'][$lang['lang_short']]['prozent'];
-
 			$result[$k]['pluginBackend']=$translationState['backend']['plugin'][$lang['lang_short']]['prozent'];
 			$result[$k]['pluginFrontend']=$translationState['frontend']['plugin'][$lang['lang_short']]['prozent'];
-
+			}
 		}
-		//print_r($result);
+
 		//languages
 		$this->content->template['languages'] = $result;
 		//exit();
@@ -169,37 +186,6 @@ class deepltrans_class
 
 		//verfügbare Sprachen
 		$this->setLangFiles();
-
-
-
-		//Es ist ein Ajax Call - also müssen wir nur die Daten realisieren
-		if ($this->checked->ajax=="true")
-		{
-			require_once __DIR__."/translate.php";
-			$translate = new translate();
-
-
-			switch ($this->checked->ajax_count) {
-				// Startseite
-				case "0":
-					// Inhalt anzeigen
-					$translate->translate_freie_module();
-					break;
-
-				case "1":
-					// Inhalt anzeigen
-					$translate->translate_menu();
-					break;
-
-				case "2":
-					// Inhalt anzeigen
-					//$translate->translate_freie_module();
-					break;
-
-
-			}
-			exit("");
-		}
 		return true;
 	}
 
@@ -207,7 +193,7 @@ class deepltrans_class
 	/**
 	 * Einen Eintrag rausholen
 	 */
-	private function get_key()
+	public function get_key()
 	{
 		$xsql = array();
 		$xsql['dbname'] = "plugin_deepltrans_einstellun_form";
@@ -223,7 +209,7 @@ class deepltrans_class
 	/**
 	 * @return bool
 	 */
-	private function make_settings()
+	public function make_settings()
 	{
 		//Daten eines Eintrages
 		$this->get_key();

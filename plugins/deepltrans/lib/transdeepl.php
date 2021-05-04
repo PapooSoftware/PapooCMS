@@ -62,17 +62,64 @@ class transdeepl
 	 */
 	public function __construct()
 	{
+
+	}
+
+	public function setDeeplUrl()
+	{
 		//die Basis Translateurl setzen
 		$this->deepl_url = "https://api.deepl.com/v2/translate?auth_key=".$this->auth_key."&source_lang=".$this->source_lang."&preserve_formatting=".$this->preserve_formatting."&split_sentences=".$this->split_sentences."&tag_handling=".$this->tag_handling;
-
 	}
 
 	/**
 	 *
 	 */
-	public function set_aut_key(){
-		$this->auth_key = "xxx";
+	public function set_aut_key($key=""){
+		$this->auth_key = $key;
+	}
 
+
+
+	public function translateArray($target_lang="en",$text=array())
+	{
+
+		//startzeit
+		$start 					= microtime(true);
+
+		//ini transtext
+		$trans_text 			= array();
+
+		$body 	 				= "";
+
+		foreach($text as $sentence)
+		{
+			$body 					.= 	"&text=".urlencode($sentence);
+		}
+
+		//contents kodieren damit nix schief geht
+		$target_lang 			= 	urlencode($target_lang);
+
+		//deepl urls vervollständigen
+		$deepl_url 		= $this->deepl_url."&target_lang=".$target_lang;
+
+		//translate Aufruf durchführen
+		$return_text 			= 	$this->curlFromDeepl($deepl_url,$body);
+
+		//aus dem json rausholen
+		$trans_text 			= 		json_decode($return_text,true);;
+
+		//ende
+		$stop 					= 	microtime(true);
+
+		//zeit die es gebraucht hat
+		$difftime 				= 	$stop - $start;
+
+		//Daten für Rückgabe aufbereiten
+		$return['used_time'] 	= 	$difftime;
+		$return['trans_text'] 	= 	$trans_text;
+
+		//übersetzten Text zurückgeben
+		return $return;
 	}
 
 	/**
@@ -83,11 +130,6 @@ class transdeepl
 	 */
 	public function translate($target_lang="en",$text="")
 	{
-		$return['used_time'] 	= 	1;
-		$return['trans_text'] 	= 	"TRANS - ".$text;
-
-		//übersetzten Text zurückgeben
-		return $return;
 		//startzeit
 		$start 					= microtime(true);
 
@@ -123,6 +165,26 @@ class transdeepl
 
 		//übersetzten Text zurückgeben
 		return $return;
+	}
+
+	/**
+	 * @param $deeplApiKey
+	 * @param $body
+	 * @param $targetLang
+	 * @return mixed
+	 */
+	public static function curlFromDeepl($deepUrl,$body)
+	{
+		//Daten holen
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($curl, CURLOPT_POST, true);
+		curl_setopt($curl, CURLOPT_URL, $deepUrl);
+		curl_setopt($curl, CURLOPT_POSTFIELDS, $body);
+		curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+		$response = curl_exec($curl);
+
+		return $response;
 	}
 
 	/**
