@@ -86,6 +86,7 @@ class translate_content extends deepltrans_class
 		$langData= array($lang,$langId);
 
 		$this->db->csrfok = true;
+		$this->db->show_errors = false;
 
 		/**
 		 * Start Translation Backend
@@ -139,6 +140,7 @@ class translate_content extends deepltrans_class
 		//TODO die Alternativtexte der Bilder müssen noch ersetzt werden
 		//
 		$this->db->csrfok = false;
+		$this->db->show_errors = true;
 	}
 
 
