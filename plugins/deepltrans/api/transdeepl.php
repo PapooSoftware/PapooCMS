@@ -86,7 +86,7 @@ class transdeepl
 	 * @param string $text
 	 * @return string übersetzter Text
 	 */
-	public function translate($target_lang="en",$text="",$deeplKey="")
+	public function translate($target_lang="en",$text="",$deeplKey="",$filename="",$key="")
 	{
 		$this->set_aut_key($deeplKey);
 		$this->setDeeplUrl();
@@ -116,9 +116,14 @@ class transdeepl
 
 		//ende
 		$stop 					= 	microtime(true);
+		ini_set("display_errors", true);
+		error_reporting(E_ALL);
 
 		//zeit die es gebraucht hat
 		$difftime 				= 	$stop - $start;
+		$logentry = date("d.m.Y H:i:s")." - Time needed: ".$difftime." - TargetLang: ".$target_lang." - ".$filename." - ".$key." - ".$trans_text."\n";
+		file_put_contents(__DIR__."/../log/translate.log",$logentry,FILE_APPEND);
+		//exit();
 
 		//Daten für Rückgabe aufbereiten
 		$return['used_time'] 	= 	$difftime;

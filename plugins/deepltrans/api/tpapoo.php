@@ -186,7 +186,7 @@ if ($_GET['translate']==true)
 					if (is_string($pv)) {
 						if($transpapoo->isTranslatebleVar($pk,$pv))
 						{
-							$transtext = $trans->translate($single_lang, $pv,$deeplKey);
+							$transtext = $trans->translate($single_lang, $pv,$deeplKey,$filename,$pk);
 						}
 						else{
 							$transtext['trans_text'] = $transpapoo->targetVars[$pk];
@@ -199,7 +199,7 @@ if ($_GET['translate']==true)
 						foreach ($pv as $k2 => $v2) {
 							if (is_string($v2)) {
 								if($transpapoo->isTranslatebleVarK2($pk,$k2,$v2)) {
-									$transtext = $trans->translate($single_lang, $v2,$deeplKey);
+									$transtext = $trans->translate($single_lang, $v2,$deeplKey,$filename,$k2);
 									$isTranslated++;
 								}
 								else{
@@ -212,7 +212,7 @@ if ($_GET['translate']==true)
 								foreach ($v2 as $k4 => $v4) {
 									if (is_string($v4)) {
 										if($transpapoo->isTranslatebleVarK3($pk,$k2,$k4,$v4)) {
-											$transtext = $trans->translate($single_lang, $v4,$deeplKey);
+											$transtext = $trans->translate($single_lang, $v4,$deeplKey,$filename,$k4);
 											$isTranslated++;
 										}
 										else{
@@ -224,7 +224,7 @@ if ($_GET['translate']==true)
 										foreach ($v4 as $k6 => $v6) {
 											if (is_string($v6)) {
 												if($transpapoo->isTranslatebleVarK4($pk,$k2,$k4,$k6,$v6)) {
-													$transtext = $trans->translate($single_lang, $v6,$deeplKey);
+													$transtext = $trans->translate($single_lang, $v6,$deeplKey,$filename,$k6);
 													$isTranslated++;
 												}
 												else{

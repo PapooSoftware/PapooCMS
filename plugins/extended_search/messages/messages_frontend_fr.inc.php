@@ -1,19 +1,15 @@
 <?php 
-/**
-* Deutsche Text-Daten des Plugins "bookmark" für das Backend
-* !! Diese Datei muss im Format "UTF-8 (NoBOM)" gespeichert werden !!!
-*/
- 
-$this->content->template['plugin_ext_search_thesaurus_ie_haben_nach']='You have searched for';
-$this->content->template['plugin_ext_search_thesaurus_gesucht']=' ';
-$this->content->template['plugin_shop_einten_ie_vielleicht']='Did you mean';
-$this->content->template['Suchbereich_auswaehlen']='choose search area';
-$this->content->template['Suchbereich_text']='Text content / News';
-$this->content->template['Suchbereich_shop']='Products / Shop';
-$this->content->template['Suchbereich_forum']='Forum / Articles';
-$this->content->template['Suchbereich_flex']='Members / Calendar';
-$this->content->template['Suchbereich_faq']='FAQ / Help';
-$this->content->template['Suchbereich_all']='Everything';
+$this->content->template['plugin_ext_search_thesaurus_ie_haben_nach'] = "Vous avez cherché"; 
+$this->content->template['plugin_ext_search_thesaurus_gesucht'] = "recherché"; 
+$this->content->template['plugin_shop_einten_ie_vielleicht'] = "Peut-être que vous vouliez dire :"; 
+$this->content->template['Suchbereich_auswaehlen'] = "Sélectionnez la zone de recherche"; 
+$this->content->template['Suchbereich_text'] = "Contenu textuel / Nouvelles"; 
+$this->content->template['Suchbereich_shop'] = "Produits / Boutique"; 
+$this->content->template['Suchbereich_forum'] = "Forum / Contributions"; 
+$this->content->template['Suchbereich_flex'] = "Membres / Calendrier"; 
+$this->content->template['Suchbereich_faq'] = "FAQ / Aide supplémentaire"; 
+$this->content->template['Suchbereich_doc'] = "Documents / PDF"; 
+$this->content->template['Suchbereich_all'] = "Tous"; 
+$this->content->template['plugin_ext_search_spezialsuchmen_menu'] = "Sélectionner l'élément de menu"; 
 
- 
  ?>

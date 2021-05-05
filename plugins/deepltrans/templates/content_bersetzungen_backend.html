@@ -37,38 +37,13 @@
 				<td>
 					<a href="{$translinkContent}&transcontent=ok&lang={$language.lang_short}" id="deepltrans_bersetzungen_jetzt_starten_bvar" class="btn btn-info" >{$plugin_deepltrans_bersetzungen_jetzt_starten_bvar}</a>
 				</td>
-				<td> - </td>
+				<td> {$language.lastTime} </td>
 
 			</tr>
 			{/foreach}
 		</table>
 
 
-		{if $plugin_creator_is_dev}
-
-			<span class="ignore"></span>
-			<!-- Der Start Button ist notwendig damit sich das System daran aun kann. -->
-			<div id="rapid_form_slot">
-				<div class="rapid_form">
-					{include file=../../../plugins/plugincreator/templates/help_icon.html}
-					<form action="" name="" method="POST">
-						<!-- Der Name der DB Tabelle die erzeugt und benutzt werden soll -->
-						{assign var="tb_name_tpl" value="plugin_deepltrans_bersetzung_form"}
-						<input type="hidden" name="tb_name" value="{$tb_name_tpl}" />
-						<!-- Der Name der PHP Datei in der der Code eingebunden werden soll ohne .php (noch offen) -->
-						<input type="hidden" name="php_datei_name" value="deepltrans_class" />
-						<!-- Das Standarpie Ids -->
-						<input type="hidden" name="praefix" value="deepltrans" />
-						<!-- Das Standarpre Feldernamen und Namen -->
-						<input type="hidden" name="praefix_spezial" value="deepltrans" />
-						<!-- Das Tool einbinden -->
-						{include file=../../../plugins/devtools/templates/rapid_felder.htm}
-					</form>
-				</div>
-			</div>
-
-
-		{/if}
 	</div>
 
 	{*<!-- Hier kommt der Fuss rein-->*}

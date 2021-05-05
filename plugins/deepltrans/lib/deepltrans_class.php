@@ -106,6 +106,8 @@ class deepltrans_class
 		//print_r($sql);
 		$result = $this->db->get_results($sql,ARRAY_A);
 
+		$log = $this->getLogData();
+
 
 		//Base entry is german
 		$translationState = $this->getState();
@@ -117,19 +119,36 @@ class deepltrans_class
 			if($lang['lang_short']=="de")
 			{
 				unset($result[$k]);
+				continue;
 			}
+			$result[$k]['lastTime']=$log[$lang['lang_short']];
 			if(empty($content))
 			{
-			$result[$k]['mainBackend']=$translationState['backend']['main'][$lang['lang_short']]['prozent'];
-			$result[$k]['mainFrontend']=$translationState['frontend']['main'][$lang['lang_short']]['prozent'];
-			$result[$k]['pluginBackend']=$translationState['backend']['plugin'][$lang['lang_short']]['prozent'];
-			$result[$k]['pluginFrontend']=$translationState['frontend']['plugin'][$lang['lang_short']]['prozent'];
+				$result[$k]['mainBackend']=$translationState['backend']['main'][$lang['lang_short']]['prozent'];
+				$result[$k]['mainFrontend']=$translationState['frontend']['main'][$lang['lang_short']]['prozent'];
+				$result[$k]['pluginBackend']=$translationState['backend']['plugin'][$lang['lang_short']]['prozent'];
+				$result[$k]['pluginFrontend']=$translationState['frontend']['plugin'][$lang['lang_short']]['prozent'];
 			}
 		}
-
+		//print_r($result);
 		//languages
 		$this->content->template['languages'] = $result;
 		//exit();
+	}
+
+	public function setLogData($lang="en")
+	{
+		$log = $this->getLogData();
+		$log[$lang]	= date("d.m.Y H:i:s");
+		file_put_contents(PAPOO_ABS_PFAD."/dokumente/logs/translateContent.log",json_encode($log));
+		return true;
+	}
+
+	public function getLogData()
+	{
+		touch(PAPOO_ABS_PFAD."/dokumente/logs/translateContent.log");
+		$data = file_get_contents(PAPOO_ABS_PFAD."/dokumente/logs/translateContent.log");
+		return json_decode($data,true);
 	}
 
 	public function getState()
@@ -144,8 +163,8 @@ class deepltrans_class
 		//print_r($url);exit();
 		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 240);
-		curl_setopt($curl, CURLOPT_TIMEOUT, 240);
+		curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 10);
+		curl_setopt($curl, CURLOPT_TIMEOUT, 10);
 		$returndata = curl_exec($curl);
 		//print_r($returndata);
 		//$code = @curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
@@ -161,12 +180,12 @@ class deepltrans_class
 		$dir=(str_ireplace("lib","api",__DIR__));
 		$apiKey = md5($dir);
 		$url = $_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST']."/".PAPOO_WEB_PFAD."/plugins/deepltrans/api/tpapoo.php?translate=true&apiKey=".$apiKey."&transData=".$transData;
-		//print_r($url);exit();
+		#print_r($url);exit();
 		$curl = curl_init($url);
 		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 600);
-		curl_setopt($curl, CURLOPT_TIMEOUT, 600);
+		curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 2);
+		curl_setopt($curl, CURLOPT_TIMEOUT, 2);
 		$returndata = curl_exec($curl);
 		//$code = @curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
 		//$curlerror = @curl_error($curl);
