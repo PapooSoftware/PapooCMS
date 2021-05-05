@@ -1,0 +1,12 @@
+<?php 
+$this->content->template['message']['plugin']['plugincreator']['infotext'] = "Il plugin Plugin Creator può creare, modificare, reinstallare e disinstallare i plugin. Se deve creare un plugin, crea la struttura della directory, crea e riempie il file XML con più dati possibili, crea i modelli (per quanto prevedibile) necessari, i file SQL, il file css, il file php e li riempie con la classe, e i file dei messaggi. Quando si modifica, le voci del modulo per esempio nel file XML vengono cancellate, per le voci del database le voci nei file SQL di installazione e disinstallazione."; 
+$this->content->template['message']['plugin']['plugincreator']['create_backend_expl'] = "Qui puoi creare o - se applicabile - modificare un plugin. Cliccate su save, la struttura della directory che include i file - per quanto le vostre specifiche lo permettano - sarà creata."; 
+$this->content->template['message']['plugin']['plugincreator']['create_backend_menu_annotation'] = "<p>Nota: una voce di menu con il nome del vostro plugin verrà creata automaticamente. Qui potete solo aggiungere o cambiare le voci del sottomenu.</p>"; 
+$this->content->template['message']['plugin']['plugincreator']['loeschenFrage'] = "Cancellare il plugin con la struttura della directory davvero?"; 
+$this->content->template['message']['plugin']['plugincreator']['achtungLoeschen'] = "ATTENZIONE: Questo passo non può essere invertito!"; 
+$this->content->template['message']['plugin']['plugincreator']['deinstallLink'] = "Se invece vuoi solo disinstallare il plugin clicca qui"; 
+$this->content->template['message']['plugin']['plugincreator']['checkboxCheck'] = "Sì, sono sicuro di voler eliminare questo plugin irrevocabilmente."; 
+$this->content->template['message']['plugin']['plugincreator']['rapid_dev_popup_info'] = "Seleziona un nome per la variabile e l'etichetta, il tipo di elemento del modulo, e per certi tipi di elementi le rispettive voci che l'elemento deve avere e clicca su \"Inserisci nel database\". Gli elementi inseriti in questo modo possono richiedere 2 rinfreschi della pagina per diventare visibili.
+I dati inseriti nel modulo creato saranno inseriti in una tabella creata automaticamente. Questi dati saranno poi visualizzati automaticamente in una tabella sotto il modulo \"crea nuovi campi\". Se non vuoi che gli elementi \"crea nuovi campi\" e \"dati demo\" siano visualizzati, cancellali dal modello o disinstalla il plugin \"crea plugin\"."; 
+
+ ?>

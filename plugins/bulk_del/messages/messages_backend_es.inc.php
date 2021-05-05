@@ -1,0 +1,46 @@
+<?php 
+$this->content->template['plugin_commentplus_automatische_updates'] = "Actualizaciones automáticas"; 
+$this->content->template['plugin_auto_update_mit_diesem_plugin_knnen_sie_automatisch'] = "Con este plugin puedes realizar actualizaciones automáticas. Su sistema se mantiene siempre actualizado. Por supuesto, también puede realizar cada actualización manualmente haciendo clic en el botón correspondiente."; 
+$this->content->template['plugin_auto_update_einstellungen_fr_das_update'] = "Ajustes para la actualización"; 
+$this->content->template['plugin_auto_update_um_die_updates_durchzufhren'] = "Para realizar las actualizaciones, hay que introducir aquí algunos datos. Por un lado, los datos de acceso FTP a su página aquí. Son necesarios porque normalmente no tienes acceso de escritura a tus propios archivos. Por otro lado los datos de acceso al sitio Papoo.de para que podamos activar su actualización."; 
+$this->content->template['plugin_auto_update_zugangsdaten_zur_papoode_seite'] = "Datos de acceso al sitio Papoo.de"; 
+$this->content->template['plugin_auto_update_papoo_username'] = "Nombre de usuario"; 
+$this->content->template['plugin_auto_update_papoo_padsswprd'] = "Contraseña"; 
+$this->content->template['plugin_auto_update_ftp_zugangsdaten_zu_ihrer_seite'] = "Datos de acceso FTP a su sitio"; 
+$this->content->template['plugin_auto_update_ftp_servername'] = "Nombre del servidor FTP"; 
+$this->content->template['plugin_auto_update_ftp_username'] = "Nombre de usuario FTP"; 
+$this->content->template['plugin_auto_update_ftp_passwort'] = "Contraseña FTP"; 
+$this->content->template['plugin_auto_update_auto_daten_speichern'] = "Almacenar datos"; 
+$this->content->template['plugin_auto_update_geben_sie_hier_zugangsdaten_zur'] = "Introduzca aquí sus datos de acceso al sitio Papoo.de"; 
+$this->content->template['plugin_auto_update_geben_sie_hier_ihre_ftp_zugangsdate'] = "Introduzca aquí sus datos de acceso al FTP"; 
+$this->content->template['plugin_auto_update_verbindung_testen'] = "Conexión de prueba"; 
+$this->content->template['plugin_auto_update_ftp_berbindung_testen'] = "Probar la conexión FTP"; 
+$this->content->template['plugin_auto_update_artikel_und_menpunkte_lschen'] = "Eliminar artículos, imágenes, archivos o elementos del menú"; 
+$this->content->template['plugin_del_artikel_mit_diesem_plugin_knnen_sie_aus_einer_kompletten_bersicht_einfach_per_haken'] = "Con este plugin puedes eliminar todos los artículos, imágenes, archivos o elementos de menú marcados de una vista general completa simplemente poniendo una marca de verificación. <br /><br /><strong>Pero tenga cuidado: necesita derechos de administrador para esta acción</strong>."; 
+$this->content->template['plugin_del_artikel_whlen_sie_die_artikel_aus_die_sie_lschen_wollen'] = "Seleccione los elementos que desea eliminar."; 
+$this->content->template['plugin_del_artikel_auswgewhlte_artikel_lschen'] = "Eliminar los artículos seleccionados"; 
+$this->content->template['plugin_del_artikel_sie_brauchen_adminrechte'] = "Necesita derechos de administrador para esta acción"; 
+$this->content->template['plugin_del_artikel_berschrift'] = "Titular"; 
+$this->content->template['plugin_del_artikel_artikel_lschen'] = "Eliminar el artículo"; 
+$this->content->template['plugin_del_artikel_soll_der_artikel_wirklich_gelscht_werden'] = "¿Deben eliminarse realmente estos artículos? N - ¡Los artículos serán borrados completa e irremediablemente!"; 
+$this->content->template['plugin_del_artikel_soll_der_artikel_wirklich_gelscht_werden2'] = "¿Deben eliminarse realmente estos elementos del menú? N - Los elementos del menú se borrarán completa e irremediablemente!!!!"; 
+$this->content->template['plugin_del_artikel_die_artikel_wurden_gelscht'] = "Los artículos fueron eliminados"; 
+$this->content->template['plugin_del_artikel_whlen_sie_die_menpunkte_die_sie_lschen_wollen'] = "Seleccione los elementos del menú que desea eliminar"; 
+$this->content->template['plugin_del_artikel_whlen_sie_hier_die_'] = "Seleccione aquí los elementos del menú que desea eliminar "; 
+$this->content->template['plugin_del_artikel_die_menpunkte_lnn'] = "Aquí se pueden eliminar los elementos del menú de una sola vez y de forma irremediable."; 
+$this->content->template['plugin_del_artikel_ausgewhlte_menpunkte_lschen'] = "Borrar los elementos de menú seleccionados"; 
+$this->content->template['plugin_del_artikel_die_menpunkte_wurden_gelscht'] = "Se han eliminado los elementos del menú"; 
+$this->content->template['plugin_del_artikel_whlen_sie_die_bilder_aus_die_sie_lschen_wollen'] = "Seleccione las imágenes que desea eliminar."; 
+$this->content->template['plugin_del_artikel_ausgewhlte_bilder_lschen'] = "Eliminar las imágenes seleccionadas"; 
+$this->content->template['plugin_del_artikel_bilder_berschrift'] = "Nombre del archivo"; 
+$this->content->template['plugin_del_artikel_bilder_lschen'] = "Borrar imágenes"; 
+$this->content->template['plugin_del_artikel_sollen_die_bilder_wirklich_gelscht_werden'] = "¿Deben eliminarse realmente estas fotos? N - ¡¡¡Las fotos serán borradas completa e irremediablemente!!!"; 
+$this->content->template['plugin_del_artikel_die_bilder_wurden_gelscht'] = "Las imágenes han sido borradas"; 
+$this->content->template['plugin_del_artikel_whlen_sie_die_dateien_aus_die_sie_lschen_wollen'] = "Seleccione los archivos que desea eliminar."; 
+$this->content->template['plugin_del_artikel_ausgewhlte_dateien_lschen'] = "Eliminar los archivos seleccionados"; 
+$this->content->template['plugin_del_artikel_dateien_berschrift'] = "Nombre del archivo"; 
+$this->content->template['plugin_del_artikel_dateien_lschen'] = "Borrar archivos"; 
+$this->content->template['plugin_del_artikel_sollen_die_dateien_wirklich_gelscht_werden'] = "¿Deben eliminarse realmente estos archivos? N - ¡¡¡Los archivos se borran completa e irremediablemente!!!"; 
+$this->content->template['plugin_del_artikel_die_dateien_wurden_gelscht'] = "Los archivos fueron borrados"; 
+
+ ?>

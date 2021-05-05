@@ -1,0 +1,107 @@
+<?php 
+$this->content->template['message_20001'] = "<h2>发送通讯</h2>
+<p>你可以在这里输入你想发送的通讯。你创建的印记将被自动转发。</p>"; 
+$this->content->template['message_20002'] = "主题"; 
+$this->content->template['message_20003'] = "通讯内容。 "; 
+$this->content->template['message_20004'] = "内容为纯文本"; 
+$this->content->template['message_20005'] = "<h2>编辑通讯印记</h2>
+<strong>在这里输入重要的数据在通讯的印记。</strong>"; 
+$this->content->template['message_20006'] = "版本说明内容。"; 
+$this->content->template['message_20007'] = "内容"; 
+$this->content->template['message_20008'] = "<h2>电子报订阅者</h2>
+<p>在这里，你可以看到我们用户的电子邮件地址。</p>
+<p>点击一个电子邮件地址来编辑它。</p>
+<p>要添加一个新的地址，请点击"; 
+$this->content->template['message_20009'] = "添加新的电子邮件 "; 
+$this->content->template['message_20010'] = ""; 
+$this->content->template['message_20011'] = "是 "; 
+$this->content->template['message_20012'] = "没有"; 
+$this->content->template['message_20013'] = "活跃"; 
+$this->content->template['message_20014'] = "电子邮件地址"; 
+$this->content->template['message_20015'] = "电子邮件"; 
+$this->content->template['news_message_1'] = "<h1>编辑通讯</h1><p>你可以在这里编辑通讯，编辑订阅者和印记。</p><p>如果你想包括通讯，你可以。<br/><ol><li>创建一个菜单项。创建时，你可以在表单链接下手动添加以下条目：<br /><strong>plugin:newsletter/templates/subscribe_newsletter.html</strong>。</li><li>如果你不想有一个单独的菜单项，你可以通过编辑器的链接功能在任何文章中创建一个链接。该链接应该有以下内容：/plugin.php?menuid=1&amp;template=newsletter/templates/subscribe_newsletter.html 。</li><li>你也可以使用模块管理器将订阅表嵌入你喜欢的任何地方。 </li></ol>"; 
+$this->content->template['news_message_2'] = "<h2 style=\"color:red;\">通讯已经发出去了!</h2>"; 
+$this->content->template['news_message_3'] = "<h2>保存通讯!</h2><p>点击保存通讯，所有相关的通讯数据将被保存在一个转储文件中。这个存储是独立于一般存储的。</p>"; 
+$this->content->template['news_message_4'] = "保存通讯"; 
+$this->content->template['message_20016'] = "发送的电子邮件地址。"; 
+$this->content->template['message_20017'] = "*of:*部分的名称。"; 
+$this->content->template['message_20018'] = "<h3>订阅我们的通讯。</h3><p>你可以在这里订阅我们的通讯。要做到这一点，请填写以下表格。然后你会收到一封确认邮件，你必须回答。</p>
+<p>只有这样，你才会被注册为新闻通讯员。</p>"; 
+$this->content->template['message_20018_ds'] = "我已经注意到了隐私政策。我同意以电子方式收集和储存我的详细资料和数据，以便对我的询问作出回应。注意：你可以在任何时候通过发送电子邮件至 info@ihre-mail.de 撤销你对未来的同意。"; 
+$this->content->template['message_20018_1'] = "通讯档案"; 
+$this->content->template['message_20018_a'] = "订阅我们的通讯。"; 
+$this->content->template['message_20019'] = "请输入你的数据。"; 
+$this->content->template['message_20020'] = "订阅"; 
+$this->content->template['message_20021'] = "发送"; 
+$this->content->template['erneut_versenden'] = "重新发送。"; 
+$this->content->template['datum'] = "日期"; 
+$this->content->template['inhalt'] = "内容"; 
+$this->content->template['useranzahl'] = "收件人数量"; 
+$this->content->template['gruppe'] = "集团"; 
+$this->content->template['newsletter_texthtml'] = "作为HTML的内容"; 
+$this->content->template['news_message1'] = "<h2>选择一种语言</h2><p>在此选择要创建通讯的语言。</p>"; 
+$this->content->template['news_message2'] = "选择"; 
+$this->content->template['news_imptext1'] = "-- 要取消订阅，请点击这里：http://#url#/plugin.php?menuid=1&amp;activate=#key#&amp;news_message=de_activate&amp;template=newsletter/templates/subscribe_newsletter.html #imp#"; 
+$this->content->template['news_imptext2'] = "  要取消通讯，请点击这里。<br /> <a href=\"http://#url#/plugin.php?menuid=1&activate=#key#&news_message=de_activate&template=newsletter/templates/subscribe_newsletter.html\">通讯取消</a><br />"; 
+$this->content->template['news_mail1'] = "通过seitenurl订阅的通讯。"; 
+$this->content->template['news_mail2'] = "您已经订阅了seitenurl的电子报，如果您没有订阅这个电子报或者不想要这个电子报，请忽略这封邮件，您不会再收到其他邮件。要激活通讯，请点击以下链接。"; 
+$this->content->template['news_mail3'] = "一个新的订阅者已经注册了一个或更多的节制名单。"; 
+$this->content->template['news_front1'] = "nodecode。<div id=\"hl\"><h1 class=\"home\">订阅的通讯</h1></div><p>你已经订阅了我们的通讯。你应该在几分钟内收到一封带有确认链接的电子邮件。</p><p>请点击邮件中的链接，最终订阅本通讯。</p>"; 
+$this->content->template['news_front2'] = "nodecode。<div id=\"hl\"><h1 class=\"home\">订阅的通讯</h1></div><p>您对我们的新闻简报的订阅已被激活。您将从今天开始收到我们的通讯。如果你想取消订阅，只需点击你从我们收到的任何电子邮件中的取消订阅链接。</p>"; 
+$this->content->template['news_front3'] = "<div id=\"hl\"><h1 class=\"home\">取消的通讯</h1></div><p>通讯已被取消，您的数据已被删除。</p>"; 
+$this->content->template['news_front4'] = "您的详细资料"; 
+$this->content->template['news_front5'] = "先生。"; 
+$this->content->template['news_front6'] = "女士。"; 
+$this->content->template['news_front7'] = "名字"; 
+$this->content->template['news_front8'] = "姓氏"; 
+$this->content->template['news_front9'] = "街道和门牌号"; 
+$this->content->template['news_front10'] = "邮政编号"; 
+$this->content->template['news_front11'] = "居住地"; 
+$this->content->template['news_front12'] = "语言"; 
+$this->content->template['news_front13'] = "国家"; 
+$this->content->template['news_front14'] = "规格缺失"; 
+$this->content->template['news_front15'] = "无效的规格"; 
+$this->content->template['news_front16'] = "已经存在"; 
+$this->content->template['news_front17'] = "<div id=\"hl\"><h1 class=\"home\">通讯档案</h1></div>"; 
+$this->content->template['news_front18'] = "通讯"; 
+$this->content->template['news_front19'] = "通讯"; 
+$this->content->template['news_front20'] = "目前尚无档案数据。"; 
+$this->content->template['news_front21'] = "==&gt; 没有选择任何组别"; 
+$this->content->template['news_front22'] = "电话"; 
+$this->content->template['news_message3'] = "语言"; 
+$this->content->template['newsletter_anzeigen'] = "显示"; 
+$this->content->template['plugin']['newsletter']['unsubscribe_newsletter_title'] = "你真的想退订通讯吗？"; 
+$this->content->template['plugin']['newsletter']['unsubscribe_newsletter'] = "通讯退订"; 
+$this->content->template['plugin']['newsletter']['cancel'] = "取消"; 
+$this->content->template['plugin']['newsletter']['alle'] = "全部"; 
+$this->content->template['plugin']['newsletter']['altnewsletter'] = "旧新闻通讯"; 
+$this->content->template['plugin']['newsletter']['inhalt_text'] = "作为文本的内容"; 
+$this->content->template['plugin']['newsletter']['inhalt_html'] = "作为HTML的内容"; 
+$this->content->template['plugin']['newsletter']['userdaten'] = "高级用户数据"; 
+$this->content->template['plugin']['newsletter']['sprachwahl'] = "在前台启用用户登录的语言选择？"; 
+$this->content->template['plugin']['newsletter']['text'] = "在登录处上方显示文字？"; 
+$this->content->template['plugin']['newsletter']['html_mails'] = "HTML邮件？"; 
+$this->content->template['plugin']['newsletter']['editor'] = "WYSIWYG编辑器tinymce?"; 
+$this->content->template['plugin']['newsletter']['sprache'] = "语言"; 
+$this->content->template['plugin']['newsletter']['daten'] = "日期。"; 
+$this->content->template['plugin']['newsletter']['vorname'] = "名字"; 
+$this->content->template['plugin']['newsletter']['nachname'] = "姓氏"; 
+$this->content->template['plugin']['newsletter']['strasse'] = "街道和门牌号"; 
+$this->content->template['plugin']['newsletter']['postleitzahl'] = "邮政编号"; 
+$this->content->template['plugin']['newsletter']['wohnort'] = "居住地"; 
+$this->content->template['plugin']['newsletter']['staat'] = "国家"; 
+$this->content->template['plugin']['newsletter']['abschicken'] = "提交"; 
+$this->content->template['plugin']['newsletter']['email'] = "电子邮件"; 
+$this->content->template['plugin']['newsletter']['eingabe_datei'] = "输入文件。"; 
+$this->content->template['plugin']['newsletter']['dokument'] = "该文件。"; 
+$this->content->template['plugin']['newsletter']['durchsuchen'] = "浏览..."; 
+$this->content->template['plugin']['newsletter']['datei_upload'] = "上传文件。"; 
+$this->content->template['plugin']['newsletter']['upload'] = "上传"; 
+$this->content->template['plugin']['newsletter']['sicherung'] = "<h3>创建一个数据库的备份</h3><p>你可以在这里创建一个数据库的备份，你可以在新的安装后或在任何其他时间恢复。</p>"; 
+$this->content->template['plugin']['newsletter']['sicherung_einspielen'] = "导入一个备份"; 
+$this->content->template['plugin']['newsletter']['sicherung_ready'] = "备份文件已被导入。"; 
+$this->content->template['plugin']['newsletter']['hinweis'] = "要导入一个备份，请选择备份文件。"; 
+$this->content->template['plugin']['newsletter']['warnung'] = "注意 - 如果你导入一个备份，所有当前数据将被不可逆转地删除。因此，一定要事先创建一个备份!"; 
+$this->content->template['plugin']['newsletter']['make_dump'] = "现在创建一个备份"; 
+
+ ?>

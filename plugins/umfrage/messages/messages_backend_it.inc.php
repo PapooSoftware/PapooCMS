@@ -1,0 +1,41 @@
+<?php 
+$this->content->template['UMFMSG_PLUGIN_NAME'] = "Plugin di sondaggio"; 
+$this->content->template['UMFMSG_TITEL'] = "Sondaggio:"; 
+$this->content->template['UMFMSG_DETAILS'] = "Dettagli"; 
+$this->content->template['UMFMSG_AENDERN'] = "Cambia"; 
+$this->content->template['UMFMSG_LOESCHEN'] = "Cancellare"; 
+$this->content->template['UMFMSG_JA'] = "Sì"; 
+$this->content->template['UMFMSG_NEIN'] = "No"; 
+$this->content->template['UMFMSG_ZURUECK'] = "Indietro"; 
+$this->content->template['UMFMSG_B_INTEGRATION'] = "Per abilitare il plugin del sondaggio, è necessario assegnare il modulo del sondaggio a una sezione sotto \"Layout -&gt; Styles\"."; 
+$this->content->template['UMFMSG_B_UMFRAGE'] = "Sondaggio:"; 
+$this->content->template['UMFMSG_B_STIMMEN'] = "Voti:"; 
+$this->content->template['UMFMSG_B_TEILNEHMER'] = "Partecipanti:"; 
+$this->content->template['UMFMSG_B_AKTIV'] = "attivo:"; 
+$this->content->template['UMFMSG_B_MENU_ID'] = "Menu Id:"; 
+$this->content->template['UMFMSG_B_TEXT'] = "Testo"; 
+$this->content->template['UMFMSG_B_SPRACHE'] = "Lingua:"; 
+$this->content->template['UMFMSG_B_BTN_UMFRAGE_NEU'] = "Crea un nuovo sondaggio"; 
+$this->content->template['UMFMSG_B_UMFRAGEN_LISTE'] = "Elenco di tutte le indagini:"; 
+$this->content->template['UMFMSG_B_UMFRAGE_NEU'] = "Creare un nuovo sondaggio"; 
+$this->content->template['UMFMSG_B_UMFRAGE_AENDERN'] = "Cambia questo sondaggio"; 
+$this->content->template['UMFMSG_B_BTN_UMFRAGE_AENDERN'] = "Cambia questo sondaggio"; 
+$this->content->template['UMFMSG_B_UMFRAGE_SICHERN_NACHRICHT'] = "I dati del sondaggio sono stati salvati!"; 
+$this->content->template['UMFMSG_B_UMFRAGE_LOESCHEN'] = "Cancella questo sondaggio"; 
+$this->content->template['UMFMSG_B_UMFRAGE_LOESCHEN_FRAGE'] = "Sei sicuro di voler cancellare il seguente sondaggio?"; 
+$this->content->template['UMFMSG_B_UMFRAGE_LOESCHEN_HINWEIS'] = "Nota:<br />Con il sondaggio tutte le risposte e i risultati di questo sondaggio saranno cancellati."; 
+$this->content->template['UMFMSG_B_BTN_UMFRAGE_LOESCHEN'] = "Cancella questo sondaggio"; 
+$this->content->template['UMFMSG_B_UMFRAGE_LOESCHEN_NACHRICHT'] = "Il sondaggio è stato cancellato!"; 
+$this->content->template['UMFMSG_B_BTN_ANTWORT_NEU'] = "Crea una nuova risposta"; 
+$this->content->template['UMFMSG_B_ANTWORTEN_LISTE'] = "Elenco di tutte le risposte:"; 
+$this->content->template['UMFMSG_B_ANTWORT_NEU'] = "Creare una nuova risposta"; 
+$this->content->template['UMFMSG_B_ANTWORT_AENDERN'] = "Cambia questa risposta"; 
+$this->content->template['UMFMSG_B_BTN_ANTWORT_AENDERN'] = "Cambia questa risposta"; 
+$this->content->template['UMFMSG_B_ANTWORT_SICHERN_NACHRICHT'] = "I dati di risposta sono stati salvati!"; 
+$this->content->template['UMFMSG_B_ANTWORT_LOESCHEN'] = "Cancella questa risposta"; 
+$this->content->template['UMFMSG_B_ANTWORT_LOESCHEN_FRAGE'] = "Vuoi davvero cancellare la seguente risposta?"; 
+$this->content->template['UMFMSG_B_ANTWORT_LOESCHEN_HINWEIS'] = "Nota:<br />Quando rispondi, anche tutti i voti espressi per quella risposta saranno cancellati. Il numero di voti espressi sarà sottratto dal numero di partecipanti al sondaggio."; 
+$this->content->template['UMFMSG_B_BTN_ANTWORT_LOESCHEN'] = "Cancella questa risposta"; 
+$this->content->template['UMFMSG_B_ANTWORT_LOESCHEN_NACHRICHT'] = "La risposta è stata cancellata!"; 
+
+ ?>

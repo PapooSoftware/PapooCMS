@@ -1,0 +1,41 @@
+<?php 
+$this->content->template['plugin_plugin_zentrale_inhalte_verwalten_sie_hier_zentral_inhalte'] = "Beheer hier inhoud centraal"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_mit_diesem_plugin_knnen_sie'] = "Met deze plugin kunt u centraal instellen welke menu items met welke inhoud gespiegeld moeten worden op welke domeinen. Alle inhoud is aanpasbaar via plaatshouders."; 
+$this->content->template['plugin_plugin_zentrale_inhalte_stammdaten'] = "De inhoud van de hoofdpagina wordt normaal bewerkt via het artikel / menu beheer. Voor het werken met plaatshouders, moeten deze dan ook hier voor de hoofdpagina worden ingevoerd."; 
+$this->content->template['plugin_plugin_zentrale_inhalte_verwaltung_der_domains'] = "Beheer van het domein"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_hier_knnen_sie_die_domains'] = "Hier kunt u de domeinen, sleutels en wildcards beheren"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_neue_domain_eintragen'] = "Registreer nieuw domein"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_vorhandene_domains'] = "Bestaande domeinen"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_name_der_domain'] = "Domeinnaam"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_schlssel'] = "Key"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_platzhalter'] = "Plaatsaanduiding"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_bearbeiten'] = "edit"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_lschen'] = "verwijderen"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_domaindaten_bearbeiten'] = "Domeingegevens bewerken"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_hier_bearbeiten_sie_die_daten_einer_domain'] = "Hier kunt u de gegevens van een domein bewerken"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_name_der_domainf'] = "Domeinnaam"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_domainkey'] = "Domino-sleutel (wordt automatisch gegenereerd)"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_daten_speichern'] = "Gegevens opslaan"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_jetzt_speichern'] = "Nu sparen"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_daten_wurden_gespeichert'] = "Gegevens werden opgeslagen"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_daten_wurden_gelscht'] = "Gegevens zijn gewist"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_inhalte_fr_die_domains_verwalten'] = "Beheer inhoud voor de domeinen"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_hier_stellen_sie_ein_welche'] = "Hier stelt u in welke inhoud de afzonderlijke domeinen moeten ontvangen."; 
+$this->content->template['plugin_plugin_zentrale_inhalte_liste_der_domains'] = "Lijst van domeinen"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_weisen_sie_hier_die_inhalte'] = "Wijs hier de inhoud van het betreffende domein toe"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_sie_sehen_hier_die_'] = "Hier ziet u de lijst van menu items die beschikbaar zijn, vink gewoon het vakje aan voor de menu items die geïnstalleerd moeten worden op het client domein."; 
+$this->content->template['plugin_plugin_zentrale_inhalte_daten_zuweisen'] = "Gegevens toewijzen"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_menpunkt'] = "Menu-item"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_zuweisen'] = "Toewijzen"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_menupunkte'] = "menupoints"; 
+$this->content->template['plugin_plugin_cotent_client_zentrale_inhalte_einbinden'] = "Integreer centrale inhoud"; 
+$this->content->template['plugin_plugin_cotent_client_hier_tragen_sie_die_daten_ein_die_sie'] = "Hier voert u de gegevens in die nodig zijn om deze pagina met de centrale pagina te synchroniseren. De instelling van wat gesynchroniseerd wordt, gebeurt vanuit de centrale."; 
+$this->content->template['plugin_plugin_cotent_client_daten_verwalten'] = "Gegevens beheren"; 
+$this->content->template['plugin_plugin_cotent_client_url_der_zentrale'] = "Hoofdkwartier url"; 
+$this->content->template['plugin_plugin_cotent_client_token_key_kommt_aus_der_zentrale'] = "tokensleutel (komt van het centrale kantoor)"; 
+$this->content->template['plugin_plugin_cotent_client_domain_key'] = "Domeinsleutel (komt van het hoofdkantoor)"; 
+$this->content->template['plugin_plugin_cotent_client_daten_eintragen_fr_den_kontakt'] = "Vul hier de gegevens in"; 
+$this->content->template['plugin_plugin_cotent_client_diese_seite_mit_der_zentrale_synchronisieren'] = "Synchroniseer deze pagina met het configuratiescherm"; 
+$this->content->template['plugin_plugin_cotent_client_daten_speichern'] = "Gegevens opslaan"; 
+
+ ?>

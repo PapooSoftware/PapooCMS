@@ -1,0 +1,39 @@
+<?php 
+$this->content->template['message']['plugin']['kontrastwechsler']['empty'] = ""; 
+$this->content->template['message']['plugin']['kontrastwechsler']['contrast_name'] = "Nome per contrasto:"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['aria_label'] = "Descrizione del pulsante per i ciechi: (Cosa succede)"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['background_color'] = "Colore per lo sfondo:"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['text_color'] = "Colore per il testo:"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['edit'] = "edit"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['cancel'] = "Cancella"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['save'] = "Salva"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['delete'] = "cancellare"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['delete1'] = "Cancellare il contrasto"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['add'] = "Aggiungere il contrasto"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['confirm_delete'] = "Vuoi davvero eliminare il contrasto?"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['id'] = "ID"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['name'] = "Nome"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['description'] = "Descrizione"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['background-color'] = "Colore di sfondo"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['text-color'] = "Colore del testo"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['main_header'] = "Il modulo di cambio di contrasto"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['main_description'] = " <br> <br>Il modulo contrast changer aggiunge un modulo per passare da un contrasto all'altro nel frontend</br></br>. Questo plugin installa il modulo dopo e puoi installarlo come al solito nel module manager. Attivi il modulo tramite il module manager - seleziona il modulo lì e aggiungilo dove vuoi."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['css_header'] = "Il CSS del modulo di cambio di contrasto"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['css_description'] = "<br>Il CSS funziona come uno normale, eccetto che i colori sono automaticamente presi da segnaposti dalla lista dei contrasti</br>:<strong>(#text_color#</strong> per il colore del testo e <strong>#background_color#</strong> per il colore dello sfondo)."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['add_success'] = "Contrasto aggiunto con successo."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['edit_success'] = "Contrasto elaborato con successo."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['setting_edit_success'] = "Impostazioni modificate con successo."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['delete_success'] = "Contrasto eliminato con successo."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['edit_css_success'] = "CSS elaborato con successo."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['efabox'] = "Il modulo EFA Fontsize deve essere collegato al modulo di variazione del contrasto?"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['efa_error_1'] = "L'EFA è integrato come modulo."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['efa_error_2'] = "EFA Fontsize non è installato."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['efa_error_3'] = "I file EFA Fontsize non sono disponibili."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['efa_error_none'] = "L'EFA può essere collegato al modulo di cambio di contrasto."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['module_top'] = "Modulo nella parte superiore dello schermo"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['module_side'] = "Modulo sul lato"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['own_style'] = "Stile proprio per il modulo"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['styling_label'] = "Seleziona lo stile"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['styling_description'] = "Qui è possibile selezionare diversi stili del cambio di contrasto o scrivere il proprio."; 
+
+ ?>

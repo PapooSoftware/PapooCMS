@@ -1,0 +1,107 @@
+<?php 
+$this->content->template['message_20001'] = "<h2>Enviar boletín de noticias</h2>
+<p>Aquí puede introducir el boletín que desea enviar. La huella que ha creado se enviará automáticamente.</p>"; 
+$this->content->template['message_20002'] = "Asunto"; 
+$this->content->template['message_20003'] = " Contenido del boletín "; 
+$this->content->template['message_20004'] = "Contenido como texto plano"; 
+$this->content->template['message_20005'] = "<h2>Editar la impresión del boletín</h2>
+<strong>Introduzca aquí los datos importantes en el pie de imprenta del boletín.</strong>"; 
+$this->content->template['message_20006'] = " Contenido de la impresión:"; 
+$this->content->template['message_20007'] = "Contenido"; 
+$this->content->template['message_20008'] = "<h2>Suscriptores del boletín de noticias</h2>
+<p>Aquí puede ver las direcciones de correo electrónico de nuestros suscriptores</p>
+<p>Haga clic en una dirección de correo electrónico para editarla.</p>
+<p>Para añadir una nueva dirección, haga clic en"; 
+$this->content->template['message_20009'] = "añadir un nuevo correo electrónico "; 
+$this->content->template['message_20010'] = ""; 
+$this->content->template['message_20011'] = "Sí "; 
+$this->content->template['message_20012'] = "No"; 
+$this->content->template['message_20013'] = "Activo"; 
+$this->content->template['message_20014'] = "Dirección de correo electrónico"; 
+$this->content->template['message_20015'] = "Envíe un correo electrónico a"; 
+$this->content->template['news_message_1'] = "<h1>Editar el boletín de noticias</h1><p>Aquí puede editar el boletín, editar los suscriptores y el pie de imprenta.</p><p>Si quiere incluir el boletín, puede hacerlo<br/><ol><li>Crear un elemento de menú. Al crearlo, puede añadir manualmente la siguiente entrada en el enlace del formulario: <br /><strong>plugin:newsletter/templates/subscribe_newsletter.html</strong>.</li><li>Si no quieres tener un elemento de menú separado, puedes crear un enlace en cualquier artículo a través de la función de enlace en el editor. El enlace debe tener el siguiente contenido: /plugin.php?menuid=1&amp;template=newsletter/templates/subscribe_newsletter.html .</li><li>También puede utilizar el gestor de módulos para incrustar el formulario de suscripción en cualquier lugar que desee </li></ol>"; 
+$this->content->template['news_message_2'] = "<h2 style=\"color:red;\">El boletín se ha enviado</h2>"; 
+$this->content->template['news_message_3'] = "<h2>Ahorre en el boletín de noticias</h2><p>Haga clic en Guardar boletín y todos los datos relevantes del boletín se guardarán en un archivo de volcado. Este almacenamiento es independiente del almacenamiento general.</p>"; 
+$this->content->template['news_message_4'] = "Guardar el boletín de noticias"; 
+$this->content->template['message_20016'] = "Dirección de correo electrónico con la que se envía:"; 
+$this->content->template['message_20017'] = "El nombre de la parte *de:*:"; 
+$this->content->template['message_20018'] = "<h3>Suscríbase a nuestro boletín de noticias.</h3><p>Puede suscribirse a nuestro boletín aquí. Para ello, rellene el siguiente formulario. A continuación, recibirá un correo electrónico de confirmación, al que deberá responder.</p>
+<p>Sólo entonces estará inscrito en el boletín.</p>"; 
+$this->content->template['message_20018_ds'] = "He tomado nota de la política de privacidad. Doy mi consentimiento para que mis datos sean recogidos y almacenados electrónicamente con el fin de responder a mi consulta. Nota: Puede revocar su consentimiento para el futuro en cualquier momento enviando un correo electrónico a info@ihre-mail.de."; 
+$this->content->template['message_20018_1'] = "Archivo de boletines"; 
+$this->content->template['message_20018_a'] = "Suscríbase a nuestro boletín de noticias."; 
+$this->content->template['message_20019'] = "Por favor, introduzca sus datos."; 
+$this->content->template['message_20020'] = "suscríbase a"; 
+$this->content->template['message_20021'] = "Enviar"; 
+$this->content->template['erneut_versenden'] = "Reenviar."; 
+$this->content->template['datum'] = "Fecha"; 
+$this->content->template['inhalt'] = "Contenido"; 
+$this->content->template['useranzahl'] = "Número de beneficiarios"; 
+$this->content->template['gruppe'] = "Grupo"; 
+$this->content->template['newsletter_texthtml'] = "Contenido como HTML"; 
+$this->content->template['news_message1'] = "<h2>Seleccione un idioma</h2><p>Seleccione aquí el idioma en el que se va a crear un boletín.</p>"; 
+$this->content->template['news_message2'] = "Seleccione"; 
+$this->content->template['news_imptext1'] = "-- Para darse de baja, pulse aquí: http://#url#/plugin.php?menuid=1&amp;activate=#key#&amp;news_message=de_activate&amp;template=newsletter/templates/subscribe_newsletter.html #imp#"; 
+$this->content->template['news_imptext2'] = "  Para cancelar el boletín, haga clic aquí: <br /> <a href=\"http://#url#/plugin.php?menuid=1&activate=#key#&news_message=de_activate&template=newsletter/templates/subscribe_newsletter.html\">Boletín de noticias cancelar</a><br />"; 
+$this->content->template['news_mail1'] = "Boletín de noticias suscrito por seitenurl."; 
+$this->content->template['news_mail2'] = "Se ha suscrito al boletín de noticias de seitenurl, si no se ha suscrito a este boletín o no lo desea, ignore este correo electrónico, no recibirá otro. Para activar el boletín, haga clic en el siguiente enlace"; 
+$this->content->template['news_mail3'] = "Un nuevo suscriptor se ha inscrito en una o varias listas moderadas"; 
+$this->content->template['news_front1'] = "nodecode:<div id=\"hl\"><h1 class=\"home\">Boletín de noticias suscrito</h1></div><p>Se ha suscrito a nuestro boletín de noticias. En unos minutos debería recibir un correo electrónico con un enlace de confirmación.</p><p>Haga clic en el enlace del correo electrónico para suscribirse finalmente a este boletín.</p>"; 
+$this->content->template['news_front2'] = "nodecode:<div id=\"hl\"><h1 class=\"home\">Boletín de noticias suscrito</h1></div><p>Su suscripción a nuestro boletín de noticias ha sido activada. Empezará a recibir nuestro boletín hoy mismo. Si desea darse de baja, sólo tiene que hacer clic en el enlace para darse de baja de cualquier correo electrónico que reciba de nosotros.</p>"; 
+$this->content->template['news_front3'] = "<div id=\"hl\"><h1 class=\"home\">Boletín cancelado</h1></div><p>El boletín ha sido cancelado y sus datos han sido eliminados.</p>"; 
+$this->content->template['news_front4'] = "Sus datos"; 
+$this->content->template['news_front5'] = "El Sr"; 
+$this->content->template['news_front6'] = "La Sra"; 
+$this->content->template['news_front7'] = "Nombre"; 
+$this->content->template['news_front8'] = "Apellido"; 
+$this->content->template['news_front9'] = "Calle y número de casa"; 
+$this->content->template['news_front10'] = "Código postal"; 
+$this->content->template['news_front11'] = "Residencia"; 
+$this->content->template['news_front12'] = "Idioma"; 
+$this->content->template['news_front13'] = "Estado"; 
+$this->content->template['news_front14'] = " Falta la especificación"; 
+$this->content->template['news_front15'] = " Especificación no válida"; 
+$this->content->template['news_front16'] = " ya presente"; 
+$this->content->template['news_front17'] = "<div id=\"hl\"><h1 class=\"home\">Archivo de boletines</h1></div>"; 
+$this->content->template['news_front18'] = "Boletín de noticias"; 
+$this->content->template['news_front19'] = "Boletín de noticias"; 
+$this->content->template['news_front20'] = "Actualmente no hay datos de archivo disponibles."; 
+$this->content->template['news_front21'] = " ==&gt; No hay grupo(s) seleccionado(s)"; 
+$this->content->template['news_front22'] = "Teléfono"; 
+$this->content->template['news_message3'] = "Idioma"; 
+$this->content->template['newsletter_anzeigen'] = "mostrar"; 
+$this->content->template['plugin']['newsletter']['unsubscribe_newsletter_title'] = "¿Realmente quiere darse de baja del boletín?"; 
+$this->content->template['plugin']['newsletter']['unsubscribe_newsletter'] = "Desinscripción del boletín de noticias"; 
+$this->content->template['plugin']['newsletter']['cancel'] = "Cancelar"; 
+$this->content->template['plugin']['newsletter']['alle'] = "Todo"; 
+$this->content->template['plugin']['newsletter']['altnewsletter'] = "Boletines antiguos"; 
+$this->content->template['plugin']['newsletter']['inhalt_text'] = "Contenido como texto"; 
+$this->content->template['plugin']['newsletter']['inhalt_html'] = "Contenido como HTML"; 
+$this->content->template['plugin']['newsletter']['userdaten'] = "Datos avanzados del usuario"; 
+$this->content->template['plugin']['newsletter']['sprachwahl'] = "¿Habilitar la selección de idioma para el inicio de sesión del usuario en el frontend?"; 
+$this->content->template['plugin']['newsletter']['text'] = "¿Mostrar texto sobre el inicio de sesión?"; 
+$this->content->template['plugin']['newsletter']['html_mails'] = "¿Correos HTML?"; 
+$this->content->template['plugin']['newsletter']['editor'] = "Editor WYSIWYG tinymce?"; 
+$this->content->template['plugin']['newsletter']['sprache'] = "Idioma"; 
+$this->content->template['plugin']['newsletter']['daten'] = "Fechas."; 
+$this->content->template['plugin']['newsletter']['vorname'] = "Nombre"; 
+$this->content->template['plugin']['newsletter']['nachname'] = "Apellido"; 
+$this->content->template['plugin']['newsletter']['strasse'] = "Calle y número de casa"; 
+$this->content->template['plugin']['newsletter']['postleitzahl'] = "Código postal"; 
+$this->content->template['plugin']['newsletter']['wohnort'] = "Residencia"; 
+$this->content->template['plugin']['newsletter']['staat'] = "Estado"; 
+$this->content->template['plugin']['newsletter']['abschicken'] = "presentar"; 
+$this->content->template['plugin']['newsletter']['email'] = "Envíe un correo electrónico a"; 
+$this->content->template['plugin']['newsletter']['eingabe_datei'] = "Introduzca el archivo:"; 
+$this->content->template['plugin']['newsletter']['dokument'] = "El documento:"; 
+$this->content->template['plugin']['newsletter']['durchsuchen'] = "Navegar..."; 
+$this->content->template['plugin']['newsletter']['datei_upload'] = "Sube el archivo:"; 
+$this->content->template['plugin']['newsletter']['upload'] = "cargar"; 
+$this->content->template['plugin']['newsletter']['sicherung'] = "<h3>Crear una copia de seguridad de la base de datos</h3><p> Aquí puede crear una copia de seguridad de la base de datos, que puede restaurar después de una nueva instalación o en cualquier otro momento.</p>"; 
+$this->content->template['plugin']['newsletter']['sicherung_einspielen'] = "Importar una copia de seguridad"; 
+$this->content->template['plugin']['newsletter']['sicherung_ready'] = "Se ha importado el archivo de copia de seguridad."; 
+$this->content->template['plugin']['newsletter']['hinweis'] = "Para importar una copia de seguridad, seleccione el archivo de copia de seguridad:"; 
+$this->content->template['plugin']['newsletter']['warnung'] = "ATENCIÓN - Si importa una copia de seguridad, todos los datos actuales se borrarán irremediablemente. Por lo tanto, ¡asegúrese de crear una copia de seguridad de antemano!"; 
+$this->content->template['plugin']['newsletter']['make_dump'] = "Crear una copia de seguridad ahora"; 
+
+ ?>

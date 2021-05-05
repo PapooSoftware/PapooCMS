@@ -1,0 +1,39 @@
+<?php 
+$this->content->template['message']['plugin']['kontrastwechsler']['empty'] = ""; 
+$this->content->template['message']['plugin']['kontrastwechsler']['contrast_name'] = "名称为对比。"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['aria_label'] = "盲人的按钮描述。(会发生什么)"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['background_color'] = "背景的颜色。"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['text_color'] = "文字的颜色。"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['edit'] = "编辑"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['cancel'] = "取消"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['save'] = "拯救"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['delete'] = "删除"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['delete1'] = "删除对比"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['add'] = "增加对比度"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['confirm_delete'] = "你真的想删除对比度吗？"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['id'] = "身份证"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['name'] = "命名"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['description'] = "描述"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['background-color'] = "背景颜色"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['text-color'] = "文字颜色"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['main_header'] = "对比度转换模块"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['main_description'] = " <br> <br>对比度变换器模块增加了一个模块，可以在前端切换对比度。</br></br>这个插件在安装模块后，你可以像往常一样在模块管理器中安装它。 你通过模块管理器激活模块--在那里选择模块，并把它添加到你想要的地方。"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['css_header'] = "对比度变换器模块的CSS"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['css_description'] = "<br>CSS的工作原理与普通的一样，只不过颜色是由对比列表中的占位符自动取得</br>的：<strong>（#text_color#</strong>表示文字的颜色，<strong>#background_color#</strong>表示背景的颜色）。"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['add_success'] = "对比度成功添加。"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['edit_success'] = "对比度成功处理。"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['setting_edit_success'] = "成功编辑了设置。"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['delete_success'] = "对比度成功删除。"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['edit_css_success'] = "成功处理了CSS。"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['efabox'] = "全民教育字体大小模块是否应与对比度变化模块相连？"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['efa_error_1'] = "全民教育作为一个模块被整合。"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['efa_error_2'] = "EFA Fontsize没有安装。"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['efa_error_3'] = "EFA字体大小文件不可用。"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['efa_error_none'] = "EFA可以连接到对比度转换模块。"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['module_top'] = "屏幕顶部的模块"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['module_side'] = "侧面的模块"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['own_style'] = "自己的模块风格"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['styling_label'] = "选择风格"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['styling_description'] = "在这里，你可以选择不同风格的对比度变化器，或编写你自己的风格。"; 
+
+ ?>

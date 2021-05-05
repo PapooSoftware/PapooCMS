@@ -1,0 +1,41 @@
+<?php 
+$this->content->template['plugin_plugin_zentrale_inhalte_verwalten_sie_hier_zentral_inhalte'] = "Gerir o conteúdo de forma centralizada aqui"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_mit_diesem_plugin_knnen_sie'] = "Com este plugin você pode definir centralmente quais itens de menu com quais conteúdos devem ser espelhados em quais domínios. Todos os conteúdos são personalizáveis através de marcadores de lugar."; 
+$this->content->template['plugin_plugin_zentrale_inhalte_stammdaten'] = "O conteúdo da página principal é editado normalmente através da gestão de artigos / menus. Para trabalhar com marcadores de lugar, estes também devem ser inseridos aqui para a página principal."; 
+$this->content->template['plugin_plugin_zentrale_inhalte_verwaltung_der_domains'] = "Gestão de domínios"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_hier_knnen_sie_die_domains'] = "Aqui você pode gerenciar os domínios, chaves e wildcards"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_neue_domain_eintragen'] = "Registar novo domínio"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_vorhandene_domains'] = "Domínios existentes"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_name_der_domain'] = "Nome de domínio"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_schlssel'] = "Chave"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_platzhalter'] = "Localizador"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_bearbeiten'] = "editar"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_lschen'] = "excluir"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_domaindaten_bearbeiten'] = "Editar dados de domínio"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_hier_bearbeiten_sie_die_daten_einer_domain'] = "Aqui você edita os dados de um domínio"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_name_der_domainf'] = "Nome de domínio"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_domainkey'] = "Domainkey(será gerado automaticamente)"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_daten_speichern'] = "Dados da loja"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_jetzt_speichern'] = "Economize agora"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_daten_wurden_gespeichert'] = "Os dados foram gravados"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_daten_wurden_gelscht'] = "Os dados foram apagados"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_inhalte_fr_die_domains_verwalten'] = "Gerenciar conteúdo para os domínios"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_hier_stellen_sie_ein_welche'] = "Aqui você define o conteúdo que os domínios individuais devem receber."; 
+$this->content->template['plugin_plugin_zentrale_inhalte_liste_der_domains'] = "Lista de domínios"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_weisen_sie_hier_die_inhalte'] = "Atribuir aqui o conteúdo do respectivo domínio"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_sie_sehen_hier_die_'] = "Aqui você pode ver a lista de itens de menu que estão disponíveis, basta marcar a caixa para os itens de menu que devem ser instalados no domínio do cliente."; 
+$this->content->template['plugin_plugin_zentrale_inhalte_daten_zuweisen'] = "Atribuir dados"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_menpunkt'] = "Item do menu"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_zuweisen'] = "Atribuir"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_menupunkte'] = "menupontos"; 
+$this->content->template['plugin_plugin_cotent_client_zentrale_inhalte_einbinden'] = "Integrar conteúdo central"; 
+$this->content->template['plugin_plugin_cotent_client_hier_tragen_sie_die_daten_ein_die_sie'] = "Aqui você insere os dados necessários para sincronizar esta página com a página central. A configuração do que é sincronizado é feita a partir da central."; 
+$this->content->template['plugin_plugin_cotent_client_daten_verwalten'] = "Gerenciar dados"; 
+$this->content->template['plugin_plugin_cotent_client_url_der_zentrale'] = "Sede url"; 
+$this->content->template['plugin_plugin_cotent_client_token_key_kommt_aus_der_zentrale'] = "chave simbólica (vem do escritório central)"; 
+$this->content->template['plugin_plugin_cotent_client_domain_key'] = "Chave de domínio (vem da sede)"; 
+$this->content->template['plugin_plugin_cotent_client_daten_eintragen_fr_den_kontakt'] = "Introduza os dados aqui"; 
+$this->content->template['plugin_plugin_cotent_client_diese_seite_mit_der_zentrale_synchronisieren'] = "Sincronizar esta página com o painel de controle"; 
+$this->content->template['plugin_plugin_cotent_client_daten_speichern'] = "Dados da loja"; 
+
+ ?>

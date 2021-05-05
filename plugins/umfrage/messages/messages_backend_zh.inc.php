@@ -1,0 +1,41 @@
+<?php 
+$this->content->template['UMFMSG_PLUGIN_NAME'] = "调查插件"; 
+$this->content->template['UMFMSG_TITEL'] = "调查。"; 
+$this->content->template['UMFMSG_DETAILS'] = "详细内容"; 
+$this->content->template['UMFMSG_AENDERN'] = "变化"; 
+$this->content->template['UMFMSG_LOESCHEN'] = "删除"; 
+$this->content->template['UMFMSG_JA'] = "是"; 
+$this->content->template['UMFMSG_NEIN'] = "没有"; 
+$this->content->template['UMFMSG_ZURUECK'] = "溯源"; 
+$this->content->template['UMFMSG_B_INTEGRATION'] = "为了启用投票插件，你需要将投票模块分配给 \"布局-&gt;样式 \"下的一个部分。"; 
+$this->content->template['UMFMSG_B_UMFRAGE'] = "调查。"; 
+$this->content->template['UMFMSG_B_STIMMEN'] = "投票。"; 
+$this->content->template['UMFMSG_B_TEILNEHMER'] = "参与者。"; 
+$this->content->template['UMFMSG_B_AKTIV'] = "活跃。"; 
+$this->content->template['UMFMSG_B_MENU_ID'] = "菜单标识。"; 
+$this->content->template['UMFMSG_B_TEXT'] = "文本"; 
+$this->content->template['UMFMSG_B_SPRACHE'] = "语言。"; 
+$this->content->template['UMFMSG_B_BTN_UMFRAGE_NEU'] = "创建一个新的调查"; 
+$this->content->template['UMFMSG_B_UMFRAGEN_LISTE'] = "所有调查的清单。"; 
+$this->content->template['UMFMSG_B_UMFRAGE_NEU'] = "创建一个新的投票"; 
+$this->content->template['UMFMSG_B_UMFRAGE_AENDERN'] = "改变这个调查"; 
+$this->content->template['UMFMSG_B_BTN_UMFRAGE_AENDERN'] = "改变这个调查"; 
+$this->content->template['UMFMSG_B_UMFRAGE_SICHERN_NACHRICHT'] = "调查数据已被保存!"; 
+$this->content->template['UMFMSG_B_UMFRAGE_LOESCHEN'] = "删除此调查"; 
+$this->content->template['UMFMSG_B_UMFRAGE_LOESCHEN_FRAGE'] = "你确定要删除以下调查吗？"; 
+$this->content->template['UMFMSG_B_UMFRAGE_LOESCHEN_HINWEIS'] = "注：<br />随着调查的进行，本次调查的所有答案和结果将被删除。"; 
+$this->content->template['UMFMSG_B_BTN_UMFRAGE_LOESCHEN'] = "删除此调查"; 
+$this->content->template['UMFMSG_B_UMFRAGE_LOESCHEN_NACHRICHT'] = "投票已被删除!"; 
+$this->content->template['UMFMSG_B_BTN_ANTWORT_NEU'] = "创建新的响应"; 
+$this->content->template['UMFMSG_B_ANTWORTEN_LISTE'] = "所有答案的清单。"; 
+$this->content->template['UMFMSG_B_ANTWORT_NEU'] = "创建一个新的响应"; 
+$this->content->template['UMFMSG_B_ANTWORT_AENDERN'] = "改变这个答案"; 
+$this->content->template['UMFMSG_B_BTN_ANTWORT_AENDERN'] = "改变这个答案"; 
+$this->content->template['UMFMSG_B_ANTWORT_SICHERN_NACHRICHT'] = "响应数据已被保存!"; 
+$this->content->template['UMFMSG_B_ANTWORT_LOESCHEN'] = "删除此答案"; 
+$this->content->template['UMFMSG_B_ANTWORT_LOESCHEN_FRAGE'] = "你真的想删除以下答案吗？"; 
+$this->content->template['UMFMSG_B_ANTWORT_LOESCHEN_HINWEIS'] = "注意：<br />，当你回答时，对该答案的所有投票也将被删除。投票的数量将从参与投票的人数中减去。"; 
+$this->content->template['UMFMSG_B_BTN_ANTWORT_LOESCHEN'] = "删除此答案"; 
+$this->content->template['UMFMSG_B_ANTWORT_LOESCHEN_NACHRICHT'] = "答案已被删除!"; 
+
+ ?>

@@ -1,0 +1,4 @@
+<?php 
+$this->content->template['message']['plugin']['imgexpired']['kopf'] = "<h1>Comprobación de la fecha de caducidad de la imagen</h1><p>Este plugin escanea el contenido de la página, incluso antes de enviarlo al cliente, en busca de imágenes que hayan caducado y las elimina.</p><p>Las imágenes a comprobar deben tener una clase definida en uno de los siguientes formatos:</p><ul><li>class=\"expiración-dt-mm-jj\"</li><li>class=\"expiración-dd-mm-aaaa\"</li></ul><p>Ejemplos:</p><ul><li>&lt;img src=\"../images/example.jpg class=\"expiration-18-08-14\" height=\"180\" width=\"320\" /&gt;</li><li>&lt;img src=\"../images/example2.jpg class=\"expire-18-08-2014\" height=\"180\" width=\"320\" /&gt;</li></ul><p>Actualmente no hay opciones de ajuste disponibles.</p>"; 
+
+ ?>

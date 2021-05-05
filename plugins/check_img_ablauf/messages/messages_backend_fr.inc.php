@@ -1,0 +1,4 @@
+<?php 
+$this->content->template['message']['plugin']['imgexpired']['kopf'] = "<h1>Vérification de la date d'expiration de l'image</h1><p>Ce plugin analyse le contenu de la page, avant même qu'elle ne soit envoyée au client, à la recherche d'images ayant expiré et les supprime.</p><p>Les images à vérifier doivent avoir une classe définie dans l'un des formats suivants :</p><ul><li>class=\"expiration-dt-mm-jj\"</li><li>class=\"expiration-dd-mm-yyy\"</li></ul><p>Exemples :</p><ul><li>&lt;img src=\"../images/exemple.jpg class=\"expiration-18-08-14\" height=\"180\" width=\"320\" /&gt;</li><li>&lt;img src=\"../images/exemple2.jpg class=\"expire-18-08-2014\" height=\"180\" width=\"320\" /&gt;</li></ul><p>Il n'y a actuellement aucune option d'ajustement disponible.</p>"; 
+
+ ?>
