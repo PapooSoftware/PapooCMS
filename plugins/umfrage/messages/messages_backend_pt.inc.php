@@ -1,0 +1,41 @@
+<?php 
+$this->content->template['UMFMSG_PLUGIN_NAME'] = "Plugin de pesquisa"; 
+$this->content->template['UMFMSG_TITEL'] = "Pesquisa:"; 
+$this->content->template['UMFMSG_DETAILS'] = "Detalhes"; 
+$this->content->template['UMFMSG_AENDERN'] = "Alterar"; 
+$this->content->template['UMFMSG_LOESCHEN'] = "Eliminar"; 
+$this->content->template['UMFMSG_JA'] = "Sim"; 
+$this->content->template['UMFMSG_NEIN'] = "Não"; 
+$this->content->template['UMFMSG_ZURUECK'] = "Voltar"; 
+$this->content->template['UMFMSG_B_INTEGRATION'] = "Para activar o plugin da sondagem, é necessário atribuir o módulo de sondagem a uma secção em \"Layout -&gt; Estilos\"."; 
+$this->content->template['UMFMSG_B_UMFRAGE'] = "Pesquisa:"; 
+$this->content->template['UMFMSG_B_STIMMEN'] = "Votos:"; 
+$this->content->template['UMFMSG_B_TEILNEHMER'] = "Participantes:"; 
+$this->content->template['UMFMSG_B_AKTIV'] = "ativo:"; 
+$this->content->template['UMFMSG_B_MENU_ID'] = "Identificação do menu:"; 
+$this->content->template['UMFMSG_B_TEXT'] = "Texto"; 
+$this->content->template['UMFMSG_B_SPRACHE'] = "Linguagem:"; 
+$this->content->template['UMFMSG_B_BTN_UMFRAGE_NEU'] = "Criar uma nova pesquisa"; 
+$this->content->template['UMFMSG_B_UMFRAGEN_LISTE'] = "Lista de todas as pesquisas:"; 
+$this->content->template['UMFMSG_B_UMFRAGE_NEU'] = "Criar uma nova sondagem"; 
+$this->content->template['UMFMSG_B_UMFRAGE_AENDERN'] = "Alterar esta pesquisa"; 
+$this->content->template['UMFMSG_B_BTN_UMFRAGE_AENDERN'] = "Alterar esta pesquisa"; 
+$this->content->template['UMFMSG_B_UMFRAGE_SICHERN_NACHRICHT'] = "Os dados da pesquisa foram salvos!"; 
+$this->content->template['UMFMSG_B_UMFRAGE_LOESCHEN'] = "Eliminar esta pesquisa"; 
+$this->content->template['UMFMSG_B_UMFRAGE_LOESCHEN_FRAGE'] = "Tem a certeza que quer apagar a seguinte pesquisa?"; 
+$this->content->template['UMFMSG_B_UMFRAGE_LOESCHEN_HINWEIS'] = "Nota:<br />Com a pesquisa, todas as respostas e resultados desta pesquisa serão eliminados."; 
+$this->content->template['UMFMSG_B_BTN_UMFRAGE_LOESCHEN'] = "Eliminar esta pesquisa"; 
+$this->content->template['UMFMSG_B_UMFRAGE_LOESCHEN_NACHRICHT'] = "A sondagem foi eliminada!"; 
+$this->content->template['UMFMSG_B_BTN_ANTWORT_NEU'] = "Criar nova resposta"; 
+$this->content->template['UMFMSG_B_ANTWORTEN_LISTE'] = "Lista de todas as respostas:"; 
+$this->content->template['UMFMSG_B_ANTWORT_NEU'] = "Criar uma nova resposta"; 
+$this->content->template['UMFMSG_B_ANTWORT_AENDERN'] = "Alterar esta resposta"; 
+$this->content->template['UMFMSG_B_BTN_ANTWORT_AENDERN'] = "Alterar esta resposta"; 
+$this->content->template['UMFMSG_B_ANTWORT_SICHERN_NACHRICHT'] = "Os dados de resposta foram guardados!"; 
+$this->content->template['UMFMSG_B_ANTWORT_LOESCHEN'] = "Apagar esta resposta"; 
+$this->content->template['UMFMSG_B_ANTWORT_LOESCHEN_FRAGE'] = "Você realmente quer apagar a seguinte resposta?"; 
+$this->content->template['UMFMSG_B_ANTWORT_LOESCHEN_HINWEIS'] = "Nota:<br />Quando você responder, todos os votos emitidos para essa resposta também serão excluídos. O número de votos expressos será subtraído do número de participantes na votação."; 
+$this->content->template['UMFMSG_B_BTN_ANTWORT_LOESCHEN'] = "Apagar esta resposta"; 
+$this->content->template['UMFMSG_B_ANTWORT_LOESCHEN_NACHRICHT'] = "A resposta foi apagada!"; 
+
+ ?>

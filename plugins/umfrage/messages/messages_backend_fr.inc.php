@@ -1,75 +1,41 @@
-<?php
-/**
+<?php 
+$this->content->template['UMFMSG_PLUGIN_NAME'] = "Sondage Plugin"; 
+$this->content->template['UMFMSG_TITEL'] = "Sondage"; 
+$this->content->template['UMFMSG_DETAILS'] = "Détails"; 
+$this->content->template['UMFMSG_AENDERN'] = "Modifier"; 
+$this->content->template['UMFMSG_LOESCHEN'] = "Effacer"; 
+$this->content->template['UMFMSG_JA'] = "Oui"; 
+$this->content->template['UMFMSG_NEIN'] = "Non"; 
+$this->content->template['UMFMSG_ZURUECK'] = "Retour"; 
+$this->content->template['UMFMSG_B_INTEGRATION'] = "Pour activer le plugin de sondage, vous devez attribuer le module de sondage à une section sous \"Layout -&gt; Styles\"."; 
+$this->content->template['UMFMSG_B_UMFRAGE'] = "Enquête :"; 
+$this->content->template['UMFMSG_B_STIMMEN'] = "Votes :"; 
+$this->content->template['UMFMSG_B_TEILNEHMER'] = "Participants :"; 
+$this->content->template['UMFMSG_B_AKTIV'] = "active :"; 
+$this->content->template['UMFMSG_B_MENU_ID'] = "Id. de menu :"; 
+$this->content->template['UMFMSG_B_TEXT'] = "Texte"; 
+$this->content->template['UMFMSG_B_SPRACHE'] = "Langue :"; 
+$this->content->template['UMFMSG_B_BTN_UMFRAGE_NEU'] = "Créer une nouvelle enquête"; 
+$this->content->template['UMFMSG_B_UMFRAGEN_LISTE'] = "Liste de toutes les enquêtes :"; 
+$this->content->template['UMFMSG_B_UMFRAGE_NEU'] = "Créer un nouveau sondage"; 
+$this->content->template['UMFMSG_B_UMFRAGE_AENDERN'] = "Modifier cette enquête"; 
+$this->content->template['UMFMSG_B_BTN_UMFRAGE_AENDERN'] = "Modifier cette enquête"; 
+$this->content->template['UMFMSG_B_UMFRAGE_SICHERN_NACHRICHT'] = "Les données de l'enquête ont été sauvegardées !"; 
+$this->content->template['UMFMSG_B_UMFRAGE_LOESCHEN'] = "Supprimer cette enquête"; 
+$this->content->template['UMFMSG_B_UMFRAGE_LOESCHEN_FRAGE'] = "Êtes-vous sûr de vouloir supprimer l'enquête suivante ?"; 
+$this->content->template['UMFMSG_B_UMFRAGE_LOESCHEN_HINWEIS'] = "Note :<br />. Avec l'enquête, toutes les réponses et les résultats de cette enquête seront supprimés."; 
+$this->content->template['UMFMSG_B_BTN_UMFRAGE_LOESCHEN'] = "Supprimer cette enquête"; 
+$this->content->template['UMFMSG_B_UMFRAGE_LOESCHEN_NACHRICHT'] = "Le sondage a été supprimé !"; 
+$this->content->template['UMFMSG_B_BTN_ANTWORT_NEU'] = "Créer une nouvelle réponse"; 
+$this->content->template['UMFMSG_B_ANTWORTEN_LISTE'] = "Liste de toutes les réponses :"; 
+$this->content->template['UMFMSG_B_ANTWORT_NEU'] = "Créer une nouvelle réponse"; 
+$this->content->template['UMFMSG_B_ANTWORT_AENDERN'] = "Changez cette réponse"; 
+$this->content->template['UMFMSG_B_BTN_ANTWORT_AENDERN'] = "Changez cette réponse"; 
+$this->content->template['UMFMSG_B_ANTWORT_SICHERN_NACHRICHT'] = "Les données de réponse ont été sauvegardées !"; 
+$this->content->template['UMFMSG_B_ANTWORT_LOESCHEN'] = "Supprimer cette réponse"; 
+$this->content->template['UMFMSG_B_ANTWORT_LOESCHEN_FRAGE'] = "Voulez-vous vraiment supprimer la réponse suivante ?"; 
+$this->content->template['UMFMSG_B_ANTWORT_LOESCHEN_HINWEIS'] = "Note :<br />Lorsque vous répondez, tous les votes émis pour cette réponse seront également supprimés. Le nombre de votes exprimés sera soustrait du nombre de participants au sondage."; 
+$this->content->template['UMFMSG_B_BTN_ANTWORT_LOESCHEN'] = "Supprimer cette réponse"; 
+$this->content->template['UMFMSG_B_ANTWORT_LOESCHEN_NACHRICHT'] = "La réponse a été supprimée !"; 
 
-Deutsche Text-Daten des Plugins "Umfrage" für das Backend
-
-!! Diese Datei muss im Format "UTF-8 (NoBOM)" gespeichert werden !!!
-
-*/
-// *********************
-// ***   ALLGEMEIN   ***
-// *********************
-
-$this->content->template['UMFMSG_PLUGIN_NAME'] = "Sondage Plugin";
-$this->content->template['UMFMSG_TITEL'] = "Sondage";
-
-$this->content->template['UMFMSG_DETAILS'] = "Détails";
-$this->content->template['UMFMSG_AENDERN'] = "Modifier";
-$this->content->template['UMFMSG_LOESCHEN'] = "Effacer";
-
-$this->content->template['UMFMSG_JA'] = "Oui";
-$this->content->template['UMFMSG_NEIN'] = "Non";
-
-$this->content->template['UMFMSG_ZURUECK'] = "Retour";
-
-
-// *******************
-// ***   BACKEND   ***
-// *******************
-
-// Allgemein
-$this->content->template['UMFMSG_B_INTEGRATION'] = "Um das Umfrage-Pugin zu aktivieren, müssen Sie das Umfrage-Modul unter \"Layout -> Styles\" einem Bereich zuweisen.";
-$this->content->template['UMFMSG_B_UMFRAGE'] = "Umfrage:";
-$this->content->template['UMFMSG_B_STIMMEN'] = "Stimmen:";
-$this->content->template['UMFMSG_B_TEILNEHMER'] = "Teilnehmer:";
-$this->content->template['UMFMSG_B_AKTIV'] = "aktiv:";
-$this->content->template['UMFMSG_B_MENU_ID'] = "Menü-Id:";
-$this->content->template['UMFMSG_B_TEXT'] = "Text";
-$this->content->template['UMFMSG_B_SPRACHE'] = "Sprache:";
-
-// Texte "Umfrage - Liste"
-$this->content->template['UMFMSG_B_BTN_UMFRAGE_NEU'] = "Neue Umfrage erstellen";
-$this->content->template['UMFMSG_B_UMFRAGEN_LISTE'] = "Liste aller Umfragen:";
-
-// Texte "Umfrage - NeuEdit"
-$this->content->template['UMFMSG_B_UMFRAGE_NEU'] = "Eine neue Umfrage erstellen";
-$this->content->template['UMFMSG_B_UMFRAGE_AENDERN'] = "Diese Umfrage ändern";
-$this->content->template['UMFMSG_B_BTN_UMFRAGE_AENDERN'] = "Diese Umfrage ändern";
-$this->content->template['UMFMSG_B_UMFRAGE_SICHERN_NACHRICHT'] = "Umfrage-Daten wurden gespeichert!";
-
-// Texte "Umfrage - Löschen"
-$this->content->template['UMFMSG_B_UMFRAGE_LOESCHEN'] = "Diese Umfrage löschen";
-$this->content->template['UMFMSG_B_UMFRAGE_LOESCHEN_FRAGE'] = "Wollen Sie die folgende Umfrage wirklich löschen?";
-$this->content->template['UMFMSG_B_UMFRAGE_LOESCHEN_HINWEIS'] = "Hinweis:<br />Mit der Umfrage werden auch sämtliche Antworten und Ergebnisse dieser Umfrage gelöscht.";
-$this->content->template['UMFMSG_B_BTN_UMFRAGE_LOESCHEN'] = "Diese Umfrage löschen";
-$this->content->template['UMFMSG_B_UMFRAGE_LOESCHEN_NACHRICHT'] = "Umfrage wurde gelöscht!";
-
-// Texte "Antworten - Liste"
-$this->content->template['UMFMSG_B_BTN_ANTWORT_NEU'] = "Neue Antwort erzeugen";
-$this->content->template['UMFMSG_B_ANTWORTEN_LISTE'] = "Liste aller Antworten:";
-
-// Texte "Antworten - NeuEdit"
-$this->content->template['UMFMSG_B_ANTWORT_NEU'] = "Eine neue Antwort erzeugen";
-$this->content->template['UMFMSG_B_ANTWORT_AENDERN'] = "Diese Antwort ändern";
-$this->content->template['UMFMSG_B_BTN_ANTWORT_AENDERN'] = "Diese Antwort ändern";
-$this->content->template['UMFMSG_B_ANTWORT_SICHERN_NACHRICHT'] = "Antwort-Daten wurden gespeichert!";
-
-// Texte "Antworten - Löschen"
-$this->content->template['UMFMSG_B_ANTWORT_LOESCHEN'] = "Diese Antwort löschen";
-$this->content->template['UMFMSG_B_ANTWORT_LOESCHEN_FRAGE'] = "Wollen Sie die folgende Antwort wirklich löschen?";
-$this->content->template['UMFMSG_B_ANTWORT_LOESCHEN_HINWEIS'] = "Hinweis:<br />Mit der Antwort werden auch alle abgegebenen Stimmen für diese Antwort gelöscht. Die Zahl der abgegebenen Stimmen wird von der Anzahl der Teilnehmer an der Umfrage abgezogen.";
-$this->content->template['UMFMSG_B_BTN_ANTWORT_LOESCHEN'] = "Diese Antwort löschen";
-$this->content->template['UMFMSG_B_ANTWORT_LOESCHEN_NACHRICHT'] = "Antwort wurde gelöscht!";
-
-
-?>
+ ?>

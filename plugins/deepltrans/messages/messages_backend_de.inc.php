@@ -17,7 +17,7 @@ $this->content->template['plugin_deepltrans_bersetzungen_starten']='&Uuml;berset
 $this->content->template['plugin_deepltrans_hier_knnen_sie_die_bersetzung_der_einzelnen_elemente_starten']='Hier k&ouml;nnen Sie die &Uuml;bersetzung der einzelnen Elemente starten';
 $this->content->template['plugin_deepltrans_die_bersetzung_erfolgt_in_alle_aktivierten_sprachen']='Die &Uuml;bersetzung erfolgt in in den jeweils dargestellten Sprachen. Mit dem Klick auf den Button stoßen Sie die Routine an - die Übersetzung an sich dauert ca. 15 Minuten je Button. 
 Haben Sie ein wenig Geduld und schauen Sie nach 10 bis 30 Minuten wieder nach den Dateien.<br ><br >Im Verzeichnis plugins/deepltrans/log findet sich das translate.log - das können Sie mit tail -f z.B. auf der Konsole in Linux Systemen beobachten. Dort wird jede Übersetzung
-vermerkt. Ab 99% zählen Dateien als komplett übersetzt, es kommt gerade bei den Plugins da immer mal wieder zu Zählungen die nicht ganz korrekt sind, daher gibt es diesen Schwellenwert. Falls nochwas auffällt kann man das manuell ergänzen.';
+vermerkt. Ab 99% zählen Dateien als komplett übersetzt, es kommt gerade bei den Plugins da immer mal wieder zu Zählungen die nicht ganz korrekt sind, da es Begriffe gibt die in beiden Sprachen identisch sind. Falls nochwas auffällt kann man das manuell ergänzen.';
 $this->content->template['plugin_deepltrans_bersetzung_jetzt_starten']='&Uuml;bersetzung jetzt starten';
 $this->content->template['plugin_deepltrans_bersetzungen_jetzt_starten_bvar']='&Uuml;bersetzungen jetzt starten';
 $this->content->template['plugin_deepltrans_sprachdateien_bersetzen']='Sprachdateien &uuml;bersetzen';

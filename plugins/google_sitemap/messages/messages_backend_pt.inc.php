@@ -1,0 +1,21 @@
+<?php 
+$this->content->template['plugin']['google_sitemap']['text'] = "<h2>O Plugin do Mapa do Site do Google</h2><p>Com este plugin você pode criar o Google Sitemap.</p>"; 
+$this->content->template['plugin']['google_sitemap']['change'] = "Alterar os dados para o mapa do site do google"; 
+$this->content->template['plugin']['google_sitemap']['text2'] = "Especifique com que frequência a sua página é actualizada e qual a prioridade que as entradas devem ter:"; 
+$this->content->template['plugin']['google_sitemap']['changefreq'] = "Selecione o changefreq:"; 
+$this->content->template['plugin']['google_sitemap']['prioritaet'] = "Selecione a prioridade:"; 
+$this->content->template['plugin']['google_sitemap']['eintragen'] = "Entre"; 
+$this->content->template['plugin']['google_sitemap']['erlaeuterung'] = "Explicação:"; 
+$this->content->template['plugin']['google_sitemap']['text3'] = "<p><b>changefreq:</b> <br />A frequência com que se espera que a página mude. Este valor dá aos motores de busca informações gerais. Não está necessariamente relacionado com a frequência com que você rasteja a página. Os valores válidos são:<br />"; 
+$this->content->template['plugin']['google_sitemap']['text4'] = "O valor \"sempre\" é usado para descrever documentos que mudam a cada acesso. O valor \"nunca\" é usado para descrever URLs arquivadas. <br /> <br /> O valor desta tag é tomado como uma dica, não como um comando. Os rastejadores dos motores de busca levam esta informação em conta quando tomam decisões. No entanto, podem rastejar páginas etiquetadas \"de hora em hora\" com menos frequência do que de hora em hora, ou páginas etiquetadas \"anualmente\" com mais frequência do que anualmente. Mesmo as páginas marcadas com \"nunca\" são provavelmente rastreadas por rastejadores em certos intervalos para detectar alterações inesperadas em tais páginas. <br /></p><p><b>Prioridade:</b> <br />A prioridade deste URL em relação a outros URLs do seu site. Os valores válidos variam de 0,0 a 1,0. Este valor não afecta uma comparação das suas páginas com páginas de outros sites, apenas informa aos motores de busca quais as páginas que têm a maior prioridade para si. As páginas são então rastejadas com base nisso. <br /> <br /> A prioridade padrão de uma página é 0,5. <br /> <br />A prioridade que você atribui a uma página não afeta a posição de suas URLs nas páginas de resultados de um mecanismo de busca. Esta informação só é utilizada pelos motores de busca para seleccionar entre URLs no mesmo website. Assim, a utilização desta etiqueta aumenta a probabilidade de que as suas páginas mais importantes sejam listadas no índice de pesquisa. <br /> <br /> Da mesma forma, atribuir alta prioridade a todos os URLs do seu site não é uma boa idéia. Como a prioridade é relativa, ela só é usada para selecionar entre URLs dentro do seu próprio site. A prioridade das suas páginas não é comparada com a prioridade das páginas de outros sites. <br /></p>"; 
+$this->content->template['plugin']['google_sitemap']['ready'] = "O Sitemap do Google foi criado."; 
+$this->content->template['plugin']['google_sitemap']['link'] = "Link para a sua Conta Google:"; 
+$this->content->template['plugin']['google_sitemap']['error'] = "Nenhum Sitemap do Google poderia ser criado."; 
+$this->content->template['plugin']['google_sitemap']['datei'] = "O arquivo "; 
+$this->content->template['plugin']['google_sitemap']['datei2'] = " existe, mas não pode ser sobregravada. Por favor, altere os direitos de acesso (permissão pública para escrever) do arquivo."; 
+$this->content->template['plugin']['google_sitemap']['gespeichert'] = "O mapa do site foi salvo."; 
+$this->content->template['plugin']['google_sitemap']['ordner'] = "A pasta "; 
+$this->content->template['plugin']['google_sitemap']['ordner2'] = " não podia ser escrito. Por favor, altere os direitos de acesso via ftp. Ou salvar um arquivo vazio \" . $filename . \" no diretório htdocs e alterar os direitos de acesso (permissão pública de escrita) do arquivo."; 
+$this->content->template['plugin']['google_sitemap']['geaendert'] = "As datas foram alteradas"; 
+
+ ?>

@@ -845,7 +845,7 @@ $this->content->template['message_734'] = "nobr:<h2>Iniciar actualización</h2><
 $this->content->template['message_735'] = "Fuera de servicio / Mantenimiento"; 
 $this->content->template['message_736'] = "¿Página fuera de línea? (No se aplica al usuario root)"; 
 $this->content->template['message_737'] = "Texto fuera de línea / de mantenimiento"; 
-$this->content->template['message_738'] = ""; 
+$this->content->template['message_738'] = "nobr:<h1>:Gestionar artículos.</h1><p>Aquí puede crear artículos, editarlos y cambiar su orden.</p>"; 
 $this->content->template['message_739'] = "<h1>Editar el diseño</h1><p>Aquí puedes editar el diseño de Papoo. ¿Qué módulos deben mostrarse y dónde? ¿Qué CSS quieres utilizar? ¿Qué plantillas deben utilizarse?</p>  "; 
 $this->content->template['message_740'] = "<legend>Seleccione la opción de menú</legend>
 			<p>Seleccione el elemento del menú cuyo orden de los elementos desea cambiar:</p>"; 
@@ -855,7 +855,7 @@ $this->content->template['message_743'] = "Paso 1 de 5";
 $this->content->template['message_744'] = "Paso 2 de 5"; 
 $this->content->template['message_745'] = "Paso 3 de 5"; 
 $this->content->template['message_746'] = "Paso 4 de 5"; 
-$this->content->template['message_747'] = ""; 
+$this->content->template['message_747'] = "Paso 5 de 5"; 
 $this->content->template['message_748'] = "El estilo ha sido introducido y ya está disponible en el sistema."; 
 $this->content->template['message_749'] = "Ahora puede personalizar los archivos de la plantilla y los archivos CSS utilizando los elementos del menú de la izquierda."; 
 $this->content->template['message_750'] = "Los próximos pasos"; 

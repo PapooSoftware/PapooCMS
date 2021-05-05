@@ -1,0 +1,107 @@
+<?php 
+$this->content->template['message_20001'] = "<h2>Nieuwsbrief versturen</h2>
+<p>U kunt hier de nieuwsbrief invoeren die u wilt verzenden. De afdruk die u hebt gemaakt, wordt automatisch doorgestuurd.</p>"; 
+$this->content->template['message_20002'] = "Onderwerp"; 
+$this->content->template['message_20003'] = " Inhoud van de nieuwsbrief "; 
+$this->content->template['message_20004'] = "Inhoud als platte tekst"; 
+$this->content->template['message_20005'] = "<h2>Nieuwsbrief afdruk bewerken</h2>
+<strong>Vul hier belangrijke gegevens in de opdruk van de nieuwsbrief in.</strong>"; 
+$this->content->template['message_20006'] = " Afdruk Inhoud:"; 
+$this->content->template['message_20007'] = "Inhoud"; 
+$this->content->template['message_20008'] = "<h2>Nieuwsbrief abonnees</h2>
+<p>Hier kunt u de e-mailadressen van onze abonnees zien</p>
+<p>Klik op een e-mailadres om het te bewerken.</p>
+<p>Om een nieuw adres toe te voegen klik op"; 
+$this->content->template['message_20009'] = "nieuwe e-mail toevoegen "; 
+$this->content->template['message_20010'] = ""; 
+$this->content->template['message_20011'] = "Ja "; 
+$this->content->template['message_20012'] = "Geen"; 
+$this->content->template['message_20013'] = "Actief"; 
+$this->content->template['message_20014'] = "E-mail adres"; 
+$this->content->template['message_20015'] = "E-mail"; 
+$this->content->template['news_message_1'] = "<h1>Nieuwsbrief bewerken</h1><p>U kunt hier de nieuwsbrief, de abonnees en de opdruk bewerken.</p><p>Als u de nieuwsbrief wilt opnemen, kan dat<br/><ol><li>Maak een menu-item. Bij het aanmaken kan u manueel de volgende vermelding toevoegen onder formulier link: <br /><strong>plugin:newsletter/templates/subscribe_newsletter.html</strong>.</li><li>Als u geen apart menu-item wilt, kunt u in elk artikel een link maken via de link-functie in de editor. De link moet de volgende inhoud hebben: /plugin.php?menuid=1&amp;template=newsletter/templates/subscribe_newsletter.html .</li><li>U kunt ook de module manager gebruiken om het inschrijvingsformulier in te sluiten waar u maar wilt </li></ol>"; 
+$this->content->template['news_message_2'] = "<h2 style=\"color:red;\">De nieuwsbrief is verstuurd!</h2>"; 
+$this->content->template['news_message_3'] = "<h2>Bespaar Nieuwsbrief!</h2><p>Klik op Bewaar Nieuwsbrief en alle relevante nieuwsbriefgegevens worden opgeslagen in een dumpbestand. Deze opslag is onafhankelijk van de algemene opslag.</p>"; 
+$this->content->template['news_message_4'] = "Bewaar nieuwsbrief"; 
+$this->content->template['message_20016'] = "E-mail adres waarmee wordt verzonden:"; 
+$this->content->template['message_20017'] = "De naam voor het *of:* gedeelte:"; 
+$this->content->template['message_20018'] = "<h3>Abonneer u op onze nieuwsbrief.</h3><p>U kunt zich hier abonneren op onze nieuwsbrief. Vul daarvoor het onderstaande formulier in. U ontvangt dan een bevestigingse-mail, die u moet beantwoorden.</p>
+<p>Pas dan bent u ingeschreven voor de nieuwsbrief.</p>"; 
+$this->content->template['message_20018_ds'] = "Ik heb kennis genomen van het privacybeleid. Ik ga ermee akkoord dat mijn gegevens elektronisch worden verzameld en opgeslagen om op mijn verzoek te kunnen reageren. Opmerking: U kunt uw toestemming voor de toekomst te allen tijde intrekken door een e-mail te sturen naar info@ihre-mail.de."; 
+$this->content->template['message_20018_1'] = "Archief Nieuwsbrief"; 
+$this->content->template['message_20018_a'] = "Abonneer u op onze nieuwsbrief."; 
+$this->content->template['message_20019'] = "Voer uw gegevens in."; 
+$this->content->template['message_20020'] = "abonneer u op"; 
+$this->content->template['message_20021'] = "Stuur"; 
+$this->content->template['erneut_versenden'] = "Opnieuw verzenden."; 
+$this->content->template['datum'] = "Datum"; 
+$this->content->template['inhalt'] = "Inhoud"; 
+$this->content->template['useranzahl'] = "Aantal ontvangers"; 
+$this->content->template['gruppe'] = "Groep"; 
+$this->content->template['newsletter_texthtml'] = "Inhoud als HTML"; 
+$this->content->template['news_message1'] = "<h2>Kies een taal</h2><p>Selecteer hier de taal waarin een nieuwsbrief moet worden aangemaakt.</p>"; 
+$this->content->template['news_message2'] = "Selecteer"; 
+$this->content->template['news_imptext1'] = "-- Om u uit te schrijven, klik hier: http://#url#/plugin.php?menuid=1&amp;activate=#key#&amp;news_message=de_activate&amp;template=newsletter/templates/subscribe_newsletter.html #imp#"; 
+$this->content->template['news_imptext2'] = "  Om de nieuwsbrief op te zeggen, klik hier: <br /> <a href=\"http://#url#/plugin.php?menuid=1&activate=#key#&news_message=de_activate&template=newsletter/templates/subscribe_newsletter.html\">Nieuwsbrief annuleren</a><br />"; 
+$this->content->template['news_mail1'] = "Nieuwsbrief geabonneerd op seitenurl."; 
+$this->content->template['news_mail2'] = "U heeft zich geabonneerd op de nieuwsbrief van seitenurl, indien u zich niet heeft geabonneerd op deze nieuwsbrief of deze niet wenst te ontvangen, gelieve deze e-mail te negeren, u zult geen nieuwe nieuwsbrief meer ontvangen. Om de nieuwsbrief te activeren, klikt u op de volgende link"; 
+$this->content->template['news_mail3'] = "Een nieuwe abonnee heeft zich aangemeld voor een of meer gemodereerde lijsten"; 
+$this->content->template['news_front1'] = "nodecode:<div id=\"hl\"><h1 class=\"home\">Nieuwsbrief ingeschreven</h1></div><p>U heeft zich ingeschreven voor onze nieuwsbrief. U zou binnen enkele minuten een e-mail met een bevestigingslink moeten ontvangen.</p><p>Klik op de link in de e-mail om u definitief op deze nieuwsbrief te abonneren.</p>"; 
+$this->content->template['news_front2'] = "nodecode:<div id=\"hl\"><h1 class=\"home\">Nieuwsbrief ingeschreven</h1></div><p>Uw inschrijving op onze nieuwsbrief is geactiveerd. U begint vandaag met het ontvangen van onze nieuwsbrief. Indien u zich wenst uit te schrijven, klikt u gewoon op de uitschrijflink in elke e-mail die u van ons ontvangt.</p>"; 
+$this->content->template['news_front3'] = "<div id=\"hl\"><h1 class=\"home\">Nieuwsbrief geannuleerd</h1></div><p>De nieuwsbrief is geannuleerd en uw gegevens zijn gewist.</p>"; 
+$this->content->template['news_front4'] = "Uw gegevens"; 
+$this->content->template['news_front5'] = "Mr"; 
+$this->content->template['news_front6'] = "Mevrouw"; 
+$this->content->template['news_front7'] = "Voornaam"; 
+$this->content->template['news_front8'] = "Achternaam"; 
+$this->content->template['news_front9'] = "Straat en huisnummer"; 
+$this->content->template['news_front10'] = "Postcode"; 
+$this->content->template['news_front11'] = "Residentie"; 
+$this->content->template['news_front12'] = "Taal"; 
+$this->content->template['news_front13'] = "Staat"; 
+$this->content->template['news_front14'] = " Specificatie ontbreekt"; 
+$this->content->template['news_front15'] = " Ongeldige specificatie"; 
+$this->content->template['news_front16'] = " reeds aanwezig"; 
+$this->content->template['news_front17'] = "<div id=\"hl\"><h1 class=\"home\">Archief Nieuwsbrief</h1></div>"; 
+$this->content->template['news_front18'] = "Nieuwsbrief"; 
+$this->content->template['news_front19'] = "Nieuwsbrief"; 
+$this->content->template['news_front20'] = "Er zijn momenteel geen archiefgegevens beschikbaar."; 
+$this->content->template['news_front21'] = " ==&gt; Geen groep(en) geselecteerd"; 
+$this->content->template['news_front22'] = "Telefoon"; 
+$this->content->template['news_message3'] = "Taal"; 
+$this->content->template['newsletter_anzeigen'] = "show"; 
+$this->content->template['plugin']['newsletter']['unsubscribe_newsletter_title'] = "Wilt u zich echt uitschrijven voor de nieuwsbrief?"; 
+$this->content->template['plugin']['newsletter']['unsubscribe_newsletter'] = "Nieuwsbrief afmelden"; 
+$this->content->template['plugin']['newsletter']['cancel'] = "Annuleren"; 
+$this->content->template['plugin']['newsletter']['alle'] = "Alle"; 
+$this->content->template['plugin']['newsletter']['altnewsletter'] = "Oude nieuwsbrieven"; 
+$this->content->template['plugin']['newsletter']['inhalt_text'] = "Inhoud als tekst"; 
+$this->content->template['plugin']['newsletter']['inhalt_html'] = "Inhoud als HTML"; 
+$this->content->template['plugin']['newsletter']['userdaten'] = "Geavanceerde gebruikersgegevens"; 
+$this->content->template['plugin']['newsletter']['sprachwahl'] = "Taalselectie inschakelen voor gebruikers login in frontend?"; 
+$this->content->template['plugin']['newsletter']['text'] = "Tekst tonen boven de login?"; 
+$this->content->template['plugin']['newsletter']['html_mails'] = "HTML mails?"; 
+$this->content->template['plugin']['newsletter']['editor'] = "WYSIWYG-editor tinymce?"; 
+$this->content->template['plugin']['newsletter']['sprache'] = "Taal"; 
+$this->content->template['plugin']['newsletter']['daten'] = "Data."; 
+$this->content->template['plugin']['newsletter']['vorname'] = "Voornaam"; 
+$this->content->template['plugin']['newsletter']['nachname'] = "Achternaam"; 
+$this->content->template['plugin']['newsletter']['strasse'] = "Straat en huisnummer"; 
+$this->content->template['plugin']['newsletter']['postleitzahl'] = "Postcode"; 
+$this->content->template['plugin']['newsletter']['wohnort'] = "Residentie"; 
+$this->content->template['plugin']['newsletter']['staat'] = "Staat"; 
+$this->content->template['plugin']['newsletter']['abschicken'] = "indienen"; 
+$this->content->template['plugin']['newsletter']['email'] = "E-mail"; 
+$this->content->template['plugin']['newsletter']['eingabe_datei'] = "Voer het bestand in:"; 
+$this->content->template['plugin']['newsletter']['dokument'] = "Het document:"; 
+$this->content->template['plugin']['newsletter']['durchsuchen'] = "Blader..."; 
+$this->content->template['plugin']['newsletter']['datei_upload'] = "Upload bestand:"; 
+$this->content->template['plugin']['newsletter']['upload'] = "upload"; 
+$this->content->template['plugin']['newsletter']['sicherung'] = "<h3>Een backup maken van de database</h3><p> U kunt hier een backup maken van de database, die u kunt herstellen na een nieuwe installatie of op een ander tijdstip.</p>"; 
+$this->content->template['plugin']['newsletter']['sicherung_einspielen'] = "Een backup importeren"; 
+$this->content->template['plugin']['newsletter']['sicherung_ready'] = "Back-up bestand is geïmporteerd."; 
+$this->content->template['plugin']['newsletter']['hinweis'] = "Om een backup te importeren, selecteert u het backup-bestand:"; 
+$this->content->template['plugin']['newsletter']['warnung'] = "ATTENTIE - Als u een backup importeert, worden alle huidige gegevens onherroepelijk gewist. Zorg er daarom voor dat u vooraf een back-up maakt!"; 
+$this->content->template['plugin']['newsletter']['make_dump'] = "Maak nu een back-up"; 
+
+ ?>

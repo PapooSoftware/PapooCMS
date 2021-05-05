@@ -24,4 +24,11 @@ ALTER TABLE `XXX_papoo_faq_categories` CHANGE `id` `id` INT NOT NULL; ##b_dump##
 ALTER TABLE `XXX_papoo_faq_categories` DROP PRIMARY KEY; ##b_dump##
 ALTER TABLE `XXX_papoo_faq_content` CHANGE `id` `id` INT NOT NULL; ##b_dump##
 ALTER TABLE `XXX_papoo_faq_content` DROP PRIMARY KEY; ##b_dump##
+ALTER TABLE `XXX__plugin_shop_produkte_lang` CHANGE `produkte_lang_meta_title` `produkte_lang_meta_title` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL; ##b_dump##
+ALTER TABLE `XXX__plugin_shop_produkte_lang` CHANGE `produkte_lang_meta_beschreibung` `produkte_lang_meta_beschreibung` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL; ##b_dump##
+ALTER TABLE `XXX__plugin_shop_produkte_lang` CHANGE `produkte_lang_met_keywords` `produkte_lang_met_keywords` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL; ##b_dump##
+ALTER TABLE `XXX__plugin_shop_produkte_lang` CHANGE `produkte_lang_produkt_beschreibung_lang` `produkte_lang_produkt_beschreibung_lang` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL; ##b_dump##
+ALTER TABLE `XXX__plugin_shop_produkte_lang` CHANGE `produkte_lang_produkt_surl` `produkte_lang_produkt_surl` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL; ##b_dump##
+ALTER TABLE `XXX__plugin_shop_produkte_lang` CHANGE `produkte_lang_produktename` `produkte_lang_produktename` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL; ##b_dump##
+ALTER TABLE `XXX__plugin_shop_produkte_lang` CHANGE `produkte_lang_produkt_beschreibung` `produkte_lang_produkt_beschreibung` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL; ##b_dump##
 

@@ -1,0 +1,21 @@
+<?php 
+$this->content->template['plugin']['google_sitemap']['text'] = "<h2>Le plugin Google Sitemap</h2><p>Avec ce plugin, vous pouvez créer le Google Sitemap.</p>"; 
+$this->content->template['plugin']['google_sitemap']['change'] = "Modification des données pour le google sitemap"; 
+$this->content->template['plugin']['google_sitemap']['text2'] = "Précisez la fréquence de mise à jour de votre page et la priorité que doivent avoir les entrées :"; 
+$this->content->template['plugin']['google_sitemap']['changefreq'] = "Sélectionnez la fréquence de changement :"; 
+$this->content->template['plugin']['google_sitemap']['prioritaet'] = "Sélectionnez la priorité :"; 
+$this->content->template['plugin']['google_sitemap']['eintragen'] = "Entrez"; 
+$this->content->template['plugin']['google_sitemap']['erlaeuterung'] = "Explication :"; 
+$this->content->template['plugin']['google_sitemap']['text3'] = "<p><b>changefreq :</b> <br />La fréquence à laquelle la page est censée changer. Cette valeur donne aux moteurs de recherche des informations générales. Elle n'est pas nécessairement liée à la fréquence d'exploration de la page. Les valeurs valides sont :<br />"; 
+$this->content->template['plugin']['google_sitemap']['text4'] = "La valeur \"toujours\" est utilisée pour décrire des documents qui changent à chaque accès. La valeur \"jamais\" est utilisée pour décrire les URL archivées. <br /> <br /> La valeur de cette balise est considérée comme une indication et non comme un ordre. Les robots d'exploration des moteurs de recherche tiennent compte de ces informations lorsqu'ils prennent leurs décisions. Cependant, ils peuvent explorer les pages marquées \"hourly\" moins fréquemment que hourly, ou les pages marquées \"yearly\" plus fréquemment que yearly. Même les pages marquées \"jamais\" sont susceptibles d'être explorées par des robots d'exploration à certains intervalles afin de détecter des modifications inattendues de ces pages. <br /></p><p><b>Priorité :</b> <br />La priorité de cette URL par rapport aux autres URL de votre site. Les valeurs valides vont de 0,0 à 1,0. Cette valeur n'affecte pas la comparaison de vos pages avec celles d'autres sites web, elle informe simplement les moteurs de recherche des pages qui ont la plus haute priorité pour vous. Les pages sont ensuite explorées sur cette base. <br /> <br /> La priorité par défaut d'une page est de 0,5. <br /> <br />La priorité que vous attribuez à une page n'affecte pas la position de vos URL dans les pages de résultats d'un moteur de recherche. Ces informations sont uniquement utilisées par les moteurs de recherche pour faire une sélection entre les URL d'un même site web. Ainsi, l'utilisation de cette balise augmente la probabilité que vos pages les plus importantes soient répertoriées dans l'index de recherche. <br /> <br /> De même, attribuer une priorité élevée à toutes les URL de votre site n'est pas une bonne idée. La priorité étant relative, elle n'est utilisée que pour choisir entre les URL au sein de votre propre site. La priorité de vos pages n'est pas comparée à celle des pages d'autres sites web. <br /></p>"; 
+$this->content->template['plugin']['google_sitemap']['ready'] = "Le plan Sitemap de Google a été créé."; 
+$this->content->template['plugin']['google_sitemap']['link'] = "Lien pour votre compte Google :"; 
+$this->content->template['plugin']['google_sitemap']['error'] = "Aucun plan Sitemap Google n'a pu être créé."; 
+$this->content->template['plugin']['google_sitemap']['datei'] = "Le dossier "; 
+$this->content->template['plugin']['google_sitemap']['datei2'] = " existe, mais n'a pas pu être écrasé. Veuillez modifier les droits d'accès (autorisation publique d'écriture) du fichier."; 
+$this->content->template['plugin']['google_sitemap']['gespeichert'] = "Le plan du site a été enregistré."; 
+$this->content->template['plugin']['google_sitemap']['ordner'] = "Le dossier "; 
+$this->content->template['plugin']['google_sitemap']['ordner2'] = " n'a pas pu être écrit. Veuillez modifier les droits d'accès via ftp. Ou enregistrer un fichier vide \" . $filename . \"dans le répertoire htdocs et modifiez les droits d'accès (autorisation publique d'écriture) du fichier."; 
+$this->content->template['plugin']['google_sitemap']['geaendert'] = "Les dates ont été modifiées"; 
+
+ ?>

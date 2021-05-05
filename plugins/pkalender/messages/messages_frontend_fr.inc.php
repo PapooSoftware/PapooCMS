@@ -1,37 +1,123 @@
-<?php
-/**
+<?php 
+$this->content->template['plugin_kalender_der_papoo_kalender'] = "Le calendrier Papoo"; 
+$this->content->template['plugin_kalender_das_papoo_kalender_plugin'] = "Le plugin Papoo Calendar vous donne la possibilité d'afficher et d'utiliser différents calendriers sur votre site web."; 
+$this->content->template['plugin_kalender_konfiguration_des_papoo_kalenders'] = "Configuration du calendrier Papoo"; 
+$this->content->template['plugin_kalender_erstellen__bearbeiten_eines_kalenders'] = "Créer / modifier un calendrier"; 
+$this->content->template['plugin_kalender_erstellen__bearbeiten_eines_kalenders2'] = "Créer / modifier un calendrier"; 
+$this->content->template['plugin_kalender_hier_knnen_sie_beliebig_viele_kalender_erstellen_und_bearbeiten'] = "Vous pouvez y créer et modifier autant de calendriers que vous le souhaitez."; 
+$this->content->template['plugin_kalender_erstellen_sie_hier_einen_neuen_kalender'] = "Créez un nouveau calendrier ici."; 
+$this->content->template['plugin_kalender_bersicht_der_vorhandenen_kalender'] = "Aperçu des calendriers existants"; 
+$this->content->template['plugin_kalender_klicken_sie_auf_einen_eintrag_um_ihn_zu_bearbeiten'] = "Cliquez sur une entrée pour la modifier"; 
+$this->content->template['plugin_kalender_daten_erstellen_und_bearbeiten'] = "Créer et modifier des données"; 
+$this->content->template['plugin_kalender_hier_knnen_sie_neue_daten_und_termin_erstellen_und_vorhandene_bearbeiten'] = "Vous pouvez y créer de nouvelles dates et de nouveaux rendez-vous et modifier ceux qui existent déjà."; 
+$this->content->template['plugin_kalender_whlen_sie_zuerste_den_kalender_aus_in_dem_sich_das_datum_befindet'] = "Sélectionnez d'abord le calendrier dans lequel vous souhaitez saisir ou modifier la date."; 
+$this->content->template['plugin_kalender_kalender_auswhlen'] = "Sélectionner le calendrier"; 
+$this->content->template['plugin_kalender_bearbeiten_sie_hier_einen_kalender'] = "Modifier un calendrier ici"; 
+$this->content->template['plugin_kalender_bezeichnung_des_kalenders'] = "Nom du calendrier"; 
+$this->content->template['plugin_kalender_kalender_basis_daten'] = "Données de base du calendrier"; 
+$this->content->template['plugin_kalender_eintrge_von_aussen'] = "Autoriser les entrées depuis l'extérieur"; 
+$this->content->template['plugin_kalender_direkt_freischalten'] = "Activez les entrées directement de l'extérieur"; 
+$this->content->template['plugin_kalender_rechte_einstellung'] = "Autres paramètres"; 
+$this->content->template['plugin_kalender_gruppen_mit_leserechten'] = "Groupes ayant des droits de lecture"; 
+$this->content->template['plugin_kalender_whlen_sie_hier_die_gruppen_aus_die_die_eintrge_sehen_drfen'] = "Sélectionnez ici les groupes qui sont autorisés à voir les entrées"; 
+$this->content->template['plugin_kalender_gruppen_mit_schreibrechten'] = "Groupes avec accès en écriture"; 
+$this->content->template['plugin_kalender_whlen_sie_hier_die_gruppen_aus_die_die_eintrge_erstellen_drfen'] = "Sélectionnez ici les groupes qui sont autorisés à créer des entrées. Si vous cochez la case \"tout le monde\", les utilisateurs non connectés sont également autorisés à créer des entrées."; 
+$this->content->template['plugin_kalender_kalender_benutzt_kategorien'] = "Le calendrier utilise des catégories"; 
+$this->content->template['plugin_pkalender_wurde_nicht_eingetragen'] = "Veuillez corriger les entrées, les entrées manquantes ont été marquées."; 
+$this->content->template['plugin_pkalender_wurde_eingetragen'] = "Les données ont été sauvegardées."; 
+$this->content->template['plugin_kalender_kalendername'] = "Désignation du calendrier"; 
+$this->content->template['plugin_kalender_anzahl_termine'] = "Nombre de dates"; 
+$this->content->template['plugin_kalender_eintrge_von_auen'] = "Entrées de l'extérieur"; 
+$this->content->template['plugin_kalender_kategorien'] = "Catégories"; 
+$this->content->template['plugin_kalender_id_des_kalenders'] = "ID"; 
+$this->content->template['plugin_kalender_aktion'] = "Action"; 
+$this->content->template['plugin_kalender_bearbeiten'] = "modifier"; 
+$this->content->template['plugin_kalender_lschen'] = "supprimer"; 
+$this->content->template['plugin_kalender_kalender_lschen'] = "Supprimer le calendrier"; 
+$this->content->template['plugin_kalender_wenn_sie_diesen_kalender_lschen_werden_auch_alle_dazugehrigen_termine_auf_einen_rutsch_gelscht'] = "Si vous supprimez ce calendrier, tous les rendez-vous associés seront également supprimés en une seule fois."; 
+$this->content->template['plugin_kalender_kalender_lschen_field'] = "Supprimer ce calendrier"; 
+$this->content->template['plugin_pkalender_wurde_del'] = "L'entrée a été supprimée !"; 
+$this->content->template['plugin_kalender_link_fr_die_einbindung_im_menpunkt'] = "Lien pour l'intégration dans l'élément de menu"; 
+$this->content->template['plugin_kalender_kalender_auswhlen2'] = "Sélectionner le calendrier"; 
+$this->content->template['plugin_kalender_text_oberhalb'] = "Texte au-dessus du calendrier dans la vue du menu"; 
+$this->content->template['plugin_kalender_termine_eintragen_und_ndern'] = "Saisir et modifier les rendez-vous dans le calendrier "; 
+$this->content->template['plugin_kalender_sie_knnen_hier_termine'] = "Vous pouvez saisir de nouveaux rendez-vous et modifier les rendez-vous existants ici. Pour saisir un nouveau rendez-vous, cliquez sur le lien suivant."; 
+$this->content->template['plugin_kalender_neuen_termin_eintragen'] = "Saisir un nouveau rendez-vous"; 
+$this->content->template['plugin_kalender_termine_bearbeiten'] = "Modifier les rendez-vous"; 
+$this->content->template['plugin_kalender_whlen_sie_hier_den_termin_aus'] = "Sélectionnez le rendez-vous que vous voulez modifier ici."; 
+$this->content->template['plugin_kalender_termin_eintragen_oder_ndern'] = "Saisir ou modifier un rendez-vous dans le calendrier "; 
+$this->content->template['plugin_kalender_bearbeiten_sie_hier_die_daten_eines_termineintrages'] = "Modifiez ici les données d'une entrée de rendez-vous."; 
+$this->content->template['plugin_kalender_titel_des_terminsfieldset'] = "Titre de la nomination"; 
+$this->content->template['plugin_pkal_date_titel_des_termins'] = "Titre de la nomination"; 
+$this->content->template['plugin_pkal_date_terminbeschreibungfield'] = "Description du rendez-vous"; 
+$this->content->template['plugin_pkal_date_terminbeschreibung'] = "Description du rendez-vous"; 
+$this->content->template['plugin_kalender_kategorien_im_kalender_jede_zeile_eine_kategorie'] = "Catégories dans le calendrier (chaque ligne est une catégorie)"; 
+$this->content->template['plugin_pkal_date_kategorie_im_kalenderf'] = "Catégorie"; 
+$this->content->template['plugin_pkal_date_kategorie_im_kalender'] = "Catégorie"; 
+$this->content->template['plugin_pkal_date_datum'] = "Date"; 
+$this->content->template['plugin_pkal_date_start_datum'] = "Date de début (format 01.01.2010)"; 
+$this->content->template['plugin_pkal_date_end_datum'] = "Date de fin (format 01.01.2010)"; 
+$this->content->template['plugin_pkal_date_uhrzeit_beginn'] = "Heure de début (format 12:00)"; 
+$this->content->template['plugin_pkal_date_uhrzeit_ende'] = "Fin de l'heure (format 12:00)"; 
+$this->content->template['plugin_pkal_date_das_startdatum'] = "Date de début"; 
+$this->content->template['plugin_pkal_date_das_enddatum'] = "Date de fin"; 
+$this->content->template['plugin_pkal_date_wiederkehrende_veranstaltung'] = "Événement récurrent"; 
+$this->content->template['plugin_pkal_date_veranstaltung_wiederholt_sich_so_oft'] = "L'événement se répète autant de fois : (0 ou vide = infini)"; 
+$this->content->template['plugin_pkal_date_an_jedem'] = "Tout le monde :"; 
+$this->content->template['plugin_pkal_date_link_zu_termin'] = "Lien vers le rendez-vous"; 
+$this->content->template['plugin_pkal_date_link_zu_terminfeld'] = "Lien vers le rendez-vous"; 
+$this->content->template['plugin_pkal_date_termin_auswhlen'] = "modifier"; 
+$this->content->template['plugin_pkal_date_zurck_zur_bersicht'] = "Retour à la vue d'ensemble"; 
+$this->content->template['plugin_pkal_date_tag'] = "Jour"; 
+$this->content->template['plugin_pkal_date_woche'] = "Semaine"; 
+$this->content->template['plugin_pkal_date_monat'] = "Mois"; 
+$this->content->template['plugin_pkal_date_jahr'] = "Année"; 
+$this->content->template['plugin_pkal_date_kommende_termine'] = "Prochaines dates"; 
+$this->content->template['plugin_pkal_date_alle_termine'] = "Toutes les dates"; 
+$this->content->template['plugin_pkal_date_termin_lschen'] = "supprimer"; 
+$this->content->template['plugin_pkal_date_termin_lschen_hier'] = "Supprimer le rendez-vous"; 
+$this->content->template['plugin_pkal_date_um_diesen_termin_zu_lschen'] = "Pour supprimer ce rendez-vous, il suffit de cliquer sur le bouton ci-dessous."; 
+$this->content->template['plugin_pkal_date_diesen_termin_lschen'] = "Supprimer ce rendez-vous"; 
+$this->content->template['plugin_kalender_administration_des_kalenders'] = "Administration du calendrier"; 
+$this->content->template['plugin_kalender_hier_knnen_sie_administrative_aufgaben_durchfhren'] = "Vous pouvez y effectuer des tâches administratives."; 
+$this->content->template['plugin_kalender_abgelaufene_termine_on_block_lschen'] = "Supprimer les rendez-vous expirés &quot;en bloc"; 
+$this->content->template['plugin_kalender_klicken_sie_auf_den_folgenden_link_um_in_allen_kalendern_alle_abgelaufenen_termine_zu_lschen'] = "Cliquez sur le lien suivant pour supprimer tous les rendez-vous expirés dans tous les calendriers."; 
+$this->content->template['plugin_kalender_termine_jetzt_lschen'] = "Supprimez maintenant tous les rendez-vous expirés"; 
+$this->content->template['plugin_kalender_unbenutzte_kalender_lschen'] = "Supprimer les calendriers inutilisés"; 
+$this->content->template['plugin_kalender_mit_klick_auf_den_link_lschen_sie_alle_unbenutzten_kalender_in_allen_sprachen'] = "Cliquez sur le lien pour supprimer tous les calendriers inutilisés dans toutes les langues."; 
+$this->content->template['plugin_kalender_unbenutzte_kalender_jetzt_lschen'] = "Supprimer les calendriers inutilisés maintenant"; 
+$this->content->template['plugin_pkal_date_eintrag_im_frontend_freischalten'] = "Activer l'entrée dans le frontend"; 
+$this->content->template['plugin_pkal_date_im_frontend_freischalten'] = "Activer dans le frontend"; 
+$this->content->template['plugin_pkal_date_im_frontend_freigeschaltet'] = "sync et corrections par n17t01"; 
+$this->content->template['plugin_kalender_email_versenden_bei_neuen_eintrag_von_auen'] = "Envoyer un e-mail sur une nouvelle entrée depuis l'extérieur"; 
+$this->content->template['plugin_kalender_email_adresse_fr_den_versand_dieser_mail'] = "Adresse électronique pour l'envoi de ce courrier"; 
+$this->content->template['plugin_kalender_zustzlicher_parameter_calview'] = "Le paramètre supplémentaire cal_view=cal règle la vue sur la vue du calendrier, avec cal_view=new vous pouvez passer directement au masque de saisie pour les nouvelles entrées."; 
+$this->content->template['plugin_pkal_lsite_aktuellle'] = " - Liste des entrées les plus récentes"; 
+$this->content->template['plugin_kalender_modul_aktuellste_eintrge'] = "Module des dernières entrées"; 
+$this->content->template['plugin_kalender_anzahl_der_eintrge_im_modul_aktuellste_eintrge'] = "Nombre d'entrées dans le module les plus récentes"; 
+$this->content->template['plugin_kalender_alscopyspeichern'] = "Enregistrer comme copie"; 
+$this->content->template['plugin_kalender_mit_google_kalender_verbinden'] = "Connectez-vous à Google Agenda"; 
+$this->content->template['plugin_kalender_xml_google'] = "Adresse ICAL de l'agenda Google"; 
+$this->content->template['message_paket_mo'] = "Lun"; 
+$this->content->template['message_paket_di'] = "Mar"; 
+$this->content->template['message_paket_mi'] = "Mi"; 
+$this->content->template['message_paket_do'] = "Faites"; 
+$this->content->template['message_paket_fr'] = "Fri"; 
+$this->content->template['message_paket_sa'] = "Sam"; 
+$this->content->template['message_paket_so'] = "Alors"; 
+$this->content->template['plugin_termine_des_datums'] = "Dates sur "; 
+$this->content->template['plugin_termine_des_monats'] = "Dates dans le "; 
+$this->content->template['plugin_termine_des_monats_keine'] = "Aucune date disponible"; 
+$this->content->template['plugin_weitere_infos_des_datums'] = "Vous pouvez trouver plus d'informations ici."; 
+$this->content->template['plugin_kal_liste'] = "Liste des rendez-vous"; 
+$this->content->template['plugin_kal_kalender'] = "Calendrier"; 
+$this->content->template['plugin_kal_new'] = "Nouvelle entrée"; 
+$this->content->template['plugin_kal_monatsauswahl'] = "Sélectionnez le mois."; 
+$this->content->template['plugin_kal_alle_termine'] = "Toutes les dates de ce mois"; 
+$this->content->template['message_70'] = "Stocker des données"; 
+$this->content->template['message_160'] = "sélectionnez"; 
+$this->content->template['neuer_kal_eintrag'] = "Nouvelle entrée de calendrier créée."; 
+$this->content->template['plugin_kal_liste_jahr'] = "Aperçu annuel "; 
+$this->content->template['plugin_kal_liste_kat'] = "Catégories"; 
 
-Deutsche Text-Daten des Plugins "test" für das Frontend
-
-!! Diese Datei muss im Format "Utf-8 (NoBOM)" gespeichert werden !!!
-
-*/
-
-$this->content->template['message_paket_mo'] ='Lun';
-$this->content->template['message_paket_di'] ='Mar';
-$this->content->template['message_paket_mi'] ='Mer';
-$this->content->template['message_paket_do'] ='Jeu';
-$this->content->template['message_paket_fr'] ='Ven';
-$this->content->template['message_paket_sa'] ='Sam';
-$this->content->template['message_paket_so'] ='Dim';
-//plugin_termine_des_datums
-$this->content->template['plugin_termine_des_datums'] ='Rendez-vous le ';
-$this->content->template['plugin_termine_des_monats'] ='Rendez-vous en ';
-//plugin_termine_des_monats_keine
-$this->content->template['plugin_termine_des_monats_keine'] ='Aucun rendez-vous disponible.';
-//
-$this->content->template['plugin_weitere_infos_des_datums'] ='Plus d\'informations peuvent être trouvées ici.';
-$this->content->template['plugin_kal_liste'] ='Liste de rendez-vous';
-$this->content->template['plugin_kal_kalender'] ='Calendrier';
-$this->content->template['plugin_kal_new'] ='Nouvelle Entrée';
-$this->content->template['plugin_kal_monatsauswahl'] ='Veuillez selectionner le mois.';
-$this->content->template['plugin_kal_alle_termine'] ='Tous les rendez-vous ce mois-ci';
-
-$this->content->template['message_70'] ='Sauvegarder';
-
-$this->content->template['message_160'] ='choisir';
-$this->content->template['neuer_kal_eintrag']="Nouveau rendez-vous creé.";
-//$plugin_kal_liste_jahr
-$this->content->template['plugin_kal_liste_jahr'] ='Sommaire d\'année ';
-
-?>
+ ?>

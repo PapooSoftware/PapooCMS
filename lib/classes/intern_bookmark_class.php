@@ -67,7 +67,7 @@ class intern_book
 	{
 		// Überprüfen ob Zugriff auf die Inhalte besteht
 		# $this->user->check_access();
-
+		$this->db->csrfok=true;
 		$sql = sprintf("SELECT menulink FROM %s WHERE menuid='%s'",
 			$this->cms->tbname['papoo_menuint'],
 			$this->db->escape($this->checked->menuid)
@@ -146,6 +146,7 @@ class intern_book
 			}
 		}
 		$this->content->template['bookmarks']=$result;
+		$this->db->csrfok=false;
 	}
 }
 

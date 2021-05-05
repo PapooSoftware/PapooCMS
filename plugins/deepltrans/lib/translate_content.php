@@ -40,9 +40,6 @@ class translate_content extends deepltrans_class
 		$this->content->template['translinkContent']="plugin.php?menuid=".$this->checked->menuid."&template=deepltrans/templates/content_bersetzungen_backend.html";
 		//exit();
 		#ini_set("display_errors", true);
-
-
-
 		#error_reporting(E_ALL);
 		if(!empty($this->checked->transcontent))
 		{
@@ -84,7 +81,6 @@ class translate_content extends deepltrans_class
 		$this->transDeeplNow->setDeeplUrl();
 
 		$this->setLogData($lang);
-		return true;
 
 		//Lang Data for items
 		$langData= array($lang,$langId);
@@ -144,6 +140,8 @@ class translate_content extends deepltrans_class
 		//
 		$this->db->csrfok = false;
 	}
+
+
 
 	/**
 	 * @param array $langData

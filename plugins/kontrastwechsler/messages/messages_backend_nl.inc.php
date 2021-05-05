@@ -1,0 +1,39 @@
+<?php 
+$this->content->template['message']['plugin']['kontrastwechsler']['empty'] = ""; 
+$this->content->template['message']['plugin']['kontrastwechsler']['contrast_name'] = "Naam voor contrast:"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['aria_label'] = "Beschrijving van de button voor de blinden: (Wat gebeurt er)"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['background_color'] = "Kleur voor de achtergrond:"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['text_color'] = "Kleur voor de tekst:"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['edit'] = "edit"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['cancel'] = "Annuleren"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['save'] = "Save"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['delete'] = "verwijderen"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['delete1'] = "Contrast verwijderen"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['add'] = "Contrast toevoegen"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['confirm_delete'] = "Wil je echt het contrast verwijderen?"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['id'] = "ID"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['name'] = "Naam"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['description'] = "Beschrijving"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['background-color'] = "Achtergrond kleur"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['text-color'] = "Tekst kleur"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['main_header'] = "De contrastwisselaarmodule"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['main_description'] = " <br> <br>De contrast wisselaar module voegt een module toe om te wisselen tussen contrasten in de frontend.</br></br>Deze plugin installeert de module na en je kunt het zoals gewoonlijk installeren in de module manager. Je activeert de module via de module manager - selecteer de module daar en voeg het toe waar je het wilt hebben."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['css_header'] = "De CSS van de contrastwisselaarmodule"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['css_description'] = "<br>De CSS werkt als een normale, behalve dat de kleuren automatisch worden overgenomen door placeholders uit de lijst van contrasten</br>:<strong>(#text_color#</strong> voor de kleur van de tekst en <strong>#background_color#</strong> voor de kleur van de achtergrond)."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['add_success'] = "Contrast succesvol toegevoegd."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['edit_success'] = "Contrast succesvol verwerkt."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['setting_edit_success'] = "Instellingen succesvol gewijzigd."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['delete_success'] = "Contrast succesvol verwijderd."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['edit_css_success'] = "CSS succesvol verwerkt."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['efabox'] = "Moet de EFA-module voor lettergrootte worden aangesloten op de contrastomschakelingsmodule?"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['efa_error_1'] = "EFA is geïntegreerd als module."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['efa_error_2'] = "EFA Fontsize is niet geïnstalleerd."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['efa_error_3'] = "EFA Fontsize bestanden zijn niet beschikbaar."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['efa_error_none'] = "EFA kan worden aangesloten op de contrastwisselaarmodule."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['module_top'] = "Module aan de bovenkant van het scherm"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['module_side'] = "Module aan de zijkant"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['own_style'] = "Eigen stijl voor de module"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['styling_label'] = "Selecteer stijl"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['styling_description'] = "Hier kunt u verschillende stijlen van de contrastwisselaar kiezen of uw eigen stijl schrijven."; 
+
+ ?>
