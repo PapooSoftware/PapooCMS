@@ -1,6 +1,18 @@
 # PapooCMS
 The Papoo CMS was founded 2003 by Dr. Carsten Euwens as a first step for accessible Websites. Since then it was developed with accessibilty in mind.
 
+## Translation
+PapooCMS is fully translated in 9 Languages.
+* German
+* English	
+* Italiano
+* Español
+* Français
+* Português	
+* Nederlands
+* Russisch	
+* Chinesisch
+
 ## Webpage
 The Webpage can be found here: https://www.papoo.de - their you can find additional information arround the CMS
 
