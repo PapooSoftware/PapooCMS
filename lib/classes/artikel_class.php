@@ -2849,6 +2849,10 @@ class artikel_class
 				$img['0']['0'] = str_replace("/thumbs", "", $img['0']['0']);
 				$img['0']['0'] = str_replace("style", "rel", $img['0']['0']);
 
+				$teaserVideoTag = preg_match('~<video(?=\s|>).*?</video>~i', $row->lan_teaser, $teaserVideoTag)
+					? $teaserVideoTag[0]
+					: '';
+
 				// Daten zuweisen
 				$table_data[ ] = array(
 					'text' => $textunter,
@@ -2878,6 +2882,8 @@ class artikel_class
 					'author' => $this->author,
 					'teaserbild' => ($row->teaser_bild_html),
 					'lan_teaser_img' => $img['0']['0'],
+					'teaser_video' => $teaserVideoTag,
+					'teaser_image_or_video' => $img[0][0] ?: $teaserVideoTag,
 					'lan_teaser_sans' => substr(strip_tags($row->lan_teaser), 0, 150) . "...",
 					'order_id_start' => ($row->order_id_start)
 				);
@@ -3112,6 +3118,10 @@ class artikel_class
 				$img['0']['0'] = str_replace("/thumbs", "", $img['0']['0']);
 				$img['0']['0'] = str_replace("style", "rel", $img['0']['0']);
 
+				$teaserVideoTag = preg_match('~<video(?=\s|>).*?</video>~i', $row->lan_teaser, $teaserVideoTag)
+					? $teaserVideoTag[0]
+					: '';
+
 				// Daten zuweisen
 				$table_data[ ] = array(
 					'text' => $textunter,
@@ -3141,6 +3151,8 @@ class artikel_class
 					'author' => $this->author,
 					'teaserbild' => ($row->teaser_bild_html),
 					'lan_teaser_img' => $img['0']['0'],
+					'teaser_video' => $teaserVideoTag,
+					'teaser_image_or_video' => $img[0][0] ?: $teaserVideoTag,
 					'lan_teaser_sans' => substr(strip_tags($row->lan_teaser), 0, 150) . "..."
 				);
 			}
