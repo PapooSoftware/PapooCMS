@@ -1060,8 +1060,12 @@ class form_manager
 
 				if ($daten->plugin_cform_type == "file") {
 					if (empty($_FILES[$name]) || empty($_FILES[$name]['tmp_name'])) {
-						$this->error[$name] = "error";
-						$this->insert_ok = false;
+						//also empty Session files... than its really an error
+						if(empty($_SESSION['filename'][$name]))
+						{
+							$this->error[$name] = "error";
+							$this->insert_ok = false;
+						}
 					}
 				}
 
