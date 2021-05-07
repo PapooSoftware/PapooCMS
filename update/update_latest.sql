@@ -31,4 +31,9 @@ ALTER TABLE `XXX__plugin_shop_produkte_lang` CHANGE `produkte_lang_produkt_besch
 ALTER TABLE `XXX__plugin_shop_produkte_lang` CHANGE `produkte_lang_produkt_surl` `produkte_lang_produkt_surl` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL; ##b_dump##
 ALTER TABLE `XXX__plugin_shop_produkte_lang` CHANGE `produkte_lang_produktename` `produkte_lang_produktename` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL; ##b_dump##
 ALTER TABLE `XXX__plugin_shop_produkte_lang` CHANGE `produkte_lang_produkt_beschreibung` `produkte_lang_produkt_beschreibung` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL; ##b_dump##
-
+ALTER TABLE `XXX_papoo_user` ADD `user_titel` varchar(255) NULL; ##b_dump##
+ALTER TABLE `XXX_papoo_user` ADD `user_country` varchar(255) NULL; ##b_dump##
+ALTER TABLE `XXX_papoo_user` ADD `user_tel_abends` varchar(255) NULL; ##b_dump##
+ALTER TABLE `XXX_papoo_user` ADD `user_tel_tags` varchar(255) NULL; ##b_dump##
+ALTER TABLE `XXX_papoo_user` ADD `user_tel_kunden_nr` varchar(255) NULL; ##b_dump##
+ALTER TABLE `XXX_papoo_user` ADD `user_merkzettel` LONGTEXT NULL; ##b_dump##
