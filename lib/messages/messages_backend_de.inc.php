@@ -1,14 +1,24 @@
 <?php
 /**
-* Deutsche Text-Daten des Plugins "bookmark" für das Backend
-* !! Diese Datei muss im Format "UTF-8 (NoBOM)" gespeichert werden !!!
-*/
+ * Deutsche Text-Daten des Plugins "bookmark" für das Backend
+ * !! Diese Datei muss im Format "UTF-8 (NoBOM)" gespeichert werden !!!
+ */
 
 $this->content->template['kat_form_change']='Ändern';
 $this->content->template['head_inc']['title']='Administration Ihrer Internetseite';
 $this->content->template['message_2120']='direkt zum Inhalt';
 $this->content->template['message_2121']='zur Bereichsnavigation';
 $this->content->template['message_2122']=' direkt zur Suche ';
+
+$this->content->template['message_user_anrede']='Anrede';
+$this->content->template['message_user_titel']='Titel';
+$this->content->template['message_user_country']='Land';
+$this->content->template['message_user_tel_abends']='Tel Abends';
+$this->content->template['message_user_tel_tags']='Tel Tagsüber';
+$this->content->template['message_user_tel_kunden_nr']='Kunden Nummer';
+$this->content->template['message_212dddd2']='xxx';
+$this->content->template['message_ddddd2122']='xxx';
+
 $this->content->template['message_2123']='direkt zur Anmeldung';
 $this->content->template['message_5']='Es wurde leider nichts gefunden. Bitte präzisieren Sie Ihren Suchbegriff, damit wir Ihnen helfen können.';
 $this->content->template['message_2099']='Benutzername: ';
@@ -513,7 +523,7 @@ $this->content->template['messagex_439']='Ihre Daten';
 $this->content->template['message_440']='ändern';
 $this->content->template['message_441']='Seiteninhalt';
 $this->content->template['message_442']='<p>Hier finden Sie den Seitenbaum (Menüpunkte und Artikel) Ihrer Seite.<p>'.
-										'<p>Links im Menü finden Sie weitere Möglichkeiten, den Inhalt Ihrer Seite zu bearbeiten.</p>';
+	'<p>Links im Menü finden Sie weitere Möglichkeiten, den Inhalt Ihrer Seite zu bearbeiten.</p>';
 $this->content->template['message_443']='Plugins Verwalten';
 $this->content->template['message_444']='System-Daten können hier verwaltet werden.';
 $this->content->template['message_443a']='Plugins Verwalten';
@@ -2004,15 +2014,15 @@ $this->content->template['aktivieren2']='<br /><span class="verify_small">Falls 
 $this->content->template['footer_text1']='<h2>Über Papoo</h2><p>Eine ausführliche <a href="http://www.papoo.de/cms-dokumentation/cms-dokumentation-papoo.html">PDF Dokumentation</a> finden sie auf unserer Webseite, dort finden Sie auch unser <a href="http://www.papoo.de/cms-forum/forum-cms-papoo/">Online Hilfe Forum</a>, unsere <a href="http://www.doku.papoo.de">Online Wiki Dokumentation</a> und eine <a href="http://www.papoo.de/cms-forum/faq-von-papoo/">FAQ Sammlung</a>.</p>';
 
 $this->content->template['system_image_mehrfach_upload']='Mehrfach Upload';
- $this->content->template['system_image_whlen_sie_fr_den_mehrfach_upload_bitte_das_gewnschte_verzeichnis_aus']='W&auml;hlen Sie f&uuml;r den Mehrfach Upload bitte die gew&uuml;nschte Kategorie aus';
- $this->content->template['system_image_hochgeladene_bilder_in_der_datenbank_abspeichern']='Hochgeladene Bilder in der Datenbank abspeichern';
- $this->content->template['system_image_in_datenbank_speichern']='In Datenbank speichern';
- $this->content->template['system_image_daten_der_bilder_eintragen']='Daten der Bilder eintragen';
- $this->content->template['system_image_das_bild']='Bild';
- $this->content->template['system_image_alternativ_text_alt']='Alternativ Text (alt)';
- $this->content->template['system_image_title_attribut_title']='Title Attribut (title)';
- $this->content->template['system_image_die_bilder_wurden_in_die_datenbank_eingetragen']='Die Bilder wurden in die Datenbank eingetragen';
- $this->content->template['system_image_alternativ_text_required'] = 'Um diese Bilder in der Datenbank zu speichern müssen Sie alt angeben - ansonsten erfolgt keine Speicherung der Daten.
+$this->content->template['system_image_whlen_sie_fr_den_mehrfach_upload_bitte_das_gewnschte_verzeichnis_aus']='W&auml;hlen Sie f&uuml;r den Mehrfach Upload bitte die gew&uuml;nschte Kategorie aus';
+$this->content->template['system_image_hochgeladene_bilder_in_der_datenbank_abspeichern']='Hochgeladene Bilder in der Datenbank abspeichern';
+$this->content->template['system_image_in_datenbank_speichern']='In Datenbank speichern';
+$this->content->template['system_image_daten_der_bilder_eintragen']='Daten der Bilder eintragen';
+$this->content->template['system_image_das_bild']='Bild';
+$this->content->template['system_image_alternativ_text_alt']='Alternativ Text (alt)';
+$this->content->template['system_image_title_attribut_title']='Title Attribut (title)';
+$this->content->template['system_image_die_bilder_wurden_in_die_datenbank_eingetragen']='Die Bilder wurden in die Datenbank eingetragen';
+$this->content->template['system_image_alternativ_text_required'] = 'Um diese Bilder in der Datenbank zu speichern müssen Sie alt angeben - ansonsten erfolgt keine Speicherung der Daten.
 Diese Daten sind für Google unbedingt notwendig.';
 
 $this->content->template['system_twitter_card_tags'] = "Twitter Card Tags";
@@ -2039,4 +2049,10 @@ $this->content->template['abort_process'] = 'Vorgang abbrechen';
 
 $this->content->template['label__rename_uploaded_file']='Alten Dateinamen beibehalten';
 
- #start#s
+$this->content->template['frau']="Frau";
+$this->content->template['herr']="Herr";
+$this->content->template['message_user_fax']="Fax";
+$this->content->template["ergaenzen"] ='<span class="error">Bitte ergänzen</span>';
+
+$this->content->template['auswaehlen']='auswählen';
+#start#s

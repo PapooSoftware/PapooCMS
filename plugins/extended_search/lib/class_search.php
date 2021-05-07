@@ -362,7 +362,7 @@ class class_search_front
                         AND ext_search_wort_id LIKE '" . utf8_encode($value) . "%' " . $sub_sql_text . " " . $einschr;
 				}
 			}
-			$sub = implode($sub, " OR ");
+			$sub = @implode($sub, " OR ");
 		}
 		$sql = sprintf("SELECT ext_search_id
                 FROM %s
@@ -680,8 +680,8 @@ class class_search_front
 		global $db;
 
 		$teaserMaxLength = (int)($db->get_var(
-			"SELECT ext_search_teaser_max_length FROM {$cms->tbname['plugin_ext_search_config']} LIMIT 1"
-		) ?? 400);
+				"SELECT ext_search_teaser_max_length FROM {$cms->tbname['plugin_ext_search_config']} LIMIT 1"
+			) ?? 400);
 
 		$this->such_woerter = $this->such_woerter_neu;
 		$neu_array = array();
