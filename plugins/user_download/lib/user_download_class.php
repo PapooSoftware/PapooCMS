@@ -190,7 +190,8 @@ class user_download
 			if (count($result)>0) {
 				IfNotSetNull($this->content->template['plugin']['user_download']['file_liste']);
 				$this->content->template['plugin']['user_download']['file_liste'] .=
-					sprintf('<table class="user_download_table_frontend"><tr><th>%s</th><th>%s</th><th>%s</th><th>%s</th></tr>',
+					sprintf('<table class="user_download_table_frontend" style="%s"><tr><th>%s</th><th>%s</th><th>%s</th><th>%s</th></tr>',
+						"width:100%;",
 						$this->content->template['plugin_user_download__filename'],
 						$this->content->template['plugin_user_download__filesize'],
 						$this->content->template['plugin_user_download__date'],
