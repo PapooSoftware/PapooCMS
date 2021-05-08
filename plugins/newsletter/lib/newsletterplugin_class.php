@@ -93,6 +93,7 @@ class news
 			if (defined('admin')) {
 				$this->user->check_intern();
 				$this->make_newsletter_link();
+				$this->db->csrfok=true;
 				// Konfigurations-Daten aus Papoo_news_impressum holen und an die Session �bergeben (0 = ausser POP3-Daten)
 				$_SESSION['nl']['admindaten'] = $this->get_admin_daten();
 				if (!empty($this->checked->template)) {
@@ -188,6 +189,7 @@ class news
 						break;
 					}
 				}
+				$this->db->csrfok=false;
 			}
 		}
 	}
@@ -730,7 +732,7 @@ class news
 				foreach ($old as $data) {
 					$grp = $this->get_group($data->news_nlgruppe);
 					$grp = $grp[0];
-					IfNotSetNull($grp->news_gruppe_name);
+					@IfNotSetNull($grp->news_gruppe_name);
 					$inhalt = substr(strip_tags($data->news_inhalt), 0, 30);
 					array_push($olddata,
 						array(
@@ -2291,6 +2293,7 @@ class news
 			$this->content->template['case2a'] = "ok"; // Liste der Abonnenten anzeigen
 			//Gruppen zuweisen
 			$datanlg = $this->get_all_nl_groups();
+			//print_r($datanlg);
 
 			foreach ($datanlg as $xk => $xv) {
 				$grnl[$xv->news_gruppe_id] = $xv->news_gruppe_name;
@@ -2404,9 +2407,10 @@ class news
 					$_SESSION['csv_export_newsletter_search'] = $this->db->get_results($sql, ARRAY_A);
 				}
 				// Wenn kein Abonnent �berarbeitet wurde und nicht Eintragen (Men�-Aufruf)
-				elseif (!isset($this->checked->submit) || isset($this->checked->submit) &&
+				elseif (!isset($this->checked->submit) || (isset($this->checked->submit) &&
 					$this->checked->submit != $this->content->template['plugin']['newsletter']['speichern'] and empty($this->checked->search)
-				) {
+				)) {
+
 					// Anzahl der Abonennten news_user_id
 					$sql = sprintf("SELECT COUNT(news_user_id)
 													FROM %s
@@ -2414,6 +2418,7 @@ class news
 						$this->papoo_news_user
 					);
 					$anzahl = $this->db->get_var($sql);
+					//print_r($sql);
 
 					$this->content->template['anzahl'] = $anzahl;
 					$sql = sprintf("SELECT COUNT(news_user_id)

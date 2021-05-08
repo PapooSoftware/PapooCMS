@@ -148,10 +148,10 @@
 				</div><div class="clearfix"></div>
 				{*<!-- weitere Seiten -->*}
 				{include file=weiter.inc.html}
-	
-				<p>{$plugin.newsletter.anzahlgef} {$anzahl}, 
-					davon aktiv: {$anzahl_aktiv} 
-						({if $anzahl_aktiv AND $anzahl}{math equation = "round(anzahl_aktiv * hund / anzahl, 1)" anzahl = $anzahl anzahl_aktiv = $anzahl_aktiv hund = 100}{else}0{/if} %), 
+
+				<p>{$plugin.newsletter.anzahlgef} {$anzahl},
+					davon aktiv: {$anzahl_aktiv}
+						({if $anzahl_aktiv AND $anzahl}{math equation = "round(anzahl_aktiv * hund / anzahl, 1)" anzahl = $anzahl anzahl_aktiv = $anzahl_aktiv hund = 100}{else}0{/if} %),
 					inaktiv: {$anzahl-$anzahl_aktiv} ({if $anzahl_aktiv AND $anzahl}{math equation = "round((anzahl - anzahl_aktiv) * hund / anzahl, 1)" anzahl = $anzahl anzahl_aktiv = $anzahl_aktiv hund = 100}{else}0{/if} %) (exkl. gel&ouml;schter Abonnenten)</p>
 				<p><span style="color:red">Rot</span> gekennzeichnete Adressen wurden gel&ouml;scht und k&ouml;nnen daher nicht ge&auml;ndert werden (beachten Sie hierzu auch die Newsletter Konfiguration). Das endg&uuml;ltige, unwiederbringliche L&ouml;schen und die Funktion <strong>"Doppelte entfernen"</strong> ist nur anhand der Konfigurations-Einstellung m&ouml;glich. Auch gel&ouml;schte, inaktive bleiben von der Funktion <strong>"Inaktive l&ouml;schen"</strong> in diesem Fall unber&uuml;hrt.</p>
 				<p>{$message_20044}</p>
@@ -193,23 +193,23 @@
 					<tr class="news_old_row">
 						<td headers="email">
 							{if !$ander.deleted}
-								<a href="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/newsabo.html&msgid={$ander.news_user_id}{if $sort_email}&sort_email={$sort_email}{elseif $sort_registration_date}&sort_registration_date={$sort_registration_date}{/if}" title="{$abo_edite}">	
+								<a href="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/newsabo.html&msgid={$ander.news_user_id}{if $sort_email}&sort_email={$sort_email}{elseif $sort_registration_date}&sort_registration_date={$sort_registration_date}{/if}" title="{$abo_edite}">
 								{$ander.news_user_email}</a>
-							{else}	
+							{else}
 								<span style="color:red">{$ander.news_user_email}</span>
 							{/if}
 						</td>
                         <td headers="news_group">{$ander.news_gruppen}</td>
 						<td headers="aktivjn" align="right">
 							{if !$ander.deleted}
-								<a href="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/newsabo.html&activate={$ander.news_user_id}{if $sort_email}&sort_email={$sort_email}{elseif $sort_registration_date}&sort_registration_date={$sort_registration_date}{/if}" 
-									{if $ander.news_active==1} 
+								<a href="./plugin.php?menuid={$menuid_aktuell}&template=newsletter/templates/newsabo.html&activate={$ander.news_user_id}{if $sort_email}&sort_email={$sort_email}{elseif $sort_registration_date}&sort_registration_date={$sort_registration_date}{/if}"
+									{if $ander.news_active==1}
 										title="{$message_20043}">{$message_20011}
 									{else}
 										title="{$message_20042}">{$message_20012}
 									{/if}</a>
 							{else}
-								{if $ander.news_active==1} 
+								{if $ander.news_active==1}
 									{$message_20011}
 								{else}
 									{$message_20012}
@@ -276,13 +276,13 @@
 							<input type="text" class="inpt" id="neuphone" name="news_phone" value="{$table.news_phone}" size="35" maxlength="50" /><br />
 							{if $is_iaks}
 								{*<!--  IAKS-Mitglied:   -->*}
-								{$news_front17}<br />        
+								{$news_front17}<br />
 								<input type="radio" id="mitglied_ja" name="news_name_mitglied" value="1" {if $table.news_name_mitglied==1}checked{/if} />
 								<label for="mitglied_ja"><span class="label">{$message_20011}</span></label><br />
 								<input type="radio" id="mitglied_nein" name="news_name_mitglied" value="0" {if $table.news_name_mitglied==0 or not $table.news_name_mitglied}checked{/if} />
 								<label for="mitglied_nein"><span class="label">{$message_20012}</span></label><br /><br />
 								{*<!--  sb abonnent:   -->*}
-								{$news_front18}<br />        
+								{$news_front18}<br />
 								<input type="radio" id="abonnent_ja" name="news_name_abonnent" value="1" {if $table.news_name_abonnent==1}checked{/if} />
 								<label for="abonnent_ja"><span class="label">{$message_20011}</span></label><br />
 								<input type="radio" id="abonnent_nein" name="news_name_abonnent" value="0" {if $table.news_name_abonnent==0 or not $table.news_name_abonnent}checked{/if} />
@@ -294,9 +294,8 @@
 						{*<!-- Email Adresse  -->*}
 						<legend> {$message_20014}</legend>
 						{*<!-- Email -->*}
+						<input type="checkbox" {if $table.news_active==1}checked{/if} name="news_active" id="rechte" value="1" /><label for="rechte">{$message_20013}</label><p></p>
 						<label for="email">{$plugin.newsletter.email} * {if $table.fehltemail==2}<strong style="color:#f00">{$news_front15}</strong>{/if}{if $table.fehltemail==3}<strong style="color:#f00">{$news_front16}</strong>{/if}</label>
-						<label for="rechte">{$message_20013}</label>
-						<input type="checkbox" {if $table.news_active==1}checked{/if} name="news_active" id="rechte" value="1" />
 						<input type="text" name="news_user_email" id="email" value="{$table.news_user_email}" size="80"/><br />
 						<input type="hidden" name="news_user_id" value="{$table.news_user_id}" />
 						<input type="hidden" name="new_recipient" value="{$table.new}" />
@@ -334,7 +333,7 @@
 			</form>
 		{/if}
 	</div>
- 
+
 {*<!-- Hier kommt der Fuss rein-->*}
 {include file=foot.inc.html}
 {/if}
