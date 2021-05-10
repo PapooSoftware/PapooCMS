@@ -1,0 +1,39 @@
+<?php 
+$this->content->template['message']['plugin']['kontrastwechsler']['empty'] = ""; 
+$this->content->template['message']['plugin']['kontrastwechsler']['contrast_name'] = "Название для контраста:"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['aria_label'] = "Описание кнопки для блайндов: (Что происходит)"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['background_color'] = "Цвет для фона:"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['text_color'] = "Цвет для текста:"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['edit'] = "редактировать"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['cancel'] = "Отмена"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['save'] = "Сохранить"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['delete'] = "удалить"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['delete1'] = "Удалить контраст"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['add'] = "Добавьте контраст"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['confirm_delete'] = "Вы действительно хотите удалить контраст?"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['id'] = "ID"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['name'] = "Имя"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['description'] = "Описание"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['background-color'] = "Цвет фона"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['text-color'] = "Цвет текста"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['main_header'] = "Модуль смены контраста"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['main_description'] = " <br> <br>Модуль contrast changer добавляет модуль для переключения между контрастами во фронтенде.</br></br>Этот плагин устанавливает модуль после, и вы можете установить его как обычно в менеджере модулей. Вы активируете модуль через менеджер модулей - выберите модуль там и добавьте его туда, куда вам нужно."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['css_header'] = "CSS модуля смены контраста"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['css_description'] = "<br>CSS работает как обычный, за исключением того, что цвета автоматически берутся за место заполнителей из списка контрастов</br>:<strong>(#text_color#</strong> для цвета текста и <strong>#background_color#</strong> для цвета фона)."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['add_success'] = "Контрастность успешно добавлена."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['edit_success'] = "Контраст успешно обработан."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['setting_edit_success'] = "Настройки успешно отредактированы."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['delete_success'] = "Контраст успешно удален."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['edit_css_success'] = "CSS успешно обработан."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['efabox'] = "Должен ли модуль EFA Fontsize быть подключен к модулю изменения контрастности?"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['efa_error_1'] = "ОДВ интегрирована в качестве модуля."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['efa_error_2'] = "EFA Fontsize не установлен."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['efa_error_3'] = "Файлы EFA Fontsize недоступны."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['efa_error_none'] = "EFA может быть подключен к модулю смены контраста."; 
+$this->content->template['message']['plugin']['kontrastwechsler']['module_top'] = "Модуль в верхней части экрана"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['module_side'] = "Модуль сбоку"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['own_style'] = "Собственный стиль для модуля"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['styling_label'] = "Выберите стиль"; 
+$this->content->template['message']['plugin']['kontrastwechsler']['styling_description'] = "Здесь вы можете выбрать различные стили смены контраста или написать свой собственный."; 
+
+ ?>

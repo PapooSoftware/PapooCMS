@@ -1285,7 +1285,7 @@ class user_class
 										WHERE email = '%s' 
 										LIMIT 1",
 					$this->cms->tbname['papoo_user'],
-                    $this->diverse->hash_password($newpass),
+					$this->diverse->hash_password($newpass),
 					$this->db->escape($result)
 				);
 				$this->db->query($sql);
@@ -1310,7 +1310,7 @@ class user_class
 												WHERE Benutzername_1 = '%s' 
 												LIMIT 1",
 							$this->cms->tbname['papoo_mv_content_' . $mv_id . '_search_1'],
-                            $this->diverse->hash_password($newpass),
+							$this->diverse->hash_password($newpass),
 							$this->db->escape($resultuser)
 						);
 						$this->db->query($sql);
@@ -1318,7 +1318,7 @@ class user_class
 												WHERE Benutzername_1 = '%s' 
 												LIMIT 1",
 							$this->cms->tbname['papoo_mv_content_' . $mv_id . '_search_1'],
-                            $this->diverse->hash_password($newpass),
+							$this->diverse->hash_password($newpass),
 							$this->db->escape($resultuser)
 						);
 						$this->db->query($sql);
@@ -1415,9 +1415,13 @@ class user_class
 					$count = count($result);
 
 					// Wenn ein Eintrag existiert, dann bestätigen und Session starten
+
 					if ($count == 1) {
+						$this->db->csrfok = true;
 						$sql = "UPDATE " . $this->cms->papoo_user . " SET active='1' WHERE confirm_code='" . $this->db->escape($this->checked->activate) . "' LIMIT 1 ";
 						$this->db->query($sql);
+						$this->db->csrfok = false;
+						//print_r($sql);exit();
 
 						// Für die Mitgliederverwaltung die Daten in der mv_content Tabelle speichern
 						if ($this->mv->is_mv_installed) {
@@ -1428,7 +1432,7 @@ class user_class
 						#$this->do_einlogg($row->username, $row->password_org);
 						#}
 						//header("Location: ./login.php");
-						$location_url = "./account.php?fertig=drin";
+						$location_url = "./account.php?fertig=drin&menuid=".$this->checked->menuid;
 
 						if ($_SESSION['debug_stopallredirect']) {
 							echo '<a href="' . $location_url . '">Weiter</a>';
@@ -1515,7 +1519,7 @@ class user_class
 							$body = str_ireplace("#username#", $this->checked->neuusername, $body);
 							$body = str_ireplace("#passwort#", $this->checked->neupassword1, $body);
 							$body = str_ireplace("#link_seite#", $link, $body);
-							$body = str_ireplace("#bestaetigungslink#", $link . "?activate=" . $confirm_code, $body);
+							$body = str_ireplace("#bestaetigungslink#", $link . "?activate=" . $confirm_code."&menuid=".$this->checked->menuid, $body);
 
 							$this->mail_it->to = $this->checked->neuemail;
 							$this->mail_it->from = $this->cms->admin_email;
@@ -1531,7 +1535,7 @@ class user_class
 							}
 
 							//header("Location: ./login.php?fertig=1");
-							$location_url = $this->cms->webverzeichnis . "/account.php?fertig=1";
+							$location_url = $this->cms->webverzeichnis . "/account.php?fertig=1&menuid=".$this->checked->menuid;
 							if ($_SESSION['debug_stopallredirect']) {
 								echo '<a href="' . $location_url . '">Weiter</a>';
 							}
@@ -1547,6 +1551,7 @@ class user_class
 					elseif (!empty ($this->checked->loginnow2)) {
 						// Daten überprüfen
 						$this->check_data(); //!!!! b.legt: hier liegt irgendein Fehler !!!
+						//print_r("hier?");exit();
 						/*
 						* für genaue Überprüfug das hier verwenden
 						* if (!($this->namefalsch || $this->passwortfalsch || $this-
@@ -1598,6 +1603,13 @@ class user_class
 							$sql .= " dauer_einlogg = '" . $this->db->escape($this->checked->dauer_einlogg) . "',  ";
 							$sql .= " board = '" . $this->db->escape($this->checked->forum_board) . "',  ";
 							$sql .= " signatur = '" . $this->db->escape($this->checked->signatur) . "',  ";
+							$sql .= " user_titel='" . $this->db->escape($this->checked->user_titel) . "', ";
+							$sql .= " user_gender='" . $this->db->escape($this->checked->user_gender) . "', ";
+							$sql .= " user_country='" . $this->db->escape($this->checked->user_country) . "', ";
+							$sql .= " user_tel_abends='" . $this->db->escape($this->checked->user_tel_abends) . "', ";
+							$sql .= " user_tel_tags='" . $this->db->escape($this->checked->user_tel_tags) . "', ";
+							$sql .= " user_fax='" . $this->db->escape($this->checked->user_fax) . "', ";
+							$sql .= " user_tel_kunden_nr='" . $this->db->escape($this->checked->user_tel_kunden_nr) . "', ";
 							//user_agb_ok='%d',
 							$sql .= " user_agb_ok = '" . $this->db->escape($this->checked->user_agb_ok) . "',  ";
 							$sql .= " signatur_html = '" . $this->db->escape($this->bbcode->parse($this->checked->signatur)) . "'  ";
@@ -1694,6 +1706,13 @@ class user_class
 									'ortname' => $this->checked->neuort,
 									'checked' => $checked,
 									'loeschen' => "",
+									'user_titel' => $this->checked->user_titel,
+									'user_gender' =>$this->checked->user_gender,
+									'user_fax' => $this->checked->user_fax,
+									'user_country' => $this->checked->user_country,
+									'user_tel_abends' => $this->checked->user_tel_abends,
+									'user_tel_tags' => $this->checked->user_tel_tags,
+									'user_tel_kunden_nr' => $this->checked->user_tel_kunden_nr,
 									'username' => $this->checked->neuusername,
 									'mailname' => $this->checked->neuemail,
 									'checked_logg' => $checked_logg,
@@ -1815,6 +1834,13 @@ class user_class
 									'ortname' => $row->user_ort,
 									'checked' => $checked,
 									'loeschen' => "Loeschen",
+									'user_titel' =>$row->user_titel,
+									'user_gender' =>$row->user_gender,
+									'user_fax' => $row->user_fax,
+									'user_country' => $row->user_country,
+									'user_tel_abends' => $row->user_tel_abends,
+									'user_tel_tags' => $row->user_tel_tags,
+									'user_tel_kunden_nr' => $row->user_tel_kunden_nr,
 									'username' => $row->username,
 									'mailname' => $row->email,
 									'logalt' => "",
@@ -1885,14 +1911,14 @@ class user_class
 				if ($result == 1) {
 					// dann auf falsch setzen
 					$this->namefalsch = 1;
-					$this->content->template['usernamefalsch'] = $this->fehltusername = "<strong style=\"color:red;\">&auml;ndern</strong>";
+					$this->content->template['usernamefalsch'] = $this->fehltusername = $this->content->template["ergaenzen"];
 				}
 				// existiert schon
 			} // kein Username eingegeben
 			else {
 				if (empty ($_SESSION['sessionusername'])) {
 					$this->namefalsch = 1;
-					$this->content->template['usernamefalsch'] = $this->fehltusername = "<strong style=\"color:red;\">erg&auml;nzen</strong>";
+					$this->content->template['usernamefalsch'] = $this->fehltusername = $this->content->template["ergaenzen"];
 				}
 				$this->checked->neuusername = "";
 			}
@@ -1900,7 +1926,7 @@ class user_class
 			// Auch wenn der Username default ist
 			if ($this->checked->neuusername == "Username") {
 				$this->namefalsch = 1;
-				$this->content->template['usernamefalsch'] = $this->fehltusername = "<strong style=\"color:red;\">&auml;ndern</strong>";
+				$this->content->template['usernamefalsch'] = $this->fehltusername = $this->content->template["ergaenzen"];
 			}
 
 			//Blacklist filter
@@ -1915,25 +1941,32 @@ class user_class
 			if (empty ($this->checked->neupassword1)) {
 				if (empty ($this->checked->neupassword1) or $this->checked->neupassword1 != $this->checked->neupassword2) {
 					$this->passwortfalsch = 1;
-					$this->content->template['pass1falsch'] = $this->fehltpass1 = "<strong style=\"color:red;\">&auml;ndern</strong>";
-					$this->content->template['pass2falsch'] = $this->fehltpass2 = "<strong style=\"color:red;\">&auml;ndern</strong>";
+					$this->content->template['pass1falsch'] = $this->fehltpass1 = $this->content->template["ergaenzen"];
+					$this->content->template['pass2falsch'] = $this->fehltpass2 = $this->content->template["ergaenzen"];
 				}
 			}
 			if ($this->checked->neupassword1 != $this->checked->neupassword2) {
 				$this->content->template['nomatch'] = $this->password_nomatch = "<strong style=\"color:red;\">Passw&ouml;rter stimmen nicht &uuml;berein.</strong>";
 			}
 
+			if (empty ($this->checked->neupassword1) && empty(($this->checked->neupassword2)) && $this->userid > 11) {
+				$this->passwortfalsch = "";
+				$this->content->template['pass1falsch'] = $this->fehltpass1 = "";
+				$this->content->template['pass2falsch'] = $this->fehltpass2 = "";
+				$this->content->template['nomatch']="";
+			}
+
 			// Email überprüfen
 			// keine Email angegeben
 			if (empty ($this->checked->neuemail)) {
 				$this->emailfalsch = 1;
-				$this->content->template['emailfalsch'] = $this->fehltemail = "<strong style=\"color:red;\">erg&auml;nzen</strong>";
+				$this->content->template['emailfalsch'] = $this->fehltemail = $this->content->template["ergaenzen"];
 			}
 			else {
 				// Validität der Mail checken
 				if (!$this->mail_it->validateEmail($this->checked->neuemail)) {
 					$this->emailfalsch = 1;
-					$this->content->template['emailfalsch'] = $this->fehltemail = "<strong style=\"color:red;\">&auml;ndern</strong>";
+					$this->content->template['emailfalsch'] = $this->fehltemail = $this->content->template["ergaenzen"];
 				}
 				else {
 					$selectuser = "SELECT COUNT(userid) FROM " . $this->cms->papoo_user . " " . "WHERE email = '" . $this->db->escape($this->checked->neuemail) . "' ";
@@ -1954,7 +1987,7 @@ class user_class
 						}
 						else {
 							$this->emailfalsch = 1;
-							$this->content->template['emailfalsch'] = $this->fehltemail = "<strong style=\"color:red;\">&auml;ndern</strong>";
+							$this->content->template['emailfalsch'] = $this->fehltemail = $this->content->template["ergaenzen"];
 						}
 					}
 					// existiert schon
@@ -1964,37 +1997,37 @@ class user_class
 			// Vorname überprüfen
 			if (empty ($this->checked->neuvorname) or $this->checked->neuvorname == "Vorname") {
 				$this->vorfalsch = 1;
-				$this->content->template['vornamefalsch'] = $this->fehltvorname = "<strong style=\"color:red;\">erg&auml;nzen</strong>";
+				$this->content->template['vornamefalsch'] = $this->fehltvorname = $this->content->template["ergaenzen"];
 			}
 
 			// Nachname überprüfen
 			if (empty ($this->checked->neunachname) or $this->checked->neunachname == "Nachname") {
 				$this->nachfalsch = 1;
-				$this->content->template['nachnamefalsch'] = $this->fehltnachname = "<strong style=\"color:red;\">erg&auml;nzen</strong>";
+				$this->content->template['nachnamefalsch'] = $this->fehltnachname = $this->content->template["ergaenzen"];
 			}
 
 			// Postleitzahl überprüfen
 			if (empty ($this->checked->neuplz) or $this->checked->neuplz == "Postleitzahl") {
 				$this->plzfalsch = 1;
-				$this->content->template['plzfalsch'] = $this->fehltplz = "<strong style=\"color:red;\">erg&auml;nzen</strong>";
+				$this->content->template['plzfalsch'] = $this->fehltplz = $this->content->template["ergaenzen"];
 			}
 
 			// AGB überprüfen
 			if (empty ($this->checked->user_agb_ok)) {
 				$this->agbfalsch = 1;
-				$this->content->template['agbfalsch'] = $this->fehltagb = "<strong style=\"color:red;\">erg&auml;nzen</strong>";
+				$this->content->template['agbfalsch'] = $this->fehltagb = $this->content->template["ergaenzen"];
 			}
 
 			// Ort überprüfen
 			if (empty ($this->checked->neuort) or $this->checked->neuort == "Wohnort") {
 				$this->ortfalsch = 1;
-				$this->content->template['ortfalsch'] = $this->fehltort = "<strong style=\"color:red;\">erg&auml;nzen</strong>";
+				$this->content->template['ortfalsch'] = $this->fehltort = $this->content->template["ergaenzen"];
 			}
 
 			// Strasse und Hausnummer überprüfen
 			if (empty ($this->checked->neustrnr) or $this->checked->neustrnr == "Strasse und Hausnummer") {
 				$this->nrstrfalsch = 1;
-				$this->content->template['strfalsch'] = $this->fehltstrnr = "<strong style=\"color:red;\">erg&auml;nzen</strong>";
+				$this->content->template['strfalsch'] = $this->fehltstrnr = $this->content->template["ergaenzen"];
 			}
 		}
 	}

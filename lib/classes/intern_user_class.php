@@ -98,284 +98,292 @@ class intern_user
 		$this->content->template['userschreiben_data'] = array();
 
 		switch ($this->checked->menuid) {
-		case "4" :
-			// Starttext Übergeben
-			if (empty ($this->checked->messageget)) {
-				$this->content->template['text'] = $this->content->template['message_18'];
-			} // Gruppe wurde eingetragen
-			elseif ($this->checked->messageget == 50) {
-				$this->content->template['text'] = $this->content->template['message_18'] . $this->content->template['message_50'];
-			} // User eingetragen
-			elseif ($this->checked->messageget == 52) {
-				$this->content->template['text'] = $this->content->template['message_18'];
-				$this->content->template['user_message_text'] = $this->content->template['message_52'];
-			} // User gelöscht
-			elseif ($this->checked->messageget == 53) {
-				$this->content->template['text'] = $this->content->template['message_18'] . $this->content->template['message_53'];
-			} // root kann nicht gelöscht werden
-			elseif ($this->checked->messageget == 54) {
-				$this->content->template['text'] = $this->content->template['message_18'] . $this->content->template['message_54'];
-			} // jeder kann nicht gelöscht werden
-			elseif ($this->checked->messageget == 55) {
-				$this->content->template['text'] = $this->content->template['message_18'] . $this->content->template['message_55'];
-			} // Gruppe wurde gelöscht
-			elseif ($this->checked->messageget == 57) {
-				$this->content->template['text'] = $this->content->template['message_18'] . $this->content->template['message_57'];
-			} // Gruppe root kann nicht gelöscht werden
-			elseif ($this->checked->messageget == 58) {
-				$this->content->template['text'] = $this->content->template['message_18'] . $this->content->template['message_58'];
-			} // Gruppe jeder kann nicht gelöscht werden
-			elseif ($this->checked->messageget == 59) {
-				$this->content->template['text'] = $this->content->template['message_18'] . $this->content->template['message_59'];
-			}
-			break;
-			// Hier wird eine neue Gruppe angelegt
-		case "6" :
-			$this->content->template['menuid_form'] = 6;
-			// Formular anzeigen für Template
-			$this->gesetzt = "NOK";
-			if (empty ($this->checked->formSubmit)) {
-				$this->checked->formSubmit = "";
-			}
-			// Es wurde auf Übermitteln gedrückt
-			if ($this->checked->formSubmit != "") {
-				// Wenn alle Sachen korrekt ausgefüllt sind
-				if ($this->checked->groupname != "" and $this->checked->gruppenleiter != "none" and $this->checked->kategorie != "" and $this->checked->beschreibung != "") {
-					// Abfrage formulieren
-					// $sql= " INSERT INTO ".$this->cms->papoo_gruppe." SET gruppenname='".$this->db->escape($this->checked->groupname)."',"." gruppenleiter='".$this->db->escape($this->checked->gruppenleiter)."',admin_zugriff='".$this->db->escape($this->checked->admin_zugriff)."', elterngruppe='".$this->db->escape($this->checked->kategorie)."', "." gruppen_beschreibung='".$this->db->escape($this->checked->beschreibung)."', allow_internet='".$this->db->escape($this->checked->allow_internet)."', allow_intranet='".$this->db->escape($this->checked->allow_intranet)."', intranet='".$this->db->escape($this->checked->intranet_zu)."', publish_user='".$this->db->escape($this->checked->userleiter)."' ";
-					$sql = " INSERT INTO " . $this->cms->papoo_gruppe . "
-					SET gruppenname='" . $this->db->escape($this->checked->groupname) . "'," . " gruppenleiter='" . $this->db->escape($this->checked->gruppenleiter) . "',admin_zugriff='" . $this->db->escape($this->checked->admin_zugriff) . "', elterngruppe='" . $this->db->escape($this->checked->kategorie) . "', " . " gruppen_beschreibung='" . $this->db->escape($this->checked->beschreibung) . "', allow_internet='" . $this->db->escape($this->checked->allow_internet) . "', publish_user='" . $this->db->escape($this->checked->userleiter) . "', user_konfiguration_des_tinymce='" . $this->db->escape($this->checked->user_konfiguration_des_tinymce) . "' ";
-					// in die Datenbank eintragen
-					$this->db->query($sql);
-					// Userstartseite neu laden
-					// header("Location: ./user.php?menuid=4&messageget=50");
-					$location_url = "./user.php?menuid=9&messageget=50";
-					if ($_SESSION['debug_stopallredirect'])
-						echo '<a href="' . $location_url . '">Weiter</a>';
-					else
-						header("Location: $location_url");
-					exit;
-				} // es ist nicht alles korrekt ausgefüllt
-				else {
-					// Message ausgeben
-					$this->content->template['text_error'] = $this->content->template['message_48a'];
+			case "4" :
+				// Starttext Übergeben
+				if (empty ($this->checked->messageget)) {
+					$this->content->template['text'] = $this->content->template['message_18'];
+				} // Gruppe wurde eingetragen
+				elseif ($this->checked->messageget == 50) {
+					$this->content->template['text'] = $this->content->template['message_18'] . $this->content->template['message_50'];
+				} // User eingetragen
+				elseif ($this->checked->messageget == 52) {
+					$this->content->template['text'] = $this->content->template['message_18'];
+					$this->content->template['user_message_text'] = $this->content->template['message_52'];
+				} // User gelöscht
+				elseif ($this->checked->messageget == 53) {
+					$this->content->template['text'] = $this->content->template['message_18'] . $this->content->template['message_53'];
+				} // root kann nicht gelöscht werden
+				elseif ($this->checked->messageget == 54) {
+					$this->content->template['text'] = $this->content->template['message_18'] . $this->content->template['message_54'];
+				} // jeder kann nicht gelöscht werden
+				elseif ($this->checked->messageget == 55) {
+					$this->content->template['text'] = $this->content->template['message_18'] . $this->content->template['message_55'];
+				} // Gruppe wurde gelöscht
+				elseif ($this->checked->messageget == 57) {
+					$this->content->template['text'] = $this->content->template['message_18'] . $this->content->template['message_57'];
+				} // Gruppe root kann nicht gelöscht werden
+				elseif ($this->checked->messageget == 58) {
+					$this->content->template['text'] = $this->content->template['message_18'] . $this->content->template['message_58'];
+				} // Gruppe jeder kann nicht gelöscht werden
+				elseif ($this->checked->messageget == 59) {
+					$this->content->template['text'] = $this->content->template['message_18'] . $this->content->template['message_59'];
 				}
-			}
-			else {
-				// Daten für neues Formular anzeigen ###############
-				if ($this->gesetzt == "NOK") {
-					// Variable setzen für die if Abfrage im Template ###
-					$this->content->template['neugroup'] = '1';
-					// Gruppe zuweisen für die Auswahl der Elterngruppe
-					$result = $this->db->get_results("SELECT gruppenname, gruppeid FROM " . $this->cms->papoo_gruppe . " ORDER BY gruppenname ASC ");
+				break;
+			// Hier wird eine neue Gruppe angelegt
+			case "6" :
+				$this->content->template['menuid_form'] = 6;
+				// Formular anzeigen für Template
+				$this->gesetzt = "NOK";
+				if (empty ($this->checked->formSubmit)) {
+					$this->checked->formSubmit = "";
+				}
+				// Es wurde auf Übermitteln gedrückt
+				if ($this->checked->formSubmit != "") {
+					// Wenn alle Sachen korrekt ausgefüllt sind
+					if ($this->checked->groupname != "" and $this->checked->gruppenleiter != "none" and $this->checked->kategorie != "" and $this->checked->beschreibung != "") {
+						// Abfrage formulieren
+						// $sql= " INSERT INTO ".$this->cms->papoo_gruppe." SET gruppenname='".$this->db->escape($this->checked->groupname)."',"." gruppenleiter='".$this->db->escape($this->checked->gruppenleiter)."',admin_zugriff='".$this->db->escape($this->checked->admin_zugriff)."', elterngruppe='".$this->db->escape($this->checked->kategorie)."', "." gruppen_beschreibung='".$this->db->escape($this->checked->beschreibung)."', allow_internet='".$this->db->escape($this->checked->allow_internet)."', allow_intranet='".$this->db->escape($this->checked->allow_intranet)."', intranet='".$this->db->escape($this->checked->intranet_zu)."', publish_user='".$this->db->escape($this->checked->userleiter)."' ";
+						$sql = " INSERT INTO " . $this->cms->papoo_gruppe . "
+					SET gruppenname='" . $this->db->escape($this->checked->groupname) . "'," . " gruppenleiter='" . $this->db->escape($this->checked->gruppenleiter) . "',admin_zugriff='" . $this->db->escape($this->checked->admin_zugriff) . "', elterngruppe='" . $this->db->escape($this->checked->kategorie) . "', " . " gruppen_beschreibung='" . $this->db->escape($this->checked->beschreibung) . "', allow_internet='" . $this->db->escape($this->checked->allow_internet) . "', publish_user='" . $this->db->escape($this->checked->userleiter) . "', user_konfiguration_des_tinymce='" . $this->db->escape($this->checked->user_konfiguration_des_tinymce) . "' ";
+						// in die Datenbank eintragen
+						$this->db->query($sql);
+						// Userstartseite neu laden
+						// header("Location: ./user.php?menuid=4&messageget=50");
+						$location_url = "./user.php?menuid=9&messageget=50";
+						if ($_SESSION['debug_stopallredirect'])
+							echo '<a href="' . $location_url . '">Weiter</a>';
+						else
+							header("Location: $location_url");
+						exit;
+					} // es ist nicht alles korrekt ausgefüllt
+					else {
+						// Message ausgeben
+						$this->content->template['text_error'] = $this->content->template['message_48a'];
+					}
+				}
+				else {
+					// Daten für neues Formular anzeigen ###############
+					if ($this->gesetzt == "NOK") {
+						// Variable setzen für die if Abfrage im Template ###
+						$this->content->template['neugroup'] = '1';
+						// Gruppe zuweisen für die Auswahl der Elterngruppe
+						$result = $this->db->get_results("SELECT gruppenname, gruppeid FROM " . $this->cms->papoo_gruppe . " ORDER BY gruppenname ASC ");
 
-					foreach ($result as $row) {
-						array_push($this->content->template['gruppelesen_data'], array('gruppelesen_name' => $row->gruppenname, 'gruppelesen_value' => $row->gruppeid,));
-					}
-					// User zuweisen für die Auswahl des Gruppenleiters
-					$resultuser = $this->db->get_results("SELECT username, userid FROM " . $this->cms->papoo_user . "  ORDER BY username ASC ");
-					foreach ($resultuser as $row) {
-						array_push($this->content->template['userlesen_data'], array('userlesen_name' => $row->username,
-							'userlesen_value' => $row->userid,
-						));
-					}
-					// User zuweisen für die Auswahl des Gruppenleiters
-					$sql = "SELECT DISTINCT(username), " . $this->cms->papoo_user . ".userid FROM " . $this->cms->papoo_user . ", " . $this->cms->papoo_gruppe . ", " . $this->cms->papoo_lookup_ug . "  WHERE
+						foreach ($result as $row) {
+							array_push($this->content->template['gruppelesen_data'], array('gruppelesen_name' => $row->gruppenname, 'gruppelesen_value' => $row->gruppeid,));
+						}
+						// User zuweisen für die Auswahl des Gruppenleiters
+						$resultuser = $this->db->get_results("SELECT username, userid FROM " . $this->cms->papoo_user . "  ORDER BY username ASC ");
+						foreach ($resultuser as $row) {
+							array_push($this->content->template['userlesen_data'], array('userlesen_name' => $row->username,
+								'userlesen_value' => $row->userid,
+							));
+						}
+						// User zuweisen für die Auswahl des Gruppenleiters
+						$sql = "SELECT DISTINCT(username), " . $this->cms->papoo_user . ".userid FROM " . $this->cms->papoo_user . ", " . $this->cms->papoo_gruppe . ", " . $this->cms->papoo_lookup_ug . "  WHERE
 						" . $this->cms->papoo_lookup_ug . ".userid=" . $this->cms->papoo_user . ".userid
 						AND " . $this->cms->papoo_lookup_ug . ".gruppenid=gruppeid AND  allow_internet='1'
 						ORDER BY username ASC ";
 
-					$resultuser = $this->db->get_results($sql);
-					// if (!empty($resultuser))
-					foreach ($resultuser as $row) {
-						array_push($this->content->template['userschreiben_data'], array('userlesen_name' => $row->username,
-							'userlesen_value' => $row->userid,
-						));
+						$resultuser = $this->db->get_results($sql);
+						// if (!empty($resultuser))
+						foreach ($resultuser as $row) {
+							array_push($this->content->template['userschreiben_data'], array('userlesen_name' => $row->username,
+								'userlesen_value' => $row->userid,
+							));
+						}
 					}
 				}
-			}
 
-			break;
+				break;
 			// Ende neue Gruppe
 			// Neuer User
-		case "7" :
-			$gesetzt = "NOK";
-			if (empty ($this->checked->formSubmit)) {
-				$this->checked->formSubmit = "";
-			}
-			if ($this->checked->formSubmit != "") {
-				if ($this->checked->neuusername != "" and $this->checked->formpassword != "" and $this->checked->email != "") {
-					// checken ob der User schon existiert
-					$sql = "SELECT username FROM " . $this->cms->papoo_user . " WHERE username='" . $this->db->escape($this->checked->neuusername) . "' LIMIT 1 ";
-					$resultname = $this->db->get_results($sql);
-					// wenn ja, dann Fehler auswerfen
-					if (is_array($resultname) && count($resultname) > 0) {
-						$this->content->template['text_error'] = $this->content->template['message_51'];
-					} // wenn nicht dann eintragen
-					else {
-						if ($this->checked->antwortmail == "ok") {
-							$antwortmail = 1;
-						}
+			case "7" :
+				$gesetzt = "NOK";
+				if (empty ($this->checked->formSubmit)) {
+					$this->checked->formSubmit = "";
+				}
+				if ($this->checked->formSubmit != "") {
+					if ($this->checked->neuusername != "" and $this->checked->formpassword != "" and $this->checked->email != "") {
+						// checken ob der User schon existiert
+						$sql = "SELECT username FROM " . $this->cms->papoo_user . " WHERE username='" . $this->db->escape($this->checked->neuusername) . "' LIMIT 1 ";
+						$resultname = $this->db->get_results($sql);
+						// wenn ja, dann Fehler auswerfen
+						if (@count($resultname) > 0) {
+							$this->content->template['text'] = $this->content->template['message_51'];
+						} // wenn nicht dann eintragen
 						else {
-							$antwortmail = 0;
-						}
-						if ($this->checked->dauer_einlogg == "ok") {
-							$this->checked->dauer_einlogg = 1;
-						}
-						else {
-							$this->checked->dauer_einlogg = 0;
-						}
-						//$heute = date("Y.m.d  G:i:s");
-						// Passwort verschlüsseln
-						$hashed_password = $this->diverse->hash_password($this->checked->formpassword);
-						$confirm_code = $this->createCode($this->checked->neuusername);
-						// Eingabe formulieren
-						$sql = "INSERT INTO " . $this->cms->papoo_user;
-						$sql .= " (username, email, password, password_org, antwortmail, zeitstempel, user_vorname, user_nachname, user_strasse, user_ort, user_plz,user_style_id,dauer_einlogg, active, confirm_code, board, beschreibung, user_lang_front, user_lang_back,user_newsletter) ";
-						$sql .= "VALUES ('" . $this->db->escape($this->checked->neuusername) . "', '" . $this->db->escape($this->checked->email) . "', ";
-						$sql .= " '$hashed_password','" . $this->db->escape('xxx') . "', '$antwortmail', NOW(),";
-						$sql .= " '" . $this->db->escape($this->checked->neuvorname) . "','" . $this->db->escape($this->checked->neunachname) . "','" . $this->db->escape($this->checked->neustrnr) . "', ";
-						$sql .= " '" . $this->db->escape($this->checked->neuort) . "','" . $this->db->escape($this->checked->neuplz) . "','" . $this->db->escape($this->checked->stylepost) . "', ";
-						$sql .= " '" . $this->db->escape($this->checked->dauer_einlogg) . "', '" . $this->db->escape($this->checked->active) . "', '" . $confirm_code . "','" . $this->db->escape($this->checked->forum_board) . "','" . $this->db->escape($this->checked->beschreibung) . "', ";
-						$sql .= " '" . $this->db->escape($this->checked->lang_front) . "','" . $this->db->escape($this->checked->lang_back) . "','" . $this->db->escape($this->checked->user_newsletter) . "') ";
+							if ($this->checked->antwortmail == "ok") {
+								$antwortmail = 1;
+							}
+							else {
+								$antwortmail = 0;
+							}
+							if ($this->checked->dauer_einlogg == "ok") {
+								$this->checked->dauer_einlogg = 1;
+							}
+							else {
+								$this->checked->dauer_einlogg = 0;
+							}
+							//$heute = date("Y.m.d  G:i:s");
+							// Passwort verschlüsseln
+							$hashed_password = $this->diverse->hash_password($this->checked->formpassword);
+							$confirm_code = $this->createCode($this->checked->neuusername);
+							// Eingabe formulieren
+							$sql = "INSERT INTO " . $this->cms->papoo_user;
+							$sql .= " (username, email, password, password_org, antwortmail, 
+										zeitstempel, user_vorname, user_nachname, user_strasse, 
+										user_ort, user_plz,user_style_id,dauer_einlogg, 
+										active, confirm_code, board, beschreibung, user_lang_front, 
+										user_lang_back,user_newsletter,
+										user_titel, user_country, user_tel_abends, user_tel_tags, user_tel_kunden_nr, user_gender, user_fax) ";
+							$sql .= "VALUES ('" . $this->db->escape($this->checked->neuusername) . "', '" . $this->db->escape($this->checked->email) . "', ";
+							$sql .= " '$hashed_password','" . $this->db->escape('xxx') . "', '$antwortmail', NOW(),";
+							$sql .= " '" . $this->db->escape($this->checked->neuvorname) . "','" . $this->db->escape($this->checked->neunachname) . "','" . $this->db->escape($this->checked->neustrnr) . "', ";
+							$sql .= " '" . $this->db->escape($this->checked->neuort) . "','" . $this->db->escape($this->checked->neuplz) . "','" . $this->db->escape($this->checked->stylepost) . "', ";
+							$sql .= " '" . $this->db->escape($this->checked->dauer_einlogg) . "', '" . $this->db->escape($this->checked->active) . "', '" . $confirm_code . "','" . $this->db->escape($this->checked->forum_board) . "','" . $this->db->escape($this->checked->beschreibung) . "', ";
+							$sql .= " '" . $this->db->escape($this->checked->lang_front) . "','" . $this->db->escape($this->checked->lang_back) . "','" . $this->db->escape($this->checked->user_newsletter) . "'
+						,'" . $this->db->escape($this->checked->user_titel) . "','" . $this->db->escape($this->checked->user_country) . "','" . $this->db->escape($this->checked->user_tel_abends) . "',
+						'" . $this->db->escape($this->checked->user_tel_tags) . "','" . $this->db->escape($this->checked->user_tel_kunden_nr) . "') ,'" . $this->db->escape($this->checked->user_gender) .
+								"'),'" . $this->db->escape($this->checked->user_fax) . "')";
 
-						$this->db->query($sql);
-						// Neue Userid erfahr
-						$userid = $this->db->insert_id;
-						// wenn die gruppenid nicht leer ist
-						if (!empty ($this->checked->gruppelesen)) {
-							// neue Einträge erstellen
-							foreach ($this->checked->gruppelesen as $insert) {
-								$sqlin = "INSERT INTO " . $this->cms->papoo_lookup_ug . " SET userid='$userid', gruppenid='$insert' ";
+							$this->db->query($sql);
+							// Neue Userid erfahr
+							$userid = $this->db->insert_id;
+							// wenn die gruppenid nicht leer ist
+							if (!empty ($this->checked->gruppelesen)) {
+								// neue Einträge erstellen
+								foreach ($this->checked->gruppelesen as $insert) {
+									$sqlin = "INSERT INTO " . $this->cms->papoo_lookup_ug . " SET userid='$userid', gruppenid='$insert' ";
+									$this->db->query($sqlin);
+								}
+							} // ansonsten wird die gruppenid auf jeder gesetzt
+							else {
+								// neue Einträge erstellen
+								$sqlin = "INSERT INTO " . $this->cms->papoo_lookup_ug . " SET userid='$userid', gruppenid='10' ";
 								$this->db->query($sqlin);
 							}
-						} // ansonsten wird die gruppenid auf jeder gesetzt
-						else {
-							// neue Einträge erstellen
-							$sqlin = "INSERT INTO " . $this->cms->papoo_lookup_ug . " SET userid='$userid', gruppenid='10' ";
-							$this->db->query($sqlin);
+							// zur Startseite
+							// header("Location: ./user.php?menuid=4&messageget=52");
+							$location_url = "./user.php?menuid=4&messageget=52";
+							if ($_SESSION['debug_stopallredirect']) {
+								echo '<a href="' . $location_url . '">Weiter</a>';
+							}
+							else {
+								header("Location: $location_url");
+							}
+							exit;
 						}
-						// zur Startseite
-						// header("Location: ./user.php?menuid=4&messageget=52");
-						$location_url = "./user.php?menuid=4&messageget=52";
-						if ($_SESSION['debug_stopallredirect']) {
-							echo '<a href="' . $location_url . '">Weiter</a>';
-						}
-						else {
-							header("Location: $location_url");
-						}
-						exit;
+					}
+					else {
+						$gesetzt = "NOK";
+						$this->content->template['text_error'] = $this->content->template['message_48'];
 					}
 				}
-				else {
-					$gesetzt = "NOK";
-					$this->content->template['text_error'] = $this->content->template['message_48'];
+				if ($gesetzt == "NOK") {
+					$this->show_form();
 				}
-			}
-			if ($gesetzt == "NOK") {
-				$this->show_form();
-			}
 
-			break;
+				break;
 			// User bearbeiten
-		case "8" :
-			$this->change_user();
-			break;
+			case "8" :
+				$this->change_user();
+				break;
 			// Gruppe bearbeiten
-		case "9" :
-			$this->content->template['menuid_form'] = 9;
-			if (empty ($this->checked->loeschenecht)) {
-				$this->checked->loeschenecht = "";
-			}
-			// Es soll gelöscht werden, Überprüft also löschen ###
-			if ($this->checked->loeschenecht != "") {
-				$gruppeid = $this->db->escape($this->checked->gruppeid);
-				// checken ob root oder jeder ausgewählt ist
-				if ($gruppeid != "1" and $gruppeid != "10") {
-					$sqlloesch = "DELETE FROM " . $this->cms->papoo_gruppe . " WHERE gruppeid='$gruppeid' LIMIT 1";
-					// echo $sqlloesch;
-					$this->db->query($sqlloesch);
-					// header("Location: ./user.php?menuid=4&messageget=57");
-					$location_url = "./user.php?menuid=9&messageget=57";
-					if ($_SESSION['debug_stopallredirect'])
-						echo '<a href="' . $location_url . '">Weiter</a>';
-					else
-						header("Location: $location_url");
-					exit;
+			case "9" :
+				$this->content->template['menuid_form'] = 9;
+				if (empty ($this->checked->loeschenecht)) {
+					$this->checked->loeschenecht = "";
 				}
-				else {
-					// root, dann kann nicht gelöscht werden
-					if ($gruppeid == "1") {
-						// header("Location: ./user.php?menuid=4&messageget=58");
-						$location_url = "./user.php?menuid=9&messageget=58";
+				// Es soll gelöscht werden, Überprüft also löschen ###
+				if ($this->checked->loeschenecht != "") {
+					$gruppeid = $this->db->escape($this->checked->gruppeid);
+					// checken ob root oder jeder ausgewählt ist
+					if ($gruppeid != "1" and $gruppeid != "10") {
+						$sqlloesch = "DELETE FROM " . $this->cms->papoo_gruppe . " WHERE gruppeid='$gruppeid' LIMIT 1";
+						// echo $sqlloesch;
+						$this->db->query($sqlloesch);
+						// header("Location: ./user.php?menuid=4&messageget=57");
+						$location_url = "./user.php?menuid=9&messageget=57";
 						if ($_SESSION['debug_stopallredirect'])
 							echo '<a href="' . $location_url . '">Weiter</a>';
 						else
 							header("Location: $location_url");
 						exit;
 					}
-					// jeder, dann kann nicht gelöscht werden
-					if ($gruppeid == "10") {
-						// header("Location: ./user.php?menuid=4&messageget=59");
-						$location_url = "./user.php?menuid=9&messageget=59";
-						if ($_SESSION['debug_stopallredirect'])
-							echo '<a href="' . $location_url . '">Weiter</a>';
-						else
-							header("Location: $location_url");
-						exit;
-					}
-				}
-			}
-			// Nicht löschen, daher ...
-			else {
-				if (empty ($this->checked->loeschen)) {
-					$this->checked->loeschen = "";
-				}
-				// Löschmöglichkeit anzeigen, Daten Überprüfen --- Fragen  ob wirklich gelöscht werden soll###
-				if ($this->checked->loeschen != "") {
-					$this->content->template['loeschgruppe'] = '1';
-					array_push($this->content->template['gruppelesen_data'], array('gruppenname' => $this->checked->groupname, 'gruppeid' => $this->checked->gruppeid,));
-				} // Kein löschen ausgewählt, do the rest ###
-				else {
-					if (empty ($this->checked->formSubmit)) {
-						$this->checked->formSubmit = "";
-					}
-					// Daten wurden verändert und Übermittelt , also zur Überprüfung anzeigen ###
-					if ($this->checked->formSubmit != "") {
-						if (empty ($this->checked->gruppeid)) {
-							$this->checked->gruppeid = "";
-						}
-						// alles ok, dann ändern
-						if ($this->checked->groupname != "" and $this->checked->gruppenleiter != "none" and $this->checked->kategorie != "" and $this->checked->beschreibung != "") {
-							// $sql= "UPDATE ".$this->cms->papoo_gruppe." SET gruppenname='".$this->db->escape($this->checked->groupname)."',"." gruppenleiter='".$this->db->escape($this->checked->gruppenleiter)."', admin_zugriff='".$this->db->escape($this->checked->admin_zugriff)."', elterngruppe='".$this->db->escape($this->checked->kategorie)."', "."gruppen_beschreibung='".$this->db->escape($this->checked->beschreibung)."', allow_internet='".$this->db->escape($this->checked->allow_internet)."', allow_intranet='".$this->db->escape($this->checked->allow_intranet)."', intranet='".$this->db->escape($this->checked->intranet_zu)."', publish_user='".$this->db->escape($this->checked->userleiter)."' WHERE gruppeid=".$this->db->escape($this->checked->gruppeid)." ";
-							$sql = "UPDATE " . $this->cms->papoo_gruppe . " SET gruppenname='" . $this->db->escape($this->checked->groupname) . "'," . " gruppenleiter='" . $this->db->escape($this->checked->gruppenleiter) . "', admin_zugriff='" . $this->db->escape($this->checked->admin_zugriff) . "', elterngruppe='" . $this->db->escape($this->checked->kategorie) . "', " . "gruppen_beschreibung='" . $this->db->escape($this->checked->beschreibung) . "', allow_internet='" . $this->db->escape($this->checked->allow_internet) . "', publish_user='" . $this->db->escape($this->checked->userleiter) . "', user_konfiguration_des_tinymce='" .
-								$this->db->escape($this->checked->user_konfiguration_des_tinymce) . "'  WHERE gruppeid=" . $this->db->escape($this->checked->gruppeid) . "";
-							$this->db->query($sql);
-							// header("Location: ./user.php?menuid=9&messageget=50");
-							$location_url = "./user.php?menuid=9&messageget=50";
+					else {
+						// root, dann kann nicht gelöscht werden
+						if ($gruppeid == "1") {
+							// header("Location: ./user.php?menuid=4&messageget=58");
+							$location_url = "./user.php?menuid=9&messageget=58";
 							if ($_SESSION['debug_stopallredirect'])
 								echo '<a href="' . $location_url . '">Weiter</a>';
 							else
 								header("Location: $location_url");
 							exit;
-						} // nicht ok, dann message raus.
-						else {
-							$this->content->template['text_error'] = $this->content->template['message_48a'];
 						}
-					} // Es werden die Daten aus der Datenbank geholt und angezeigt
+						// jeder, dann kann nicht gelöscht werden
+						if ($gruppeid == "10") {
+							// header("Location: ./user.php?menuid=4&messageget=59");
+							$location_url = "./user.php?menuid=9&messageget=59";
+							if ($_SESSION['debug_stopallredirect'])
+								echo '<a href="' . $location_url . '">Weiter</a>';
+							else
+								header("Location: $location_url");
+							exit;
+						}
+					}
+				}
+				// Nicht löschen, daher ...
+				else {
+					if (empty ($this->checked->loeschen)) {
+						$this->checked->loeschen = "";
+					}
+					// Löschmöglichkeit anzeigen, Daten Überprüfen --- Fragen  ob wirklich gelöscht werden soll###
+					if ($this->checked->loeschen != "") {
+						$this->content->template['loeschgruppe'] = '1';
+						array_push($this->content->template['gruppelesen_data'], array('gruppenname' => $this->checked->groupname, 'gruppeid' => $this->checked->gruppeid,));
+					} // Kein löschen ausgewählt, do the rest ###
 					else {
-						if (empty ($this->checked->gruppeid)) {
-							$this->checked->gruppeid = "";
+						if (empty ($this->checked->formSubmit)) {
+							$this->checked->formSubmit = "";
 						}
-						$gruppeid = $this->checked->gruppeid;
-						// Gruppe anzeigen zur Auswahl
-						if ($gruppeid == "") {
-							// Template-> Gruppebearbeitung
-							$this->content->template['altgruppe'] = '1';
-							// ANzahl der Gruppen ermitteln
-							$this->weiter->result_anzahl = $this->db->get_var("SELECT COUNT(*) FROM " . $this->cms->papoo_gruppe . " ");
+						// Daten wurden verändert und Übermittelt , also zur Überprüfung anzeigen ###
+						if ($this->checked->formSubmit != "") {
+							if (empty ($this->checked->gruppeid)) {
+								$this->checked->gruppeid = "";
+							}
+							// alles ok, dann ändern
+							if ($this->checked->groupname != "" and $this->checked->gruppenleiter != "none" and $this->checked->kategorie != "" and $this->checked->beschreibung != "") {
+								// $sql= "UPDATE ".$this->cms->papoo_gruppe." SET gruppenname='".$this->db->escape($this->checked->groupname)."',"." gruppenleiter='".$this->db->escape($this->checked->gruppenleiter)."', admin_zugriff='".$this->db->escape($this->checked->admin_zugriff)."', elterngruppe='".$this->db->escape($this->checked->kategorie)."', "."gruppen_beschreibung='".$this->db->escape($this->checked->beschreibung)."', allow_internet='".$this->db->escape($this->checked->allow_internet)."', allow_intranet='".$this->db->escape($this->checked->allow_intranet)."', intranet='".$this->db->escape($this->checked->intranet_zu)."', publish_user='".$this->db->escape($this->checked->userleiter)."' WHERE gruppeid=".$this->db->escape($this->checked->gruppeid)." ";
+								$sql = "UPDATE " . $this->cms->papoo_gruppe . " SET gruppenname='" . $this->db->escape($this->checked->groupname) . "'," . " gruppenleiter='" . $this->db->escape($this->checked->gruppenleiter) . "', admin_zugriff='" . $this->db->escape($this->checked->admin_zugriff) . "', elterngruppe='" . $this->db->escape($this->checked->kategorie) . "', " . "gruppen_beschreibung='" . $this->db->escape($this->checked->beschreibung) . "', allow_internet='" . $this->db->escape($this->checked->allow_internet) . "', publish_user='" . $this->db->escape($this->checked->userleiter) . "', user_konfiguration_des_tinymce='" .
+									$this->db->escape($this->checked->user_konfiguration_des_tinymce) . "'  WHERE gruppeid=" . $this->db->escape($this->checked->gruppeid) . "";
+								$this->db->query($sql);
+								// header("Location: ./user.php?menuid=9&messageget=50");
+								$location_url = "./user.php?menuid=9&messageget=50";
+								if ($_SESSION['debug_stopallredirect'])
+									echo '<a href="' . $location_url . '">Weiter</a>';
+								else
+									header("Location: $location_url");
+								exit;
+							} // nicht ok, dann message raus.
+							else {
+								$this->content->template['text_error'] = $this->content->template['message_48a'];
+							}
+						} // Es werden die Daten aus der Datenbank geholt und angezeigt
+						else {
+							if (empty ($this->checked->gruppeid)) {
+								$this->checked->gruppeid = "";
+							}
+							$gruppeid = $this->checked->gruppeid;
+							// Gruppe anzeigen zur Auswahl
+							if ($gruppeid == "") {
+								// Template-> Gruppebearbeitung
+								$this->content->template['altgruppe'] = '1';
+								// ANzahl der Gruppen ermitteln
+								$this->weiter->result_anzahl = $this->db->get_var("SELECT COUNT(*) FROM " . $this->cms->papoo_gruppe . " ");
 
-							$sql = sprintf("SELECT COUNT(%s.userid) AS count,
+								$sql = sprintf("SELECT COUNT(%s.userid) AS count,
                  													gruppenname,
                  													gruppen_beschreibung,
                  													allow_internet,
@@ -386,150 +394,150 @@ class intern_user
                  													GROUP BY gruppeid
                  													ORDER BY gruppenname ASC
                  													%s",
-								$this->cms->tbname['papoo_user'],
-								$this->cms->tbname['papoo_gruppe'],
-								$this->cms->tbname['papoo_lookup_ug'],
-								$this->cms->tbname['papoo_lookup_ug'],
-								$this->cms->tbname['papoo_user'],
-								$this->cms->tbname['papoo_user'],
-								$this->cms->tbname['papoo_lookup_ug'],
-								$this->cms->sqllimit
-							);
-							$result = $this->db->get_results($sql, ARRAY_A);
+									$this->cms->tbname['papoo_user'],
+									$this->cms->tbname['papoo_gruppe'],
+									$this->cms->tbname['papoo_lookup_ug'],
+									$this->cms->tbname['papoo_lookup_ug'],
+									$this->cms->tbname['papoo_user'],
+									$this->cms->tbname['papoo_user'],
+									$this->cms->tbname['papoo_lookup_ug'],
+									$this->cms->sqllimit
+								);
+								$result = $this->db->get_results($sql, ARRAY_A);
 
 
-							// Name der Gruppen und id zur Auswahl angeben
-							$this->content->template['gruppelesen_data'] = $result;
+								// Name der Gruppen und id zur Auswahl angeben
+								$this->content->template['gruppelesen_data'] = $result;
 
-							//ANzahl der User in der Gruppe
-							$sql = sprintf("SELECT COUNT(userid), gruppenname
+								//ANzahl der User in der Gruppe
+								$sql = sprintf("SELECT COUNT(userid), gruppenname
                  													FROM %s LEFT JOIN %s ON gruppeid=gruppenid
                  													GROUP BY gruppeid",
-								$this->cms->tbname['papoo_gruppe'],
-								$this->cms->tbname['papoo_lookup_ug']);
-							$result = $this->db->get_results($sql);
+									$this->cms->tbname['papoo_gruppe'],
+									$this->cms->tbname['papoo_lookup_ug']);
+								$result = $this->db->get_results($sql);
 
-							// Link für weitere Seiten
-							$this->weiter->weiter_link = "./user.php?menuid=9";
-							// weitere Seiten anzeigen
-							$this->weiter->do_weiter("teaser");
-						}
-						// Es ist eine Gruppe ausgewählt, also die Daten anzeigen zur Bearbeitung ###
-						else {
-							if (empty ($this->checked->gruppeid)) {
-								$this->checked->gruppeid = "";
+								// Link für weitere Seiten
+								$this->weiter->weiter_link = "./user.php?menuid=9";
+								// weitere Seiten anzeigen
+								$this->weiter->do_weiter("teaser");
 							}
-							// Daten der Gruppe raussuchen
-							$result = $this->db->get_results("SELECT * FROM " . $this->cms->papoo_gruppe . "  WHERE gruppeid='" . $this->db->escape($this->checked->gruppeid) . "' ORDER BY gruppeid ");
-							// Gruppe existiert
-							if (count($result)) {
-								foreach ($result as $row) {
-									$gruppenleiter = $row->gruppenleiter;
-									$gruppeid = $row->gruppeid;
-									$groupname = $row->gruppenname;
-									$admin_zugriff = $row->admin_zugriff;
-									$kategorie = $row->elterngruppe;
-									$beschreibung = $row->gruppen_beschreibung;
-									$allow_internet = $row->allow_internet;
-									$tiny = $row->user_konfiguration_des_tinymce;
-									// $allow_intranet= $row->allow_intranet;
-									// $intranet_zu= $row->intranet;
-									$publish_user = $row->publish_user;
+							// Es ist eine Gruppe ausgewählt, also die Daten anzeigen zur Bearbeitung ###
+							else {
+								if (empty ($this->checked->gruppeid)) {
+									$this->checked->gruppeid = "";
 								}
-								IfNotSetNull($allow_internet);
-								IfNotSetNull($admin_zugriff);
-								IfNotSetNull($groupname);
-								IfNotSetNull($beschreibung);
-								IfNotSetNull($tiny);
-								// Gruppe darf Artikel für das Internet veröffentlichen
-								if ($allow_internet == 1) {
-									$this->content->template['checked_internet'] = 'nodecode:checked="checked"';
-								}
-								// Gruppe darf Artikel für das Intranet veröffentlichen
-								// if ($allow_intranet == 1) $this->content->template['checked_intranet']= 'nodecode:checked="checked"';
-								// hat die Gruppe Zugriff auf das Intranet
-								// if ($intranet_zu == 1) $this->content->template['checked_intranet_zu']= 'nodecode:checked="checked"';
-								// Hat die Gruppe Zugriff auf den Adminbereich
-								if ($admin_zugriff == 1) {
-									$this->content->template['admin_checked'] = 'nodecode:checked="checked"';
-								}
-
-								$this->content->template['gruppeid'] = $gruppeid;
-								// Formular setzen
-								$this->content->template['neugroup'] = '1';
-								$this->content->template['gruppenname'] = $groupname;
-								$this->content->template['update'] = 'update';
-								$this->content->template['beschreibung'] = "nobr:" . $beschreibung;
-								$this->content->template['user_konfiguration_des_tinymce'] = "nobr:" . $tiny;
-								// Alle Gruppen ausser der eigenen
-								$result = $this->db->get_results("SELECT gruppenname, gruppeid FROM " . $this->cms->papoo_gruppe . " WHERE gruppeid!='" . $this->db->escape($this->checked->gruppeid) . "' ORDER BY gruppenname ASC ");
-								// anzeigen der Gruppen für die ANgabe der Untergruppen von:
-								IfNotSetNull($kategorie);
-								foreach ($result as $row) {
-									if ($row->gruppeid == $kategorie) {
-										$selected2 = "selected";
+								// Daten der Gruppe raussuchen
+								$result = $this->db->get_results("SELECT * FROM " . $this->cms->papoo_gruppe . "  WHERE gruppeid='" . $this->db->escape($this->checked->gruppeid) . "' ORDER BY gruppeid ");
+								// Gruppe existiert
+								if (count($result)) {
+									foreach ($result as $row) {
+										$gruppenleiter = $row->gruppenleiter;
+										$gruppeid = $row->gruppeid;
+										$groupname = $row->gruppenname;
+										$admin_zugriff = $row->admin_zugriff;
+										$kategorie = $row->elterngruppe;
+										$beschreibung = $row->gruppen_beschreibung;
+										$allow_internet = $row->allow_internet;
+										$tiny = $row->user_konfiguration_des_tinymce;
+										// $allow_intranet= $row->allow_intranet;
+										// $intranet_zu= $row->intranet;
+										$publish_user = $row->publish_user;
 									}
-									else {
-										$selected2 = "";
+									IfNotSetNull($allow_internet);
+									IfNotSetNull($admin_zugriff);
+									IfNotSetNull($groupname);
+									IfNotSetNull($beschreibung);
+									IfNotSetNull($tiny);
+									// Gruppe darf Artikel für das Internet veröffentlichen
+									if ($allow_internet == 1) {
+										$this->content->template['checked_internet'] = 'nodecode:checked="checked"';
 									}
-									array_push($this->content->template['gruppelesen_data'], array('gruppelesen_name' => $row->gruppenname,
-										'gruppelesen_value' => $row->gruppeid,
-										'selected2' => $selected2,
-									));
-								}
-								// Gruppenleiter festlegen
-								$resultuser = $this->db->get_results("SELECT username, userid FROM " . $this->cms->papoo_user . " ORDER BY username ASC ");
-								IfNotSetNull($gruppenleiter);
-								foreach ($resultuser as $row) {
-									if ($row->userid == $gruppenleiter) {
-										$selected = "selected";
-									}
-									else {
-										$selected = "";
+									// Gruppe darf Artikel für das Intranet veröffentlichen
+									// if ($allow_intranet == 1) $this->content->template['checked_intranet']= 'nodecode:checked="checked"';
+									// hat die Gruppe Zugriff auf das Intranet
+									// if ($intranet_zu == 1) $this->content->template['checked_intranet_zu']= 'nodecode:checked="checked"';
+									// Hat die Gruppe Zugriff auf den Adminbereich
+									if ($admin_zugriff == 1) {
+										$this->content->template['admin_checked'] = 'nodecode:checked="checked"';
 									}
 
-									array_push($this->content->template['userlesen_data'], array('userlesen_name' => $row->username,
-										'userlesen_value' => $row->userid,
-										'selected' => $selected,
-									));
-								}
-								// USerleiter festlegen
-								// User zuweisen für die Auswahl des Gruppenleiters
-								$sql = "SELECT username, " .
-									$this->cms->papoo_user .
-									".userid FROM " . $this->cms->papoo_user . ", " .
-									$this->cms->papoo_gruppe . ", " .
-									$this->cms->papoo_lookup_ug . "  WHERE " . $this->cms->papoo_lookup_ug .
-									".userid=" . $this->cms->papoo_user . ".userid
-									AND " . $this->cms->papoo_lookup_ug . ".gruppenid=gruppeid AND  allow_internet='1'
-									ORDER BY username ASC ";
-								$resultuser = $this->db->get_results($sql);
-								IfNotSetNull($publish_user);
-								if ((!empty($resultuser))) {
+									$this->content->template['gruppeid'] = $gruppeid;
+									// Formular setzen
+									$this->content->template['neugroup'] = '1';
+									$this->content->template['gruppenname'] = $groupname;
+									$this->content->template['update'] = 'update';
+									$this->content->template['beschreibung'] = "nobr:" . $beschreibung;
+									$this->content->template['user_konfiguration_des_tinymce'] = "nobr:" . $tiny;
+									// Alle Gruppen ausser der eigenen
+									$result = $this->db->get_results("SELECT gruppenname, gruppeid FROM " . $this->cms->papoo_gruppe . " WHERE gruppeid!='" . $this->db->escape($this->checked->gruppeid) . "' ORDER BY gruppenname ASC ");
+									// anzeigen der Gruppen für die ANgabe der Untergruppen von:
+									IfNotSetNull($kategorie);
+									foreach ($result as $row) {
+										if ($row->gruppeid == $kategorie) {
+											$selected2 = "selected";
+										}
+										else {
+											$selected2 = "";
+										}
+										array_push($this->content->template['gruppelesen_data'], array('gruppelesen_name' => $row->gruppenname,
+											'gruppelesen_value' => $row->gruppeid,
+											'selected2' => $selected2,
+										));
+									}
+									// Gruppenleiter festlegen
+									$resultuser = $this->db->get_results("SELECT username, userid FROM " . $this->cms->papoo_user . " ORDER BY username ASC ");
+									IfNotSetNull($gruppenleiter);
 									foreach ($resultuser as $row) {
-										if ($row->userid == $publish_user) {
+										if ($row->userid == $gruppenleiter) {
 											$selected = "selected";
 										}
 										else {
 											$selected = "";
 										}
 
-										array_push($this->content->template['userschreiben_data'], array('userlesen_name' => $row->username,
+										array_push($this->content->template['userlesen_data'], array('userlesen_name' => $row->username,
 											'userlesen_value' => $row->userid,
 											'selected' => $selected,
 										));
 									}
+									// USerleiter festlegen
+									// User zuweisen für die Auswahl des Gruppenleiters
+									$sql = "SELECT username, " .
+										$this->cms->papoo_user .
+										".userid FROM " . $this->cms->papoo_user . ", " .
+										$this->cms->papoo_gruppe . ", " .
+										$this->cms->papoo_lookup_ug . "  WHERE " . $this->cms->papoo_lookup_ug .
+										".userid=" . $this->cms->papoo_user . ".userid
+									AND " . $this->cms->papoo_lookup_ug . ".gruppenid=gruppeid AND  allow_internet='1'
+									ORDER BY username ASC ";
+									$resultuser = $this->db->get_results($sql);
+									IfNotSetNull($publish_user);
+									if ((!empty($resultuser))) {
+										foreach ($resultuser as $row) {
+											if ($row->userid == $publish_user) {
+												$selected = "selected";
+											}
+											else {
+												$selected = "";
+											}
+
+											array_push($this->content->template['userschreiben_data'], array('userlesen_name' => $row->username,
+												'userlesen_value' => $row->userid,
+												'selected' => $selected,
+											));
+										}
+									}
 								}
-							}
-							else {
-								// Gruppe existiert nicht
-								$this->content->template['text'] = $this->content->template['message_56'];
+								else {
+									// Gruppe existiert nicht
+									$this->content->template['text'] = $this->content->template['message_56'];
+								}
 							}
 						}
 					}
 				}
-			}
-			break;
+				break;
 		}
 	}
 
@@ -643,7 +651,11 @@ class intern_user
 
 							$hashed_password = $this->diverse->hash_password($this->checked->formpassword);
 							// Datenbank updaten
-							$sql = " UPDATE " . $this->cms->papoo_user . " SET username='" . $this->db->escape($this->checked->neuusername) . "', email='" . $this->db->escape($this->checked->email) . "', password='$hashed_password', password_org='" . $this->db->escape("xxx") . "', " . " beschreibung='" . $this->db->escape($this->checked->beschreibung) . "',";
+							$sql = " UPDATE " . $this->cms->papoo_user . " SET username='" . $this->db->escape($this->checked->neuusername) . "', 
+							email='" . $this->db->escape($this->checked->email) . "', 
+							password='$hashed_password', 
+							password_org='" . $this->db->escape("wtf") . "', 
+							" . " beschreibung='" . $this->db->escape($this->checked->beschreibung) . "',";
 							$sql .= " user_vorname ='" . $this->db->escape($this->checked->neuvorname) . "', ";
 							$sql .= " user_nachname='" . $this->db->escape($this->checked->neunachname) . "' , ";
 							$sql .= " user_strasse='" . $this->db->escape($this->checked->neustrnr) . "', ";
@@ -657,7 +669,14 @@ class intern_user
 							$sql .= " active = '" . $this->db->escape($this->checked->active) . "',  ";
 							$sql .= " user_newsletter = '" . $this->db->escape($this->checked->user_newsletter) . "',  ";
 							$sql .= " antwortmail='$antwortmail', ";
-							$sql .= " dauer_einlogg='" . $this->db->escape($this->checked->dauer_einlogg) . "' ";
+							$sql .= " dauer_einlogg='" . $this->db->escape($this->checked->dauer_einlogg) . "', ";
+							$sql .= " user_titel='" . $this->db->escape($this->checked->user_titel) . "', ";
+							$sql .= " user_gender='" . $this->db->escape($this->checked->user_gender) . "', ";
+							$sql .= " user_fax='" . $this->db->escape($this->checked->user_fax) . "', ";
+							$sql .= " user_country='" . $this->db->escape($this->checked->user_country) . "', ";
+							$sql .= " user_tel_abends='" . $this->db->escape($this->checked->user_tel_abends) . "', ";
+							$sql .= " user_tel_tags='" . $this->db->escape($this->checked->user_tel_tags) . "', ";
+							$sql .= " user_tel_kunden_nr='" . $this->db->escape($this->checked->user_tel_kunden_nr) . "' ";
 							$sql .= "";
 							$sql .= " WHERE userid='" . $this->db->escape($this->checked->userid) . "'";
 						} // Kein neues Passwort
@@ -687,10 +706,18 @@ class intern_user
 							$sql .= " board = '" . $this->db->escape($this->checked->forum_board) . "',  ";
 							$sql .= " user_newsletter = '" . $this->db->escape($this->checked->user_newsletter) . "',  ";
 							$sql .= " antwortmail='$antwortmail', ";
-							$sql .= " dauer_einlogg='" . $this->db->escape($this->checked->dauer_einlogg) . "'";
+							$sql .= " dauer_einlogg='" . $this->db->escape($this->checked->dauer_einlogg) . "',";
+							$sql .= " user_titel='" . $this->db->escape($this->checked->user_titel) . "', ";
+							$sql .= " user_gender='" . $this->db->escape($this->checked->user_gender) . "', ";
+							$sql .= " user_fax='" . $this->db->escape($this->checked->user_fax) . "', ";
+							$sql .= " user_country='" . $this->db->escape($this->checked->user_country) . "', ";
+							$sql .= " user_tel_abends='" . $this->db->escape($this->checked->user_tel_abends) . "', ";
+							$sql .= " user_tel_tags='" . $this->db->escape($this->checked->user_tel_tags) . "', ";
+							$sql .= " user_tel_kunden_nr='" . $this->db->escape($this->checked->user_tel_kunden_nr) . "' ";
 							$sql .= "";
 							$sql .= " WHERE userid='" . $this->db->escape($this->checked->userid) . "'";
 						}
+						//print_r($sql);exit();
 						$this->db->query($sql);
 						// wenn die gruppenid nicht leer ist
 						if (!empty ($this->checked->gruppelesen)) {
@@ -788,6 +815,13 @@ class intern_user
 									'checked' => "$checked",
 									'loeschen' => "",
 									'username' => $row->username,
+									'user_titel' => $row->user_titel,
+									'user_gender' => $row->user_gender,
+									'user_fax' => $row->user_fax,
+									'user_country' => $row->user_country,
+									'user_tel_abends' => $row->user_tel_abends,
+									'user_tel_tags' => $row->user_tel_tags,
+									'user_tel_kunden_nr' => $row->user_tel_kunden_nr,
 									'active' => $row->active,
 									'mailname' => $row->email,
 									'user_newsletter' => $row->user_newsletter,
@@ -1017,37 +1051,37 @@ class intern_user
 		}
 		switch ($this->checked->order) {
 			// ordnen nach Username
-		case "user" :
-			$this->order = "username";
-			break;
+			case "user" :
+				$this->order = "username";
+				break;
 			// ordnen nach Beitritt
-		case "beitritt" :
-			$this->order = "zeitstempel";
-			break;
+			case "beitritt" :
+				$this->order = "zeitstempel";
+				break;
 			// ordnen nach userid
-		default :
-			$this->order = "userid";
+			default :
+				$this->order = "userid";
 		}
 		if (empty ($this->checked->richtung)) {
 			$this->checked->richtung = "";
 		}
 		// Richtung der ORdnung
 		switch ($this->checked->richtung) {
-		case "rauf" :
-			$this->richtung = "ASC";
-			$this->content->template['richtung'] = 'runter';
-			$this->content->template['richtungweiter'] = 'rauf';
-			break;
+			case "rauf" :
+				$this->richtung = "ASC";
+				$this->content->template['richtung'] = 'runter';
+				$this->content->template['richtungweiter'] = 'rauf';
+				break;
 
-		case "runter" :
-			$this->richtung = "DESC";
-			$this->content->template['richtung'] = 'rauf';
-			$this->content->template['richtungweiter'] = 'runter';
-			break;
+			case "runter" :
+				$this->richtung = "DESC";
+				$this->content->template['richtung'] = 'rauf';
+				$this->content->template['richtungweiter'] = 'runter';
+				break;
 
-		default :
-			$this->richtung = "DESC";
-			$this->content->template['richtung'] = 'runter';
+			default :
+				$this->richtung = "DESC";
+				$this->content->template['richtung'] = 'runter';
 		}
 	}
 

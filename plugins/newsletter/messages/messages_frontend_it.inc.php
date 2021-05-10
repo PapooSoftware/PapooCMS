@@ -1,0 +1,107 @@
+<?php 
+$this->content->template['message_20001'] = "<h2>Inviare newsletter</h2>
+<p>Puoi inserire qui la newsletter che vuoi inviare. L'impronta che avete creato sarà inoltrata automaticamente.</p>"; 
+$this->content->template['message_20002'] = "Oggetto"; 
+$this->content->template['message_20003'] = " Contenuto della newsletter "; 
+$this->content->template['message_20004'] = "Contenuto come testo semplice"; 
+$this->content->template['message_20005'] = "<h2>Modifica l'impronta della newsletter</h2>
+<strong>Inserisci qui i dati importanti nell'impronta della newsletter.</strong>"; 
+$this->content->template['message_20006'] = " Contenuto dell'impronta:"; 
+$this->content->template['message_20007'] = "Contenuto"; 
+$this->content->template['message_20008'] = "<h2>Abbonati alla newsletter</h2>
+<p>Qui puoi vedere gli indirizzi e-mail dei nostri abbonati</p>
+<p>Clicca su un indirizzo e-mail per modificarlo.</p>
+<p>Per aggiungere un nuovo indirizzo clicca su"; 
+$this->content->template['message_20009'] = "aggiungi una nuova email "; 
+$this->content->template['message_20010'] = ""; 
+$this->content->template['message_20011'] = "Sì "; 
+$this->content->template['message_20012'] = "No"; 
+$this->content->template['message_20013'] = "Attivo"; 
+$this->content->template['message_20014'] = "Indirizzo e-mail"; 
+$this->content->template['message_20015'] = "Email"; 
+$this->content->template['news_message_1'] = "<h1>Modifica newsletter</h1><p>Puoi modificare la newsletter, modificare gli abbonati e l'impronta qui.</p><p>Se vuoi includere la newsletter, puoi farlo<br/><ol><li>Creare una voce di menu. Quando lo create, potete aggiungere manualmente la seguente voce sotto il link del modulo: <br /><strong>plugin:newsletter/templates/subscribe_newsletter.html.</strong></li><li>Se non vuoi avere una voce di menu separata, puoi creare un link in qualsiasi articolo attraverso la funzione link nell'editor. Il link dovrebbe avere il seguente contenuto: /plugin.php?menuid=1&amp;template=newsletter/templates/subscribe_newsletter.html .</li><li>Puoi anche usare il gestore di moduli per incorporare il modulo d'iscrizione dove vuoi </li></ol>"; 
+$this->content->template['news_message_2'] = "<h2 style=\"color:red;\">La newsletter è stata inviata!</h2>"; 
+$this->content->template['news_message_3'] = "<h2>Salva Newsletter!</h2><p>Clicca su Save Newsletter e tutti i dati rilevanti della newsletter saranno salvati in un file dump. Questo magazzino è indipendente dal magazzino generale.</p>"; 
+$this->content->template['news_message_4'] = "Salvare la newsletter"; 
+$this->content->template['message_20016'] = "Indirizzo e-mail con cui viene inviato:"; 
+$this->content->template['message_20017'] = "Il nome per la parte *di:*:"; 
+$this->content->template['message_20018'] = "<h3>Iscriviti alla nostra newsletter.</h3><p>Puoi iscriverti alla nostra newsletter qui. Per farlo, si prega di compilare il modulo sottostante. Riceverai quindi un'e-mail di conferma, alla quale dovrai rispondere.</p>
+<p>Solo allora sei iscritto alla newsletter.</p>"; 
+$this->content->template['message_20018_ds'] = "Ho preso nota dell'informativa sulla privacy. Acconsento che i miei dati siano raccolti e conservati elettronicamente per rispondere alla mia richiesta. Nota: Puoi revocare il tuo consenso per il futuro in qualsiasi momento inviando una e-mail a info@ihre-mail.de."; 
+$this->content->template['message_20018_1'] = "Archivio newsletter"; 
+$this->content->template['message_20018_a'] = "Iscriviti alla nostra newsletter."; 
+$this->content->template['message_20019'] = "Inserisci i tuoi dati."; 
+$this->content->template['message_20020'] = "sottoscrivere"; 
+$this->content->template['message_20021'] = "Invia"; 
+$this->content->template['erneut_versenden'] = "Rispedire."; 
+$this->content->template['datum'] = "Data"; 
+$this->content->template['inhalt'] = "Contenuto"; 
+$this->content->template['useranzahl'] = "Numero di destinatari"; 
+$this->content->template['gruppe'] = "Gruppo"; 
+$this->content->template['newsletter_texthtml'] = "Contenuto come HTML"; 
+$this->content->template['news_message1'] = "<h2>Selezionare una lingua</h2><p>Seleziona qui la lingua in cui deve essere creata la newsletter.</p>"; 
+$this->content->template['news_message2'] = "Seleziona"; 
+$this->content->template['news_imptext1'] = "-- Per annullare l'iscrizione, clicca qui: http://#url#/plugin.php?menuid=1&amp;activate=#key#&amp;news_message=de_activate&amp;template=newsletter/templates/subscribe_newsletter.html #imp#"; 
+$this->content->template['news_imptext2'] = "  Per cancellare la newsletter, clicca qui: <br /> <a href=\"http://#url#/plugin.php?menuid=1&activate=#key#&news_message=de_activate&template=newsletter/templates/subscribe_newsletter.html\">Newsletter cancel</a><br />"; 
+$this->content->template['news_mail1'] = "Newsletter sottoscritto da seitenurl."; 
+$this->content->template['news_mail2'] = "Ti sei iscritto alla newsletter di seitenurl, se non ti sei iscritto a questa newsletter o non la vuoi, ignora questa email, non ne riceverai un'altra. Per attivare la newsletter, clicca sul seguente link"; 
+$this->content->template['news_mail3'] = "Un nuovo iscritto si è iscritto a una o più liste moderate"; 
+$this->content->template['news_front1'] = "nodecode:<div id=\"hl\"><h1 class=\"home\">Newsletter iscritta</h1></div><p>Ti sei iscritto alla nostra newsletter. Dovresti ricevere un'e-mail con un link di conferma in pochi minuti.</p><p>Cliccate sul link nell'e-mail per iscrivervi finalmente a questa newsletter.</p>"; 
+$this->content->template['news_front2'] = "nodecode:<div id=\"hl\"><h1 class=\"home\">Newsletter iscritta</h1></div><p>La tua iscrizione alla nostra newsletter è stata attivata. Inizierai a ricevere la nostra newsletter oggi stesso. Se desideri annullare l'iscrizione, basta cliccare sul link di annullamento dell'iscrizione in qualsiasi e-mail che ricevi da noi.</p>"; 
+$this->content->template['news_front3'] = "<div id=\"hl\"><h1 class=\"home\">Newsletter cancellata</h1></div><p>La newsletter è stata annullata e i suoi dati sono stati cancellati.</p>"; 
+$this->content->template['news_front4'] = "I tuoi dati"; 
+$this->content->template['news_front5'] = "Il Sig"; 
+$this->content->template['news_front6'] = "Signora"; 
+$this->content->template['news_front7'] = "Nome"; 
+$this->content->template['news_front8'] = "Nome e cognome"; 
+$this->content->template['news_front9'] = "Via e numero civico"; 
+$this->content->template['news_front10'] = "Codice postale"; 
+$this->content->template['news_front11'] = "Residenza"; 
+$this->content->template['news_front12'] = "Lingua"; 
+$this->content->template['news_front13'] = "Stato"; 
+$this->content->template['news_front14'] = " Specifica mancante"; 
+$this->content->template['news_front15'] = " Specifica non valida"; 
+$this->content->template['news_front16'] = " già presente"; 
+$this->content->template['news_front17'] = "<div id=\"hl\"><h1 class=\"home\">Archivio newsletter</h1></div>"; 
+$this->content->template['news_front18'] = "Newsletter"; 
+$this->content->template['news_front19'] = "Newsletter"; 
+$this->content->template['news_front20'] = "Attualmente non ci sono dati d'archivio disponibili."; 
+$this->content->template['news_front21'] = " ==&gt; Nessun gruppo selezionato"; 
+$this->content->template['news_front22'] = "Telefono"; 
+$this->content->template['news_message3'] = "Lingua"; 
+$this->content->template['newsletter_anzeigen'] = "mostra"; 
+$this->content->template['plugin']['newsletter']['unsubscribe_newsletter_title'] = "Vuoi davvero cancellarti dalla newsletter?"; 
+$this->content->template['plugin']['newsletter']['unsubscribe_newsletter'] = "Cancellazione della newsletter"; 
+$this->content->template['plugin']['newsletter']['cancel'] = "Cancella"; 
+$this->content->template['plugin']['newsletter']['alle'] = "Tutti"; 
+$this->content->template['plugin']['newsletter']['altnewsletter'] = "Vecchi bollettini"; 
+$this->content->template['plugin']['newsletter']['inhalt_text'] = "Contenuto come testo"; 
+$this->content->template['plugin']['newsletter']['inhalt_html'] = "Contenuto come HTML"; 
+$this->content->template['plugin']['newsletter']['userdaten'] = "Dati utente avanzati"; 
+$this->content->template['plugin']['newsletter']['sprachwahl'] = "Abilitare la selezione della lingua per il login dell'utente nel frontend?"; 
+$this->content->template['plugin']['newsletter']['text'] = "Mostrare il testo sopra il login?"; 
+$this->content->template['plugin']['newsletter']['html_mails'] = "Mail in HTML?"; 
+$this->content->template['plugin']['newsletter']['editor'] = "Editor WYSIWYG tinymce?"; 
+$this->content->template['plugin']['newsletter']['sprache'] = "Lingua"; 
+$this->content->template['plugin']['newsletter']['daten'] = "Date."; 
+$this->content->template['plugin']['newsletter']['vorname'] = "Nome"; 
+$this->content->template['plugin']['newsletter']['nachname'] = "Nome e cognome"; 
+$this->content->template['plugin']['newsletter']['strasse'] = "Via e numero civico"; 
+$this->content->template['plugin']['newsletter']['postleitzahl'] = "Codice postale"; 
+$this->content->template['plugin']['newsletter']['wohnort'] = "Residenza"; 
+$this->content->template['plugin']['newsletter']['staat'] = "Stato"; 
+$this->content->template['plugin']['newsletter']['abschicken'] = "invia"; 
+$this->content->template['plugin']['newsletter']['email'] = "Email"; 
+$this->content->template['plugin']['newsletter']['eingabe_datei'] = "Inserisci il file:"; 
+$this->content->template['plugin']['newsletter']['dokument'] = "Il documento:"; 
+$this->content->template['plugin']['newsletter']['durchsuchen'] = "Sfogliare..."; 
+$this->content->template['plugin']['newsletter']['datei_upload'] = "Carica il file:"; 
+$this->content->template['plugin']['newsletter']['upload'] = "caricare"; 
+$this->content->template['plugin']['newsletter']['sicherung'] = "<h3>Creare un backup del database</h3><p> Qui puoi creare un backup del database, che puoi ripristinare dopo una nuova installazione o in qualsiasi altro momento.</p>"; 
+$this->content->template['plugin']['newsletter']['sicherung_einspielen'] = "Importare un backup"; 
+$this->content->template['plugin']['newsletter']['sicherung_ready'] = "Il file di backup è stato importato."; 
+$this->content->template['plugin']['newsletter']['hinweis'] = "Per importare un backup, seleziona il file di backup:"; 
+$this->content->template['plugin']['newsletter']['warnung'] = "ATTENZIONE - Se si importa un backup, tutti i dati attuali saranno irrimediabilmente cancellati. Pertanto, assicuratevi di creare un backup in anticipo!"; 
+$this->content->template['plugin']['newsletter']['make_dump'] = "Creare un backup ora"; 
+
+ ?>

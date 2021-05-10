@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- version: Papoo-Versions-Nummer für die das Plugin gedacht ist / funktioniert -->
+<plugin version="3.5">
+  <!-- ALLGEMEINE-INFORMATIONEN -->
+  <!-- ************************ -->
+  <!-- name: Name des Plugins -->
+  <name><![CDATA[DeeplTrans]]></name>
+  <!-- beschreibung_de: Kurz-Beschreibung des Plugins auf deutsch (wird im Plugin-Manager angezeigt) -->
+  <beschreibung_de><![CDATA[Übersetzt den Content mit Hilfe von Deepl in die gewünschten Sprachen...]]></beschreibung_de>
+  <!-- beschreibung_en: Kurz-Beschreibung des Plugins auf englisch (wird im Plugin-Manager angezeigt) -->
+  <beschreibung_en><![CDATA[]]></beschreibung_en>
+  <!-- version: Versions-Nummer des Plugins -->
+  <version>1.0</version>
+  <!-- papooid: Eindeutige Nummer offizieller papoo-Plugins -->
+  <papooid>0</papooid>
+  <!-- link: z.Z. noch ohne Funktion -->
+  <link>http://www.papoo.de</link>
+  <!-- datum: Erscheinungs-Datum bzw. Stand des Plugins -->
+  <datum>06.03.2020</datum>
+  <!-- AUTOR-INFORMATIONEN -->
+  <!-- ******************* -->
+  <!-- autor: Informationen zum Autor (Programmierer) des Plugins -->
+  <autor>
+    <!-- autor.name: Name des Authors -->
+    <name><![CDATA[Carsten Euwens]]></name>
+    <!-- autor.email: Email des Authors -->
+    <email><![CDATA[info@papoo.de]]></email>
+    <!-- autor.telefon: Telefon-Nummer des Autors -->
+    <telefon/>
+    <!-- autor.kontakt: postalische Kontakt-Informationen des Autors -->
+    <kontakt><![CDATA[]]></kontakt>
+  </autor>
+  <!-- MENÜ-INFORMATIONEN -->
+  <!-- ****************** -->
+  <!-- menue: Informationen für den Menü-Eintrag im Backend (papoo/interna) -->
+  <menue>
+    <!-- menue.eintrag_de: Name des Menü-Punktes im Backend auf deutsch -->
+    <eintrag_de><![CDATA[DeeplTrans]]></eintrag_de>
+    <!-- menue.eintrag_en: Name des Menü-Punktes im Backend auf englisch -->
+    <eintrag_en><![CDATA[DeeplTrans]]></eintrag_en>
+    <!-- menue.icon: Pfad zum Menü-Icon des Menü-Punktes im Backend (relativ zum Plugin-Verzeichnis) -->
+    <icon/>
+    <!-- menue.link: Name der Seite auf welche der Menü-Punkt im Backend verweisen soll -->
+    <link>plugin:deepltrans/templates/deepltrans_backend.html</link>
+    <submenue>
+      <eintrag_de><![CDATA[Einstellungen]]></eintrag_de>
+      <eintrag_en><![CDATA[Einstellungen]]></eintrag_en>
+      <icon/>
+      <link>plugin:deepltrans/templates/setdeepl_backend.html</link>
+    </submenue>
+    <submenue>
+      <eintrag_de><![CDATA[Sprach Dateien]]></eintrag_de>
+      <eintrag_en><![CDATA[Language Files]]></eintrag_en>
+      <icon/>
+      <link>plugin:deepltrans/templates/bersetzungen_backend.html</link>
+    </submenue>
+    <submenue>
+      <eintrag_de><![CDATA[Content]]></eintrag_de>
+      <eintrag_en><![CDATA[Content]]></eintrag_en>
+      <icon/>
+      <link>plugin:deepltrans/templates/content_bersetzungen_backend.html</link>
+    </submenue>
+  </menue>
+  <!-- KLASSEN-INFORMATIONEN -->
+  <!-- ****************** -->
+  <!-- klasse: Informationen der Plugin-Klasse welche eingebunden werden sollen -->
+  <klasse>
+    <!-- klasse.name: Name der Klassen-Instanz / des Objekts (also der Name des Dings, das mit $name = new xx_class(); erzeugt wird) -->
+    <name>deepltrans</name>
+    <!-- klasse.datei: Pfad zur Klassen-Datei (relativ zum Plugin-Verzeichnis) -->
+    <datei>deepltrans/lib/deepltrans_class.php</datei>
+  </klasse>
+  <!-- CSS-INFORMATIONEN -->
+  <!-- ***************** -->
+  <!-- css: Pfad zur CSS-Datei (relativ zum Plugin-Verzeichnis) -->
+  <css>deepltrans/css/frontend.css</css>
+  <!-- DATENBANK-INFORMATIONEN -->
+  <!-- ****************** -->
+  <datenbank>
+    <!-- datenbank.installation: Pfad zur SQL-Installations-Datei (relativ zum Plugin-Verzeichnis) -->
+    <installation>deepltrans/sql/install.sql</installation>
+    <!-- datenbank.deinstallation: Pfad zur SQL-Deinstallations-Datei (relativ zum Plugin-Verzeichnis) -->
+    <deinstallation>deepltrans/sql/deinstall.sql</deinstallation>
+  </datenbank>
+  <!-- Einbindung der Sprach-Dateien.
+	  In dem hier angegebenen Verzeichnis sollten Dateien mit folgenden Namen liegen:
+		- messages_backend_[de|en|fr| .. etc.].inc.php
+	  - messages_frontend_[de|en|fr| .. etc.].inc.php
+	-->
+  <messages>deepltrans/messages</messages>
+</plugin>

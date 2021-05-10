@@ -374,13 +374,29 @@ class class_datums
 				//Datum umwandeln
 				$this->create_time_stamps_from_date();
 
-				$xsql['dbname'] = "plugin_kalender_date";
-				$xsql['praefix'] = "pkal_date";
-				$xsql['must'] = array("pkal_date_titel_des_termins");
-				$this->checked->pkal_date_lang_id=$this->cms->lang_back_content_id;
-				$this->checked->pkal_date_kalender_id=$this->checked->psel_cal_id;
-				//$xsql['where_name'] = "config_id";
-				$insert=$this->db_abs->insert($xsql);
+				$sql = sprintf("SELECT MAX(pkal_date_id) FROM %s",DB_PRAEFIX."plugin_kalender_date");
+				$max = $this->db->get_var($sql);
+				$max++;
+
+				$sql = sprintf("SELECT * FROM %s",
+					DB_PRAEFIX.'papoo_name_language');
+				//print_r($sql);
+				$result = $this->db->get_results($sql,ARRAY_A);
+
+				//Create for all possible languages...
+				foreach ($result as $lang) {
+					$xsql['dbname'] = "plugin_kalender_date";
+					$xsql['praefix'] = "pkal_date";
+					$xsql['must'] = array("pkal_date_titel_des_termins");
+					$this->checked->pkal_date_lang_id=$lang['lang_id'];
+					$this->checked->pkal_date_kalender_id=$this->checked->psel_cal_id;
+					$this->checked->pkal_date_id = $max;
+					//$xsql['where_name'] = "config_id";
+
+				}
+				$insert['insert_id']=$max;
+
+
 				if (is_numeric($insert['insert_id'])) {
 					//Rechte speichern
 					$this->pcal_save_date_rights($insert['insert_id']);

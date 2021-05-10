@@ -26,7 +26,7 @@ CREATE TABLE `XXX_glossar_daten` (
   `glossar_mit_alphabet` VARCHAR( 255 ) NOT NULL,
   `glossar_tabs` VARCHAR( 255 )NOT NULL,
   PRIMARY KEY (`glossar_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=latin1 ; ##b_dump##
+) AUTO_INCREMENT=17 ; ##b_dump##
 INSERT INTO `XXX_glossar_daten` SET glossar_id='1', glossar_lang_id='1', glossar_link='', glossar_descrip='Die Zitrusöle aus der Familie der Rautengewächse haben sowohl einen Bezug zum Verdauungstrakt als auch zur Psyche. Weitere Rautengewächse sind: Amyris, Bergamotte, Clementine, Grapefruit,\r\nLimette, Mandarine, Orange, Pampelmuse, Zitrone', glossar_descrip_sans='Die Zitrusöle aus der Familie der Rautengewächse haben sowohl einen Bezug zum Verdauungstrakt als auch zur Psyche. Weitere Rautengewächse sind: Amyris, Bergamotte, Clementine, Grapefruit,\r\nLimette, Mandarine, Orange, Pampelmuse, Zitrone', glossar_Wort='Rutaceae', glossar_Wort_alt='', glossar_gramatinfo='', glossar_abk='', glossar_sachgebiet='', glossar_frequenz='', glossar_definition='', glossar_anwendungsbeispiel='', glossar_siehe='', glossar_synonym1='', glossar_synonym2='', glossar_synonym3='', glossar_synonym4='', glossar_synonym5='', glossar_meta_title='', glossar_meta_descrip='', glossar_meta_key=''  ; ##b_dump##
 INSERT INTO `XXX_glossar_daten` SET glossar_id='2', glossar_lang_id='1', glossar_link='', glossar_descrip='schonendes Verfahren durch mechanisches Auspressen zur Gewinnung von Agrumenölen (Zitrusschalenölen)\r\nDie Schalen werden in großen, waschmaschinenartigen Trommeln abgeraspelt und mit Wasser abgespült. Durch Zerstörung der äußeren Schicht der Fruchtschale platzen die Öldrüsen. Das   Gemisch aus Wasser, ätherischen Ölen und festen Bestandteilen der Fruchtschale wird gefiltert und abzentrifugiert.   Essenz   ist der gebräuchliche Name für das Endprodukt, das   genau dem Stoff entspricht, der unverändert und ohne Zuführen von Hitze aus der Fruchtschale gewonnen wird.', glossar_descrip_sans='schonendes Verfahren durch mechanisches Auspressen zur Gewinnung von Agrumenölen (Zitrusschalenölen)\r\nDie Schalen werden in großen, waschmaschinenartigen Trommeln abgeraspelt und mit Wasser abgespült. Durch Zerstörung der äußeren Schicht der Fruchtschale platzen die Öldrüsen. Das  Gemisch aus Wasser, ätherischen Ölen und festen Bestandteilen der Fruchtschale wird gefiltert und abzentrifugiert.  Essenz  ist der gebräuchliche Name für das Endprodukt, das  genau dem Stoff entspricht, der unverändert und ohne Zuführen von Hitze aus der Fruchtschale gewonnen wird.', glossar_Wort='Expression', glossar_Wort_alt='', glossar_gramatinfo='', glossar_abk='', glossar_sachgebiet='', glossar_frequenz='', glossar_definition='', glossar_anwendungsbeispiel='', glossar_siehe='', glossar_synonym1='', glossar_synonym2='', glossar_synonym3='', glossar_synonym4='', glossar_synonym5='', glossar_meta_title='', glossar_meta_descrip='', glossar_meta_key=''  ; ##b_dump##
 INSERT INTO `XXX_glossar_daten` SET glossar_id='3', glossar_lang_id='1', glossar_link='', glossar_descrip='Düfte können in Kopf- Herz- und Basisnoten eingeteilt werden.\r\nSie sind frisch und leicht, geben einen anregenden Impuls, entfalten sich schnell und sind ebenso schnell verflüchtigt.\r\nTypische Vertreter: Zitrusschalenöle, Eukalyptus, Lemongras, Pfefferminz, Rosmarin', glossar_descrip_sans='Düfte können in Kopf- Herz- und Basisnoten eingeteilt werden.\r\nSie sind frisch und leicht, geben einen anregenden Impuls, entfalten sich schnell und sind ebenso schnell verflüchtigt.\r\nTypische Vertreter: Zitrusschalenöle, Eukalyptus, Lemongras, Pfefferminz, Rosmarin', glossar_Wort='Kopfnote', glossar_Wort_alt='', glossar_gramatinfo='', glossar_abk='', glossar_sachgebiet='', glossar_frequenz='', glossar_definition='', glossar_anwendungsbeispiel='', glossar_siehe='', glossar_synonym1='', glossar_synonym2='', glossar_synonym3='', glossar_synonym4='', glossar_synonym5='', glossar_meta_title='', glossar_meta_descrip='', glossar_meta_key=''  ; ##b_dump##
@@ -55,11 +55,22 @@ CREATE TABLE `XXX_glossar_pref` (
   `glossar_colorbox_hoehe` text,
   `glossar_colorbox_breite` text,
   `glossar_colorbox_fading` text,
-  `glossar_tabs` VARCHAR( 255 )NOT NULL 
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 ; ##b_dump##
+  `glossar_tabs` VARCHAR( 255 )NOT NULL
+) ; ##b_dump##
 INSERT INTO `XXX_glossar_pref` SET glosspref_id='1', glosspref_liste='1', glosspref_daten='0', glosspref_menu_pfad='/plugin.php?menuid=1', glosspref_introtext_de='<h2>Glossar-Überschrift</h2><p>.. Text</p>', glossar_mit_popup='1', glossar_mit_alphabet='1', glossar_colorbox_hoehe='300', glossar_colorbox_breite='500', glossar_colorbox_fading='0.5'  ; ##b_dump##
 ALTER TABLE `XXX_glossar_daten` ADD `glossar_colorbox_fading` TEXT; ##b_dump##
-
 ALTER TABLE `XXX_glossar_daten` ADD `glossar_mit_alphabet` VARCHAR( 255 ) NOT NULL; ##b_dump##
-
 ALTER TABLE `XXX_glossar_daten` ADD `glossar_tabs` VARCHAR( 255 ) NOT NULL; ##b_dump##
+ALTER TABLE `XXX_glossar_daten` ADD `glossar_colorbox_fading` TEXT; ##b_dump##
+ALTER TABLE `XXX_glossar_daten` ADD `glossar_mit_alphabet` VARCHAR( 255 ) NOT NULL; ##b_dump##
+ALTER TABLE `XXX_glossar_pref` ADD `glossar_tabs` VARCHAR( 255 ) NOT NULL; ##b_dump##
+ALTER TABLE `XXX_glossar_daten` CHANGE `glossar_id` `glossar_id` INT NOT NULL; ##b_dump##
+ALTER TABLE `XXX_glossar_daten` DROP PRIMARY KEY; ##b_dump##
+DROP TABLE IF EXISTS `XXX_glossar_pref_html`; ##b_dump##
+CREATE TABLE `XXX_glossar_pref_html` (
+                                         `glosspref_id_id` int NOT NULL DEFAULT '1',
+                                         `glosspref_lang_id` int NOT NULL DEFAULT '1',
+                                         `glosspref_introtext_de` longtext
+) ENGINE=MyISAM ; ##b_dump##
+INSERT INTO `XXX_glossar_pref_html` SET `glosspref_id_id`='1', `glosspref_lang_id`='1', `glosspref_introtext_de`='<h2>Glossar-Überschrift</h2><p>.. Text</p>'  ; ##b_dump##
+

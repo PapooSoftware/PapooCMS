@@ -1,0 +1,40 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+	{*<!-- Hier kommt der Kopf rein-->*}
+	{include file=head.inc.utf8.html}
+
+
+	{include file=menu.inc.html}
+
+	<link rel="stylesheet" type="text/css" href="{$css_path}/backend.css" />
+	<link rel="stylesheet" type="text/css" href="{$css_path}/../../plugincreator/css/backend.css" />
+
+	<div class="artikel">
+
+			<h1 id="deepltrans_deepltrans_einstellungen" class="h1" >{$plugin_deepltrans_deepltrans_einstellungen}</h1>
+
+ <p id="deepltrans_einstellungen_text" class="h1" >{$plugin_deepltrans_einstellungen_text}</p>
+
+
+		<form action="" method="post">
+		 <fieldset>
+		<legend>{$plugin_deepltrans_deepl_key}</legend>
+
+		 <div class="labdiv">
+			 <label for="deepltrans_deepl_key_input">{$plugin_deepltrans_deepl_key_input}{$plugin_error.deepltrans_deepl_key_input} </label>
+
+		<input type="text" name="deepltrans_deepl_key_input" id="deepltrans_deepl_key_input" value="{$deepltrans.0.deepltrans_deepl_key_input|escape:"html"}" class="deepltrans_deepl_key_input" id="deepltrans_deepl_key_input"/>
+		</div><br />
+			 <input type="hidden" id="p_deepltrans_form_tabelle" name="plugin_deepltrans_form_tablename" value="plugin_deepltrans_einstellun_form" >
+
+		 <input type="submit" id="p_deepltrans_form_submit" name="plugin_deepltrans_form_submit" class="rapid_dev_submit_button btn btn-info" value="speichern" >
+
+
+		</fieldset><br />
+		<!-- END DIV --><br />
+		</form>
+
+	</div>
+
+	{*<!-- Hier kommt der Fuss rein-->*}
+	{include file=foot.inc.html}
+{/if}

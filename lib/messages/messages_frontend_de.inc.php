@@ -1,14 +1,14 @@
-<?php 
+<?php
 /**
 
-* Deutsche Text-Daten des Plugins "bookmark" für das Backend
+ * Deutsche Text-Daten des Plugins "bookmark" für das Backend
 
-* !! Diese Datei muss im Format "UTF-8 (NoBOM)" gespeichert werden !!!
+ * !! Diese Datei muss im Format "UTF-8 (NoBOM)" gespeichert werden !!!
 
-*/
+ */
 
 $this->content->template['message_kommentare']='Kommentare';
- 
+
 $this->content->template['message_1']='Ihre E-Mail wurde übertragen.';
 $this->content->template['message_2']='Und hier die komplette Forenliste.';
 $this->content->template['message_3']='Die letzten zehn Einträge ';
@@ -26,7 +26,7 @@ $this->content->template['message_9']='<p>Dieses Forum existiert nicht, bitte w�
 ';
 $this->content->template['message_10']='<p>Bitte geben Sie einen Text ein!</p>';
 $this->content->template['message_11']='Sie haben leider keine Rechte, um einen Beitrag schreiben zu können.';
-$this->content->template['message_12']='<h1>Ihre Daten wurden eingetragen. </h1><p>Sie sollten in wenigen Sekunden eine E-Mail zur Bestätigung erhalten. Folgen Sie den Anweisungen in der E-Mail, um Ihr Benutzerkonto zu aktivieren.</p><p>Falls Sie keine E-Mail erhalten sollten, schreiben Sie uns bitte eine E-Mail über unser <a href="./kontakt.php">Kontaktformular</a>, wir melden uns umgehend bei Ihnen.</p>';
+$this->content->template['message_12']='<h1>Ihre Daten wurden eingetragen. </h1><p>Sie sollten in wenigen Sekunden eine E-Mail zur Bestätigung erhalten. <strong>Folgen Sie den Anweisungen in der E-Mail, um Ihr Benutzerkonto zu aktivieren.</strong></p><p>Falls Sie keine E-Mail erhalten sollten, schreiben Sie uns bitte eine E-Mail über unser <a href="/kontaktform/">Kontaktformular</a>, wir melden uns umgehend bei Ihnen.</p>';
 $this->content->template['message_73']='Eine Seite zurück';
 $this->content->template['message_86']='Eine Seite weiter';
 $this->content->template['message_2000']='Dieser Link führt zur Startseite von ';
@@ -137,7 +137,7 @@ $this->content->template['message_2095']='Autor:';
 $this->content->template['message_2096']='Kommentar von ';
 $this->content->template['message_2097']='nobr:<h2>Login</h2>
 
-    <p>Legen Sie hier Ihr Benutzerkonto an. Alle relevanten Daten, die in die Datenbank eingetragen werden, werden Ihnen auch per E-Mail zugestellt.</p><p>Felder, die mit einem * gekennzeichnet sind, müssen ausgefüllt werden.<br />Benutzername, Passwort und E-Mail-Adresse sind ausreichend.</p>';
+    <p>Legen Sie hier Ihr Benutzerkonto an. Alle relevanten Daten, die in die Datenbank eingetragen werden, werden Ihnen auch per E-Mail zugestellt.</p><p>Felder, die mit einem * gekennzeichnet sind, müssen ausgefüllt werden.<br /></p>';
 $this->content->template['message_2098']='Hier können Sie die Daten für Ihr Benutzerkonto eintragen.';
 $this->content->template['message_2099']='Benutzername: ';
 $this->content->template['message_2100']=' E-Mail-Adresse:';
@@ -247,7 +247,17 @@ $this->content->template['message_2204']='Benutzername';
 $this->content->template['message_2205']='Persönliche Daten';
 $this->content->template['message_2206']='Vorname';
 $this->content->template['message_2207']='Nachname';
-$this->content->template['message_2208']='Wohnanlage';
+$this->content->template['message_2208']='Straße und Hausnummer';
+$this->content->template['message_2208a']='Straße und Hausnummer';
+
+
+$this->content->template['message_user_anrede']='Anrede';
+$this->content->template['message_user_titel']='Titel';
+$this->content->template['message_user_anrede']='Anrede';
+$this->content->template['message_user_country']='Land';
+$this->content->template['message_user_tel_abends']='Tel Abends';
+$this->content->template['message_user_tel_tags']='Tel Tagsüber';
+$this->content->template['message_user_tel_kunden_nr']='Kunden Nummer';
 $this->content->template['message_2209']='Postleitzahl';
 $this->content->template['message_2210']='Wohnort';
 $this->content->template['message_2211']='Forum';
@@ -329,7 +339,7 @@ $this->content->template['mod_access14']='Direkt zum Inhalt';
 $this->content->template['mod_access15']='Alt+9';
 $this->content->template['mod_access16']='Kontaktseite';
 $this->content->template['mod_access17']='Sitemap';
-$this->content->template['message_2263']='Ihre Benutzerkennung und Ihr Passwort bei ';
+$this->content->template['message_2263']='Ihr Account wurde aktiviert und Sie können ihn jetzt nutzen. ';
 $this->content->template['nbs']='&nbsp;';
 $this->content->template['mod_efa_fontsize']['text']='Schriftgröße:';
 $this->content->template['mod_efa_fontsize']['bigger']='Schrift vergrößern';
@@ -405,14 +415,14 @@ Ihr Passwort lautet: #password#
 
 Hier können Sie Ihr Profil NACH dem Login bearbeiten #link# - voher loggen Sie sich bitte über die normale Loginfunktion auf der Webseite ein.
 ';
-$this->content->template['message_2270']='Herzlich willkommen bei #seitentitel#.
-							Ihre Benutzerkennung ist: #username# 
-							Ihr Passwort lautet: #passwort# 
-							Sie können hier Ihr Profil bearbeiten 
-						 #link_seite#  
-						 
-						 Um Ihr Benutzerkonto zu aktivieren, klicken Sie bitte hier:
-						 #bestaetigungslink#';
+$this->content->template['message_2270']='Herzlich willkommen bei #seitentitel#. 
+Ihre Benutzerkennung ist: #username# 
+Ihr Passwort ist nur Ihnen bekannt.
+Sie können hier Ihr Profil bearbeiten 
+#link_seite#  
+		 
+Um Ihr Benutzerkonto zu aktivieren, klicken Sie bitte hier:
+#bestaetigungslink#';
 $this->content->template['message_2271']='Ihre Benutzerkennung und Ihr Passwort bei ';
 $this->content->template['message_2272']='Neuer Benutzer';
 $this->content->template['message_2273']='Der Benutzer ';
@@ -432,7 +442,7 @@ $this->content->template['message_2281']='Suchbegriff';
 $this->content->template['message_2253']='Fuß';
 $this->content->template['message_22630']='nix';
 $this->content->template['error_1']='Diese E-Mail-Adresse ist fehlerhaft. Haben Sie sich vertippt?';
-//Bitte korrigieren Sie den Eintrag: 
+//Bitte korrigieren Sie den Eintrag:
 $this->content->template['message_biite_correct']='Bitte korrigieren Sie den Eintrag: ';
 $this->content->template['message_bitte_correct_label']='Bitte korrigieren: ';
 $this->content->template['message_bitte_spam_schutz_korrigieren']='Bitte korrigieren Sie die Daten aus dem Spamschutz.';
@@ -453,3 +463,9 @@ $this->content->template['filter_bis'] = 'bis';
 $this->content->template['filter_los'] = 'los';
 $this->content->template['submenu_headline']="Untermenü";
 $this->content->template['weitere_informationen']="Weitere Informationen";
+$this->content->template['frau']="Frau";
+$this->content->template['herr']="Herr";
+$this->content->template['message_user_fax']="Fax";
+$this->content->template["ergaenzen"] ='<span class="error">Bitte ergänzen</span>';
+
+

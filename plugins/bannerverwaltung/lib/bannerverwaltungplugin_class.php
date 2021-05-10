@@ -96,7 +96,7 @@ class bannerverwaltung {
 		if (!defined("admin")) {
 			$datum = date("Y-m-d",time());
 			//Rausbekommen ob zuf�llig oder linear
-			$sql=sprintf("SELECT * FROM %s ",
+			$sql=sprintf("SELECT * FROM %s   ",
 				$this->cms->tbname['papoo_bannerverwaltung_pref']
 			);
 			$result=$this->db->get_results($sql,ARRAY_A);
@@ -112,20 +112,22 @@ class bannerverwaltung {
 			$result_allx=array();
 
 			foreach ($bannermodule_array as $modid) {
-				//alle Eintr�ge rausholen die immer angezeigt werden sollen
+				//alle Eintr�ge rausholen die immer angezeigt werden sollen //AND banner_lang ='%s'  	//$this->cms->lang_short,
 				$sql=sprintf("SELECT * FROM %s 
 											WHERE banner_menuid ='all' 
 											AND banner_start <='%s' 
 											AND banner_stop >='%s' 
-											AND banner_lang ='%s' 
+											
 											AND banner_modulid ='%d' 
+											AND banner_lang_id='%d'
 											ORDER BY RAND() 
 											LIMIT %s",
 					$this->cms->tbname['papoo_bannerverwaltung_daten'],
 					$datum,
 					$datum,
-					$this->cms->lang_short,
+
 					$modid,
+					$this->cms->lang_id,
 					$result[0]['bannerverwaltung_wieviel']
 				);
 				$result_all=$this->db->get_results($sql,ARRAY_A);
@@ -142,7 +144,7 @@ class bannerverwaltung {
 										WHERE banner_mid = banner_id AND banner_menu_id='%s' 
 										AND banner_start<='%s' 
 										AND banner_stop>='%s' 
-										AND banner_lang='%s'
+										AND banner_lang_id='%s'
 										GROUP BY banner_mid 
 										ORDER BY rand() 
                                         LIMIT %s",
@@ -151,7 +153,7 @@ class bannerverwaltung {
 					$this->db->escape($this->checked->menuid),
 					$datum,
 					$datum,
-					$this->cms->lang_short,
+					$this->cms->lang_id,
 					$result[0]['bannerverwaltung_wieviel']
 				);
 				$result_menu=$this->db->get_results($sql,ARRAY_A);
@@ -163,13 +165,13 @@ class bannerverwaltung {
 											banner_artikelid='%s' 
 											AND banner_start<='%s' 
 											AND banner_stop>='%s' 
-											AND banner_lang='%s'
+											AND banner_lang_id='%s'
 											",
 					$this->cms->tbname['papoo_bannerverwaltung_daten'],
 					$this->db->escape($this->checked->reporeid),
 					$datum,
 					$datum,
-					$this->cms->lang_short
+					$this->cms->lang_id
 				);
 				$result_artikel=$this->db->get_results($sql,ARRAY_A);
 			}
@@ -212,9 +214,10 @@ class bannerverwaltung {
 			//Z�hlen
 			if (is_array($result_gesamt3)) {
 				foreach ($result_gesamt3 as $banids) {
-					$sql = sprintf("UPDATE %s SET banner_views = banner_views+1 WHERE banner_id = '%d'",
+					$sql = sprintf("UPDATE %s SET banner_views = banner_views+1 WHERE banner_id = '%d' AND banner_lang_id='%d'",
 						$this->cms->db_praefix . "papoo_bannerverwaltung_daten",
-						$this->db->escape($banids['banner_id'])
+						$this->db->escape($banids['banner_id']),
+					$this->cms->lang_id
 					);
 					$this->db->query($sql);
 				}
@@ -353,21 +356,37 @@ class bannerverwaltung {
 				$this->checked->banner_lang=$this->cms->lang_short;
 			}
 
-			$sql = sprintf("INSERT INTO %s SET banner_name='%s', banner_code='%s', banner_menuid='%s', banner_artikelid='%s',
-                   banner_modulid='%s', banner_start='%s', banner_stop='%s',banner_count_yn='%d', banner_lang='%s' ",
-				$this->cms->tbname['papoo_bannerverwaltung_daten'],
-				$this->db->escape($this->checked->banner_name),
-				$this->db->escape($this->checked->banner_code),
-				$this->db->escape($this->checked->banner_menuid),
-				$this->db->escape($this->checked->banner_artikelid),
-				$this->db->escape($this->checked->banner_modulid),
-				$this->db->escape($this->checked->banner_start),
-				$this->db->escape($this->checked->banner_stop),
-				$this->db->escape($this->checked->banner_count_yn),
-				$this->db->escape($this->checked->banner_lang)
-			);
-			$this->db->query($sql);
-			$insertid=$this->db->insert_id;
+			//Get Last freiemodule_id?
+			$sql = sprintf("SELECT MAX(banner_id) FROM %s",DB_PRAEFIX."papoo_bannerverwaltung_daten");
+			$max = $this->db->get_var($sql);
+			$max++;
+
+			//Get Languages of the system
+			$sql = sprintf("SELECT * FROM %s",
+				DB_PRAEFIX.'papoo_name_language');
+			//print_r($sql);
+			$result = $this->db->get_results($sql,ARRAY_A);
+
+			foreach ($result as $k =>$v) {
+
+				$sql = sprintf("INSERT INTO %s SET banner_name='%s', banner_code='%s', banner_menuid='%s', banner_artikelid='%s',
+                   banner_modulid='%s', banner_start='%s', banner_stop='%s',banner_count_yn='%d', banner_lang='%s', banner_lang_id='%d', banner_id='%d' ",
+					$this->cms->tbname['papoo_bannerverwaltung_daten'],
+					$this->db->escape($this->checked->banner_name),
+					$this->db->escape($this->checked->banner_code),
+					$this->db->escape($this->checked->banner_menuid),
+					$this->db->escape($this->checked->banner_artikelid),
+					$this->db->escape($this->checked->banner_modulid),
+					$this->db->escape($this->checked->banner_start),
+					$this->db->escape($this->checked->banner_stop),
+					$this->db->escape($this->checked->banner_count_yn),
+					$this->db->escape($this->checked->banner_lang),
+					$v['lang_id'],
+					$max
+				);
+				$this->db->query($sql);
+			}
+			$insertid=$max;
 			if ($this->checked->banner_count_yn==1) {
 				$this->checked->banner_code=$this->do_redir_link($this->checked->banner_code,$insertid);
 				$sql = sprintf("UPDATE %s SET banner_code='%s' WHERE banner_id='%s' ",
@@ -419,7 +438,8 @@ class bannerverwaltung {
 											banner_stop='%s', 
 											banner_lang='%s',
 											banner_count_yn='%d' 
-											WHERE banner_id='%s' ",
+											WHERE banner_id='%s' 
+											AND banner_lang_id='%d'",
 				$this->cms->tbname['papoo_bannerverwaltung_daten'],
 				$this->db->escape($this->checked->banner_name),
 				$this->db->escape($this->checked->banner_code),
@@ -430,7 +450,8 @@ class bannerverwaltung {
 				$this->db->escape($this->checked->banner_stop),
 				$this->db->escape($this->checked->banner_lang),
 				$this->db->escape($this->checked->banner_count_yn),
-				$this->db->escape($this->checked->banner_id)
+				$this->db->escape($this->checked->banner_id),
+				$this->cms->lang_id
 			);
 			$this->db->query($sql);
 			$insertid=$this->db->escape($this->checked->cat_id);
@@ -471,9 +492,10 @@ class bannerverwaltung {
 
 		if (!empty ($this->checked->bannerid)) {
 			//Nach id aus der Datenbank holen
-			$sql = sprintf("SELECT * FROM %s WHERE banner_id='%s'",
+			$sql = sprintf("SELECT * FROM %s WHERE banner_id='%s' AND banner_lang_id='%d'",
 				$this->cms->tbname['papoo_bannerverwaltung_daten'],
-				$this->db->escape($this->checked->bannerid)
+				$this->db->escape($this->checked->bannerid),
+			$this->cms->lang_id
 			);
 
 			$result = $this->db->get_results($sql);
@@ -509,8 +531,9 @@ class bannerverwaltung {
 		else {
 			//Daten rausholen und als Liste anbieten
 			$this->content->template['list'] = "ok";
-			$sql = sprintf("SELECT * FROM %s ORDER BY banner_name ASC",
-				$this->cms->tbname['papoo_bannerverwaltung_daten']
+			$sql = sprintf("SELECT * FROM %s WHERE banner_lang_id='%d' ORDER BY banner_name ASC",
+				$this->cms->tbname['papoo_bannerverwaltung_daten'],
+			$this->cms->lang_id
 			);
 			$result = $this->db->get_results($sql, ARRAY_A);
 			//Daten f�r das Template zuweisen

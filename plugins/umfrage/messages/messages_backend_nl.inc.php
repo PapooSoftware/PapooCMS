@@ -1,0 +1,41 @@
+<?php 
+$this->content->template['UMFMSG_PLUGIN_NAME'] = "Enquête plugin"; 
+$this->content->template['UMFMSG_TITEL'] = "Enquête:"; 
+$this->content->template['UMFMSG_DETAILS'] = "Details"; 
+$this->content->template['UMFMSG_AENDERN'] = "Verander"; 
+$this->content->template['UMFMSG_LOESCHEN'] = "Delete"; 
+$this->content->template['UMFMSG_JA'] = "Ja"; 
+$this->content->template['UMFMSG_NEIN'] = "Geen"; 
+$this->content->template['UMFMSG_ZURUECK'] = "Terug"; 
+$this->content->template['UMFMSG_B_INTEGRATION'] = "Om de poll plugin te activeren, moet je de poll module toewijzen aan een sectie onder \"Layout -&gt; Styles\"."; 
+$this->content->template['UMFMSG_B_UMFRAGE'] = "Enquête:"; 
+$this->content->template['UMFMSG_B_STIMMEN'] = "Stemmen:"; 
+$this->content->template['UMFMSG_B_TEILNEHMER'] = "Deelnemers:"; 
+$this->content->template['UMFMSG_B_AKTIV'] = "actief:"; 
+$this->content->template['UMFMSG_B_MENU_ID'] = "Menu Id:"; 
+$this->content->template['UMFMSG_B_TEXT'] = "Tekst"; 
+$this->content->template['UMFMSG_B_SPRACHE'] = "Taal:"; 
+$this->content->template['UMFMSG_B_BTN_UMFRAGE_NEU'] = "Maak een nieuwe enquête"; 
+$this->content->template['UMFMSG_B_UMFRAGEN_LISTE'] = "Lijst van alle onderzoeken:"; 
+$this->content->template['UMFMSG_B_UMFRAGE_NEU'] = "Maak een nieuwe peiling"; 
+$this->content->template['UMFMSG_B_UMFRAGE_AENDERN'] = "Verander deze enquête"; 
+$this->content->template['UMFMSG_B_BTN_UMFRAGE_AENDERN'] = "Verander deze enquête"; 
+$this->content->template['UMFMSG_B_UMFRAGE_SICHERN_NACHRICHT'] = "Enquêtegegevens zijn opgeslagen!"; 
+$this->content->template['UMFMSG_B_UMFRAGE_LOESCHEN'] = "Deze enquête verwijderen"; 
+$this->content->template['UMFMSG_B_UMFRAGE_LOESCHEN_FRAGE'] = "Weet u zeker dat u de volgende enquête wilt verwijderen?"; 
+$this->content->template['UMFMSG_B_UMFRAGE_LOESCHEN_HINWEIS'] = "Opmerking:<br />Met de enquête worden alle antwoorden en resultaten van deze enquête gewist."; 
+$this->content->template['UMFMSG_B_BTN_UMFRAGE_LOESCHEN'] = "Deze enquête verwijderen"; 
+$this->content->template['UMFMSG_B_UMFRAGE_LOESCHEN_NACHRICHT'] = "Poll is verwijderd!"; 
+$this->content->template['UMFMSG_B_BTN_ANTWORT_NEU'] = "Nieuw antwoord maken"; 
+$this->content->template['UMFMSG_B_ANTWORTEN_LISTE'] = "Lijst van alle antwoorden:"; 
+$this->content->template['UMFMSG_B_ANTWORT_NEU'] = "Maak een nieuw antwoord"; 
+$this->content->template['UMFMSG_B_ANTWORT_AENDERN'] = "Verander dit antwoord"; 
+$this->content->template['UMFMSG_B_BTN_ANTWORT_AENDERN'] = "Verander dit antwoord"; 
+$this->content->template['UMFMSG_B_ANTWORT_SICHERN_NACHRICHT'] = "De responsgegevens zijn opgeslagen!"; 
+$this->content->template['UMFMSG_B_ANTWORT_LOESCHEN'] = "Verwijder dit antwoord"; 
+$this->content->template['UMFMSG_B_ANTWORT_LOESCHEN_FRAGE'] = "Wil je echt het volgende antwoord schrappen?"; 
+$this->content->template['UMFMSG_B_ANTWORT_LOESCHEN_HINWEIS'] = "Opmerking:<br />Wanneer u antwoordt, worden alle stemmen die voor dat antwoord zijn uitgebracht, ook verwijderd. Het aantal uitgebrachte stemmen zal worden afgetrokken van het aantal deelnemers aan de peiling."; 
+$this->content->template['UMFMSG_B_BTN_ANTWORT_LOESCHEN'] = "Verwijder dit antwoord"; 
+$this->content->template['UMFMSG_B_ANTWORT_LOESCHEN_NACHRICHT'] = "Antwoord is verwijderd!"; 
+
+ ?>

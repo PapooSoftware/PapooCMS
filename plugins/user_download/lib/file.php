@@ -12,7 +12,7 @@
  **/
 
 // Fehler bzw. warnings könnten den Download zerstören (HEADER), daher alles ausschalten
-error_reporting(0);
+error_reporting(E_ALL);
 
 // Datenbank Verbindung erstellen
 foreach (['site_conf.php', "ez_sql.php"] as $libFile) {
@@ -21,10 +21,29 @@ foreach (['site_conf.php', "ez_sql.php"] as $libFile) {
 		include_once $file;
 	}
 }
-
 // Verwende die gleiche Session wie Papoo -> möglich, da in einem Unterverzeichnis der gleichen Domain
-session_start();
+session_name('papoo_session_'.substr(md5(PAPOO_ABS_PFAD), 0, 4));
+// Session-Lebensdauer
+$cookie_lifetime = 432000;
+// Cookie-Pfad aus PAPOO_WEB_PFAD bestimmen
+$cookie_base_path = str_replace('//', '/', PAPOO_WEB_PFAD.'/');
+// Cookie-Domain setzen, Cookie mit und ohne www. gültig machen. Dabei ebenfalls lokale Installationen beachten.
+$cookie_domain = str_replace('.www.', '.', (strpos($_SERVER['SERVER_NAME'], '.') === false ? '' : '.'.$_SERVER['SERVER_NAME']));
 
+if (stristr($_SERVER['REQUEST_URI'],"https")) {
+	// Nur über HTTPS senden. Wenn Website nur HTTPS nutzt anschalten!
+	$cookie_secure = FALSE;
+}
+else {
+	// Nur über HTTPS senden. Wenn Website nur HTTPS nutzt anschalten!
+	$cookie_secure = FALSE;
+}
+
+// Zugriff via Javascript verweigern
+$cookie_httponly = TRUE;
+session_set_cookie_params($cookie_lifetime, $cookie_base_path, $cookie_domain, $cookie_secure, $cookie_httponly);
+session_start();
+//print_r($_SESSION);
 if (empty($_GET['fid'])) {
 	die("No File ID given<br />Usage: file.php?fid=&lt;fileid&gt;");
 }
@@ -32,7 +51,7 @@ if (empty($_GET['fid'])) {
 //Anti SQL Injections
 $fid = $db->escape($_GET['fid']);
 $uid = $db->escape($_SESSION['sessionuserid']);
-
+$db->scrfok=true;
 if (empty($uid)) {
 	die("You are not logged in");
 }
@@ -72,3 +91,5 @@ else {
 		var_dump($e);
 	}
 }
+$db->scrfok=false;
+?>

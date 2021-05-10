@@ -1,25 +1,14 @@
-<?php
-/**
+<?php 
+$this->content->template['message_cplus_head1'] = "Write a comment here"; 
+$this->content->template['message_cplus_head2'] = "Write a comment"; 
+$this->content->template['message_cplus_name'] = "Her name "; 
+$this->content->template['message_cplus_beitrag'] = "Your contribution:"; 
+$this->content->template['message_cplus_spamschutz'] = "Spam protection"; 
+$this->content->template['message_cplus_sicherheit'] = "For security reasons, this form is protected against unsolicited e-mail (spam)."; 
+$this->content->template['message_cplus_Eintragen'] = "Enter"; 
+$this->content->template['message_cplus_projekt_lang'] = "Project area"; 
+$this->content->template['message_cplus_datum_lang'] = "Date"; 
+$this->content->template['message_cplus_land_lang'] = "Country concerned"; 
+$this->content->template['message_cplus_ort_massnahme_lang'] = "Place of action"; 
 
-Englische Text-Daten des Plugins "simplex3 ArticleProperities" für das Frontend
-
-!! Diese Datei muss im Format "Utf-8 (NoBOM)" gespeichert werden !!!
-
-*/
-
-$this->content->template['message']['plugin']['simplex3_article_properties']['image_pdf_alt'] =
-'PDF';
-$this->content->template['message']['plugin']['simplex3_article_properties']['image_pdf_title'] =
-'Pdf version of this article';
-
-$this->content->template['message']['plugin']['simplex3_article_properties']['image_print_alt'] =
-'Print';
-$this->content->template['message']['plugin']['simplex3_article_properties']['image_print_title'] =
-'Print version of article';
-
-$this->content->template['message']['plugin']['simplex3_article_properties']['image_email_alt'] =
-'Email';
-$this->content->template['message']['plugin']['simplex3_article_properties']['image_email_title'] =
-'Send article as email';
-
-?>
+ ?>

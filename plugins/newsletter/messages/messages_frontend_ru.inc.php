@@ -1,0 +1,107 @@
+<?php 
+$this->content->template['message_20001'] = "<h2>Отправить информационный бюллетень</h2>
+<p>Здесь можно указать рассылку, которую вы хотите отправить. Созданный вами оттиск будет автоматически пересылаться.</p>"; 
+$this->content->template['message_20002'] = "Тема"; 
+$this->content->template['message_20003'] = " Содержание информационного бюллетеня "; 
+$this->content->template['message_20004'] = "Контент в виде обычного текста"; 
+$this->content->template['message_20005'] = "<h2>Редактирование оттиска информационного бюллетеня</h2>
+<strong>Введите важные данные в оттиск информационного бюллетеня здесь.</strong>"; 
+$this->content->template['message_20006'] = " Содержание оттиска:"; 
+$this->content->template['message_20007'] = "Содержание"; 
+$this->content->template['message_20008'] = "<h2>Подписчики новостной рассылки</h2>
+<p>Здесь вы можете увидеть адреса электронной почты наших подписчиков</p>
+<p>Нажмите на адрес электронной почты, чтобы отредактировать его.</p>
+<p>Чтобы добавить новый адрес, нажмите"; 
+$this->content->template['message_20009'] = "Добавить новую электронную почту "; 
+$this->content->template['message_20010'] = ""; 
+$this->content->template['message_20011'] = "Да "; 
+$this->content->template['message_20012'] = "Нет"; 
+$this->content->template['message_20013'] = "Активный"; 
+$this->content->template['message_20014'] = "Адрес электронной почты"; 
+$this->content->template['message_20015'] = "Электронная почта"; 
+$this->content->template['news_message_1'] = "<h1>Редактирование информационного бюллетеня</h1><p>Вы можете редактировать рассылку, редактировать подписчиков и оттиск здесь.</p><p>Если вы хотите включить информационный бюллетень, вы можете это сделать<br/><ol><li>Создайте пункт меню. При его создании вы можете вручную добавить следующую запись под ссылкой формы: <br /><strong>plugin:newsletter/templates/subscribe_newsletter.html</strong>.</li><li>Если вы не хотите иметь отдельный пункт меню, вы можете создать ссылку в любой статье с помощью функции ссылки в редакторе. Ссылка должна иметь следующее содержание: /plugin.php?menuid=1&amp;template=newsletter/templates/subscribe_newsletter.html .</li><li>Вы также можете использовать менеджер модулей для встраивания формы подписки в любое удобное для вас место </li></ol>"; 
+$this->content->template['news_message_2'] = "<h2 style=\"color:red;\">Информационный бюллетень отправлен!</h2>"; 
+$this->content->template['news_message_3'] = "<h2>Сохранить рассылку!</h2><p>Нажмите на кнопку Сохранить рассылку, и все соответствующие данные рассылки будут сохранены в файле дампа. Это хранилище не зависит от общего хранилища.</p>"; 
+$this->content->template['news_message_4'] = "Сохранить информационный бюллетень"; 
+$this->content->template['message_20016'] = "Адрес электронной почты, с которого отправляется сообщение:"; 
+$this->content->template['message_20017'] = "Имя для части *of:*:"; 
+$this->content->template['message_20018'] = "<h3>Подпишитесь на нашу рассылку.</h3><p>Вы можете подписаться на нашу рассылку здесь. Для этого, пожалуйста, заполните приведенную ниже форму. Затем вы получите подтверждение по электронной почте, на которое вы должны ответить.</p>
+<p>Только после этого вы будете зарегистрированы для получения рассылки.</p>"; 
+$this->content->template['message_20018_ds'] = "Я принял к сведению политику конфиденциальности. Я согласен на сбор и хранение моих данных и информации в электронном виде для ответа на мой запрос. Примечание: Вы можете отозвать свое согласие на будущее в любое время, отправив электронное письмо на адрес info@ihre-mail.de."; 
+$this->content->template['message_20018_1'] = "Архив новостей"; 
+$this->content->template['message_20018_a'] = "Подпишитесь на нашу рассылку."; 
+$this->content->template['message_20019'] = "Пожалуйста, введите ваши данные."; 
+$this->content->template['message_20020'] = "подписаться"; 
+$this->content->template['message_20021'] = "Отправить"; 
+$this->content->template['erneut_versenden'] = "Отправить."; 
+$this->content->template['datum'] = "Дата"; 
+$this->content->template['inhalt'] = "Содержание"; 
+$this->content->template['useranzahl'] = "Количество получателей"; 
+$this->content->template['gruppe'] = "Группа"; 
+$this->content->template['newsletter_texthtml'] = "Содержание как HTML"; 
+$this->content->template['news_message1'] = "<h2>Выберите язык</h2><p>Здесь выберите язык, на котором будет создан информационный бюллетень.</p>"; 
+$this->content->template['news_message2'] = "Выберите"; 
+$this->content->template['news_imptext1'] = "-- Чтобы отказаться от подписки, пожалуйста, нажмите здесь: http://#url#/plugin.php?menuid=1&amp;activate=#key#&amp;news_message=de_activate&amp;template=newsletter/templates/subscribe_newsletter.html #imp#"; 
+$this->content->template['news_imptext2'] = "  Чтобы отменить рассылку, пожалуйста, нажмите здесь: <br /> <a href=\"http://#url#/plugin.php?menuid=1&activate=#key#&news_message=de_activate&template=newsletter/templates/subscribe_newsletter.html\">Отмена рассылки новостей</a><br />"; 
+$this->content->template['news_mail1'] = "Подписчик рассылки - seitenurl."; 
+$this->content->template['news_mail2'] = "Вы подписались на рассылку новостей seitenurl, если вы не подписывались на эту рассылку или не хотите ее получать, пожалуйста, проигнорируйте это письмо, вы больше не получите его. Чтобы активировать рассылку, пожалуйста, нажмите на следующую ссылку"; 
+$this->content->template['news_mail3'] = "Новый подписчик подписался на один или несколько модерируемых списков"; 
+$this->content->template['news_front1'] = "nodecode:<div id=\"hl\"><h1 class=\"home\">Подписка на рассылку новостей</h1></div><p>Вы подписались на нашу рассылку. Через несколько минут вы получите электронное письмо со ссылкой для подтверждения.</p><p>Пожалуйста, нажмите на ссылку в письме, чтобы окончательно подписаться на эту рассылку.</p>"; 
+$this->content->template['news_front2'] = "nodecode:<div id=\"hl\"><h1 class=\"home\">Подписка на рассылку новостей</h1></div><p>Ваша подписка на нашу рассылку активирована. Вы начнете получать нашу рассылку уже сегодня. Если вы хотите отказаться от подписки, просто нажмите на ссылку \"Отказаться от подписки\" в любом полученном от нас электронном письме.</p>"; 
+$this->content->template['news_front3'] = "<div id=\"hl\"><h1 class=\"home\">Информационный бюллетень отменен</h1></div><p>Рассылка была отменена, а ваши данные удалены.</p>"; 
+$this->content->template['news_front4'] = "ваши данные"; 
+$this->content->template['news_front5'] = "Господин"; 
+$this->content->template['news_front6'] = "Мисс"; 
+$this->content->template['news_front7'] = "Имя"; 
+$this->content->template['news_front8'] = "Фамилия"; 
+$this->content->template['news_front9'] = "Улица и номер дома"; 
+$this->content->template['news_front10'] = "Почтовый индекс"; 
+$this->content->template['news_front11'] = "Проживание"; 
+$this->content->template['news_front12'] = "Язык"; 
+$this->content->template['news_front13'] = "Государство"; 
+$this->content->template['news_front14'] = " Спецификация отсутствует"; 
+$this->content->template['news_front15'] = " Недопустимая спецификация"; 
+$this->content->template['news_front16'] = " уже присутствует"; 
+$this->content->template['news_front17'] = "<div id=\"hl\"><h1 class=\"home\">Архив новостей</h1></div>"; 
+$this->content->template['news_front18'] = "Информационный бюллетень"; 
+$this->content->template['news_front19'] = "Информационный бюллетень"; 
+$this->content->template['news_front20'] = "В настоящее время архивные данные отсутствуют."; 
+$this->content->template['news_front21'] = " ==&gt; Группа(ы) не выбрана(ы)"; 
+$this->content->template['news_front22'] = "Телефон"; 
+$this->content->template['news_message3'] = "Язык"; 
+$this->content->template['newsletter_anzeigen'] = "показать"; 
+$this->content->template['plugin']['newsletter']['unsubscribe_newsletter_title'] = "Вы действительно хотите отписаться от рассылки?"; 
+$this->content->template['plugin']['newsletter']['unsubscribe_newsletter'] = "Отказ от подписки на рассылку новостей"; 
+$this->content->template['plugin']['newsletter']['cancel'] = "Отмена"; 
+$this->content->template['plugin']['newsletter']['alle'] = "Все"; 
+$this->content->template['plugin']['newsletter']['altnewsletter'] = "Старые информационные бюллетени"; 
+$this->content->template['plugin']['newsletter']['inhalt_text'] = "Содержание как текст"; 
+$this->content->template['plugin']['newsletter']['inhalt_html'] = "Содержание как HTML"; 
+$this->content->template['plugin']['newsletter']['userdaten'] = "Расширенные пользовательские данные"; 
+$this->content->template['plugin']['newsletter']['sprachwahl'] = "Включить выбор языка для входа пользователя во фронтенде?"; 
+$this->content->template['plugin']['newsletter']['text'] = "Показать текст над логином?"; 
+$this->content->template['plugin']['newsletter']['html_mails'] = "Письма в формате HTML?"; 
+$this->content->template['plugin']['newsletter']['editor'] = "WYSIWYG-редактор tinymce?"; 
+$this->content->template['plugin']['newsletter']['sprache'] = "Язык"; 
+$this->content->template['plugin']['newsletter']['daten'] = "Даты."; 
+$this->content->template['plugin']['newsletter']['vorname'] = "Имя"; 
+$this->content->template['plugin']['newsletter']['nachname'] = "Фамилия"; 
+$this->content->template['plugin']['newsletter']['strasse'] = "Улица и номер дома"; 
+$this->content->template['plugin']['newsletter']['postleitzahl'] = "Почтовый индекс"; 
+$this->content->template['plugin']['newsletter']['wohnort'] = "Проживание"; 
+$this->content->template['plugin']['newsletter']['staat'] = "Государство"; 
+$this->content->template['plugin']['newsletter']['abschicken'] = "отправить"; 
+$this->content->template['plugin']['newsletter']['email'] = "Электронная почта"; 
+$this->content->template['plugin']['newsletter']['eingabe_datei'] = "Введите файл:"; 
+$this->content->template['plugin']['newsletter']['dokument'] = "Документ:"; 
+$this->content->template['plugin']['newsletter']['durchsuchen'] = "Просмотреть..."; 
+$this->content->template['plugin']['newsletter']['datei_upload'] = "Загрузите файл:"; 
+$this->content->template['plugin']['newsletter']['upload'] = "загрузить"; 
+$this->content->template['plugin']['newsletter']['sicherung'] = "<h3>Создание резервной копии базы данных</h3><p> Здесь можно создать резервную копию базы данных, которую можно восстановить после новой установки или в любое другое время.</p>"; 
+$this->content->template['plugin']['newsletter']['sicherung_einspielen'] = "Импорт резервной копии"; 
+$this->content->template['plugin']['newsletter']['sicherung_ready'] = "Файл резервной копии был импортирован."; 
+$this->content->template['plugin']['newsletter']['hinweis'] = "Чтобы импортировать резервную копию, выберите файл резервной копии:"; 
+$this->content->template['plugin']['newsletter']['warnung'] = "ВНИМАНИЕ - При импорте резервной копии все текущие данные будут безвозвратно удалены. Поэтому обязательно создайте резервную копию заранее!"; 
+$this->content->template['plugin']['newsletter']['make_dump'] = "Создайте резервную копию сейчас"; 
+
+ ?>

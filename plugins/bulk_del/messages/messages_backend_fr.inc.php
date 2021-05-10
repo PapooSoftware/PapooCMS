@@ -1,0 +1,46 @@
+<?php 
+$this->content->template['plugin_commentplus_automatische_updates'] = "Mises à jour automatiques"; 
+$this->content->template['plugin_auto_update_mit_diesem_plugin_knnen_sie_automatisch'] = "Avec ce plugin, vous pouvez effectuer des mises à jour automatiques. Votre système reste toujours à jour. Bien entendu, vous pouvez également effectuer chaque mise à jour manuellement en cliquant sur le bouton approprié."; 
+$this->content->template['plugin_auto_update_einstellungen_fr_das_update'] = "Paramètres de la mise à jour"; 
+$this->content->template['plugin_auto_update_um_die_updates_durchzufhren'] = "Pour effectuer les mises à jour, certaines données doivent être saisies ici. D'une part, les données d'accès FTP à votre page ici. Ils sont nécessaires car vous n'avez généralement pas accès en écriture à vos propres fichiers. D'autre part les données d'accès au site Papoo.de pour que nous puissions activer votre mise à jour."; 
+$this->content->template['plugin_auto_update_zugangsdaten_zur_papoode_seite'] = "Données d'accès au site Papoo.de"; 
+$this->content->template['plugin_auto_update_papoo_username'] = "Nom d'utilisateur "; 
+$this->content->template['plugin_auto_update_papoo_padsswprd'] = "Mot de passe"; 
+$this->content->template['plugin_auto_update_ftp_zugangsdaten_zu_ihrer_seite'] = "Accès FTP aux données sur votre site"; 
+$this->content->template['plugin_auto_update_ftp_servername'] = "Nom du serveur FTP"; 
+$this->content->template['plugin_auto_update_ftp_username'] = "Nom d'utilisateur FTP"; 
+$this->content->template['plugin_auto_update_ftp_passwort'] = "Mot de passe FTP"; 
+$this->content->template['plugin_auto_update_auto_daten_speichern'] = "Stocker des données"; 
+$this->content->template['plugin_auto_update_geben_sie_hier_zugangsdaten_zur'] = "Entrez ici vos données d'accès au site Papoo.de"; 
+$this->content->template['plugin_auto_update_geben_sie_hier_ihre_ftp_zugangsdate'] = "Entrez vos données d'accès FTP ici"; 
+$this->content->template['plugin_auto_update_verbindung_testen'] = "Test de connexion"; 
+$this->content->template['plugin_auto_update_ftp_berbindung_testen'] = "Test de la connexion FTP"; 
+$this->content->template['plugin_auto_update_artikel_und_menpunkte_lschen'] = "Supprimer des articles, des images, des fichiers ou des éléments de menu"; 
+$this->content->template['plugin_del_artikel_mit_diesem_plugin_knnen_sie_aus_einer_kompletten_bersicht_einfach_per_haken'] = "Avec ce plugin, vous pouvez supprimer tous les articles, images, fichiers ou éléments de menu cochés d'un aperçu complet, simplement en cochant une case. <br /><br /><strong>Mais attention - vous devez avoir des droits d'administrateur pour cette action</strong>."; 
+$this->content->template['plugin_del_artikel_whlen_sie_die_artikel_aus_die_sie_lschen_wollen'] = "Sélectionnez les éléments que vous souhaitez supprimer."; 
+$this->content->template['plugin_del_artikel_auswgewhlte_artikel_lschen'] = "Supprimer les articles sélectionnés"; 
+$this->content->template['plugin_del_artikel_sie_brauchen_adminrechte'] = "Vous devez avoir des droits d'administrateur pour cette action"; 
+$this->content->template['plugin_del_artikel_berschrift'] = "A la une"; 
+$this->content->template['plugin_del_artikel_artikel_lschen'] = "Supprimer l'article"; 
+$this->content->template['plugin_del_artikel_soll_der_artikel_wirklich_gelscht_werden'] = "Ces articles doivent-ils vraiment être supprimés ? Les articles seront supprimés complètement et irrémédiablement ! !!"; 
+$this->content->template['plugin_del_artikel_soll_der_artikel_wirklich_gelscht_werden2'] = "Ces éléments de menu doivent-ils vraiment être supprimés ? N Les éléments du menu seront supprimés complètement et irrémédiablement !!!!"; 
+$this->content->template['plugin_del_artikel_die_artikel_wurden_gelscht'] = "Les articles ont été supprimés"; 
+$this->content->template['plugin_del_artikel_whlen_sie_die_menpunkte_die_sie_lschen_wollen'] = "Sélectionnez les éléments de menu que vous souhaitez supprimer"; 
+$this->content->template['plugin_del_artikel_whlen_sie_hier_die_'] = "Sélectionnez ici les éléments de menu que vous souhaitez supprimer "; 
+$this->content->template['plugin_del_artikel_die_menpunkte_lnn'] = "Les éléments du menu peuvent être supprimés ici en une seule fois et de manière irrémédiable."; 
+$this->content->template['plugin_del_artikel_ausgewhlte_menpunkte_lschen'] = "Supprimer les éléments de menu sélectionnés"; 
+$this->content->template['plugin_del_artikel_die_menpunkte_wurden_gelscht'] = "Les éléments du menu ont été supprimés"; 
+$this->content->template['plugin_del_artikel_whlen_sie_die_bilder_aus_die_sie_lschen_wollen'] = "Sélectionnez les images que vous souhaitez supprimer."; 
+$this->content->template['plugin_del_artikel_ausgewhlte_bilder_lschen'] = "Supprimer les images sélectionnées"; 
+$this->content->template['plugin_del_artikel_bilder_berschrift'] = "Nom du fichier"; 
+$this->content->template['plugin_del_artikel_bilder_lschen'] = "Supprimer les images"; 
+$this->content->template['plugin_del_artikel_sollen_die_bilder_wirklich_gelscht_werden'] = "Ces photos doivent-elles vraiment être supprimées ? Les photos seront effacées complètement et irrémédiablement ! !!"; 
+$this->content->template['plugin_del_artikel_die_bilder_wurden_gelscht'] = "Les images ont été supprimées"; 
+$this->content->template['plugin_del_artikel_whlen_sie_die_dateien_aus_die_sie_lschen_wollen'] = "Sélectionnez les fichiers que vous voulez supprimer."; 
+$this->content->template['plugin_del_artikel_ausgewhlte_dateien_lschen'] = "Supprimer les fichiers sélectionnés"; 
+$this->content->template['plugin_del_artikel_dateien_berschrift'] = "Nom du fichier"; 
+$this->content->template['plugin_del_artikel_dateien_lschen'] = "Supprimer des fichiers"; 
+$this->content->template['plugin_del_artikel_sollen_die_dateien_wirklich_gelscht_werden'] = "Ces fichiers doivent-ils vraiment être supprimés ? Les fichiers sont complètement et irrémédiablement supprimés ! !!"; 
+$this->content->template['plugin_del_artikel_die_dateien_wurden_gelscht'] = "Les fichiers ont été supprimés"; 
+
+ ?>

@@ -1,17 +1,54 @@
-<?php
-/**
+<?php 
+$this->content->template['plugin_kalender_facebook_pages_plugin'] = " Pages plugin"; 
+$this->content->template['plugin_kalender_mit_hilfe_des_lp_plugins'] = "With the help of the Facebook Pages Plugin you can manage as many single pages on single domains as you like."; 
+$this->content->template['plugin_kalender_erstellen'] = "On each domain you manage you can place an index.html file, for each domain a directory will be created to which you can point this domain."; 
+$this->content->template['plugin_kalender_kategorien_fr_die_facebook_pages'] = "Categories for the Facebook Pages"; 
+$this->content->template['plugin_kalender_erstellen_sie_hier_die_kategorien'] = "Create the categories here for the Facebook Pages you want to use, at least one must be created, otherwise you can't save the pages."; 
+$this->content->template['plugin_kalender_neue_kategorie_erstellen'] = "Create new category"; 
+$this->content->template['plugin_kalender_erstellen_sie_hier_eine_neue_kategorie'] = "Create a new category here"; 
+$this->content->template['plugin_kalender_kategorien_bearbeiten'] = "Edit categories"; 
+$this->content->template['plugin_kalender_hier_knnen_sie_die_kategorien_bearb'] = "Here you can edit the categories for the Facebookpages, click on one to change the data."; 
+$this->content->template['plugin_kalender_seiten_erstellen_und_bearbeiten'] = "Create and edit pages"; 
+$this->content->template['plugin_kalender_sie_knnen_hier_die_seiten'] = "Here you can create and edit the pages you want to publish as Facebook Pages. If you click on \"update\" the page will be updated. Each page is located in its own directory, which is automatically derived from the domain name. The domain you want to use link to your provider to the respective directory, which you can find under /plugins/facebook_pages/sites/.. "; 
+$this->content->template['plugin_kalender_neue_seite_erstellen'] = "Create new page"; 
+$this->content->template['plugin_kalender_erstellen_sie_eine_neue_seite'] = "Create a new page"; 
+$this->content->template['plugin_kalender_vorhandene_seiten_bearbeiten'] = "Edit existing pages"; 
+$this->content->template['plugin_kalender_whlen_sie_die_seite_aus'] = "Select the page"; 
+$this->content->template['plugin_kalender_konfiguration_der_papoo_facebook_pages'] = "Configuration of the Papoo Facebook Pages"; 
+$this->content->template['plugin_kalender_hier_knnen_sie_einige_konfigurationen_durchfrhren'] = "Here you can perform some configurations (currently none necessary and available)."; 
+$this->content->template['plugin_kalender_erstellen__bearbeiten_von_kategorien'] = "Create / edit categories"; 
+$this->content->template['plugin_kalender_hier_knnen_sie_kategorie_erstellen_oder_bearbeiten'] = "Here you can create or edit category"; 
+$this->content->template['plugin_kalender_kategorie_name'] = "Category Name"; 
+$this->content->template['plugin_kalender_name_der_kategorie'] = "Category name"; 
+$this->content->template['plugin_kalender_daten_eintragen'] = "Enter data"; 
+$this->content->template['plugin_facebook_page_der_name_der_kategorie_'] = "The name of the category "; 
+$this->content->template['plugin_shop_fehlt_eintrag'] = "<strong class=&quot;error_strong&quot;> - Entry missing - </strong>"; 
+$this->content->template['plugin_facebook_page_name_der_kategorie2'] = "Category name"; 
+$this->content->template['plugin_facebook_page_anzahl_der_seiten'] = "Number of pages available"; 
+$this->content->template['plugin_facebook_page_aktion'] = "Action"; 
+$this->content->template['plugin_facebook_page_bearbeiten'] = "edit"; 
+$this->content->template['plugin_kalender_erstellen__bearbeiten_von_seiten'] = "Create / edit pages"; 
+$this->content->template['plugin_kalender_hier_knnen_soe'] = "Here you can edit the pages and create new ones."; 
+$this->content->template['plugin_kalender_basisdaten'] = "Basic data"; 
+$this->content->template['plugin_facebook_page_sites_interne_bezeichnung'] = "Internal designation"; 
+$this->content->template['plugin_facebook_page_sites_interne_bezeichnung_id'] = "ID"; 
+$this->content->template['plugin_facebook_page_sites_domain'] = "Domain"; 
+$this->content->template['plugin_facebook_page_sites_metadaten'] = "Metadata"; 
+$this->content->template['plugin_facebook_page_sites_titel_der_seite'] = "Title of the page"; 
+$this->content->template['plugin_facebook_page_sites_meta_description'] = "Meta description"; 
+$this->content->template['plugin_facebook_page_sites_meta_keywords'] = "Meta keywords"; 
+$this->content->template['plugin_facebook_page_sites_verwendetes_design'] = "Design used"; 
+$this->content->template['plugin_facebook_page_sites_design'] = "Design"; 
+$this->content->template['plugin_facebook_page_sites_eigentlicher_inhalt'] = "Actual content"; 
+$this->content->template['plugin_facebook_page_sites_content'] = "Content / Content on the page"; 
+$this->content->template['plugin_facebook_page_sites_daten_speichern2'] = "Store data"; 
+$this->content->template['plugin_facebook_page_sites_kategori_der_sseite'] = "Category of the page"; 
+$this->content->template['plugin_facebook_page_sites_lschen'] = "delete"; 
+$this->content->template['plugin_facebook_page_sites_seite_lschen'] = "Delete page"; 
+$this->content->template['plugin_facebook_page_sites_hier_knnen_sie_die_folgende_seite_lschen'] = "Here you can delete the following page"; 
+$this->content->template['plugin_facebook_page_sites_datensatz_lschen'] = "Delete record"; 
+$this->content->template['plugin_facebook_page_sites_aktualisieren'] = "uPDATE"; 
+$this->content->template['plugin_facebook_page_sites_gacode'] = "Google Analytics Code ID"; 
+$this->content->template['plugin_facebook_page_sites_als_kopie_speichern'] = "Save as copy"; 
 
-Deutsche Text-Daten des Plugins "test" für das Backend
-
-!! Diese Datei muss im Format "UTF-8 (NoBOM)" gespeichert werden !!!
-
-*/
-
-$this->content->template['message']['plugin']['test']['name']='Plugin “test” ';
-$this->content->template['message']['plugin']['test']['kopf']='<h1>Baking the test Plugins</h1><p>This Template is not barrier-free, but however sense-free and not X-HTML-conformal. Nothing the defiance should carry it out for the explanation of the programming of Papoo Plugins serve-rich assistance.</p><p>The different menu options of this Plugins are likewise sense-free. They always refer to the same Template “test_back.html”. The points are to be shown only over, how in the Plugin XML file menu options can be put on.</p><p>The integration of the Frontend Templates goes as follows: Provide a new menu option. Enter there under form left (completely down) the following: <strong>plugin: test/templates/test_front.html</strong>. Thus the Template is available in front-ends.</p><p>The modules contained in this Template can be inserted with the module manager here in the administration. For all those did not discover the thing yet, to find are it under “system - &gt; module manager”.</p> ';
-$this->content->template['message']['plugin']['test']['form_kopf']='And here a small form: ';
-$this->content->template['message']['plugin']['test']['form_legend']='Test value ';
-$this->content->template['message']['plugin']['test']['form_testwert_label']='A test value by POST OFFICE hand over ';
-
-
-?>
+ ?>

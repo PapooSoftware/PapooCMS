@@ -1,0 +1,41 @@
+<?php 
+$this->content->template['plugin']['sprechomat']['einstellungen'] = "Sprechomat PlugIn: 设置"; 
+$this->content->template['plugin']['sprechomat']['bereiche'] = "激活或停用不同区域的语音输出。"; 
+$this->content->template['plugin']['sprechomat']['startseite'] = "主页。"; 
+$this->content->template['plugin']['sprechomat']['start_aktiv'] = "激活起始页文本的语音输出。"; 
+$this->content->template['plugin']['sprechomat']['artikel'] = "文章。"; 
+$this->content->template['plugin']['sprechomat']['artikel_aktiv'] = "启用文章的语音输出。"; 
+$this->content->template['plugin']['sprechomat']['hinweis'] = "在 &quot;文章排除 &quot;菜单项下，你也可以停用个别文章的语音输出。"; 
+$this->content->template['plugin']['sprechomat']['kommentare'] = "评论。"; 
+$this->content->template['plugin']['sprechomat']['kommentar_aktiv'] = "为文章的评论启用语音输出。"; 
+$this->content->template['plugin']['sprechomat']['gaestebuch'] = "留言簿。"; 
+$this->content->template['plugin']['sprechomat']['gaestebuch_aktiv'] = "激活留言簿的语音输出。"; 
+$this->content->template['plugin']['sprechomat']['forum'] = "论坛。"; 
+$this->content->template['plugin']['sprechomat']['forum_aktiv'] = "激活论坛的语音输出。"; 
+$this->content->template['plugin']['sprechomat']['speichern'] = "保存设置。"; 
+$this->content->template['plugin']['sprechomat']['text'] = "<h1>淘宝网插件</h1><p>Sprechomat.de &quot;服务的注册可以在这个页面下找到。"; 
+$this->content->template['plugin']['sprechomat']['sprechomatde'] = "Talkomat.com"; 
+$this->content->template['plugin']['sprechomat']['text2'] = "一旦你注册了，你就可以输入你的详细资料，并立即开始使用该服务。"; 
+$this->content->template['plugin']['sprechomat']['daten'] = "Sprechomat PlugIn: 数据"; 
+$this->content->template['plugin']['sprechomat']['aktivieren'] = "激活Speechomat"; 
+$this->content->template['plugin']['sprechomat']['server_adresse'] = "你的服务器地址"; 
+$this->content->template['plugin']['sprechomat']['server_url'] = "在此输入你的服务器地址，格式为http://www.Ihr-Name.de（即没有任何子目录等）。"; 
+$this->content->template['plugin']['sprechomat']['sprechomat_adresse'] = "Sprechomat服务器地址"; 
+$this->content->template['plugin']['sprechomat']['sprechomat_url'] = "Sprechomat.de服务的服务器地址。你将在注册时被告知这个地址，或者你可以从页面的客户区访问它。"; 
+$this->content->template['plugin']['sprechomat']['sprechomat_url2'] = "外卖。"; 
+$this->content->template['plugin']['sprechomat']['zugangskennung'] = "<legend>用于在本地服务器上安装的访问ID</legend><p>你只需要为本地开发服务器指定这些字段。在实际的域名服务器上，出于安全考虑，你应该把这些字段留空。</p>"; 
+$this->content->template['plugin']['sprechomat']['entwicklerkennung'] = "开发者ID。"; 
+$this->content->template['plugin']['sprechomat']['domainkennung'] = "域名标识符。"; 
+$this->content->template['plugin']['sprechomat']['aendern'] = "变化数据"; 
+$this->content->template['plugin']['sprechomat']['ausschliessen'] = "Sprechomat PlugIn: 排除文章"; 
+$this->content->template['plugin']['sprechomat']['deaktivieren'] = "<legend>停用个别文章的语音输出。</legend><p>通过勾选一篇文章，这篇文章可以从语音输出中排除。因此，被勾选的文章将<strong>不会</strong>收到激活语音输出的链接。</p>"; 
+$this->content->template['plugin']['sprechomat']['nummer'] = "项目编号。"; 
+$this->content->template['plugin']['sprechomat']['ausschuss_aendern'] = "变革委员会"; 
+$this->content->template['plugin']['sprechomat']['speichern2'] = "拯救"; 
+$this->content->template['plugin']['sprechomat']['aendern2'] = "修改"; 
+$this->content->template['plugin']['sprechomat']['text3'] = "请朗读这篇课文。"; 
+$this->content->template['plugin']['sprechomat']['text4'] = "Sprechomat的数据已被成功更改。"; 
+$this->content->template['plugin']['sprechomat']['text5'] = "Sprechomat的设置已被成功更改。"; 
+$this->content->template['plugin']['sprechomat']['text6'] = "文章的排他性已被成功改变。"; 
+
+ ?>

@@ -1,13 +1,41 @@
-<?php
-/**
+<?php 
+$this->content->template['plugin_plugin_zentrale_inhalte_verwalten_sie_hier_zentral_inhalte'] = "Manage content centrally here"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_mit_diesem_plugin_knnen_sie'] = "With this plugin you can centrally set which menu items with which content should be mirrored on which domains. All contents are customizable via placeholders."; 
+$this->content->template['plugin_plugin_zentrale_inhalte_stammdaten'] = "The contents of the master page are edited normally via the article / menu management. For working with placeholders, these must then also be entered here for the master page."; 
+$this->content->template['plugin_plugin_zentrale_inhalte_verwaltung_der_domains'] = "Domain management"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_hier_knnen_sie_die_domains'] = "Here you can manage the domains, keys and wildcards"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_neue_domain_eintragen'] = "Register new domain"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_vorhandene_domains'] = "Existing domains"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_name_der_domain'] = "Domain name"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_schlssel'] = "Key"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_platzhalter'] = "Placeholder"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_bearbeiten'] = "edit"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_lschen'] = "delete"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_domaindaten_bearbeiten'] = "Edit domain data"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_hier_bearbeiten_sie_die_daten_einer_domain'] = "Here you edit the data of a domain"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_name_der_domainf'] = "Domain name"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_domainkey'] = "Domainkey(will be generated automatically)"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_daten_speichern'] = "Store data"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_jetzt_speichern'] = "Save now"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_daten_wurden_gespeichert'] = "Data was saved"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_daten_wurden_gelscht'] = "Data has been erased"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_inhalte_fr_die_domains_verwalten'] = "Manage content for the domains"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_hier_stellen_sie_ein_welche'] = "Here you set which contents the individual domains should receive."; 
+$this->content->template['plugin_plugin_zentrale_inhalte_liste_der_domains'] = "List of domains"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_weisen_sie_hier_die_inhalte'] = "Assign the contents of the respective domain here"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_sie_sehen_hier_die_'] = "Here you can see the list of menu items that are available, simply check the box for the menu items that should be installed on the client domain."; 
+$this->content->template['plugin_plugin_zentrale_inhalte_daten_zuweisen'] = "Assign data"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_menpunkt'] = "Menu item"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_zuweisen'] = "Assign"; 
+$this->content->template['plugin_plugin_zentrale_inhalte_menupunkte'] = "menupoints"; 
+$this->content->template['plugin_plugin_cotent_client_zentrale_inhalte_einbinden'] = "Integrate central content"; 
+$this->content->template['plugin_plugin_cotent_client_hier_tragen_sie_die_daten_ein_die_sie'] = "Here you enter the data you need to synchronise this page with the central page. The setting of what is synchronized is done from the central."; 
+$this->content->template['plugin_plugin_cotent_client_daten_verwalten'] = "Manage data"; 
+$this->content->template['plugin_plugin_cotent_client_url_der_zentrale'] = "Headquarters url"; 
+$this->content->template['plugin_plugin_cotent_client_token_key_kommt_aus_der_zentrale'] = "token key (comes from the central office)"; 
+$this->content->template['plugin_plugin_cotent_client_domain_key'] = "Domain key (comes from the head office)"; 
+$this->content->template['plugin_plugin_cotent_client_daten_eintragen_fr_den_kontakt'] = "Enter data here"; 
+$this->content->template['plugin_plugin_cotent_client_diese_seite_mit_der_zentrale_synchronisieren'] = "Synchronize this page with the control panel"; 
+$this->content->template['plugin_plugin_cotent_client_daten_speichern'] = "Store data"; 
 
-Deutsche Text-Daten des Plugins "test" für das Backend
-
-!! Diese Datei muss im Format "UTF-8 (NoBOM)" gespeichert werden !!!
-
-*/
-
-#start#
-
-
-?>
+ ?>

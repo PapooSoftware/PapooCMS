@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS `XXX_papoo_osm_map_plugin_config`; ##b_dump##

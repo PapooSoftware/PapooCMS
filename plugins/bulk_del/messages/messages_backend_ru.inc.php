@@ -1,0 +1,46 @@
+<?php 
+$this->content->template['plugin_commentplus_automatische_updates'] = "Автоматические обновления"; 
+$this->content->template['plugin_auto_update_mit_diesem_plugin_knnen_sie_automatisch'] = "С помощью этого плагина вы можете выполнять автоматические обновления. Ваша система всегда остается в актуальном состоянии. Конечно, вы также можете выполнить каждое обновление вручную, нажав на соответствующую кнопку."; 
+$this->content->template['plugin_auto_update_einstellungen_fr_das_update'] = "Настройки для обновления"; 
+$this->content->template['plugin_auto_update_um_die_updates_durchzufhren'] = "Для выполнения обновлений необходимо ввести некоторые данные. С одной стороны, данные FTP-доступа к вашей странице здесь. Они необходимы, поскольку обычно у вас нет доступа на запись к собственным файлам. С другой стороны, данные доступа к странице Papoo.de, чтобы мы могли активировать ваше обновление."; 
+$this->content->template['plugin_auto_update_zugangsdaten_zur_papoode_seite'] = "Данные доступа к сайту Papoo.de"; 
+$this->content->template['plugin_auto_update_papoo_username'] = "Имя пользователя"; 
+$this->content->template['plugin_auto_update_papoo_padsswprd'] = "Пароль"; 
+$this->content->template['plugin_auto_update_ftp_zugangsdaten_zu_ihrer_seite'] = "Данные FTP-доступа к вашему сайту"; 
+$this->content->template['plugin_auto_update_ftp_servername'] = "Имя FTP-сервера"; 
+$this->content->template['plugin_auto_update_ftp_username'] = "Имя пользователя FTP"; 
+$this->content->template['plugin_auto_update_ftp_passwort'] = "Пароль FTP"; 
+$this->content->template['plugin_auto_update_auto_daten_speichern'] = "хранить данные"; 
+$this->content->template['plugin_auto_update_geben_sie_hier_zugangsdaten_zur'] = "Введите свои данные для доступа к сайту Papoo.de здесь"; 
+$this->content->template['plugin_auto_update_geben_sie_hier_ihre_ftp_zugangsdate'] = "Введите данные доступа к FTP здесь"; 
+$this->content->template['plugin_auto_update_verbindung_testen'] = "Тестовое подключение"; 
+$this->content->template['plugin_auto_update_ftp_berbindung_testen'] = "Проверить FTP-соединение"; 
+$this->content->template['plugin_auto_update_artikel_und_menpunkte_lschen'] = "Удаление статей, изображений, файлов или пунктов меню"; 
+$this->content->template['plugin_del_artikel_mit_diesem_plugin_knnen_sie_aus_einer_kompletten_bersicht_einfach_per_haken'] = "С помощью этого плагина вы можете удалить все отмеченные галочкой статьи, изображения, файлы или пункты меню из полного обзора, просто установив галочку. <br /><br /><strong>Но будьте осторожны - для этого действия вам нужны права администратора</strong>."; 
+$this->content->template['plugin_del_artikel_whlen_sie_die_artikel_aus_die_sie_lschen_wollen'] = "Выберите элементы, которые необходимо удалить."; 
+$this->content->template['plugin_del_artikel_auswgewhlte_artikel_lschen'] = "Удалить выбранные статьи"; 
+$this->content->template['plugin_del_artikel_sie_brauchen_adminrechte'] = "Для выполнения этого действия вам необходимы права администратора"; 
+$this->content->template['plugin_del_artikel_berschrift'] = "Заголовок"; 
+$this->content->template['plugin_del_artikel_artikel_lschen'] = "Удалить статью"; 
+$this->content->template['plugin_del_artikel_soll_der_artikel_wirklich_gelscht_werden'] = "Действительно ли эти статьи должны быть удалены? n Статьи будут удалены полностью и безвозвратно!!!"; 
+$this->content->template['plugin_del_artikel_soll_der_artikel_wirklich_gelscht_werden2'] = "Действительно ли эти пункты меню должны быть удалены? n Пункты меню будут удалены полностью и безвозвратно!!!!"; 
+$this->content->template['plugin_del_artikel_die_artikel_wurden_gelscht'] = "Статьи были удалены"; 
+$this->content->template['plugin_del_artikel_whlen_sie_die_menpunkte_die_sie_lschen_wollen'] = "Выберите пункты меню, которые вы хотите удалить"; 
+$this->content->template['plugin_del_artikel_whlen_sie_hier_die_'] = "Выберите здесь пункты меню, которые необходимо удалить "; 
+$this->content->template['plugin_del_artikel_die_menpunkte_lnn'] = "Здесь пункты меню могут быть удалены одним махом и безвозвратно."; 
+$this->content->template['plugin_del_artikel_ausgewhlte_menpunkte_lschen'] = "Удаление выбранных пунктов меню"; 
+$this->content->template['plugin_del_artikel_die_menpunkte_wurden_gelscht'] = "Пункты меню были удалены"; 
+$this->content->template['plugin_del_artikel_whlen_sie_die_bilder_aus_die_sie_lschen_wollen'] = "Выберите изображения, которые нужно удалить."; 
+$this->content->template['plugin_del_artikel_ausgewhlte_bilder_lschen'] = "Удаление выбранных изображений"; 
+$this->content->template['plugin_del_artikel_bilder_berschrift'] = "Имя файла"; 
+$this->content->template['plugin_del_artikel_bilder_lschen'] = "Удаление изображений"; 
+$this->content->template['plugin_del_artikel_sollen_die_bilder_wirklich_gelscht_werden'] = "Действительно ли эти фотографии должны быть удалены? n Фотографии будут удалены полностью и безвозвратно!!!"; 
+$this->content->template['plugin_del_artikel_die_bilder_wurden_gelscht'] = "Изображения были удалены"; 
+$this->content->template['plugin_del_artikel_whlen_sie_die_dateien_aus_die_sie_lschen_wollen'] = "Выберите файлы, которые необходимо удалить."; 
+$this->content->template['plugin_del_artikel_ausgewhlte_dateien_lschen'] = "Удалить выбранные файлы"; 
+$this->content->template['plugin_del_artikel_dateien_berschrift'] = "Имя файла"; 
+$this->content->template['plugin_del_artikel_dateien_lschen'] = "Удаление файлов"; 
+$this->content->template['plugin_del_artikel_sollen_die_dateien_wirklich_gelscht_werden'] = "Нужно ли удалять эти файлы? n Файлы полностью и безвозвратно удалены!!!"; 
+$this->content->template['plugin_del_artikel_die_dateien_wurden_gelscht'] = "Файлы были удалены"; 
+
+ ?>

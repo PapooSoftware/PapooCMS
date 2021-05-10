@@ -1,0 +1,41 @@
+<?php 
+$this->content->template['plugin']['sprechomat']['einstellungen'] = "Sprechomat PlugIn: Impostazioni"; 
+$this->content->template['plugin']['sprechomat']['bereiche'] = "Attivare o disattivare l'uscita vocale per diverse aree."; 
+$this->content->template['plugin']['sprechomat']['startseite'] = "Home Page:"; 
+$this->content->template['plugin']['sprechomat']['start_aktiv'] = "Attiva l'output vocale per il testo della pagina iniziale:"; 
+$this->content->template['plugin']['sprechomat']['artikel'] = "Articolo:"; 
+$this->content->template['plugin']['sprechomat']['artikel_aktiv'] = "Abilita l'output vocale per gli articoli:"; 
+$this->content->template['plugin']['sprechomat']['hinweis'] = "Sotto la voce di menu &quot;Esclusione di articoli&quot; si può anche disattivare l'emissione vocale per singoli articoli."; 
+$this->content->template['plugin']['sprechomat']['kommentare'] = "Commenti:"; 
+$this->content->template['plugin']['sprechomat']['kommentar_aktiv'] = "Abilita l'output vocale per i commenti agli articoli:"; 
+$this->content->template['plugin']['sprechomat']['gaestebuch'] = "Libro degli ospiti:"; 
+$this->content->template['plugin']['sprechomat']['gaestebuch_aktiv'] = "Attiva l'output vocale per il libro degli ospiti:"; 
+$this->content->template['plugin']['sprechomat']['forum'] = "Forum:"; 
+$this->content->template['plugin']['sprechomat']['forum_aktiv'] = "Attiva l'output vocale per il forum:"; 
+$this->content->template['plugin']['sprechomat']['speichern'] = "Salvare le impostazioni:"; 
+$this->content->template['plugin']['sprechomat']['text'] = "<h1>Sprechomat PlugIn</h1><p>La registrazione per il servizio &quot;Sprechomat.de&quot; si trova sotto questa pagina:"; 
+$this->content->template['plugin']['sprechomat']['sprechomatde'] = "Talkomat.com"; 
+$this->content->template['plugin']['sprechomat']['text2'] = "Una volta che ti sei registrato, puoi inserire i tuoi dati e iniziare a usare il servizio immediatamente."; 
+$this->content->template['plugin']['sprechomat']['daten'] = "Sprechomat PlugIn: dati"; 
+$this->content->template['plugin']['sprechomat']['aktivieren'] = "Attivare Speechomat"; 
+$this->content->template['plugin']['sprechomat']['server_adresse'] = "L'indirizzo del tuo server"; 
+$this->content->template['plugin']['sprechomat']['server_url'] = "Inserisci qui l'indirizzo del tuo server nella forma http://www.Ihr-Name.de (cioè senza sottodirectory ecc.):"; 
+$this->content->template['plugin']['sprechomat']['sprechomat_adresse'] = "Indirizzo del server Sprechomat"; 
+$this->content->template['plugin']['sprechomat']['sprechomat_url'] = "Indirizzo del server del servizio Sprechomat.de. Sarete informati di questo indirizzo al momento della registrazione o potrete accedervi dall'area clienti della pagina"; 
+$this->content->template['plugin']['sprechomat']['sprechomat_url2'] = "portare fuori."; 
+$this->content->template['plugin']['sprechomat']['zugangskennung'] = "<legend>ID di accesso per l'installazione sul server locale</legend><p>È necessario specificare questi campi solo per un server di sviluppo locale. Sul server di dominio attuale, dovresti lasciare questi campi vuoti per ragioni di sicurezza.</p>"; 
+$this->content->template['plugin']['sprechomat']['entwicklerkennung'] = "ID sviluppatore:"; 
+$this->content->template['plugin']['sprechomat']['domainkennung'] = "Identificatore di dominio:"; 
+$this->content->template['plugin']['sprechomat']['aendern'] = "Cambiare i dati"; 
+$this->content->template['plugin']['sprechomat']['ausschliessen'] = "Sprechomat PlugIn: escludere articoli"; 
+$this->content->template['plugin']['sprechomat']['deaktivieren'] = "<legend>Disattivare l'output vocale per i singoli articoli:</legend><p>Spuntando un articolo, questo articolo può essere escluso dall'output vocale. Gli articoli spuntati <strong>non</strong> riceveranno quindi un link per attivare l'output vocale.</p>"; 
+$this->content->template['plugin']['sprechomat']['nummer'] = "Numero di articolo:"; 
+$this->content->template['plugin']['sprechomat']['ausschuss_aendern'] = "Comitato per il cambiamento"; 
+$this->content->template['plugin']['sprechomat']['speichern2'] = "Salva"; 
+$this->content->template['plugin']['sprechomat']['aendern2'] = "Modificare"; 
+$this->content->template['plugin']['sprechomat']['text3'] = "Fate leggere questo testo ad alta voce."; 
+$this->content->template['plugin']['sprechomat']['text4'] = "I dati di Sprechomat sono stati modificati con successo."; 
+$this->content->template['plugin']['sprechomat']['text5'] = "Le impostazioni di Sprechomat sono state modificate con successo."; 
+$this->content->template['plugin']['sprechomat']['text6'] = "L'esclusione dell'articolo è stata modificata con successo."; 
+
+ ?>

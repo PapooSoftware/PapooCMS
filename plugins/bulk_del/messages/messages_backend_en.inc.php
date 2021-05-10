@@ -1,8 +1,46 @@
 <?php 
-/**
-* Deutsche Text-Daten des Plugins "bookmark" für das Backend
-* !! Diese Datei muss im Format "UTF-8 (NoBOM)" gespeichert werden !!!
-*/
- 
- 
+$this->content->template['plugin_commentplus_automatische_updates'] = "Automatic updates"; 
+$this->content->template['plugin_auto_update_mit_diesem_plugin_knnen_sie_automatisch'] = "With this plugin you can perform automatic updates. Your system always stays up to date. Of course, you can also perform each update manually by clicking on the appropriate button."; 
+$this->content->template['plugin_auto_update_einstellungen_fr_das_update'] = "Settings for the update"; 
+$this->content->template['plugin_auto_update_um_die_updates_durchzufhren'] = "To perform the updates, some data must be entered here. On the one hand, the FTP access data to your page here. These are necessary because you usually do not have write access to your own files. On the other hand the access data to the Papoo.de site so that we can activate your update."; 
+$this->content->template['plugin_auto_update_zugangsdaten_zur_papoode_seite'] = "Access data to the Papoo.de site"; 
+$this->content->template['plugin_auto_update_papoo_username'] = "Username"; 
+$this->content->template['plugin_auto_update_papoo_padsswprd'] = "Password"; 
+$this->content->template['plugin_auto_update_ftp_zugangsdaten_zu_ihrer_seite'] = "FTP access data to your site"; 
+$this->content->template['plugin_auto_update_ftp_servername'] = "FTP server name"; 
+$this->content->template['plugin_auto_update_ftp_username'] = "FTP Username"; 
+$this->content->template['plugin_auto_update_ftp_passwort'] = "FTP password"; 
+$this->content->template['plugin_auto_update_auto_daten_speichern'] = "Store data"; 
+$this->content->template['plugin_auto_update_geben_sie_hier_zugangsdaten_zur'] = "Enter your access data to the Papoo.de site here"; 
+$this->content->template['plugin_auto_update_geben_sie_hier_ihre_ftp_zugangsdate'] = "Enter your FTP access data here"; 
+$this->content->template['plugin_auto_update_verbindung_testen'] = "Test connection"; 
+$this->content->template['plugin_auto_update_ftp_berbindung_testen'] = "Test FTP connection"; 
+$this->content->template['plugin_auto_update_artikel_und_menpunkte_lschen'] = "Delete articles, images, files or menu items"; 
+$this->content->template['plugin_del_artikel_mit_diesem_plugin_knnen_sie_aus_einer_kompletten_bersicht_einfach_per_haken'] = "With this plugin you can delete all ticked articles, images, files or menu items from a complete overview simply by setting a check mark. <br /><br /><strong>But beware - you need administrator rights for this action</strong>."; 
+$this->content->template['plugin_del_artikel_whlen_sie_die_artikel_aus_die_sie_lschen_wollen'] = "Select the items you want to delete."; 
+$this->content->template['plugin_del_artikel_auswgewhlte_artikel_lschen'] = "Delete selected articles"; 
+$this->content->template['plugin_del_artikel_sie_brauchen_adminrechte'] = "You need admin rights for this action"; 
+$this->content->template['plugin_del_artikel_berschrift'] = "Headline"; 
+$this->content->template['plugin_del_artikel_artikel_lschen'] = "Delete article"; 
+$this->content->template['plugin_del_artikel_soll_der_artikel_wirklich_gelscht_werden'] = "Should these articles really be deleted? n The articles will be deleted completely and irretrievably!!!"; 
+$this->content->template['plugin_del_artikel_soll_der_artikel_wirklich_gelscht_werden2'] = "Should these menu items really be deleted? n The menu items will be deleted completely and irretrievably!!!!"; 
+$this->content->template['plugin_del_artikel_die_artikel_wurden_gelscht'] = "The articles were deleted"; 
+$this->content->template['plugin_del_artikel_whlen_sie_die_menpunkte_die_sie_lschen_wollen'] = "Select the menu items you want to delete"; 
+$this->content->template['plugin_del_artikel_whlen_sie_hier_die_'] = "Select the menu items you want to delete here "; 
+$this->content->template['plugin_del_artikel_die_menpunkte_lnn'] = "The menu items can be deleted here in one go and irretrievably."; 
+$this->content->template['plugin_del_artikel_ausgewhlte_menpunkte_lschen'] = "Delete selected menu items"; 
+$this->content->template['plugin_del_artikel_die_menpunkte_wurden_gelscht'] = "The menu items have been deleted"; 
+$this->content->template['plugin_del_artikel_whlen_sie_die_bilder_aus_die_sie_lschen_wollen'] = "Select the images you want to delete."; 
+$this->content->template['plugin_del_artikel_ausgewhlte_bilder_lschen'] = "Delete selected images"; 
+$this->content->template['plugin_del_artikel_bilder_berschrift'] = "File name"; 
+$this->content->template['plugin_del_artikel_bilder_lschen'] = "Delete images"; 
+$this->content->template['plugin_del_artikel_sollen_die_bilder_wirklich_gelscht_werden'] = "Should these pictures really be deleted? n The pictures will be deleted completely and irretrievably!!!"; 
+$this->content->template['plugin_del_artikel_die_bilder_wurden_gelscht'] = "The images have been deleted"; 
+$this->content->template['plugin_del_artikel_whlen_sie_die_dateien_aus_die_sie_lschen_wollen'] = "Select the files you want to delete."; 
+$this->content->template['plugin_del_artikel_ausgewhlte_dateien_lschen'] = "Delete selected files"; 
+$this->content->template['plugin_del_artikel_dateien_berschrift'] = "File name"; 
+$this->content->template['plugin_del_artikel_dateien_lschen'] = "Delete files"; 
+$this->content->template['plugin_del_artikel_sollen_die_dateien_wirklich_gelscht_werden'] = "Should these files really be deleted? n The files are completely and irretrievably deleted!!!"; 
+$this->content->template['plugin_del_artikel_die_dateien_wurden_gelscht'] = "The files were deleted"; 
+
  ?>

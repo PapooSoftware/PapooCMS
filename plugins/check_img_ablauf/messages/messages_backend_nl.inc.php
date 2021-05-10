@@ -1,0 +1,4 @@
+<?php 
+$this->content->template['message']['plugin']['imgexpired']['kopf'] = "<h1>Controle vervaldatum afbeelding</h1><p>Deze plugin scant de pagina inhoud, zelfs voordat het naar de klant wordt gestuurd, op afbeeldingen die verlopen zijn en verwijdert ze.</p><p>De te controleren afbeeldingen moeten een klasse hebben die gedefinieerd is in een van de volgende formaten:</p><ul><li>class=\"expiratie-dt-mm-jj\"</li><li>class=\"vervaldatum-dd-mm-jjj\"</li></ul><p>Voorbeelden:</p><ul><li>&lt;img src=\"../images/example.jpg class=\"expiration-18-08-14\" height=\"180\" width=\"320\" /&gt;</li><li>&lt;img src=\"../images/example2.jpg class=\"expire-18-08-2014\" height=\"180\" width=\"320\" /&gt;</li></ul><p>Er zijn momenteel geen aanpassingsmogelijkheden beschikbaar.</p>"; 
+
+ ?>

@@ -56,17 +56,12 @@
 								{*<!-- Hier kann eine Sprache ausgewaehlt werden. -->*}
 								<select title="{$message_841}" name="language" id="language" size="1">
 									{*<!-- auswaehlen/select -->*}
-									<!-- {foreach item=lang from=$language}
+									{foreach item=lang from=$language}
 										<option value="{$lang.lang_short}">
 											{$lang.language}
 										</option>
-									{/foreach} -->
-									<option value="de">
-										Deutsch
-									</option>
-									<option value="en">
-										English
-									</option>
+									{/foreach}
+
 								</select>
 							</p>
 						</div>

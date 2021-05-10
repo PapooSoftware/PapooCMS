@@ -268,19 +268,35 @@ class pkalenderplugin_class
 		$this->get_user_gruppen();
 
 		if (!empty($this->checked->formSubmit_save_pcal)) {
-			$xsql['dbname'] = "plugin_kalender";
-			$xsql['praefix'] = "kalender";
-			$xsql['must'] = array("kalender_bezeichnung_des_kalenders");
-			$this->checked->kalender_lang_id=$this->cms->lang_back_content_id;
-			//$xsql['where_name'] = "config_id";
-			//$this->checked->kalender_id =1;
-			#$xsql['must'] = array("produkte_lang_internername");
-			$insert=$this->db_abs->insert($xsql);
-			if (is_numeric($insert['insert_id'])) {
+
+			$sql = sprintf("SELECT MAX(kalender_id) FROM %s",DB_PRAEFIX."plugin_kalender");
+			$max = $this->db->get_var($sql);
+			$max++;
+
+			$sql = sprintf("SELECT * FROM %s",
+				DB_PRAEFIX.'papoo_name_language');
+			//print_r($sql);
+			$result = $this->db->get_results($sql,ARRAY_A);
+
+			//Create for all possible languages...
+			foreach ($result as $lang) {
+				$xsql['dbname'] = "plugin_kalender";
+				$xsql['praefix'] = "kalender";
+				$xsql['must'] = array("kalender_bezeichnung_des_kalenders");
+				$this->checked->kalender_lang_id=$lang[$lang['lang_id']];
+				$this->checked->kalender_id = $max;
+				//$xsql['where_name'] = "config_id";
+				//$this->checked->kalender_id =1;
+				#$xsql['must'] = array("produkte_lang_internername");
+				$insert=$this->db_abs->insert($xsql);
+			}
+
+
+			if (is_numeric($max)) {
 				//Rechte setzen
-				$this->pcal_save_cal_rights($insert['insert_id']);
+				$this->pcal_save_cal_rights($max);
 				//Modul erstellen
-				$this->pcal_save_modul($insert['insert_id']);
+				$this->pcal_save_modul($max);
 				$this->reload("","saved");
 			}
 		}

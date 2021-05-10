@@ -1,0 +1,21 @@
+<?php 
+$this->content->template['plugin']['google_sitemap']['text'] = "<h2>El plugin de Google Sitemap</h2><p>Con este plugin puedes crear el sitemap de Google.</p>"; 
+$this->content->template['plugin']['google_sitemap']['change'] = "Cambio de los datos para el mapa del sitio de Google"; 
+$this->content->template['plugin']['google_sitemap']['text2'] = "Especifique con qué frecuencia se actualiza su página y qué prioridad deben tener las entradas:"; 
+$this->content->template['plugin']['google_sitemap']['changefreq'] = "Seleccione la frecuencia de cambio:"; 
+$this->content->template['plugin']['google_sitemap']['prioritaet'] = "Seleccione la prioridad:"; 
+$this->content->template['plugin']['google_sitemap']['eintragen'] = "Entre en"; 
+$this->content->template['plugin']['google_sitemap']['erlaeuterung'] = "Explicación:"; 
+$this->content->template['plugin']['google_sitemap']['text3'] = "<p><b>changefreq:</b> <br />La frecuencia con la que se espera que la página cambie. Este valor proporciona a los motores de búsqueda información general. No está necesariamente relacionado con la frecuencia con la que se rastrea la página. Los valores válidos son:<br />"; 
+$this->content->template['plugin']['google_sitemap']['text4'] = "El valor \"siempre\" se utiliza para describir documentos que cambian con cada acceso. El valor \"nunca\" se utiliza para describir las URL archivadas. <br /> <br /> El valor de esta etiqueta se toma como una pista, no como una orden. Los rastreadores de los motores de búsqueda tienen en cuenta esta información a la hora de tomar decisiones. Sin embargo, pueden rastrear las páginas etiquetadas como \"horarias\" con menos frecuencia que las horarias, o las páginas etiquetadas como \"anuales\" con más frecuencia que las anuales. Incluso las páginas marcadas como \"nunca\" son susceptibles de ser rastreadas por los rastreadores a determinados intervalos para detectar cambios inesperados en dichas páginas. <br /></p><p><b>Prioridad:</b> <br />La prioridad de esta URL sobre otras URLs en su sitio. Los valores válidos van de 0,0 a 1,0. Este valor no afecta a la comparación de sus páginas con las de otros sitios web, simplemente informa a los motores de búsqueda de las páginas que tienen mayor prioridad para usted. Las páginas se rastrean sobre esta base. <br /> <br /> La prioridad por defecto de una página es de 0,5. <br /> <br />La prioridad que asigne a una página no afecta a la posición de sus URLs en las páginas de resultados de un buscador. Esta información sólo es utilizada por los motores de búsqueda para seleccionar entre las URL del mismo sitio web. Así, el uso de esta etiqueta aumenta la probabilidad de que sus páginas más importantes aparezcan en el índice de búsqueda. <br /> <br /> Del mismo modo, asignar una alta prioridad a todas las URL de su sitio no es una buena idea. Dado que la prioridad es relativa, sólo se utiliza para seleccionar entre URLs dentro de su propio sitio. La prioridad de sus páginas no se compara con la prioridad de las páginas de otros sitios web. <br /></p>"; 
+$this->content->template['plugin']['google_sitemap']['ready'] = "Se ha creado el sitemap de Google."; 
+$this->content->template['plugin']['google_sitemap']['link'] = "Enlace para su cuenta de Google:"; 
+$this->content->template['plugin']['google_sitemap']['error'] = "No se ha podido crear ningún sitemap de Google."; 
+$this->content->template['plugin']['google_sitemap']['datei'] = "El archivo "; 
+$this->content->template['plugin']['google_sitemap']['datei2'] = " existe, pero no se ha podido sobrescribir. Por favor, cambie los derechos de acceso (permiso público de escritura) del archivo."; 
+$this->content->template['plugin']['google_sitemap']['gespeichert'] = "El mapa del sitio se ha guardado."; 
+$this->content->template['plugin']['google_sitemap']['ordner'] = "La carpeta "; 
+$this->content->template['plugin']['google_sitemap']['ordner2'] = " no se pudo escribir. Por favor, cambie los derechos de acceso vía ftp. O guarda un archivo vacío \" . $nombredelarchivo . \" en el directorio htdocs y cambiar los derechos de acceso (permiso público de escritura) del archivo."; 
+$this->content->template['plugin']['google_sitemap']['geaendert'] = "Las fechas han sido modificadas"; 
+
+ ?>

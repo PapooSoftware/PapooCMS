@@ -1,0 +1,82 @@
+{if $IS_ADMIN}{*<!-- Wir nur in der Admin angezeigt -->*}
+	{*<!-- Hier kommt der Kopf rein-->*}
+	{include file=head.inc.utf8.html}
+
+	<!-- Menrein-->
+	{include file=menu.inc.html}
+
+
+	<link rel="stylesheet" type="text/css" href="{$css_path}/backend.css" />
+	<link rel="stylesheet" type="text/css" href="{$css_path}/../../plugincreator/css/backend.css" />
+
+	<div class="artikel">
+		<h1 id="deepltrans_bersetzungen_starten" class="h1" >{$plugin_deepltrans_bersetzungen_starten}</h1>
+
+ <p id="deepltrans_hier_knnen_sie_die_bersetzung_der_einzelnen_elemente_starten" class="h1" >{$plugin_deepltrans_hier_knnen_sie_die_bersetzung_der_einzelnen_elemente_starten}</p>
+
+ <p id="deepltrans_die_bersetzung_erfolgt_in_alle_aktivierten_sprachen" class="h1" >{$plugin_deepltrans_die_bersetzung_erfolgt_in_alle_aktivierten_sprachen}</p>
+
+
+		<div class="results">
+			<p id="startresult"></p>
+		</div>
+		<div id="loaded" style="display:none;">FERTIG</div>
+
+
+
+ <h2 id="deepltrans_sprachdateien_bersetzen" class="h2" >{$plugin_deepltrans_sprachdateien_bersetzen}</h2>
+
+		<table class="outside  table table-striped table-hover">
+			<tr>
+				<th>{$plugin_deepltrans_sprache}</th>
+				<th> {$plugin_deepltrans_bersetzt}</th>
+				<th>{$plugin_deepltrans_hauptdatei} {$plugin_deepltrans_backend}</th>
+				<th> {$plugin_deepltrans_bersetzt}</th>
+				<th>{$plugin_deepltrans_hauptdatei} {$plugin_deepltrans_front}</th>
+				<th> {$plugin_deepltrans_bersetzt} </th>
+				<th>{$plugin_deepltrans_plugindateien} {$plugin_deepltrans_backend}</th>
+				<th> {$plugin_deepltrans_bersetzt} </th>
+				<th>{$plugin_deepltrans_plugindateien} {$plugin_deepltrans_front}</th>
+			</tr>
+			{foreach item=language from=$languages}
+			<tr>
+				<td>{$language.lang_long}</td>
+				<td>{$language.mainBackend} %</td>
+				<td>
+					{if $language.mainBackend < 99}
+					<a href="{$translink}&trans=main&what=backend&lang={$language.lang_short}" id="deepltrans_bersetzungen_jetzt_starten_bvar" class="btn btn-info" >{$plugin_deepltrans_bersetzungen_jetzt_starten_bvar}</a>
+					{else}
+					<p class="btn">{$translateddeepl}</p>
+					{/if}
+				</td>
+				<td>{$language.mainFrontend} %</td>
+				<td>{if $language.mainFrontend < 99}
+					<a href="{$translink}&trans=main&what=frontend&lang={$language.lang_short}" id="deepltrans_bersetzungen_jetzt_starten_bvar" class="btn btn-info" >{$plugin_deepltrans_bersetzungen_jetzt_starten_bvar}</a>
+					{else}
+					<p class="btn">{$translateddeepl}</p>
+					{/if}
+				</td>
+				<td>{$language.pluginBackend} %</td>
+				<td>
+					{if $language.pluginBackend < 99}
+					<a href="{$translink}&trans=plugins&what=backend&lang={$language.lang_short}" id="deepltrans_bersetzungen_jetzt_starten_bvar" class="btn btn-info" >{$plugin_deepltrans_bersetzungen_jetzt_starten_bvar}</a>
+					{else}
+					<p class="btn">{$translateddeepl}</p>
+					{/if}
+				</td>
+				<td>{$language.pluginFrontend} %</td>
+				<td>
+					{if $language.pluginFrontend < 99}
+					<a href="{$translink}&trans=plugins&what=frontend&lang={$language.lang_short}" id="deepltrans_bersetzungen_jetzt_starten_bvar" class="btn btn-info" >{$plugin_deepltrans_bersetzungen_jetzt_starten_bvar}</a>
+					{else}
+					<p class="btn">{$translateddeepl}</p>
+					{/if}
+				</td>
+			</tr>
+			{/foreach}
+		</table>
+	</div>
+
+	{*<!-- Hier kommt der Fuss rein-->*}
+	{include file=foot.inc.html}
+{/if}

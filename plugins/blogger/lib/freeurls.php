@@ -60,7 +60,7 @@ if (stristr($sprechende_url,"date/")) {
 	$this->checked->do_404="";
 }
 
-if (stristr($sprechende_url,"archiv/")) {
+if (stristr($sprechende_url,"archiv/") && !stristr($sprechende_url,"-archiv/")) {
 	$data_blog1=explode("archiv/",$sprechende_url);
 	$data_blog2=explode("-",$data_blog1['1']);
 
