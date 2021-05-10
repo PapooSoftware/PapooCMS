@@ -1,0 +1,123 @@
+{if $IS_ADMIN}{*<!-- Wird nur in der Admin angezeigt -->*}
+{*<!-- Hier kommt der Kopf rein-->*}
+{include file=head.inc.utf8.html}
+
+<!-- Menü kommt hier rein-->
+{include file=menu.inc.html}
+<link rel="stylesheet" type="text/css" href="{$css_path}/backend.css"/>
+<div class="artikel">
+	{if $ImportError == true}{$ImportErrortext}{/if}
+	{if $ArtikelImportStep2 == true}
+	<form method="post" id="formi" action="">
+		<fieldset>
+			<legend>{$message.plugin.artikel_import.mapping}</legend>
+			{foreach item=setting key=tabname from=$settings}
+				<input type="hidden" value="{$setting}" name="{$tabname}">
+			{/foreach}
+
+			<table>
+				<tr>
+					<th>{$message.plugin.artikel_import.file_fields}</th>
+					<th>{$message.plugin.artikel_import.article_fields}</th>
+					<th>{$message.plugin.artikel_import.assign}</th>
+				</tr>
+				<tr>
+					<td>
+						<label for="csv_tabelle">{$message.plugin.artikel_import.file_fields}</label><br/>
+						<select id="csv_tabelle" name="connectedFields[{$connectedFields|@count}][csv]" size="1">
+							<option value="">{$message.plugin.artikel_import.choose}</option>
+							{foreach item=feld key=tabname from=$csv_felder}
+								<option value="{$feld}">{$feld}</option>
+							{/foreach}
+						</select>
+					</td>
+					<td>
+						<label for="dat_tabelle">{$message.plugin.artikel_import.article_fields}</label><br/>
+						<select id="dat_tabelle" name="connectedFields[{$connectedFields|@count}][artikel]" size="1">
+							<option value="">{$message.plugin.artikel_import.choose}</option>
+							{foreach item=feld key=tabname from=$artikel_felder}
+								<option value="{$tabname}">{$feld}</option>
+							{/foreach}
+						</select>
+					</td>
+					<td>
+						<input name="startzuordnen" type="submit" value="{$message.plugin.artikel_import.assign}"/>
+					</td>
+				</tr>
+				{foreach item=feld key=tabname from=$connectedFields}
+				<tr>
+					<td>
+						{$feld.csv}
+						<input type="hidden" name="connectedFields[{$tabname|escape}][csv]" value="{$feld.csv|escape}">
+					</td>
+					<td>
+						{$artikelFelderTranslation[$feld.artikel]}
+						<input type="hidden" name="connectedFields[{$tabname|escape}][artikel]" value="{$feld.artikel|escape}">
+					</td>
+					<td>
+						<button name="deletezuordnung" type="submit" value="{$tabname|escape}">{$message.plugin.artikel_import.delete}</button>
+					</td>
+				</tr>
+				{/foreach}
+			</table>
+		</fieldset>
+		<fieldset>
+			<legend>{$message.plugin.artikel_import.import_start}</legend>
+			<input id="finishmapping" type="submit" class="submit_back" name="finishmapping" value="{$message.plugin.artikel_import.mapping_finish}" />
+		</fieldset>
+	</form>
+	{elseif $ArtikelImportDone == true}
+		<h2>{$message.plugin.artikel_import.import_finished}</h2>
+		<p>{$message.plugin.artikel_import.import_finished_intro_1}{$ImportedArticleNumber}{$message.plugin.artikel_import.import_finished_intro_2}</p>
+	{else}
+	<form method="post" id="formi" action="" enctype="multipart/form-data">
+		<fieldset>
+			<legend>{$message.plugin.artikel_import.settings}</legend>
+			<label for="encodingType">{$message.plugin.artikel_import.encoding_lable}</label>
+			<select name="encodingType" id="encodingType">
+				<option value="utf8">{$message.plugin.artikel_import.utf8}</option>
+				<option value="iso">{$message.plugin.artikel_import.iso}</option>
+			</select>
+
+			<label for="fieldsNumber">{$message.plugin.artikel_import.start_lable}</label>
+			<input name="fieldsNumber" id="fieldsNumber" value="1" type="number">
+
+			<label for="delimiter">{$message.plugin.artikel_import.delimiter_lable}</label>
+			<select name="delimiter" id="delimiter">
+				<option value="tab">{$message.plugin.artikel_import.tab}</option>
+				<option value="comma">{$message.plugin.artikel_import.comma}</option>
+				<option value="semicolon">{$message.plugin.artikel_import.semicolon}</option>
+				<option value="space">{$message.plugin.artikel_import.space}</option>
+			</select>
+
+			<label for="menueID">{$message.plugin.artikel_import.menu_lable}</label>
+			<select name="menueID" id="menueID">
+				{foreach item=menu key=tabname from=$menues}
+					<option value="{$menu.menuid_id}">[{$menu.menuid_id}] {$menu.menuname}</option>
+				{/foreach}
+			</select>
+
+			<!-- FIXME: Not implemented
+			<label for="languageID">{$message.plugin.artikel_import.lang_lable}</label>
+			<select name="languageID" id="languageID">
+				{foreach item=language key=tabname from=$languages}
+					<option value="{$language.lang_id}">{$language.lang_long}[{$language.lang_short}]</option>
+				{/foreach}
+			</select>
+			-->
+		</fieldset>
+		<fieldset>
+			<legend>{$message.plugin.artikel_import.file_input}</legend>
+			<label for="importFile">{$message.plugin.artikel_import.the_document}</label>
+			<input name="importFile" id="importFile" value="" type="file">
+		</fieldset>
+		<fieldset>
+			<legend>{$message.plugin.artikel_import.import_start}</legend>
+			<input type="submit" class="submit_back" name="startupload" value="{$message.plugin.artikel_import.file_upload}" />
+		</fieldset>
+	</form>
+	{/if}
+</div>
+{*<!-- Hier kommt der Fuss rein-->*}
+{include file=foot.inc.html}
+{/if}

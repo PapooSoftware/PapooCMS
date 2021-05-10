@@ -1,0 +1,32 @@
+<?php
+
+#start#
+$this->content->template['message']['plugin']['artikel_import'] = array(
+	"main_header" => "Das Artikel-Import Plugin",
+	"main_description" => "Sie können hier Artikel-Daten als CSV importieren. Jedes Feld wird dabei genau beim Import zugewiesen",
+	"mapping" => "Mapping",
+	"file_fields" => "Felder aus der Datei",
+	"article_fields" => "Felder für Artikel",
+	"assign" => "Zuordnen",
+	"choose" => "(auswählen)",
+	"delete" => "Entfernen",
+	"import_start" => "Import starten",
+	"mapping_finish" => "Mapping abschließen",
+	"import_finished" => "Import abgeschlossen",
+	"import_finished_intro_1" => "Es wurden ", "import_finished_intro_2" => " Artikel importiert.",
+	"file_upload" => "Datei hochladen",
+	"the_document" => "Das Dokument:",
+	"file_input" => "Eingabe der Datei:",
+	"lang_lable" => "Sprache in die die Artikel importiert werden",
+	"menu_lable" => "Menüpunkt in den die Artikel importiert werden",
+	"delimiter_lable" => "Trennzeichen im CSV",
+	"start_lable" => "Zeilen-Start der Feldnamen",
+	"encoding_lable" => "Encoding Typ des CSVs",
+	"tab" => "Tab",
+	"comma" => "Komma",
+	"semicolon" => "Semikolon",
+	"space" => "Leerzeichen",
+	"utf8" => "UTF-8",
+	"iso" => "ISO-8859-1",
+	"settings" => "Einstellungen",
+);
