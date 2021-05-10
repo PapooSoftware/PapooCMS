@@ -2034,13 +2034,6 @@ $this->content->template['plugin_shop_fehlt_eintrag']='<strong class=&quot;error
 $this->content->template['plugin_shop_fehlt_eintrag_email_exist']='<strong class=&quot;error_strong&quot;> - E-Mail-Adresse existiert schon - </strong>';
 $this->content->template['menu_publish_yn'] = 'Veröffentlichen ';
 $this->content->template['menu_publish_yn_text'] = 'Erst wenn ein Menüpunkt veröffentlicht wird, greifen auch die obigen Rechte Einstellungen - so wie bei den Artikeln auch. Standard = Veröffentlicht.';
-$this->content->template['style_reset_text'] = 'Layout automatisch einrichten. (Achtung: Entfernt alle Inhalte aus der Datenbank.)';
-$this->content->template['style_reset_msg_heading'] = 'nobr:<h1>Layout zur&uuml;cksetzen</h1>';
-$this->content->template['style_reset_msg_warning_1'] = '<p class="danger">Achtung: Sie sind dabei, Ihre Installation auf die Werkseinstellungen des Styles';
-$this->content->template['style_reset_msg_warning_2'] = 'zurückzusetzen; dabei gehen sämtliche Änderungen, die Sie vorgenommen haben UNWIDERRUFLICH verloren.</p><p class="danger">Bitte seien Sie sich der Konsequenzen dieses Schrittes bewusst.</p><p class="danger">Nehmen Sie bitte vorher unbedingt eine Datenbanksicherung unter Plugins &gt; Entwickler-Werkzeuge &gt; Datensicherung vor.</p><p>Das aktuelle Passwort des Benutzers root bleibt erhalten.</p><p>Bitte klicken Sie auf Layout zur&uuml;cksetzen, um die Initialisierung des Styles durchzuführen.</p>';
-$this->content->template['style_reset'] = 'Layout zur&uuml;cksetzen';
-$this->content->template['style_reset_done'] = 'Die Datenbank wurde zurückgesetzt.';
-$this->content->template['style_reset_no_sql'] = 'Der ausgew&auml;hlte Style verf&uuml;gt &uuml;ber keine Wiederherstellungsdatei.';
 $this->content->template['delete_selection'] = 'Ausgewählte Bilder löschen';
 $this->content->template['delete_selected_files'] = 'Ausgewählte Dateien löschen';
 $this->content->template['content_deleted'] = 'Inhalt gelöscht';

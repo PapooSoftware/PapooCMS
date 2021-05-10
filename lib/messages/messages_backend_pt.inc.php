@@ -950,8 +950,8 @@ $this->content->template['message_813'] = "Captura de tela (clique para ampliar)
 $this->content->template['message_814'] = "Nome"; 
 $this->content->template['message_815'] = "Padrão?"; 
 $this->content->template['message_816'] = "Ativo (Sim/Não)"; 
-$this->content->template['message_817'] = "Faz disso o padrão."; 
-$this->content->template['message_818'] = "O estilo por defeito foi alterado."; 
+$this->content->template['message_817'] = "Faz disso o padrão.";
+$this->content->template['message_818'] = "O estilo por defeito foi alterado.";
 $this->content->template['message_819'] = "Despejar de uma versão mais antiga"; 
 $this->content->template['message_820'] = "restore.sql a partir de uma versão mais antiga"; 
 $this->content->template['message_821'] = "Mostrar todos os itens do menu ao mesmo tempo? (Útil para menus flyout via JS)"; 
@@ -1178,14 +1178,7 @@ $this->content->template['upload_error_message'] = "O arquivo não pôde ser car
 $this->content->template['plugin_shop_fehlt_eintrag'] = "<strong class=&quot;error_strong&quot;> - Entrada em falta - </strong>"; 
 $this->content->template['plugin_shop_fehlt_eintrag_email_exist'] = "<strong class=&quot;error_strong&quot;> - O endereço de e-mail já existe - </strong>"; 
 $this->content->template['menu_publish_yn'] = "Publique "; 
-$this->content->template['menu_publish_yn_text'] = "Apenas quando um item do menu é publicado, as configurações de direitos acima entram em vigor - tal como acontece com os artigos. Predefinição = Publicado."; 
-$this->content->template['style_reset_text'] = "Configurar o layout automaticamente. (Atenção: Retira todo o conteúdo da base de dados)"; 
-$this->content->template['style_reset_msg_heading'] = "nobr:<h1>:Reiniciar layout</h1>"; 
-$this->content->template['style_reset_msg_warning_1'] = "<p class=\"danger\">Atenção: Você está prestes a reiniciar sua instalação para as configurações de fábrica do estilo"; 
-$this->content->template['style_reset_msg_warning_2'] = "reset; ao fazê-lo, quaisquer alterações que você tenha feito serão IMEDIATAMENTE perdidas.</p><p class=\"danger\">Por favor, esteja ciente das consequências deste passo.</p><p class=\"danger\">Certifique-se de fazer um backup do banco de dados em Plugins &gt; Ferramentas do Desenvolvedor &gt; Backup antes de fazer isso.</p><p>A senha atual do usuário root será mantida.</p><p>Por favor clique em Reset Layout para realizar a inicialização do estilo.</p>"; 
-$this->content->template['style_reset'] = "Reiniciar o layout"; 
-$this->content->template['style_reset_done'] = "A base de dados foi reiniciada."; 
-$this->content->template['style_reset_no_sql'] = "O Estilo selecionado não tem um arquivo de recuperação."; 
+$this->content->template['menu_publish_yn_text'] = "Apenas quando um item do menu é publicado, as configurações de direitos acima entram em vigor - tal como acontece com os artigos. Predefinição = Publicado.";
 $this->content->template['delete_selection'] = "Apagar imagens selecionadas"; 
 $this->content->template['delete_selected_files'] = "Eliminar ficheiros seleccionados"; 
 $this->content->template['content_deleted'] = "Conteúdo eliminado"; 

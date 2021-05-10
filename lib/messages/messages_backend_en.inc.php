@@ -1555,15 +1555,7 @@ $this->content->template['upload_error_message'] = "Could not upload the file. P
 $this->content->template['plugin_shop_fehlt_eintrag'] = "<strong class=&quot;error_strong&quot;> - missing entry - </strong>"; 
 $this->content->template['plugin_shop_fehlt_eintrag_email_exist'] = "<strong class=&quot;error_strong&quot;> - email address already exists - </strong>"; 
 $this->content->template['menu_publish_yn'] = "Publish "; 
-$this->content->template['menu_publish_yn_text'] = "Only if the menu item is published, the upper settings will apply - similarly to the articles. default = published."; 
-$this->content->template['style_reset_text'] = "Initialize layout automatically. (Warning: This action removes all non default database entries.)"; 
-$this->content->template['style_reset_msg_heading'] = "nobr:<h1>Reset layout</h1>"; 
-$this->content->template['style_reset_msg_warning_1'] = "<p class=\"danger\">Warning: You're about to reset your copy of papoo to the defaults of the style "; 
-$this->content->template['style_reset_msg_warning_2'] = "; all changes you've made so far will be lost.</p>
-<p>Please click on reset layout to continue.</p>"; 
-$this->content->template['style_reset'] = "reset layout"; 
-$this->content->template['style_reset_done'] = "The database has been reset."; 
-$this->content->template['style_reset_no_sql'] = "The selected style has no recovery file."; 
+$this->content->template['menu_publish_yn_text'] = "Only if the menu item is published, the upper settings will apply - similarly to the articles. default = published.";
 $this->content->template['delete_selection'] = "Delete selection"; 
 $this->content->template['delete_selected_files'] = "Delete selected files"; 
 $this->content->template['content_deleted'] = "Content deleted"; 

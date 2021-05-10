@@ -1178,14 +1178,7 @@ $this->content->template['upload_error_message'] = "文件不能被上传。它�
 $this->content->template['plugin_shop_fehlt_eintrag'] = "<strong class=&quot;error_strong&quot;> - 缺少的条目 - </strong>"; 
 $this->content->template['plugin_shop_fehlt_eintrag_email_exist'] = "<strong class=&quot;error_strong&quot;> - 电子邮件地址已经存在- </strong>"; 
 $this->content->template['menu_publish_yn'] = "发布 "; 
-$this->content->template['menu_publish_yn_text'] = "只有当一个菜单项被发布时，上述权利设置才会生效--就像对文章一样。默认=发布。"; 
-$this->content->template['style_reset_text'] = "自动设置布局。注意：删除数据库中的所有内容）。"; 
-$this->content->template['style_reset_msg_heading'] = "nobr:<h1>:重置布局</h1>"; 
-$this->content->template['style_reset_msg_warning_1'] = "<p class=\"danger\">注意：你将把你的安装重置为出厂设置的样式。"; 
-$this->content->template['style_reset_msg_warning_2'] = "重置；这样做，你所做的任何改变都会立即消失。</p><p class=\"danger\">请注意这一步骤的后果。</p><p class=\"danger\">在这样做之前，请确保在插件&gt;开发工具&gt;备份下进行数据库备份。</p><p>根用户的当前密码将被保留。</p><p>请点击重置布局来执行样式的初始化。</p>"; 
-$this->content->template['style_reset'] = "重置布局"; 
-$this->content->template['style_reset_done'] = "数据库已被重置。"; 
-$this->content->template['style_reset_no_sql'] = "所选样式没有恢复文件。"; 
+$this->content->template['menu_publish_yn_text'] = "只有当一个菜单项被发布时，上述权利设置才会生效--就像对文章一样。默认=发布。";
 $this->content->template['delete_selection'] = "删除选定的图像"; 
 $this->content->template['delete_selected_files'] = "删除选定的文件"; 
 $this->content->template['content_deleted'] = "内容删除"; 

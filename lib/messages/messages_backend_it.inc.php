@@ -1245,14 +1245,7 @@ $this->content->template['upload_error_message'] = "Il file non può essere cari
 $this->content->template['plugin_shop_fehlt_eintrag'] = "<strong class=&quot;error_strong&quot;> - Ingresso mancante - </strong>"; 
 $this->content->template['plugin_shop_fehlt_eintrag_email_exist'] = "<strong class=&quot;error_strong&quot;> - L'indirizzo e-mail esiste già - </strong>"; 
 $this->content->template['menu_publish_yn'] = "Pubblica "; 
-$this->content->template['menu_publish_yn_text'] = "Solo quando un elemento del menu viene pubblicato, le impostazioni dei diritti di cui sopra hanno effetto - proprio come per gli articoli. Predefinito = Pubblicato."; 
-$this->content->template['style_reset_text'] = "Imposta automaticamente il layout. (Attenzione: rimuove tutti i contenuti dal database)"; 
-$this->content->template['style_reset_msg_heading'] = "nobr:<h1>:Reset layout</h1>"; 
-$this->content->template['style_reset_msg_warning_1'] = "<p class=\"danger\">Attenzione: state per resettare la vostra installazione alle impostazioni di fabbrica dello stile"; 
-$this->content->template['style_reset_msg_warning_2'] = "resettare; così facendo, tutte le modifiche che avete fatto saranno IMMEDIATAMENTE perse.</p><p class=\"danger\">Si prega di essere consapevoli delle conseguenze di questo passo.</p><p class=\"danger\">Assicurati di fare un backup del database sotto Plugins &gt; Developer Tools &gt; Backup prima di farlo.</p><p>La password corrente dell'utente root verrà mantenuta.</p><p>Clicca su Reset Layout per eseguire l'inizializzazione dello stile.</p>"; 
-$this->content->template['style_reset'] = "Ripristinare il layout"; 
-$this->content->template['style_reset_done'] = "Il database è stato resettato."; 
-$this->content->template['style_reset_no_sql'] = "Lo stile selezionato non ha un file di recupero."; 
+$this->content->template['menu_publish_yn_text'] = "Solo quando un elemento del menu viene pubblicato, le impostazioni dei diritti di cui sopra hanno effetto - proprio come per gli articoli. Predefinito = Pubblicato.";
 $this->content->template['delete_selection'] = "Elimina le immagini selezionate"; 
 $this->content->template['delete_selected_files'] = "Elimina i file selezionati"; 
 $this->content->template['content_deleted'] = "Contenuto cancellato"; 

@@ -1178,14 +1178,7 @@ $this->content->template['upload_error_message'] = "El archivo no pudo ser carga
 $this->content->template['plugin_shop_fehlt_eintrag'] = "<strong class=&quot;error_strong&quot;> - Falta la entrada - </strong>"; 
 $this->content->template['plugin_shop_fehlt_eintrag_email_exist'] = "<strong class=&quot;error_strong&quot;> - La dirección de correo electrónico ya existe - </strong>"; 
 $this->content->template['menu_publish_yn'] = "Publicar "; 
-$this->content->template['menu_publish_yn_text'] = "Sólo cuando se publica un elemento del menú, la configuración de los derechos anteriores surte efecto, al igual que con los artículos. Por defecto = Publicado."; 
-$this->content->template['style_reset_text'] = "Configurar el diseño automáticamente. (Atención: elimina todo el contenido de la base de datos)"; 
-$this->content->template['style_reset_msg_heading'] = "nobr:<h1>:Restablecer diseño</h1>"; 
-$this->content->template['style_reset_msg_warning_1'] = "<p class=\"danger\">Atención: Está a punto de restablecer la configuración de fábrica del estilo de su instalación"; 
-$this->content->template['style_reset_msg_warning_2'] = "reiniciar; al hacerlo, cualquier cambio que haya realizado se perderá INMEDIATAMENTE.</p><p class=\"danger\">Tenga en cuenta las consecuencias de este paso.</p><p class=\"danger\">Por favor, asegúrese de hacer una copia de seguridad de la base de datos en Plugins &gt; Developer Tools &gt; Backup antes de hacerlo.</p><p>Se mantendrá la contraseña actual del usuario root.</p><p>Por favor, haga clic en Reiniciar Diseño para realizar la inicialización del estilo.</p>"; 
-$this->content->template['style_reset'] = "Restablecer la disposición"; 
-$this->content->template['style_reset_done'] = "La base de datos se ha restablecido."; 
-$this->content->template['style_reset_no_sql'] = "El Estilo seleccionado no tiene un archivo de recuperación."; 
+$this->content->template['menu_publish_yn_text'] = "Sólo cuando se publica un elemento del menú, la configuración de los derechos anteriores surte efecto, al igual que con los artículos. Por defecto = Publicado.";
 $this->content->template['delete_selection'] = "Eliminar las imágenes seleccionadas"; 
 $this->content->template['delete_selected_files'] = "Eliminar los archivos seleccionados"; 
 $this->content->template['content_deleted'] = "Contenido eliminado"; 

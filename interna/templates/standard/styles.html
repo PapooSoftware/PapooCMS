@@ -27,52 +27,6 @@
 				<h1 id="styles_bersicht_der_installierten_und_aktiven_layouts" class="h1" >{$system_styles_bersicht_der_installierten_und_aktiven_layouts}</h1>
 				{include file=sub_templates/css_styles_liste.html}
 			{/if}
-			{if $styles.template_weiche == "STYLE_RESET"}
-				{if $css_themessage}
-				<div class="message">{$css_themessage}</div>
-				{/if}
-				{$style_reset_msg_heading}
-				{$style_reset_msg_warning_1} {$styles.style_data.style_name} {$style_reset_msg_warning_2}
-				<form action="" method="post" id="style_reset_form" >
-					<input type="submit" id="style_reset_form_submit" name="style_reset_form_submit" value="{$style_reset}" class="btn btn-danger" disabled />
-				</form>
-				<script>
-					{literal}
-					(function() {
-						"use strict";
-						var wait = 15; // Wie viele Sekunden wird gewartet
-						var value = "";
-						var button = null;
-						var interval = null;
-						window.addEventListener("load", function () {
-							button = document.getElementById("style_reset_form_submit");
-							value = button.value;
-							button.value += " (Noch " + wait + " Sekunden)";
-							interval = setInterval(function () {
-								if(--wait > 0){
-									button.value = value + " (Noch " + wait + " Sekunden)";
-								}
-								else {
-									button.value = value;
-									button.disabled = false;
-									clearInterval(interval);
-								}
-							}, 1000);
-							button.addEventListener("click", function (event) {
-								event = event || window.event;
-								if(!confirm("Dies ist die letzte Warnung. Mit der Bestätigung dieses Dialogs wird der komplette Inhalt Ihrer Datenbank zurückgesetzt und geht somit unwiderruflich verloren.")) {
-									event.preventDefault();
-								}
-							}, false);
-						}, false);
-					})();
-					{/literal}
-				</script>
-			{elseif $styles.template_weiche == "STYLE_RESET_DONE"}
-				{if $css_themessage}
-					<div class="message">{$css_themessage}</div>
-				{/if}
-			{/if}
 			{if ($styles.template_weiche == "BEREICHE_LISTE") OR ($styles.template_weiche == "MODULE_LISTE")}
 				<h1 id="styles_bearbeiten_sie_hier_die_daten_des_layouts" class="h1" >
 					{$system_styles_bearbeiten_sie_hier_die_daten_des_layouts}: "{$styles.style_data.style_name}"

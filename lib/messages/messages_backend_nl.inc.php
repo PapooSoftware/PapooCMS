@@ -1178,14 +1178,7 @@ $this->content->template['upload_error_message'] = "Het bestand kon niet worden 
 $this->content->template['plugin_shop_fehlt_eintrag'] = "<strong class=&quot;error_strong&quot;> - Ingang ontbreekt - </strong>"; 
 $this->content->template['plugin_shop_fehlt_eintrag_email_exist'] = "<strong class=&quot;error_strong&quot;> - E-mail adres bestaat al - </strong>"; 
 $this->content->template['menu_publish_yn'] = "Publiceren "; 
-$this->content->template['menu_publish_yn_text'] = "Pas wanneer een menu-item wordt gepubliceerd, worden de bovenstaande rechteninstellingen van kracht - net als bij de artikelen. Standaard = Gepubliceerd."; 
-$this->content->template['style_reset_text'] = "Opmaak automatisch. (Let op: Verwijdert alle inhoud uit de database)"; 
-$this->content->template['style_reset_msg_heading'] = "nobr:<h1>:Reset opmaak</h1>"; 
-$this->content->template['style_reset_msg_warning_1'] = "<p class=\"danger\">Attentie: U staat op het punt uw installatie terug te zetten naar de fabrieksinstellingen van de stijl"; 
-$this->content->template['style_reset_msg_warning_2'] = "resetten; als u dat doet, gaan alle wijzigingen die u hebt aangebracht ONMIDDELLIJK verloren.</p><p class=\"danger\">Wees u bewust van de gevolgen van deze stap.</p><p class=\"danger\">Zorg ervoor dat u een database back-up maakt onder Plugins &gt; Developer Tools &gt; Back-up voordat u dit doet.</p><p>Het huidige wachtwoord van de root-gebruiker wordt bewaard.</p><p>Klik op Reset Layout om de initialisatie van de stijl uit te voeren.</p>"; 
-$this->content->template['style_reset'] = "Opnieuw instellen"; 
-$this->content->template['style_reset_done'] = "De database is opnieuw ingesteld."; 
-$this->content->template['style_reset_no_sql'] = "De geselecteerde Style heeft geen herstelbestand."; 
+$this->content->template['menu_publish_yn_text'] = "Pas wanneer een menu-item wordt gepubliceerd, worden de bovenstaande rechteninstellingen van kracht - net als bij de artikelen. Standaard = Gepubliceerd.";
 $this->content->template['delete_selection'] = "Verwijder geselecteerde beelden"; 
 $this->content->template['delete_selected_files'] = "Verwijder geselecteerde bestanden"; 
 $this->content->template['content_deleted'] = "Inhoud verwijderd"; 

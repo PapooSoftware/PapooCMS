@@ -1289,14 +1289,7 @@ $this->content->template['upload_error_message'] = "Le fichier n'a pas pu être 
 $this->content->template['plugin_shop_fehlt_eintrag'] = "<strong class=&quot;error_strong&quot;> - Entrée manquante - </strong>"; 
 $this->content->template['plugin_shop_fehlt_eintrag_email_exist'] = "<strong class=&quot;error_strong&quot;> - L'adresse électronique existe déjà - </strong>"; 
 $this->content->template['menu_publish_yn'] = "Publier "; 
-$this->content->template['menu_publish_yn_text'] = "Ce n'est que lorsqu'un élément de menu est publié que les paramètres de droits ci-dessus prennent effet - tout comme pour les articles. Par défaut = Publié."; 
-$this->content->template['style_reset_text'] = "Mise en page automatique. (Attention : supprime tout le contenu de la base de données)"; 
-$this->content->template['style_reset_msg_heading'] = "nobr:<h1>:Réinitialisation de la mise en page</h1>"; 
-$this->content->template['style_reset_msg_warning_1'] = "<p class=\"danger\">Attention : vous êtes sur le point de réinitialiser votre installation aux paramètres d'usine du style"; 
-$this->content->template['style_reset_msg_warning_2'] = "réinitialiser ; ce faisant, tous les changements que vous avez effectués seront IMMÉDIATEMENT perdus.</p><p class=\"danger\">Veuillez être conscient des conséquences de cette étape.</p><p class=\"danger\">Veillez à effectuer une sauvegarde de la base de données sous Plugins &gt; Developer Tools &gt; Backup avant de le faire.</p><p>Le mot de passe actuel de l'utilisateur root sera conservé.</p><p>Veuillez cliquer sur Réinitialiser la mise en page pour effectuer l'initialisation du style.</p>"; 
-$this->content->template['style_reset'] = "Réinitialisation de la mise en page"; 
-$this->content->template['style_reset_done'] = "La base de données a été réinitialisée."; 
-$this->content->template['style_reset_no_sql'] = "Le style sélectionné n'a pas de fichier de récupération."; 
+$this->content->template['menu_publish_yn_text'] = "Ce n'est que lorsqu'un élément de menu est publié que les paramètres de droits ci-dessus prennent effet - tout comme pour les articles. Par défaut = Publié.";
 $this->content->template['delete_selection'] = "Supprimer les images sélectionnées"; 
 $this->content->template['delete_selected_files'] = "Supprimer les fichiers sélectionnés"; 
 $this->content->template['content_deleted'] = "Contenu supprimé"; 
