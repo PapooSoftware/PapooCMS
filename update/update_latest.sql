@@ -37,3 +37,9 @@ ALTER TABLE `XXX_papoo_user` ADD `user_tel_abends` varchar(255) NULL; ##b_dump##
 ALTER TABLE `XXX_papoo_user` ADD `user_tel_tags` varchar(255) NULL; ##b_dump##
 ALTER TABLE `XXX_papoo_user` ADD `user_tel_kunden_nr` varchar(255) NULL; ##b_dump##
 ALTER TABLE `XXX_papoo_user` ADD `user_merkzettel` LONGTEXT NULL; ##b_dump##
+
+ALTER TABLE `XXX_papoo_daten` ADD `smtp_active` tinyint(1) NOT NULL DEFAULT 0; ##b_dump##
+ALTER TABLE `XXX_papoo_daten` ADD `smtp_host` varchar(255) NOT NULL DEFAULT ''; ##b_dump##
+ALTER TABLE `XXX_papoo_daten` ADD `smtp_port` smallint UNSIGNED NOT NULL DEFAULT 0; ##b_dump##
+ALTER TABLE `XXX_papoo_daten` ADD `smtp_user` varchar(255) NOT NULL DEFAULT ''; ##b_dump##
+ALTER TABLE `XXX_papoo_daten` ADD `smtp_pass` varchar(255) NOT NULL DEFAULT ''; ##b_dump##

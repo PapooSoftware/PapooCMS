@@ -1302,6 +1302,17 @@ $this->content->template['delete_selected_files'] = "Supprimer les fichiers sél
 $this->content->template['content_deleted'] = "Contenu supprimé"; 
 $this->content->template['process_canceled'] = "L'opération a été annulée"; 
 $this->content->template['abort_process'] = "Procédure d'annulation"; 
-$this->content->template['label__rename_uploaded_file'] = "Conserver l'ancien nom de fichier"; 
+$this->content->template['label__rename_uploaded_file'] = "Conserver l'ancien nom de fichier";
+$this->content->template['message']['stamm']['smtp'] = [
+	'title' => "Paramètres SMTP (Adresse électronique de l'administrateur uniquement)",
+	'activate' => "Activez le SMTP pour l'envoi d'adresse électronique",
+	'host' => "Nom d'hôte",
+	'port' => "Port",
+	'user' => "Identifiant",
+	'password' => "Mot de passe",
+	'nosmtp' => "Ne pas utiliser le SMTP",
+	'customsmtp' => "Utiliser des paramètres SMTP personnalisés",
+	'system' => "Utiliser les paramètres du système"
+];
 
  ?>

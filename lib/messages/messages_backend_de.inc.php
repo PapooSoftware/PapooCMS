@@ -2055,4 +2055,15 @@ $this->content->template['message_user_fax']="Fax";
 $this->content->template["ergaenzen"] ='<span class="error">Bitte ergänzen</span>';
 
 $this->content->template['auswaehlen']='auswählen';
+$this->content->template['message']['stamm']['smtp'] = [
+	'title' => "SMTP-Einstellungen (Nur für Admin E-Mail-Adresse)",
+	'activate' => "SMTP für den E-Mail-Versand aktivieren",
+	'host' => "Hostname",
+	'port' => "Port",
+	'user' => "Benutzer",
+	'password' => "Passwort",
+	'nosmtp' => "Kein SMTP Verwenden",
+	'customsmtp' => "Benutzerdefinierte SMTP-Einstellungen verwenden",
+	'system' => "System-Einstellungen verwenden"
+];
 #start#s
