@@ -49,22 +49,20 @@
 	<script>
 		{literal}
 		document.addEventListener('DOMContentLoaded', function() {
-			let radios = document.forms["formi"].elements["form_manager_smtp_settings_type"];
-			let smtpSettings = [
-				document.getElementById('form_manager_smtp_host'), document.getElementById('form_manager_smtp_port'),
-				document.getElementById('form_manager_smtp_user'), document.getElementById('form_manager_smtp_pass')
-			];
-
-			for(let i = 0, max = radios.length; i < max; i++) {
-				radios[i].onclick = function() {
-					if(this.value === 'smtp') {
-						smtpSettings.forEach(element => element.readOnly = false);
-					}
-					else {
-						smtpSettings.forEach(element => element.readOnly = true);
-					}
+			document.forms["formi"].elements["form_manager_mail_settings_type"].forEach(element => element.addEventListener('click', function() {
+				if (this.value === 'smtp') {
+					document.getElementById('form_manager_smtp_host').readOnly = false;
+					document.getElementById('form_manager_smtp_port').readOnly = false;
+					document.getElementById('form_manager_smtp_user').readOnly = false;
+					document.getElementById('form_manager_smtp_pass').readOnly = false;
 				}
-			}
+				else {
+					document.getElementById('form_manager_smtp_host').readOnly = true;
+					document.getElementById('form_manager_smtp_port').readOnly = true;
+					document.getElementById('form_manager_smtp_user').readOnly = true;
+					document.getElementById('form_manager_smtp_pass').readOnly = true;
+				}
+			}));
 		})
 		{/literal}
 	</script>
@@ -77,14 +75,14 @@
 
 		<div class="clear">&nbsp;</div>
 
-		<input type="radio" id="form_manager_smtp_settings_type_sendmail" name="form_manager_smtp_settings_type" value="sendmail" {if $form_manager_smtp_settings_type == 'sendmail'}checked{/if} />
-		<label for="form_manager_smtp_settings_type_sendmail" style="width:50%;">{$message.stamm.smtp.nosmtp}</label>
+		<input type="radio" id="form_manager_mail_settings_type_sendmail" name="form_manager_mail_settings_type" value="sendmail" {if $form_manager_mail_settings_type == 'sendmail'}checked{/if} />
+		<label for="form_manager_mail_settings_type_sendmail" style="width:50%;">{$message.stamm.smtp.nosmtp}</label>
 
-		<input type="radio" id="form_manager_smtp_settings_type_smtp" name="form_manager_smtp_settings_type" value="smtp" {if $form_manager_smtp_settings_type == 'smtp'}checked{/if} />
-		<label for="form_manager_smtp_settings_type_smtp" style="width:50%;">{$message.stamm.smtp.customsmtp}</label>
+		<input type="radio" id="form_manager_mail_settings_type_smtp" name="form_manager_mail_settings_type" value="smtp" {if $form_manager_mail_settings_type == 'smtp'}checked{/if} />
+		<label for="form_manager_mail_settings_type_smtp" style="width:50%;">{$message.stamm.smtp.customsmtp}</label>
 
-		<input type="radio" id="form_manager_smtp_settings_type_system" name="form_manager_smtp_settings_type" value="system" {if $form_manager_smtp_settings_type == 'system'}checked{/if} />
-		<label for="form_manager_smtp_settings_type_system" style="width:50%;">{$message.stamm.smtp.system}</label>
+		<input type="radio" id="form_manager_mail_settings_type_system" name="form_manager_mail_settings_type" value="system" {if $form_manager_mail_settings_type == 'system'}checked{/if} />
+		<label for="form_manager_mail_settings_type_system" style="width:50%;">{$message.stamm.smtp.system}</label>
 
 		<div class="clear">&nbsp;</div>
 

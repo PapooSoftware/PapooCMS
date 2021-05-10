@@ -21,14 +21,14 @@ CREATE TABLE `XXX_papoo_form_manager` (
   `form_manager_erstellt` int(11) NOT NULL,
   `form_manager_geaendert` int(11) NOT NULL,
   `form_manager_sender_mail` varchar(255) NOT NULL DEFAULT '',
-  `form_manager_smtp_settings_type` varchar(255) NOT NULL DEFAULT 'system',
+  `form_manager_mail_settings_type` varchar(255) NOT NULL DEFAULT 'system',
   `form_manager_smtp_host` varchar(255) NOT NULL DEFAULT '',
   `form_manager_smtp_port` smallint UNSIGNED NOT NULL DEFAULT 0,
   `form_manager_smtp_user` varchar(255) NOT NULL DEFAULT '',
   `form_manager_smtp_pass` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`form_manager_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ; ##b_dump##
-INSERT INTO `XXX_papoo_form_manager` SET `form_manager_id`='2', `form_manager_email`='', `form_manager_name`='Kontakt', `form_manager_anzeig_select_email`='', `form_manager_lang`='', `form_manager_antwort_html`='', `form_manager_antwort_email`='', `form_manager_antwort_yn`='0', `form_manager_saleforce_yn`='', `form_manager_saleforce_oid`='', `form_manager_saleforce_returl`='', `form_manager_saleforce_action`='', `form_manager_saleforce_debug`='', `form_manager_saleforce_debug_email`='', `form_manager_loesch_dat1`='999', `form_manager_loesch_dat2`='999', `form_manager_modul_id`='93', `form_manager_kategorie`='0', `form_manager_erstellt`='0', `form_manager_geaendert`='1430743789', `form_manager_sender_mail`='test@kobos.de', `form_manager_smtp_settings_type`='system', `form_manager_smtp_host`='', `form_manager_smtp_port`=0, `form_manager_smtp_user`='', `form_manager_smtp_pass`=''  ; ##b_dump##
+INSERT INTO `XXX_papoo_form_manager` SET `form_manager_id`='2', `form_manager_email`='', `form_manager_name`='Kontakt', `form_manager_anzeig_select_email`='', `form_manager_lang`='', `form_manager_antwort_html`='', `form_manager_antwort_email`='', `form_manager_antwort_yn`='0', `form_manager_saleforce_yn`='', `form_manager_saleforce_oid`='', `form_manager_saleforce_returl`='', `form_manager_saleforce_action`='', `form_manager_saleforce_debug`='', `form_manager_saleforce_debug_email`='', `form_manager_loesch_dat1`='999', `form_manager_loesch_dat2`='999', `form_manager_modul_id`='93', `form_manager_kategorie`='0', `form_manager_erstellt`='0', `form_manager_geaendert`='1430743789', `form_manager_sender_mail`='test@kobos.de', `form_manager_mail_settings_type`='system', `form_manager_smtp_host`='', `form_manager_smtp_port`=0, `form_manager_smtp_user`='', `form_manager_smtp_pass`=''  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_form_manager_email`; ##b_dump##
 CREATE TABLE `XXX_papoo_form_manager_email` (
   `form_manager_email_id` int(11) NOT NULL AUTO_INCREMENT,

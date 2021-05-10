@@ -73,8 +73,8 @@ class cms
 	public $artikel_url_mit_html = false;
 	/** @var string */
 	public $system_show_template_comment = "";
-	/** @var array $smtpConfig */
-	private $smtpConfig = [];
+	/** @var array $mailConfig */
+	private $mailConfig = [];
 	/** @var ezSQL_mysqli */
 	public $db;
 	/** @var checked_class */
@@ -516,7 +516,7 @@ class cms
 				$this->captcha_secret = $row->captcha_secret;
 				$this->content->template['captcha_secret'] = $row->captcha_secret;
 
-				$this->smtpConfig = [
+				$this->mailConfig = [
 					'settingsType' => $row->smtp_active ? 'smtp' : 'sendmail',
 					'host' => $row->smtp_host,
 					'port' => (int)$row->smtp_port,
@@ -2528,9 +2528,9 @@ class cms
 	 *
 	 * @return array
 	 */
-	function getSmtpConfig() : array
+	function getMailConfig() : array
 	{
-		return $this->smtpConfig;
+		return $this->mailConfig;
 	}
 }
 
