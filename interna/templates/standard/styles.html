@@ -2,6 +2,9 @@
 	{include file=head.inc.utf8.html}
 	{include file=menu.inc.html}
 	<div class="artikel">
+		{if $css_themessage}
+			<div class="message">{$css_themessage}</div>
+		{/if}
 		{if $template_news_start=='ok'}
 			{if $template_sys_start=='ok'}
 				{include file=site_template.html}
@@ -17,9 +20,6 @@
 		{else}
 			<div class="aktuell" id="aktuell_{$menuid_aktuell}"></div>
 			{if $styles.template_weiche == "STYLES_LISTE"}
-				{if $css_themessage}
-					<div class="message">{$css_themessage}</div>
-				{/if}
 				{$message_407}
 				<h1 id="styles_neues_layout_erstellen" class="h1" >{$system_styles_neues_layout_erstellen}</h1>
 				<p id="styles_hier_neues_laout_erstellen_link" class="h1" >{$system_styles_hier_neues_laout_erstellen_link}</p>

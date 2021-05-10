@@ -419,6 +419,8 @@ class intern_styles_class
 
 			// Wenn Style existiert, deisen zum Standard machen
 			if ($temp_style_exists) {
+				$this->db->csrfok = true;
+
 				$sql = sprintf("UPDATE %s SET standard_style='0'",$this->db_praefix."papoo_styles");
 				$this->db->query($sql);
 
@@ -428,7 +430,10 @@ class intern_styles_class
 				);
 				$this->db->query($sql);
 
+				$this->db->csrfok = false;
+
 				$this->diverse->write_to_file("/interna/templates_c/css.txt",$style_id,"w+");
+				$this->content->template['css_themessage'] = $this->content->template['message_818'];
 			}
 		}
 	}
