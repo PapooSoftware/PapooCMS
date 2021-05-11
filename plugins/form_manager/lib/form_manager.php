@@ -2994,7 +2994,7 @@ class form_manager
 		curl_setopt($ch, CURLOPT_USERAGENT,
 			"Mozilla/5.0 (Windows; U; Windows NT 5.1; rv:1.8.1.4) Gecko/20070515 Firefox/2.0.0.4");
 		curl_setopt($ch, CURLOPT_POST, true);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $_POST);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($_POST, '', '&'));
 		$curl_ret = curl_exec($ch);
 		curl_close($ch);
 
