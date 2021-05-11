@@ -496,8 +496,12 @@ CREATE TABLE `XXX_papoo_bookmarks` (
   `book_name` varchar(255) NOT NULL,
   PRIMARY KEY (`book_user`,`book_menuid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
-INSERT INTO `XXX_papoo_bookmarks` SET `book_user`='10', `book_menuid`='55', `book_link`='./content.php?menuid=55&amp;template=', `book_name`='内容'  ; ##b_dump##
-INSERT INTO `XXX_papoo_bookmarks` SET `book_user`='10', `book_menuid`='18', `book_link`='./stamm.php?menuid=18&amp;template=', `book_name`='配置'  ; ##b_dump##
+INSERT INTO `XXX_papoo_bookmarks` SET `book_user`='10', `book_menuid`='55', `book_link`='./content.php?menuid=55&amp;template=', `book_name`='Seiteninhalt'  ; ##b_dump##
+INSERT INTO `XXX_papoo_bookmarks` SET `book_user`='10', `book_menuid`='18', `book_link`='./stamm.php?menuid=18&amp;template=', `book_name`='Konfiguration'  ; ##b_dump##
+INSERT INTO `XXX_papoo_bookmarks` SET `book_user`='10', `book_menuid`='46', `book_link`='./menu.php?menuid=46', `book_name`='Reihenfolge'  ; ##b_dump##
+INSERT INTO `XXX_papoo_bookmarks` SET `book_user`='10', `book_menuid`='44', `book_link`='./menu.php?menuid=44', `book_name`='Menü bearbeiten'  ; ##b_dump##
+INSERT INTO `XXX_papoo_bookmarks` SET `book_user`='10', `book_menuid`='11', `book_link`='./artikel.php?menuid=11', `book_name`='Artikel ändern'  ; ##b_dump##
+INSERT INTO `XXX_papoo_bookmarks` SET `book_user`='10', `book_menuid`='8', `book_link`='./user.php?menuid=8', `book_name`='User bearbeiten'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_cache`; ##b_dump##
 CREATE TABLE `XXX_papoo_cache` (
   `cache_id` bigint NOT NULL AUTO_INCREMENT,
