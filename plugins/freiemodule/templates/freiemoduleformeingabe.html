@@ -127,21 +127,6 @@
     {/foreach}
     </select>
 	<br />
-	<label for="banner_lang" >{$plugin.freiemodule.sprache}</label>
-	<br />
-{*<!-- Hier kann eine Sprache ausgew�hlt werden. -->*}
-    <select name="banner_lang" id="banner_lang" title="" style="width:40%;" size="1">
-{*<!-- ausw�hlen/select -->*}
-    <option value="">({$message_294})</option>
-    {foreach item=lang from=$language}
-				<option value="{$lang.lang_short}" {if $lang.lang_short==$freiemodule_lang} selected="selected" {/if} >
-					{$lang.language}
-				</option>
-			{/foreach}
-    </select>
-    <br />
-	<br />
-
 
 	<label for="freiemodule_zeitrahmen">{$plugin.freiemodule.freiemodule_zeitrahmen}</label>
 	<br />

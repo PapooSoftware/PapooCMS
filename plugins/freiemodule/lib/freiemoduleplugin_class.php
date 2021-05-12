@@ -205,10 +205,6 @@ class freiemodule {
 		$this->get_liste_artikel();
 		$this->get_liste_menu();
 		if (!empty ($this->checked->submitentry)) {
-			if (strlen($this->checked->banner_lang)<2) {
-				$this->checked->banner_lang="de";
-			}
-
 			preg_match("/(\d+).(\d+).(\d+)/",$this->checked->freiemodule_start,$res);
 			$this->checked->freiemodule_start=$res[3]."-".$res[2]."-".$res[1];
 			preg_match("/(\d+).(\d+).(\d+)/",$this->checked->freiemodule_stop,$res);
@@ -234,10 +230,9 @@ class freiemodule {
 			//Get Languages of the system
 			$sql = sprintf("SELECT * FROM %s",
 				DB_PRAEFIX.'papoo_name_language');
-			//print_r($sql);
 			$result = $this->db->get_results($sql,ARRAY_A);
 
-			foreach ($result as $k =>$v)
+			foreach ($result as $k => $v)
 			{
 				$sql = sprintf("INSERT INTO %s SET 
 										freiemodule_id = '%d',
@@ -249,7 +244,6 @@ class freiemodule {
 										freiemodule_modulid='%s', 
                    						freiemodule_start='%s', 
                    						freiemodule_stop='%s',
-                   						freiemodule_lang='%s',
               							freiemodule_lang_id = '%d' ",
 					$this->cms->tbname['papoo_freiemodule_daten'],
 					$max,
@@ -263,7 +257,6 @@ class freiemodule {
 					$this->db->escape($this->checked->freiemodule_modulid),
 					$this->db->escape($this->checked->freiemodule_start),
 					$this->db->escape($this->checked->freiemodule_stop),
-					$this->db->escape($this->checked->banner_lang),
 					$v['lang_id']
 				);
 
@@ -393,9 +386,6 @@ class freiemodule {
 
 		//Es soll eingetragen werden
 		if ($this->checked->submitentry) {
-			if (strlen($this->checked->banner_lang)<2) {
-				$this->checked->banner_lang="de";
-			}
 
 			preg_match("/(\d+).(\d+).(\d+)/",$this->checked->freiemodule_start,$res);
 			$this->checked->freiemodule_start=$res[3]."-".$res[2]."-".$res[1];
@@ -413,7 +403,6 @@ class freiemodule {
 					freiemodule_raw_output = %d,
 					freiemodule_start='%s',
 					freiemodule_stop='%s',
-					freiemodule_lang='%s',
               		freiemodule_lang_id = '%d'
 					WHERE freiemodule_id='%s' ",
 				$this->cms->tbname['papoo_freiemodule_daten'],
@@ -424,9 +413,8 @@ class freiemodule {
 				$this->db->escape($rawOutput ? 1 : 0),
 				$this->db->escape($this->checked->freiemodule_start),
 				$this->db->escape($this->checked->freiemodule_stop),
-				$this->db->escape($this->checked->banner_lang),
-				$this->db->escape($this->checked->freiemodule_id),
-				$this->cms->freiemodule_lang_id
+				$this->db->escape($this->cms->freiemodule_lang_id),
+				$this->db->escape($this->checked->freiemodule_id)
 			);
 			$this->db->query($sql);
 			$insertid=$this->db->escape($this->checked->cat_id);
@@ -542,7 +530,6 @@ class freiemodule {
 				$this->cms->tbname['papoo_freiemodule_daten'],
 				$this->cms->lang_id
 			);
-			//print_r($sql);
 			$result = $this->db->get_results($sql, ARRAY_A);
 			//Daten f�r das Template zuweisen
 			$this->content->template['list_dat'] = $result;
