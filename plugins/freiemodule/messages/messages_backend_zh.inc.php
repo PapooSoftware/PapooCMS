@@ -3,6 +3,7 @@ $this->content->template['plugin']['freiemodule']['neuereintrag'] = "创建一�
 $this->content->template['plugin']['freiemodule']['altereintrag'] = "修改一个模块条目"; 
 $this->content->template['plugin']['freiemodule']['name_code'] = "在这里输入模块的名称和代码。"; 
 $this->content->template['plugin']['freiemodule']['bannereintrag'] = "在此输入一个模块条目"; 
+$this->content->template['plugin']['freiemodule']['cross_language_settings'] = '跨语言设置';
 $this->content->template['plugin']['freiemodule']['freiemodule_name'] = "在此输入一个指定的名称。"; 
 $this->content->template['plugin']['freiemodule']['freiemodule_wrapper'] = "无需额外容器的自由输出模块"; 
 $this->content->template['plugin']['freiemodule']['freiemodule_code'] = "在此输入代码。"; 

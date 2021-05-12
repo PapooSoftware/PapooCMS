@@ -832,7 +832,8 @@ INSERT INTO `XXX_papoo_forums` SET `forumid`='20', `forumname`='Gästebuch', `ze
 INSERT INTO `XXX_papoo_forums` SET `forumid`='21', `forumname`='Dies ist ein Testforum', `zeitstempel`='', `Beschreibung`='Hier können Sie alles diksutieren was auch immer Sie möchten.', `lese_rechte`='g1,', `schreib_rechte`='g1,', `intranet_yn`='0', `forum_last`='1', `forum_threads`='1', `forum_beitr`='1'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_freiemodule_daten`; ##b_dump##
 CREATE TABLE `XXX_papoo_freiemodule_daten` (
-  `freiemodule_id` int NOT NULL,
+  `freiemodule_id` int NOT NULL AUTO_INCREMENT,
+  `freiemodule_lang_id` int NOT NULL,
   `freiemodule_name` text NOT NULL,
   `freiemodule_code` text NOT NULL,
   `freiemodule_menuid` varchar(255) NOT NULL DEFAULT '',
@@ -841,7 +842,7 @@ CREATE TABLE `XXX_papoo_freiemodule_daten` (
   `freiemodule_stop` date NOT NULL,
   `freiemodule_modulid` varchar(255) NOT NULL DEFAULT '',
   `freiemodule_raw_output` tinyint(1) NOT NULL DEFAULT '0',
-  `freiemodule_lang_id` int NOT NULL DEFAULT '1'
+  PRIMARY KEY (`freiemodule_id`, `freiemodule_lang_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ; ##b_dump##
 INSERT INTO `XXX_papoo_freiemodule_daten` SET `freiemodule_id`='1', `freiemodule_name`='Kopflogo', `freiemodule_code`='<div id=\"kopflogo\" class=\"span3\"><p><a title=\"Startseite\" href=\"#webverzeichnis#/\"><img src=\"../images/10-crop-10-logo-green.png\" alt=\"Papoo Logo\" title=\" \" width=\"332\" height=\"73\" /></a></p></div>', `freiemodule_menuid`='all', `freiemodule_artikelid`='', `freiemodule_start`='2010-01-01', `freiemodule_stop`='2050-01-01', `freiemodule_modulid`='36', `freiemodule_raw_output`='0', `freiemodule_lang_id`='1'  ; ##b_dump##
 INSERT INTO `XXX_papoo_freiemodule_daten` SET `freiemodule_id`='2', `freiemodule_name`='Startseite Kopf', `freiemodule_code`='', `freiemodule_menuid`='1', `freiemodule_artikelid`='', `freiemodule_start`='2010-01-01', `freiemodule_stop`='2050-01-01', `freiemodule_modulid`='37', `freiemodule_raw_output`='0', `freiemodule_lang_id`='1'  ; ##b_dump##

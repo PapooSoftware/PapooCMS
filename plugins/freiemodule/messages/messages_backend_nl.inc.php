@@ -3,6 +3,7 @@ $this->content->template['plugin']['freiemodule']['neuereintrag'] = "Aanmaken va
 $this->content->template['plugin']['freiemodule']['altereintrag'] = "Een module-artikel wijzigen"; 
 $this->content->template['plugin']['freiemodule']['name_code'] = "Voer hier de naam van de module en de code ervoor in."; 
 $this->content->template['plugin']['freiemodule']['bannereintrag'] = "Voer hier een module in"; 
+$this->content->template['plugin']['freiemodule']['cross_language_settings'] = 'Instellingen voor verschillende talen';
 $this->content->template['plugin']['freiemodule']['freiemodule_name'] = "Voer hier een aanwijzing in:"; 
 $this->content->template['plugin']['freiemodule']['freiemodule_wrapper'] = "Uitgang vrije module zonder extra container"; 
 $this->content->template['plugin']['freiemodule']['freiemodule_code'] = "Voer de code hier in:"; 

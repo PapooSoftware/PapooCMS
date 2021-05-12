@@ -10,6 +10,7 @@ $this->content->template['plugin']['freiemodule']['neuereintrag'] = 'Erstellung 
 $this->content->template['plugin']['freiemodule']['altereintrag'] ='Ändern eines Modul Eintrages';
 $this->content->template['plugin']['freiemodule']['name_code'] = 'Geben Sie hier den Namen des Moduls und Code dazu ein.';
 $this->content->template['plugin']['freiemodule']['bannereintrag'] = 'Geben Sie hier einen Moduleintrag ein';
+$this->content->template['plugin']['freiemodule']['cross_language_settings'] = 'Sprachübergreifende Einstellungen';
 $this->content->template['plugin']['freiemodule']['freiemodule_name'] = 'Geben Sie hier eine Bezeichung an:';
 $this->content->template['plugin']['freiemodule']['freiemodule_wrapper'] = 'Freies Modul ohne zusätzlichen Container ausgeben';
 $this->content->template['plugin']['freiemodule']['freiemodule_code'] = 'Geben Sie hier den Code an:';

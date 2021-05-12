@@ -3,6 +3,7 @@ $this->content->template['plugin']['freiemodule']['neuereintrag'] = "Criação d
 $this->content->template['plugin']['freiemodule']['altereintrag'] = "Modificar uma entrada de módulo"; 
 $this->content->template['plugin']['freiemodule']['name_code'] = "Introduza aqui o nome do módulo e o código para ele."; 
 $this->content->template['plugin']['freiemodule']['bannereintrag'] = "Digite uma entrada de módulo aqui"; 
+$this->content->template['plugin']['freiemodule']['cross_language_settings'] = 'Definições de línguas cruzadas';
 $this->content->template['plugin']['freiemodule']['freiemodule_name'] = "Digite uma designação aqui:"; 
 $this->content->template['plugin']['freiemodule']['freiemodule_wrapper'] = "Módulo de saída livre sem recipiente adicional"; 
 $this->content->template['plugin']['freiemodule']['freiemodule_code'] = "Digite o código aqui:"; 

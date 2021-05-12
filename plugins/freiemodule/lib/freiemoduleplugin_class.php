@@ -395,25 +395,44 @@ class freiemodule {
 
 			$rawOutput = (bool)($this->checked->freiemodule_raw_output ?? false);
 
+			$moduleId = (int)$this->checked->bannerid;
+			$langId = (int)$this->cms->lang_back_content_id;
+
+			$languageSpecificColumns = [
+				'freiemodule_id' => $moduleId,
+				'freiemodule_lang_id' => $langId,
+				'freiemodule_code' => $this->checked->freiemodule_code,
+			];
+
+			// Sprachabhängigen Inhalt abspeichern
+			$this->db->query(
+				"INSERT INTO {$this->cms->tbname['papoo_freiemodule_daten']} SET ".
+				"freiemodule_name = '', freiemodule_start = '2010-01-01', freiemodule_stop = '2050-01-01', ".
+				implode(', ', array_map(function ($column, $value) {
+					return "$column = '{$this->db->escape($value)}'";
+				}, array_keys($languageSpecificColumns), $languageSpecificColumns))." ".
+				"ON DUPLICATE KEY UPDATE ".
+				implode(', ', array_map(function ($column) {
+					return "$column = VALUES($column)";
+				}, array_keys($languageSpecificColumns)))
+			);
+
+			// Speichere sprachübergreifende Daten in allen Datensätzen (Normalisierung… -.-)
 			$sql = sprintf("UPDATE %s SET
 					freiemodule_name='%s',
-					freiemodule_code='%s',
 					freiemodule_menuid='%s',
 					freiemodule_artikelid='%s',
 					freiemodule_raw_output = %d,
 					freiemodule_start='%s',
-					freiemodule_stop='%s',
-              		freiemodule_lang_id = '%d'
+					freiemodule_stop='%s'
 					WHERE freiemodule_id='%s' ",
 				$this->cms->tbname['papoo_freiemodule_daten'],
 				$this->db->escape($this->checked->freiemodule_name),
-				$this->db->escape($this->checked->freiemodule_code),
 				$this->db->escape($this->checked->freiemodule_menuid),
 				$this->db->escape($this->checked->freiemodule_artikelid),
 				$this->db->escape($rawOutput ? 1 : 0),
 				$this->db->escape($this->checked->freiemodule_start),
 				$this->db->escape($this->checked->freiemodule_stop),
-				$this->db->escape($this->cms->freiemodule_lang_id),
 				$this->db->escape($this->checked->freiemodule_id)
 			);
 			$this->db->query($sql);
@@ -441,7 +460,6 @@ class freiemodule {
 			}
 
 			// Menue-Blacklist aktualisieren
-			$moduleId = (int)$this->checked->bannerid;
 			$this->db->query(
 				"DELETE FROM {$this->cms->tbname["papoo_freiemodule_menu_blacklist"]} ".
 				"WHERE blacklist_module_id = $moduleId"

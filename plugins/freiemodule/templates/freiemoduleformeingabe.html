@@ -14,9 +14,6 @@
    <legend>{$plugin.freiemodule.bannereintrag}
     </legend>
 
-  <label for="freiemodule_name">{$plugin.freiemodule.freiemodule_name}</label><br />
-  <input type="text" name="freiemodule_name" id="freiemodule_name" value="{$freiemodule_name}" size="40" maxlength="254"/>
-  <br />
 	<script language="javascript" type="text/javascript" src="./tiny_mce/tiny_mce.js" charset="utf-8"></script>
 	<script language="javascript" type="text/javascript" src="./tiny_mce/FileBrowser.js"></script>
 	
@@ -39,6 +36,16 @@
   <label for="freiemodule_code">{$plugin.freiemodule.freiemodule_code}</label><br />
   <textarea name="freiemodule_code" id="freiemodule_code" rows="20" cols="70" >{$freiemodule_code}</textarea>
   <br />
+	</fieldset>
+
+	<fieldset>
+		<legend>{$plugin.freiemodule.cross_language_settings|escape}</legend>
+
+		<div class="form-field">
+			<label for="freiemodule_name">{$plugin.freiemodule.freiemodule_name|escape}</label>
+			<input type="text" name="freiemodule_name" id="freiemodule_name" value="{$freiemodule_name|escape}" size="40" maxlength="254"/>
+		</div>
+
    <label for="freiemodule_menuid">{$plugin.freiemodule.freiemodule_menuid}</label>
    <br />
   <select name="freiemodule_menuid" id="freiemodule_menuid" title="" style="width: 40%;" size="1">
