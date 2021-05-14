@@ -401,13 +401,14 @@ class freiemodule {
 			$languageSpecificColumns = [
 				'freiemodule_id' => $moduleId,
 				'freiemodule_lang_id' => $langId,
+				'freiemodule_name' => $this->checked->freiemodule_name,
 				'freiemodule_code' => $this->checked->freiemodule_code,
 			];
 
 			// Sprachabhängigen Inhalt abspeichern
 			$this->db->query(
 				"INSERT INTO {$this->cms->tbname['papoo_freiemodule_daten']} SET ".
-				"freiemodule_name = '', freiemodule_start = '2010-01-01', freiemodule_stop = '2050-01-01', ".
+				"freiemodule_start = '2010-01-01', freiemodule_stop = '2050-01-01', ".
 				implode(', ', array_map(function ($column, $value) {
 					return "$column = '{$this->db->escape($value)}'";
 				}, array_keys($languageSpecificColumns), $languageSpecificColumns))." ".
@@ -419,7 +420,6 @@ class freiemodule {
 
 			// Speichere sprachübergreifende Daten in allen Datensätzen (Normalisierung… -.-)
 			$sql = sprintf("UPDATE %s SET
-					freiemodule_name='%s',
 					freiemodule_menuid='%s',
 					freiemodule_artikelid='%s',
 					freiemodule_raw_output = %d,
@@ -427,7 +427,6 @@ class freiemodule {
 					freiemodule_stop='%s'
 					WHERE freiemodule_id='%s' ",
 				$this->cms->tbname['papoo_freiemodule_daten'],
-				$this->db->escape($this->checked->freiemodule_name),
 				$this->db->escape($this->checked->freiemodule_menuid),
 				$this->db->escape($this->checked->freiemodule_artikelid),
 				$this->db->escape($rawOutput ? 1 : 0),
