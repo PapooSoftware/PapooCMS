@@ -2,6 +2,7 @@
 $this->content->template['plugin']['freiemodule']['neuereintrag'] = "Create a new module entry. "; 
 $this->content->template['plugin']['freiemodule']['altereintrag'] = "Change a module entry"; 
 $this->content->template['plugin']['freiemodule']['name_code'] = "Please enter the name of the module and the code"; 
+$this->content->template['plugin']['freiemodule']['not_translated_note'] = 'This module has not been translated yet. The content was prefilled with data from another language. Save your changes to create a new translation.';
 $this->content->template['plugin']['freiemodule']['bannereintrag'] = "Enter the module content."; 
 $this->content->template['plugin']['freiemodule']['cross_language_settings'] = 'Cross-language settings';
 $this->content->template['plugin']['freiemodule']['freiemodule_name'] = "Enter the designation here."; 

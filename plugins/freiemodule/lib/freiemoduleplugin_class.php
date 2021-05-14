@@ -423,6 +423,7 @@ class freiemodule {
 					freiemodule_menuid='%s',
 					freiemodule_artikelid='%s',
 					freiemodule_raw_output = %d,
+					freiemodule_modulid='%s',
 					freiemodule_start='%s',
 					freiemodule_stop='%s'
 					WHERE freiemodule_id='%s' ",
@@ -430,6 +431,7 @@ class freiemodule {
 				$this->db->escape($this->checked->freiemodule_menuid),
 				$this->db->escape($this->checked->freiemodule_artikelid),
 				$this->db->escape($rawOutput ? 1 : 0),
+				$this->db->escape(trim($this->checked->freiemodule_modulid)),
 				$this->db->escape($this->checked->freiemodule_start),
 				$this->db->escape($this->checked->freiemodule_stop),
 				$this->db->escape($this->checked->freiemodule_id)
@@ -496,29 +498,51 @@ class freiemodule {
 		$this->get_liste_menu();
 
 		if (!empty ($this->checked->bannerid)) {
-			//Nach id aus der Datenbank holen
-			$sql = sprintf("SELECT * FROM %s WHERE freiemodule_id='%s' AND freiemodule_lang_id = '%d' ",
-				$this->cms->tbname['papoo_freiemodule_daten'],
-				$this->db->escape($this->checked->bannerid),
-				$this->cms->lang_id
+			$moduleId = (int)$this->checked->bannerid;
+			$langId = (int)$this->cms->lang_back_content_id;
+
+			// Get module data; use default language as fallback or whatever data exists otherwise
+			$module = $this->db->get_row(
+				"SELECT * FROM pdev_ppx07_papoo_freiemodule_daten WHERE freiemodule_id = {$moduleId} AND freiemodule_lang_id = {$langId} ".
+				"UNION ALL SELECT * FROM pdev_ppx07_papoo_freiemodule_daten WHERE freiemodule_id = {$moduleId} AND freiemodule_lang_id = ( ".
+				"  SELECT _lang.lang_id ".
+				"  FROM pdev_ppx07_papoo_name_language _lang ".
+				"  JOIN pdev_ppx07_papoo_daten _system ON _system.lang_frontend LIKE _lang.lang_short ".
+				"  LIMIT 1".
+				") ".
+				"UNION ALL SELECT * FROM pdev_ppx07_papoo_freiemodule_daten WHERE freiemodule_id = {$moduleId} ".
+				"LIMIT 1", ARRAY_A
 			);
 
-			$result = $this->db->get_results($sql);
-			if (!empty ($result)) {
-				foreach ($result as $glos) {
-					$this->content->template['freiemodule_id'] = $glos->freiemodule_id;
-					$this->content->template['freiemodule_name'] = $glos->freiemodule_name;
-					$this->content->template['freiemodule_lang'] = $glos->freiemodule_lang;
-					$this->content->template['freiemodule_code'] = "nodecode:".$glos->freiemodule_code;
-					$this->content->template['freiemodule_menuid'] = $glos->freiemodule_menuid;
-					$this->content->template['freiemodule_artikelid'] = $glos->freiemodule_artikelid;
-					$this->content->template['freiemodule_raw_output'] = (bool)$glos->freiemodule_raw_output;
-					$this->content->template['freiemodule_modulid'] = $glos->freiemodule_modulid;
-					$this->content->template['freiemodule_start'] = $glos->freiemodule_start;
-					$this->content->template['freiemodule_stop'] = $glos->freiemodule_stop;
+			// Prepare module data for use in templates
+			if ($module) {
+				array_walk($module, function ($value, $column) use ($langId) {
+					switch ($column) {
+						case 'freiemodule_lang_id':
+							$this->content->template['isFreeModuleTranslated'] = $value == $langId;
+							break;
+						case 'freiemodule_code':
+							$value = 'nodecode:'.$value;
+							break;
+						case 'freiemodule_raw_output':
+							$value = (bool)$value;
+							break;
+						default:
+							break;
+					}
 
-				}
+					$this->content->template[$column] = $value;
+				});
 			}
+
+			// Redirect to module list if module wasn't found
+			else {
+				$this->diverse->http_redirect('/interna/plugin.php?'.http_build_query([
+					'menuid' => $this->checked->menuid,
+					'template' => $this->checked->template,
+				], '', '&'), 303);
+			}
+
 			$this->content->template['edit'] = "ok";
 			$this->content->template['altereintrag'] = "ok";
 			preg_match("/(\d+)-(\d+)-(\d+)/",$this->content->template['freiemodule_start'],$res);

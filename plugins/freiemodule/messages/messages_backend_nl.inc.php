@@ -2,6 +2,7 @@
 $this->content->template['plugin']['freiemodule']['neuereintrag'] = "Aanmaken van een nieuwe module"; 
 $this->content->template['plugin']['freiemodule']['altereintrag'] = "Een module-artikel wijzigen"; 
 $this->content->template['plugin']['freiemodule']['name_code'] = "Voer hier de naam van de module en de code ervoor in."; 
+$this->content->template['plugin']['freiemodule']['not_translated_note'] = 'Deze module is nog niet vertaald. De inhoud werd vooraf gevuld met gegevens uit een andere taal. Sla uw wijzigingen op om een nieuwe vertaling te maken.';
 $this->content->template['plugin']['freiemodule']['bannereintrag'] = "Voer hier een module in"; 
 $this->content->template['plugin']['freiemodule']['cross_language_settings'] = 'Instellingen voor verschillende talen';
 $this->content->template['plugin']['freiemodule']['freiemodule_name'] = "Voer hier een aanwijzing in:"; 
