@@ -52,7 +52,7 @@ class translate
 	{
 		print_r("hier");
 		$sql = sprintf("SELECT * FROM %s
-								WHERE freiemodule_lang='de' ",
+								WHERE freiemodule_lang_id='1' ",
 						DB_PRAEFIX."papoo_freiemodule_daten"
 		);
 		$result = $this->db->get_results($sql,ARRAY_A);

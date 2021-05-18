@@ -503,9 +503,9 @@ class reorder_class
 
 		//Dann alle 3. spalte
 		$sql=sprintf("SELECT * FROM %s
-						WHERE freiemodule_lang<>'%s'",
+						WHERE freiemodule_lang_id<>'%s'",
 			$this->cms->tbname['papoo_freiemodule_daten'],
-			$this->content->template['lang_front_default']
+			$this->db->escape($standard_lang)
 		);
 		$result_module=$this->db->get_results($sql,ARRAY_A);
 		//Dann Startseite
@@ -686,12 +686,12 @@ class reorder_class
 				$sql=sprintf("UPDATE %s
 								SET freiemodule_code='%s'
 								WHERE  	freiemodule_id='%d'
-								AND freiemodule_lang='%s'
+								AND freiemodule_lang_id='%s'
 								",
 					$this->cms->tbname['papoo_freiemodule_daten'],
 					$this->db->escape($value['freiemodule_code']),
 					$this->db->escape($value['freiemodule_id']),
-					$this->db->escape($value['freiemodule_lang'])
+					$this->db->escape($value['freiemodule_lang_id'])
 				);
 				$this->db->get_results($sql,ARRAY_A);
 			}

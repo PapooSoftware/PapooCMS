@@ -130,7 +130,7 @@ class freiemodule {
 			//Alle Eintr�ge zum Artikel
 			if (!empty($this->checked->reporeid)) {
 				$sql = sprintf("SELECT * FROM %s
-								WHERE freiemodule_artikelid='%s' AND freiemodule_start<='%s' AND freiemodule_stop>='%s' AND freiemodule_lang='%s'
+								WHERE freiemodule_artikelid='%s' AND freiemodule_start<='%s' AND freiemodule_stop>='%s' AND freiemodule_lang_id='%s'
 								OR freiemodule_artikelid='%s' AND freiemodule_start<='0000-00-00' AND freiemodule_stop>='0000-00-00'  AND freiemodule_lang_id='%s'  ",
 
 					$this->cms->tbname['papoo_freiemodule_daten'],
@@ -141,7 +141,7 @@ class freiemodule {
 					$this->db->escape($this->cms->lang_id),
 
 					$this->db->escape($this->checked->reporeid),
-					$this->db->escape($this->cms->lang_short)
+					$this->db->escape($this->cms->lang_id)
 				);
 				$result_artikel=$this->db->get_results($sql,ARRAY_A);
 			}
