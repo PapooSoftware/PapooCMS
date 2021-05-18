@@ -503,14 +503,14 @@ class freiemodule {
 
 			// Get module data; use default language as fallback or whatever data exists otherwise
 			$module = $this->db->get_row(
-				"SELECT * FROM pdev_ppx07_papoo_freiemodule_daten WHERE freiemodule_id = {$moduleId} AND freiemodule_lang_id = {$langId} ".
-				"UNION ALL SELECT * FROM pdev_ppx07_papoo_freiemodule_daten WHERE freiemodule_id = {$moduleId} AND freiemodule_lang_id = ( ".
+				"SELECT * FROM {$this->cms->tbname['papoo_freiemodule_daten']} WHERE freiemodule_id = {$moduleId} AND freiemodule_lang_id = {$langId} ".
+				"UNION ALL SELECT * FROM {$this->cms->tbname['papoo_freiemodule_daten']} WHERE freiemodule_id = {$moduleId} AND freiemodule_lang_id = ( ".
 				"  SELECT _lang.lang_id ".
-				"  FROM pdev_ppx07_papoo_name_language _lang ".
-				"  JOIN pdev_ppx07_papoo_daten _system ON _system.lang_frontend LIKE _lang.lang_short ".
+				"  FROM {$this->cms->tbname['papoo_name_language']} _lang ".
+				"  JOIN {$this->cms->tbname['papoo_daten']} _system ON _system.lang_frontend LIKE _lang.lang_short ".
 				"  LIMIT 1".
 				") ".
-				"UNION ALL SELECT * FROM pdev_ppx07_papoo_freiemodule_daten WHERE freiemodule_id = {$moduleId} ".
+				"UNION ALL SELECT * FROM {$this->cms->tbname['papoo_freiemodule_daten']} WHERE freiemodule_id = {$moduleId} ".
 				"LIMIT 1", ARRAY_A
 			);
 
