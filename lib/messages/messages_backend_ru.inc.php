@@ -1264,6 +1264,7 @@ $this->content->template['system_config_test2'] = "тест2";
 $this->content->template['system_config_emailadmin'] = "Адрес электронной почты администратора";
 $this->content->template['system_config_benachrichtungsadresse'] = "Электронная почта для уведомления, например, о записи на форуме, пользователях, гостевой книге";
 $this->content->template['system_config_systemmail_neuer_user'] = "Системная почта нового пользователя";
+$this->content->template['system_config_contactform_send_reply_mail'] = "При отправке контактной формы также отправьте письмо посетителю";
 $this->content->template['system_config_maximale_bildgre'] = "Максимальный размер изображения";
 $this->content->template['system_config_maximale_bildgrel'] = "Максимальный размер изображения в px (4000x4000) ширина x высота";
 $this->content->template['system_config_maximale_bildgre_in_kb'] = "Максимальный размер изображения в кб";

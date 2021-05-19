@@ -1940,6 +1940,7 @@ $this->content->template['system_config_test2']='test2';
 $this->content->template['system_config_emailadmin']='Admin E-Mail Adresse';
 $this->content->template['system_config_benachrichtungsadresse']='E-Mail für die Benachrichtigung bei z.B. Forum, User, G&auml;stebucheintrag';
 $this->content->template['system_config_systemmail_neuer_user']='Systemmail neuer User';
+$this->content->template['system_config_contactform_send_reply_mail']='Beim Absenden des Kontaktformulars auch eine Mail an den Besucher senden';
 $this->content->template['system_config_maximale_bildgre']='Maximale Bildgr&ouml;&szlig;e';
 $this->content->template['system_config_maximale_bildgrel']='Maximale Bildgr&ouml;&szlig;e in px (4000x4000) Breite x Höhe';
 $this->content->template['system_config_maximale_bildgre_in_kb']='Maximale Bildgr&ouml;&szlig;e in kb';

@@ -1094,6 +1094,7 @@ $this->content->template['system_config_test2'] = "测试2";
 $this->content->template['system_config_emailadmin'] = "管理员电子邮件地址";
 $this->content->template['system_config_benachrichtungsadresse'] = "用于通知的电子邮件，如论坛、用户、留言簿条目等。";
 $this->content->template['system_config_systemmail_neuer_user'] = "系统邮件新用户";
+$this->content->template['system_config_contactform_send_reply_mail']= "在发送联系表格时，也要给访问者发送一封邮件";
 $this->content->template['system_config_maximale_bildgre'] = "最大图像尺寸";
 $this->content->template['system_config_maximale_bildgrel'] = "最大的图像尺寸，单位是px（4000x4000）宽度x高度";
 $this->content->template['system_config_maximale_bildgre_in_kb'] = "最大图像尺寸，单位：kb";

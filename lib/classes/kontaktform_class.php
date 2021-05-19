@@ -155,7 +155,7 @@ class kontaktform
 				$this->mail_it->body = $this->content->template['contact']['mail1'] . " " . $this->cms->title;
 				$this->mail_it->body .= $this->get_form_dat();
 				$this->mail_it->to = $this->replayto;
-
+				unset($this->mail_it->ReplyTo[$this->replayto]);
 				$this->mail_it->from = $this->cms->admin_email;
 				$this->mail_it->subject = $this->content->template['contact']['mail1'] . " " . $this->cms->title;
 

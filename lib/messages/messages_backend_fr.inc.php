@@ -1205,6 +1205,7 @@ $this->content->template['system_config_test2'] = "test2";
 $this->content->template['system_config_emailadmin'] = "Adresse électronique de l'administrateur";
 $this->content->template['system_config_benachrichtungsadresse'] = "E-mail pour la notification d'une entrée dans un forum, un utilisateur, un livre d'or, etc";
 $this->content->template['system_config_systemmail_neuer_user'] = "Système de messagerie pour les nouveaux utilisateurs";
+$this->content->template['system_config_contactform_send_reply_mail'] = "Lorsque vous envoyez le formulaire de contact, envoyez également un courrier au visiteur.";
 $this->content->template['system_config_maximale_bildgre'] = "Taille maximale de l'image";
 $this->content->template['system_config_maximale_bildgrel'] = "Taille maximale de l'image en px (4000x4000) largeur x hauteur";
 $this->content->template['system_config_maximale_bildgre_in_kb'] = "Taille maximale de l'image en kb";

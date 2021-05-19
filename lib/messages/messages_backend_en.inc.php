@@ -1470,6 +1470,7 @@ $this->content->template['system_config_test2'] = "test2";
 $this->content->template['system_config_emailadmin'] = "Admin E-mail Address";
 $this->content->template['system_config_benachrichtungsadresse'] = "E-mail for notification of such forum, user, guestbook";
 $this->content->template['system_config_systemmail_neuer_user'] = "New user mail";
+$this->content->template['system_config_contactform_send_reply_mail'] = "When sending the contact form also send a mail to the visitor";
 $this->content->template['system_config_maximale_bildgre'] = "Maximum picture size";
 $this->content->template['system_config_maximale_bildgrel'] = "Max filesize in px(4000x4000) width x height";
 $this->content->template['system_config_maximale_bildgre_in_kb'] = "Max Filesize in kb";

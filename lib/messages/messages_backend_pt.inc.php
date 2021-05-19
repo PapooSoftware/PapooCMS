@@ -1094,6 +1094,7 @@ $this->content->template['system_config_test2'] = "teste2";
 $this->content->template['system_config_emailadmin'] = "Endereço de e-mail de administração";
 $this->content->template['system_config_benachrichtungsadresse'] = "E-mail para notificação de, por exemplo, fórum, usuário, entrada no livro de visitas";
 $this->content->template['system_config_systemmail_neuer_user'] = "Novo usuário do correio do sistema";
+$this->content->template['system_config_contactform_send_reply_mail'] = "Ao enviar o formulário de contacto, enviar também um correio ao visitante";
 $this->content->template['system_config_maximale_bildgre'] = "Tamanho máximo da imagem";
 $this->content->template['system_config_maximale_bildgrel'] = "Tamanho máximo da imagem em px (4000x4000) largura x altura";
 $this->content->template['system_config_maximale_bildgre_in_kb'] = "Tamanho máximo de imagem em kb";
