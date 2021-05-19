@@ -4,57 +4,57 @@
     <channel>
         <title>Papoo Software - Testfeed</title>
         <description><![CDATA[Papoo Software - Testinstallation]]></description>
-        <link>http://www.ihre_seite.de/papoo_git_full</link>
-        <atom:link href="http://www.ihre_seite.de/papoo_git_full/plugins/rssfeed/feed1.xml" rel="self" type="application/rss+xml" />
+        <link>http://www.webseite.de/papoo_git_full</link>
+        <atom:link href="http://www.webseite.de/papoo_git_full/plugins/rssfeed/feed1.xml" rel="self" type="application/rss+xml" />
         <lastBuildDate>Wed, 17 Mar 2021 12:28:37 +0100</lastBuildDate>
         <generator>FeedCreator 1.7.2</generator>
         <item>
             <title>Artikel Menüpunkt 1rrr</title>
-            <link>http://www.ihre_seite.de/papoo_git_full/artikel-menuepunkt-1.html</link>
-            <description><![CDATA[<p><img src="http://www.ihre_seite.de/papoo_git_full/images/10_slide2.jpg" alt="Slide 2" title="Slide 2" width="1200" height="329" /><br />Sie haben in Papoo fast alle Freiheitsgrade um Inhalte schnell und attraktiv erstellen zu können. Fest integriert in das gewünschte CI können Sie die Inhalte einbinden.</p>]]></description>
+            <link>http://www.webseite.de/papoo_git_full/artikel-menuepunkt-1.html</link>
+            <description><![CDATA[<p><img src="http://www.webseite.de/papoo_git_full/images/10_slide2.jpg" alt="Slide 2" title="Slide 2" width="1200" height="329" /><br />Sie haben in Papoo fast alle Freiheitsgrade um Inhalte schnell und attraktiv erstellen zu können. Fest integriert in das gewünschte CI können Sie die Inhalte einbinden.</p>]]></description>
             <author>info@1234.de (root) </author>
             <pubDate>Wed, 17 Mar 2021 11:28:36 +0100</pubDate>
-            <guid>http://www.ihre_seite.de/papoo_git_full/artikel-menuepunkt-1.html</guid>
+            <guid>http://www.webseite.de/papoo_git_full/artikel-menuepunkt-1.html</guid>
         </item>
         <item>
             <title>Layout &amp; Design des Papoo CMS Systems</title>
-            <link>http://www.ihre_seite.de/papoo_git_full/layout-und-design.html</link>
-            <description><![CDATA[<p><img src="http://www.ihre_seite.de/papoo_git_full/images/10_slide3.jpg" alt="Über Dubai" title="Über Dubai" width="1200" height="478" />Das Papoo CMS System nutzt standardmäßig das Bootstrap CSS Framework von Twitter. Bootstrap ist das optimale Framework wenn Sie Ihre Webseiten auch für mobile Geräte optimieren wollen. Seit der Version 4.2.0 ist Bootstrap für Administration und Frontend die Grundlage aller Layouts.</p>]]></description>
+            <link>http://www.webseite.de/papoo_git_full/layout-und-design.html</link>
+            <description><![CDATA[<p><img src="http://www.webseite.de/papoo_git_full/images/10_slide3.jpg" alt="Über Dubai" title="Über Dubai" width="1200" height="478" />Das Papoo CMS System nutzt standardmäßig das Bootstrap CSS Framework von Twitter. Bootstrap ist das optimale Framework wenn Sie Ihre Webseiten auch für mobile Geräte optimieren wollen. Seit der Version 4.2.0 ist Bootstrap für Administration und Frontend die Grundlage aller Layouts.</p>]]></description>
             <author>info@1234.de (root) </author>
             <pubDate>Wed, 13 Jun 2018 11:51:58 +0100</pubDate>
-            <guid>http://www.ihre_seite.de/papoo_git_full/layout-und-design.html</guid>
+            <guid>http://www.webseite.de/papoo_git_full/layout-und-design.html</guid>
         </item>
         <item>
             <title>Datenschutzerklärung</title>
-            <link>http://www.ihre_seite.de/papoo_git_full/datenschutzerklaerung.html</link>
+            <link>http://www.webseite.de/papoo_git_full/datenschutzerklaerung.html</link>
             <description></description>
             <author>info@1234.de (root) </author>
             <pubDate>Mon, 11 Jun 2018 15:06:02 +0100</pubDate>
-            <guid>http://www.ihre_seite.de/papoo_git_full/datenschutzerklaerung.html</guid>
+            <guid>http://www.webseite.de/papoo_git_full/datenschutzerklaerung.html</guid>
         </item>
         <item>
             <title>Dies ist ein neuer Artikel im Blog</title>
-            <link>http://www.ihre_seite.de/papoo_git_full/dies-ist-ein-neuer-artikel-im-blog.html</link>
-            <description><![CDATA[<p><img src="http://www.ihre_seite.de/papoo_git_full/images/10_slide4.jpg" alt="On the Road" title="On the Road" width="1200" height="470" />Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>]]></description>
+            <link>http://www.webseite.de/papoo_git_full/dies-ist-ein-neuer-artikel-im-blog.html</link>
+            <description><![CDATA[<p><img src="http://www.webseite.de/papoo_git_full/images/10_slide4.jpg" alt="On the Road" title="On the Road" width="1200" height="470" />Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>]]></description>
             <author>info@1234.de (root) </author>
             <pubDate>Fri, 05 Aug 2016 09:50:01 +0100</pubDate>
-            <guid>http://www.ihre_seite.de/papoo_git_full/dies-ist-ein-neuer-artikel-im-blog.html</guid>
+            <guid>http://www.webseite.de/papoo_git_full/dies-ist-ein-neuer-artikel-im-blog.html</guid>
         </item>
         <item>
             <title>SEO und Barrierefreiheit</title>
-            <link>http://www.ihre_seite.de/papoo_git_full/seo-und-barrierefreiheit.html</link>
-            <description><![CDATA[<p><img src="http://www.ihre_seite.de/papoo_git_full/images/10_slide5.jpg" alt="Erdbeere" title="Erdbeere" width="1200" height="473" />Papoo legt einen ganz klaren Focus auf die Suchmaschinen Optimierung (SEO) und die Barrierefreiheit (behindertengerechte Umsetzung) der Inhalte um Ihre Webseite eine maximale Anzahl an Besuchern zu ermöglichen.</p>]]></description>
+            <link>http://www.webseite.de/papoo_git_full/seo-und-barrierefreiheit.html</link>
+            <description><![CDATA[<p><img src="http://www.webseite.de/papoo_git_full/images/10_slide5.jpg" alt="Erdbeere" title="Erdbeere" width="1200" height="473" />Papoo legt einen ganz klaren Focus auf die Suchmaschinen Optimierung (SEO) und die Barrierefreiheit (behindertengerechte Umsetzung) der Inhalte um Ihre Webseite eine maximale Anzahl an Besuchern zu ermöglichen.</p>]]></description>
             <author>info@1234.de (root) </author>
             <pubDate>Fri, 05 Aug 2016 09:36:53 +0100</pubDate>
-            <guid>http://www.ihre_seite.de/papoo_git_full/seo-und-barrierefreiheit.html</guid>
+            <guid>http://www.webseite.de/papoo_git_full/seo-und-barrierefreiheit.html</guid>
         </item>
         <item>
             <title>Maximale Freiheit</title>
-            <link>http://www.ihre_seite.de/papoo_git_full/maximale-freiheit.html</link>
-            <description><![CDATA[<p><img src="http://www.ihre_seite.de/papoo_git_full/images/10_slide1.jpg" alt="Slide 1" title="Slide 1" width="1200" height="336" />Textinhalte im Inhaltsbereich der Webseite nennen wir bei Papoo Artikel, entlehnt aus dem Begriff Zeitungsartikel.</p>]]></description>
+            <link>http://www.webseite.de/papoo_git_full/maximale-freiheit.html</link>
+            <description><![CDATA[<p><img src="http://www.webseite.de/papoo_git_full/images/10_slide1.jpg" alt="Slide 1" title="Slide 1" width="1200" height="336" />Textinhalte im Inhaltsbereich der Webseite nennen wir bei Papoo Artikel, entlehnt aus dem Begriff Zeitungsartikel.</p>]]></description>
             <author>info@1234.de (root) </author>
             <pubDate>Fri, 05 Aug 2016 09:35:26 +0100</pubDate>
-            <guid>http://www.ihre_seite.de/papoo_git_full/maximale-freiheit.html</guid>
+            <guid>http://www.webseite.de/papoo_git_full/maximale-freiheit.html</guid>
         </item>
     </channel>
 </rss>
