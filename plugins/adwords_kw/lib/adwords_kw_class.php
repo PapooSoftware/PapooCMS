@@ -464,8 +464,8 @@ class adwords_kw_class {
 
 		foreach($this->placeholder as $place_h) {
 			$place_h['parameter'] = trim($place_h['parameter']);
-			if(!empty($this->checked->$place_h['parameter'])){
-				$output=str_replace($place_h['placeholder'],$this->checked->$place_h['parameter'],$output);
+			if (isset($this->checked->{$place_h['parameter']})) {
+				$output = str_replace($place_h['placeholder'], $this->checked->{$place_h['parameter']}, $output);
 			}
 			else {
 				$output=str_replace($place_h['placeholder'],$place_h['keyword'],$output);
