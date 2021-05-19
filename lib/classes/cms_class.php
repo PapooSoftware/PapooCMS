@@ -73,6 +73,8 @@ class cms
 	public $artikel_url_mit_html = false;
 	/** @var string */
 	public $system_show_template_comment = "";
+	/** @var array $mailConfig */
+	private $mailConfig = [];
 	/** @var ezSQL_mysqli */
 	public $db;
 	/** @var checked_class */
@@ -513,6 +515,10 @@ class cms
 
 				$this->captcha_secret = $row->captcha_secret;
 				$this->content->template['captcha_secret'] = $row->captcha_secret;
+
+				$this->mailConfig = [
+					'sendReplyMail' => (int)$row->send_reply_mail,
+				];
 
 				$this->anzeig_pageviews = $row->anzeig_pageviews;
 				$this->content->template['anzeig_pageviews'] = $row->anzeig_pageviews;
@@ -2511,6 +2517,16 @@ class cms
 				$this->checked->reporeid = $art['lan_repore_id'];
 			}
 		}
+	}
+
+	/**
+	 * Mail Einstellungen abfragen
+	 *
+	 * @return array
+	 */
+	function getMailConfig() : array
+	{
+		return $this->mailConfig;
 	}
 }
 

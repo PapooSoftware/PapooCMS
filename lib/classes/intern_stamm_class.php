@@ -1217,6 +1217,12 @@ class intern_stamm_class {
 			$this->db->query($sql);
 			$this->content->template['content_text'] = $this->content->template['message_21'];
 
+			$sql = sprintf("UPDATE %s SET send_reply_mail='%d'",
+				$this->cms->papoo_daten,
+				$this->db->escape(!empty($this->checked->send_reply_mail) ? 1 : 0)
+			);
+			$this->db->query($sql);
+
 			$location_url = $_SERVER['PHP_SELF'] . "?menuid=48&messageget=21&lang_idx=" . $this->lang_aktu_id;
 			if ($_SESSION['debug_stopallredirect']) {
 				echo '<a href="' . $location_url . '">Weiter</a>';
@@ -1261,6 +1267,13 @@ class intern_stamm_class {
 	 */
 	function make_div_lang()
 	{
+		$sql = sprintf("SELECT send_reply_mail FROM %s",
+			$this->cms->papoo_daten
+		);
+		$result = $this->db->get_row($sql, ARRAY_A);
+
+		$this->content->template['send_reply_mail'] = $result['send_reply_mail'] == "1" ? 'nodecode:checked="checked"' : '';
+
 		// lang_id rausfinden
 		if(!empty($_SESSION['langid_front'])) {
 			$this->lang_aktu_id=$_SESSION['langid_front'];

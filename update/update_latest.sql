@@ -42,3 +42,4 @@ ALTER TABLE `XXX_papoo_user` ADD `user_tel_abends` varchar(255) NULL; ##b_dump##
 ALTER TABLE `XXX_papoo_user` ADD `user_tel_tags` varchar(255) NULL; ##b_dump##
 ALTER TABLE `XXX_papoo_user` ADD `user_tel_kunden_nr` varchar(255) NULL; ##b_dump##
 ALTER TABLE `XXX_papoo_user` ADD `user_merkzettel` LONGTEXT NULL; ##b_dump##
+ALTER TABLE `XXX_papoo_daten` ADD `send_reply_mail` tinyint(1) NOT NULL DEFAULT 1; ##b_dump##
