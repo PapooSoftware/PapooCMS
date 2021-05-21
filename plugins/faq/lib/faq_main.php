@@ -3856,6 +3856,7 @@ class faq {
 				foreach ($this->content->template['cat_data'] AS $key =>$value) {
 					// Hole alle aktiven FAQ-Ids zu dieser Kategorie und ber�cksichtige die order_id (lt. Konfig.)
 					$faqids = $this->getFaqIDsByCatId($this->content->template['cat_data'][$key]['id']);
+					//print_r($faqids);
 					// Zusammenstellung der FAQ Daten f�r das Template
 					if (count($faqids)) {
 						foreach ($faqids AS $key2 =>$value2) {
@@ -4055,11 +4056,12 @@ class faq {
 		$sql = sprintf("SELECT faq_id
   							FROM %s T2
 							INNER JOIN %s T1 ON (T2.faq_id = T1.id) AND (T2.version_id = T1.version_id)
- 							WHERE cat_id = '%d' AND T1.active = 'j'
+ 							WHERE cat_id = '%d' AND T1.active = 'j' AND T1.lang_id = '%d'
 							ORDER BY %s" . $desc,
 			$this->cms->tbname['papoo_faq_cat_link'],
 			$this->cms->tbname['papoo_faq_content'],
 			$this->db->escape($cat_id),
+			$this->cms->lang_id,
 			$order.$_SESSION['faq']['FAQ_FAQ_ORDER']
 		);
 		$result = $this->db->get_results($sql, ARRAY_A);
