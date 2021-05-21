@@ -80,12 +80,12 @@ class bannerintegration
 			 						FROM %s
 									WHERE banner_start <= '%s'
 											AND banner_stop >= '%s'
-											AND banner_lang = '%s'
+											AND banner_lang_id = '%s'
 											AND banner_id = '%d'",
 				$this->cms->tbname['papoo_bannerverwaltung_daten'],
 				$datum,
 				$datum,
-				$this->cms->lang_short,
+				$this->cms->lang_id,
 				$banner_id
 			);
 			$result = $this->db->get_var($sql);
