@@ -27,8 +27,8 @@ $langs = array("en", "fr", "es", "pt", "it", "nl", "ru", "zh");
  */
 
 //set errors on
-//ini_set("display_errors", true);
-//error_reporting(E_ALL);
+#ini_set("display_errors", true);
+#error_reporting(E_ALL);
 
 //base is german
 if (!empty($_GET['compare'])) {
@@ -111,7 +111,7 @@ if (!empty($_GET['compare'])) {
 		foreach ($count as $k => $v) {
 			foreach ($v as $k1 => $v1) {
 				if ($v1['count'] > 0) {
-					$count[$k][$k1]['prozent'] = 100 - round(($v1['diff'] / $v1['count'] * 100), 2);
+					$count[$k][$k1]['prozent'] = 100 - round(($v1['diff'] / $v1['count'] * 100), 0);
 				} else {
 					$count[$k][$k1]['prozent'] = 100;
 				}
@@ -125,13 +125,15 @@ if (!empty($_GET['compare'])) {
 			}
 		}
 		foreach ($langs as $kl => $lang) {
-			$prozentDat[$bfend]['plugin'][$lang]['prozent'] = 100 - round(($sumDiff[$lang] / $sumCount[$lang] * 100), 2);
+			$prozentDat[$bfend]['plugin'][$lang]['prozent'] = round(100 - round(($sumDiff[$lang] / $sumCount[$lang] * 100), 2),0);
 			$prozentDat[$bfend]['plugin'][$lang]['diff'] = $sumDiff[$lang];
 			$prozentDat[$bfend]['plugin'][$lang]['count'] = $sumCount[$lang];
 		}
 	}
-	//print_r($dif);
-	print_r(json_encode($prozentDat,JSON_PRETTY_PRINT));
+	#print_r($prozentDat);
+	//print_r(trim(urlencode(json_encode($prozentDat,JSON_PRETTY_PRINT))));
+	file_put_contents(__DIR__."/../../../interna/templates_c/trans.txt",json_encode($prozentDat,JSON_PRETTY_PRINT));
+	//print_r(implod);
 	exit();
 }
 //print_r($_GET['translate']);
@@ -244,7 +246,8 @@ if ($_GET['translate']==true)
 			}
 		}
 	}
-	print_r(json_encode(array("transation"=>true),JSON_PRETTY_PRINT));
+	//print_r(json_encode(array("translation"=>true),JSON_PRETTY_PRINT));
+	file_put_contents(__DIR__."/../../../interna/templates_c/transOK.txt",json_encode(array("translation"=>true,JSON_PRETTY_PRINT)));
 }
 
 
