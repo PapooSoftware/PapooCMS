@@ -1151,43 +1151,9 @@ class translate_content extends deepltrans_class
 	}
 
 
-
-
-	public function translate_freie_module()
-	{
-		/**
-		return false;
-		print_r("hier");
-		$sql = sprintf("SELECT * FROM %s
-		WHERE freiemodule_lang='de' ",
-		DB_PRAEFIX."papoo_freiemodule_daten"
-		);
-		$result = $this->db->get_results($sql,ARRAY_A);
-		//print_r($result);
-		$active_lng_data = $this->get_active_lngs();
-
-		#print_r($result);
-		$trans_frei_content = "";
-
-		foreach ($active_lng_data as $lk=>$lv)
-		{
-		if (is_array($result))
-		{
-		foreach ($result as $k=>$v)
-		{
-		print_r(($v['freiemodule_code']));
-		$trans_frei_content = $this->transDeeplNow->translate($lv['lang_short'],$v['freiemodule_code']);
-		print_r(($trans_frei_content));
-		//exit();
-		}
-		}
-		}
-
-		print_r("<p>Freie Module fertig </p>");
-		return true;
-		 * **/
-	}
-
+	/**
+	 * @return mixed
+	 */
 	public function get_active_lngs()
 	{
 		$sql = sprintf("SELECT * FROM %s WHERE lang_short<>'de'",
@@ -1195,15 +1161,6 @@ class translate_content extends deepltrans_class
 		);
 		return $this->db->get_results($sql, ARRAY_A);
 	}
-	/**
-	 * @return transDeeplNow
-	 */
-	public function getTransDeeplNow()
-	{
-		$this->setDeeplUrl();
-		return $this->transDeeplNow;
-	}
-
 
 
 }

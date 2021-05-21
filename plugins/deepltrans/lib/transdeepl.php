@@ -93,6 +93,8 @@ class transdeepl
 
 		foreach($text as $sentence)
 		{
+			//kommentare entfernen
+			$sentence				= 	preg_replace("~<!--(.*?)-->~s", "", $sentence);
 			$body 					.= 	"&text=".urlencode($sentence);
 		}
 
@@ -136,9 +138,11 @@ class transdeepl
 		//ini transtext
 		$trans_text 			=	"";
 
-		//contents kodieren damit nix schief geht
+		//contents kodieren damit nix schief geht und kommentare entfernen
+		$text					= 	preg_replace("~<!--(.*?)-->~s", "", $text);
 		$text 					= 	urlencode($text);
 		$target_lang 			= 	urlencode($target_lang);
+
 
 		//deepl urls vervollständigen
 
