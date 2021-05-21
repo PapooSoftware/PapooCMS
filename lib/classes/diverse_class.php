@@ -481,6 +481,10 @@ class diverse_class
 			$the_return = true;
 		}
 
+		if($text['0']=="/") {
+			$the_return = true;
+		}
+
 		return $the_return;
 	}
 
