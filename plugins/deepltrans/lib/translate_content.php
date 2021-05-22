@@ -91,12 +91,12 @@ class translate_content extends deepltrans_class
 		/**
 		 * Start Translation Backend
 		 */
-		$this->translateBackendMenu($langData);
+		//$this->translateBackendMenu($langData);
 
 		/**
 		 * Start Translation Frontend
 		 */
-
+		/***
 		$this->translateFrontendMenu($langData);
 		$this->translateStartPage($langData);
 		$this->translateArticle($langData);
@@ -124,17 +124,24 @@ class translate_content extends deepltrans_class
 		$this->translateFormLang($langData);
 		$this->translateGlossar($langData);
 		$this->translateGlossarPref($langData);
+
 		$this->translateMVForms($langData);
 		$this->translateMVFormsFelder($langData);
 		$this->translateMVContents($langData);
+		///// dont do... does not really work with deepl
+		 * */
 		$this->translateMVTemplate($langData);
+		/**
 		$this->translateMVMetaLang($langData);
 		$this->translateMVLang($langData);
+
+
 		$this->translateBanner($langData);
 		$this->translateFAQCats($langData);
 		$this->translateFAQQuestions($langData);
 		$this->translateFAQConfig($langData);
 		$this->translateFAQConfig($langData);
+	* */
 		//Shop noch offen...
 
 		//TODO die Alternativtexte der Bilder müssen noch ersetzt werden
@@ -306,7 +313,7 @@ class translate_content extends deepltrans_class
 
 		$felderMitLang = array();
 
-		$idName = "id";
+		$idName = "detail_id";
 		$langIdName = "lang_id";
 
 		//Die MVs raus suchen -... müssen ja alle
@@ -1061,14 +1068,14 @@ class translate_content extends deepltrans_class
 			//alten Eintrag raus
 			$xsql=array();
 			$xsql['dbname']         = $tbName;
-			$xsql['limit']          = " LIMIT 1";
+			$xsql['limit']          = " LIMIT 10";
 			$xsql['del_where_wert'] = " ".$idName."='".$item[$idName]."' AND ".$langIdName."='".$langData['1']."'";
-			$this->db_abs->delete( $xsql );
+			$this->db_abs->delete( $xsql,$show );
 
 			//Daten für neuen Eintrag
 			foreach($item as $feld=>$feldValue)
 			{
-				$this->checked->$feld=$feldValue;
+				$this->checked->$feld=$this->transDeeplNow->unIgnore($feldValue);
 			}
 			//print_r($transData);
 			//print_r($felderMitLang);
@@ -1080,17 +1087,24 @@ class translate_content extends deepltrans_class
 					$this->checked->$feld="/".$langData['0'].$transText['trans_text']['translations'][$k]['text'];
 				}
 				else{
-					$this->checked->$feld=$transText['trans_text']['translations'][$k]['text'];
+					$this->checked->$feld=$this->transDeeplNow->unIgnore($transText['trans_text']['translations'][$k]['text']);
 				}
 
 			}
 			//set target langid
 			$this->checked->$langIdName=$langData['1'];
 
+			//Fallback if whyever the id is 0...
+			if($this->checked->$idName==0)
+			{
+				$this->checked->$idName=1;
+			}
+			//print_r($this->checked);exit();
 			//neuen Eintrag rein
 			$xsql=array();
 			$xsql['dbname'] = $tbName;
 			$xsql['must'] = array($idName,$langIdName);
+			//print_r($xsql);
 			$this->db_abs->insert( $xsql,$show);
 			//exit();
 		}
@@ -1116,7 +1130,8 @@ class translate_content extends deepltrans_class
 				unset($item[$feld]);
 			}
 			$transData = $item;
-			$transText = $this->transDeeplNow->translateArray($langData['0'],$transData);
+			$delcomments = false;
+			$transText = $this->transDeeplNow->translateArray($langData['0'],$transData,$delcomments);
 
 			$tbNameTarget = str_ireplace("search_1","search_".$langData['1'],$tbName);
 
@@ -1136,7 +1151,7 @@ class translate_content extends deepltrans_class
 			$i =0;
 			foreach ($item as $k=>$feld)
 			{
-				$this->checked->$k=$transText['trans_text']['translations'][$i]['text'];
+				$this->checked->$k=$this->transDeeplNow->unIgnore($transText['trans_text']['translations'][$i]['text']);
 				$i++;
 			}
 

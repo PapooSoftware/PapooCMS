@@ -49,6 +49,12 @@ class transdeepl
 	private $tag_handling = "xml";
 
 	/**
+	 * Immer xml damit die tags erhalten bleiben
+	 * @var
+	 */
+	private $ignore_tag = "nd";
+
+	/**
 	 * Die deeplurl die genutzt wird.
 	 * BEispiel
 	 * https://api.deepl.com/v2/translate?auth_key=".$auth_key."&text=beispiel&target_lang=en&source_lang=de&preserve_formatting=1&split_sentences=nonewlines&tag_handling=xml
@@ -68,7 +74,7 @@ class transdeepl
 	public function setDeeplUrl()
 	{
 		//die Basis Translateurl setzen
-		$this->deepl_url = "https://api.deepl.com/v2/translate?auth_key=".$this->auth_key."&source_lang=".$this->source_lang."&preserve_formatting=".$this->preserve_formatting."&split_sentences=".$this->split_sentences."&tag_handling=".$this->tag_handling;
+		$this->deepl_url = "https://api.deepl.com/v2/translate?auth_key=".$this->auth_key."&source_lang=".$this->source_lang."&preserve_formatting=".$this->preserve_formatting."&split_sentences=".$this->split_sentences."&tag_handling=".$this->tag_handling."&ignore_tags=".$this->ignore_tag;
 	}
 
 	/**
@@ -80,7 +86,7 @@ class transdeepl
 
 
 
-	public function translateArray($target_lang="en",$text=array())
+	public function translateArray($target_lang="en",$text=array(),$delcomments=true)
 	{
 
 		//startzeit
@@ -94,8 +100,12 @@ class transdeepl
 		foreach($text as $sentence)
 		{
 			//kommentare entfernen
-			$sentence				= 	preg_replace("~<!--(.*?)-->~s", "", $sentence);
-			$body 					.= 	"&text=".urlencode($sentence);
+			if($delcomments)
+			{
+				$sentence				= 	preg_replace("~<!--(.*?)-->~s", "", $sentence);
+			}
+			$sentence 	 				= 	$this->escapePlaceholder($sentence);
+			$body 						.= 	"&text=".urlencode($sentence);
 		}
 
 		//contents kodieren damit nix schief geht
@@ -108,7 +118,7 @@ class transdeepl
 		$return_text 			= 	$this->curlFromDeepl($deepl_url,$body);
 
 		//aus dem json rausholen
-		$trans_text 			= 		json_decode($return_text,true);;
+		$trans_text 			= 		json_decode($return_text,true);
 
 		//ende
 		$stop 					= 	microtime(true);
@@ -122,6 +132,26 @@ class transdeepl
 
 		//übersetzten Text zurückgeben
 		return $return;
+	}
+
+	public function escapePlaceholder($text="")
+	{
+		$pattern = '/\$\$#(.*?)#\$\$+/';
+		$replacement ='<nd>$$#$1#$$</nd>';
+		$text = preg_replace($pattern, $replacement,$text);
+
+		$pattern = '/#(.*?)#+/';
+		$replacement ='<nd>#$1#</nd>';
+		$text = preg_replace($pattern, $replacement,$text);
+
+		return $text;
+	}
+
+	public function unIgnore($text="")
+	{
+		$text = str_ireplace("<nd>","",$text);
+		$text = str_ireplace("</nd>","",$text);
+		return $text;
 	}
 
 	/**
@@ -140,6 +170,7 @@ class transdeepl
 
 		//contents kodieren damit nix schief geht und kommentare entfernen
 		$text					= 	preg_replace("~<!--(.*?)-->~s", "", $text);
+		$text 	 				= 	$this->escapePlaceholder($text);
 		$text 					= 	urlencode($text);
 		$target_lang 			= 	urlencode($target_lang);
 
