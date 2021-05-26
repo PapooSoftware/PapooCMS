@@ -59,7 +59,7 @@ class deepltrans_class
 					// Pfad zum css Ordner zur Einbindung des backend css
 					$this->content->template['css_path'] = $css_path = PAPOO_WEB_PFAD.'/plugins/deepltrans/css';
 					$this->make_settings();
-					//$this->rapid_dev();
+					#$this->rapid_dev();
 					//error_reporting(E_ALL);
 					// TODO: Backend logic hierhin
 
@@ -84,7 +84,7 @@ class deepltrans_class
 					$this->content->template['css_path'] = $css_path = PAPOO_WEB_PFAD.'/plugins/deepltrans/css';
 
 					$this->make_trans();
-					//$this->rapid_dev();
+					#$this->rapid_dev();
 
 				}
 			}

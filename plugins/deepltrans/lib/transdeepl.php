@@ -84,6 +84,15 @@ class transdeepl
 		$this->auth_key = $key;
 	}
 
+	/**
+	 * Set To newlines - to preserve structure and linebreaks
+	 * @param string $tf
+	 */
+	public function set_noNewlines($tf="nonewlines")
+	{
+		$this->split_sentences=$tf;
+	}
+
 
 
 	public function translateArray($target_lang="en",$text=array(),$delcomments=true)
@@ -105,6 +114,7 @@ class transdeepl
 				$sentence				= 	preg_replace("~<!--(.*?)-->~s", "", $sentence);
 			}
 			$sentence 	 				= 	$this->escapePlaceholder($sentence);
+			$sentence 	 				= 	$this->replaceAltUndCo($sentence,$target_lang);
 			$body 						.= 	"&text=".urlencode($sentence);
 		}
 
@@ -134,14 +144,69 @@ class transdeepl
 		return $return;
 	}
 
+	public function replaceAltUndCo($text="",$target_lang)
+	{
+		$atrribute=array("alt","title","href");
+
+		foreach($atrribute as $atr)
+		{
+			$matches 	= array();
+			$trAlt 		= "";
+			//alt across the system
+			$pattern 	= '/'.$atr.'="(.*?)"+/';
+			preg_match_all($pattern, $text,$matches);
+
+			if(!empty($matches['1'])) {
+				foreach ($matches['1'] as $alt) {
+					$trAlt .= $alt . " +++ ";
+				}
+
+				$trans = $this->translate($target_lang, $trAlt, false);
+				$transDats = explode("+++", $trans['trans_text']);
+
+				if (!empty($matches['0'])) {
+					foreach ($matches['0'] as $k => $alt) {
+						if($atr=="href")
+						{
+							$transAlt = $atr.'="/' . strtolower($target_lang)."".trim($transDats[$k]) . '"';
+						}
+						else{
+							$transAlt = $atr.'="' . trim($transDats[$k]) . '"';
+						}
+
+						if(!stristr($alt,"http"))
+						{
+							$text = str_ireplace($alt, $transAlt, $text);
+						}
+					}
+				}
+			}
+		}
+		//shop.php?menuid=247
+		$text = str_ireplace("shop.php?menuid=247", "shop.php?menuid=247&getlang=".strtolower($target_lang), $text);
+		$text = str_ireplace("getlang=de", "getlang=".strtolower($target_lang), $text);
+		return $text;
+	}
+
+	/**
+	 * @param string $text
+	 * @return string|string[]|null
+	 */
 	public function escapePlaceholder($text="")
 	{
+		//Links in Flex
 		$pattern = '/\$\$#(.*?)#\$\$+/';
 		$replacement ='<nd>$$#$1#$$</nd>';
 		$text = preg_replace($pattern, $replacement,$text);
 
+		//placeholder across the system
 		$pattern = '/#(.*?)#+/';
 		$replacement ='<nd>#$1#</nd>';
+		$text = preg_replace($pattern, $replacement,$text);
+
+		//Some placeholder in flex....
+		$pattern = '/\{(.*?)\}+/';
+		$replacement ='<nd>{$1}</nd>';
 		$text = preg_replace($pattern, $replacement,$text);
 
 		return $text;
@@ -160,7 +225,7 @@ class transdeepl
 	 * @param string $text
 	 * @return string übersetzter Text
 	 */
-	public function translate($target_lang="en",$text="")
+	public function translate($target_lang="en",$text="",$noRekur=true)
 	{
 		//startzeit
 		$start 					= microtime(true);
@@ -171,6 +236,13 @@ class transdeepl
 		//contents kodieren damit nix schief geht und kommentare entfernen
 		$text					= 	preg_replace("~<!--(.*?)-->~s", "", $text);
 		$text 	 				= 	$this->escapePlaceholder($text);
+
+		//only if not called from inside...
+		if($noRekur)
+		{
+			$text 	 				= 	$this->replaceAltUndCo($text,$target_lang);
+		}
+
 		$text 					= 	urlencode($text);
 		$target_lang 			= 	urlencode($target_lang);
 

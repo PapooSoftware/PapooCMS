@@ -99,7 +99,9 @@ class translate_content extends deepltrans_class
 		/***
 		$this->translateFrontendMenu($langData);
 		$this->translateStartPage($langData);
+		 * */
 		$this->translateArticle($langData);
+		/**
 		$this->translateCollum3($langData);
 		$this->translateImages($langData);
 		$this->translateTopMenu($langData);
@@ -128,10 +130,7 @@ class translate_content extends deepltrans_class
 		$this->translateMVForms($langData);
 		$this->translateMVFormsFelder($langData);
 		$this->translateMVContents($langData);
-		///// dont do... does not really work with deepl
-		 * */
 		$this->translateMVTemplate($langData);
-		/**
 		$this->translateMVMetaLang($langData);
 		$this->translateMVLang($langData);
 
@@ -141,15 +140,210 @@ class translate_content extends deepltrans_class
 		$this->translateFAQQuestions($langData);
 		$this->translateFAQConfig($langData);
 		$this->translateFAQConfig($langData);
-	* */
-		//Shop noch offen...
+
+		$this->translateShopCat($langData);
+		$this->translateShopProdukte($langData);
+		$this->translateShopLayouts($langData);
+		$this->translateShopKundenFelder($langData);
+		$this->translateShopPaymentArten($langData);
+		$this->translateShopMails($langData);
+		$this->translateShopSettings($langData);
+		* */
+
+		//noch offen:
+
+		///ini_set("display_errors", true);
+		//error_reporting(E_ALL);
 
 		//TODO die Alternativtexte der Bilder müssen noch ersetzt werden
-		//
+		//TODO die Links in den Contents müssen am Ende noch überall ersezt werden...
+		//  -> Artikel, 3. Spalte, freie Module, Banner, Bildwechsler, Shop, Flex,
+		//TODO getlang=de mit der jeweiligen Sprache ersetzen...
+
+
 		$this->db->csrfok = false;
 		$this->db->show_errors = true;
 	}
 
+	/**
+	 * @param array $langData
+	 * @return bool
+	 */
+	public function translateShopSettings($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"einstellungen_lang__ext"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "plugin_shop_daten";
+		$idName = "einstellungen_id";
+		$langIdName = "einstellungen_lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
+
+
+	/**
+	 * @param array $langData
+	 * @return bool
+	 */
+	public function translateShopMails($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"mail_etreff_der_ail",
+			"mail_ext_nhalt_der_ail_",
+			"mail__nhalt_der_ail_"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "plugin_shop_mailing";
+		$idName = "mail_id";
+		$langIdName = "mail_lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
+
+	/**
+	 * @param array $langData
+	 * @return bool
+	 */
+	public function translateShopPaymentArten($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"shop_payment_Name_des_Payments",
+			"shop_payment_eschreibender_ext"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "plugin_shop_daten_payment_arten";
+		$idName = "shop_payment_id";
+		$langIdName = "shop_payment_lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
+
+	/**
+	 * @param array $langData
+	 * @return bool
+	 */
+	public function translateShopKundenFelder($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"prospect_lang_label_des_kundenfeldes",
+			"prospect_lang_default_wert_wenn_vorhanden",
+			"prospect_lang_Weitereerlauterungen",
+			"prospect_lang_InhalteeinerSelectbox"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "plugin_shop_kunden_felder_lang";
+		$idName = "prospect_lang_id";
+		$langIdName = "prospect_lang_lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
+
+	/**
+	 * @param array $langData
+	 * @return bool
+	 */
+	public function translateShopLayouts($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"layout_lang_bezeichnunglayout",
+			"layout_lang_iststandatdayout",
+			"layout_lang_ausgabeuebrsicht",
+			"layout_lang_Einzelachsich"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "plugin_shop_lang_layouts";
+		$idName = "layout_lang_id";
+		$langIdName = "layout_lang_lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
+
+	/**
+	 * @param array $langData
+	 * @return bool
+	 */
+	public function translateShopProdukte($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"produkte_lang_produktename",
+			"produkte_lang_produkt_beschreibung",
+			"produkte_lang_meta_title",
+			"produkte_lang_meta_beschreibung",
+			"produkte_lang_met_keywords",
+			"produkte_lang_produkt_beschreibung_lang",
+			"produkte_lang_produkt_surl"
+		);
+
+		$felderMitLang = array("produkte_lang_produkt_surl"=>true);
+
+		$tbName = "plugin_shop_produkte_lang";
+		$idName = "produkte_lang_id";
+		$langIdName = "produkte_lang_lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
+
+	/**
+	 * @param array $langData
+	 * @return bool
+	 */
+	public function translateShopCat($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"kategorien_lang_TitelderSeite",
+			"kategorien_lang_metadescriptioncat",
+			"kategorien_lang_matakeywordcat",
+			"kategorien_lang_Beschreibung"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "plugin_shop_kategorien_lang";
+		$idName = "kategorien_lang_kat_id";
+		$langIdName = "kategorien_lang_lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
 
 
 	/**
@@ -303,6 +497,9 @@ class translate_content extends deepltrans_class
 
 	public function translateMVTemplate($langData=array())
 	{
+		$this->transDeeplNow->set_noNewlines("false");
+		$this->transDeeplNow->setDeeplUrl();
+
 		//erstmal die Daten festlegen der Felder und CO.
 		$felder = array(
 			"template_content_all",
@@ -377,6 +574,9 @@ class translate_content extends deepltrans_class
 
 	public function translateMVFormsFelder($langData=array())
 	{
+		$this->transDeeplNow->set_noNewlines("false");
+		$this->transDeeplNow->setDeeplUrl();
+
 		//erstmal die Daten festlegen der Felder und CO.
 		$felder = array(
 			"mvcform_label",
@@ -468,6 +668,9 @@ class translate_content extends deepltrans_class
 
 	public function translateFormLang($langData=array())
 	{
+		$this->transDeeplNow->set_noNewlines("false");
+		$this->transDeeplNow->setDeeplUrl();
+
 		//erstmal die Daten festlegen der Felder und CO.
 		$felder = array(
 			"form_manager_antwort_html",
@@ -516,6 +719,10 @@ class translate_content extends deepltrans_class
 
 	public function translateFormCformLang($langData=array())
 	{
+		$this->transDeeplNow->set_noNewlines("false");
+		$this->transDeeplNow->setDeeplUrl();
+
+
 		//erstmal die Daten festlegen der Felder und CO.
 		$felder = array(
 			"plugin_cform_label",
