@@ -6,7 +6,7 @@ if ($_GET['apiKey'] != $apiKey) {
 }
 //Damit es nicht versehentlich losläuft
 //exit("Bitte im Skript aktivieren - hier steht ein exit() am Anfang zur Sicherheit \n");
-error_reporting(E_ALL);
+//error_reporting(E_ALL);
 //trans Klasse einbinden
 require_once("transdeepl.php");
 
