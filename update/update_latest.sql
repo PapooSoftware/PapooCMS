@@ -43,4 +43,21 @@ ALTER TABLE `XXX_papoo_user` ADD `user_tel_tags` varchar(255) NULL; ##b_dump##
 ALTER TABLE `XXX_papoo_user` ADD `user_tel_kunden_nr` varchar(255) NULL; ##b_dump##
 ALTER TABLE `XXX_papoo_user` ADD `user_merkzettel` LONGTEXT NULL; ##b_dump##
 ALTER TABLE `XXX_papoo_daten` ADD `send_reply_mail` tinyint(1) NOT NULL DEFAULT 1; ##b_dump##
-ALTER TABLE `XXX__plugin_shop_daten` CHANGE `einstellungen_id` `einstellungen_id` INT NOT NULL; ##b_dump##
+ALTER TABLE `XXX_plugin_shop_daten` CHANGE `einstellungen_id` `einstellungen_id` INT NOT NULL; ##b_dump##
+DROP TABLE IF EXISTS `XXX_trans_ids`; ##b_dump##
+CREATE TABLE `XXX_trans_ids` (
+                                 `trans_id` int NOT NULL AUTO_INCREMENT,
+                                 `trans_tab_name` varchar(255) DEFAULT NULL,
+                                 `trans_id_id` int NOT NULL,
+                                 `trans_lang_id_id` int NOT NULL,
+                                 `trans_timestamp` int NOT NULL,
+                                 PRIMARY KEY (`trans_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ; ##b_dump##
+DROP TABLE IF EXISTS `XXX_trans_tabnames`; ##b_dump##
+CREATE TABLE `XXX_trans_tabnames` (
+                                      `trans_name_id` int NOT NULL AUTO_INCREMENT,
+                                      `trans_name_tab_name` varchar(255) DEFAULT NULL,
+                                      `trans_name_id_name` varchar(255) NOT NULL,
+                                      `trans_name_lang_id_name` varchar(255) NOT NULL,
+                                      PRIMARY KEY (`trans_name_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ; ##b_dump##

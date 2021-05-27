@@ -43,6 +43,7 @@ class ezSQL_mysqli extends ezSQLcore
     var $encoding = false;
     var $rows_affected = false;
     var $csrfok = false;
+	var $deepl = false;
 
     /**********************************************************************
      *  Constructor - allow the user to perform a quick connect at the
@@ -252,6 +253,52 @@ class ezSQL_mysqli extends ezSQLcore
 					@header('X-Papoo-Warning: "at least one persisting action was blocked because of an invalid CSRF-Token"');
 					$_SESSION['csrf_token_fail_count']++;
 					return false;
+				}
+			}
+		}
+
+		//translations... only if update and not deepl Plugin
+		if($this->deepl == false)
+		{
+			if((stristr($query,"UPDATE") || stristr($query,"DELETE")) )
+			{
+				if(empty($this->transDbs))
+				{
+					//check if translation relevant
+					$transsql = sprintf("SELECT * FROM %s",DB_PRAEFIX."trans_tabnames");
+					$this->transDbs = $this->get_results($transsql,ARRAY_A);
+				}
+
+				if(!empty($this->transDbs))
+				{
+					foreach($this->transDbs as $dbNames)
+					{
+						if(stristr($query,$dbNames['trans_name_tab_name']))
+						{
+							//Oha - it is language and translation relevant...
+							$searchQuery = strtolower($query);
+							$sqa1 = explode("where",$searchQuery);
+							$sqa2 = explode("and",$sqa1['1']);
+							foreach ($sqa2 as $checkIds)
+							{
+								if(stristr($checkIds,$dbNames['trans_name_id_name']))
+								{
+									//finally the id is found
+									$id = (trim(preg_replace("/[^0-9]/", "", $checkIds)));
+
+									if(is_numeric($id) && $id > 0)
+									{
+										//now we can delete this entry from the translation Table - so it can be translated again..
+										$delSsql = sprintf("DELETE FROM %s WHERE trans_tab_name='%s' AND trans_id_id='%d'",
+											DB_PRAEFIX."trans_ids",
+											$dbNames['trans_name_tab_name'],
+											$id);
+										$this->query($delSsql);
+									}
+								}
+							}
+						}
+					}
 				}
 			}
 		}
