@@ -59,13 +59,11 @@ class PapooAPI
 
 		$user_id = (int)$user_id;
 		$menu_id = (int)$menu_id;
-		$db->csrfok = true;
-		$return= (int)$db->get_var("SELECT COUNT(*) ".
+
+		return (int)$db->get_var("SELECT COUNT(*) ".
 				"FROM {$cms->tbname["papoo_lookup_ug"]} ug ".
 				"JOIN {$cms->tbname["papoo_lookup_men_ext"]} mg ON ug.gruppenid = mg.gruppenid ".
 				"WHERE ug.userid = $user_id AND mg.menuid = $menu_id") > 0;
-		$db->csrfok = false;
-		return $return;
 	}
 
 	/**
@@ -78,14 +76,11 @@ class PapooAPI
 
 		$user_id = (int)$user_id;
 		$article_id = (int)$article_id;
-		$db->csrfok = true;
 
-		$return= (int)$db->get_var("SELECT COUNT(*) ".
+		return (int)$db->get_var("SELECT COUNT(*) ".
 				"FROM {$cms->tbname["papoo_lookup_ug"]} ug ".
 				"JOIN {$cms->tbname["papoo_lookup_write_article"]} ag ON ug.gruppenid = ag.gruppeid_wid_id ".
 				"WHERE ug.userid = $user_id AND ag.article_wid_id = $article_id") > 0;
-		$db->csrfok = false;
-		return $return;
 	}
 
 	/**
@@ -95,17 +90,13 @@ class PapooAPI
 	private function userHasAccessToBilling($user_id) {
 		$user_id = (int)$user_id;
 
-		$GLOBALS["db"]->csrfok = true;
-		$return = (int)$GLOBALS["db"]->get_var("SELECT COUNT(_menu.menuid) ".
+		return (int)$GLOBALS["db"]->get_var("SELECT COUNT(_menu.menuid) ".
 				"FROM {$GLOBALS["cms"]->tbname["papoo_user"]} _user ".
 				"JOIN {$GLOBALS["cms"]->tbname["papoo_lookup_ug"]} _user_group ON _user_group.userid = _user.userid ".
 				"JOIN {$GLOBALS["cms"]->tbname["papoo_lookup_men_int"]} _menu_group ON _menu_group.gruppenid = _user_group.gruppenid ".
 				"JOIN {$GLOBALS["cms"]->tbname["papoo_menuint"]} _menu ON _menu.menuid = _menu_group.menuid ".
 				"WHERE _user.userid = $user_id AND _menu.menulink LIKE 'plugin:papoo_shop/templates/papoo_shop_order.html' ".
 				"GROUP BY _menu.menuid") > 0;
-
-		$GLOBALS["db"]->csrfok = false;
-		return $return;
 	}
 
 	/**
@@ -213,6 +204,10 @@ class PapooAPI
 					"FROM {$cms->tbname["papoo_lookup_article"]} ".
 					"WHERE article_id = $article_id AND gruppeid_id = 10") > 0;
 
+			// Temporarily disable CSRF protection
+			$oldCsrfState = $db->csrfok;
+			$db->csrfok = true;
+
 			if ($permissionGranted) {
 				$db->query("DELETE FROM {$cms->tbname["papoo_lookup_article"]} ".
 					"WHERE article_id = $article_id AND gruppeid_id = 10");
@@ -221,12 +216,15 @@ class PapooAPI
 				$db->query("INSERT INTO {$cms->tbname["papoo_lookup_article"]} ".
 					"SET article_id = $article_id, gruppeid_id = 10");
 			}
+
+			// Revert CSRF protection to old state
+			$db->csrfok = $oldCsrfState;
 		}
 
 		$permissionGranted = (int)$db->get_var("SELECT COUNT(*) ".
 				"FROM {$cms->tbname["papoo_lookup_article"]} ".
 				"WHERE article_id = $article_id AND gruppeid_id = 10") > 0;
-		$db->csrfok = false;
+
 		$this->setResponse(["userId" => $userId, "permission" => $userHasWritingPermission, "articleId" => $article_id, "newState" => $permissionGranted]);
 	}
 
