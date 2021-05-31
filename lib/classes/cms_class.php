@@ -517,6 +517,7 @@ class cms
 				$this->content->template['captcha_secret'] = $row->captcha_secret;
 
 				$this->mailConfig = [
+					'sendReplyMail' => (int)$row->send_reply_mail,
 					'settingsType' => $row->smtp_active ? 'smtp' : 'sendmail',
 					'host' => $row->smtp_host,
 					'port' => (int)$row->smtp_port,
@@ -2524,7 +2525,7 @@ class cms
 	}
 
 	/**
-	 * SMTP Einstellungen abfragen
+	 * Mail Einstellungen abfragen
 	 *
 	 * @return array
 	 */

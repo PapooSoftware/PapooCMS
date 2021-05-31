@@ -225,6 +225,11 @@
 				{include file=artikel_editor.inc.html}
 			</fieldset>
 			<fieldset>
+				<legend>{$message_455}:</legend>
+				<input type="checkbox" {$send_reply_mail} id="send_reply_mail" name="send_reply_mail" value="1" />
+				<label for="send_reply_mail" style="width:50%">{$system_config_contactform_send_reply_mail}</label>
+			</fieldset>
+			<fieldset>
 				<legend>{$message_70}:</legend>
 				<input type="hidden" name="active_language" value="{$active_language}" />
 				{*<!-- Eintragen-->*}

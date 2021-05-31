@@ -1,8 +1,13 @@
 ALTER TABLE `XXX_bildwechsler` CHANGE `bw_id` `bw_id` BIGINT NOT NULL; ##b_dump##
 ALTER TABLE `XXX_bildwechsler` DROP PRIMARY KEY; ##b_dump##
-ALTER TABLE `XXX_papoo_freiemodule_daten` ADD COLUMN `freiemodule_lang_id` INT(11) NOT NULL DEFAULT 1; ##b_dump##
+ALTER TABLE `XXX_papoo_freiemodule_daten` ADD COLUMN `freiemodule_lang_id` INT(11) NOT NULL AFTER `freiemodule_id`; ##b_dump##
+UPDATE `XXX_papoo_freiemodule_daten` _module
+LEFT JOIN `XXX_papoo_name_language` _lang ON _lang.lang_short LIKE _module.freiemodule_lang
+SET _module.freiemodule_lang_id = COALESCE(_lang.lang_id, 1); ##b_dump##
 ALTER TABLE `XXX_papoo_freiemodule_daten` MODIFY `freiemodule_id` INT NOT NULL; ##b_dump##
 ALTER TABLE `XXX_papoo_freiemodule_daten` DROP PRIMARY KEY; ##b_dump##
+ALTER TABLE `XXX_papoo_freiemodule_daten` ADD PRIMARY KEY (`freiemodule_id`, `freiemodule_lang_id`); ##b_dump##
+ALTER TABLE `XXX_papoo_freiemodule_daten` MODIFY `freiemodule_id` INT NOT NULL AUTO_INCREMENT; ##b_dump##
 ALTER TABLE `XXX_plugin_kalender` CHANGE `kalender_id` `kalender_id` INT NOT NULL; ##b_dump##
 ALTER TABLE `XXX_plugin_kalender` DROP PRIMARY KEY; ##b_dump##
 ALTER TABLE `XXX_plugin_kalender_date` CHANGE `pkal_date_id` `pkal_date_id` INT NOT NULL; ##b_dump##
@@ -37,6 +42,8 @@ ALTER TABLE `XXX_papoo_user` ADD `user_tel_abends` varchar(255) NULL; ##b_dump##
 ALTER TABLE `XXX_papoo_user` ADD `user_tel_tags` varchar(255) NULL; ##b_dump##
 ALTER TABLE `XXX_papoo_user` ADD `user_tel_kunden_nr` varchar(255) NULL; ##b_dump##
 ALTER TABLE `XXX_papoo_user` ADD `user_merkzettel` LONGTEXT NULL; ##b_dump##
+ALTER TABLE `XXX_papoo_daten` ADD `send_reply_mail` tinyint(1) NOT NULL DEFAULT 1; ##b_dump##
+ALTER TABLE `XXX__plugin_shop_daten` CHANGE `einstellungen_id` `einstellungen_id` INT NOT NULL; ##b_dump##
 
 ALTER TABLE `XXX_papoo_daten` ADD `smtp_active` tinyint(1) NOT NULL DEFAULT 0; ##b_dump##
 ALTER TABLE `XXX_papoo_daten` ADD `smtp_host` varchar(255) NOT NULL DEFAULT ''; ##b_dump##

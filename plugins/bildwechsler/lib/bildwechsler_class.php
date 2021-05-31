@@ -597,9 +597,9 @@ class bildwechsler_class
                     bw_ueberschrift='%s',
                     bw_noch_mehr_text='%s',
                     bw_extra_link='%s',
-                    bw_extra_link_text='%s',
-                    bw_lang_id='%d'
-                WHERE bw_id='%d'",
+                    bw_extra_link_text='%s'
+                   
+                WHERE bw_id='%d' AND  bw_lang_id='%d'",
 				$this->db_praefix . "bildwechsler",
 				$this->checked->bw_menu_id,
 				$this->db->escape($temp_bild),
@@ -609,8 +609,8 @@ class bildwechsler_class
 				$this->db->escape($temp_text2),
 				$this->db->escape($temp_link2),
 				$this->db->escape($temp_link2_text),
-				$this->cms->lang_id,
-				$temp_id
+				$temp_id,
+				$this->cms->lang_id
 			);
 			$this->db->query($sql);
 

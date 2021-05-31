@@ -46,7 +46,7 @@ class deepltrans_class
 					// Pfad zum css Ordner zur Einbindung des backend css
 					$this->content->template['css_path'] = $css_path = PAPOO_WEB_PFAD.'/plugins/deepltrans/css';
 
-					$this->rapid_dev();
+					//$this->rapid_dev();
 
 					// TODO: Backend logic hierhin
 				}
@@ -59,7 +59,7 @@ class deepltrans_class
 					// Pfad zum css Ordner zur Einbindung des backend css
 					$this->content->template['css_path'] = $css_path = PAPOO_WEB_PFAD.'/plugins/deepltrans/css';
 					$this->make_settings();
-					$this->rapid_dev();
+					#$this->rapid_dev();
 					//error_reporting(E_ALL);
 					// TODO: Backend logic hierhin
 
@@ -84,15 +84,12 @@ class deepltrans_class
 					$this->content->template['css_path'] = $css_path = PAPOO_WEB_PFAD.'/plugins/deepltrans/css';
 
 					$this->make_trans();
-					$this->rapid_dev();
+					#$this->rapid_dev();
 
-					// TODO: Backend logic hierhin
 				}
 			}
 		}
-		else {
-			// TODO: Frontend logic hierhin
-		}
+		else {}
 	}
 
 	/**
@@ -136,6 +133,10 @@ class deepltrans_class
 		//exit();
 	}
 
+	/**
+	 * @param string $lang
+	 * @return bool
+	 */
 	public function setLogData($lang="en")
 	{
 		$log = $this->getLogData();
@@ -144,6 +145,9 @@ class deepltrans_class
 		return true;
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function getLogData()
 	{
 		touch(PAPOO_ABS_PFAD."/dokumente/logs/translateContent.log");
@@ -151,28 +155,31 @@ class deepltrans_class
 		return json_decode($data,true);
 	}
 
+	/**
+	 *
+	 * Get State of File Translations...
+	 * @return mixed
+	 */
 	public function getState()
 	{
 		//ini_set("display_errors", true);
 		//error_reporting(E_ALL);
-
 		$dir=(str_ireplace("lib","api",__DIR__));
 		$apiKey = md5($dir);
 		$url = $_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST']."/".PAPOO_WEB_PFAD."/plugins/deepltrans/api/tpapoo.php?compare=true&apiKey=".$apiKey;
 		$curl = curl_init($url);
-		//print_r($url);exit();
 		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 10);
 		curl_setopt($curl, CURLOPT_TIMEOUT, 10);
-		$returndata = curl_exec($curl);
-		//print_r($returndata);
-		//$code = @curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
-		//$curlerror = @curl_error($curl);
+		curl_exec($curl);
 
-		return json_decode($returndata,true);
+		return json_decode(file_get_contents(PAPOO_ABS_PFAD."/interna/templates_c/trans.txt"),true);
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function translateNow()
 	{
 		$deeplKey = $this->get_key();
@@ -180,15 +187,13 @@ class deepltrans_class
 		$dir=(str_ireplace("lib","api",__DIR__));
 		$apiKey = md5($dir);
 		$url = $_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST']."/".PAPOO_WEB_PFAD."/plugins/deepltrans/api/tpapoo.php?translate=true&apiKey=".$apiKey."&transData=".$transData;
-		#print_r($url);exit();
+
 		$curl = curl_init($url);
 		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 2);
 		curl_setopt($curl, CURLOPT_TIMEOUT, 2);
 		$returndata = curl_exec($curl);
-		//$code = @curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
-		//$curlerror = @curl_error($curl);
 
 		return json_decode($returndata,true);
 	}
@@ -269,163 +274,6 @@ class deepltrans_class
 		exit;
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	/**
-	 * @param $plugin_name
-	 * @return string|null
-	 */
-	static public function ToSecureName($plugin_name)
-	{
-		$matches = array();
-
-		if(!preg_match_all("/[a-zA-Z]+/", $plugin_name, $matches)) {
-			return NULL;
-		}
-
-		$plugin_name = "";
-
-		foreach($matches[0] as $match) {
-			$plugin_name .= $match;
-		}
-
-		return strtolower($plugin_name);
-	}
-
-	/**
-	 * @return bool|string
-	 */
-	public function GetShortPrefix()
-	{
-		return self::ShortName(self::PREFIX);
-	}
-
-	/**
-	 * @param $input
-	 * @return bool|string
-	 */
-	static public function ShortName($input)
-	{
-		return substr(self::ToSecureName($input), 0, 10);
-	}
-
-	/**
-	 * Funktion die die Übertragung der rapid dev Form Daten in die Datenbank übernimmt.
-	 *
-	 * @uses db_abs
-	 */
-	private function rapid_dev()
-	{
-		$this->rapid_dev_insert("deepltrans");
-		$this->rapid_dev_templify("deepltrans");
-		$this->rapid_dev_insert("einstellungen");
-		$this->rapid_dev_templify("einstellungen");
-		$this->rapid_dev_insert("bersetzungen");
-		$this->rapid_dev_templify("bersetzungen");
-
-	}
-
-	/**
-	 * Holt den Inhalt der $tabelle aus der Datenbank als assoziatives array.
-	 *
-	 * Beispiel:
-	 *  $this->get_results("testbackend", "SELECT * FROM %%"); // => enthält alle eintrage von testbackend
-	 *
-	 * @param string $tabelle
-	 * @param string $sql SQL das ausgeführt werden soll. %% im string wird durch die übergebene Tabelle ersetzt.
-	 * @param string $get_mode
-	 * @return array
-	 */
-	private function get_results($tabelle, $sql, $get_mode = ARRAY_A)
-	{
-		$tabellenname = $this->db_praefix . "plugin_" . $this->GetShortPrefix() . "_" . self::ShortName($tabelle) . "_form";
-		$sql = preg_replace("/(?<!%)%%(?!%)/", $tabellenname, $sql);
-		return $this->db->get_results($sql, $get_mode);
-	}
-
-	/**
-	 * @param $tabelle
-	 * @param $sql
-	 * @return bool|int|mixed|mysqli_result|void
-	 */
-	private function query($tabelle, $sql)
-	{
-		$tabellenname = $this->db_praefix . "plugin_" . $this->GetShortPrefix() . "_" . self::ShortName($tabelle) . "_form";
-		$sql = preg_replace("/(?<!%)%%(?!%)/", $tabellenname, $sql);
-		return $this->db->query($sql);
-	}
-
-	/**
-	 * @param $tabelle
-	 */
-	private function rapid_dev_templify($tabelle)
-	{
-		$tabellenname = "plugin_" . $this->GetShortPrefix() . "_" . self::ShortName($tabelle) . "_form";
-
-		global $db_name;
-		$sql = "SELECT DISTINCT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='{$this->db_praefix}{$tabellenname}' AND TABLE_SCHEMA='$db_name';";
-		$labels = $this->db->get_results($sql, ARRAY_A);
-
-		// Falls die Tabelle noch garnicht existiert
-		if(!empty($labels)) {
-			$this->content->template['plugin'][$this->GetShortPrefix()]['rapid_dev'][$tabellenname]['labels'] = $labels;
-
-			$sql = "SELECT * FROM " . $this->db_praefix . $tabellenname;
-			$this->content->template['plugin'][$this->GetShortPrefix()]['rapid_dev'][$tabellenname]['data'] = $this->db->get_results($sql, ARRAY_A);
-		}
-	}
-
-	/**
-	 * @param $tabelle
-	 * @return null
-	 */
-	private function rapid_dev_insert($tabelle)
-	{
-		$tabellenname = "plugin_" . $this->GetShortPrefix() . "_" . self::ShortName($tabelle) . "_form";
-		$abgesendete_tabelle = "plugin_" . $this->GetShortPrefix() . "_form_tablename";
-
-		if(isset($_REQUEST[$abgesendete_tabelle]) and
-			$_REQUEST[$abgesendete_tabelle] == "plugin_" . $this->GetShortPrefix() . "_" . self::ShortName($tabelle) . "_form") {
-			$xsql = array();
-			$xsql["dbname"] = $tabellenname;
-			$xsql["praefix"] = $this->GetShortPrefix();
-
-			// Siehe http://stackoverflow.com/questions/4142809/simple-post-redirect-get-code-example
-			header("Location: " . $_SERVER['REQUEST_URI']);
-
-			return $this->db_abs->insert($xsql)['insert_id'];
-		}
-		return NULL;
-	}
-
 	/**
 	 * Funktion die vor dem Senden des Seiteninhalts für jedes Plugin aufgerufen wird,
 	 * bei der dann per global $output und z.B. einem regulären Ausdruck der Inhalt
@@ -450,3 +298,4 @@ class deepltrans_class
 }
 
 $deepltrans = new deepltrans_class();
+?>

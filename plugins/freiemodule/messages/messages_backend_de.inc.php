@@ -9,7 +9,9 @@ Deutsche Text-Daten des Plugins "freiemodule" für das Backend
 $this->content->template['plugin']['freiemodule']['neuereintrag'] = 'Erstellung eines neuen Modul Eintrages';
 $this->content->template['plugin']['freiemodule']['altereintrag'] ='Ändern eines Modul Eintrages';
 $this->content->template['plugin']['freiemodule']['name_code'] = 'Geben Sie hier den Namen des Moduls und Code dazu ein.';
+$this->content->template['plugin']['freiemodule']['not_translated_note'] = 'Dieses Modul ist noch nicht übersetzt worden. Der Inhalt wurde mit Daten aus einer anderen Sprache vorausgefüllt. Speichern Sie Ihre Änderungen, um eine neue Übersetzung zu erstellen.';
 $this->content->template['plugin']['freiemodule']['bannereintrag'] = 'Geben Sie hier einen Moduleintrag ein';
+$this->content->template['plugin']['freiemodule']['cross_language_settings'] = 'Sprachübergreifende Einstellungen';
 $this->content->template['plugin']['freiemodule']['freiemodule_name'] = 'Geben Sie hier eine Bezeichung an:';
 $this->content->template['plugin']['freiemodule']['freiemodule_wrapper'] = 'Freies Modul ohne zusätzlichen Container ausgeben';
 $this->content->template['plugin']['freiemodule']['freiemodule_code'] = 'Geben Sie hier den Code an:';

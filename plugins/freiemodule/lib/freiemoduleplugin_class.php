@@ -130,7 +130,7 @@ class freiemodule {
 			//Alle Eintr�ge zum Artikel
 			if (!empty($this->checked->reporeid)) {
 				$sql = sprintf("SELECT * FROM %s
-								WHERE freiemodule_artikelid='%s' AND freiemodule_start<='%s' AND freiemodule_stop>='%s' AND freiemodule_lang='%s'
+								WHERE freiemodule_artikelid='%s' AND freiemodule_start<='%s' AND freiemodule_stop>='%s' AND freiemodule_lang_id='%s'
 								OR freiemodule_artikelid='%s' AND freiemodule_start<='0000-00-00' AND freiemodule_stop>='0000-00-00'  AND freiemodule_lang_id='%s'  ",
 
 					$this->cms->tbname['papoo_freiemodule_daten'],
@@ -141,7 +141,7 @@ class freiemodule {
 					$this->db->escape($this->cms->lang_id),
 
 					$this->db->escape($this->checked->reporeid),
-					$this->db->escape($this->cms->lang_short)
+					$this->db->escape($this->cms->lang_id)
 				);
 				$result_artikel=$this->db->get_results($sql,ARRAY_A);
 			}
@@ -205,10 +205,6 @@ class freiemodule {
 		$this->get_liste_artikel();
 		$this->get_liste_menu();
 		if (!empty ($this->checked->submitentry)) {
-			if (strlen($this->checked->banner_lang)<2) {
-				$this->checked->banner_lang="de";
-			}
-
 			preg_match("/(\d+).(\d+).(\d+)/",$this->checked->freiemodule_start,$res);
 			$this->checked->freiemodule_start=$res[3]."-".$res[2]."-".$res[1];
 			preg_match("/(\d+).(\d+).(\d+)/",$this->checked->freiemodule_stop,$res);
@@ -234,10 +230,9 @@ class freiemodule {
 			//Get Languages of the system
 			$sql = sprintf("SELECT * FROM %s",
 				DB_PRAEFIX.'papoo_name_language');
-			//print_r($sql);
 			$result = $this->db->get_results($sql,ARRAY_A);
 
-			foreach ($result as $k =>$v)
+			foreach ($result as $k => $v)
 			{
 				$sql = sprintf("INSERT INTO %s SET 
 										freiemodule_id = '%d',
@@ -249,7 +244,6 @@ class freiemodule {
 										freiemodule_modulid='%s', 
                    						freiemodule_start='%s', 
                    						freiemodule_stop='%s',
-                   						freiemodule_lang='%s',
               							freiemodule_lang_id = '%d' ",
 					$this->cms->tbname['papoo_freiemodule_daten'],
 					$max,
@@ -263,7 +257,6 @@ class freiemodule {
 					$this->db->escape($this->checked->freiemodule_modulid),
 					$this->db->escape($this->checked->freiemodule_start),
 					$this->db->escape($this->checked->freiemodule_stop),
-					$this->db->escape($this->checked->banner_lang),
 					$v['lang_id']
 				);
 
@@ -393,9 +386,6 @@ class freiemodule {
 
 		//Es soll eingetragen werden
 		if ($this->checked->submitentry) {
-			if (strlen($this->checked->banner_lang)<2) {
-				$this->checked->banner_lang="de";
-			}
 
 			preg_match("/(\d+).(\d+).(\d+)/",$this->checked->freiemodule_start,$res);
 			$this->checked->freiemodule_start=$res[3]."-".$res[2]."-".$res[1];
@@ -405,28 +395,46 @@ class freiemodule {
 
 			$rawOutput = (bool)($this->checked->freiemodule_raw_output ?? false);
 
+			$moduleId = (int)$this->checked->bannerid;
+			$langId = (int)$this->cms->lang_back_content_id;
+
+			$languageSpecificColumns = [
+				'freiemodule_id' => $moduleId,
+				'freiemodule_lang_id' => $langId,
+				'freiemodule_name' => $this->checked->freiemodule_name,
+				'freiemodule_code' => $this->checked->freiemodule_code,
+			];
+
+			// Sprachabhängigen Inhalt abspeichern
+			$this->db->query(
+				"INSERT INTO {$this->cms->tbname['papoo_freiemodule_daten']} SET ".
+				"freiemodule_start = '2010-01-01', freiemodule_stop = '2050-01-01', ".
+				implode(', ', array_map(function ($column, $value) {
+					return "$column = '{$this->db->escape($value)}'";
+				}, array_keys($languageSpecificColumns), $languageSpecificColumns))." ".
+				"ON DUPLICATE KEY UPDATE ".
+				implode(', ', array_map(function ($column) {
+					return "$column = VALUES($column)";
+				}, array_keys($languageSpecificColumns)))
+			);
+
+			// Speichere sprachübergreifende Daten in allen Datensätzen (Normalisierung… -.-)
 			$sql = sprintf("UPDATE %s SET
-					freiemodule_name='%s',
-					freiemodule_code='%s',
 					freiemodule_menuid='%s',
 					freiemodule_artikelid='%s',
 					freiemodule_raw_output = %d,
+					freiemodule_modulid='%s',
 					freiemodule_start='%s',
-					freiemodule_stop='%s',
-					freiemodule_lang='%s',
-              		freiemodule_lang_id = '%d'
+					freiemodule_stop='%s'
 					WHERE freiemodule_id='%s' ",
 				$this->cms->tbname['papoo_freiemodule_daten'],
-				$this->db->escape($this->checked->freiemodule_name),
-				$this->db->escape($this->checked->freiemodule_code),
 				$this->db->escape($this->checked->freiemodule_menuid),
 				$this->db->escape($this->checked->freiemodule_artikelid),
 				$this->db->escape($rawOutput ? 1 : 0),
+				$this->db->escape(trim($this->checked->freiemodule_modulid)),
 				$this->db->escape($this->checked->freiemodule_start),
 				$this->db->escape($this->checked->freiemodule_stop),
-				$this->db->escape($this->checked->banner_lang),
-				$this->db->escape($this->checked->freiemodule_id),
-				$this->cms->freiemodule_lang_id
+				$this->db->escape($this->checked->freiemodule_id)
 			);
 			$this->db->query($sql);
 			$insertid=$this->db->escape($this->checked->cat_id);
@@ -453,7 +461,6 @@ class freiemodule {
 			}
 
 			// Menue-Blacklist aktualisieren
-			$moduleId = (int)$this->checked->bannerid;
 			$this->db->query(
 				"DELETE FROM {$this->cms->tbname["papoo_freiemodule_menu_blacklist"]} ".
 				"WHERE blacklist_module_id = $moduleId"
@@ -491,29 +498,51 @@ class freiemodule {
 		$this->get_liste_menu();
 
 		if (!empty ($this->checked->bannerid)) {
-			//Nach id aus der Datenbank holen
-			$sql = sprintf("SELECT * FROM %s WHERE freiemodule_id='%s' AND freiemodule_lang_id = '%d' ",
-				$this->cms->tbname['papoo_freiemodule_daten'],
-				$this->db->escape($this->checked->bannerid),
-				$this->cms->lang_id
+			$moduleId = (int)$this->checked->bannerid;
+			$langId = (int)$this->cms->lang_back_content_id;
+
+			// Get module data; use default language as fallback or whatever data exists otherwise
+			$module = $this->db->get_row(
+				"SELECT * FROM {$this->cms->tbname['papoo_freiemodule_daten']} WHERE freiemodule_id = {$moduleId} AND freiemodule_lang_id = {$langId} ".
+				"UNION ALL SELECT * FROM {$this->cms->tbname['papoo_freiemodule_daten']} WHERE freiemodule_id = {$moduleId} AND freiemodule_lang_id = ( ".
+				"  SELECT _lang.lang_id ".
+				"  FROM {$this->cms->tbname['papoo_name_language']} _lang ".
+				"  JOIN {$this->cms->tbname['papoo_daten']} _system ON _system.lang_frontend LIKE _lang.lang_short ".
+				"  LIMIT 1".
+				") ".
+				"UNION ALL SELECT * FROM {$this->cms->tbname['papoo_freiemodule_daten']} WHERE freiemodule_id = {$moduleId} ".
+				"LIMIT 1", ARRAY_A
 			);
 
-			$result = $this->db->get_results($sql);
-			if (!empty ($result)) {
-				foreach ($result as $glos) {
-					$this->content->template['freiemodule_id'] = $glos->freiemodule_id;
-					$this->content->template['freiemodule_name'] = $glos->freiemodule_name;
-					$this->content->template['freiemodule_lang'] = $glos->freiemodule_lang;
-					$this->content->template['freiemodule_code'] = "nodecode:".$glos->freiemodule_code;
-					$this->content->template['freiemodule_menuid'] = $glos->freiemodule_menuid;
-					$this->content->template['freiemodule_artikelid'] = $glos->freiemodule_artikelid;
-					$this->content->template['freiemodule_raw_output'] = (bool)$glos->freiemodule_raw_output;
-					$this->content->template['freiemodule_modulid'] = $glos->freiemodule_modulid;
-					$this->content->template['freiemodule_start'] = $glos->freiemodule_start;
-					$this->content->template['freiemodule_stop'] = $glos->freiemodule_stop;
+			// Prepare module data for use in templates
+			if ($module) {
+				array_walk($module, function ($value, $column) use ($langId) {
+					switch ($column) {
+						case 'freiemodule_lang_id':
+							$this->content->template['isFreeModuleTranslated'] = $value == $langId;
+							break;
+						case 'freiemodule_code':
+							$value = 'nodecode:'.$value;
+							break;
+						case 'freiemodule_raw_output':
+							$value = (bool)$value;
+							break;
+						default:
+							break;
+					}
 
-				}
+					$this->content->template[$column] = $value;
+				});
 			}
+
+			// Redirect to module list if module wasn't found
+			else {
+				$this->diverse->http_redirect('/interna/plugin.php?'.http_build_query([
+					'menuid' => $this->checked->menuid,
+					'template' => $this->checked->template,
+				], '', '&'), 303);
+			}
+
 			$this->content->template['edit'] = "ok";
 			$this->content->template['altereintrag'] = "ok";
 			preg_match("/(\d+)-(\d+)-(\d+)/",$this->content->template['freiemodule_start'],$res);
@@ -542,7 +571,6 @@ class freiemodule {
 				$this->cms->tbname['papoo_freiemodule_daten'],
 				$this->cms->lang_id
 			);
-			//print_r($sql);
 			$result = $this->db->get_results($sql, ARRAY_A);
 			//Daten f�r das Template zuweisen
 			$this->content->template['list_dat'] = $result;

@@ -104,6 +104,8 @@ class kontaktform
 
 			//Wenn Übermitteln
 			if (!empty($this->checked->kontakt_senden)) {
+				$_SESSION['cgeschickt'] = $_SESSION['cgeschickt'] ?? 0;
+
 				//Prüfen nach Datenbank,
 				$this->check_data();
 				//wenn nicht ok, nochmal
@@ -134,54 +136,33 @@ class kontaktform
 	function send_form()
 	{
 		if (isset($_SESSION['cgeschickt']) && $_SESSION['cgeschickt'] < 10) {
-			//Kontaktformular der Seite
-			$this->mail_it->body = $this->content->template['contact']['mail1']." ".$this->cms->title;
-			$this->mail_it->body .=$this->get_form_dat();
+			$mailSettings = $this->cms->getMailConfig();
 
+			// Kontaktformular der Seite
+			$this->mail_it->body = $this->content->template['contact']['mail1'] . " " . $this->cms->title;
+			$this->mail_it->body .= $this->get_form_dat();
 			$this->mail_it->to = $this->cms->admin_email;
-			//$this->from = $this->checked->email;
 			$this->mail_it->ReplyTo[$this->replayto] = $this->replayto;
 			$this->mail_it->from = $this->cms->admin_email;
-			$true="";
+			$this->mail_it->subject = $this->content->template['contact']['mail1'] . " " . $this->cms->title;
 
-			if (!empty ($this->mail_it->from)) {
-				$true1 = $this->validateEmail($this->mail_it->from)."w";
+			if (!empty($this->mail_it->from) && $this->validateEmail($this->mail_it->from)) {
+				$this->mail_it->do_mail();
 			}
 
-			if ($true1!=1) {
+			// An den Sender
+			if ($mailSettings['sendReplyMail']) {
+				$this->mail_it->body = $this->content->template['contact']['mail1'] . " " . $this->cms->title;
+				$this->mail_it->body .= $this->get_form_dat();
+				$this->mail_it->to = $this->replayto;
+				unset($this->mail_it->ReplyTo[$this->replayto]);
 				$this->mail_it->from = $this->cms->admin_email;
+				$this->mail_it->subject = $this->content->template['contact']['mail1'] . " " . $this->cms->title;
+
+				if (!empty($this->mail_it->from) && $this->validateEmail($this->mail_it->from)) {
+					$this->mail_it->do_mail();
+				}
 			}
-
-			$this->mail_it->subject = $this->content->template['contact']['mail1']." ".$this->cms->title;
-			//$this->priority = 5;
-			$this->mail_it->body ;
-
-			$this->mail_it->do_mail();
-
-			//AN den Sender
-
-			$this->mail_it->body = $this->content->template['contact']['mail1']." ".$this->cms->title;
-			$this->mail_it->body .=$this->get_form_dat();
-
-			$this->mail_it->to = $this->replayto;
-
-			//$this->from = $this->checked->email;
-			#$this->mail_it->ReplyTo = $this->replayto;
-			$this->mail_it->from = $this->cms->admin_email;
-			$true="";
-
-			if (!empty ($this->mail_it->from)) {
-				$true1 = $this->validateEmail($this->mail_it->from)."w";
-			}
-
-			if ($true1!=1) {
-				$this->mail_it->from = $this->cms->admin_email;
-			}
-
-			$this->mail_it->subject = $this->content->template['contact']['mail1']." ".$this->cms->title;
-			//$this->priority = 5;
-			$this->mail_it->body ;
-			$this->mail_it->do_mail();
 
 			// added by khm (z. B. empfehlenswert bei Google adwords conversion target, SEO)
 			$location_url = "kontakt.php";
@@ -193,9 +174,6 @@ class kontaktform
 				header("Location: $location_url");
 				exit;
 			}
-		}
-		else {
-			$_SESSION['cgeschickt']=0;
 		}
 	}
 

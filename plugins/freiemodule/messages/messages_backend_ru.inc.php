@@ -2,7 +2,9 @@
 $this->content->template['plugin']['freiemodule']['neuereintrag'] = "Создание новой записи модуля"; 
 $this->content->template['plugin']['freiemodule']['altereintrag'] = "Изменение записи модуля"; 
 $this->content->template['plugin']['freiemodule']['name_code'] = "Введите здесь название модуля и код для него."; 
+$this->content->template['plugin']['freiemodule']['not_translated_note'] = 'Этот модуль еще не переведен. Содержимое было предварительно заполнено данными с другого языка. Сохраните изменения, чтобы создать новый перевод.';
 $this->content->template['plugin']['freiemodule']['bannereintrag'] = "Введите запись модуля здесь"; 
+$this->content->template['plugin']['freiemodule']['cross_language_settings'] = 'Межъязыковые настройки';
 $this->content->template['plugin']['freiemodule']['freiemodule_name'] = "Введите обозначение здесь:"; 
 $this->content->template['plugin']['freiemodule']['freiemodule_wrapper'] = "Свободный выходной модуль без дополнительного контейнера"; 
 $this->content->template['plugin']['freiemodule']['freiemodule_code'] = "Введите код здесь:"; 

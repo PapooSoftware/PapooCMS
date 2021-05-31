@@ -76,16 +76,15 @@ class social_media_buttons_class
 			$this->content->template['plugin']['social_media_buttons']['config']['orientation'] = 'horizontal';
 		}
 
-		// Den data-service-string zusammenbasteln
-		$active_buttons_template_string = "";
-		$active_button_names[] = "";
+		// Den data-service-string erstellen
+		$active_button_names = [];
 		if (sizeof($active_buttons) > 0) {
 			foreach ($active_buttons as $button) {
 				$active_button_names[] = '&quot;' . $button['name'] . '&quot;';
 			}
 		}
 
-		// Die html-Strings für die Einbindung zusammenbasteln
+		// Die html-Strings für die Einbindung erstellen
 		$css_file = 'shariff.min.css';
 		$js_file = 'shariff.min.js';
 

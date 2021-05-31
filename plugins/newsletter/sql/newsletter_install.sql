@@ -32,7 +32,7 @@ CREATE TABLE `XXX_papoo_news_impressum` (
   `max_hardbounce_time` int(3) NOT NULL DEFAULT '14'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8; ##b_dump##
 
-INSERT INTO `XXX_papoo_news_impressum` SET news_imp_id='0', news_email='newsletter@ihre_seite.de', news_name='Ihr Absendername', news_erw='', wyswig='', news_html='', news_anzeig_message='', news_sprachwahl='', news_impressum='Inhalt', news_lang=';1', news_impressum_html=''  ; ##b_dump##
+INSERT INTO `XXX_papoo_news_impressum` SET news_imp_id='0', news_email='newsletter@webseite.de', news_name='Ihr Absendername', news_erw='', wyswig='', news_html='', news_anzeig_message='', news_sprachwahl='', news_impressum='Inhalt', news_lang=';1', news_impressum_html=''  ; ##b_dump##
 
 DROP TABLE IF EXISTS `XXX_papoo_news_user`; ##b_dump##
 CREATE TABLE `XXX_papoo_news_user` (
@@ -61,7 +61,7 @@ CREATE TABLE `XXX_papoo_news_user` (
   PRIMARY KEY (`news_user_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8; ##b_dump##
 
-INSERT INTO `XXX_papoo_news_user` SET news_user_id='1', news_active='1', news_key='b7841872e8b138fc40a3b5f0a9db43e5', news_user_email='mail@ihre_seite.de', news_name_vor='', news_name_nach='', news_name_gender='', news_name_str='', news_name_plz='', news_user_lang='1', news_name_ort='', news_signup_date=''  ; ##b_dump##
+INSERT INTO `XXX_papoo_news_user` SET news_user_id='1', news_active='1', news_key='b7841872e8b138fc40a3b5f0a9db43e5', news_user_email='mail@webseite.de', news_name_vor='', news_name_nach='', news_name_gender='', news_name_str='', news_name_plz='', news_user_lang='1', news_name_ort='', news_signup_date=''  ; ##b_dump##
 
 DROP TABLE IF EXISTS `XXX_papoo_newsletter`; ##b_dump##
 CREATE TABLE `XXX_papoo_newsletter` (

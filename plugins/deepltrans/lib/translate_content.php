@@ -91,15 +91,17 @@ class translate_content extends deepltrans_class
 		/**
 		 * Start Translation Backend
 		 */
-		$this->translateBackendMenu($langData);
+		//$this->translateBackendMenu($langData);
 
 		/**
 		 * Start Translation Frontend
 		 */
-
+		/***
 		$this->translateFrontendMenu($langData);
 		$this->translateStartPage($langData);
+		 * */
 		$this->translateArticle($langData);
+		/**
 		$this->translateCollum3($langData);
 		$this->translateImages($langData);
 		$this->translateTopMenu($langData);
@@ -124,25 +126,224 @@ class translate_content extends deepltrans_class
 		$this->translateFormLang($langData);
 		$this->translateGlossar($langData);
 		$this->translateGlossarPref($langData);
+
 		$this->translateMVForms($langData);
 		$this->translateMVFormsFelder($langData);
 		$this->translateMVContents($langData);
 		$this->translateMVTemplate($langData);
 		$this->translateMVMetaLang($langData);
 		$this->translateMVLang($langData);
+
+
 		$this->translateBanner($langData);
 		$this->translateFAQCats($langData);
 		$this->translateFAQQuestions($langData);
 		$this->translateFAQConfig($langData);
 		$this->translateFAQConfig($langData);
-		//Shop noch offen...
+
+		$this->translateShopCat($langData);
+		$this->translateShopProdukte($langData);
+		$this->translateShopLayouts($langData);
+		$this->translateShopKundenFelder($langData);
+		$this->translateShopPaymentArten($langData);
+		$this->translateShopMails($langData);
+		$this->translateShopSettings($langData);
+		* */
+
+		//noch offen:
+
+		///ini_set("display_errors", true);
+		//error_reporting(E_ALL);
 
 		//TODO die Alternativtexte der Bilder müssen noch ersetzt werden
-		//
+		//TODO die Links in den Contents müssen am Ende noch überall ersezt werden...
+		//  -> Artikel, 3. Spalte, freie Module, Banner, Bildwechsler, Shop, Flex,
+		//TODO getlang=de mit der jeweiligen Sprache ersetzen...
+
+
 		$this->db->csrfok = false;
 		$this->db->show_errors = true;
 	}
 
+	/**
+	 * @param array $langData
+	 * @return bool
+	 */
+	public function translateShopSettings($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"einstellungen_lang__ext"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "plugin_shop_daten";
+		$idName = "einstellungen_id";
+		$langIdName = "einstellungen_lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
+
+
+	/**
+	 * @param array $langData
+	 * @return bool
+	 */
+	public function translateShopMails($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"mail_etreff_der_ail",
+			"mail_ext_nhalt_der_ail_",
+			"mail__nhalt_der_ail_"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "plugin_shop_mailing";
+		$idName = "mail_id";
+		$langIdName = "mail_lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
+
+	/**
+	 * @param array $langData
+	 * @return bool
+	 */
+	public function translateShopPaymentArten($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"shop_payment_Name_des_Payments",
+			"shop_payment_eschreibender_ext"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "plugin_shop_daten_payment_arten";
+		$idName = "shop_payment_id";
+		$langIdName = "shop_payment_lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
+
+	/**
+	 * @param array $langData
+	 * @return bool
+	 */
+	public function translateShopKundenFelder($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"prospect_lang_label_des_kundenfeldes",
+			"prospect_lang_default_wert_wenn_vorhanden",
+			"prospect_lang_Weitereerlauterungen",
+			"prospect_lang_InhalteeinerSelectbox"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "plugin_shop_kunden_felder_lang";
+		$idName = "prospect_lang_id";
+		$langIdName = "prospect_lang_lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
+
+	/**
+	 * @param array $langData
+	 * @return bool
+	 */
+	public function translateShopLayouts($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"layout_lang_bezeichnunglayout",
+			"layout_lang_iststandatdayout",
+			"layout_lang_ausgabeuebrsicht",
+			"layout_lang_Einzelachsich"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "plugin_shop_lang_layouts";
+		$idName = "layout_lang_id";
+		$langIdName = "layout_lang_lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
+
+	/**
+	 * @param array $langData
+	 * @return bool
+	 */
+	public function translateShopProdukte($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"produkte_lang_produktename",
+			"produkte_lang_produkt_beschreibung",
+			"produkte_lang_meta_title",
+			"produkte_lang_meta_beschreibung",
+			"produkte_lang_met_keywords",
+			"produkte_lang_produkt_beschreibung_lang",
+			"produkte_lang_produkt_surl"
+		);
+
+		$felderMitLang = array("produkte_lang_produkt_surl"=>true);
+
+		$tbName = "plugin_shop_produkte_lang";
+		$idName = "produkte_lang_id";
+		$langIdName = "produkte_lang_lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
+
+	/**
+	 * @param array $langData
+	 * @return bool
+	 */
+	public function translateShopCat($langData=array())
+	{
+		//erstmal die Daten festlegen der Felder und CO.
+		$felder = array(
+			"kategorien_lang_TitelderSeite",
+			"kategorien_lang_metadescriptioncat",
+			"kategorien_lang_matakeywordcat",
+			"kategorien_lang_Beschreibung"
+		);
+
+		$felderMitLang = array();
+
+		$tbName = "plugin_shop_kategorien_lang";
+		$idName = "kategorien_lang_kat_id";
+		$langIdName = "kategorien_lang_lang_id";
+
+		//Dann übersetzen und in DB schreiben.
+		$this->translateLangTable($tbName,$idName,$felder,$langData,$felderMitLang,$langIdName);
+
+		return true;
+	}
 
 
 	/**
@@ -296,6 +497,9 @@ class translate_content extends deepltrans_class
 
 	public function translateMVTemplate($langData=array())
 	{
+		$this->transDeeplNow->set_noNewlines("false");
+		$this->transDeeplNow->setDeeplUrl();
+
 		//erstmal die Daten festlegen der Felder und CO.
 		$felder = array(
 			"template_content_all",
@@ -306,7 +510,7 @@ class translate_content extends deepltrans_class
 
 		$felderMitLang = array();
 
-		$idName = "id";
+		$idName = "detail_id";
 		$langIdName = "lang_id";
 
 		//Die MVs raus suchen -... müssen ja alle
@@ -370,6 +574,9 @@ class translate_content extends deepltrans_class
 
 	public function translateMVFormsFelder($langData=array())
 	{
+		$this->transDeeplNow->set_noNewlines("false");
+		$this->transDeeplNow->setDeeplUrl();
+
 		//erstmal die Daten festlegen der Felder und CO.
 		$felder = array(
 			"mvcform_label",
@@ -461,6 +668,9 @@ class translate_content extends deepltrans_class
 
 	public function translateFormLang($langData=array())
 	{
+		$this->transDeeplNow->set_noNewlines("false");
+		$this->transDeeplNow->setDeeplUrl();
+
 		//erstmal die Daten festlegen der Felder und CO.
 		$felder = array(
 			"form_manager_antwort_html",
@@ -509,6 +719,10 @@ class translate_content extends deepltrans_class
 
 	public function translateFormCformLang($langData=array())
 	{
+		$this->transDeeplNow->set_noNewlines("false");
+		$this->transDeeplNow->setDeeplUrl();
+
+
 		//erstmal die Daten festlegen der Felder und CO.
 		$felder = array(
 			"plugin_cform_label",
@@ -1061,14 +1275,14 @@ class translate_content extends deepltrans_class
 			//alten Eintrag raus
 			$xsql=array();
 			$xsql['dbname']         = $tbName;
-			$xsql['limit']          = " LIMIT 1";
+			$xsql['limit']          = " LIMIT 10";
 			$xsql['del_where_wert'] = " ".$idName."='".$item[$idName]."' AND ".$langIdName."='".$langData['1']."'";
-			$this->db_abs->delete( $xsql );
+			$this->db_abs->delete( $xsql,$show );
 
 			//Daten für neuen Eintrag
 			foreach($item as $feld=>$feldValue)
 			{
-				$this->checked->$feld=$feldValue;
+				$this->checked->$feld=$this->transDeeplNow->unIgnore($feldValue);
 			}
 			//print_r($transData);
 			//print_r($felderMitLang);
@@ -1080,17 +1294,24 @@ class translate_content extends deepltrans_class
 					$this->checked->$feld="/".$langData['0'].$transText['trans_text']['translations'][$k]['text'];
 				}
 				else{
-					$this->checked->$feld=$transText['trans_text']['translations'][$k]['text'];
+					$this->checked->$feld=$this->transDeeplNow->unIgnore($transText['trans_text']['translations'][$k]['text']);
 				}
 
 			}
 			//set target langid
 			$this->checked->$langIdName=$langData['1'];
 
+			//Fallback if whyever the id is 0...
+			if($this->checked->$idName==0)
+			{
+				$this->checked->$idName=1;
+			}
+			//print_r($this->checked);exit();
 			//neuen Eintrag rein
 			$xsql=array();
 			$xsql['dbname'] = $tbName;
 			$xsql['must'] = array($idName,$langIdName);
+			//print_r($xsql);
 			$this->db_abs->insert( $xsql,$show);
 			//exit();
 		}
@@ -1116,7 +1337,8 @@ class translate_content extends deepltrans_class
 				unset($item[$feld]);
 			}
 			$transData = $item;
-			$transText = $this->transDeeplNow->translateArray($langData['0'],$transData);
+			$delcomments = false;
+			$transText = $this->transDeeplNow->translateArray($langData['0'],$transData,$delcomments);
 
 			$tbNameTarget = str_ireplace("search_1","search_".$langData['1'],$tbName);
 
@@ -1136,7 +1358,7 @@ class translate_content extends deepltrans_class
 			$i =0;
 			foreach ($item as $k=>$feld)
 			{
-				$this->checked->$k=$transText['trans_text']['translations'][$i]['text'];
+				$this->checked->$k=$this->transDeeplNow->unIgnore($transText['trans_text']['translations'][$i]['text']);
 				$i++;
 			}
 
@@ -1151,43 +1373,9 @@ class translate_content extends deepltrans_class
 	}
 
 
-
-
-	public function translate_freie_module()
-	{
-		/**
-		return false;
-		print_r("hier");
-		$sql = sprintf("SELECT * FROM %s
-		WHERE freiemodule_lang='de' ",
-		DB_PRAEFIX."papoo_freiemodule_daten"
-		);
-		$result = $this->db->get_results($sql,ARRAY_A);
-		//print_r($result);
-		$active_lng_data = $this->get_active_lngs();
-
-		#print_r($result);
-		$trans_frei_content = "";
-
-		foreach ($active_lng_data as $lk=>$lv)
-		{
-		if (is_array($result))
-		{
-		foreach ($result as $k=>$v)
-		{
-		print_r(($v['freiemodule_code']));
-		$trans_frei_content = $this->transDeeplNow->translate($lv['lang_short'],$v['freiemodule_code']);
-		print_r(($trans_frei_content));
-		//exit();
-		}
-		}
-		}
-
-		print_r("<p>Freie Module fertig </p>");
-		return true;
-		 * **/
-	}
-
+	/**
+	 * @return mixed
+	 */
 	public function get_active_lngs()
 	{
 		$sql = sprintf("SELECT * FROM %s WHERE lang_short<>'de'",
@@ -1195,15 +1383,6 @@ class translate_content extends deepltrans_class
 		);
 		return $this->db->get_results($sql, ARRAY_A);
 	}
-	/**
-	 * @return transDeeplNow
-	 */
-	public function getTransDeeplNow()
-	{
-		$this->setDeeplUrl();
-		return $this->transDeeplNow;
-	}
-
 
 
 }

@@ -89,10 +89,10 @@ class frmodul
 			/* Überprüfung hier nur auf Sprache */
 			$sql = sprintf("SELECT freiemodule_code
 						FROM %s
-						WHERE freiemodule_lang = '%s'
+						WHERE freiemodule_lang_id = '%d'
 						AND freiemodule_id = '%d'",
 				$this->cms->tbname['papoo_freiemodule_daten'],
-				$this->cms->lang_short,
+				$this->cms->lang_id,
 				$banner_id
 			);
 			$result = $this->db->get_var($sql);

@@ -7,6 +7,11 @@
 {/if}
 <p>{$plugin.freiemodule.name_code}</p>
 
+{if not $isFreeModuleTranslated}
+	<div class="alert alert-info">
+		<strong>{$plugin.freiemodule.not_translated_note|escape}</strong>
+	</div>
+{/if}
 
   <form action="" method="post">
 
@@ -14,9 +19,11 @@
    <legend>{$plugin.freiemodule.bannereintrag}
     </legend>
 
-  <label for="freiemodule_name">{$plugin.freiemodule.freiemodule_name}</label><br />
-  <input type="text" name="freiemodule_name" id="freiemodule_name" value="{$freiemodule_name}" size="40" maxlength="254"/>
-  <br />
+		<div class="form-field">
+			<label for="freiemodule_name">{$plugin.freiemodule.freiemodule_name|escape}</label>
+			<input type="text" name="freiemodule_name" id="freiemodule_name" value="{$freiemodule_name|escape}" size="40" maxlength="254"/>
+		</div>
+
 	<script language="javascript" type="text/javascript" src="./tiny_mce/tiny_mce.js" charset="utf-8"></script>
 	<script language="javascript" type="text/javascript" src="./tiny_mce/FileBrowser.js"></script>
 	
@@ -39,6 +46,11 @@
   <label for="freiemodule_code">{$plugin.freiemodule.freiemodule_code}</label><br />
   <textarea name="freiemodule_code" id="freiemodule_code" rows="20" cols="70" >{$freiemodule_code}</textarea>
   <br />
+	</fieldset>
+
+	<fieldset>
+		<legend>{$plugin.freiemodule.cross_language_settings|escape}</legend>
+
    <label for="freiemodule_menuid">{$plugin.freiemodule.freiemodule_menuid}</label>
    <br />
   <select name="freiemodule_menuid" id="freiemodule_menuid" title="" style="width: 40%;" size="1">
@@ -127,21 +139,6 @@
     {/foreach}
     </select>
 	<br />
-	<label for="banner_lang" >{$plugin.freiemodule.sprache}</label>
-	<br />
-{*<!-- Hier kann eine Sprache ausgew�hlt werden. -->*}
-    <select name="banner_lang" id="banner_lang" title="" style="width:40%;" size="1">
-{*<!-- ausw�hlen/select -->*}
-    <option value="">({$message_294})</option>
-    {foreach item=lang from=$language}
-				<option value="{$lang.lang_short}" {if $lang.lang_short==$freiemodule_lang} selected="selected" {/if} >
-					{$lang.language}
-				</option>
-			{/foreach}
-    </select>
-    <br />
-	<br />
-
 
 	<label for="freiemodule_zeitrahmen">{$plugin.freiemodule.freiemodule_zeitrahmen}</label>
 	<br />
@@ -152,6 +149,7 @@
 	 <input type="text" name="freiemodule_stop" id="freiemodule_stop" value="{$freiemodule_stop}" size="8" maxlength="255"/><br /><br />
 
 
+		<input type="hidden" name="freiemodule_modulid" value="{$freiemodule_modulid|escape}" />
   <input type="hidden" name="freiemodule_id" value="{$freiemodule_id}"/>
   <br /><br />
 

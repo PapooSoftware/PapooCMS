@@ -29,13 +29,6 @@
 								{$message_814_bearbeiten2} {$style.style_name} -- {$message_814_bearbeiten3}
 							</a>
 						</p>
-						{if $style.standard_style && $style.dumpnrestore_exists}
-							<p>
-								<a href="./styles.php?menuid=22&amp;style_id={$style.style_id}&amp;action=style_reset" class="danger">
-									<input type="button" value="{$style_reset_text}" class="btn btn-danger">
-								</a>
-							</p>
-						{/if}
 					</td>
 					<td {if $style.standard_style} style="background-color:#DFF0D8;" {/if}>
 						{if $style.standard_style}

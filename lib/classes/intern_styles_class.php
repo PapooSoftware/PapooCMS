@@ -47,7 +47,6 @@ class intern_styles_class
 		global $dumpnrestore;
 		$this->dumpnrestore = &$dumpnrestore;
 
-		IfNotSetNull($this->content->template['css_themessage']);
 		IfNotSetNull($this->content->template['template_cont_start']);
 	}
 
@@ -102,11 +101,9 @@ class intern_styles_class
 		switch ($action) {
 		case "module_get_xml":
 			if($module->helper_make_xml($this->checked->mod_style_id)) {
-
 				exit;
 			}
 			else {
-
 				$this->switch_module();
 			}
 			break;
@@ -126,83 +123,41 @@ class intern_styles_class
 	 */
 	function switch_styles($action="")
 	{
+		switch ($action) {
+			case "style_edit":
+				$this->styles_edit($this->checked->style_id);
+				$this->switch_styles($_GET['action']);
+				break;
 
-		switch ($action)
-		{
-		case "style_edit":
-			$this->styles_edit($this->checked->style_id);
-			$this->switch_styles($_GET['action']);
-			break;
+			case "style_select":
+				$this->content->template['styles']['style_id'] = $this->checked->style_id;
+				$this->content->template['styles']['style_data'] = $this->styles_data($this->checked->style_id);
+				$this->content->template['styles']['template_weiche'] = "BEREICHE_LISTE";
+				break;
 
-		case "style_select":
-			$this->content->template['styles']['style_id'] = $this->checked->style_id;
-			$this->content->template['styles']['style_data'] = $this->styles_data($this->checked->style_id);
-			$this->content->template['styles']['template_weiche'] = "BEREICHE_LISTE";
-			break;
+			case "style_multi_aktiv":
+				IfNotSetNull($this->checked->styles_deaktiv);
+				$this->styles_multi_aktiv($this->checked->styles_aktiv, $this->checked->styles_deaktiv);
+				$this->switch_styles();
+				break;
 
-		case "style_multi_aktiv":
-			IfNotSetNull($this->checked->styles_deaktiv);
-			$this->styles_multi_aktiv($this->checked->styles_aktiv, $this->checked->styles_deaktiv);
-			$this->switch_styles();
-			break;
+			case "style_add":
+				$this->styles_aktivieren($this->checked->style_name);
+				$this->switch_styles();
+				break;
 
-		case "style_add":
-			$this->styles_aktivieren($this->checked->style_name);
-			$this->switch_styles();
-			break;
+			case "style_make_standard":
+				$this->styles_make_standard($this->checked->style_id);
+				$this->switch_styles();
+				break;
 
-		case "style_make_standard":
-			$this->styles_make_standard($this->checked->style_id);
-			$this->switch_styles();
-			break;
+			case "":
+			default:
+				$this->content->template['styles']['template_weiche'] = "STYLES_LISTE";
+				$this->content->template['styles']['liste_aktiv'] = $this->helper_styles_screenshot_test($this->styles_liste());
+				$this->content->template['styles']['liste_deaktiv'] = $this->helper_styles_screenshot_test($this->styles_liste_deaktiv());
 
-		case "style_reset":
-			$this->content->template['styles']['style_id'] = $this->checked->style_id;
-			$this->content->template['styles']['style_data'] = $this->styles_data($this->checked->style_id);
-			// ist Style Standardstyle; sollte ohne Modifizierung der Seite clientseitig nicht nötig sein
-			if(isset($this->content->template['styles']['style_data']['standard_style']) &&
-				$this->content->template['styles']['style_data']['standard_style'] == 1)
-			{
-				$this->content->template['styles']['style_pfad'] = $path = sprintf("%s/styles/%s/",
-					PAPOO_ABS_PFAD,
-					$this->content->template['styles']['style_data']['style_pfad']
-				);
-				$filename = $path."sql/dumpnrestore.sql";
-				// das break für case style_reset nur hier drin, damit default ausgeführt wird,
-				// falls der Style keine sql Datei hat
-				if(is_file($filename)) {
-					// Zurücksetzen wurde bestätigt
-					if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['style_reset_form_submit'])) {
-						// Passwort des Benutzers root merken
-						$password = $this->db->get_var("SELECT `password` FROM `".$this->cms->tbname['papoo_user']."` WHERE `username`='root'");
-						// Initialisierung der Datenbank durchführen
-						$this->dumpnrestore->restore($filename);
-						// Passwort wiederherstellen
-						$this->db->query("UPDATE `".$this->cms->tbname['papoo_user']."` SET `password`='".$password."' WHERE `username`='root';");
-						// Rückmeldung an das Template
-						$this->content->template['styles']['template_weiche'] = "STYLE_RESET_DONE";
-						$this->content->template['css_themessage'] = $this->content->template['style_reset_done'];
-					}
-					else {
-						// Warnung ausgeben
-						$this->content->template['styles']['template_weiche'] = "STYLE_RESET";
-					}
-					break;
-				}
-				else {
-					$this->content->template['css_themessage'] = $this->content->template['style_reset_no_sql'];
-				}
-			}
-			break;
-
-		case "":
-		default:
-			$this->content->template['styles']['template_weiche'] = "STYLES_LISTE";
-			$this->content->template['styles']['liste_aktiv'] = $this->helper_styles_dumpnrestore_test($this->helper_styles_screenshot_test($this->styles_liste()));
-			$this->content->template['styles']['liste_deaktiv'] = $this->helper_styles_screenshot_test($this->styles_liste_deaktiv());
-			//
-
-			break;
+				break;
 		}
 	}
 
@@ -419,6 +374,8 @@ class intern_styles_class
 
 			// Wenn Style existiert, deisen zum Standard machen
 			if ($temp_style_exists) {
+				$this->db->csrfok = true;
+
 				$sql = sprintf("UPDATE %s SET standard_style='0'",$this->db_praefix."papoo_styles");
 				$this->db->query($sql);
 
@@ -428,7 +385,10 @@ class intern_styles_class
 				);
 				$this->db->query($sql);
 
+				$this->db->csrfok = false;
+
 				$this->diverse->write_to_file("/interna/templates_c/css.txt",$style_id,"w+");
+				$this->content->template['css_themessage'] = $this->content->template['message_818'];
 			}
 		}
 	}
@@ -447,47 +407,6 @@ class intern_styles_class
 			}
 		}
 		return $temp_return;
-	}
-
-	/**
-	 * @param array $styles
-	 * @return array
-	 */
-	function helper_styles_dumpnrestore_test($styles = array())
-	{
-		$temp_return = array();
-		if (!empty($styles)) {
-			foreach ($styles as $style) {
-				$style['dumpnrestore_exists'] = file_exists(PAPOO_ABS_PFAD."/styles/".$style['style_pfad']."/sql/dumpnrestore.sql");
-				$temp_return[] = $style;
-			}
-		}
-		return $temp_return;
-	}
-
-	/**
-	 * @deprecated Wozu ist das noch hier?
-	 */
-	function BACKUP_make_inhalt()
-	{
-		// Überprüfen ob Zugriff auf die Inhalte besteht
-		$this->user->check_access();
-		if ( empty ( $this->checked->messageget ) ) {
-			$this->checked->messageget = "";
-		}
-		if ($this->checked->messageget==818) {
-			$this->content->template['css_themessage'] = $this->content->template['message_818'];
-		}
-
-		switch ($this->checked->menuid) {
-		case "22" :
-			// FIXME: Funktion existiert nicht: in css_do_change? Was hatte man hier vor?
-			$this->do_change();
-			break;
-
-		default :
-			break;
-		}
 	}
 
 	/**

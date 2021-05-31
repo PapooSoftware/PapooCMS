@@ -1472,11 +1472,15 @@ class user_class
 							// Confirm Code beim erstellen des Accounts via Email prüfen
 							$confirm_code = $this->createCode($this->checked->neuusername);
 
+
+
+
 							$sql = sprintf("INSERT INTO %s
 											SET username='%s', email='%s', password='%s', antwortmail='%s', zeitstempel=NOW(),
 											user_vorname='%s', user_nachname='%s', user_strasse='%s', user_ort='%s', user_plz='%s',
 											user_style_id='%d', dauer_einlogg='%d', confirm_code='%s', board='%d',
 											user_agb_ok='%d', user_newsletter='%s', signatur='%s', signatur_html='%s',
+											user_titel='%s', user_gender='%s', user_country='%s', user_tel_abends='%s', user_tel_tags='%s', user_fax='%s',
 											active='0'",
 								$this->cms->papoo_user,
 
@@ -1499,7 +1503,14 @@ class user_class
 								$this->db->escape($this->checked->user_agb_ok),
 								$this->db->escape($this->checked->newsletter),
 								$this->db->escape($this->checked->signatur),
-								$this->db->escape($this->bbcode->parse($this->checked->signatur))
+								$this->db->escape($this->bbcode->parse($this->checked->signatur),
+									$this->db->escape($this->checked->user_titel) ,
+									$this->db->escape($this->checked->user_gender) ,
+									$this->db->escape($this->checked->user_country) ,
+									$this->db->escape($this->checked->user_tel_abends) ,
+									$this->db->escape($this->checked->user_tel_tags) ,
+									$this->db->escape($this->checked->user_fax)
+								)
 							);
 
 							$this->db->query($sql);
