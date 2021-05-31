@@ -421,7 +421,7 @@ class blogger_shortcut_class {
 				foreach (array_filter($words, "blogger_shortcut_class::filter_words") as $word) {
 					$list[] = array($this->clean_word(trim($word)), $post->reporeID);
 				}
-				ini_set(display_errors, "On");
+				ini_set("display_errors", "On");
 			}
 			if (!empty($inhalts_array)) {
 				$text="";
