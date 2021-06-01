@@ -144,6 +144,11 @@ class transdeepl
 		return $return;
 	}
 
+	/**
+	 * @param string $text
+	 * @param $target_lang
+	 * @return mixed|string|string[]|null
+	 */
 	public function replaceAltUndCo($text="",$target_lang)
 	{
 		$atrribute=array("alt","title","href");
@@ -157,29 +162,43 @@ class transdeepl
 			preg_match_all($pattern, $text,$matches);
 
 			if(!empty($matches['1'])) {
-				foreach ($matches['1'] as $alt) {
-					$trAlt .= $alt . " +++ ";
-				}
+				foreach ($matches['1'] as $mk=> $alt) {
+					if(!stristr($alt,"#")) {
+						$trans = $this->translate($target_lang, $alt, false);
+						$transText = $trans['trans_text'];
 
-				$trans = $this->translate($target_lang, $trAlt, false);
-				$transDats = explode("+++", $trans['trans_text']);
-
-				if (!empty($matches['0'])) {
-					foreach ($matches['0'] as $k => $alt) {
-						if($atr=="href")
-						{
-							$transAlt = $atr.'="/' . strtolower($target_lang)."".trim($transDats[$k]) . '"';
-						}
-						else{
-							$transAlt = $atr.'="' . trim($transDats[$k]) . '"';
+						if ($atr == "href") {
+							$transAlt = $atr . '="/' . strtolower($target_lang) . "" . trim($transText) . '"';
+						} else {
+							$transAlt = $atr . '="' . trim($transText) . '"';
 						}
 
-						if(!stristr($alt,"http"))
-						{
-							$text = str_ireplace($alt, $transAlt, $text);
+						if (!stristr($alt, "http")) {
+							$text = str_ireplace($matches['0'][$mk], $transAlt, $text);
 						}
 					}
 				}
+				/**
+				 * did not work really... deepl was to dump...
+				 *
+				$trans = $this->translate($target_lang, $trAlt, false);
+				$transDats = explode("xxx", $trans['trans_text']);
+				var_dump($transDats);
+
+				if (!empty($matches['0'])) {
+				foreach ($matches['0'] as $k => $alt) {
+				if ($atr == "href") {
+				$transAlt = $atr . '="/' . strtolower($target_lang) . "" . trim($transDats[$k]) . '"';
+				} else {
+				$transAlt = $atr . '="' . trim($transDats[$k]) . '"';
+				}
+
+				if (!stristr($alt, "http")) {
+				$text = str_ireplace($alt, $transAlt, $text);
+				}
+				}
+				}
+				 * */
 			}
 		}
 		//shop.php?menuid=247
@@ -195,17 +214,19 @@ class transdeepl
 	public function escapePlaceholder($text="")
 	{
 		//Links in Flex
-		$pattern = '/\$\$#(.*?)#\$\$+/';
+		$pattern = '/\$\$#(\S*?)#\$\$+/';
 		$replacement ='<nd>$$#$1#$$</nd>';
 		$text = preg_replace($pattern, $replacement,$text);
 
+		//$text = 'als <a style="color: #fff !important; text-decoration: underline;" href="#mod_freiemodule_12">Download</a> oder #placeholder# und so gehts weiter...';
 		//placeholder across the system
-		$pattern = '/#(.*?)#+/';
+		$pattern = '/#(\S*?)#+/';
 		$replacement ='<nd>#$1#</nd>';
 		$text = preg_replace($pattern, $replacement,$text);
+		//print_r($text);exit();
 
 		//Some placeholder in flex....
-		$pattern = '/\{(.*?)\}+/';
+		$pattern = '/\{(\S*?)\}+/';
 		$replacement ='<nd>{$1}</nd>';
 		$text = preg_replace($pattern, $replacement,$text);
 
