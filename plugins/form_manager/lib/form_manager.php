@@ -4170,6 +4170,10 @@ class form_manager
 	 */
 	function copy_form($id = "")
 	{
+		// Temporarily disable CSRF protection
+		$oldCsrfState = $this->db->csrfok;
+		$this->db->csrfok = true;
+
 		// Formular Daten
 		$sql = sprintf("SELECT * FROM %s WHERE form_manager_id='%d'",
 			$this->cms->tbname['papoo_form_manager'],
@@ -4367,6 +4371,10 @@ class form_manager
 				}
 			}
 		}
+
+		// Revert CSRF protection to old state
+		$this->db->csrfok = $oldCsrfState;
+
 		$this->checked->form_manager_name =
 			//Beim Kopieren auch ein Modul erzeugen
 			$this->insert_module($insert_id_modul);
