@@ -392,6 +392,7 @@ class class_datums
 					$this->checked->pkal_date_kalender_id=$this->checked->psel_cal_id;
 					$this->checked->pkal_date_id = $max;
 					//$xsql['where_name'] = "config_id";
+					$this->db_abs->insert($xsql);
 
 				}
 				$insert['insert_id']=$max;
