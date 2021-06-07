@@ -23,6 +23,7 @@ CREATE TABLE `XXX_plugin_fixemodule_feldtypen` (
 INSERT INTO `XXX_plugin_fixemodule_feldtypen` SET `name`='Text'; ##b_dump##
 INSERT INTO `XXX_plugin_fixemodule_feldtypen` SET `name`='Bild'; ##b_dump##
 INSERT INTO `XXX_plugin_fixemodule_feldtypen` SET `name`='HTML'; ##b_dump##
+INSERT INTO `XXX_plugin_fixemodule_feldtypen` SET `name`='Checkbox'; ##b_dump##
 DROP TABLE IF EXISTS `XXX_plugin_fixemodule_module`; ##b_dump##
 CREATE TABLE `XXX_plugin_fixemodule_module` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
