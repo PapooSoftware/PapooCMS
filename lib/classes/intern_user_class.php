@@ -244,8 +244,8 @@ class intern_user
 							$sql .= " '" . $this->db->escape($this->checked->dauer_einlogg) . "', '" . $this->db->escape($this->checked->active) . "', '" . $confirm_code . "','" . $this->db->escape($this->checked->forum_board) . "','" . $this->db->escape($this->checked->beschreibung) . "', ";
 							$sql .= " '" . $this->db->escape($this->checked->lang_front) . "','" . $this->db->escape($this->checked->lang_back) . "','" . $this->db->escape($this->checked->user_newsletter) . "'
 						,'" . $this->db->escape($this->checked->user_titel) . "','" . $this->db->escape($this->checked->user_country) . "','" . $this->db->escape($this->checked->user_tel_abends) . "',
-						'" . $this->db->escape($this->checked->user_tel_tags) . "','" . $this->db->escape($this->checked->user_tel_kunden_nr) . "') ,'" . $this->db->escape($this->checked->user_gender) .
-								"'),'" . $this->db->escape($this->checked->user_fax) . "')";
+						'" . $this->db->escape($this->checked->user_tel_tags) . "','" . $this->db->escape($this->checked->user_tel_kunden_nr) . "', '" . $this->db->escape($this->checked->user_gender) .
+								"','" . $this->db->escape($this->checked->user_fax) . "')";
 
 							$this->db->query($sql);
 							// Neue Userid erfahr
