@@ -1,1 +1,0 @@
-ALTER TABLE `XXX_papoo_config` ADD `config_html_tidy_funktionaktivieren` varchar(255) NOT NULL; ##b_dump## 

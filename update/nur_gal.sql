@@ -1,1 +1,0 @@
-ALTER TABLE `XXX_galerie_galerien` ADD `parent_id` int(11) NOT NULL DEFAULT '0'; ##b_dump##
