@@ -163,12 +163,15 @@ class bildwechsler_class
 
 		if (!empty($temp_wechselbilder)) {
 			$index = 0;
-			foreach ($temp_wechselbilder as $temp_bild) {
+			foreach ($temp_wechselbilder as $k => $temp_bild) {
 				if ($temp_bild['bw_extra_link'] && $temp_bild['bw_extra_link_text']) {
 					$temp_wechselbilder[$index]['bw_extra_link'] =
 						'<a href="' . $temp_bild['bw_extra_link'] . '">' . $temp_bild['bw_extra_link_text'] . '</a>';
 					$temp_wechselbilder[$index]['bw_extra_link_url'] = $temp_bild['bw_extra_link'];
 					// unset ($temp_wechselbilder[$index]['bw_extra_link_text']);
+					$imageex1 = explode('src="',$temp_bild['bw_bild']);
+					$imageex2 = explode('"',$imageex1['1']);
+					$temp_wechselbilder[$k]['bw_bild_path'] = trim($imageex2['0']);
 				}
 				$index++;
 			}
