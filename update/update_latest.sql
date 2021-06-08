@@ -61,3 +61,7 @@ CREATE TABLE `XXX_trans_tabnames` (
                                       `trans_name_lang_id_name` varchar(255) NOT NULL,
                                       PRIMARY KEY (`trans_name_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ; ##b_dump##
+
+-- Emulate unique key to insert new type only once
+SELECT @rowId := id FROM `XXX_plugin_fixemodule_feldtypen` WHERE name LIKE 'Checkbox' LIMIT 1; ##b_dump##
+INSERT IGNORE INTO `XXX_plugin_fixemodule_feldtypen` SET id = @rowId, name = 'Checkbox'; ##b_dump##

@@ -1743,22 +1743,7 @@ class form_manager
 		$cfeld .= '<input type="hidden" name="' . $feld['plugin_cform_name'] . '" ';
 		$cfeld .= 'id="plugin_cform_' . $feld['plugin_cform_name'] . '" value="';
 		// OPtions eintragen
-		if (empty($this->checked->{$feld['plugin_cform_name']})) {
-			$cfeld .= $feld['plugin_cform_content_list'];
-		}
-		$cfeld .= isset($this->checked->{$feld['plugin_cform_name']}) ? $this->diverse->encode_quote($this->checked->{$feld['plugin_cform_name']}) : NULL;
-		$i = 0;
-		$cdaten = explode("\n", $feld['plugin_cform_content_list']);
-		if ((is_array($cdaten))) {
-			foreach ($cdaten as $daten) {
-				if (($i >= 1)) {
-					continue;
-				}
-				$daten = trim($daten);
-				$cfeld .= $daten;
-				$i++;
-			}
-		}
+		$cfeld .= htmlspecialchars(trim($this->checked->{$feld['plugin_cform_name']} ?? $feld['plugin_cform_content_list']));
 
 		$cfeld .= '"/>';
 		$this->feldarray[] = $cfeld;
