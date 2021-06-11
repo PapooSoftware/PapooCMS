@@ -69,7 +69,7 @@ class content_class
 				else {
 					// Skip previously decoded values
 					$nodeName = implode('.', array_merge($nodeNames, [$name]));
-					if (self::$decodedNodes[$nodeName] ?? false) {
+					if (self::$decodedNodes[$nodeName] ?? false and preg_match('~^[a-z]+:~', $wert) == false) {
 						$temp_array[$name] = $wert;
 					}
 
