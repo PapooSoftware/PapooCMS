@@ -19,6 +19,9 @@ class content_class
 	/** @var array beinhaltet Variablen für das Template */
 	var $template;
 
+	/** @var array $decodedNodes */
+	private static $decodedNodes = [];
+
 	/**
 	 * content_class constructor.
 	 */
@@ -36,7 +39,7 @@ class content_class
 		global $template;
 
 		// 1. Inhalte Codieren
-		$this->template = $this->decode($this->template);
+		$this->template = self::decode($this->template);
 
 		// 2. Template (HTML-Datei) Übergeben
 		$this->template['_template_'] = $template;
@@ -48,10 +51,11 @@ class content_class
 	/**
 	 * Inhalt eines Arrays umwandeln
 	 *
-	 * @param int $data
+	 * @param array $data
+	 * @param array $nodeNames
 	 * @return array
 	 */
-	function decode($data = 0)
+	private static function decode(array $data, array $nodeNames=[]): array
 	{
 		#return $data;
 		$temp_array = array();
@@ -60,11 +64,17 @@ class content_class
 			foreach($data as $name => $wert) {
 				if (is_array($wert)) {
 					// Die Rekursion
-					$temp_array[$name] = $this->decode($wert);
+					$temp_array[$name] = self::decode($wert, array_merge($nodeNames, [$name]));
 				}
 				else {
+					// Skip previously decoded values
+					$nodeName = implode('.', array_merge($nodeNames, [$name]));
+					if (self::$decodedNodes[$nodeName] ?? false and preg_match('~^[a-z]+:~', $wert) == false) {
+						$temp_array[$name] = $wert;
+					}
+
 					// das eigentliche Decodieren, wobei nur Texte decodiert werden sollen
-					if (is_string($wert)) {
+					elseif (is_string($wert)) {
 						// nur Texte deocdieren, die nicht "nodecode:" sind
 						if (strpos("xxx".$wert, "nodecode:") == 3) {
 							$temp_array[$name] = substr_replace($wert, "", 0 , 9);
@@ -79,8 +89,10 @@ class content_class
 								$nobr = true;
 								$wert = substr_replace($wert, "", 0 , 5);
 							}
-							$temp_array[$name] = $this->decode_text($wert, $nobr);
+							$temp_array[$name] = self::decode_text($wert, $nobr);
 						}
+
+						self::$decodedNodes[$name] = true;
 					}
 					else {
 						$temp_array[$name] = $wert;
@@ -94,15 +106,15 @@ class content_class
 	/**
 	 * @param string $text
 	 * @param bool $nobr
-	 * @return mixed|string|string[]|null
+	 * @return string
 	 */
-	function decode_text($text = "", $nobr = false)
+	private static function decode_text(string $text, bool $nobr): string
 	{
 		$neuer_text = preg_replace_callback('/((?:<[^>]+>?)?)((?(?<=>)[^<]+|))/', function ($match) use ($nobr) {
 			// [alter code] Test für HTML-Auszeichnung "alleinstehender &s"
 			$match[2] = str_replace("& ", "&amp; ", $match[2]);
 
-			return $this->decode_url($match[1]) . ($nobr ? $match[2] : nl2br($match[2]));
+			return self::decode_url($match[1]) . ($nobr ? $match[2] : nl2br($match[2]));
 		}, $text);
 
 		$neuer_text=preg_replace('/>[ ]{1,}([\.|\|\,|\;|\!|\?|:])/i','>$1',$neuer_text);
@@ -135,10 +147,10 @@ class content_class
 	/**
 	 * ersetzt & durch &amp; in URLs, also in den Attributen href, src eines Tags
 	 *
-	 * @param $tag
+	 * @param string $tag
 	 * @return string
 	 */
-	function decode_url($tag)
+	private static function decode_url(string $tag): string
 	{
 		// dieses Array wird von preg_match_all gefüllt.
 		$tag_array = array();

@@ -332,7 +332,7 @@ class class_cal_front
 								WHERE pkal_date_kalender_id='%d'
 								AND pkal_date_kategorie_im_kalender='%d'
 								AND year(FROM_UNIXTIME(pkal_date_start_datum))='%d'
-								AND userid='%d' AND pkal_date_kalender_id='%d'
+								AND userid='%d' AND pkal_date_kalender_id='%d' AND pkal_date_lang_id='%d'
 						",
 					$this->cms->tbname['plugin_kalender_date'],
 					$this->cms->tbname['plugin_kalender_lookup_read_date'],
@@ -341,7 +341,8 @@ class class_cal_front
 					$this->db->escape($this->checked->pkal_cat_id),
 					$this->db->escape($this->checked->wy),
 					$this->user->userid,
-					$this->checked->kal_id
+					$this->checked->kal_id,
+					$this->cms->lang_id
 				);
 			}
 			else {
@@ -351,7 +352,7 @@ class class_cal_front
 									WHERE pkal_date_kalender_id='%d'
 						AND pkal_date_kategorie_im_kalender='%d'
 						AND FROM_UNIXTIME(pkal_date_start_datum) >= date(NOW())
-						AND userid='%d' AND pkal_date_kalender_id='%d'
+						AND userid='%d' AND pkal_date_kalender_id='%d' AND pkal_date_lang_id='%d'
 						",
 					$this->cms->tbname['plugin_kalender_date'],
 					$this->cms->tbname['plugin_kalender_lookup_read_date'],
@@ -359,7 +360,8 @@ class class_cal_front
 					$this->db->escape($this->checked->kal_id),
 					$this->db->escape($this->checked->pkal_cat_id),
 					$this->user->userid,
-					$this->checked->kal_id
+					$this->checked->kal_id,
+					$this->cms->lang_id
 				);
 			}
 		}
@@ -370,7 +372,7 @@ class class_cal_front
 									LEFT JOIN %s ON date_gruppe_lese_id=gruppenid
 									WHERE pkal_date_kalender_id='%d'
 								AND year(FROM_UNIXTIME(pkal_date_start_datum))='%d'
-								AND userid='%d' AND pkal_date_kalender_id='%d'
+								AND userid='%d' AND pkal_date_kalender_id='%d' AND pkal_date_lang_id='%d'
 							",
 					$this->cms->tbname['plugin_kalender_date'],
 					$this->cms->tbname['plugin_kalender_lookup_read_date'],
@@ -378,7 +380,8 @@ class class_cal_front
 					$this->db->escape($this->checked->kal_id),
 					$this->db->escape($this->checked->wy),
 					$this->user->userid,
-					$this->checked->kal_id
+					$this->checked->kal_id,
+					$this->cms->lang_id
 				);
 			}
 			else {
@@ -387,14 +390,15 @@ class class_cal_front
 									LEFT JOIN %s ON date_gruppe_lese_id=gruppenid
 									WHERE pkal_date_kalender_id='%d'
 							AND FROM_UNIXTIME(pkal_date_start_datum) >= date(NOW())
-							AND userid='%d' AND pkal_date_kalender_id='%d'
+							AND userid='%d' AND pkal_date_kalender_id='%d' AND pkal_date_lang_id='%d'
 							",
 					$this->cms->tbname['plugin_kalender_date'],
 					$this->cms->tbname['plugin_kalender_lookup_read_date'],
 					$this->cms->tbname['papoo_lookup_ug'],
 					$this->db->escape($this->checked->kal_id),
 					$this->user->userid,
-					$this->checked->kal_id
+					$this->checked->kal_id,
+					$this->cms->lang_id
 				);
 			}
 		}
