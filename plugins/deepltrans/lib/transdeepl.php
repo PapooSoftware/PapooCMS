@@ -95,7 +95,7 @@ class transdeepl
 
 
 
-	public function translateArray($target_lang="en",$text=array(),$delcomments=true)
+	public function translateArray($target_lang="en",$text=array(),$delcomments=true,$noRekur=true)
 	{
 
 		//startzeit
@@ -106,15 +106,25 @@ class transdeepl
 
 		$body 	 				= "";
 
-		foreach($text as $sentence)
+		foreach($text as $k=> $sentence)
 		{
 			//kommentare entfernen
 			if($delcomments)
 			{
 				$sentence				= 	preg_replace("~<!--(.*?)-->~s", "", $sentence);
 			}
+			//print_r(strlen($sentence)."\n");
 			$sentence 	 				= 	$this->escapePlaceholder($sentence);
-			$sentence 	 				= 	$this->replaceAltUndCo($sentence,$target_lang);
+			if($noRekur) {
+				$sentence = $this->replaceAltUndCo($sentence, $target_lang);
+			}
+
+			if(strlen($sentence)>10000)
+			{
+				$longText[$k]=$sentence;
+				$sentence ="";
+			}
+
 			$body 						.= 	"&text=".urlencode($sentence);
 		}
 
@@ -129,16 +139,57 @@ class transdeepl
 
 		//aus dem json rausholen
 		$trans_text 			= 		json_decode($return_text,true);
+		//print_r($trans_text);exit();
+		if(!empty($longText))
+		{
+			$body 	 				= "";
+			foreach($longText as $k =>$long)
+			{
+				$shortTextArray = explode("<section",$long);
+				if(!empty($shortTextArray))
+				{
+					foreach($shortTextArray as $short) {
+
+						if($short['0']==" " && $short['1']=="i")
+						{
+							$short = ("<section".$short);
+						}
+						$body 						.= 	"&text=".urlencode($short);
+					}
+				}
+				//translate Aufruf durchführen
+				$return_text 			= 	$this->curlFromDeepl($deepl_url,$body);
+
+				//aus dem json rausholen
+				$trans_text2 			= 		json_decode($return_text,true);
+				if(!empty($trans_text2))
+				{
+					$transTextLong = "";
+					foreach($trans_text2['translations'] as $data)
+					{
+						$transTextLong.=$data['text'];
+					}
+				}
+				//und übertragen...
+				$trans_text['translations'][$k]['text']= $transTextLong;
+				//print_R($trans_text2);exit();
+			}
+			//exit();
+			//$trans_text = array_merge($trans_text,$trans_text2);
+		}
 
 		//ende
 		$stop 					= 	microtime(true);
 
 		//zeit die es gebraucht hat
 		$difftime 				= 	$stop - $start;
+		//print_r($trans_text);exit();
 
 		//Daten für Rückgabe aufbereiten
 		$return['used_time'] 	= 	$difftime;
 		$return['trans_text'] 	= 	$trans_text;
+
+
 
 		//übersetzten Text zurückgeben
 		return $return;
@@ -151,21 +202,34 @@ class transdeepl
 	 */
 	public function replaceAltUndCo($text="",$target_lang)
 	{
-		$atrribute=array("alt","title","href");
+		$atrribute = array("alt", "title", "href");
 
-		foreach($atrribute as $atr)
-		{
-			$matches 	= array();
-			$trAlt 		= "";
+		foreach ($atrribute as $atr) {
+			$matches = array();
+			$trAlt = "";
 			//alt across the system
-			$pattern 	= '/'.$atr.'="(.*?)"+/';
-			preg_match_all($pattern, $text,$matches);
+			$pattern = '/' . $atr . '="(.*?)"+/';
+			preg_match_all($pattern, $text, $matches);
 
-			if(!empty($matches['1'])) {
-				foreach ($matches['1'] as $mk=> $alt) {
-					if(!stristr($alt,"#")) {
-						$trans = $this->translate($target_lang, $alt, false);
-						$transText = $trans['trans_text'];
+			if (!empty($matches['1'])) {
+				foreach ($matches['1'] as $mk => $alt) {
+					if (!stristr($alt, "#")) {
+						$toTrans[$mk] = $alt;
+					}
+				}
+			}
+			if(empty($toTrans))
+			{
+				continue;
+			}
+			$getransed = $this->translateArray($target_lang, $toTrans, false, false);
+
+			if (!empty($matches['1'])) {
+				foreach ($matches['1'] as $mk => $alt) {
+					if (!stristr($alt, "#")) {
+						//$trans = $this->translate($target_lang, $alt, false);
+						$transText = $getransed['translations'][$mk]['text'];
+						//$transText = $trans['trans_text'];
 
 						if ($atr == "href") {
 							$transAlt = $atr . '="/' . strtolower($target_lang) . "" . trim($transText) . '"';
@@ -178,34 +242,15 @@ class transdeepl
 						}
 					}
 				}
-				/**
-				 * did not work really... deepl was to dump...
-				 *
-				$trans = $this->translate($target_lang, $trAlt, false);
-				$transDats = explode("xxx", $trans['trans_text']);
-				var_dump($transDats);
-
-				if (!empty($matches['0'])) {
-				foreach ($matches['0'] as $k => $alt) {
-				if ($atr == "href") {
-				$transAlt = $atr . '="/' . strtolower($target_lang) . "" . trim($transDats[$k]) . '"';
-				} else {
-				$transAlt = $atr . '="' . trim($transDats[$k]) . '"';
-				}
-
-				if (!stristr($alt, "http")) {
-				$text = str_ireplace($alt, $transAlt, $text);
-				}
-				}
-				}
-				 * */
 			}
 		}
+
 		//shop.php?menuid=247
 		$text = str_ireplace("shop.php?menuid=247", "shop.php?menuid=247&getlang=".strtolower($target_lang), $text);
 		$text = str_ireplace("getlang=de", "getlang=".strtolower($target_lang), $text);
 		return $text;
 	}
+
 
 	/**
 	 * @param string $text
