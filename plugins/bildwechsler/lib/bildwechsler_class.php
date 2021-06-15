@@ -568,18 +568,12 @@ class bildwechsler_class
 			}
 
 			if (!$temp_id) {
-				$sql = sprintf("SELECT MAX(bw_id) FROM %s",DB_PRAEFIX."bildwechsler");
-				$max = $this->db->get_var($sql);
-				$max++;
-
-				$sql = sprintf("INSERT INTO %s SET bw_id='%d', bw_order_id='999999', bw_lang_id='%d'",
+				$sql = sprintf("INSERT INTO %s SET bw_order_id='999999', bw_lang_id='%d'",
 					$this->db_praefix . "bildwechsler",
-					$max,
 					$this->cms->lang_id
 				);
 				$this->db->query($sql);
-
-				$temp_id = $max;
+				$temp_id = $this->db->insert_id;
 			}
 
 			$sql = sprintf(
