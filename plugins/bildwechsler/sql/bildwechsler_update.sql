@@ -20,3 +20,6 @@ DELETE FROM `XXX_bildwechsler_config` WHERE `id` > 1; ##b_dump##
 
 ALTER TABLE `XXX_bildwechsler` CHANGE `bw_id` `bw_id` BIGINT NOT NULL;
 ALTER TABLE `XXX_bildwechsler` DROP PRIMARY KEY;
+
+ALTER TABLE `XXX_bildwechsler` ADD PRIMARY KEY(bw_id, bw_lang_id);
+ALTER TABLE `XXX_bildwechsler` CHANGE `bw_id` `bw_id` BIGINT NOT NULL AUTO_INCREMENT;
