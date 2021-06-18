@@ -1486,7 +1486,7 @@ class user_class
 
 								$this->db->escape($this->checked->neuusername),
 								$this->db->escape($this->checked->neuemail),
-								$md5password = $this->diverse->hash_password($this->checked->neupassword1),
+								$this->diverse->hash_password($this->checked->neupassword1),
 								$antwortmail,
 
 								$this->db->escape($this->checked->neuvorname),
@@ -1503,14 +1503,14 @@ class user_class
 								$this->db->escape($this->checked->user_agb_ok),
 								$this->db->escape($this->checked->newsletter),
 								$this->db->escape($this->checked->signatur),
-								$this->db->escape($this->bbcode->parse($this->checked->signatur),
-									$this->db->escape($this->checked->user_titel) ,
-									$this->db->escape($this->checked->user_gender) ,
-									$this->db->escape($this->checked->user_country) ,
-									$this->db->escape($this->checked->user_tel_abends) ,
-									$this->db->escape($this->checked->user_tel_tags) ,
-									$this->db->escape($this->checked->user_fax)
-								)
+								$this->db->escape($this->bbcode->parse($this->checked->signatur)),
+
+								$this->db->escape($this->checked->user_titel),
+								$this->db->escape($this->checked->user_gender),
+								$this->db->escape($this->checked->user_country),
+								$this->db->escape($this->checked->user_tel_abends),
+								$this->db->escape($this->checked->user_tel_tags),
+								$this->db->escape($this->checked->user_fax)
 							);
 
 							$this->db->query($sql);
@@ -1521,9 +1521,7 @@ class user_class
 							$this->db->query($sqlin);
 
 							// sendmail hier
-
-							$link = "http://" . str_replace("//", "/",
-									$this->cms->title_send . PAPOO_WEB_PFAD . "/account.php");
+							$link = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . PAPOO_WEB_PFAD . "/account.php";
 
 							$body = $this->content->template['message_2270'];
 							$body = str_ireplace("#seitentitel#", $title_send, $body);
