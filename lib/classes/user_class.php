@@ -1421,7 +1421,6 @@ class user_class
 						$sql = "UPDATE " . $this->cms->papoo_user . " SET active='1' WHERE confirm_code='" . $this->db->escape($this->checked->activate) . "' LIMIT 1 ";
 						$this->db->query($sql);
 						$this->db->csrfok = false;
-						//print_r($sql);exit();
 
 						// Für die Mitgliederverwaltung die Daten in der mv_content Tabelle speichern
 						if ($this->mv->is_mv_installed) {
@@ -1472,9 +1471,6 @@ class user_class
 							// Confirm Code beim erstellen des Accounts via Email prüfen
 							$confirm_code = $this->createCode($this->checked->neuusername);
 
-
-
-
 							$sql = sprintf("INSERT INTO %s
 											SET username='%s', email='%s', password='%s', antwortmail='%s', zeitstempel=NOW(),
 											user_vorname='%s', user_nachname='%s', user_strasse='%s', user_ort='%s', user_plz='%s',
@@ -1521,7 +1517,8 @@ class user_class
 							$this->db->query($sqlin);
 
 							// sendmail hier
-							$link = $_SERVER['HTTPS'] == 'on' && $_SERVER['SERVER_PORT'] == '443' ? 'https' : 'http' . '://' . $_SERVER['HTTP_HOST'] . PAPOO_WEB_PFAD . "/account.php";
+							$protocol = $_SERVER['HTTPS'] == 'on' && $_SERVER['SERVER_PORT'] == '443' ? 'https' : 'http';
+							$link = $protocol . '://' . $_SERVER['HTTP_HOST'] . PAPOO_WEB_PFAD . "/account.php";
 
 							$body = $this->content->template['message_2270'];
 							$body = str_ireplace("#seitentitel#", $title_send, $body);
@@ -1632,7 +1629,8 @@ class user_class
 								$this->checked->neuusername = $this->db->get_var($sql);
 							}
 							// sendmail hier
-							$link = "http://" . str_replace("//", "/", $this->cms->title_send . "/account.php");
+							$protocol = $_SERVER['HTTPS'] == 'on' && $_SERVER['SERVER_PORT'] == '443' ? 'https' : 'http';
+							$link = $protocol . '://' . $_SERVER['HTTP_HOST'] . PAPOO_WEB_PFAD . "/account.php";
 
 							$body = $this->content->template['message_2275'];
 							$body = str_ireplace("#username#", $this->checked->neuusername, $body);
@@ -2014,28 +2012,10 @@ class user_class
 				$this->content->template['nachnamefalsch'] = $this->fehltnachname = $this->content->template["ergaenzen"];
 			}
 
-			// Postleitzahl überprüfen
-			if (empty ($this->checked->neuplz) or $this->checked->neuplz == "Postleitzahl") {
-				$this->plzfalsch = 1;
-				$this->content->template['plzfalsch'] = $this->fehltplz = $this->content->template["ergaenzen"];
-			}
-
 			// AGB überprüfen
 			if (empty ($this->checked->user_agb_ok)) {
 				$this->agbfalsch = 1;
 				$this->content->template['agbfalsch'] = $this->fehltagb = $this->content->template["ergaenzen"];
-			}
-
-			// Ort überprüfen
-			if (empty ($this->checked->neuort) or $this->checked->neuort == "Wohnort") {
-				$this->ortfalsch = 1;
-				$this->content->template['ortfalsch'] = $this->fehltort = $this->content->template["ergaenzen"];
-			}
-
-			// Strasse und Hausnummer überprüfen
-			if (empty ($this->checked->neustrnr) or $this->checked->neustrnr == "Strasse und Hausnummer") {
-				$this->nrstrfalsch = 1;
-				$this->content->template['strfalsch'] = $this->fehltstrnr = $this->content->template["ergaenzen"];
 			}
 		}
 	}

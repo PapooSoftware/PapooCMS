@@ -91,7 +91,7 @@
 				</select>
 			</div>
 			<div class="large-6 medium-12 columns">
-				<label for="user_gender">{$message_user_anrede}<span class="must_stern"> *</span> </label>
+				<label for="user_gender">{$message_user_anrede}</label>
 				<select name="user_gender" id="user_gender" size="1" >
 					<option value="">{$auswaehlen}</option>
 					<option {if $table.user_gender == "w"} selected="selected"{/if}  value="w">{$frau}</option>
@@ -113,13 +113,13 @@
 				<label for="neuplz">{$message_2209}  {$table.fehltplz}</label>
 				<input type="text" class="inpt" id="neuplz" name="neuplz" value="{$table.plzname|escape:"html"}" size="35" maxlength="50" />
 			</div>
+			{*<!--  Ort:   -->*}
 			<div class="large-8 medium-12 columns">
-				{*<!--  Ort:   -->*}
 				<label for="neuort">{$message_2210}  {$table.fehltort}</label>
 				<input type="text" class="inpt" id="neuort" name="neuort" value="{$table.ortname|escape:"html"}" size="35" maxlength="50" />
 			</div>
 
-			<label for="user_country">{$message_user_country}  {$table.fehltuser_country}<span class="must_stern"> *</span> </label>
+			<label for="user_country">{$message_user_country}  {$table.fehltuser_country} </label>
 			<select name="user_country" id="user_country" size="1" >
 				<option value="">{$auswaehlen}</option>
 				{foreach key=countryKey item=country from=$countries}
@@ -156,8 +156,8 @@
 		<fieldset  class="large-12 medium-12 columns" style="">
 			<legend>{$message_2159}</legend>
 			{*<!--  Newsletter?  -->*}
-			<input type="checkbox" id="newsletter" name="newsletter" {$table.checked_newsletter} value="ok" />   <label for="newsletter"><span class="">{$message_2158}</span></label><br />
-			<input type="checkbox" id="user_agb_ok" name="user_agb_ok" {$table.checked_user_agb_ok} value="1" />   <label for="user_agb_ok" style="width:90%;"><span class="">* {$message_2282} {$agbfalsch}</span></label>
+			<input type="checkbox" id="newsletter" name="newsletter" {$table.checked_newsletter} />   <label for="newsletter"><span class="">{$message_2158}</span></label><br />
+			<input type="checkbox" id="user_agb_ok" name="user_agb_ok" {$table.checked_user_agb_ok} />   <label for="user_agb_ok" style="width:90%;"><span class="">* {$message_2282} {$agbfalsch}</span></label>
 			<p></p>
 		</fieldset>
 
@@ -181,7 +181,7 @@
 		{else}
 		{if $spamschutz_modus}
 		<div  class="large-12 medium-12 columns" style="">
-			{include file="_module_intern/mod_spamschutz.html}
+			{include file="_module_intern/mod_spamschutz.html"}
 		</div>
 
 		{/if}
