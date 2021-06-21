@@ -1521,7 +1521,7 @@ class user_class
 							$this->db->query($sqlin);
 
 							// sendmail hier
-							$link = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . PAPOO_WEB_PFAD . "/account.php";
+							$link = $_SERVER['HTTPS'] == 'on' && $_SERVER['SERVER_PORT'] == '443' ? 'https' : 'http' . '://' . $_SERVER['HTTP_HOST'] . PAPOO_WEB_PFAD . "/account.php";
 
 							$body = $this->content->template['message_2270'];
 							$body = str_ireplace("#seitentitel#", $title_send, $body);
@@ -1559,8 +1559,7 @@ class user_class
 					}
 					elseif (!empty ($this->checked->loginnow2)) {
 						// Daten überprüfen
-						$this->check_data(); //!!!! b.legt: hier liegt irgendein Fehler !!!
-						//print_r("hier?");exit();
+						$this->check_data();
 						/*
 						* für genaue Überprüfug das hier verwenden
 						* if (!($this->namefalsch || $this->passwortfalsch || $this-
