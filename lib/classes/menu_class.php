@@ -1967,12 +1967,13 @@ class menu_class
 	 * Urls sauber umkodieren, damit die lesbar beleiben
 	 *
 	 * @param string $url
-	 * @return mixed|string|string[]|null
+	 * @param bool $toLowerCase
+	 * @return string
 	 */
-	function urlencode($url = "")
+	public function urlencode(string $url, bool $toLowerCase=true): string
 	{
 		if (!stristr($url,":::")) {
-			$url = $this->replace_uml($url);
+			$url = $this->replace_uml($url, $toLowerCase);
 			//Wenn mod_free deaktivieren
 			if ($this->cms->mod_free!=1) {
 				$url = urlencode($url);
@@ -1985,9 +1986,10 @@ class menu_class
 	 * Umlaute und Spezialfälle ersetzen
 	 *
 	 * @param string $url
-	 * @return mixed|string|string[]|null
+	 * @param bool $toLowerCase
+	 * @return string
 	 */
-	function replace_uml($url = "")
+	public function replace_uml(string $url, bool $toLowerCase=true): string
 	{
 		if (!stristr($url,":::"))
 		{
@@ -2007,12 +2009,15 @@ class menu_class
 			$url = str_ireplace(":","",$url);
 
 			# Kleinschreibung
-			if (function_exists('mb_strtolower')) {
-				$url = mb_strtolower($url, 'utf-8');
+			if ($toLowerCase) {
+				if (function_exists('mb_strtolower')) {
+					$url = mb_strtolower($url, 'utf-8');
+				}
+				else {
+					$url = strtolower($url);
+				}
 			}
-			else {
-				$url = strtolower(($url));
-			}
+
 			# Umlaute, etc. ersetzen
 			$url = replace_umlaute($url);
 

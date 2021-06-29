@@ -2626,7 +2626,7 @@ class form_manager
 
 		IfNotSetNull($this->checked->plugin_cform_must);
 
-		$this->checked->plugin_cform_name = $this->menu->urlencode($this->checked->plugin_cform_name);
+		$this->checked->plugin_cform_name = $this->menu->urlencode($this->checked->plugin_cform_name, false);
 		$this->checked->plugin_cform_name = str_replace("-", "_", $this->checked->plugin_cform_name);
 		// Normale Daten eintragen
 		$sql = sprintf("%s %s SET
