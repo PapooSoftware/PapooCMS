@@ -105,6 +105,9 @@ class intern_menu_class
 	 */
 	private function check_publish_all()
 	{
+		$oldCsrfState = $this->db->csrfok;
+		$this->db->csrfok = true;
+
 		//Check ob umgestellt
 		$xsql = array();
 		$xsql['dbname'] = "papoo_menu_language";
@@ -133,6 +136,8 @@ class intern_menu_class
 				}
 			}
 		}
+
+		$this->db->csrfok = $oldCsrfState;
 	}
 
 	/**
