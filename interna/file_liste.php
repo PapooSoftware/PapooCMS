@@ -236,19 +236,19 @@ if ($user->check_access(1)) {
 					<div class="image_folder_container_left">
 						<strong><?php echo $content->template['system_image_image_ordner'] ?></strong><br/>
 
-						<a class="bilder_verzeichnis_top"
-						   href="file_liste.php"> <?php echo $content->template['system_image_alle_bilderverzeichnisse'] ?>
+						<a href="file_liste.php?type=image&amp;reiter_active=images" class="bilder_verzeichnis_top">
+							<?=htmlspecialchars($content->template['system_image_alle_bilderverzeichnisse'])?>
 							<span style="color: #333;">(<?php echo isset($content->template['bilder_cat_id_count']['0']) ? $content->template['bilder_cat_id_count']['0'] : NULL ?>)</span>
 						</a>
 						<?php
 						foreach ($content->template['dirlist'] as $dat) {
 							echo $dat['vor_ul'];
 							echo '<a ';
-							if ($content->template['bilder_active_cat_id'] == isset($dat['bilder_cat_id']) ? $dat['bilder_cat_id'] : NULL) {
+							if ($content->template['bilder_active_cat_id'] == ($dat['bilder_cat_id'] ?? null)) {
 								echo ' class="active_cat" ';
 							}
 							IfNotSetNull($dat['bilder_cat_id']);
-							echo 'href="./file_liste.php?type=file&reiter_active=images&image_dir=' . $dat['bilder_cat_id'] . '">' . $dat['bilder_cat_name'] . ' (';
+							echo 'href="./file_liste.php?type=image&amp;reiter_active=images&amp;image_dir=' . $dat['bilder_cat_id'] . '">' . $dat['bilder_cat_name'] . ' (';
 							if (isset($content->template['bilder_cat_id_count'][$dat['bilder_cat_id']]) && $content->template['bilder_cat_id_count'][$dat['bilder_cat_id']] > 0) {
 								echo $content->template['bilder_cat_id_count'][$dat['bilder_cat_id']];
 							} else {
