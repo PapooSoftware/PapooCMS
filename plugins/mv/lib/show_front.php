@@ -297,10 +297,10 @@ if (!headers_sent($f, $l) && $this->checked->mv_id)
 				elseif($result2[0]->mvcform_type == "picture"
 						&& !empty($result[0]->$feldname_feldid))
 				{
-					if (file_exists(PAPOO_ABS_PFAD . "/images/thumbs/" . $result[0]->$feldname_feldid))
-					{
+					$imagePathname = rtrim(PAPOO_ABS_PFAD, '/') . '/images/' . $result[0]->$feldname_feldid;
+					if (is_file($imagePathname)) {
 						// . $this->checked->mv_content_id . "_" entfernt
-						$temp_infos = getimagesize(PAPOO_ABS_PFAD . "/images/thumbs/"  . $result[0]->$feldname_feldid);
+						$temp_infos = getimagesize($imagePathname);
 						// Bild-Breite und -H�he setzen
 						/*$faktor_breite = ($temp_infos[0] / 180);
 						$faktor_hoehe = ($temp_infos[1] / 240);
