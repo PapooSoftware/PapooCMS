@@ -6259,3 +6259,20 @@ CREATE TABLE `XXX_sprechomat_artikelausschluss` (
   `sprechomat_artikelausschluss_id` bigint DEFAULT NULL,
   `sprechomat_artikelausschluss_lang_id` int DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
+DROP TABLE IF EXISTS `XXX_trans_ids`; ##b_dump##
+CREATE TABLE `XXX_trans_ids` (
+  `trans_id` int NOT NULL AUTO_INCREMENT,
+  `trans_tab_name` varchar(255) DEFAULT NULL,
+  `trans_id_id` int NOT NULL,
+  `trans_lang_id_id` int NOT NULL,
+  `trans_timestamp` int NOT NULL,
+  PRIMARY KEY (`trans_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
+DROP TABLE IF EXISTS `XXX_trans_tabnames`; ##b_dump##
+CREATE TABLE `XXX_trans_tabnames` (
+  `trans_name_id` int NOT NULL AUTO_INCREMENT,
+  `trans_name_tab_name` varchar(255) DEFAULT NULL,
+  `trans_name_id_name` varchar(255) NOT NULL,
+  `trans_name_lang_id_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`trans_name_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
