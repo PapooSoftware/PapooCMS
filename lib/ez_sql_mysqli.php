@@ -246,7 +246,7 @@ class ezSQL_mysqli extends ezSQLcore
         if($this->csrfok==false)
 		{
 			//csrf check // ein Update oder INSERT statement - dann auf csrf checken
-			if(stristr($query,"UPDATE") || stristr($query,"INSERT")  || stristr($query,"DELETE"))
+			if (preg_match('%^(?:(?:--.*\n\s*)|(?:/\*.*?\*/\s*))*(INSERT|UPDATE|DELETE)\b%i', $query) !== 0)
 			{
 				//Wenn kein POST Csrf Token vorliegt - dann isses sowieso mist...
 				if (!empty($_SESSION['sessionusername']) and (empty($_POST['csrf_token']) or $_POST['csrf_token'] !== $_SESSION['csrf_token'])) {
