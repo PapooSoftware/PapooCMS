@@ -395,7 +395,7 @@ if ( $submit == 1 )
         }
 
 		// Revert CSRF protection to old state
-		$this->db->csrfok = $oldCsrfState;
+		$db->csrfok = $oldCsrfState;
     }
 }
 else
