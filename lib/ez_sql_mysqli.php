@@ -261,8 +261,7 @@ class ezSQL_mysqli extends ezSQLcore
 		if($this->deepl == false)
 		{
 			//checken if backend lang = standard lang - else go on - change nothing...
-			if($_SESSION['langdata_front']['lang_short'] == $_SESSION['dbp']['papoo_daten2']['0']['lang_frontend'])
-			{
+			if (defined('DB_PRAEFIX') && ($_SESSION['langdata_front']['lang_short'] ?? 'xx') == ($_SESSION['dbp']['papoo_daten2']['0']['lang_frontend'] ?? 'yy')) {
 				//print_r("");
 				if((stristr($query,"UPDATE") || stristr($query,"DELETE")) )
 				{
