@@ -271,35 +271,30 @@ class ezSQL_mysqli extends ezSQLcore
 						$transsql = sprintf("SELECT * FROM %s",DB_PRAEFIX."trans_tabnames");
 						$this->transDbs = $this->get_results($transsql,ARRAY_A);
 					}
+					if(!stristr($query,"trans_tab_name")) {
+						if (!empty($this->transDbs)) {
+							foreach ($this->transDbs as $dbNames) {
+								if (stristr($query, $dbNames['trans_name_tab_name'])) {
+									//Oha - it is language and translation relevant...
+									$searchQuery = strtolower($query);
 
-					if(!empty($this->transDbs))
-					{
-						foreach($this->transDbs as $dbNames)
-						{
-							if(stristr($query,$dbNames['trans_name_tab_name']))
-							{
-								//Oha - it is language and translation relevant...
-								$searchQuery = strtolower($query);
+									//lets find the ids...
+									$sqa1 = explode("where", $searchQuery);
+									$sqa2 = explode("and", $sqa1['1']);
+									foreach ($sqa2 as $checkIds) {
+										if (stristr($checkIds, $dbNames['trans_name_id_name'])) {
+											//finally the id is found
+											$id = (trim(preg_replace("/[^0-9]/", "", $checkIds)));
 
-								//lets find the ids...
-								$sqa1 = explode("where",$searchQuery);
-								$sqa2 = explode("and",$sqa1['1']);
-								foreach ($sqa2 as $checkIds)
-								{
-									if(stristr($checkIds,$dbNames['trans_name_id_name']))
-									{
-										//finally the id is found
-										$id = (trim(preg_replace("/[^0-9]/", "", $checkIds)));
-
-										//Should be numeric :-)
-										if(is_numeric($id) && $id > 0)
-										{
-											//now we can delete this entry from the translation Table - so it can be translated again..
-											$delSsql = sprintf("DELETE FROM %s WHERE trans_tab_name='%s' AND trans_id_id='%d'",
-												DB_PRAEFIX."trans_ids",
-												$dbNames['trans_name_tab_name'],
-												$id);
-											$this->query($delSsql);
+											//Should be numeric :-)
+											if (is_numeric($id) && $id > 0) {
+												//now we can delete this entry from the translation Table - so it can be translated again..
+												$delSsql = sprintf("DELETE FROM %s WHERE trans_tab_name='%s' AND trans_id_id='%d'",
+													DB_PRAEFIX . "trans_ids",
+													$dbNames['trans_name_tab_name'],
+													$id);
+												$this->query($delSsql);
+											}
 										}
 									}
 								}
