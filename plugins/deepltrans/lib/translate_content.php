@@ -101,7 +101,7 @@ class translate_content extends deepltrans_class
 		$this->translateStartPage($langData);
 		 * */
 		$this->translateArticle($langData);
-		/**
+		/****/
 		$this->translateCollum3($langData);
 		$this->translateImages($langData);
 		$this->translateTopMenu($langData);
@@ -148,7 +148,6 @@ class translate_content extends deepltrans_class
 		$this->translateShopPaymentArten($langData);
 		$this->translateShopMails($langData);
 		$this->translateShopSettings($langData);
-		* */
 
 		//noch offen:
 
