@@ -246,7 +246,7 @@ class ezSQL_mysqli extends ezSQLcore
         if($this->csrfok==false)
 		{
 			//csrf check // ein Update oder INSERT statement - dann auf csrf checken
-			if(stristr($query,"UPDATE") || stristr($query,"INSERT")  || stristr($query,"DELETE"))
+			if (preg_match('%^(?:(?:--.*\n\s*)|(?:/\*.*?\*/\s*))*(INSERT|UPDATE|DELETE)\b%i', $query) !== 0)
 			{
 				//Wenn kein POST Csrf Token vorliegt - dann isses sowieso mist...
 				if (!empty($_SESSION['sessionusername']) and (empty($_POST['csrf_token']) or $_POST['csrf_token'] !== $_SESSION['csrf_token'])) {
@@ -261,8 +261,7 @@ class ezSQL_mysqli extends ezSQLcore
 		if($this->deepl == false)
 		{
 			//checken if backend lang = standard lang - else go on - change nothing...
-			if($_SESSION['langdata_front']['lang_short'] == $_SESSION['dbp']['papoo_daten2']['0']['lang_frontend'])
-			{
+			if (defined('DB_PRAEFIX') && ($_SESSION['langdata_front']['lang_short'] ?? 'xx') == ($_SESSION['dbp']['papoo_daten2']['0']['lang_frontend'] ?? 'yy')) {
 				//print_r("");
 				if((stristr($query,"UPDATE") || stristr($query,"DELETE")) )
 				{

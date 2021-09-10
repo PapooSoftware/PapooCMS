@@ -316,6 +316,10 @@ if ( $submit == 1 )
     // error_reporting(E_ALL);
     if ( $insert == 1 )
     {
+		// Temporarily disable CSRF protection
+		$oldCsrfState = $db->csrfok;
+		$db->csrfok = true;
+
         // $selecttest = "SELECT * FROM ".$praefix."papoo_user";
         // $resulttest = $db->query($selecttest);
         // if (!empty ($resulttest)) {
@@ -389,6 +393,9 @@ if ( $submit == 1 )
             }
             else echo $message21;
         }
+
+		// Revert CSRF protection to old state
+		$db->csrfok = $oldCsrfState;
     }
 }
 else

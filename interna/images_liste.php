@@ -373,6 +373,7 @@ if ($user->check_access(1)) {
 							<input type="submit" class="submit_back" name="strSubmit"
 								   value="<?php echo $content->template['message_213'] ?>"/>
 						</fieldset>
+						<input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token'] ?>"/>
 					</form>    <br/>    <br/>    <br/>
 					<p><?php echo $content->template['message_209'] ?></p>
 					<!-- Maximale Dateigröße ist 100 kbyte und 800x800px! -->
@@ -552,6 +553,7 @@ if ($user->check_access(1)) {
 								   value="<?php echo $content->template['message_224'] ?>" type="submit"/>
 
 						</fieldset>
+						<input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token'] ?>"/>
 					</form>
 					<?php
 				}

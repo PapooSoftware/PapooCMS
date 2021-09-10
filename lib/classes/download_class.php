@@ -108,10 +108,17 @@ class download_class
 
 			// Prüfung ob Benutzer genügend Rechte hat um die Datei herunter zu laden
 			if ($this->check_download_rights($download_id)) {
+				// Temporarily disable CSRF protection
+				$oldCsrfState = $this->db->csrfok;
+				$this->db->csrfok = true;
+
 				// Abfrage formulieren Downloads zählen
 				$sql = "UPDATE " . $this->cms->papoo_download . " SET wieoft=wieoft+1, zeitpunkt=now() WHERE downloadid='" . $this->db->escape($download_id) . "'";
 				// Abfrage durchführen
 				$this->db->query($sql);
+
+				// Revert CSRF protection to old state
+				$this->db->csrfok = $oldCsrfState;
 
 				$sql2 = "SELECT  downloadname  FROM " . $this->cms->papoo_language_download . " WHERE download_id='" . $this->db->escape($download_id) . "' AND lang_id='".$this->cms->lang_id."'";
 				$filename2 =$this->db->get_var($sql2);

@@ -11,13 +11,10 @@ CREATE TABLE `XXX_bildwechsler` (
   `bw_extra_link` text,
   `bw_extra_link_text` text,
   `bw_lang_id` int(11) NOT NULL,
-  PRIMARY KEY (`bw_id`),
+  PRIMARY KEY (`bw_id`, `bw_lang_id`),
   KEY `bw_menuid` (`bw_menu_id`),
   KEY `bw_order_id` (`bw_order_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1 ; ##b_dump##
-INSERT INTO `XXX_bildwechsler` SET bw_id='1', bw_menu_id='0', bw_order_id='10', bw_bild='src=\"http://lorempixel.com/510/250/animals/1\" alt=\"Ein Tierbild (1)\" title=\"Ein Tierbild (1)\"', bw_ueberschrift='Tierbild 1', bw_text='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', bw_link='href=\"http://lorempixel.com\" target=\"_blank\"' ; ##b_dump##
-INSERT INTO `XXX_bildwechsler` SET bw_id='2', bw_menu_id='0', bw_order_id='20', bw_bild='src=\"http://lorempixel.com/510/250/animals/2\" alt=\"Ein Tierbild (2)\" title=\"Ein Tierbild (2)\"', bw_ueberschrift='Tierbild 1', bw_text='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', bw_link='href=\"http://lorempixel.com\" target=\"_blank\"' ; ##b_dump##
-INSERT INTO `XXX_bildwechsler` SET bw_id='3', bw_menu_id='0', bw_order_id='30', bw_bild='src=\"http://lorempixel.com/510/250/animals/3\" alt=\"Ein Tierbild (3)\" title=\"Ein Tierbild (3)\"', bw_ueberschrift='Tierbild 1', bw_text='Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', bw_link='href=\"http://lorempixel.com\" target=\"_blank\"' ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_bildwechsler_config`; ##b_dump##
 CREATE TABLE `XXX_bildwechsler_config` (
   `id` INT NOT NULL AUTO_INCREMENT,

@@ -1,5 +1,7 @@
 ALTER TABLE `XXX_bildwechsler` CHANGE `bw_id` `bw_id` BIGINT NOT NULL; ##b_dump##
 ALTER TABLE `XXX_bildwechsler` DROP PRIMARY KEY; ##b_dump##
+ALTER TABLE `XXX_bildwechsler` ADD PRIMARY KEY(bw_id, bw_lang_id); ##b_dump##
+ALTER TABLE `XXX_bildwechsler` CHANGE `bw_id` `bw_id` BIGINT NOT NULL AUTO_INCREMENT; ##b_dump##
 ALTER TABLE `XXX_papoo_freiemodule_daten` ADD COLUMN `freiemodule_lang_id` INT(11) NOT NULL AFTER `freiemodule_id`; ##b_dump##
 UPDATE `XXX_papoo_freiemodule_daten` _module
 LEFT JOIN `XXX_papoo_name_language` _lang ON _lang.lang_short LIKE _module.freiemodule_lang
