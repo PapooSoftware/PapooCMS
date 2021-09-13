@@ -67,3 +67,9 @@ CREATE TABLE `XXX_trans_tabnames` (
 -- Emulate unique key to insert new type only once
 SELECT @rowId := id FROM `XXX_plugin_fixemodule_feldtypen` WHERE name LIKE 'Checkbox' LIMIT 1; ##b_dump##
 INSERT IGNORE INTO `XXX_plugin_fixemodule_feldtypen` SET id = @rowId, name = 'Checkbox'; ##b_dump##
+
+ALTER TABLE `XXX_papoo_daten` ADD `smtp_active` tinyint(1) NOT NULL DEFAULT 0; ##b_dump##
+ALTER TABLE `XXX_papoo_daten` ADD `smtp_host` varchar(255) NOT NULL DEFAULT ''; ##b_dump##
+ALTER TABLE `XXX_papoo_daten` ADD `smtp_port` smallint UNSIGNED NOT NULL DEFAULT 0; ##b_dump##
+ALTER TABLE `XXX_papoo_daten` ADD `smtp_user` varchar(255) NOT NULL DEFAULT ''; ##b_dump##
+ALTER TABLE `XXX_papoo_daten` ADD `smtp_pass` varchar(255) NOT NULL DEFAULT ''; ##b_dump##
