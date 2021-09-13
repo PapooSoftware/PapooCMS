@@ -43,6 +43,7 @@ class ezSQL_mysqli extends ezSQLcore
     var $encoding = false;
     var $rows_affected = false;
     var $csrfok = false;
+	var $deepl = false;
 
     /**********************************************************************
      *  Constructor - allow the user to perform a quick connect at the
@@ -245,13 +246,61 @@ class ezSQL_mysqli extends ezSQLcore
         if($this->csrfok==false)
 		{
 			//csrf check // ein Update oder INSERT statement - dann auf csrf checken
-			if(stristr($query,"UPDATE") || stristr($query,"INSERT")  || stristr($query,"DELETE"))
+			if (preg_match('%^(?:(?:--.*\n\s*)|(?:/\*.*?\*/\s*))*(INSERT|UPDATE|DELETE)\b%i', $query) !== 0)
 			{
 				//Wenn kein POST Csrf Token vorliegt - dann isses sowieso mist...
 				if (!empty($_SESSION['sessionusername']) and (empty($_POST['csrf_token']) or $_POST['csrf_token'] !== $_SESSION['csrf_token'])) {
 					@header('X-Papoo-Warning: "at least one persisting action was blocked because of an invalid CSRF-Token"');
 					$_SESSION['csrf_token_fail_count']++;
 					return false;
+				}
+			}
+		}
+
+		//translations... only if update and not deepl Plugin
+		if($this->deepl == false)
+		{
+			//checken if backend lang = standard lang - else go on - change nothing...
+			if (defined('DB_PRAEFIX') && ($_SESSION['langdata_front']['lang_short'] ?? 'xx') == ($_SESSION['dbp']['papoo_daten2']['0']['lang_frontend'] ?? 'yy')) {
+				//print_r("");
+				if((stristr($query,"UPDATE") || stristr($query,"DELETE")) )
+				{
+					if(empty($this->transDbs))
+					{
+						//check if translation relevant
+						$transsql = sprintf("SELECT * FROM %s",DB_PRAEFIX."trans_tabnames");
+						$this->transDbs = $this->get_results($transsql,ARRAY_A);
+					}
+					if(!stristr($query,"trans_tab_name")) {
+						if (!empty($this->transDbs)) {
+							foreach ($this->transDbs as $dbNames) {
+								if (stristr($query, $dbNames['trans_name_tab_name'])) {
+									//Oha - it is language and translation relevant...
+									$searchQuery = strtolower($query);
+
+									//lets find the ids...
+									$sqa1 = explode("where", $searchQuery);
+									$sqa2 = explode("and", $sqa1['1']);
+									foreach ($sqa2 as $checkIds) {
+										if (stristr($checkIds, $dbNames['trans_name_id_name'])) {
+											//finally the id is found
+											$id = (trim(preg_replace("/[^0-9]/", "", $checkIds)));
+
+											//Should be numeric :-)
+											if (is_numeric($id) && $id > 0) {
+												//now we can delete this entry from the translation Table - so it can be translated again..
+												$delSsql = sprintf("DELETE FROM %s WHERE trans_tab_name='%s' AND trans_id_id='%d'",
+													DB_PRAEFIX . "trans_ids",
+													$dbNames['trans_name_tab_name'],
+													$id);
+												$this->query($delSsql);
+											}
+										}
+									}
+								}
+							}
+						}
+					}
 				}
 			}
 		}

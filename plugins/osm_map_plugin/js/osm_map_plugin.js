@@ -1,3 +1,4 @@
+(function () {
 'use strict';
 
 /**
@@ -17,7 +18,7 @@ function parseAddresses($addressesObject) {
     return addressesArray;
 }
 
-$(document).on('DOMContentLoaded', function () {
+	function initMaps() {
     var addressesSelector = 'address',      // address selector
         $addresses = $(addressesSelector),  // all address tags
         addressTexts;                       // addresses texts
@@ -108,4 +109,12 @@ $(document).on('DOMContentLoaded', function () {
             }
         });
     });
-});
+	}
+
+	if (document.readyState == 'loading') {
+		window.addEventListener('DOMContentLoaded', initMaps);
+	}
+	else {
+		initMaps();
+	}
+})();

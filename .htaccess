@@ -81,6 +81,8 @@ FileETag MTime Size
 </IfModule>
 FileETag None
 
+Options -Indexes
+
 #=================================================================================
 # Dynamisch Komprimierung für die Ausgabe aktivieren.
 # Die komprimierte Übertragung von Inhalten spart nicht nur Bandbreite und Traffic,

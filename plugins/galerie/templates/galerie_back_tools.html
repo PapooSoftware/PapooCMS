@@ -131,6 +131,7 @@
 						firstSend = typeof firstSend === "boolean" ? firstSend : true;
 						json = typeof json === "string" ? json : null;
 						this.ajaxpost = [];
+						this.ajaxpost.push("csrf_token=" + encodeURIComponent($('meta[name="csrf-token"]').attr('content') || ''));
 						this.ajaxpost.push("galerie_switch=GALERIE");
 						this.ajaxpost.push("galerie_verzeichnis=" +
 								encodeURIComponent(this.gallery.options[this.gallery.selectedIndex].value));

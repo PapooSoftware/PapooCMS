@@ -74,6 +74,13 @@
 						<div class="feld-html-wrapper">
 							<textarea class="feld-html" id="feld-{$feld.id}" name="felder[{$feld.id}]" style="width: 800px; height: 450px;">{$feld.inhalt}</textarea>
 						</div>
+					{elseif $feld.feldtyp.name == 'Checkbox'}
+						<div class="feld-checkbox-wrapper">
+							<!-- Verstecktes Feld, um den Status "nicht angehakt" zu übermitteln -->
+							<input type="hidden" name="felder[{$feld.id}]" value="0" />
+							<input type="checkbox" id="feld-{$feld.id}" name="felder[{$feld.id}]" value="1"{if $feld.inhalt} checked="checked"{/if} />
+							<label for="feld-{$feld.id}">{$feld.name}</label>
+						</div>
 					{/if}
 
 				</div>

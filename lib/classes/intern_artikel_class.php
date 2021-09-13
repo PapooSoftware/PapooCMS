@@ -247,6 +247,9 @@ class intern_artikel
 	 */
 	private function check_publish_lang()
 	{
+		$oldCsrfState = $this->db->csrfok;
+		$this->db->csrfok = true;
+
 		//Check ob umgestellt
 		$xsql = array();
 		$xsql['dbname'] = "papoo_language_article";
@@ -280,6 +283,8 @@ class intern_artikel
 				}
 			}
 		}
+
+		$this->db->csrfok = $oldCsrfState;
 	}
 
 	/**

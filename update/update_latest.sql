@@ -1,5 +1,7 @@
 ALTER TABLE `XXX_bildwechsler` CHANGE `bw_id` `bw_id` BIGINT NOT NULL; ##b_dump##
 ALTER TABLE `XXX_bildwechsler` DROP PRIMARY KEY; ##b_dump##
+ALTER TABLE `XXX_bildwechsler` ADD PRIMARY KEY(bw_id, bw_lang_id); ##b_dump##
+ALTER TABLE `XXX_bildwechsler` CHANGE `bw_id` `bw_id` BIGINT NOT NULL AUTO_INCREMENT; ##b_dump##
 ALTER TABLE `XXX_papoo_freiemodule_daten` ADD COLUMN `freiemodule_lang_id` INT(11) NOT NULL AFTER `freiemodule_id`; ##b_dump##
 UPDATE `XXX_papoo_freiemodule_daten` _module
 LEFT JOIN `XXX_papoo_name_language` _lang ON _lang.lang_short LIKE _module.freiemodule_lang
@@ -43,10 +45,25 @@ ALTER TABLE `XXX_papoo_user` ADD `user_tel_tags` varchar(255) NULL; ##b_dump##
 ALTER TABLE `XXX_papoo_user` ADD `user_tel_kunden_nr` varchar(255) NULL; ##b_dump##
 ALTER TABLE `XXX_papoo_user` ADD `user_merkzettel` LONGTEXT NULL; ##b_dump##
 ALTER TABLE `XXX_papoo_daten` ADD `send_reply_mail` tinyint(1) NOT NULL DEFAULT 1; ##b_dump##
-ALTER TABLE `XXX__plugin_shop_daten` CHANGE `einstellungen_id` `einstellungen_id` INT NOT NULL; ##b_dump##
+ALTER TABLE `XXX_plugin_shop_daten` CHANGE `einstellungen_id` `einstellungen_id` INT NOT NULL; ##b_dump##
+DROP TABLE IF EXISTS `XXX_trans_ids`; ##b_dump##
+CREATE TABLE `XXX_trans_ids` (
+                                 `trans_id` int NOT NULL AUTO_INCREMENT,
+                                 `trans_tab_name` varchar(255) DEFAULT NULL,
+                                 `trans_id_id` int NOT NULL,
+                                 `trans_lang_id_id` int NOT NULL,
+                                 `trans_timestamp` int NOT NULL,
+                                 PRIMARY KEY (`trans_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ; ##b_dump##
+DROP TABLE IF EXISTS `XXX_trans_tabnames`; ##b_dump##
+CREATE TABLE `XXX_trans_tabnames` (
+                                      `trans_name_id` int NOT NULL AUTO_INCREMENT,
+                                      `trans_name_tab_name` varchar(255) DEFAULT NULL,
+                                      `trans_name_id_name` varchar(255) NOT NULL,
+                                      `trans_name_lang_id_name` varchar(255) NOT NULL,
+                                      PRIMARY KEY (`trans_name_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 ; ##b_dump##
 
-ALTER TABLE `XXX_papoo_daten` ADD `smtp_active` tinyint(1) NOT NULL DEFAULT 0; ##b_dump##
-ALTER TABLE `XXX_papoo_daten` ADD `smtp_host` varchar(255) NOT NULL DEFAULT ''; ##b_dump##
-ALTER TABLE `XXX_papoo_daten` ADD `smtp_port` smallint UNSIGNED NOT NULL DEFAULT 0; ##b_dump##
-ALTER TABLE `XXX_papoo_daten` ADD `smtp_user` varchar(255) NOT NULL DEFAULT ''; ##b_dump##
-ALTER TABLE `XXX_papoo_daten` ADD `smtp_pass` varchar(255) NOT NULL DEFAULT ''; ##b_dump##
+-- Emulate unique key to insert new type only once
+SELECT @rowId := id FROM `XXX_plugin_fixemodule_feldtypen` WHERE name LIKE 'Checkbox' LIMIT 1; ##b_dump##
+INSERT IGNORE INTO `XXX_plugin_fixemodule_feldtypen` SET id = @rowId, name = 'Checkbox'; ##b_dump##

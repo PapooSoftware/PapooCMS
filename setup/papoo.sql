@@ -5133,6 +5133,12 @@ CREATE TABLE `XXX_papoo_user` (
   `antwortmail` int NOT NULL DEFAULT '0',
   `beschreibung` mediumtext NOT NULL,
   `user_firma` varchar(255) NOT NULL,
+  `user_titel` varchar(255) NOT NULL,
+  `user_country` varchar(255) NOT NULL,
+  `user_tel_abends` varchar(255) NOT NULL,
+  `user_tel_tags` varchar(255) NOT NULL,
+  `user_tel_kunden_nr` varchar(255) NOT NULL,
+  `user_merkzettel` varchar(255) NOT NULL,
   `user_land` varchar(255) NOT NULL,
   `user_vorname` varchar(255) NOT NULL,
   `user_nachname` varchar(255) NOT NULL,
@@ -5174,8 +5180,8 @@ CREATE TABLE `XXX_papoo_user` (
   `user_konfiguration_des_tinymce` text,
   PRIMARY KEY (`userid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 ; ##b_dump##
-INSERT INTO `XXX_papoo_user` SET `userid`='11', `gruppenid`='g10,', `username`='jeder', `email`='', `password`='', `password_org`='', `beitraege`='0', `zeitstempel`='2003.11.11 13:18:00', `antwortmail`='0', `beschreibung`='.', `user_firma`='', `user_land`='', `user_vorname`='', `user_nachname`='', `user_strasse`='', `user_hausnummer`='', `user_ort`='', `user_telefon`='', `user_fax`='', `editor`='3', `user_plz`='', `confirm_code`='', `user_style_id`='0', `dauer_einlogg`='0', `active`='1', `board`='0', `user_kontonr`='0', `user_blz`='0', `user_bankname`='', `user_confirm_abbuchung`='0', `user_club_stufe`='0', `user_agb_ok`='0', `wie_oft_login`='0', `zeitsperre`='0', `user_bbsid`='0', `user_gender`='0', `user_no_skript`='', `user_list_artikel`='0', `user_timestamp`='0', `user_newsletter`='0', `signatur`='', `signatur_html`='', `user_lang_front`='de', `user_lang_back`='de', `user_mv_id`='0', `user_content_tree_show_all`='0', `news_hardbounce`='0', `news_hardbounce_time`='2016-01-01', `user_last_login`='', `user_konfiguration_des_tinymce`=''  ; ##b_dump##
-INSERT INTO `XXX_papoo_user` SET `userid`='10', `gruppenid`='g1,', `username`='root', `email`='info@1234.de', `password`='$2y$12$oO1u4NZGoQ8CHLYHCnos3ur9XMZ8nKiJw1lGgfu5JJ6Q0JPcvDFuS', `password_org`='', `beitraege`='4', `zeitstempel`='2004.11.11 13.19:00', `antwortmail`='1', `beschreibung`='.', `user_firma`='', `user_land`='', `user_vorname`='', `user_nachname`='', `user_strasse`='', `user_hausnummer`='', `user_ort`='', `user_telefon`='', `user_fax`='', `editor`='3', `user_plz`='', `confirm_code`='', `user_style_id`='0', `dauer_einlogg`='0', `active`='1', `board`='1', `user_kontonr`='0', `user_blz`='0', `user_bankname`='', `user_confirm_abbuchung`='0', `user_club_stufe`='0', `user_agb_ok`='0', `wie_oft_login`='0', `zeitsperre`='0', `user_bbsid`='0', `user_gender`='0', `user_no_skript`='', `user_list_artikel`='', `user_timestamp`='0', `user_newsletter`='ok', `signatur`='', `signatur_html`='', `user_lang_front`='', `user_lang_back`='', `user_mv_id`='0', `user_content_tree_show_all`='1', `news_hardbounce`='0', `news_hardbounce_time`='2016-01-01', `user_last_login`='1620243441', `user_konfiguration_des_tinymce`=''  ; ##b_dump##
+INSERT INTO `XXX_papoo_user` SET `userid`='11', `gruppenid`='g10,', `username`='jeder', `email`='', `password`='', `password_org`='', `beitraege`='0', `zeitstempel`='2003.11.11 13:18:00', `antwortmail`='0', `beschreibung`='.', `user_firma`='', `user_titel`='', `user_country`='', `user_tel_abends`='', `user_tel_tags`='', `user_tel_kunden_nr`='', `user_merkzettel`='', `user_land`='', `user_vorname`='', `user_nachname`='', `user_strasse`='', `user_hausnummer`='', `user_ort`='', `user_telefon`='', `user_fax`='', `editor`='3', `user_plz`='', `confirm_code`='', `user_style_id`='0', `dauer_einlogg`='0', `active`='1', `board`='0', `user_kontonr`='0', `user_blz`='0', `user_bankname`='', `user_confirm_abbuchung`='0', `user_club_stufe`='0', `user_agb_ok`='0', `wie_oft_login`='0', `zeitsperre`='0', `user_bbsid`='0', `user_gender`='0', `user_no_skript`='', `user_list_artikel`='0', `user_timestamp`='0', `user_newsletter`='0', `signatur`='', `signatur_html`='', `user_lang_front`='de', `user_lang_back`='de', `user_mv_id`='0', `user_content_tree_show_all`='0', `news_hardbounce`='0', `news_hardbounce_time`='2016-01-01', `user_last_login`='', `user_konfiguration_des_tinymce`=''  ; ##b_dump##
+INSERT INTO `XXX_papoo_user` SET `userid`='10', `gruppenid`='g1,', `username`='root', `email`='info@1234.de', `password`='$2y$12$oO1u4NZGoQ8CHLYHCnos3ur9XMZ8nKiJw1lGgfu5JJ6Q0JPcvDFuS', `password_org`='', `beitraege`='4', `zeitstempel`='2004.11.11 13.19:00', `antwortmail`='1', `beschreibung`='.', `user_firma`='', `user_titel`='', `user_country`='', `user_tel_abends`='', `user_tel_tags`='', `user_tel_kunden_nr`='', `user_merkzettel`='', `user_land`='', `user_vorname`='', `user_nachname`='', `user_strasse`='', `user_hausnummer`='', `user_ort`='', `user_telefon`='', `user_fax`='', `editor`='3', `user_plz`='', `confirm_code`='', `user_style_id`='0', `dauer_einlogg`='0', `active`='1', `board`='1', `user_kontonr`='0', `user_blz`='0', `user_bankname`='', `user_confirm_abbuchung`='0', `user_club_stufe`='0', `user_agb_ok`='0', `wie_oft_login`='0', `zeitsperre`='0', `user_bbsid`='0', `user_gender`='0', `user_no_skript`='', `user_list_artikel`='', `user_timestamp`='0', `user_newsletter`='ok', `signatur`='', `signatur_html`='', `user_lang_front`='', `user_lang_back`='', `user_mv_id`='0', `user_content_tree_show_all`='1', `news_hardbounce`='0', `news_hardbounce_time`='2016-01-01', `user_last_login`='1620243441', `user_konfiguration_des_tinymce`=''  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_papoo_version_article`; ##b_dump##
 CREATE TABLE `XXX_papoo_version_article` (
   `version_art_id` int NOT NULL AUTO_INCREMENT,
@@ -6257,4 +6263,21 @@ DROP TABLE IF EXISTS `XXX_sprechomat_artikelausschluss`; ##b_dump##
 CREATE TABLE `XXX_sprechomat_artikelausschluss` (
   `sprechomat_artikelausschluss_id` bigint DEFAULT NULL,
   `sprechomat_artikelausschluss_lang_id` int DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
+DROP TABLE IF EXISTS `XXX_trans_ids`; ##b_dump##
+CREATE TABLE `XXX_trans_ids` (
+  `trans_id` int NOT NULL AUTO_INCREMENT,
+  `trans_tab_name` varchar(255) DEFAULT NULL,
+  `trans_id_id` int NOT NULL,
+  `trans_lang_id_id` int NOT NULL,
+  `trans_timestamp` int NOT NULL,
+  PRIMARY KEY (`trans_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##
+DROP TABLE IF EXISTS `XXX_trans_tabnames`; ##b_dump##
+CREATE TABLE `XXX_trans_tabnames` (
+  `trans_name_id` int NOT NULL AUTO_INCREMENT,
+  `trans_name_tab_name` varchar(255) DEFAULT NULL,
+  `trans_name_id_name` varchar(255) NOT NULL,
+  `trans_name_lang_id_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`trans_name_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ; ##b_dump##

@@ -89,6 +89,11 @@ if ( $submit and $password )
     require_once "../lib/site_conf.php";
     // Datenbankklasse einbinden
     require_once "../lib/ez_sql.php";
+
+	// Temporarily disable CSRF protection
+	$oldCsrfState = $db->csrfok;
+	$db->csrfok = true;
+
     $db->query("SET NAMES 'utf8'");
     //$db->query("SET CHARACTER SET 'utf8'");
     
@@ -125,6 +130,9 @@ if ( $submit and $password )
     $username = "root";
     $userid = 10;
     $hash = md5( $username . $password . $userid );
+
+	// Revert CSRF protection to old state
+	$db->csrfok = $oldCsrfState;
     
     // Username und Passwort an Session �bergeben
     // b.legt: nicht �bergeben, da sonst einige Angaben fehler (z.B. Editor)

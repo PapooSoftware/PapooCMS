@@ -283,7 +283,7 @@ class pkalenderplugin_class
 				$xsql['dbname'] = "plugin_kalender";
 				$xsql['praefix'] = "kalender";
 				$xsql['must'] = array("kalender_bezeichnung_des_kalenders");
-				$this->checked->kalender_lang_id=$lang[$lang['lang_id']];
+				$this->checked->kalender_lang_id=$lang['lang_id'];
 				$this->checked->kalender_id = $max;
 				//$xsql['where_name'] = "config_id";
 				//$this->checked->kalender_id =1;

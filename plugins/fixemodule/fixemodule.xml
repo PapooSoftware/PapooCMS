@@ -10,7 +10,7 @@
   <!-- beschreibung_en: Kurz-Beschreibung des Plugins auf englisch (wird im Plugin-Manager angezeigt) -->
   <beschreibung_en><![CDATA[]]></beschreibung_en>
   <!-- version: Versions-Nummer des Plugins -->
-  <version>1.1</version>
+  <version>1.2</version>
   <!-- papooid: Eindeutige Nummer offizieller papoo-Plugins -->
   <papooid>0</papooid>
   <!-- link: z.Z. noch ohne Funktion -->

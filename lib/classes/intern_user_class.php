@@ -102,31 +102,38 @@ class intern_user
 				// Starttext Übergeben
 				if (empty ($this->checked->messageget)) {
 					$this->content->template['text'] = $this->content->template['message_18'];
-				} // Gruppe wurde eingetragen
+				}
+				// Gruppe wurde eingetragen
 				elseif ($this->checked->messageget == 50) {
-					$this->content->template['text'] = $this->content->template['message_18'] . $this->content->template['message_50'];
-				} // User eingetragen
+					$this->content->template['user_message_text'] = $this->content->template['message_50'];
+				}
+				// User eingetragen
 				elseif ($this->checked->messageget == 52) {
-					$this->content->template['text'] = $this->content->template['message_18'];
 					$this->content->template['user_message_text'] = $this->content->template['message_52'];
-				} // User gelöscht
+				}
+				// User gelöscht
 				elseif ($this->checked->messageget == 53) {
-					$this->content->template['text'] = $this->content->template['message_18'] . $this->content->template['message_53'];
-				} // root kann nicht gelöscht werden
+					$this->content->template['user_message_text'] = $this->content->template['message_53'];
+				}
+				// root kann nicht gelöscht werden
 				elseif ($this->checked->messageget == 54) {
-					$this->content->template['text'] = $this->content->template['message_18'] . $this->content->template['message_54'];
-				} // jeder kann nicht gelöscht werden
+					$this->content->template['text_error'] = $this->content->template['message_54'];
+				}
+				// jeder kann nicht gelöscht werden
 				elseif ($this->checked->messageget == 55) {
-					$this->content->template['text'] = $this->content->template['message_18'] . $this->content->template['message_55'];
-				} // Gruppe wurde gelöscht
+					$this->content->template['text_error'] = $this->content->template['message_55'];
+				}
+				// Gruppe wurde gelöscht
 				elseif ($this->checked->messageget == 57) {
-					$this->content->template['text'] = $this->content->template['message_18'] . $this->content->template['message_57'];
-				} // Gruppe root kann nicht gelöscht werden
+					$this->content->template['user_message_text'] = $this->content->template['message_57'];
+				}
+				// Gruppe root kann nicht gelöscht werden
 				elseif ($this->checked->messageget == 58) {
-					$this->content->template['text'] = $this->content->template['message_18'] . $this->content->template['message_58'];
-				} // Gruppe jeder kann nicht gelöscht werden
+					$this->content->template['text_error'] = $this->content->template['message_58'];
+				}
+				// Gruppe jeder kann nicht gelöscht werden
 				elseif ($this->checked->messageget == 59) {
-					$this->content->template['text'] = $this->content->template['message_18'] . $this->content->template['message_59'];
+					$this->content->template['text_error'] = $this->content->template['message_59'];
 				}
 				break;
 			// Hier wird eine neue Gruppe angelegt
@@ -210,7 +217,7 @@ class intern_user
 						$resultname = $this->db->get_results($sql);
 						// wenn ja, dann Fehler auswerfen
 						if (@count($resultname) > 0) {
-							$this->content->template['text'] = $this->content->template['message_51'];
+							$this->content->template['text_error'] = $this->content->template['message_51'];
 						} // wenn nicht dann eintragen
 						else {
 							if ($this->checked->antwortmail == "ok") {
@@ -244,8 +251,8 @@ class intern_user
 							$sql .= " '" . $this->db->escape($this->checked->dauer_einlogg) . "', '" . $this->db->escape($this->checked->active) . "', '" . $confirm_code . "','" . $this->db->escape($this->checked->forum_board) . "','" . $this->db->escape($this->checked->beschreibung) . "', ";
 							$sql .= " '" . $this->db->escape($this->checked->lang_front) . "','" . $this->db->escape($this->checked->lang_back) . "','" . $this->db->escape($this->checked->user_newsletter) . "'
 						,'" . $this->db->escape($this->checked->user_titel) . "','" . $this->db->escape($this->checked->user_country) . "','" . $this->db->escape($this->checked->user_tel_abends) . "',
-						'" . $this->db->escape($this->checked->user_tel_tags) . "','" . $this->db->escape($this->checked->user_tel_kunden_nr) . "') ,'" . $this->db->escape($this->checked->user_gender) .
-								"'),'" . $this->db->escape($this->checked->user_fax) . "')";
+						'" . $this->db->escape($this->checked->user_tel_tags) . "','" . $this->db->escape($this->checked->user_tel_kunden_nr) . "', '" . $this->db->escape($this->checked->user_gender) .
+								"','" . $this->db->escape($this->checked->user_fax) . "')";
 
 							$this->db->query($sql);
 							// Neue Userid erfahr
@@ -531,7 +538,7 @@ class intern_user
 								}
 								else {
 									// Gruppe existiert nicht
-									$this->content->template['text'] = $this->content->template['message_56'];
+									$this->content->template['text_error'] = $this->content->template['message_56'];
 								}
 							}
 						}
