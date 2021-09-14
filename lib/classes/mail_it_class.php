@@ -263,7 +263,7 @@ class mail_it
 			}
 			else {
 				//ok oder nicht?
-				$this->error="gesendet";
+				$this->error = $mail->SMTPAuth ? "gesendet via TLS" : "gesendet";
 				$this->ok = "ok";
 				$this->mail_log();
 				// Alles ok, zurückgeben
