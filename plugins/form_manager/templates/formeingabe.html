@@ -45,7 +45,60 @@
 		</select>
 		
 	</fieldset>
-	
+
+	<script>
+		{literal}
+		document.addEventListener('DOMContentLoaded', function() {
+			document.forms["formi"].elements["form_manager_mail_settings_type"].forEach(element => element.addEventListener('click', function() {
+				if (this.value === 'smtp') {
+					document.getElementById('form_manager_smtp_host').readOnly = false;
+					document.getElementById('form_manager_smtp_port').readOnly = false;
+					document.getElementById('form_manager_smtp_user').readOnly = false;
+					document.getElementById('form_manager_smtp_pass').readOnly = false;
+				}
+				else {
+					document.getElementById('form_manager_smtp_host').readOnly = true;
+					document.getElementById('form_manager_smtp_port').readOnly = true;
+					document.getElementById('form_manager_smtp_user').readOnly = true;
+					document.getElementById('form_manager_smtp_pass').readOnly = true;
+				}
+			}));
+		})
+		{/literal}
+	</script>
+
+	<fieldset>
+		<legend>Mail-Einstellungen</legend>
+
+		<label for="form_manager_sender_mail">Absender-Adresse</label> <br />
+		<input type="text" id="form_manager_sender_mail" name="form_manager_sender_mail" value="{$form_manager_sender_mail}" />
+
+		<div class="clear">&nbsp;</div>
+
+		<input type="radio" id="form_manager_mail_settings_type_sendmail" name="form_manager_mail_settings_type" value="sendmail" {if $form_manager_mail_settings_type == 'sendmail'}checked{/if} />
+		<label for="form_manager_mail_settings_type_sendmail" style="width:50%;">{$message.stamm.smtp.nosmtp}</label>
+
+		<input type="radio" id="form_manager_mail_settings_type_smtp" name="form_manager_mail_settings_type" value="smtp" {if $form_manager_mail_settings_type == 'smtp'}checked{/if} />
+		<label for="form_manager_mail_settings_type_smtp" style="width:50%;">{$message.stamm.smtp.customsmtp}</label>
+
+		<input type="radio" id="form_manager_mail_settings_type_system" name="form_manager_mail_settings_type" value="system" {if $form_manager_mail_settings_type == 'system'}checked{/if} />
+		<label for="form_manager_mail_settings_type_system" style="width:50%;">{$message.stamm.smtp.system}</label>
+
+		<div class="clear">&nbsp;</div>
+
+		<label for="form_manager_smtp_host">{$message.stamm.smtp.host}</label><br />
+		<input type="text" readonly id="form_manager_smtp_host" name="form_manager_smtp_host" value="{$form_manager_smtp_host}" />
+
+		<label for="form_manager_smtp_port">{$message.stamm.smtp.port}</label><br />
+		<input type="number" readonly id="form_manager_smtp_port" name="form_manager_smtp_port" value="{$form_manager_smtp_port}" />
+
+		<label for="form_manager_smtp_user">{$message.stamm.smtp.user}</label><br />
+		<input type="text" readonly id="form_manager_smtp_user" name="form_manager_smtp_user" value="{$form_manager_smtp_user}" />
+
+		<label for="form_manager_smtp_pass">{$message.stamm.smtp.password}</label><br />
+		<input type="text" readonly id="form_manager_smtp_pass" name="form_manager_smtp_pass" value="{$form_manager_smtp_pass}" />
+	</fieldset>
+
 	<fieldset>
 		<legend>{$plugin.form_manager.emailan}</legend>
 		<label for="form_manager_email">{$message_83} - {$plugin.form_manager.mehrere} {$emailfalsch}</label> <br />

@@ -3465,18 +3465,10 @@ class form_manager
 		 */
 		$result_ar = $this->db->get_results($sql, ARRAY_A);
 
-		/**
-		 * Kerndaten sprachunabhängig
-		 */
-		$sql = sprintf("SELECT * FROM %s
-                                                WHERE form_manager_id='%s'",
-			$this->cms->tbname['papoo_form_manager'],
-			$this->db->escape($this->checked->form_manager_id)
-		);
-		$result2 = $this->db->get_results($sql, ARRAY_A);
+		// SMTP Einstellungen abfragen
+		$mailSettings = $this->getMailConfigByFormId($this->checked->form_manager_id);
 
 		// Bestimme E-Mail-Empfänger
-
 		if (!empty ($result)) {
 			foreach ($result as $spalte) {
 				// E-Mail-Adresse an die gesendet werden soll
@@ -3507,7 +3499,7 @@ class form_manager
 				$spalte->form_manager_antwort_email_betreff = $this->do_replace_dat($betreff);
 				$subject = preg_replace('/#sendto#/', $sendto_namex, $spalte->form_manager_antwort_email_betreff);
 
-				$email_from = $form_manager_email_ar[0];
+				$email_from = $mailSettings['sender_mail'];
 				if (strlen($result_ar[0]['mail_an_betreiber_inhalt']) > 10) {
 					$inhalt = $this->do_replace_dat($result_ar[0]['mail_an_betreiber_inhalt']);
 				}
@@ -3521,7 +3513,7 @@ class form_manager
 						$sendnail = $email;
 						// Mailen vorbereiten
 						$this->mail_it->to = $email;
-						$this->mail_it->from = $email;
+						$this->mail_it->from = $email_from;
 						if (isset($attach_array) && is_array($attach_array)) {
 							$this->mail_it->attach = $attach_array;
 						}
@@ -3529,7 +3521,7 @@ class form_manager
 						$this->mail_it->subject = $this->do_replace_dat($betreff);
 						$this->mail_it->body = isset($inhalt) ? $inhalt : NULL;
 						if (!empty($inhalt)) {
-							$this->mail_it->do_mail();
+							$this->mail_it->do_mail($mailSettings);
 						}
 					}
 				}
@@ -3564,8 +3556,6 @@ class form_manager
 		//Session Daten auf 0 setzen für das nä. Formular...
 		$_SESSION['form_entry'] = array();
 		unset($_SESSION['form_entry']);
-		// Daten zuweisen
-		$name = "";
 
 		/**
 		 * Daten des Formulars rausholen
@@ -3594,6 +3584,11 @@ class form_manager
 			$this->db->escape($this->checked->form_manager_id)
 		);
 		$result2 = $this->db->get_results($sql, ARRAY_A);
+
+		/**
+		 * SMTP Einstellungen
+		 */
+		$mailSettings = $this->getMailConfigByFormId($this->checked->form_manager_id);
 
 		/**
 		 * Daten für Salesforce
@@ -3757,7 +3752,7 @@ class form_manager
 
 						$this->mail_it->body = $inhalt;
 						if (!empty($inhalt)) {
-							$this->mail_it->do_mail();
+							$this->mail_it->do_mail($mailSettings);
 						}
 					}
 				}
@@ -3793,7 +3788,7 @@ class form_manager
 					}
 
 					if (!empty($inhalt)) {
-						$this->mail_it->do_mail();
+						$this->mail_it->do_mail($mailSettings);
 					}
 				}
 
@@ -3826,7 +3821,7 @@ class form_manager
 							$this->mail_it->subject = $this->do_replace_dat($subject);
 							$this->mail_it->body = $this->do_replace_dat($inhalt . $text . "" . $link);
 							if (!empty($inhalt)) {
-								$this->mail_it->do_mail();
+								$this->mail_it->do_mail($mailSettings);
 							}
 
 							if ($form_manager_antwort_yn == 1) {
@@ -3841,7 +3836,7 @@ class form_manager
 								$this->mail_it->body = $spalte->form_manager_antwort_email;
 								$this->mail_it->body_html = $spalte->form_manager_antwort_email_html;
 								if (!empty($inhalt)) {
-									$this->mail_it->do_mail();
+									$this->mail_it->do_mail($mailSettings);
 								}
 							}
 						}
@@ -3891,6 +3886,12 @@ class form_manager
 							form_manager_saleforce_debug_email='%s',
 							form_manager_antwort_yn='%s',
 							form_manager_kategorie='%s',
+							form_manager_sender_mail='%s',
+							form_manager_mail_settings_type='%s',
+							form_manager_smtp_host='%s',
+							form_manager_smtp_port='%s',
+							form_manager_smtp_user='%s',
+							form_manager_smtp_pass='%s',
 							form_manager_erstellt='%s',
 							form_manager_geaendert='%s'",
 				$this->cms->tbname['papoo_form_manager'],
@@ -3908,6 +3909,12 @@ class form_manager
 				$this->db->escape($this->checked->form_manager_saleforce_debug_email),
 				$this->db->escape($this->checked->form_manager_antwort_yn),
 				$this->db->escape($this->checked->form_manager_kategorie),
+				$this->db->escape($this->checked->form_manager_sender_mail),
+				$this->db->escape($this->checked->form_manager_mail_settings_type),
+				$this->db->escape($this->checked->form_manager_smtp_host),
+				$this->db->escape($this->checked->form_manager_smtp_port),
+				$this->db->escape($this->checked->form_manager_smtp_user),
+				$this->db->escape($this->checked->form_manager_smtp_pass),
 				time(),
 				time()
 			);
@@ -4441,6 +4448,12 @@ class form_manager
 							form_manager_loesch_dat2='%s',
 							form_manager_saleforce_debug_email='%s',
 							form_manager_kategorie='%s',
+							form_manager_sender_mail='%s',
+							form_manager_mail_settings_type='%s',
+							form_manager_smtp_host='%s',
+							form_manager_smtp_port='%s',
+							form_manager_smtp_user='%s',
+							form_manager_smtp_pass='%s',
 							form_manager_geaendert='%s'
 							WHERE form_manager_id='%s' ",
 				$this->cms->tbname['papoo_form_manager'],
@@ -4457,6 +4470,12 @@ class form_manager
 				$this->db->escape($this->checked->form_manager_loesch_dat2),
 				$this->db->escape($this->checked->form_manager_saleforce_debug_email),
 				$this->db->escape($this->checked->form_manager_kategorie),
+				$this->db->escape($this->checked->form_manager_sender_mail),
+				$this->db->escape($this->checked->form_manager_mail_settings_type),
+				$this->db->escape($this->checked->form_manager_smtp_host),
+				$this->db->escape($this->checked->form_manager_smtp_port),
+				$this->db->escape($this->checked->form_manager_smtp_user),
+				$this->db->escape($this->checked->form_manager_smtp_pass),
 				time(),
 				$this->db->escape($this->checked->form_manager_id)
 			);
@@ -4633,6 +4652,14 @@ class form_manager
 					$this->content->template['altereintrag'] = "ok";
 					$this->content->template['form_manager_link'] = "nodecode:plugin.php?menuid=1&template=form_manager/templates/form.html&form_manager_id=" . $spalte->form_manager_id;
 					$this->content->template['form_manager_kategorie'] = $spalte->form_manager_kategorie;
+
+					$this->content->template['form_manager_sender_mail'] = $spalte->form_manager_sender_mail;
+					$this->content->template['form_manager_smtp_active'] = $spalte->form_manager_smtp_active == 1 ? 'nodecode:checked="checked"' : '';
+					$this->content->template['form_manager_mail_settings_type'] = $spalte->form_manager_mail_settings_type;
+					$this->content->template['form_manager_smtp_host'] = $spalte->form_manager_smtp_host;
+					$this->content->template['form_manager_smtp_port'] = $spalte->form_manager_smtp_port;
+					$this->content->template['form_manager_smtp_user'] = $spalte->form_manager_smtp_user;
+					$this->content->template['form_manager_smtp_pass'] = $spalte->form_manager_smtp_pass;
 				}
 				//E-Mail Daten rausholen
 				$sql = sprintf("SELECT * FROM %s
@@ -4806,6 +4833,28 @@ class form_manager
 		), function ($carry, $item) {
 			return $carry ?? (is_file($item) ? $item : $carry);
 		}, null);
+	}
+
+	/**
+	 * SMTP Einstellungen abfragen
+	 *
+	 * @param $formId int FormID to get the settings ofr
+	 * @return array
+	 */
+	function getMailConfigByFormId(int $formId) : array
+	{
+		$sql = sprintf("SELECT
+		 form_manager_mail_settings_type as `settingsType`,
+		 form_manager_smtp_host as `host`,
+		 form_manager_smtp_port as `port`,
+		 form_manager_smtp_user as `user`,
+		 form_manager_smtp_pass as `password`,
+		 sender_mail
+		FROM %s WHERE form_manager_id='%s' LIMIT 1",
+			$this->cms->tbname['papoo_form_manager'],
+			$this->db->escape($formId)
+		);
+		return $this->db->get_row($sql, ARRAY_A);
 	}
 }
 

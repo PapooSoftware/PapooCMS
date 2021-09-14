@@ -1563,5 +1563,15 @@ $this->content->template['content_deleted'] = "Content deleted";
 $this->content->template['process_canceled'] = "Process canceled";
 $this->content->template['abort_process'] = "Cancel process";
 $this->content->template['label__rename_uploaded_file'] = "Preserve old filename";
-
+$this->content->template['message']['stamm']['smtp'] = [
+	'title' => "SMTP-Settings (Only for the admin email address)",
+	'activate' => "Enable SMTP for sending email's",
+	'host' => "Hostname",
+	'port' => "Port",
+	'user' => "User",
+	'password' => "Password",
+	'nosmtp' => "Don't use SMTP",
+	'customsmtp' => "Use custom SMTP-Settings",
+	'system' => "Use System-Settings"
+];
 ?>

@@ -34,6 +34,9 @@ class form_update {
 
 		//Check Menüpunkte
 		self::check_menu();
+
+		// Check auf SMTP-Update
+		self::updateDatabaseSMTP();
 	}
 
 	public function check_tables()
@@ -288,5 +291,35 @@ class form_update {
 			$_SESSION['form_manager']['is_set_menu']="OK";
 		}
 		return true;
+	}
+
+	/**
+	 * Check ob die Absender-mail leer ist und nimmt dann die aus alten Versionen genommene Mail
+	 */
+	private function updateDatabaseSMTP() {
+		$sql = sprintf("SELECT form_manager_id, form_manager_sender_mail FROM %s",
+			$this->cms->tbname['papoo_form_manager']
+		);
+		$forms = $this->db->get_results($sql, ARRAY_A);
+
+		// leere settingstype zu system machen
+
+		foreach ($forms as $form) {
+			if (empty($form['form_manager_sender_mail'])) {
+				$sql = sprintf("SELECT form_manager_email_id, form_manager_email_email FROM %s WHERE form_manager_email_form_id = '%d' ORDER BY form_manager_email_id",
+					$this->cms->tbname['papoo_form_manager_email'],
+					$form['form_manager_id']
+				);
+				$mailAdresses = $this->db->get_results($sql, ARRAY_A);
+				$mainMailAdress = $mailAdresses[0]['form_manager_email_email'];
+
+				$sql = sprintf("UPDATE %s SET form_manager_sender_mail = '%s' WHERE form_manager_id = '%d'",
+					$this->cms->tbname['papoo_form_manager'],
+					$this->db->escape($mainMailAdress),
+					$form['form_manager_id']
+				);
+				$this->db->query($sql);
+			}
+		}
 	}
 }

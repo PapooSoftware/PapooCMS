@@ -167,29 +167,49 @@ class mail_it
 
 	/**
 	 * Diese Methode sendet die Mail, und gibt zurück ob es geklappt hat oder nicht.
+	 * @param array $settings Optionale eigene SMTP-Einstellungen. Folgende Schlüssel müssen im Array vorhanden sein:
+	 *  settingsType: Welcher Mail-Type verwendet werden soll: system (Systemeinstellungen), smtp (Eigene SMTP-Einstellungen), sendmail (Kein SMTP)
+	 *  smtp_host: Der SMTP Host
+	 *  smtp_port: Der SMTP Port
+	 *  smtp_user: Der SMTP Benutzer
+	 *  smtp_pass: Das SMTP Passwort
 	 * @return string|void
 	 *
 	 * @throws phpmailerException
 	 */
-	function do_mail()
+	function do_mail(array $settings = [])
 	{
 		if (!empty($this->from_text)) {
 			$this->from_text="";
 		}
 		// Email Adressen Überprüfen
-		if (!empty ($this->from)) {
-			$true1 = $this->validateEmail($this->from);
-		}
-		if (!empty ($this->to)) {
-			$true2 = $this->validateEmail($this->to);
-		}
-		// Email Adressen ok, dann senden...
-		IfNotSetNull($true1);
-		IfNotSetNull($true2);
-		if ($true1 == true and $true2 == true) {
+		$isFromMailValid = !empty($this->from) && $this->validateEmail($this->from);
+		$isToMailValid = !empty($this->to) && $this->validateEmail($this->to);
+
+		if ($isFromMailValid && $isToMailValid) {
 			// Neue mail Klasse initialisieren
 			require_once(PAPOO_ABS_PFAD."/lib/classes/class.phpmailer.php");
+			require_once(PAPOO_ABS_PFAD."/lib/classes/class.smtp.php");
 			$mail = new PHPMailer();
+
+			$settings['settingsType'] = $settings['settingsType'] ?? 'system';
+
+			if ($settings['settingsType'] == 'system' || empty($settings)) {
+				$settings = $this->cms->getMailConfig();
+			}
+
+			if ($settings['settingsType'] == 'sendmail') {
+				$mail->SMTPAuth   = false;
+			}
+			elseif ($settings['settingsType'] == 'smtp') {
+				$mail->IsSMTP();
+				$mail->Host       = $settings['host'] ?? 'localhost';
+				$mail->SMTPAuth   = true;
+				$mail->Username   = $settings['user'] ?? '';
+				$mail->Password   = $settings['password'] ?? '';
+				$mail->SMTPSecure = "tls";
+				$mail->Port       = $settings['port'] ?? 25;
+			}
 
 			$mail->CharSet = "utf-8";
 			//$mail->IsMail(); // ???
@@ -204,19 +224,9 @@ class mail_it
 			}
 
 			$mail->From = $this->from;
-			if (!empty($this->from_text)) {
-				$mail->Sender = $this->from_text;
-			}
-			else {
-				$mail->Sender = $this->from;
-			}
+			$mail->Sender = !empty($this->from_text) ? $this->from_text : $this->from;
 
-			if (!empty($this->from_textx)) {
-				$mail->FromName = $this->from_textx;
-			}
-			else {
-				$mail->FromName = $this->from_text;
-			}
+			$mail->FromName = !empty($this->from_textx) ? $this->from_textx : $this->from_text;
 			//$mail->language=0;
 
 			$mail->SetLanguage($this->cms->lang_short, PAPOO_ABS_PFAD."/lib/classes/language/");
@@ -253,7 +263,7 @@ class mail_it
 			}
 			else {
 				//ok oder nicht?
-				$this->error="gesendet";
+				$this->error = $mail->SMTPAuth ? "gesendet via TLS" : "gesendet";
 				$this->ok = "ok";
 				$this->mail_log();
 				// Alles ok, zurückgeben

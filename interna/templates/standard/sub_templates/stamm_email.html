@@ -24,6 +24,25 @@
 			<label for ="benach_email">{$message_513}</label><br />
 			<input type="text" id="benach_email" name="benach_email" size="30" value="{$menu.benach_email}" title="" />
 		</fieldset>
+		<fieldset>
+			<legend>{$message.stamm.smtp.title}</legend>
+			<input type="checkbox" {$menu.smtp_active} id="smtp_active" name="smtp_active" value="1" />
+			<label for="smtp_active" style="width:50%;">{$message.stamm.smtp.activate}</label>
+
+			<div class="clear">&nbsp;</div>
+
+			<label for="smtp_host">{$message.stamm.smtp.host}</label><br />
+			<input type="text" id="smtp_host" name="smtp_host" value="{$menu.smtp_host}" />
+
+			<label for="smtp_port">{$message.stamm.smtp.port}</label><br />
+			<input type="number" id="smtp_port" name="smtp_port" value="{$menu.smtp_port}" />
+
+			<label for="smtp_user">{$message.stamm.smtp.user}</label><br />
+			<input type="text" id="smtp_user" name="smtp_user" value="{$menu.smtp_user}" />
+
+			<label for="smtp_pass">{$message.stamm.smtp.password}</label><br />
+			<input type="text" id="smtp_pass" name="smtp_pass" value="{$menu.smtp_pass}" />
+		</fieldset>
 		<br />
 	{/foreach}
 {/if}

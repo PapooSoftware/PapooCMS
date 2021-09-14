@@ -405,6 +405,13 @@ class intern_stamm_class {
 				$this->checked->config_tiny_advimg_filelist = 0;
 			}
 
+			if (!empty($this->checked->smtp_active)) {
+				$this->checked->smtp_active = 1;
+			}
+			else {
+				$this->checked->smtp_active = 0;
+			}
+
 			$xsql['dbname'] = "papoo_config";
 			$xsql['praefix'] = "config";
 			$xsql['where_name'] = "config_id";
@@ -488,6 +495,11 @@ class intern_stamm_class {
 							off_yn='%s', 
 							wartungstext='%s',
 							stamm_documents_change_backup='%d',
+							smtp_active='%d',
+							smtp_host='%s',
+							smtp_port='%s',
+							smtp_user='%s',
+							smtp_pass='%s',
 							captcha_sitekey='%s',
 							captcha_secret='%s'
 							",
@@ -563,6 +575,13 @@ class intern_stamm_class {
 				$this->db->escape($this->checked->wartungstext),
 
 				$this->db->escape($this->checked->stamm_documents_change_backup),
+
+				$this->db->escape($this->checked->smtp_active),
+				$this->db->escape($this->checked->smtp_host),
+				$this->db->escape($this->checked->smtp_port),
+				$this->db->escape($this->checked->smtp_user),
+				$this->db->escape($this->checked->smtp_pass),
+
 				$this->db->escape($this->checked->captcha_key),
 				$this->db->escape($this->checked->captcha_secret)
 			);
@@ -992,6 +1011,13 @@ class intern_stamm_class {
 					$cache_yn = 'nodecode:checked="checked"';
 				}
 
+				if($row->smtp_active == "1") {
+					$smtp = 'nodecode:checked="checked"';
+				}
+				else {
+					$smtp = '';
+				}
+
 				IfNotSetNull($checkedusability);
 				IfNotSetNull($cache_yn);
 				IfNotSetNull($checkedartikel_lang_n);
@@ -1072,6 +1098,13 @@ class intern_stamm_class {
 					'wartungstext' => $wartungstext,
 					'stamm_documents_change_backup' => $row->stamm_documents_change_backup,
 					'twitter_handle' => $row->twitter_handle,
+
+					'smtp_active' => $smtp,
+					'smtp_host' => $row->smtp_host,
+					'smtp_port' => $row->smtp_port,
+					'smtp_user' => $row->smtp_user,
+					'smtp_pass' => $row->smtp_pass,
+
 					'captcha_sitekey' => $row->captcha_sitekey,
 					'captcha_secret' => $row->captcha_secret
 				));
