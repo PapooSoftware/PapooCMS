@@ -415,7 +415,7 @@ class diverse_class
 			// Encoding der momentanen Inhalts prüfen
 			$enc = mb_detect_encoding($inhalt);
 			// Den momentanen Inhalt zu UTF-8 konvertieren (Falls nicht bereits passiert)
-			$inhalt = mb_convert_encoding($inhalt, "UTF-8", $enc);
+			$inhalt = @mb_convert_encoding($inhalt, "UTF-8", $enc ?: ['auto', 'iso-8859-1']) ?: $inhalt;
 			// In Datei schreiben
 			@fwrite($file, $inhalt);
 			// Datei schließen
