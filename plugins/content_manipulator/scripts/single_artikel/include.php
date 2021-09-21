@@ -75,6 +75,8 @@ class single_artikel
 			$i++;
 		}
 
+		$this->content->assign(false);
+
 		IfNotSetNull($this->fourcss);
 		$inhalt = str_ireplace('</head>', $this->fourcss.'</head>', $inhalt);
 
@@ -194,14 +196,13 @@ class single_artikel
 		if ($templatePathname = $this->findTemplate((int)$template_var)) {
 			$smartyIdentifier = '{*##SMARTY##*}';
 			if (strpos(file_get_contents($templatePathname, false, null, 0, strlen($smartyIdentifier)), $smartyIdentifier) === 0) {
-				$content->assign();
+				$content->assign(false);
 				$smarty->assign([
 					'article' => is_array($artikel_daten) ? reset($artikel_daten) ?: [] : [],
 					'modFree' => $cms->mod_free,
 				]);
 
 				$result = $smarty->fetch($templatePathname);
-				$content->assign();
 				return $result;
 			}
 		}
