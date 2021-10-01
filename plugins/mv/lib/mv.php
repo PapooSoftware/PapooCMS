@@ -4475,14 +4475,19 @@ class mv
 		*/
 
 
-			$parameters = [
+			$parameters = array_filter([
 				"menuid" => (int)$this->checked->menuid,
 				"template" => (string)$this->checked->template,
 				"mv_id" => (int)$this->checked->mv_id,
+				'mv_submit' => (string)$this->checked->mv_submit,
 				"onemv" => (string)$this->checked->onemv,
 				"search_mv" => (string)$this->checked->search_mv,
 				"sort_feld" => (string)$this->checked->sort_feld
-			];
+			], function ($value, $name) {
+				return strlen($value) > 0 || !in_array($name, [
+					'mv_submit',
+				]);
+			}, ARRAY_FILTER_USE_BOTH);
 
 			// $this->cms->template_lang wird nach einem Seitenwechsel ueber die Pagination ploetzlich nicht mehr definiert...
 			$menuId = (int)$this->checked->menuid;
@@ -4496,6 +4501,27 @@ class mv
 					$parameters[$param[0]] = count($param) == 2 ? $param[1] : "";
 					return $parameters;
 				}, $parameters);
+			}
+
+			$flexId = $parameters['mv_id'] = (int)$parameters['mv_id'];
+
+			// Append the user input of a flex search to the parameters
+			if ($flexId) {
+				$searchColumn = defined('admin') ? 'mvcform_search_back' : 'mvcform_search';
+				$searchableFlexFields = array_map(function (array $row) {
+					return "{$row['mvcform_name']}_{$row['mvcform_id']}";
+				}, $this->db->get_results(
+					"SELECT mvcform_id, mvcform_name ".
+					"FROM {$this->cms->tbname['papoo_mvcform']} ".
+					"WHERE mvcform_form_id = {$flexId} AND mvcform_aktiv = 1 ".
+					"AND {$searchColumn} = 1", ARRAY_A)
+				);
+
+				foreach ($searchableFlexFields as $fieldName) {
+					if (strlen($value = $this->checked->$fieldName ?? '') > 0) {
+						$parameters[$fieldName] = $value;
+					}
+				}
 			}
 
 			return urldecode(http_build_query($parameters, null, "&"));
