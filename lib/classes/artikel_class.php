@@ -533,10 +533,8 @@ class artikel_class
 					$islink = $roweins->lan_teaser_link;
 				}
 
-				if ($roweins->uberschrift_hyn == 1) {
-					$uberschrift = $roweins->header;
-				}
-				IfNotSetNull($uberschrift);
+				$uberschrift = $roweins->uberschrift_hyn == 1 ? $roweins->header : "";
+
 				$this->urlheader = $uberschrift;
 				$this->content->template['thema'] = $roweins->header;
 				$this->content->template['formthema'] = $this->diverse->encode_quote($roweins->header);
