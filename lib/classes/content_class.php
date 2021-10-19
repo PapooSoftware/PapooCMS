@@ -32,14 +32,17 @@ class content_class
 
 	/**
 	 * Template-Variablen der Template-Engine Smarty zuweisen
+	 * @param bool $decode
 	 */
-	function assign()
+	public function assign(bool $decode=true): void
 	{
 		global $smarty;
 		global $template;
 
 		// 1. Inhalte Codieren
-		$this->template = self::decode($this->template);
+		if ($decode) {
+			$this->template = self::decode($this->template);
+		}
 
 		// 2. Template (HTML-Datei) Übergeben
 		$this->template['_template_'] = $template;
