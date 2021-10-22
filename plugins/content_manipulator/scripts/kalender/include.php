@@ -106,13 +106,14 @@ class kalender
 		$kal_rahmen=file_get_contents(PAPOO_ABS_PFAD."/plugins/content_manipulator/scripts/kalender/templates/kalender.html");
 		$kal_daten=file_get_contents(PAPOO_ABS_PFAD."/plugins/content_manipulator/scripts/kalender/templates/kalender_content.html");
 
+		$kalenderData = $class_cal_front_cm->get_alle_termine_ab_jetzt(['kalender_id' => $id]);
+
 		//Termine
-		if (!isset($class_cal_front_cm->alle_termin_ab_jetzt[$id]) ||
-			isset($class_cal_front_cm->alle_termin_ab_jetzt[$id]) && !is_array($class_cal_front_cm->alle_termin_ab_jetzt[$id])) {
+		if (!isset($kalenderData) || !is_array($kalenderData)) {
 			return "<strong>Es sind keine Termine im Kalender eingetragen oder der Kalender existiert nicht. - bitte ID korrigieren</strong>";
 		}
 		else {
-			$termine = array_slice($class_cal_front_cm->alle_termin_ab_jetzt[$id], 0, ($count >= 0 ? $count : null), true);
+			$termine = array_slice($kalenderData, 0, ($count >= 0 ? $count : null), true);
 			$kal_items="";
 			foreach ($termine as $k=>$v) {
 				$kal_item=$kal_daten;

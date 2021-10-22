@@ -1163,16 +1163,18 @@ class class_cal_front
 		$sql = sprintf("SELECT DISTINCT * FROM %s
 									LEFT JOIN %s ON pkal_date_id=date_id_id
 									LEFT JOIN %s ON date_gruppe_lese_id=gruppenid
-									WHERE pkal_date_start_datum>='%d'
+                                    WHERE pkal_date_lang_id='%d'
+									AND pkal_date_start_datum>='%d'
 									AND pkal_date_end_datum<='%d'
 									AND userid='%d'
 									AND pkal_date_eintrag_im_frontend_freischalten='1'
 									ORDER BY pkal_date_start_datum ASC
-									LIMIT %d									
+									LIMIT %d
 									",
 			$this->cms->tbname['plugin_kalender_date'],
 			$this->cms->tbname['plugin_kalender_lookup_read_date'],
 			$this->cms->tbname['papoo_lookup_ug'],
+			$this->cms->lang_id,
 			$start,
 			$end,
 			$this->user->userid,
