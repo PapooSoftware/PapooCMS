@@ -988,7 +988,7 @@ class intern_user
 										}
 
 										$ex_zst2 = explode(":", $ex_zst['1']);
-										$time = @mktime($ex_zst2['0'], $ex_zst2['1'], $ex_zst2['2'], $ex_zst1['1'], $ex_zst1['2'], $ex_zst1['0']);
+										$time = @mktime((int)$ex_zst2['0'], (int)$ex_zst2['1'], (int)$ex_zst2['2'], (int)$ex_zst1['1'], (int)$ex_zst1['2'], (int)$ex_zst1['0']);
 									}
 									else {
 										$time = $row->zeitstempel;
