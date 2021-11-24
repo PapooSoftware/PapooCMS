@@ -1,6 +1,6 @@
 ﻿<?php
 
-//require_once __DIR__ . "/../lib/version.php";
+require_once __DIR__ . "/../lib/version.php";
 
 $message1="";
 //Willkommen zum Setup Ihres Papoo CMS Version 1.1
@@ -788,7 +788,8 @@ $message20_1='
     if (empty($_SERVER['HTTP_REFERER']))$_SERVER['HTTP_REFERER']="";
     if (empty($_SESSION['isinstall'])){$serverdat = $_SERVER['HTTP_REFERER']."\n Memory limit:".ini_get("memory_limit")."\n PHP Version".phpversion()."\n MySQL Version".$mysql;
 if(!empty($serverdat)){$serverdat=str_replace('setup/index.html',"",$serverdat);}
-@mail('info@papoo.de','Installation Versuch - ' . PAPOO_EDITION, $serverdat );$_SESSION['isinstall'] = "ok";}
+@mail('info@papoo.de','Installation Versuch - ' . PAPOO_EDITION, $serverdat );$_SESSION['isinstall'] = "ok";
+}
 $message21='
   <h1 class="weiter" style="background-color:red; font-size:200%;color:black;">
   Schritt 4: -- ACHTUNG -- Diese Datenbank-Tabellen existieren bereits.</h1>

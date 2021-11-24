@@ -216,7 +216,7 @@ class intern_user
 						$sql = "SELECT username FROM " . $this->cms->papoo_user . " WHERE username='" . $this->db->escape($this->checked->neuusername) . "' LIMIT 1 ";
 						$resultname = $this->db->get_results($sql);
 						// wenn ja, dann Fehler auswerfen
-						if (@count($resultname) > 0) {
+						if (is_array($resultname) && count($resultname) > 0) {
 							$this->content->template['text_error'] = $this->content->template['message_51'];
 						} // wenn nicht dann eintragen
 						else {
