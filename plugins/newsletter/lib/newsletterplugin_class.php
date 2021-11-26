@@ -2307,26 +2307,23 @@ class news
 				isset($this->checked->news_user_id) && is_numeric($this->checked->news_user_id)
 			) {
 				if (!empty($this->checked->search) || !empty($this->checked->select_group)) { // Wir haben eine Suche
-					if ($this->checked->select_group == 0) {
-						$this->checked->select_group = " LIKE '%%' ";
-						$checked_group = "";
-					}
-					else {
-						$checked_group = $this->checked->select_group;
-						$this->checked->select_group = " = '" . $this->db->escape($this->checked->select_group) . "' ";
-					}
+					$selectedGroup = (int)$this->checked->select_group;
+					$selectedGroupSqlConditional = $selectedGroup > 0
+						? "AND news_gruppe_id_lu = {$selectedGroup} "
+						: '';
+
 					$sql = sprintf("SELECT B.news_gruppe_id_lu
 											FROM %s AS A LEFT JOIN %s AS B
 											ON news_user_id=news_user_id_lu
 											WHERE news_user_email LIKE %s
 											AND deleted = 0
-											AND B.news_gruppe_id_lu %s
+											%s
 											GROUP BY news_user_id
 											",
 						$this->papoo_news_user,
 						DB_PRAEFIX . "papoo_news_user_lookup_gruppen",
 						"'%" . $this->db->escape($this->checked->search) . "%'",
-						"" . $this->checked->select_group . ""
+						$selectedGroupSqlConditional
 					);
 
 					$anzahl = $this->db->get_results($sql);
@@ -2338,12 +2335,12 @@ class news
 											WHERE news_user_email LIKE %s
 											AND A.news_active = 1
 											AND deleted = 0
-											AND news_gruppe_id_lu %s
+											%s
 											GROUP BY news_user_id ",
 						$this->papoo_news_user,
 						DB_PRAEFIX . "papoo_news_user_lookup_gruppen",
 						"'%" . $this->db->escape($this->checked->search) . "%'",
-						"" . ($this->checked->select_group) . ""
+						$selectedGroupSqlConditional
 					);
 					$anzahl_aktiv = $this->db->get_results($sql);
 
@@ -2357,19 +2354,19 @@ class news
 											FROM  %s AS A lEFT JOIN %s AS B
 											ON news_user_id=news_user_id_lu
 											WHERE news_user_email LIKE %s
-											AND news_gruppe_id_lu %s
+											%s
                                             AND deleted = 0
 											",
 						$this->papoo_news_user,
 						DB_PRAEFIX . "papoo_news_user_lookup_gruppen",
 						"'%" . $this->db->escape($this->checked->search) . "%'",
-						"" . ($this->checked->select_group) . ""
+						$selectedGroupSqlConditional
 					);
 
 					$this->weiter->result_anzahl = $this->db->get_var($sql);
 					$this->weiter->weiter_link = "./plugin.php?menuid="
 						. $this->checked->menuid
-						. "&template=newsletter/templates/newsabo.html&select_group=".$checked_group;
+						. "&template=newsletter/templates/newsabo.html&select_group=".$selectedGroup;
 					// wenn es sie gibt, weitere Seiten anzeigen
 					$what = "search";
 					$this->weiter->do_weiter($what);
@@ -2377,7 +2374,7 @@ class news
 					$sql = sprintf("SELECT * , A.news_active as news_active FROM %s AS A lEFT JOIN %s AS B
                                             ON news_user_id=news_user_id_lu
 											WHERE news_user_email LIKE %s
-											AND news_gruppe_id_lu %s
+											%s
                                             AND deleted = 0
                                             GROUP BY news_user_id
 											ORDER BY news_user_email, A.news_active ASC
@@ -2385,7 +2382,7 @@ class news
 						$this->papoo_news_user,
 						DB_PRAEFIX . "papoo_news_user_lookup_gruppen",
 						"'%" . $this->db->escape($this->checked->search) . "%'",
-						"" . ($this->checked->select_group) . "",
+						$selectedGroupSqlConditional,
 						$this->weiter->sqllimit
 					);
 
@@ -2395,14 +2392,14 @@ class news
 					$sql = sprintf("SELECT * , A.news_active as news_active FROM %s AS A lEFT JOIN %s AS B
                                             ON news_user_id=news_user_id_lu
 											WHERE news_user_email LIKE %s
-											AND news_gruppe_id_lu %s
+											%s
                                             AND deleted = 0
                                             GROUP BY news_user_id
 											ORDER BY news_user_email, A.news_active ASC",
 						$this->papoo_news_user,
 						DB_PRAEFIX . "papoo_news_user_lookup_gruppen",
 						"'%" . $this->db->escape($this->checked->search) . "%'",
-						"" . ($this->checked->select_group) . ""
+						$selectedGroupSqlConditional
 					);
 					$_SESSION['csv_export_newsletter_search'] = $this->db->get_results($sql, ARRAY_A);
 				}
