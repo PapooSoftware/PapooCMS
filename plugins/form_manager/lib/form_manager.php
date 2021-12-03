@@ -4849,7 +4849,7 @@ class form_manager
 		 form_manager_smtp_port as `port`,
 		 form_manager_smtp_user as `user`,
 		 form_manager_smtp_pass as `password`,
-		 sender_mail
+		 form_manager_sender_mail as `sender_mail`
 		FROM %s WHERE form_manager_id='%s' LIMIT 1",
 			$this->cms->tbname['papoo_form_manager'],
 			$this->db->escape($formId)
