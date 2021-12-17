@@ -732,7 +732,7 @@ class news
 				foreach ($old as $data) {
 					$grp = $this->get_group($data->news_nlgruppe);
 					$grp = $grp[0];
-					@IfNotSetNull($grp->news_gruppe_name);
+
 					$inhalt = substr(strip_tags($data->news_inhalt), 0, 30);
 					array_push($olddata,
 						array(
