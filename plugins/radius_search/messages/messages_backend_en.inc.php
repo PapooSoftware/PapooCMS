@@ -1,6 +1,0 @@
-<?php 
-$this->content->template['message']['plugin']['radius_search']['backtitel'] = "Radius Search for Papoo"; 
-$this->content->template['message']['plugin']['radius_search']['kopf'] = "<h2>Purpose</h2><p>Display of GoFlex data belonging to a given postal code in the vicinity.</p>"; 
-$this->content->template['message']['plugin']['radius_search']['hilfe'] = "<h2>Terms of use</h2><p>The use of the plugin is your own responsibility and requires the purchase of a license.</p><p> The Radius Search Plugin is subject to the copyright of</p><p>khmweb<br />Karl-Heinz Mau<br />Sonnleitstr. 6<br />83483 Bischofswiesen</p><p>Phone 08652 978487<br />Fax 08652 978359<br /><a href=\"mailto:khm@khmweb.de\">khm@khmweb.de</a><br /><a href=\"http://www.khmweb.de\" target=\"_blank\">www.khmweb.de</a></p><p>I would be very grateful for suggestions, comments and the communication of possibly occurring error messages. For further assistance, please contact me using the details above. <br /> Removal or alteration of this copyright notice is not permitted!</p>"; 
-
- ?>

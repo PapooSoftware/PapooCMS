@@ -1,5 +1,0 @@
-<?php
-$this->content->template['message']['plugin']['radius_search']['backtitel']='Radius Search (Umkreissuche) für Papoo';
-$this->content->template['message']['plugin']['radius_search']['kopf'] ='<h2>Verwendungszweck</h2><p>Anzeige der GoFlex-Daten, die im Umkreis zu einer vorgegebenen Postleitzahl gehören.</p>';
-$this->content->template['message']['plugin']['radius_search']['hilfe']='<h2>Nutzungsbestimmungen</h2><p>Die Nutzung des Plugins erfolgt in eigener Verantwortung und ist mit dem Erwerb einer Lizenz verbunden.</p><p> Das Radius Search Plugin unterliegt dem Copyright von</p><p>khmweb<br />Karl-Heinz Mau<br />Sonnleitstr. 6<br />83483 Bischofswiesen</p><p>Tel. 08652 978487<br />Fax 08652 978359<br /><a href="mailto:khm@khmweb.de">khm@khmweb.de</a><br /><a href="http://www.khmweb.de" target="_blank">www.khmweb.de</a></p><p>Für Anregungen, Kommentare und die Mitteilung eventuell auftretender Fehlermeldungen wäre ich sehr dankbar. Weitere Unterstützung erhalten Sie über die genannten Kontaktdaten.<br />Entfernen oder Verändern dieses Copyright-Hinweises ist nicht erlaubt!</p>';
-?>
