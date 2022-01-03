@@ -8463,7 +8463,7 @@ class mv
 			$spalten_name = substr($spalten_name, 0, -2);
 		}
 		// wieviel Verwaltungen sind installiert
-		$anzahl_verwaltungen = count(mv_ids);
+		$anzahl_verwaltungen = count($mv_ids);
 
 		// wenns mehr als eine ist dann die einzelnen Spalten der jeweiligen Verwaltung mit GREATEST vergleichen
 		if ($anzahl_verwaltungen > 1) {
