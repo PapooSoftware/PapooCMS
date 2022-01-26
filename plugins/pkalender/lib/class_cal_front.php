@@ -1186,8 +1186,8 @@ class class_cal_front
 		/* L�sche heutige, bereits vergangene Termine */
 		$todelete = array();
 		$now = time() - (86400 * 30);
-		$nowhour = strftime('%H');
-		$nowminute = strftime('%M');
+		$nowhour = date('G', time());
+		$nowminute = date('i', time());
 		$nowtime = $nowhour * 60 + $nowminute;
 
 		if (is_array($result)) {

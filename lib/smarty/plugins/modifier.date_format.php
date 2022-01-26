@@ -51,5 +51,5 @@ function smarty_modifier_date_format($string, $format = '%b %e, %Y', $default_da
         $format = str_replace($_win_from, $_win_to, $format);
     }
     //%m.%d.%G; %H:%M:%S h
-    return strftime($format, $timestamp);
+    return @strftime($format, $timestamp);
 }
