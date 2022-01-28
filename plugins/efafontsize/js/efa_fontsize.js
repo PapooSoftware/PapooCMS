@@ -199,6 +199,8 @@ Efa_Fontsize.prototype.getLinkHtml = function(direction,properties) {
 	html += (properties[8])?' onmouseout="' + properties[8] + '"':'';
 	// concatenate the title onfocus and value
 	html += (properties[9])?' onfocus="' + properties[9] + '"':'';
+
+	html += (properties[2])?' aria-label="' + properties[2] + '"':'';
 	// concatenate the link contents, closing tag and any HTML to go after the link and return the
 	// entire string
 	return html += '>'+ properties[1] + '<' + '/a>' + properties[10];
