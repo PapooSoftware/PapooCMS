@@ -94,7 +94,7 @@ class loginbox
 		}
 
 		$replacements = [
-			'#sperre#' => isset($content->template['sperre']) ? $content->template['message_2156'] : '',
+			'#sperre#' => isset($content->template['sperre']) && $content->template['sperre'] != NULL ? $content->template['message_2156'] : '',
 			'#logfalse#' => isset($content->template['logfalse']) ? $content->template['message_2141'] : '',
 			'#loggedin_false_pass#' => isset($content->template['loggedin_false_pass']) ? $content->template['message_2141a'] : '',
 		];
