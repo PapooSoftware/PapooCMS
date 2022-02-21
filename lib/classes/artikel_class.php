@@ -1379,7 +1379,7 @@ class artikel_class
 						$dat_t2['1'] = "0";
 					}
 					if ($dat[2] > 1970) {
-						$verfall = @mktime($dat_t2['0'], $dat_t2['1'], 0, $dat[1], $dat[0], $dat[2]);
+						$verfall = @mktime((int)$dat_t2['0'], (int)$dat_t2['1'], 0, (int)$dat[1], (int)$dat[0], (int)$dat[2]);
 					}
 					// Starttimestamp
 					$dat = explode(".", $artikel->pub_start);
@@ -1398,7 +1398,7 @@ class artikel_class
 						$dat_t2['1'] = "0";
 					}
 					if ($dat[2] > 1970) {
-						$start = @mktime($dat_t2['0'], $dat_t2['1'], 0, $dat[1], $dat[0], $dat[2]);
+						$start = @mktime((int)$dat_t2['0'], (int)$dat_t2['1'], 0, (int)$dat[1], (int)$dat[0], (int)$dat[2]);
 					}
 					IfNotSetNull($start);
 					IfNotSetNull($verfall);
