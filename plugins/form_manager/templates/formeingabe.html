@@ -49,6 +49,19 @@
 	<script>
 		{literal}
 		document.addEventListener('DOMContentLoaded', function() {
+			if (document.forms["formi"].elements["form_manager_mail_settings_type"].value === 'smtp') {
+				document.getElementById('form_manager_smtp_host').readOnly = false;
+				document.getElementById('form_manager_smtp_port').readOnly = false;
+				document.getElementById('form_manager_smtp_user').readOnly = false;
+				document.getElementById('form_manager_smtp_pass').readOnly = false;
+			}
+			else {
+				document.getElementById('form_manager_smtp_host').readOnly = true;
+				document.getElementById('form_manager_smtp_port').readOnly = true;
+				document.getElementById('form_manager_smtp_user').readOnly = true;
+				document.getElementById('form_manager_smtp_pass').readOnly = true;
+			}
+
 			document.forms["formi"].elements["form_manager_mail_settings_type"].forEach(element => element.addEventListener('click', function() {
 				if (this.value === 'smtp') {
 					document.getElementById('form_manager_smtp_host').readOnly = false;
@@ -96,7 +109,7 @@
 		<input type="text" readonly id="form_manager_smtp_user" name="form_manager_smtp_user" value="{$form_manager_smtp_user}" />
 
 		<label for="form_manager_smtp_pass">{$message.stamm.smtp.password}</label><br />
-		<input type="text" readonly id="form_manager_smtp_pass" name="form_manager_smtp_pass" value="{$form_manager_smtp_pass}" />
+		<input type="password" readonly id="form_manager_smtp_pass" name="form_manager_smtp_pass" value="{$form_manager_smtp_pass}" />
 	</fieldset>
 
 	<fieldset>

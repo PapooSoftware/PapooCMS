@@ -4654,7 +4654,7 @@ class form_manager
 					$this->content->template['form_manager_kategorie'] = $spalte->form_manager_kategorie;
 
 					$this->content->template['form_manager_sender_mail'] = $spalte->form_manager_sender_mail;
-					$this->content->template['form_manager_smtp_active'] = $spalte->form_manager_smtp_active == 1 ? 'nodecode:checked="checked"' : '';
+					$this->content->template['form_manager_smtp_active'] = isset($spalte->form_manager_smtp_active) && $spalte->form_manager_smtp_active == 1 ? 'nodecode:checked="checked"' : '';
 					$this->content->template['form_manager_mail_settings_type'] = $spalte->form_manager_mail_settings_type;
 					$this->content->template['form_manager_smtp_host'] = $spalte->form_manager_smtp_host;
 					$this->content->template['form_manager_smtp_port'] = $spalte->form_manager_smtp_port;
