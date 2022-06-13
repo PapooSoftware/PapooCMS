@@ -1188,7 +1188,7 @@ WHERE %s %s.userid=%s.userid AND intranet_yn='0' AND forumid='xx' GROUP BY  msgi
 			$resultschreib = $this->db->get_results($selectschreib);
 
 			$schreibrechte = "";
-			if (count($resultschreib) == 1) {
+			if (is_countable($resultschreib) && count($resultschreib) == 1) {
 				$schreibrechte = count($resultschreib);
 			}
 			// Für jeden Eintrag mit den Userrechten vergleichen

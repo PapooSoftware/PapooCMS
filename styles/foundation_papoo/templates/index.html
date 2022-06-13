@@ -167,7 +167,7 @@
 					<div class="formwrap_guest" id="formwrap_guest_anchor">
 						{*<!--Kommentar zu -->*}
 						<h3>{$message_2018} {$thema}?</h3>
-						{if $fehlerliste|@count > 0}
+						{if is_array($fehlerliste) && $fehlerliste|@count > 0}
 							<blockquote id="kommentar_fehlerliste">
 								<span style="font-weight:bold;color:red;font-size:16px;">{$fehler} :</span><br/><br/>
 								<ul>
