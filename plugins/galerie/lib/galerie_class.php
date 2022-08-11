@@ -1378,6 +1378,10 @@ class galerie_class
 			@unlink($datei_thumb);
 		}
 
+		// Temporarily disable CSRF protection
+		$oldCsrfState = $this->db->csrfok;
+		$this->db->csrfok = true;
+
 		// Eintr�ge in DB l�schen
 		$sql = sprintf("DELETE FROM %s WHERE bild_id='%d'",
 			$this->db_praefix."galerie_bilder",
@@ -1420,6 +1424,10 @@ class galerie_class
 
 		// Bilder neu durchnummerieren
 		$this->bilder_nummer_aktualisieren($galerie['gal_id']);
+
+		// Revert CSRF protection to old state
+		$this->db->csrfok = $oldCsrfState;
+
 		return true;
 	}
 
