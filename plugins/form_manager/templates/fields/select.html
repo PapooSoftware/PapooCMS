@@ -29,8 +29,7 @@
 	>
 		{foreach item=option from=$options name=option}
 			{if $smarty.foreach.option.first && $field.plugin_cform_must}
-				<option value=""{if not $value || $value == $option.value} selected="selected"{/if}
-						disabled="disabled" aria-disabled="true">
+				<option value=""{if not $value || $value == $option.value} selected="selected"{/if}>
 					{$option.value|escape}
 				</option>
 			{else}

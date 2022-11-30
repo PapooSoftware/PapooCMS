@@ -25,7 +25,7 @@
     </article>
 </div>
 
-<div id="main" class="row">
+<main id="main" class="row">
     {*<!-- Auf der Startseite ein volle-Breite-Template -->*}
     {if $aktive_menuid == 1}
         <article id="content" class="large-12 medium-12 columns">
@@ -44,7 +44,7 @@
             {include file="_inhalt_rechts.html"}
         </aside>
     {/if}
-</div>
+</main>
 
 <footer class="row">
     {include file="_fuss.html"}
@@ -90,6 +90,7 @@
 </div>
 
 <script src="{$slash}js/imageMapResizer.min.js"></script>
+<script src="{$slash}styles/{$style_dir}/js/usability.js"></script>
 <script src="{$slash}styles/{$style_dir}/js/script.js"></script>
 <script src="{$slash}styles/{$style_dir}/foundation/js/foundation.min.js"></script>
 

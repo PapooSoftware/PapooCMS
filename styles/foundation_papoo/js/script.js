@@ -23,6 +23,9 @@ $('ul.mod_menue_ul ul').each(function(){
     $(this).parent().addClass('has-dropdown not-click');
 });
 
+var menubar = new Menubar(document.getElementById('menubar'));
+menubar.init();
+
 // Alle Youtube videos finden und in die flex-video klasse packen
 var $allVideos = $("iframe[src^='http://www.youtube.com']");
 

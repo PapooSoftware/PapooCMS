@@ -1183,15 +1183,15 @@ class menu_class
 				}
 				else {
 					if ((count($menu_data_copy) > 0 ? $this->has_menu_descendants($menupunkt['menuid'], $menu_data_copy) : $this->has_submenus($menupunkt['menuid']))) {
-						$menupunkt['shift_anfang'] = '<li class="has-dropdown">';
+						$menupunkt['shift_anfang'] = '<li class="has-dropdown" role="none">';
 					}
 					else {
-						$menupunkt['shift_anfang'] = '<li>';
+						$menupunkt['shift_anfang'] = '<li role="none">';
 					}
 				}
 
 				$menupunkt['shift_ende'] = "</li>";
-				$menupunkt['shift_anfang_sub'] = '<li>';
+				$menupunkt['shift_anfang_sub'] = '<li role="none">';
 				$menupunkt['shift_ende_sub'] = "</li>";
 				$menupunkt['shift_anfang_sub'] = "";
 				$menupunkt['shift_ende_sub'] = "";
@@ -1469,10 +1469,10 @@ class menu_class
 		case "NAVIGATION" :
 		default :
 			// $shift_anfang = '<li><div class="untermenu' . $level . '" id="untermenucontainer' . $menuid . '"><ul><li>';
-			$shift_anfang = '<div class="untermenu' . $level . '" ><ul><li>';
+			$shift_anfang = '<div class="untermenu' . $level . '" ><ul role="menu"><li role="none">';
 			// class="dropdown-menu"
 
-			$shift_anfang_bootstrap = '<ul><li>';
+			$shift_anfang_bootstrap = '<ul role="menu"><li role="none">';
 			$shift_ende_vorgaenger = "</li>";
 			$shift_ende_vorgaenger_bootstrap = "</li>";
 			break;
@@ -1495,13 +1495,13 @@ class menu_class
 				$antwort['shift_anfang'] = '<li id="sitemap_menuid_' . $menuid . '">';
 			}
 			else {
-				$antwort['shift_anfang'] = '<li>';
+				$antwort['shift_anfang'] = '<li role="none">';
 
 				if ((count($menus) > 0 ? $this->has_menu_descendants($menuid, $menus) : $this->has_submenus($menuid))) {
-					$antwort['shift_anfang_bootstrap'] = '<li class="has-dropdown">';
+					$antwort['shift_anfang_bootstrap'] = '<li role="none" class="has-dropdown">';
 				}
 				else {
-					$antwort['shift_anfang_bootstrap'] = '<li>';
+					$antwort['shift_anfang_bootstrap'] = '<li role="none">';
 				}
 			}
 			$antwort['shift_ende'] = '</li>';
