@@ -791,7 +791,6 @@ class form_manager
 
 				foreach ($form_manager_email_ar as $email) {
 					if (($this->validateEmail($email))) {
-						$sendnail = $email;
 						// Mailen vorbereiten
 						$this->mail_it->to = $email;
 						$this->mail_it->from = $email;
@@ -3499,7 +3498,6 @@ class form_manager
 				$spalte->form_manager_antwort_email_betreff = $this->do_replace_dat($betreff);
 				$subject = preg_replace('/#sendto#/', $sendto_namex, $spalte->form_manager_antwort_email_betreff);
 
-				$email_from = $mailSettings['sender_mail'];
 				if (strlen($result_ar[0]['mail_an_betreiber_inhalt']) > 10) {
 					$inhalt = $this->do_replace_dat($result_ar[0]['mail_an_betreiber_inhalt']);
 				}
@@ -3509,11 +3507,9 @@ class form_manager
 				}
 				foreach ($form_manager_email_ar as $email) {
 					if (($this->validateEmail($email))) {
-						$this->sender_mail = $email;
-						$sendnail = $email;
 						// Mailen vorbereiten
 						$this->mail_it->to = $email;
-						$this->mail_it->from = $email_from;
+						$this->mail_it->from = $mailSettings['sender_mail'];
 						if (isset($attach_array) && is_array($attach_array)) {
 							$this->mail_it->attach = $attach_array;
 						}
@@ -3681,19 +3677,16 @@ class form_manager
 				if (empty($form_manager_antwort_mail)) {
 					//Hier noch check ob es eine checked Var gibt die eine Mail Adresse ist
 					$form_manager_antwort_mail = $this->check_ob_checked_mail_vorhanden();
-
-					if (empty($form_manager_antwort_mail)) {
-						$form_manager_antwort_mail = $email_from;
-					}
 				}
 				if (!empty($this->checked->$form_manager_antwort_mail)) {
 					$email_to = trim($this->checked->$form_manager_antwort_mail);
 				}
+				else {
+					$email_to = null;
+				}
 
 				$spalte->form_manager_antwort_email_betreff = $this->do_replace_dat($spalte->form_manager_antwort_email_betreff);
 				$subject = preg_replace('/#sendto#/', $sendto_namex, $spalte->form_manager_antwort_email_betreff);
-
-				$email_from = $form_manager_email_ar[0];
 
 				$sendtoflexmail = "";
 				if (is_array($this->mv_daten_array)) {
@@ -3728,14 +3721,15 @@ class form_manager
 					}
 				}
 
+				if ($email_to) {
+					$this->mail_it->ReplyTo[$email_to] = $email_to;
+				}
+
 				foreach ($form_manager_email_ar as $email) {
 					if (($this->validateEmail($email))) {
-						$this->sender_mail = $email;
-						$sendnail = $email;
 						// Mailen vorbereiten
 						$this->mail_it->to = $email;
-						$this->mail_it->from = $email_from;
-						$this->mail_it->ReplyTo[$email_to] = $email_to;
+						$this->mail_it->from = $mailSettings['sender_mail'];
 						if (is_array($attach_array)) {
 							$this->mail_it->attach = $attach_array;
 						}
@@ -3757,6 +3751,8 @@ class form_manager
 					}
 				}
 
+				$this->mail_it->ReplyTo = [];
+
 				$this->content->template['form_manager_antwort_html'] = $spalte->form_manager_antwort_html;
 				$sql = sprintf("SELECT form_manager_antwort_yn FROM %s
 												WHERE form_manager_id='%s' ",
@@ -3770,11 +3766,10 @@ class form_manager
 				$spalte->form_manager_antwort_email_html = $this->do_replace_dat($spalte->form_manager_antwort_email_html);
 
 				// Wenn geantwortet werden soll
-				if ($form_manager_antwort_yn == 1) {
+				if ($form_manager_antwort_yn == 1 && $email_to) {
 					// Name des E-Mail Feldes raussuchen
-					$email_from = $sendnail;
 					$this->mail_it->to = $email_to;
-					$this->mail_it->from = $this->sender_mail;
+					$this->mail_it->from = $mailSettings['sender_mail'];
 					$this->mail_it->subject = $this->do_replace_dat($subject);
 					$this->mail_it->body = $spalte->form_manager_antwort_email;
 					$this->mail_it->body_html = $spalte->form_manager_antwort_email_html;
@@ -3811,10 +3806,9 @@ class form_manager
 
 					foreach ($this->mv_daten_array as $key => $value) {
 						if (($this->validateEmail($value))) {
-							$sendnail = $value;
 							// Mailen vorbereiten
 							$this->mail_it->to = $value;
-							$this->mail_it->from = $sendnail;
+							$this->mail_it->from = $mailSettings['sender_mail'];
 							if (is_array($attach_array)) {
 								$this->mail_it->attach = $attach_array;
 							}
@@ -3824,14 +3818,10 @@ class form_manager
 								$this->mail_it->do_mail($mailSettings);
 							}
 
-							if ($form_manager_antwort_yn == 1) {
+							if ($form_manager_antwort_yn == 1 && $email_to) {
 								// Name des E-Mail Feldes raussuchen
-								$email_from = $sendnail;
-								if (empty($this->sender_mail)) {
-									$this->sender_mail = $email_from;
-								}
 								$this->mail_it->to = $email_to;
-								$this->mail_it->from = $this->sender_mail;
+								$this->mail_it->from = $mailSettings['sender_mail'];
 								$this->mail_it->subject = $this->do_replace_dat($subject);
 								$this->mail_it->body = $spalte->form_manager_antwort_email;
 								$this->mail_it->body_html = $spalte->form_manager_antwort_email_html;
@@ -4854,7 +4844,7 @@ class form_manager
 			$this->cms->tbname['papoo_form_manager'],
 			$this->db->escape($formId)
 		);
-		return $this->db->get_row($sql, ARRAY_A);
+		return array_map('trim', $this->db->get_row($sql, ARRAY_A));
 	}
 }
 
