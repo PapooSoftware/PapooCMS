@@ -258,7 +258,7 @@ class PHPMailer {
    * Provides the ability to change the line ending
    * @var string
    */
-  public $LE              = "\n";
+  public $LE              = "\r\n";
 
   /**
    * Used with DKIM DNS Resource Record
