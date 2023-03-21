@@ -6,11 +6,6 @@
 #[AllowDynamicProperties]
 class bildwechsler_class
 {
-	// Der Bildtext aus dem Feld "Text" fest in das Bild eingebrannt.
-	// Im Template kann das Bild mit dem eingebrannten Text Ã¼ber die
-	// Smarty-Variable "bw_bild_mit_eingebranntem_text" abgerufen werden.
-	private $text_einbrennen = FALSE;
-
 	private $config;
 
 	/**
@@ -175,16 +170,6 @@ class bildwechsler_class
 					$temp_wechselbilder[$k]['bw_bild_path'] = trim($imageex2['0']);
 				}
 				$index++;
-			}
-
-			if ($this->text_einbrennen) {
-				foreach ($temp_wechselbilder as &$temp_wechselbild) {
-					$temp_wechselbild['bw_bild_mit_eingebranntem_text'] =
-						str_replace(
-							"../images/",
-							PAPOO_WEB_PFAD . "/images/text_", $temp_wechselbild['bw_bild']);
-				}
-				unset($temp_wechselbild);
 			}
 
 			$this->content->template['plugins']['bildwechsler'] = $temp_wechselbilder;
@@ -517,55 +502,6 @@ class bildwechsler_class
 			}
 			else {
 				$temp_bild = $temp_wechselbild;
-			}
-
-			if ($this->text_einbrennen) {
-				// Dateinamen des Bildes heraussuchen
-				$pattern = "/src=\"([^\"]*)\"/";
-				$subject = $temp_wechselbild;
-				preg_match($pattern, $subject, $matches);
-				$img_url = $matches[1];
-				$img_filename = 'text_' . str_replace("../images/", "", $img_url);
-
-				// Bild - Ebene initialisieren
-				$imageLayer = PHPImageWorkshop\ImageWorkshop::initFromPath($img_url);
-
-				// Schablonen - Ebene initialisieren
-				$patternLayer = PHPImageWorkshop\ImageWorkshop::initFromPath(
-					'../plugins/bildwechsler/img/bildwechsler_grafikelement_neu.png'
-				);
-
-				// Text in Zeilen splitten
-				$text = $temp_text;
-
-				if ($text != "") {
-					// Schablonen - Ebene auf Bild - Ebene draufpappen
-					$imageLayer->addLayerOnTop($patternLayer);
-					$lines = explode("<br />", $text);
-					// Textvariablen
-					$fontPath = "../plugins/bildwechsler/fonts/arial.ttf";
-					$fontSize = 24;
-					$fontColor = "FFFFFF";
-					$textRotation = 0;
-					$xOffset = 780;
-					$yOffset = 80;
-					$lineHeight = 1.6;
-
-					// Fuer jede Zeile eine Textebene draufpappen, weil Zeilenabstand nicht
-					// standardmaessig in der GD-Lib drin ist.
-					$i = 0;
-					foreach ($lines as $line) {
-						$textLayers[$i] = PHPImageWorkshop\ImageWorkshop::initTextLayer(
-							$line, $fontPath, $fontSize, $fontColor, $textRotation
-						);
-						$imageLayer->addLayerOnTop(
-							$textLayers[$i], $xOffset, $yOffset + $i * $fontSize * $lineHeight
-						);
-						$i++;
-					}
-				}
-				// Bild speichern
-				$imageLayer->save("../images/", $img_filename, true, null, 95);
 			}
 
 			if (!$temp_id) {

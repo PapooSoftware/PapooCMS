@@ -20,11 +20,6 @@ require_once(__DIR__ . "/classes/third-party/Browser.php");
 // Third-Party Libaries per Composer Autoload laden
 require_once __DIR__ . '/classes/third-party/composer/vendor/autoload.php';
 
-if (phpversion() >= 5.3) {
-	//Klasse ImageWorkshop zu Bildbearbeitung
-	require_once(__DIR__ . "/classes/third-party/PHPImageWorkshop/ImageWorkshop.php");
-}
-
 // Hier werden eine ganze Reihe von Klassen includiert die je nachdem benötigt werden.
 require_once(PAPOO_ABS_PFAD."/lib/classes/class_debug.php");
 
