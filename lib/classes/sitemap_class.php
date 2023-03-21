@@ -214,7 +214,7 @@ class sitemap
 								$artikelurl="jgiusdhflghldjgsfdhgjsdhlkfjghlksjdgklhsdklghsdjklg";
 							}
 
-							if (stristr( $menupunkt['menuname_url'],$artikelurl)  ) {
+							if (stristr( $menupunkt['menuname_url'] ?? '',$artikelurl)  ) {
 								$menupunkt['menuname_art_url']=str_replace($artikelurl,"",$menupunkt['menuname_url']);
 								$is_url="ok";
 							}

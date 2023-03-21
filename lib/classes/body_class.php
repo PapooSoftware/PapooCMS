@@ -122,10 +122,7 @@ class body_class
 		if (!isset($this->content->template['extra_css'])) {
 			$this->content->template['extra_css'] = null;
 		}
-		$css_file = $this->content->template['extra_css'];
-		$css_class = strtolower(str_replace(".css", "-css", $css_file));
-		$css_class = preg_replace("/[^a-z-]/", "-", $css_class);
-		return $css_class;
+		return preg_replace("/[^a-z-]/", "-", strtolower(str_replace(".css", "-css", $this->content->template['extra_css'] ?? '')));
 	}
 
 	/**

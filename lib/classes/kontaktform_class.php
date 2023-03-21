@@ -85,7 +85,7 @@ class kontaktform
 			if (is_array($value)) {
 				continue;
 			}
-			$value=strip_tags($value);
+			$value=strip_tags($value ?? '');
 			$this->checked->$key=$this->diverse->encode_quote($value);
 		}
 	}

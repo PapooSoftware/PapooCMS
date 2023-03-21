@@ -1843,7 +1843,7 @@ class cms
 			// FIXME: Eigentlich nicht gesetzt, was war hier die Verwendung?
 			IfNotSetNull($abfrage_url);
 
-			if (count($result) == 0 && !stristr($abfrage_url, "keyword")) {
+			if (count($result) == 0 && !stristr($abfrage_url ?? '', "keyword")) {
 				$lastx = substr($sprechende_url_org, -1, 1);
 				$last2x = substr($sprechende_url_org, -5, 5);
 				if ($lastx != "/" && $last2x != ".html") {
@@ -1982,7 +1982,7 @@ class cms
 				}
 			}
 
-			if (stristr($var[$max1], '.html') or $max == 1) {
+			if (isset($var) && stristr($var[$max1], '.html') or $max == 1) {
 				$this->get_reporeid($var[$max1]);
 			}
 		}
@@ -2449,7 +2449,7 @@ class cms
 			IfNotSetNull($match[0]);
 			IfNotSetNull($match[1]);
 			$this->checked->menuid = (int)$match[1];
-			$header = str_replace($match[0], "", $header);
+			$header = str_replace($match[0] ?? "", "", $header);
 		}
 
 		$header_org = $header;

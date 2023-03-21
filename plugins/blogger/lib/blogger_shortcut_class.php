@@ -658,7 +658,7 @@ class blogger_shortcut_class {
 				$last = $entry['blogger_wordlist_count'];
 				continue;
 			}
-			$weight = ($entry['blogger_wordlist_count'] / $f) % 5;
+			$weight = (int)($entry['blogger_wordlist_count'] / $f) % 5;
 			$last = $entry['blogger_wordlist_count'];
 			$list[$key]['weight'] = $weight;
 		}

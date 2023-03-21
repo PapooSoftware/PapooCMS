@@ -207,7 +207,7 @@ class ezSQL_mysqli extends ezSQLcore
             $this->select($this->dbname, $this->encoding);
         }
 
-        return $this->dbh->escape_string(stripslashes($str));
+        return $this->dbh->escape_string(stripslashes($str ?? ''));
     }
 
     /**********************************************************************

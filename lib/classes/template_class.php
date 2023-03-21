@@ -342,7 +342,7 @@ class content_template_class
 		}
 		$inhalt=str_ireplace("\t","  ",$inhalt);
 
-		$inhalt=htmlentities(utf8_encode($inhalt));
+		$inhalt=htmlentities(mb_convert_encoding($inhalt, 'UTF-8'));
 		//template_file
 		// FIXME: $sub2 war nie gesetzt was hatte man hier vor?
 		IfNotSetNull($sub2);

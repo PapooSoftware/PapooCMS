@@ -501,7 +501,7 @@ class intern_styles_class
 								$this->content->template['not_writeable_file']="/styles/" . $pfad['0'] . "/css/" . $file;
 							}
 							$this->content->template['style_id'] = $this->checked->style_id;
-							$this->content->template['xinhalt'] = "nodecode:" . utf8_encode($inhalt);
+							$this->content->template['xinhalt'] = "nodecode:" . mb_convert_encoding($inhalt, 'UTF-8');
 							$this->content->template['style_file_form'] = $file;
 							$this->content->template['css_jquery_first'] = "1";
 						}

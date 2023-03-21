@@ -917,7 +917,7 @@ class menu_class
 
 			$menu['pointsToMenuOrArticle'] = false;
 
-			if (substr($menu["menulinklang"], 0, 1) === "/") {
+			if ($menu["menulinklang"] && substr($menu["menulinklang"], 0, 1) === "/") {
 				if ($isExtraFreeUrl || in_array($menu["menulinklang"], $urls, true)) {
 					$menu["url_menuname"] = $menu["menulinklang"];
 					$menu['pointsToMenuOrArticle'] = !$isExtraFreeUrl;
@@ -1359,11 +1359,11 @@ class menu_class
 					IfNotSetNull($menupunkt['url_metadescrip']);
 					IfNotSetNull($menupunkt['url_metakeywords']);
 
-					if (strlen($menupunkt['url_metadescrip']) > 0) {
+					if ($menupunkt['url_metadescrip'] && strlen($menupunkt['url_metadescrip']) > 0) {
 						$this->content->template['description'] = $menupunkt['url_metadescrip'];
 					}
 
-					if (strlen($menupunkt['url_metakeywords']) > 0) {
+					if ($menupunkt['url_metakeywords'] && strlen($menupunkt['url_metakeywords']) > 0) {
 						$this->content->template['keywords'] = $menupunkt['url_metakeywords'];
 					}
 				}

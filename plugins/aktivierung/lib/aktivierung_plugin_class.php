@@ -64,7 +64,7 @@ class aktivierung_plugin_class
 			foreach ($this->content->template['menuallback'] as $key=>$value) {
 				IfNotSetNull($value['template']);
 
-				if (stristr($value['template'],"aktivierung_back")) {
+				if ($value['template'] && stristr($value['template'],"aktivierung_back")) {
 					$this->content->template['aktivieren_link'] = "plugin.php?menuid=" . $value['menuid'] . $value['template'];
 				}
 			}

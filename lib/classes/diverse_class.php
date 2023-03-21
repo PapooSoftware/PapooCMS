@@ -717,7 +717,7 @@ class diverse_class
 	 */
 	public function encode_quote($text = "")
 	{
-		return str_replace(['"', "'"], ['&quot;', '&lsquo;'], $text);
+		return str_replace(['"', "'"], ['&quot;', '&lsquo;'], $text ?? '');
 	}
 
 	/**

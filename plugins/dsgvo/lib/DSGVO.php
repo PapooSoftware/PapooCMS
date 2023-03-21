@@ -449,7 +449,7 @@ class DSGVO
 			parse_str(html_entity_decode(substr($match["query_string"], 1)), $params);
 			$params["rel"] = 0;
 
-			$queryString = http_build_query($params, null, "&amp;");
+			$queryString = http_build_query($params, '', "&amp;");
 
 			return '<iframe width="420" height="315" src="https://www.youtube-nocookie.com/embed/'.$match["video_id"].'?'.$queryString.'" frameborder="0" allowfullscreen></iframe>';
 		}, $input);

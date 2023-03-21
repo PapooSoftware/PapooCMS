@@ -77,9 +77,6 @@ class class_cal_front
 		//Url f�r die Verlinkung im Kalender
 		$this->get_url_of_kalender($all_cals);
 
-		//Kalender und url zum Kalender rausholen
-		$this->get_aktu_kalender_url();
-
 		//Kalenderdaten im Content anzeigen
 		$this->get_kalender_daten_eines_kalender($all_cals);
 
@@ -443,20 +440,6 @@ class class_cal_front
 		if (empty($result)) {
 			$this->content->template['kalender_eintrge_von_aussen'] = "";
 		}
-	}
-
-	/**
-	 * class_cal_front::get_aktu_kalender_url()
-	 *
-	 * @return void
-	 */
-	function get_aktu_kalender_url()
-	{
-		if (!isset($this->checked->var1)) {
-			$this->checked->var1 = NULL;
-		}
-		//Zuerst mal die ID
-		$kal_split = explode("pkalender", $this->checked->var1);
 	}
 
 	/**
@@ -866,7 +849,7 @@ class class_cal_front
 	 *
 	 * @param mixed $url
 	 * @param $cal_id
-	 * @return void
+	 * @return array
 	 */
 	private function get_google_dat($url, $cal_id)
 	{

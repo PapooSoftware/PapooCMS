@@ -1301,17 +1301,9 @@ class artikel_class
 					// Verfallstimestamp;
 					$dat = explode(".", $artikel->pub_verfall_page);
 
-					if(!isset($dat['2'])) {
-						$dat['2'] = NULL;
-					}
+					$dat_t1 = isset($dat['2']) ? explode(" ", $dat['2']) : NULL;
+					$dat_t2 = isset($dat_t1['1']) ? explode(":", $dat_t1['1']) : NULL;
 
-					$dat_t1 = explode(" ", $dat['2']);
-
-					if(!isset($dat_t1['1'])) {
-						$dat_t1['1'] = NULL;
-					}
-
-					$dat_t2 = explode(":", $dat_t1['1']);
 					if (empty($dat_t2['0'])) {
 						$dat_t2['0'] = "0";
 					}
@@ -1324,17 +1316,9 @@ class artikel_class
 					// Starttimestamp
 					$dat = explode(".", $artikel->pub_start_page);
 
-					if(!isset($dat['2'])) {
-						$dat['2'] = NULL;
-					}
+					$dat_t1 = isset($dat['2']) ? explode(" ", $dat['2']) : NULL;
+					$dat_t2 = isset($dat_t1['1']) ? explode(":", $dat_t1['1']) : NULL;
 
-					$dat_t1 = explode(" ", $dat['2']);
-
-					if(!isset($dat_t1['1'])) {
-						$dat_t1['1'] = NULL;
-					}
-
-					$dat_t2 = explode(":", $dat_t1['1']);
 					if (empty($dat_t2['0'])) {
 						$dat_t2['0'] = "0";
 					}
@@ -1365,13 +1349,8 @@ class artikel_class
 					// Verfallstimestamp
 					$dat = explode(".", $artikel->pub_verfall);
 
-					IfNotSetNull($dat['2']);
-
-					$dat_t1 = explode(" ", $dat['2']);
-
-					IfNotSetNull($dat_t1['1']);
-
-					$dat_t2 = explode(":", $dat_t1['1']);
+					$dat_t1 = isset($dat['2']) ? explode(" ", $dat['2']) : NULL;
+					$dat_t2 = isset($dat_t1['1']) ? explode(":", $dat_t1['1']) : NULL;
 
 					if (empty($dat_t2['0'])) {
 						$dat_t2['0'] = "0";
@@ -1385,13 +1364,9 @@ class artikel_class
 					// Starttimestamp
 					$dat = explode(".", $artikel->pub_start);
 
-					IfNotSetNull($dat['2']);
+					$dat_t1 = isset($dat['2']) ? explode(" ", $dat['2']) : NULL;
+					$dat_t2 = isset($dat_t1['1']) ? explode(":", $dat_t1['1']) : NULL;
 
-					$dat_t1 = explode(" ", $dat['2']);
-
-					IfNotSetNull($dat_t1['1']);
-
-					$dat_t2 = explode(":", $dat_t1['1']);
 					if (empty($dat_t2['0'])) {
 						$dat_t2['0'] = "0";
 					}
@@ -1927,21 +1902,12 @@ class artikel_class
 					// Verfallstimestamp
 					$dat = explode(".", $artikel->pub_verfall);
 
-					if(!isset($dat['2'])) {
-						$dat['2'] = NULL;
-					}
+					$dat_t1 = isset($dat['2']) ? explode(" ", $dat['2']) : NULL;
+					$dat_t2 = isset($dat_t1['1']) ? explode(":", $dat_t1['1']) : NULL;
 
-					$dat_t1 = explode(" ", $dat['2']);
-
-					if(!isset($dat_t1['1'])) {
-						$dat_t1['1'] = NULL;
-					}
-
-					$dat_t2 = explode(":", $dat_t1['1']);
 					if (empty($dat_t2['0'])) {
 						$dat_t2['0'] = "0";
 					}
-
 					if (empty($dat_t2['1'])) {
 						$dat_t2['1'] = "0";
 					}
@@ -1955,17 +1921,9 @@ class artikel_class
 					// Starttimestamp
 					$dat = explode(".", $artikel->pub_start);
 
-					if(!isset($dat['2'])) {
-						$dat['2'] = NULL;
-					}
+					$dat_t1 = isset($dat['2']) ? explode(" ", $dat['2']) : NULL;
+					$dat_t2 = isset($dat_t1['1']) ? explode(":", $dat_t1['1']) : NULL;
 
-					$dat_t1 = explode(" ", $dat['2']);
-
-					if(!isset($dat_t1['1'])) {
-						$dat_t1['1'] = NULL;
-					}
-
-					$dat_t2 = explode(":", $dat_t1['1']);
 					if ($dat[2] > 1970) {
 						$start = @mktime((int)$dat_t2['0'], (int)$dat_t2['1'], 0, (int)$dat[1], (int)$dat[0], (int)$dat[2]);
 					}
@@ -2838,15 +2796,13 @@ class artikel_class
 				}
 				preg_match_all('/<img[^>]*>/Ui', $this->diverse->do_pfadeanpassen($row->lan_teaser), $img);
 
-				if(!isset($img['0']['0'])) {
-					$img['0']['0'] = NULL;
+				if (isset($img['0']['0'])) {
+					$img['0']['0'] = str_replace("/thumbs", "", $img['0']['0']);
+					$img['0']['0'] = str_replace("style", "rel", $img['0']['0']);
 				}
 				if(!isset($this->author)) {
 					$this->author = NULL;
 				}
-
-				$img['0']['0'] = str_replace("/thumbs", "", $img['0']['0']);
-				$img['0']['0'] = str_replace("style", "rel", $img['0']['0']);
 
 				$teaserVideoTag = preg_match('~<video(?=\s|>).*?</video>~i', $row->lan_teaser, $teaserVideoTag)
 					? $teaserVideoTag[0]
@@ -3634,11 +3590,11 @@ class artikel_class
 
 			// Werte fuer Open Graph Meta Tags erstellen
 			return array_merge($article, ["open_graph" => [
-				"title" => trim(strip_tags($articleData["title"])),
-				"description" => trim(strip_tags($articleData["meta_description"])),
+				"title" => trim(strip_tags($articleData["title"]) ?? ''),
+				"description" => trim(strip_tags($articleData["meta_description"]) ?? ''),
 				"type" => "Website",
-				"image" => trim($image),
-				"url" => trim($url),
+				"image" => trim($image ?? ''),
+				"url" => trim($url ?? ''),
 			]]);
 		}, $articles);
 
