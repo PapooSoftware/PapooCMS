@@ -39,6 +39,7 @@ class curl_exception extends Exception {
  * Bei new wird ein neues cURL-Handle erzeugt
  * und im Destruktor automatisch geschlossen.
  */
+#[AllowDynamicProperties]
 class curl
 {
 	/** @var false|resource|null  */

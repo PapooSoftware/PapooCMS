@@ -399,6 +399,7 @@ class SimpleUnzip {
  *  @author     Holger Boskugel <vbwebprofi@gmx.de>
  *  @example    example.unzip.php Two examples
  */
+#[AllowDynamicProperties]
 class SimpleUnzipEntry {
 	/**
 	 *  Data of the file entry

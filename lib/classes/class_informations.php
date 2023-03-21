@@ -32,6 +32,7 @@ class informations2
 /**
  * Class array2xml_class
  */
+#[AllowDynamicProperties]
 class array2xml_class
 {
 	/** @var string  */
