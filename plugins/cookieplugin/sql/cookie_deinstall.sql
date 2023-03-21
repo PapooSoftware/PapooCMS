@@ -1,1 +1,0 @@
-DROP TABLE IF EXISTS `XXX_cookieplugin_settings`; ##b_dump##
