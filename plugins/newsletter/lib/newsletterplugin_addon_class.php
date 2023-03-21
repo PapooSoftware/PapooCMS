@@ -16,7 +16,7 @@ class newsletter_addon
 	function __construct()
 	{
 		global $cms, $db, $message, $user, $weiter, $content, $searcher, $checked, $db_praefix, $intern_stamm;
-		require_once (PAPOO_ABS_PFAD . "/lib/classes/class.phpmailer.php");
+		require_once (PAPOO_ABS_PFAD . "/lib/classes/third-party/class.phpmailer.php");
 		require_once (PAPOO_ABS_PFAD . "/lib/classes/mail_it_class.php");
 		$mail_it = new mail_it();
 		$this->cms = &$cms;

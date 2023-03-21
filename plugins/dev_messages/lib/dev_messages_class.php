@@ -956,7 +956,7 @@ class dev_messages_class
 			//Verz�gerung um 1/2 Sekunde damit Google nicht blockt
 			#usleep(500000);
 
-			require_once (PAPOO_ABS_PFAD . "/lib/classes/extlib/Snoopy.class.inc.php");
+			require_once (PAPOO_ABS_PFAD . "/lib/classes/third-party/Snoopy.class.inc.php");
 			// $url="https://85.214.57.82/sportnaviTest/members/devlogin.aspx?email=cusrtis@cssaasas.de&passwort=toni";
 			$data=str_replace("\n","",$data);
 			$data=str_replace("\r","",$data);

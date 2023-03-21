@@ -187,7 +187,7 @@ class class_create_site
 	 */
 	function get_data_frontend( $style = 0 )
 	{
-		require_once ( PAPOO_ABS_PFAD . "/lib/classes/extlib/Snoopy.class.inc.php" );
+		require_once ( PAPOO_ABS_PFAD . "/lib/classes/third-party/Snoopy.class.inc.php" );
 
 		#require_once(PAPOO_ABS_PFAD."/lib/classes/xmlparser_class.php");
 		$url="http://".$this->cms->title_send.$this->cms->webverzeichnis."/index.php?style=".$style;

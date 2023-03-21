@@ -329,7 +329,7 @@ class flexintplugin
 	 */
 	function get_formmanger_daten()
 	{
-		require_once ( PAPOO_ABS_PFAD . "/lib/classes/extlib/Snoopy.class.inc.php" );
+		require_once ( PAPOO_ABS_PFAD . "/lib/classes/third-party/Snoopy.class.inc.php" );
 
 		$seite = $this->get_url_one();
 		$seite_url = $this->get_seite_url();
@@ -377,7 +377,7 @@ class flexintplugin
 	 */
 	function get_mv_daten()
 	{
-		require_once (PAPOO_ABS_PFAD . "/lib/classes/extlib/Snoopy.class.inc.php");
+		require_once (PAPOO_ABS_PFAD . "/lib/classes/third-party/Snoopy.class.inc.php");
 		$seite = $this->get_url_one() . "&getlang=" . $this->cms->lang_short;
 		$seite_url = $this->get_seite_url();
 		$get_vars = $this->get_vars();

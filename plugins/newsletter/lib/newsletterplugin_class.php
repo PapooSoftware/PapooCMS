@@ -40,7 +40,7 @@ class news
 
 		global $cms, $db, $message, $user, $weiter, $content, $searcher, $checked, $diverse, $db_praefix, $intern_stamm, $mv;
 		// Mail Klasse einbinden
-		require_once(PAPOO_ABS_PFAD . "/lib/classes/class.phpmailer.php");
+		require_once(PAPOO_ABS_PFAD . "/lib/classes/third-party/class.phpmailer.php");
 		require_once(PAPOO_ABS_PFAD . "/lib/classes/mail_it_class.php");
 		$mail_it = new mail_it();
 

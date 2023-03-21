@@ -101,7 +101,7 @@ class galdownload
 		$verzeichnis = $this->get_verzeichnis_gal();
 
 		//Zip Klasse einbinden
-		require_once(PAPOO_ABS_PFAD . "/lib/classes/zip_class.php");
+		require_once(PAPOO_ABS_PFAD . "/lib/classes/third-party/zip_class.php");
 
 		//Klasse ini
 		$zip = new Zip();

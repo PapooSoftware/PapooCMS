@@ -1315,7 +1315,7 @@ class diverse_class
 		$this->lokal_db_praefix = $db_praefix;
 
 		// xml Klasse einbinden
-		require_once(PAPOO_ABS_PFAD . "/lib/classes/extlib/Snoopy.class.inc.php");
+		require_once(PAPOO_ABS_PFAD . "/lib/classes/third-party/Snoopy.class.inc.php");
 		$html = new Snoopy();
 		$html->fetch($url);
 		$xml = $html->results;

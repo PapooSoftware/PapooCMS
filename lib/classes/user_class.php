@@ -768,7 +768,7 @@ class user_class
 
 			//USerdaten übergeben
 			$url = $url . "&username=" . $username . "&password=" . $password;
-			require_once(PAPOO_ABS_PFAD . "/lib/classes/extlib/Snoopy.class.inc.php");
+			require_once(PAPOO_ABS_PFAD . "/lib/classes/third-party/Snoopy.class.inc.php");
 
 			$html = new Snoopy();
 			$html->agent = "Web Browser";

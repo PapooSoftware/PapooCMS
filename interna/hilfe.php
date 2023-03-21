@@ -16,7 +16,7 @@ session_start();
 $title = "";
 $ausgabe = "";
 if (!empty ($_GET['hilfe'])) {
-	require_once("../lib/classes/extlib/Snoopy.class.inc.php");
+	require_once("../lib/classes/third-party/Snoopy.class.inc.php");
 
 	if (empty($_GET['action'])) {
 		($_GET['action'] = "");

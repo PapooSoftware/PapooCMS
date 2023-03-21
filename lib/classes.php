@@ -125,7 +125,7 @@ if (!defined("admin")) {
 }
 
 // Mail Klasse einbinden
-require_once(PAPOO_ABS_PFAD."/lib/classes/class.phpmailer.php");
+require_once(PAPOO_ABS_PFAD."/lib/classes/third-party/class.phpmailer.php");
 require_once(PAPOO_ABS_PFAD."/lib/classes/mail_it_class.php");
 
 /* /--------------------------------------------------------------------------------------------\

@@ -936,7 +936,7 @@ class flexcmintegration
 		$url = str_replace('/', '%2F', $url);
 		$url = str_replace('http:%2F%2F', 'http://', $url);
 		$url = str_replace('%2Fplugin.php', '/plugin.php', $url);
-		require_once (PAPOO_ABS_PFAD . "/lib/classes/extlib/Snoopy.class.inc.php");
+		require_once (PAPOO_ABS_PFAD . "/lib/classes/third-party/Snoopy.class.inc.php");
 		$html = new Snoopy();
 		$html->agent = "Web Browser";
 		$html->referer = $_SERVER["HTTP_REFERER"];

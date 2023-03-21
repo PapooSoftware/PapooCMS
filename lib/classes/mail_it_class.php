@@ -189,8 +189,8 @@ class mail_it
 
 		if ($isFromMailValid && $isToMailValid) {
 			// Neue mail Klasse initialisieren
-			require_once(PAPOO_ABS_PFAD."/lib/classes/class.phpmailer.php");
-			require_once(PAPOO_ABS_PFAD."/lib/classes/class.smtp.php");
+			require_once(PAPOO_ABS_PFAD."/lib/classes/third-party/class.phpmailer.php");
+			require_once(PAPOO_ABS_PFAD."/lib/classes/third-party/class.smtp.php");
 			$mail = new PHPMailer();
 
 			$settings['settingsType'] = $settings['settingsType'] ?? 'system';
