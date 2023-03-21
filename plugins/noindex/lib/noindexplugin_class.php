@@ -8,6 +8,7 @@
  * Die noindexplugin_class implementiert die hauptfunktionen des noindex-Plugins.
  *
  * */
+#[AllowDynamicProperties]
 class noindexplugin_class
 {
 	/**

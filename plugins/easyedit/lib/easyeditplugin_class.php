@@ -19,6 +19,7 @@
  *
  * Class easyedit
  */
+#[AllowDynamicProperties]
 class easyedit
 {
 	/**

@@ -19,6 +19,7 @@
  *
  */
 
+#[AllowDynamicProperties]
 class cat_class
 {
 	/**

@@ -19,6 +19,7 @@ require_once('krakenerror.php');
  *
  * @author Andreas Gritzan <ag@papoo.de>
  */
+#[AllowDynamicProperties]
 class krakenplugin_class
 {
 

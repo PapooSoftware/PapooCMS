@@ -15,6 +15,7 @@
 /**
  * Class linklisteplugin
  */
+#[AllowDynamicProperties]
 class linklisteplugin
 {
 	/** @var string  */

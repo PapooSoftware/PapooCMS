@@ -15,6 +15,7 @@
 /**
  * Class news
  */
+#[AllowDynamicProperties]
 class news
 {
 	/** @var string */

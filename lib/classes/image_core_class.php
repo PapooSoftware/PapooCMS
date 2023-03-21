@@ -14,6 +14,7 @@
 /**
  * Class image_core_class
  */
+#[AllowDynamicProperties]
 class image_core_class
 {
 	/** @var mixed valide Bild-Endungen (kleingeschrieben: gif, giff, jpg, jpeg, png) */

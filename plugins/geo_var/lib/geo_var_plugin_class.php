@@ -3,6 +3,7 @@
 /**
  * Class geo_var_plugin
  */
+#[AllowDynamicProperties]
 class geo_var_plugin
 {
 	/**

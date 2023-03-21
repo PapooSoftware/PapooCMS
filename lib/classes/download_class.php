@@ -12,6 +12,7 @@
 ######################################
  */
 
+#[AllowDynamicProperties]
 class download_class
 {
 	/** @var int Soll Download-Link mit weiteren Informationen angezeigt werden? (z.B. Anzahl-Downloads, Icon oder Datum letzter Download) */

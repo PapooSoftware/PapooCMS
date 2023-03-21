@@ -3,6 +3,7 @@
 /**
  * Class forum_last_messages
  */
+#[AllowDynamicProperties]
 class forum_last_messages
 {
 	/** @var string */

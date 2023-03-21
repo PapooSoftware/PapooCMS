@@ -21,6 +21,7 @@ namespace Papoo\Plugins\TwoClickVideo;
  *
  * @package Papoo\Plugins\TwoClickVideo
  */
+#[AllowDynamicProperties]
 class TwoClickVideo
 {
 	private $cms;
@@ -712,7 +713,8 @@ class TwoClickVideo
  *
  * @package Papoo\Plugins\TwoClickVideo
  */
-abstract class HandlerBase
+#[AllowDynamicProperties]
+class HandlerBase
 {
 	/** @var string */
 	const PROVIDER_ID = '???';

@@ -16,6 +16,7 @@ require_once (__DIR__) . "/Write.php";
  *
  * @author Martin Güthler <mg@papoo.de>
  */
+#[AllowDynamicProperties]
 class querverlinkungen_class
 {
 	const PREFIX = 'querverlin';

@@ -17,6 +17,7 @@
 /**
  * Class pluginscss_class
  */
+#[AllowDynamicProperties]
 class pluginscss_class
 {
 	/** @var string */

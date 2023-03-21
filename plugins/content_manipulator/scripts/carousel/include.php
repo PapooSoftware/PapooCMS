@@ -3,6 +3,7 @@
 /**
  * Class carousel_galerieintegration
  */
+#[AllowDynamicProperties]
 class carousel_galerieintegration
 {
 	/**

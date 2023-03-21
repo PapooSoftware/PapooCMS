@@ -15,6 +15,7 @@
  * @link https://github.com/Grandt/PHPZip
  * @version 1.61
  */
+#[AllowDynamicProperties]
 class Zip {
     const VERSION = 1.61;
 

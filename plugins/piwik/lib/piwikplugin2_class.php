@@ -3,6 +3,7 @@
 /**
  * Class piwikplugin2_class
  */
+#[AllowDynamicProperties]
 class piwikplugin2_class
 {
 	/**

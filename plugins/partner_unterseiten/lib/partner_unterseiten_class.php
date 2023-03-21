@@ -3,6 +3,7 @@
 /**
  * Class partner_unterseiten_class
  */
+#[AllowDynamicProperties]
 class partner_unterseiten_class
 {
 	private $db, $content, $checked, $user, $cms, $menu, $intern_menu, $diverse;

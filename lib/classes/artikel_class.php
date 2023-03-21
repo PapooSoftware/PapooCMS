@@ -14,6 +14,7 @@
 /**
  * Class artikel_class
  */
+#[AllowDynamicProperties]
 class artikel_class
 {
 	/**

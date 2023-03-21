@@ -3,6 +3,7 @@
 /**
  * Class blogger_trackback_class
  */
+#[AllowDynamicProperties]
 class blogger_trackback_class {
 	private $checked;
 	private $cms;

@@ -3,6 +3,7 @@
 /**
  * Class linklisteintegration
  */
+#[AllowDynamicProperties]
 class linklisteintegration
 {
 	/**

@@ -32,6 +32,7 @@
 /**
  * Class usefulservicesplugin
  */
+#[AllowDynamicProperties]
 class usefulservicesplugin
 {
 	/** @var string  */

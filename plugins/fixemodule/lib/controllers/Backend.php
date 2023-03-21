@@ -9,6 +9,7 @@ use ActiveRecord\Model;
  *
  * @package FixeModule
  */
+#[AllowDynamicProperties]
 class Backend extends Controller
 {
 	/**

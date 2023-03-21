@@ -3,6 +3,7 @@
 /**
  * Class bildunterschrift
  */
+#[AllowDynamicProperties]
 class bildunterschrift
 {
 	//Diesen Eintrag auf YES setzen um ihn zu aktivieren

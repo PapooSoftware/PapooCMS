@@ -16,6 +16,7 @@
  *
  * @return void
  */
+#[AllowDynamicProperties]
 class kontrastwechsler_class
 {
 	/** @var checked_class  */

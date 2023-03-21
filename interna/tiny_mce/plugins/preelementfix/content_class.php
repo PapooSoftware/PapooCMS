@@ -14,6 +14,7 @@
 /**
  * Class content_class
  */
+#[AllowDynamicProperties]
 class  content_class
 {
 	/** @var array template beinhaltet Variablen für das Template. */

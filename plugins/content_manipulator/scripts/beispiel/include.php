@@ -5,6 +5,7 @@
  * Die mu� man nicht so benutzen.
  * Im Prinzip kann man hier reinschreiben was man m�chte
  * */
+#[AllowDynamicProperties]
 class beispiel
 {
 

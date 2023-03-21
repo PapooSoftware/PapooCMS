@@ -14,6 +14,7 @@ if(stristr($_SERVER['PHP_SELF'], 'class_search.php')) {
 /**
  * Class class_search_front
  */
+#[AllowDynamicProperties]
 class class_search_front
 {
 	/** @var bool Kundenanpassung */

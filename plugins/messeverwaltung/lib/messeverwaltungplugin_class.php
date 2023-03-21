@@ -15,6 +15,7 @@
 /**
  * Class messeplugin
  */
+#[AllowDynamicProperties]
 class messeplugin
 {
 

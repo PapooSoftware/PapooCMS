@@ -3,6 +3,7 @@
 /**
  * Class cachecleaner_class
  */
+#[AllowDynamicProperties]
 class cachecleaner_class {
 	/**
 	 * cachecleaner_class constructor.

@@ -14,6 +14,7 @@
 /**
  * Class menutop_class
  */
+#[AllowDynamicProperties]
 class menutop_class
 {
 	/**

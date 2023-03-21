@@ -3,6 +3,7 @@
 /**
  * Class mehrstufige_freigabe_class
  */
+#[AllowDynamicProperties]
 class mehrstufige_freigabe_class
 {
 	/**

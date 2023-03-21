@@ -13,6 +13,7 @@
  *
  * @author Carsten Euwens <info@papoo.de>
  */
+#[AllowDynamicProperties]
 class deepltrans_class
 {
 	const PREFIX = 'deepltrans';

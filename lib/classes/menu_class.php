@@ -16,6 +16,7 @@
  *
  * Class menu_class
  */
+#[AllowDynamicProperties]
 class menu_class
 {
 	// Daten der Frontend-Menüs

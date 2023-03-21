@@ -24,6 +24,7 @@ require_once PAPOO_ABS_PFAD . '/lib/php-activerecord/ActiveRecord.php';
  *
  * @author Martin Güthler <mg@papoo.de>
  */
+#[AllowDynamicProperties]
 class fixemodule_class
 {
 	const PREFIX = 'fixemodule';

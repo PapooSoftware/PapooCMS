@@ -25,6 +25,7 @@
  * @param string $author 
  * @param string $encoding 
  */
+#[AllowDynamicProperties]
 class Trackback {
     var $blog_name = ''; // Default blog name used throughout the class (ie. BLOGish)
     var $author = ''; // Default author name used throughout the class (ie. Ran Aroussi)

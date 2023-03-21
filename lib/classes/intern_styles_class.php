@@ -14,6 +14,7 @@
 /**
  * Class intern_styles_class
  */
+#[AllowDynamicProperties]
 class intern_styles_class
 {
 	/**

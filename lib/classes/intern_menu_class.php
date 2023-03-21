@@ -15,6 +15,7 @@
 /**
  * Class intern_menu_class
  */
+#[AllowDynamicProperties]
 class intern_menu_class
 {
 	/**

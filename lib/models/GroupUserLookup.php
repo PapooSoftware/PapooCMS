@@ -3,6 +3,7 @@
 /**
  * Class GroupUserLookup
  */
+#[AllowDynamicProperties]
 class GroupUserLookup extends ActiveRecord\Model
 {
 	static $table_name;

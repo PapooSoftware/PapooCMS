@@ -3,6 +3,7 @@
 /**
  * Class RandomImages
  */
+#[AllowDynamicProperties]
 class RandomImages
 {
 	/**

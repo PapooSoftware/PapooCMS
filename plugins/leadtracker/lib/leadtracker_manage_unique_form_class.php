@@ -3,6 +3,7 @@
 /**
  * Class leadtracker_manage_unique_form_class
  */
+#[AllowDynamicProperties]
 class leadtracker_manage_unique_form_class
 {
 	/**

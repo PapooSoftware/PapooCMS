@@ -3,6 +3,7 @@
 /**
  * Class Kraken
  */
+#[AllowDynamicProperties]
 class Kraken {
 	/** @var array */
 	protected $auth = array();

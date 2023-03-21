@@ -7,6 +7,7 @@
  *
  * Class cm_divers
  */
+#[AllowDynamicProperties]
 class cm_divers
 {
 	/**

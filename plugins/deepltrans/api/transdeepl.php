@@ -4,6 +4,7 @@
  * Class transdeepl
  */
 
+#[AllowDynamicProperties]
 class transdeepl
 {
 	/**

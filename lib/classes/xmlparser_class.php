@@ -15,6 +15,7 @@ contact: s.bergmann@ximix.de
 /**
  * Class xmlparser_class
  */
+#[AllowDynamicProperties]
 class xmlparser_class
 {
 	/**

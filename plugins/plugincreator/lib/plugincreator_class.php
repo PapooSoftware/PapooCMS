@@ -16,6 +16,7 @@
  *
  * @author Andreas Gritzan <ag@papoo.de>
  */
+#[AllowDynamicProperties]
 class plugincreator_class
 {
 

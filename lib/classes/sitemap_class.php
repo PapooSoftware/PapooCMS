@@ -17,6 +17,7 @@
  *
  * Class sitemap
  */
+#[AllowDynamicProperties]
 class sitemap
 {
 	/**

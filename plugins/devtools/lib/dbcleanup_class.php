@@ -3,6 +3,7 @@
 /**
  * Class dbcleanup_class
  */
+#[AllowDynamicProperties]
 class dbcleanup_class
 {
 	/**

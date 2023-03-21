@@ -17,6 +17,7 @@ namespace Papoo\Plugins\DSGVO;
  * @date 2018-02-01
  */
 
+#[AllowDynamicProperties]
 class XHRController {
 	public function __construct() {}
 

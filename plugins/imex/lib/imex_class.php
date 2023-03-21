@@ -14,6 +14,7 @@
 /**
  * Class imex_class
  */
+#[AllowDynamicProperties]
 class imex_class
 {
 	/**

@@ -15,6 +15,7 @@
 /**
  * Class searcher
  */
+#[AllowDynamicProperties]
 class searcher
 {
 

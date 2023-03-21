@@ -20,6 +20,7 @@
  *
  * Class replace_class
  */
+#[AllowDynamicProperties]
 class replace_class {
 	/** @var array enthält die Wörter der "fremdländischen" Sprache */
 	var $lexikon;

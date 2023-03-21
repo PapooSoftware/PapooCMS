@@ -12,6 +12,7 @@
 */
 if (stristr( $_SERVER['PHP_SELF'],'bbcode.inc.php')) die('You are not allowed to see this page directly');
 // this class processes BB code
+#[AllowDynamicProperties]
 class BBCode {
 	// internal variables
 	var $codes = array ();

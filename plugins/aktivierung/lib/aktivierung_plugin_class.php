@@ -3,6 +3,7 @@
 /**
  * Class aktivierung_plugin_class
  */
+#[AllowDynamicProperties]
 class aktivierung_plugin_class
 {
 	/**

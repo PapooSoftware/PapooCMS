@@ -12,6 +12,7 @@
 #####################################
  */
 
+#[AllowDynamicProperties]
 class convert {
 
 	/** @var string  */

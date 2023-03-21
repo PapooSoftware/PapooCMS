@@ -16,6 +16,7 @@
  *
  * Class pluginintegrator_class
  */
+#[AllowDynamicProperties]
 class pluginintegrator_class
 {
 	/**

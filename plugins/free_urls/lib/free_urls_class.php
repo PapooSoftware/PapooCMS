@@ -3,6 +3,7 @@
 /**
  * Class freeplugin_class
  */
+#[AllowDynamicProperties]
 class freeplugin_class
 {
 	//Speichert mit der ID der Sprache als Index das Sprachkürzel

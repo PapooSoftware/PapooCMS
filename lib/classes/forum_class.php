@@ -15,6 +15,7 @@
 /**
  * Mit dieser Klasse wird das Forum generiert.
  */
+#[AllowDynamicProperties]
 class forum
 {
 	/**

@@ -14,6 +14,7 @@
 /**
  * Class intern_link
  */
+#[AllowDynamicProperties]
 class  intern_link  {
 
 	/**

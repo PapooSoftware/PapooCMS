@@ -16,6 +16,7 @@ if ( stristr($_SERVER['PHP_SELF'],'class_debug.php') ) die( 'You are not allowed
 /**
  * Class debug
  */
+#[AllowDynamicProperties]
 class debug
 {
 	/**

@@ -21,6 +21,7 @@ namespace Papoo\Plugins\TwoClickVideo;
  *
  * @package Papoo\Plugins\TwoClickVideo
  */
+#[AllowDynamicProperties]
 class YoutubeHandler extends HandlerBase
 {
 	const PROVIDER_ID = 'youtube';

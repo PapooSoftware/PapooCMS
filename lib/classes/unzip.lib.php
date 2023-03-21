@@ -44,6 +44,7 @@
  *  @uses       SimpleUnzipEntry
  *  @example    example.unzip.php Two examples
  */
+#[AllowDynamicProperties]
 class SimpleUnzip {
 // 2003-12-02 - HB >
 	/**

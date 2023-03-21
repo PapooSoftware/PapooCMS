@@ -1,5 +1,6 @@
 <?php
 
+#[AllowDynamicProperties]
 class Flextemplate extends ActiveRecord\Model
 {
 	static $table_name;

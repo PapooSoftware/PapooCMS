@@ -3,6 +3,7 @@
 /**
  * Class user_begruessung_class
  */
+#[AllowDynamicProperties]
 class user_begruessung_class
 {
 	var $text_begruessung = 'Sie sind angemeldet als: %s.';

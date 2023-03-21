@@ -15,6 +15,7 @@
 /**
  * Diverse öffentliche Methoden
  */
+#[AllowDynamicProperties]
 class diverse_class
 {
 	/** @var cms */

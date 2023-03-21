@@ -3,6 +3,7 @@
 /**
  * Class newdump_class
  */
+#[AllowDynamicProperties]
 class newdump_class {
 	/**
 	 * newdump_class constructor.

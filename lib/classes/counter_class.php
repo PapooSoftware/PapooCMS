@@ -19,6 +19,7 @@ require_once "./cms_class.php";*/
  *
  * Class counter
  */
+#[AllowDynamicProperties]
 class counter {
 
 	/** @var mixed Anzahl der Besucher */

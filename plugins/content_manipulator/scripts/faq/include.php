@@ -7,6 +7,7 @@
  *
  * Class faq_cm
  */
+#[AllowDynamicProperties]
 class faq_cm
 {
 	/**

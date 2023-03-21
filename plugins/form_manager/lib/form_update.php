@@ -11,6 +11,7 @@
  *
  * Checkt ab 2015 das Update
  */
+#[AllowDynamicProperties]
 class form_update {
 	/**
 	 * form_update constructor.

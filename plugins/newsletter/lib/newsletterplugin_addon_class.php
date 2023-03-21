@@ -7,6 +7,7 @@ require_once PAPOO_ABS_PFAD . '/plugins/newsletter/messages/addon_messages_front
 /**
  * Class newsletter_addon
  */
+#[AllowDynamicProperties]
 class newsletter_addon
 {
 	var $_pop3;

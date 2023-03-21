@@ -17,6 +17,7 @@
  *
  * Class session_class
  */
+#[AllowDynamicProperties]
 class session_class
 {
 

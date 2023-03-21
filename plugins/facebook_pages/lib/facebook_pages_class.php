@@ -3,6 +3,7 @@
 /**
  * Class facebook_pagesplugin_class
  */
+#[AllowDynamicProperties]
 class facebook_pagesplugin_class
 {
 	/**

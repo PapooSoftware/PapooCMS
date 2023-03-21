@@ -3,6 +3,7 @@
  * Break Annihilator - entfernt alle br-Tags!
  * @author Christoph Zimmer
  */
+#[AllowDynamicProperties]
 class BreakAnnihilator {
 	/**
 	 * BreakAnnihilator constructor.

@@ -3,6 +3,7 @@
 /**
  * Class faqsearcher
  */
+#[AllowDynamicProperties]
 class faqsearcher{
 	// Suchwert der zurückgegeben wird
 	var $result_search;

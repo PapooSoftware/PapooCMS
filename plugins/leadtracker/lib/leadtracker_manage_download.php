@@ -3,6 +3,7 @@
 /**
  * Class leadtracker_manage_download_class
  */
+#[AllowDynamicProperties]
 class leadtracker_manage_download_class
 {
 	/**

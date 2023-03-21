@@ -13,6 +13,7 @@ if ( stristr( $_SERVER['PHP_SELF'],'extended_search_class.php') ) die( 'You are 
 /**
  * Class extended_search_class
  */
+#[AllowDynamicProperties]
 class extended_search_class {
 	// ACHTUNG!!! Wenn die PDF-Indexing-Funktionalit�t
 	// benutzt werden soll, bitte folgendes beachten:

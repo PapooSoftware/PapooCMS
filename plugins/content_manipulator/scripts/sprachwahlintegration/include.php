@@ -3,6 +3,7 @@
 /**
  * Class sprachwahlintegration
  */
+#[AllowDynamicProperties]
 class sprachwahlintegration
 {
 	/**

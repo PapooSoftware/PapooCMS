@@ -19,6 +19,7 @@
 /**
  * Class sprechomat_class
  */
+#[AllowDynamicProperties]
 class sprechomat_class
 {
 	/** @var array */

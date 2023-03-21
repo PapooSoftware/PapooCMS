@@ -3,6 +3,7 @@
 /**
  * Class admin_message
  */
+#[AllowDynamicProperties]
 class admin_message
 {
 	/**

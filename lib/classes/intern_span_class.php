@@ -14,6 +14,7 @@
 /**
  * Class intern_span
  */
+#[AllowDynamicProperties]
 class  intern_span  {
 
 	/**

@@ -3,6 +3,7 @@
 /**
  * Class class_osm_overlay
  */
+#[AllowDynamicProperties]
 class class_osm_overlay {
 	private $checked;
 	private $cms;

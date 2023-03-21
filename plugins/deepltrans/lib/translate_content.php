@@ -5,6 +5,7 @@
  * Class translate
  */
 
+#[AllowDynamicProperties]
 class translate_content extends deepltrans_class
 {
 	/**

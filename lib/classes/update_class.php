@@ -14,6 +14,7 @@
 /**
  * Class update_class
  */
+#[AllowDynamicProperties]
 class update_class
 {
 	/** @var array Parameter der aktuellen DB, bzw. DB-Tabellen */

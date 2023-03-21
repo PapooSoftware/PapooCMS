@@ -13,6 +13,7 @@
  *
  * @author Dr. Carsten Euwens <info@papoo.de>
  */
+#[AllowDynamicProperties]
 class redirectcounter_class
 {
 	const PREFIX = 'redirectco';

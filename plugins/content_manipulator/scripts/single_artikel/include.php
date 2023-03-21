@@ -7,6 +7,7 @@
  *
  * Class single_artikel
  */
+#[AllowDynamicProperties]
 class single_artikel
 {
 	/**

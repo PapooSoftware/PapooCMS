@@ -3,6 +3,7 @@
 /**
  * Class adwords_kw_class
  */
+#[AllowDynamicProperties]
 class adwords_kw_class {
 	/**
 	 * adwords_kw_class constructor.

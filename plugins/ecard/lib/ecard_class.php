@@ -3,6 +3,7 @@
 /**
  * Class ecard_class
  */
+#[AllowDynamicProperties]
 class ecard_class
 {
 	/** @var array diverse Einstellungen */

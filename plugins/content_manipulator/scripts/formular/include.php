@@ -3,6 +3,7 @@
 /**
  * Class formularintegration
  */
+#[AllowDynamicProperties]
 class formularintegration
 {
 	/**

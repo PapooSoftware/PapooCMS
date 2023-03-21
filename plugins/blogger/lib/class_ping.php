@@ -5,6 +5,7 @@ if ( stristr( $_SERVER['PHP_SELF'],'class_ping.php') ) die( 'You are not allowed
 /**
  * Class ping
  */
+#[AllowDynamicProperties]
 class ping{
 	/**
 	 * class_uebungen::__construct()

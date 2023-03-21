@@ -12,6 +12,7 @@ if ( stristr( $_SERVER['PHP_SELF'], 'class_datums.php' ) ) die( 'You are not all
  * @version $Id$
  * @access public
  */
+#[AllowDynamicProperties]
 class class_datums
 {
 	/**

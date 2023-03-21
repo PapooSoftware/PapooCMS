@@ -3,6 +3,7 @@
 /**
  * Class flexslider
  */
+#[AllowDynamicProperties]
 class flexslider
 {
 	/**

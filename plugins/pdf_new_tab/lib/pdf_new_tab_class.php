@@ -3,6 +3,7 @@
  * Free URL Generator - obviously generates stuff!
  * @author Christoph Zimmer
  */
+#[AllowDynamicProperties]
 class PDFNewTab {
 	/**
 	 * PDFNewTab constructor.

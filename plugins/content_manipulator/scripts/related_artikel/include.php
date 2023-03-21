@@ -7,6 +7,7 @@
  *
  * Class related_artikel
  */
+#[AllowDynamicProperties]
 class related_artikel
 {
 	/**

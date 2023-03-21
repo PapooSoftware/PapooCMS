@@ -3,6 +3,7 @@
 /**
  * Class leadtracker_tracker_class
  */
+#[AllowDynamicProperties]
 class leadtracker_tracker_class
 {
 	/**

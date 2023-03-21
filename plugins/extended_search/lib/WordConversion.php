@@ -3,6 +3,7 @@
 /**
  * Class WordConversion
  */
+#[AllowDynamicProperties]
 class WordConversion{
 	private $filename;
 

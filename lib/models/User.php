@@ -4,6 +4,7 @@
  * Klasse die die Tabelle 'papoo_user' wiederspiegelt.
  * Jede Instanz dieser Klasse ist ein Benutzer-Account des Papoo-Systems.
  */
+#[AllowDynamicProperties]
 class User extends ActiveRecord\Model
 {
 	static $table_name;

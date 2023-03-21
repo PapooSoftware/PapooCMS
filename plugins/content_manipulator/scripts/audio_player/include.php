@@ -3,6 +3,7 @@
 /**
  * Class AudioPlayer
  */
+#[AllowDynamicProperties]
 class AudioPlayer
 {
 	/** @var content_class */

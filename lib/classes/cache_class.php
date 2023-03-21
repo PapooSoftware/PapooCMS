@@ -19,6 +19,7 @@ if (stristr( $_SERVER['PHP_SELF'],'cache_class.php')) {
 /**
  * Class cache_class
  */
+#[AllowDynamicProperties]
 class cache_class
 {
 	/** @var bool Cache aktiv für diese Seite */

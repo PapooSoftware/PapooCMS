@@ -5,6 +5,7 @@
  * @author Christoph Zimmer
  * @date 13.11.2014
  */
+#[AllowDynamicProperties]
 class CM_Headline
 {
 	//Speichert ul-html

@@ -15,6 +15,7 @@
 /**
  * Class google_sitemap
  */
+#[AllowDynamicProperties]
 class google_sitemap
 {
 	/** @var string  */

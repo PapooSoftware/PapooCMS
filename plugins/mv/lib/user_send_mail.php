@@ -1,35 +1,36 @@
 <?php
+#[AllowDynamicProperties]
 class user_send_mail
 {
 	// kundenspezifisches Modul. Der Mailversand kann an die Erfordernisse des Kunden angepasst werden
-	// Werte in Klammern: 	(r)  =  read only. Inhalt ist vor Änderung geschützt.
-	// 						(rw) =  Inhalt der Variablen kann verändert werden, wird in die Mail übernommen.
-	//								Falls hier eine Änderung erfolgt, gilt diese Änderung immer temporär nur für den
-	//								jeweils aktuellen Mailversand, nicht generell für den Versand an alle Empfänger.
+	// Werte in Klammern: 	(r)  =  read only. Inhalt ist vor ï¿½nderung geschï¿½tzt.
+	// 						(rw) =  Inhalt der Variablen kann verï¿½ndert werden, wird in die Mail ï¿½bernommen.
+	//								Falls hier eine ï¿½nderung erfolgt, gilt diese ï¿½nderung immer temporï¿½r nur fï¿½r den
+	//								jeweils aktuellen Mailversand, nicht generell fï¿½r den Versand an alle Empfï¿½nger.
 	// $subject (rw)		Betreff
 	// $body (rw)			Mail-Inhalt
-	// $to (rw)				Empfänger-Mailadresse. Immer nur eine zur Zeit. S. auch #to#
+	// $to (rw)				Empfï¿½nger-Mailadresse. Immer nur eine zur Zeit. S. auch #to#
 	//						if ($this->checked->antwortmail_4): die 1. Mail geht an den User, die 2. und folgende an Admin(s)
 	//						else: alle Mails gehen an Admin(s)
 	// $to_type (r)			"user": Mail geht an User (nur, wenn $this->checked->antwortmail_4 gesetzt ist)
 	//						"admin": Mail geht an Admin
-	// $from (r)			Absender-Mailadresse. Ist vom System vorgegeben und darf/kann nicht geändert werden
+	// $from (r)			Absender-Mailadresse. Ist vom System vorgegeben und darf/kann nicht geï¿½ndert werden
 	// $link (rw)			Link zum Eintrag. S. auch #link#
 	// $mode (r)			"create" Mailversand erfolgt aufgrund eines neuen Eintrags (template mv_create_front.html)
-	//						"change" Mailversand erfolgt aufgrund eines geänderten Eintrags (template mv_edit_[own_]front_html)
-	// $old_data (r)		Datensatz-Inhalt (array) vor der Änderung, wenn $mode = "change", sonst leer
-	// $new_data (r)		Datensatz-Inhalt (array) nach dem Eintragen ($mode = "create") bzw. der Änderung ($mode = "change")
-	// $checked (r)	enthält Infos über mv_id, main_metaebene, mv_metaebenen (array), mv_content_id, alle Eingabefelder, userid, extern_meta...
-	//						Inhalt ist vor Änderungen geschützt (r)
+	//						"change" Mailversand erfolgt aufgrund eines geï¿½nderten Eintrags (template mv_edit_[own_]front_html)
+	// $old_data (r)		Datensatz-Inhalt (array) vor der ï¿½nderung, wenn $mode = "change", sonst leer
+	// $new_data (r)		Datensatz-Inhalt (array) nach dem Eintragen ($mode = "create") bzw. der ï¿½nderung ($mode = "change")
+	// $checked (r)	enthï¿½lt Infos ï¿½ber mv_id, main_metaebene, mv_metaebenen (array), mv_content_id, alle Eingabefelder, userid, extern_meta...
+	//						Inhalt ist vor ï¿½nderungen geschï¿½tzt (r)
 	//
 	//						Es erfolgt kein Versand, wenn der return-code auf 1/true gesetzt ist.
 	//
-	// Folgende spezielle Strings stehen zur Verfügung. Sie werden erst nach Ausführung von user_send_mail.php ersetzt.
+	// Folgende spezielle Strings stehen zur Verfï¿½gung. Sie werden erst nach Ausfï¿½hrung von user_send_mail.php ersetzt.
 	// #link#				wird durch $link ersetzt (s. auch $link)
 	// #MVID#				wird durch die Verwaltungs-Id ersetzt
 	// #ID#					wird durch die Content-Id ersetzt
 	// #from#				wird durch die Absender-Mailadresse ersetzt
-	// #to#					wird durch die aktuelle Empfänger-Mailadresse ersetzt (s. auch $to)
+	// #to#					wird durch die aktuelle Empfï¿½nger-Mailadresse ersetzt (s. auch $to)
 	// #date#				wird mit dem aktuellen Datum und der Uhrzeit ersetzt
 	function send_mail(&$subject = "", &$body = "", &$to, $to_type = "", $from = "", &$link = "", $mode = "", $old_data = "", $new_data = "", &$checked = array())
 	{
@@ -52,8 +53,8 @@ class user_send_mail
 			$body = preg_replace('/#link_edit#/', $link_edit, $body);
 		}
 		return false;
-		if ($mode == "change" AND $to_type == "admin") return true; // keine Mails an Admins über Änderungen
-		return false; // Ja, für alles andere eine Mail versenden. (Bei 1/true kein Versand.)
+		if ($mode == "change" AND $to_type == "admin") return true; // keine Mails an Admins ï¿½ber ï¿½nderungen
+		return false; // Ja, fï¿½r alles andere eine Mail versenden. (Bei 1/true kein Versand.)
 	}
 }
 ?>

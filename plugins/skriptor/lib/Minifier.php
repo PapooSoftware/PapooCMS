@@ -29,6 +29,7 @@ namespace JShrink;
  * @author Robert Hafner <tedivm@tedivm.com>
  * @license http://www.opensource.org/licenses/bsd-license.php  BSD License
  */
+#[AllowDynamicProperties]
 class Minifier
 {
     /**

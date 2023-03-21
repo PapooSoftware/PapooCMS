@@ -14,6 +14,7 @@
 /**
  * Class user_download
  */
+#[AllowDynamicProperties]
 class user_download
 {
 	/**

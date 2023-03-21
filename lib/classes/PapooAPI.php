@@ -18,6 +18,7 @@
 /**
  * Manage menus, articles etc. via API calls
  */
+#[AllowDynamicProperties]
 class PapooAPI
 {
 	/** @var array  */

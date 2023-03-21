@@ -3,6 +3,7 @@
 /**
  * Class bannerintegration
  */
+#[AllowDynamicProperties]
 class bannerintegration
 {
 	/**

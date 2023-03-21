@@ -13,6 +13,7 @@ if (stristr($_SERVER['PHP_SELF'], 'class_cal_front.php')) die('You are not allow
  * @version $Id$
  * @access public
  */
+#[AllowDynamicProperties]
 class class_cal_front
 {
 	/**

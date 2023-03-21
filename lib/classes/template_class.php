@@ -13,6 +13,7 @@
 /**
  * Class content_template_class
  */
+#[AllowDynamicProperties]
 class content_template_class
 {
 	/**

@@ -3,6 +3,7 @@
 /**
  * Class blogger_shortcut_class
  */
+#[AllowDynamicProperties]
 class blogger_shortcut_class {
 	private $artikel;
 	private $checked;

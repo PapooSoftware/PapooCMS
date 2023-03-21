@@ -3,6 +3,7 @@
 /**
  * Class rating_class
  */
+#[AllowDynamicProperties]
 class rating_class
 {
 	/**

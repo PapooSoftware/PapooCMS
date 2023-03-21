@@ -3,6 +3,7 @@
 /**
  * Class body_class
  */
+#[AllowDynamicProperties]
 class body_class
 {
 	/** @var null  */

@@ -10,6 +10,7 @@
   * @email: dan@rootcube.com
   * @license: GNU General Public License (GPL)
   */
+#[AllowDynamicProperties]
 class InputFilter {
 	var $tagsArray;			// default = empty array
 	var $attrArray;			// default = empty array

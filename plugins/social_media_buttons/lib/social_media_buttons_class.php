@@ -5,6 +5,7 @@ define("SHARIFF_CONFIG_FILE", PAPOO_ABS_PFAD . "/templates_c/shariff.json");
 /**
  * Class social_media_buttons_class
  */
+#[AllowDynamicProperties]
 class social_media_buttons_class
 {
 	private $css_string;

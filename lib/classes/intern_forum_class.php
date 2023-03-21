@@ -17,6 +17,7 @@
  *
  * Class intern_forum
  */
+#[AllowDynamicProperties]
 class intern_forum
 {
 

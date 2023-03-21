@@ -26,6 +26,7 @@
  *
  * Class intern_plugin
  */
+#[AllowDynamicProperties]
 class intern_plugin
 {
 	/** @var string Adresse des papoo-Plugin-Servers */

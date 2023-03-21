@@ -15,6 +15,7 @@
 /**
  * Class glossar_class
  */
+#[AllowDynamicProperties]
 class glossar_class
 {
 	/** @var array Einstellungen aus der Tabelle glossar_pref */

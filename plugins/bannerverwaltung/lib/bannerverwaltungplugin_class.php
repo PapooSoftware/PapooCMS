@@ -15,6 +15,7 @@
 /**
  * Class bannerverwaltung
  */
+#[AllowDynamicProperties]
 class bannerverwaltung {
 
 	/** @var string  */

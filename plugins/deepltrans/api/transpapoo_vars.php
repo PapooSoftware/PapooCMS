@@ -3,6 +3,7 @@
  * Papoo Variablen holen und speichern
  */
 
+#[AllowDynamicProperties]
 class transpapoo_vars
 {
 	public $vars;

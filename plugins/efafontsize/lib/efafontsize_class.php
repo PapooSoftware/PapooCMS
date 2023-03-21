@@ -3,6 +3,7 @@
 /**
  * Class efafontsize_class
  */
+#[AllowDynamicProperties]
 class efafontsize_class
 {
 	/**

@@ -2,6 +2,7 @@
 /**
  * Class dev_messages_class
  */
+#[AllowDynamicProperties]
 class dev_messages_class
 {
 	var $datei_referenz; // Datei mit den Referenz Sprach-Definitionen

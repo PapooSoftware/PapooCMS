@@ -7,6 +7,7 @@
  *
  * Class kalender
  */
+#[AllowDynamicProperties]
 class kalender
 {
 	/**

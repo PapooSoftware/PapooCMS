@@ -3,6 +3,7 @@
 /**
  * Class adgalerieintegration
  */
+#[AllowDynamicProperties]
 class adgalerieintegration
 {
 	/**

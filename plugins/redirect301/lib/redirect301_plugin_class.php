@@ -3,6 +3,7 @@
 /**
  * Class redirect301_plugin_class
  */
+#[AllowDynamicProperties]
 class redirect301_plugin_class
 {
 	/**

@@ -3,6 +3,7 @@
 /**
  * Class google_maps
  */
+#[AllowDynamicProperties]
 class google_maps
 {
 	/**

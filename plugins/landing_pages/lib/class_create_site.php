@@ -3,6 +3,7 @@
 /**
  * Class class_create_site
  */
+#[AllowDynamicProperties]
 class class_create_site
 {
 	/**

@@ -3,6 +3,7 @@
 /**
  * Class bulk_import
  */
+#[AllowDynamicProperties]
 class bulk_import
 {
 	/**

@@ -17,6 +17,7 @@
 /**
  * Class informations2
  */
+#[AllowDynamicProperties]
 class informations2
 {
 	/**

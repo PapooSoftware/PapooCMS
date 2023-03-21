@@ -20,6 +20,7 @@
  *
  * Class content_manipulator
  */
+#[AllowDynamicProperties]
 class content_manipulator
 {
 	/**

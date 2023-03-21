@@ -15,6 +15,7 @@
  *
  * Class module_class
  */
+#[AllowDynamicProperties]
 class module_class
 {
 	/** @var string Präfix */

@@ -3,6 +3,7 @@
 /**
  * Class del_artikel
  */
+#[AllowDynamicProperties]
 class del_artikel
 {
 	/**

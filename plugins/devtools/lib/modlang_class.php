@@ -3,6 +3,7 @@
 /**
  * Class devtool_modlang_class
  */
+#[AllowDynamicProperties]
 class devtool_modlang_class
 {
 	/**

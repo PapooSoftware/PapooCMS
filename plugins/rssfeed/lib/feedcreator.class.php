@@ -174,6 +174,7 @@ define("FEEDCREATOR_VERSION", "FeedCreator 1.7.2");
  * @author Kai Blankenhorn <kaib@bitfolge.de>
  * @since 1.3
  */
+#[AllowDynamicProperties]
 class FeedItem extends HtmlDescribable {
 	/**
 	 * Mandatory attributes of an item.
@@ -221,6 +222,7 @@ class FeedItem extends HtmlDescribable {
  * @author Kai Blankenhorn <kaib@bitfolge.de>
  * @since 1.3
  */
+#[AllowDynamicProperties]
 class FeedImage extends HtmlDescribable {
 	/**
 	 * Mandatory attributes of an image.
@@ -239,6 +241,7 @@ class FeedImage extends HtmlDescribable {
  * An HtmlDescribable is an item within a feed that can have a description that may
  * include HTML markup.
  */
+#[AllowDynamicProperties]
 class HtmlDescribable {
 	/**
 	 * Indicates whether the description field should be rendered in HTML.
@@ -272,6 +275,7 @@ class HtmlDescribable {
  * @author Pascal Van Hecke <feedcreator.class.php@vanhecke.info>
  * @version 1.6
  */
+#[AllowDynamicProperties]
 class FeedHtmlField {
 	/**
 	 * Mandatory attributes of a FeedHtmlField.
@@ -330,6 +334,7 @@ class FeedHtmlField {
  * @since 1.3
  * @author Kai Blankenhorn <kaib@bitfolge.de>
  */
+#[AllowDynamicProperties]
 class UniversalFeedCreator extends FeedCreator {
 	var $_feed;
 
@@ -456,6 +461,7 @@ class UniversalFeedCreator extends FeedCreator {
  * @author Kai Blankenhorn <kaib@bitfolge.de>
  * @since 1.4
  */
+#[AllowDynamicProperties]
 class FeedCreator extends HtmlDescribable {
 
 	/**
@@ -701,6 +707,7 @@ class FeedCreator extends HtmlDescribable {
  * FeedDate is an internal class that stores a date for a feed or feed item.
  * Usually, you won't need to use this.
  */
+#[AllowDynamicProperties]
 class FeedDate {
 	var $unix;
 
@@ -798,6 +805,7 @@ class FeedDate {
  * @since 1.3
  * @author Kai Blankenhorn <kaib@bitfolge.de>
  */
+#[AllowDynamicProperties]
 class RSSCreator10 extends FeedCreator {
 
 	/**
@@ -877,6 +885,7 @@ class RSSCreator10 extends FeedCreator {
  * @since 1.3
  * @author Kai Blankenhorn <kaib@bitfolge.de>
  */
+#[AllowDynamicProperties]
 class RSSCreator091 extends FeedCreator {
 
 	/**
@@ -1021,6 +1030,7 @@ class RSSCreator091 extends FeedCreator {
  * @since 1.3
  * @author Kai Blankenhorn <kaib@bitfolge.de>
  */
+#[AllowDynamicProperties]
 class RSSCreator20 extends RSSCreator091 {
 
 	function __construct() {
@@ -1038,6 +1048,7 @@ class RSSCreator20 extends RSSCreator091 {
  * @since 1.3
  * @author Scott Reynen <scott@randomchaos.com> and Kai Blankenhorn <kaib@bitfolge.de>
  */
+#[AllowDynamicProperties]
 class PIECreator01 extends FeedCreator {
 
 	function __construct() {
@@ -1096,6 +1107,7 @@ class PIECreator01 extends FeedCreator {
  * @since 1.6
  * @author Kai Blankenhorn <kaib@bitfolge.de>, Scott Reynen <scott@randomchaos.com>
  */
+#[AllowDynamicProperties]
 class AtomCreator03 extends FeedCreator {
 
 	function __construct() {
@@ -1164,6 +1176,7 @@ class AtomCreator03 extends FeedCreator {
  * @since 1.3
  * @author Kai Blankenhorn <kaib@bitfolge.de>
  */
+#[AllowDynamicProperties]
 class MBOXCreator extends FeedCreator {
 
 	function __construct() {
@@ -1252,6 +1265,7 @@ class MBOXCreator extends FeedCreator {
  * @author Dirk Clemens, Kai Blankenhorn
  * @since 1.5
  */
+#[AllowDynamicProperties]
 class OPMLCreator extends FeedCreator {
 
 	function __construct() {
@@ -1309,6 +1323,7 @@ class OPMLCreator extends FeedCreator {
  * @author Pascal Van Hecke
  * @since 1.7
  */
+#[AllowDynamicProperties]
 class HTMLCreator extends FeedCreator {
 
 	var $contentType = "text/html";
@@ -1455,6 +1470,7 @@ class HTMLCreator extends FeedCreator {
  *
  * @author Pascal Van Hecke
  */
+#[AllowDynamicProperties]
 class JSCreator extends HTMLCreator {
 	var $contentType = "text/javascript";
 

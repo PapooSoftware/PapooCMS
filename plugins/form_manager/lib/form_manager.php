@@ -9,6 +9,7 @@
  * @version $ID$
  * @access public
  */
+#[AllowDynamicProperties]
 class form_manager
 {
 	/**

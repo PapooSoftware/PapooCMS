@@ -3,6 +3,7 @@
 /**
  * Class geo_redirect_plugin_class
  */
+#[AllowDynamicProperties]
 class geo_redirect_plugin_class
 {
 	/**

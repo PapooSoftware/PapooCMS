@@ -35,6 +35,11 @@ function IfNotSetNull(&$variable)
 	}
 }
 
+// Abwärtskompatibilität für PHP 8.2 Klasse
+if (!class_exists('AllowDynamicProperties')) {
+	class AllowDynamicProperties { }
+}
+
 $version = PAPOO_VERSION . " Rev. " . PAPOO_REVISION . " - Papoo " . PAPOO_EDITION;
 
 define("PAPOO_VERSION_STRING",$version);

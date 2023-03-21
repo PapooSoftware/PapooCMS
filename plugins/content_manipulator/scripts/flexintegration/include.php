@@ -5,6 +5,7 @@
  *
  * Class flexcmintegration
  */
+#[AllowDynamicProperties]
 class flexcmintegration
 {
 	/**

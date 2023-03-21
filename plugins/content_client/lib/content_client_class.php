@@ -3,6 +3,7 @@
 /**
  * Class content_client
  */
+#[AllowDynamicProperties]
 class content_client
 {
 	/**

@@ -13,6 +13,7 @@
  *
  * @author {__autor_name__} <{__autor_email__}>
  */
+#[AllowDynamicProperties]
 class vorlage_class
 {
 	const PREFIX = '{__PREFIX__}';

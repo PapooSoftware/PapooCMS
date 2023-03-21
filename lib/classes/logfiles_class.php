@@ -14,6 +14,7 @@
 /**
  * Class logfiles
  */
+#[AllowDynamicProperties]
 class logfiles {
 
 	/** @var string */

@@ -6,6 +6,7 @@
  * FUM = Follow Up Mail
  *
  */
+#[AllowDynamicProperties]
 class leadtracker_follow_up_mails
 {
 	/**

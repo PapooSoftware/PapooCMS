@@ -3,6 +3,7 @@
 /**
  * Class leadtracker_download_class_form_now
  */
+#[AllowDynamicProperties]
 class leadtracker_download_class_form_now
 {
 	/**

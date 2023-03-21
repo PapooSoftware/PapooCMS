@@ -15,6 +15,7 @@
  * @date 2018-02-28
  */
 
+#[AllowDynamicProperties]
 class DSGVO
 {
 	private $template;

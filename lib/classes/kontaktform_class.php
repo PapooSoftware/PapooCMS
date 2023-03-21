@@ -13,6 +13,7 @@
 /**
  * Class kontaktform
  */
+#[AllowDynamicProperties]
 class kontaktform
 {
 	/**

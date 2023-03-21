@@ -8,6 +8,7 @@ if (stristr($_SERVER['PHP_SELF'], 'class_file_upload.php'))
 /**
  * Class file_upload
  */
+#[AllowDynamicProperties]
 class file_upload
 {
 	/** @var bool Add Praefix to Uploaded filename, Default: True */

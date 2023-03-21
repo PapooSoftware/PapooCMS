@@ -3,6 +3,7 @@
 /**
  * Class newsletter_pop3
  */
+#[AllowDynamicProperties]
 class newsletter_pop3
 {
 	var $_connection;

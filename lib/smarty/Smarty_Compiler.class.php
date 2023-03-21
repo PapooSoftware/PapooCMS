@@ -30,6 +30,7 @@
  * Template compiling class
  * @package Smarty
  */
+#[AllowDynamicProperties]
 class Smarty_Compiler extends Smarty {
 
     // internal vars

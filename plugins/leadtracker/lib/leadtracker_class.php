@@ -5,6 +5,7 @@ require_once(PAPOO_ABS_PFAD."/lib/classes/class.phpmailer.php");
 /**
  * Class leadtracker_class
  */
+#[AllowDynamicProperties]
 class leadtracker_class
 {
 	/**

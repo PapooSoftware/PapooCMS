@@ -3,6 +3,7 @@
 /**
  * Class autocontent_class
  */
+#[AllowDynamicProperties]
 class autocontent_class
 {
 	/**

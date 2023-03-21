@@ -14,6 +14,7 @@
 /**
  * Class make_nested
  */
+#[AllowDynamicProperties]
 class make_nested
 {
 	/**

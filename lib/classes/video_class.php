@@ -13,6 +13,7 @@
 /**
  * Hier werden Videos bearbeitet.
  */
+#[AllowDynamicProperties]
 class video_class
 {
 	/** @var ezSQL_mysqli */

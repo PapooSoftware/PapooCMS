@@ -7,6 +7,7 @@
  *
  * Class rss
  */
+#[AllowDynamicProperties]
 class rss
 {
 	/**

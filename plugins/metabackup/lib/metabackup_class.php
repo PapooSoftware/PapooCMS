@@ -3,6 +3,7 @@
 /**
  * Class metabackup_class
  */
+#[AllowDynamicProperties]
 class metabackup_class
 {
 	private $checked, $content, $db, $db_praefix, $csv_file, $csv_webpath;

@@ -6,6 +6,7 @@
  * @author dr. carsten euwens - papoo-media.de
  *
  */
+#[AllowDynamicProperties]
 class galdownload
 {
 	/** @var int  */

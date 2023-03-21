@@ -13,6 +13,7 @@
 
 require_once(__DIR__.'/Encoding.php');
 
+#[AllowDynamicProperties]
 class imex_mw_class
 {
 	function __construct()

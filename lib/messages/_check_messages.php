@@ -9,6 +9,7 @@
 /**
  * Class check_messages_class
  */
+#[AllowDynamicProperties]
 class check_messages_class
 {
 	/** @var string Datei mit den Referenz Sprach-Definitionen */

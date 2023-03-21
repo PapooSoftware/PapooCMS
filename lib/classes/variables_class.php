@@ -19,6 +19,7 @@
  *
  * Class checked_class
  */
+#[AllowDynamicProperties]
 class checked_class
 {
 	/**

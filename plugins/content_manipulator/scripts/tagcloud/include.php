@@ -3,6 +3,7 @@
 /**
  * Class tagcloud
  */
+#[AllowDynamicProperties]
 class tagcloud
 {
 	/**

@@ -5,6 +5,7 @@
  *
  * Class spalte3
  */
+#[AllowDynamicProperties]
 class spalte3
 {
 	/**

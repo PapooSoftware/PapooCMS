@@ -3,6 +3,7 @@
 /**
  * Class download_list
  */
+#[AllowDynamicProperties]
 class download_list
 {
 	/**

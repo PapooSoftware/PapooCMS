@@ -14,6 +14,7 @@ if (stristr( $_SERVER['PHP_SELF'],'message_class.php')) die('You are not allowed
 /**
  * Class message_class
  */
+#[AllowDynamicProperties]
 class message_class
 {
 	/**

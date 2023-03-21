@@ -15,6 +15,7 @@
 /**
  * Class freiemodule
  */
+#[AllowDynamicProperties]
 class freiemodule {
 
 	/** @var string  */

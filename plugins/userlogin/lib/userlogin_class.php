@@ -4,6 +4,7 @@
 /**
  * Class userlogin_class
  */
+#[AllowDynamicProperties]
 class userlogin_class
 {
 	/**

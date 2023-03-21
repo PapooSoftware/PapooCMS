@@ -3,6 +3,7 @@
 /**
  * Class loginbox
  */
+#[AllowDynamicProperties]
 class loginbox
 {
 	/** @var content_class */

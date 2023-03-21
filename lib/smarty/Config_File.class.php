@@ -35,6 +35,7 @@
  * Config file reading class
  * @package Smarty
  */
+#[AllowDynamicProperties]
 class Config_File {
     /**#@+
      * Options

@@ -14,6 +14,7 @@
 /**
  * Class intern_image_class
  */
+#[AllowDynamicProperties]
 class intern_image_class
 {
 	/**

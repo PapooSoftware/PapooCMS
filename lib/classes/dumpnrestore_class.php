@@ -15,6 +15,7 @@
  *
  * Class dumpnrestore_class
  */
+#[AllowDynamicProperties]
 class dumpnrestore_class
 {
 	/**

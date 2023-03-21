@@ -15,6 +15,7 @@
  *
  * @return void
  */
+#[AllowDynamicProperties]
 class artikel_import
 {
 	/** @var checked_class */

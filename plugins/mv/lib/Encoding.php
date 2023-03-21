@@ -39,6 +39,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 namespace ForceUTF8;
 
+#[AllowDynamicProperties]
 class Encoding {
 
   const ICONV_TRANSLIT = "TRANSLIT";

@@ -3,6 +3,7 @@
 /**
  * Class TinyPngCore
  */
+#[AllowDynamicProperties]
 class TinyPngCore
 {
 	// all file-extensions that TinyPNG can shrink

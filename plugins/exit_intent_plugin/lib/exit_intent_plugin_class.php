@@ -3,6 +3,7 @@
 /**
  * Class exit_intent_plugin_class
  */
+#[AllowDynamicProperties]
 class exit_intent_plugin_class {
 	/**
 	 * exit_intent_plugin_class constructor.

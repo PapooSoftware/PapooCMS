@@ -14,6 +14,7 @@ require_once('tinypng_core.php');
 /**
  * Class TinyPngAjax
  */
+#[AllowDynamicProperties]
 class TinyPngAjax extends TinyPngCore
 {
 	/**

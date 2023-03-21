@@ -8,6 +8,7 @@ require_once('tinypng_core.php');
 /**
  * Class TinyPNG
  */
+#[AllowDynamicProperties]
 class TinyPNG extends TinyPngCore
 {
 	// config paramters as stored in database

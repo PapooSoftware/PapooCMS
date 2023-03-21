@@ -14,6 +14,7 @@
 /**
  * Class intern_stamm_class
  */
+#[AllowDynamicProperties]
 class intern_stamm_class {
 
 	/** @var int ID der aktuellen Sprache */

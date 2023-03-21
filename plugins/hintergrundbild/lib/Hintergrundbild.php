@@ -3,6 +3,7 @@
 /**
  * Class Hintergrundbild
  */
+#[AllowDynamicProperties]
 class Hintergrundbild {
 	/**
 	 * Hintergrundbild constructor.

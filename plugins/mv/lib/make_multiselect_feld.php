@@ -56,7 +56,8 @@ $hidden = "";
 
 // Sortierklasse um die Reihenfolge bereits ausgewählter Optionen zu behalten
 if (!class_exists('_make_multiselect_field_sorter')) {
-	class _make_multiselect_field_sorter {
+#[AllowDynamicProperties]
+class _make_multiselect_field_sorter {
 		function __construct(&$sort_by_array) {
 			$this->arr_field_werte = &$sort_by_array;
 		}

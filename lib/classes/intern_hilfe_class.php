@@ -14,6 +14,7 @@
 /**
  * Class intern_hilfe
  */
+#[AllowDynamicProperties]
 class intern_hilfe
 {
 	/**

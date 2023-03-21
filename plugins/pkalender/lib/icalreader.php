@@ -29,6 +29,7 @@
  * @param {string} filename The name of the file which should be parsed
  * @constructor
  */
+#[AllowDynamicProperties]
 class ICal
 {
     /* How many ToDos are in this ical? */

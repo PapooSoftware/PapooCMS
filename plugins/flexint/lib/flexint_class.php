@@ -15,6 +15,7 @@
 /**
  * Class flexintplugin
  */
+#[AllowDynamicProperties]
 class flexintplugin
 {
 

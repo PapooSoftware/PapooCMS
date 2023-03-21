@@ -3,6 +3,7 @@
 /**
  * Class lang_export_class
  */
+#[AllowDynamicProperties]
 class lang_export_class
 {
 	/** @var array Tabellenname und Feldnamen des lang_id-Feldes */

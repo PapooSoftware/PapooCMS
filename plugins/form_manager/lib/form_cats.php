@@ -10,6 +10,7 @@
  *
  * Checkt ab 2015 das Update
  */
+#[AllowDynamicProperties]
 class form_cats {
 	/**
 	 * form_cats constructor.

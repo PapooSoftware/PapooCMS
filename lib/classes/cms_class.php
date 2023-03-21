@@ -14,6 +14,7 @@
  * Diese Klasse initialisert alle Eigenschaften die das Papoo CMS
  * aus den Stammdaten hat.
  */
+#[AllowDynamicProperties]
 class cms
 {
 	/** @var string[] $extraFreeUrlPatterns A list of regular expressions to match plugin specific free urls. */

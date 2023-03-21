@@ -13,6 +13,7 @@
  * @abstract Eine Custom-Exception die geworfen wird falls beim Kraken-Upload keine Credentials gefunden werden, oder ein
  * Kraken-Eigener Fehler auftritt.*
  */
+#[AllowDynamicProperties]
 class KrakenError extends Exception
 {
 	/**

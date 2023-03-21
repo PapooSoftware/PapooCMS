@@ -22,6 +22,7 @@
  *
  * Class weiter
  */
+#[AllowDynamicProperties]
 class  weiter  {
 
 	//

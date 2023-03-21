@@ -3,6 +3,7 @@
 /**
  * Class keywords
  */
+#[AllowDynamicProperties]
 class keywords
 {
 	/**

@@ -15,6 +15,7 @@ if (!function_exists("IfNotSetNull")) {
 /**
  * Class galerie_class
  */
+#[AllowDynamicProperties]
 class galerie_class
 {
 	/** @var array Enth�lt diverse Einstellungen f�r die Galerien */

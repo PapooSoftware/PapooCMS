@@ -3,6 +3,7 @@
 /**
  * Klasse die die Registeransicht einer Flexverwaltung darstellt.
  */
+#[AllowDynamicProperties]
 class EintragRegister
 {
 	protected $mv_id = null;

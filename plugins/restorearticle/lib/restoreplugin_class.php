@@ -8,6 +8,7 @@
  * Die restoreplugin_class implementiert die hauptfunktionen des Artikel wiederherstellen-Plugins.
  *
  * */
+#[AllowDynamicProperties]
 class restoreplugin_class
 {
 	/**

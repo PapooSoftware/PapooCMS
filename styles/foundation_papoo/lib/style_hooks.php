@@ -3,6 +3,7 @@
 /**
  * Class style_hooks
  */
+#[AllowDynamicProperties]
 class style_hooks
 {
 	/**

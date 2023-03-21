@@ -3,6 +3,7 @@
 /**
  * Class skriptor_class
  */
+#[AllowDynamicProperties]
 class skriptor_class
 {
 	/** @var array Filter von Keywords welche beim zusammenfassen von JS Dateien nicht berücksichtigt werden. */

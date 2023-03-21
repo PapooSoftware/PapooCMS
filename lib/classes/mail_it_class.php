@@ -16,6 +16,7 @@
  *
  * Class mail_it
  */
+#[AllowDynamicProperties]
 class mail_it
 {
 	/** @var string Adresse to */

@@ -6,6 +6,7 @@ namespace FixeModule;
  *
  * @package FixeModule
  */
+#[AllowDynamicProperties]
 class View {
 	private $vars;
 	private $prefix = "fixemodule";

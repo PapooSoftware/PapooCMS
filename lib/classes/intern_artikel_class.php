@@ -15,6 +15,7 @@
  * Das ist die Mega Klasse mit der man
  * Artikel erstellen und bearbeiten kann
  */
+#[AllowDynamicProperties]
 class intern_artikel
 {
 	/**

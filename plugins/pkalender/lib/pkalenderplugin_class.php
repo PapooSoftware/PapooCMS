@@ -4,6 +4,7 @@ if ( stristr( $_SERVER['PHP_SELF'], 'pkalenderplugin_class.php' ) ) die( 'You ar
 /**
  * Class pkalenderplugin_class
  */
+#[AllowDynamicProperties]
 class pkalenderplugin_class
 {
 	/**

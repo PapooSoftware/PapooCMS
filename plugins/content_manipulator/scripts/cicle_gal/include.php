@@ -3,6 +3,7 @@
 /**
  * Class cicle_galerieintegration
  */
+#[AllowDynamicProperties]
 class cicle_galerieintegration
 {
 	/**

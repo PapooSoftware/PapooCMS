@@ -59,6 +59,7 @@
  * @author Richard Davey
  */
 
+#[AllowDynamicProperties]
 class POP3 {
   /**
    * Default POP3 port

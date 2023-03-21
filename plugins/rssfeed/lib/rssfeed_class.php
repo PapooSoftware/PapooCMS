@@ -44,6 +44,7 @@ require_once(MAGPIE_DIR.'rss_fetch.inc');
 /**
  * Class rssfeed_class
  */
+#[AllowDynamicProperties]
 class rssfeed_class
 {
 	/**

@@ -6,6 +6,7 @@ namespace FixeModule;
  *
  * @package FixeModule
  */
+#[AllowDynamicProperties]
 class Controller
 {
 	protected $checked;

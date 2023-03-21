@@ -3,6 +3,7 @@
 /**
  * Class debug_class
  */
+#[AllowDynamicProperties]
 class debug_class
 {
 	/**

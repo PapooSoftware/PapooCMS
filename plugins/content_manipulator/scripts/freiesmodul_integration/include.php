@@ -3,6 +3,7 @@
 /**
  * Class frmodul
  */
+#[AllowDynamicProperties]
 class frmodul
 {
 	/**

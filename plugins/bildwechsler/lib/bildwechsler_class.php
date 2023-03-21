@@ -3,6 +3,7 @@
 /**
  * Class bildwechsler_class
  */
+#[AllowDynamicProperties]
 class bildwechsler_class
 {
 	// Der Bildtext aus dem Feld "Text" fest in das Bild eingebrannt.

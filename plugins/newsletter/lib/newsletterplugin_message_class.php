@@ -3,6 +3,7 @@
 /**
  * Class newsletter_message
  */
+#[AllowDynamicProperties]
 class newsletter_message
 {
 

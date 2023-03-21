@@ -17,6 +17,7 @@ define('DB_DEFAULT', '__$$DEFAULT$$__');
 /**
  * Class FlexSelect
  */
+#[AllowDynamicProperties]
 class FlexSelect {
 
 	/** @var string */

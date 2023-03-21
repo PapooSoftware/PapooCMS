@@ -3,6 +3,7 @@
 /**
  * Class reorder_class
  */
+#[AllowDynamicProperties]
 class reorder_class
 {
 	/**

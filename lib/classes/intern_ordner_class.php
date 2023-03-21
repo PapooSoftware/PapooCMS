@@ -14,6 +14,7 @@
 /**
  * Class intern_ordner_class
  */
+#[AllowDynamicProperties]
 class intern_ordner_class
 {
 	/**

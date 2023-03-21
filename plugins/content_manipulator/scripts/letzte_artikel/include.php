@@ -7,6 +7,7 @@
  *
  * Class last_artikel
  */
+#[AllowDynamicProperties]
 class last_artikel
 {
 	/**

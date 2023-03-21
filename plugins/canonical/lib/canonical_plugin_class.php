@@ -5,6 +5,7 @@
  * Diese Klasse erstellt im Frontend die canonischen Links die
  * man in der Admin eingegeben hat...
  */
+#[AllowDynamicProperties]
 class canonical_plugin_class
 {
 	/**

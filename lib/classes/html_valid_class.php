@@ -22,6 +22,7 @@
  * TODO: Warum ist das dann noch hier?
  *
  */
+#[AllowDynamicProperties]
 class do_it_tidy {
 	/**
 	 * durchführen aller Funktionen am Inhalt

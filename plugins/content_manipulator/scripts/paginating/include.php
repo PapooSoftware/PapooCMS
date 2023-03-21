@@ -6,6 +6,7 @@
  * @author Christoph Zimmer
  * @date 07.11.2014
  * */
+#[AllowDynamicProperties]
 class CM_Paginating
 {
 	/**

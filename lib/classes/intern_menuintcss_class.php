@@ -17,6 +17,7 @@
 /**
  * Class menuintcss_class
  */
+#[AllowDynamicProperties]
 class menuintcss_class
 {
 	var $the_menuintcss = "";

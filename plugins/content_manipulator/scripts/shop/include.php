@@ -7,6 +7,7 @@
  *
  * Class cm_shop
  */
+#[AllowDynamicProperties]
 class cm_shop
 {
 	/**

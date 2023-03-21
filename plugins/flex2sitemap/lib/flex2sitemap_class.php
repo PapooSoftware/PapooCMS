@@ -3,6 +3,7 @@
 /**
  * Class flex2sitemap
  */
+#[AllowDynamicProperties]
 class flex2sitemap
 {
 	/**

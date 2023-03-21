@@ -19,6 +19,7 @@
  * Voraussetzung ist das die Variablen im Template gleich heissen wie
  * die DB Felder,
  */
+#[AllowDynamicProperties]
 class db_abs
 {
 	/**

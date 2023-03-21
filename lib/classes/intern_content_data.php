@@ -14,6 +14,7 @@
 /**
  * Class content_data
  */
+#[AllowDynamicProperties]
 class content_data
 {
 	/**

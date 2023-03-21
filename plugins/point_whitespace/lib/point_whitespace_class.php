@@ -4,6 +4,7 @@
  * @author Christoph Zimmer
  * @date 12.11.2014
  */
+#[AllowDynamicProperties]
 class PointWhitespace {
 	/**
 	 * PointWhitespace constructor.

@@ -20,6 +20,7 @@ if (stristr($_SERVER['PHP_SELF'], 'user_class.php')) {
  *
  * Class user_class
  */
+#[AllowDynamicProperties]
 class user_class
 {
 	/** @var string Der Username */

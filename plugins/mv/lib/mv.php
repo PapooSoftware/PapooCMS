@@ -20,6 +20,7 @@ require __DIR__ . '/tree_view.php';
  */
 // Inhaltssprache
 // $this->cms->lang_back_content_id
+#[AllowDynamicProperties]
 class mv
 {
 	const FLEX_TYPE_DEFAULT = 1;

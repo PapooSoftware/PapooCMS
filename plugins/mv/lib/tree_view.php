@@ -4,6 +4,7 @@
  * Klasse die die Baumansicht einer Flexverwaltung darstellt.
  * @author Andreas Gritzan <ag@papoo.de>
  */
+#[AllowDynamicProperties]
 class TreeView
 {
 	protected $mv_id;

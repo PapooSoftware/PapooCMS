@@ -14,6 +14,7 @@
 /**
  * Class intern_upload_class
  */
+#[AllowDynamicProperties]
 class intern_upload_class
 {
 	/** @var cms */

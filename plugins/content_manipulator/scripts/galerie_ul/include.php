@@ -3,6 +3,7 @@
 /**
  * Class galerie_ul
  */
+#[AllowDynamicProperties]
 class galerie_ul
 {
 	/**

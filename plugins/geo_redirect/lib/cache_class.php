@@ -17,6 +17,7 @@ if (stristr( $_SERVER['PHP_SELF'],'cache_class.php')) die('You are not allowed t
 /**
  * Class cache_class
  */
+#[AllowDynamicProperties]
 class cache_class
 {
 	var $aktiv; // Cache aktiv f�r diese Seite

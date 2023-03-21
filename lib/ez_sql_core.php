@@ -28,7 +28,8 @@
 	*  sets once returned
 	*/
 
-	class ezSQLcore
+#[AllowDynamicProperties]
+class ezSQLcore
 	{
 
 		var $trace            = false;  // same as $debug_all

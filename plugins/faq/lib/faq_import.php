@@ -3,6 +3,7 @@
 /**
  * Class faq_import
  */
+#[AllowDynamicProperties]
 class faq_import
 {
 	/**

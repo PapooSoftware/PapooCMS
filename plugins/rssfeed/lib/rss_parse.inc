@@ -98,6 +98,7 @@ define('RSS', 'RSS');
 define('ATOM', 'Atom');
 
 
+#[AllowDynamicProperties]
 class MagpieRSS {
 	/*
 	 * Hybrid parser, and object.  (probably a bad idea! :)

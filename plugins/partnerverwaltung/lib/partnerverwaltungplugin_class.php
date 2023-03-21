@@ -15,6 +15,7 @@
 /**
  * Class partnerverwaltung
  */
+#[AllowDynamicProperties]
 class partnerverwaltung
 {
 

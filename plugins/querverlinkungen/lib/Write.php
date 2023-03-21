@@ -3,6 +3,7 @@
 /**
  * Class Write
  */
+#[AllowDynamicProperties]
 class Write
 {
 	/**

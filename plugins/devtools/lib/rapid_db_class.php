@@ -10,6 +10,7 @@
  * @version $Id$
  * @access public
  */
+#[AllowDynamicProperties]
 class rapid_db_class
 {
 	/**

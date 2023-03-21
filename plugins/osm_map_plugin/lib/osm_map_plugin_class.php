@@ -8,6 +8,7 @@
  * Date: 05.09.18
  * Time: 15:45
  */
+#[AllowDynamicProperties]
 class osm_map_plugin
 {
 	#region global variables

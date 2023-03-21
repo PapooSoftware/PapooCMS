@@ -3,6 +3,7 @@
 /**
  * Class del_kunden_plugin
  */
+#[AllowDynamicProperties]
 class del_kunden_plugin
 {
 	/**

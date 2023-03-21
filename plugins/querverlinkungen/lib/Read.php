@@ -1,5 +1,6 @@
 <?php
 
+#[AllowDynamicProperties]
 class Read
 {
 	function __construct()

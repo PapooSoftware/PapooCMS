@@ -3,6 +3,7 @@
 /**
  * Class html_to_pdf
  */
+#[AllowDynamicProperties]
 class html_to_pdf {
 	/**
 	 * html_to_pdf constructor.

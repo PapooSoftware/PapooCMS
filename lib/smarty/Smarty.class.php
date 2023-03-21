@@ -59,6 +59,7 @@ define('SMARTY_PHP_ALLOW',      3);
 /**
  * @package Smarty
  */
+#[AllowDynamicProperties]
 class Smarty
 {
     /**#@+

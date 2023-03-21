@@ -16,6 +16,7 @@
  *
  * Class intern_spalte_class
  */
+#[AllowDynamicProperties]
 class intern_spalte_class
 {
 	/** @var int ID der aktuellen Sprache */

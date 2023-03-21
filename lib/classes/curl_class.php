@@ -21,6 +21,7 @@
  * Ein Code von -1 gibt einen Fehler mit dem
  * cURL-Handle oder dem Konstruktor an.
  */
+#[AllowDynamicProperties]
 class curl_exception extends Exception {
 
 	/**

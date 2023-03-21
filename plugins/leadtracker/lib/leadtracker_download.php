@@ -3,6 +3,7 @@
 /**
  * Class leadtracker_download_class
  */
+#[AllowDynamicProperties]
 class leadtracker_download_class
 {
 	function __construct()

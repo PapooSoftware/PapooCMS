@@ -17,6 +17,7 @@ define('DB_DEFAULT', '__$$DEFAULT$$__');
 /**
  * Class Marquee
  */
+#[AllowDynamicProperties]
 class Marquee {
 
 	/** @var string */

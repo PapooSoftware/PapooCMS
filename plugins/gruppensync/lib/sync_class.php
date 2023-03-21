@@ -20,6 +20,7 @@
  * @version $Id$
  * @access public
  */
+#[AllowDynamicProperties]
 class sync_class
 {
 	/**

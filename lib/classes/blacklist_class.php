@@ -12,6 +12,7 @@
 #####################################
 */
 
+#[AllowDynamicProperties]
 class blacklist
 {
 	/** @var string  */

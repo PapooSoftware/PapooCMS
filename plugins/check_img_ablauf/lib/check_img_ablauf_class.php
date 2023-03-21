@@ -5,6 +5,7 @@
  * @copyright 2014-08-18
  * Bilderklasse muss das Format "ablauf-tt-mm-jj" haben.
  */
+#[AllowDynamicProperties]
 class check_img_ablauf
 {
 	/**

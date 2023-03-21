@@ -3,6 +3,7 @@
 /**
  * Class bootstrapdropdown_class
  */
+#[AllowDynamicProperties]
 class bootstrapdropdown_class
 {
 	/**

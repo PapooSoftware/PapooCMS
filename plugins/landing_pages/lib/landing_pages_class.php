@@ -3,6 +3,7 @@
 /**
  * Class landing_pagesplugin_class
  */
+#[AllowDynamicProperties]
 class landing_pagesplugin_class
 {
 	/**

@@ -3,6 +3,7 @@
 /**
  * Class bildwechsler
  */
+#[AllowDynamicProperties]
 class bildwechsler
 {
 	/**

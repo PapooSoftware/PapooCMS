@@ -12,6 +12,7 @@ if ( stristr( $_SERVER['PHP_SELF'],'class_search_create.php') ) die( 'You are no
 /**
  * Class class_search_create
  */
+#[AllowDynamicProperties]
 class class_search_create {
 	/**
 	 * class_search_create::__construct()

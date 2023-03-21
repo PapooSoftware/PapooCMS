@@ -3,6 +3,7 @@
 /**
  * Class imageflow_galerieintegration
  */
+#[AllowDynamicProperties]
 class imageflow_galerieintegration
 {
 	/**

@@ -14,6 +14,7 @@
 /**
  * Class umfrage_class
  */
+#[AllowDynamicProperties]
 class umfrage_class
 {
 	var $db_praefix;

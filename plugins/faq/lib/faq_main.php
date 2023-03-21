@@ -4,6 +4,7 @@
  * FAQ Plugin f�r Papoo
  * zus�tzlich wird die class faqsearcher eingebunden
  */
+#[AllowDynamicProperties]
 class faq {
 	private $template;
 

@@ -3,6 +3,7 @@
 /**
  * Class versioncleaner_class
  */
+#[AllowDynamicProperties]
 class versioncleaner_class
 {
 	/**

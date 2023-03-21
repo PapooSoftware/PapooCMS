@@ -3,6 +3,7 @@
 /**
  * Class flex2mail_class
  */
+#[AllowDynamicProperties]
 class flex2mail_class {
 	private $checked;
 	private $cms;

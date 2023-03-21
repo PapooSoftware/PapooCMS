@@ -14,6 +14,7 @@
 /**
  * Class intern_user
  */
+#[AllowDynamicProperties]
 class intern_user
 {
 	/**

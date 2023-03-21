@@ -2,12 +2,15 @@
 
 namespace Papoo\Plugins\ContentManipulator\Scripts;
 
+use AllowDynamicProperties;
+
 /**
  * Mit diesem Content-Manipulator Skript kann das Inhaltsverzeichnis an einer beliebigen Stelle mit dem Platzhalter #sitemap# eingefuegt werden.
  * @package Papoo\Plugins\ContentManipulator\Scripts
  * @author Christoph Zimmer
  * @date 2017-10-25
  */
+#[AllowDynamicProperties]
 class Sitemap
 {
 	/**

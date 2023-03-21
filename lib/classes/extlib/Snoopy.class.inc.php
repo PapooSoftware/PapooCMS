@@ -29,6 +29,7 @@ http://snoopy.sourceforge.net/
 
 *************************************************/
 
+#[AllowDynamicProperties]
 class Snoopy
 {
 	/**** Public variables ****/

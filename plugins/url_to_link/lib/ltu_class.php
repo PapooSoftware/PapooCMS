@@ -3,6 +3,7 @@
 /**
  * Class ltu_class
  */
+#[AllowDynamicProperties]
 class ltu_class
 {
 	/**

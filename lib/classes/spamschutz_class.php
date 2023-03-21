@@ -16,6 +16,7 @@
  *
  * Class spamschutz_class
  */
+#[AllowDynamicProperties]
 class spamschutz_class
 {
 	/** @var bool zeigt an ob es sich um Spam handeln könnte (Spam = true; kein Spam = false) */

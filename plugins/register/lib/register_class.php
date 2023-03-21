@@ -3,6 +3,7 @@
 /**
  * Class register_class
  */
+#[AllowDynamicProperties]
 class register_class
 {
 	/** @var array diverse Einstellungen */

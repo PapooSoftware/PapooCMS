@@ -14,6 +14,7 @@
 /**
  * Diese Klasse macht Bookmarks des Admin Bereiches.
  */
+#[AllowDynamicProperties]
 class intern_book
 {
 	/**

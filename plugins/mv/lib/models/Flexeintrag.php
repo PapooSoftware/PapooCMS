@@ -1,5 +1,6 @@
 <?php
 
+#[AllowDynamicProperties]
 class Flexeintrag extends ActiveRecord\Model
 {
 	static $table_name;

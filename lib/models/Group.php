@@ -3,6 +3,7 @@
 /**
  * Klasse die die Tabelle 'papoo_gruppe' wiederspiegelt (Gruppen name, beschreibung, etc.).
  */
+#[AllowDynamicProperties]
 class Group extends ActiveRecord\Model
 {
 	static $table_name;

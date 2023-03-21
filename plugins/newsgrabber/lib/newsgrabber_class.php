@@ -4,6 +4,7 @@
  * RSS - News-Grabber
  * Copyright 2006 by Netzwelt-Kali.de - Karl Fahrtmann
  */
+#[AllowDynamicProperties]
 class newsgrabber_class
 {
 	/**

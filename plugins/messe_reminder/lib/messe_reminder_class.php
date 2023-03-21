@@ -15,6 +15,7 @@
 /**
  * Class MesseReminder
  */
+#[AllowDynamicProperties]
 class MesseReminder {
 
 	var $MV_ID = 1;
