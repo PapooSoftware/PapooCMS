@@ -2,26 +2,24 @@
 /**
  * @package ActiveRecord
  */
-
 namespace ActiveRecord;
+
+use Exception;
+use PDOStatement;
 
 /**
  * Generic base exception for all ActiveRecord specific errors.
  *
  * @package ActiveRecord
  */
-class ActiveRecordException extends \Exception
-{
-}
+class ActiveRecordException extends Exception {}
 
 /**
  * Thrown when a record cannot be found.
  *
  * @package ActiveRecord
  */
-class RecordNotFound extends ActiveRecordException
-{
-}
+class RecordNotFound extends ActiveRecordException {}
 
 /**
  * Thrown when there was an error performing a database operation.
@@ -32,20 +30,23 @@ class RecordNotFound extends ActiveRecordException
  */
 class DatabaseException extends ActiveRecordException
 {
-    public function __construct($adapter_or_string_or_mystery)
-    {
-        if ($adapter_or_string_or_mystery instanceof Connection) {
-            parent::__construct(
-                join(', ', $adapter_or_string_or_mystery->connection->errorInfo()),
-                intval($adapter_or_string_or_mystery->connection->errorCode()));
-        } elseif ($adapter_or_string_or_mystery instanceof \PDOStatement) {
-            parent::__construct(
-                join(', ', $adapter_or_string_or_mystery->errorInfo()),
-                intval($adapter_or_string_or_mystery->errorCode()));
-        } else {
-            parent::__construct($adapter_or_string_or_mystery);
-        }
-    }
+	public function __construct($adapter_or_string_or_mystery)
+	{
+		if ($adapter_or_string_or_mystery instanceof Connection)
+		{
+			parent::__construct(
+				join(", ",$adapter_or_string_or_mystery->connection->errorInfo()),
+				intval($adapter_or_string_or_mystery->connection->errorCode()));
+		}
+		elseif ($adapter_or_string_or_mystery instanceof PDOStatement)
+		{
+			parent::__construct(
+				join(", ",$adapter_or_string_or_mystery->errorInfo()),
+				intval($adapter_or_string_or_mystery->errorCode()));
+		}
+		else
+			parent::__construct($adapter_or_string_or_mystery);
+	}
 }
 
 /**
@@ -53,36 +54,28 @@ class DatabaseException extends ActiveRecordException
  *
  * @package ActiveRecord
  */
-class ModelException extends ActiveRecordException
-{
-}
+class ModelException extends ActiveRecordException {}
 
 /**
  * Thrown by {@link Expressions}.
  *
  * @package ActiveRecord
  */
-class ExpressionsException extends ActiveRecordException
-{
-}
+class ExpressionsException extends ActiveRecordException {}
 
 /**
  * Thrown for configuration problems.
  *
  * @package ActiveRecord
  */
-class ConfigException extends ActiveRecordException
-{
-}
+class ConfigException extends ActiveRecordException {}
 
 /**
  * Thrown for cache problems.
  *
  * @package ActiveRecord
  */
-class CacheException extends ActiveRecordException
-{
-}
+class CacheException extends ActiveRecordException {}
 
 /**
  * Thrown when attempting to access an invalid property on a {@link Model}.
@@ -91,23 +84,23 @@ class CacheException extends ActiveRecordException
  */
 class UndefinedPropertyException extends ModelException
 {
-    /**
-     * Sets the exception message to show the undefined property's name.
-     *
-     * @param string $class_name    name of the class with the missing property
-     * @param string $property_name name of undefined property
-     */
-    public function __construct($class_name, $property_name)
-    {
-        if (is_array($property_name)) {
-            $this->message = implode("\r\n", $property_name);
+	/**
+	 * Sets the exception message to show the undefined property's name.
+	 *
+	 * @param str $property_name name of undefined property
+	 * @return void
+	 */
+	public function __construct($class_name, $property_name)
+	{
+		if (is_array($property_name))
+		{
+			$this->message = implode("\r\n", $property_name);
+			return;
+		}
 
-            return;
-        }
-
-        $this->message = "Undefined property: {$class_name}->{$property_name} in {$this->file} on line {$this->line}";
-        parent::__construct();
-    }
+		$this->message = "Undefined property: {$class_name}->{$property_name} in {$this->file} on line {$this->line}";
+		parent::__construct();
+	}
 }
 
 /**
@@ -117,17 +110,18 @@ class UndefinedPropertyException extends ModelException
  */
 class ReadOnlyException extends ModelException
 {
-    /**
-     * Sets the exception message to show the undefined property's name.
-     *
-     * @param string $class_name  name of the model that is read only
-     * @param string $method_name name of method which attempted to modify the model
-     */
-    public function __construct($class_name, $method_name)
-    {
-        $this->message = "{$class_name}::{$method_name}() cannot be invoked because this model is set to read only";
-        parent::__construct();
-    }
+	/**
+	 * Sets the exception message to show the undefined property's name.
+	 *
+	 * @param str $class_name name of the model that is read only
+	 * @param str $method_name name of method which attempted to modify the model
+	 * @return void
+	 */
+	public function __construct($class_name, $method_name)
+	{
+		$this->message = "{$class_name}::{$method_name}() cannot be invoked because this model is set to read only";
+		parent::__construct();
+	}
 }
 
 /**
@@ -135,24 +129,18 @@ class ReadOnlyException extends ModelException
  *
  * @package ActiveRecord
  */
-class ValidationsArgumentError extends ActiveRecordException
-{
-}
+class ValidationsArgumentError extends ActiveRecordException {}
 
 /**
  * Thrown for relationship exceptions.
  *
  * @package ActiveRecord
  */
-class RelationshipException extends ActiveRecordException
-{
-}
+class RelationshipException extends ActiveRecordException {}
 
 /**
  * Thrown for has many thru exceptions.
  *
  * @package ActiveRecord
  */
-class HasManyThroughAssociationException extends RelationshipException
-{
-}
+class HasManyThroughAssociationException extends RelationshipException {}
