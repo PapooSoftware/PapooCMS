@@ -1,15 +1,15 @@
 {if $module_aktiv.mod_menue}
 	<nav class="top-bar" data-topbar>
-		<div class="title-area">
-			<div class="name">
+		<ul class="title-area">
+			<li class="name">
 				<strong>
 					<a href="{$slash}" accesskey="0" title="{$message_2000} {$link}" aria-label="{$message_2000} {$link}">
 						{$top_title}
 					</a>
 				</strong>
-			</div>
-			<div class="toggle-topbar menu-icon"><a href="#" title="Menü öffnen" aria-label="Menü öffnen"><span>menu</span></a></div>
-		</div>
+			</li>
+			<li class="toggle-topbar menu-icon"><a href="#" title="Menü öffnen" aria-label="Menü öffnen"><span>menu</span></a></li>
+		</ul>
 
 		<section class="top-bar-section">
 			{foreach item=kat from=$catlist_data.0}
