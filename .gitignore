@@ -17,6 +17,7 @@ interna/templates_c/**/*.*
 
 ##### Cache folders
 cache/**/*.*
+cache/*
 !cache/**/.gitkeep
 
 ##### Setting files

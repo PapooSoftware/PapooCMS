@@ -160,7 +160,7 @@ class del_artikel
 			//Artikel l�schen
 			$this->delete_artikel();
 
-			$sql=sprintf("SELECT * FROM %s WHERE lan_repore_id > 0",
+			$sql=sprintf("SELECT * FROM %s WHERE lan_repore_id > 0 AND lang_id=1",
 				$this->cms->tbname['papoo_language_article']
 			);
 			$result=$this->db->get_results($sql,ARRAY_A);
