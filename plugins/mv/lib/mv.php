@@ -181,6 +181,15 @@ class mv
 		$this->module = &$module;
 		global $dumpnrestore;
 		$this->dumpnrestore = &$dumpnrestore;
+
+		// Respect the maximum image size of the system configuration
+		$maxImageSize = explode('x', preg_replace('~[^\dx]~', '', (string)$cms->config_maximale_bildgrel), 2);
+		$imageMaxWidth = (int)$maxImageSize[0] ?: 4000;
+		$imageMaxHeight = (int)($maxImageSize[1] ?? 0) ?: 4000;
+
+		$this->pic_max_breite = $imageMaxWidth;
+		$this->pic_max_hoehe = $imageMaxHeight;
+
 		$this->make_mv_plugin();
 	}
 

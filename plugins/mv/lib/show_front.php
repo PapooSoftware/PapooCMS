@@ -102,6 +102,11 @@ if (!headers_sent($f, $l) && $this->checked->mv_id)
 		$lang_id = $this->cms->lang_id;
 		$spalten_namen = $this->get_spalten_namen();
 
+		$fieldTypes = array_combine(
+			array_map(function (array $field) { return "{$field['mvcform_name']}_{$field['mvcform_id']}"; }, $spalten_namen),
+			array_map(function (array $field) { return "{$field['mvcform_type']}"; }, $spalten_namen)
+		);
+
 		$flexId = (int)$this->checked->mv_id;
 		$contentId = (int)$this->checked->mv_content_id;
 
@@ -309,6 +314,30 @@ if (!headers_sent($f, $l) && $this->checked->mv_id)
 						if($faktor != 0)	$this->image_infos['hoehe'] = round($temp_infos[1]/$faktor);*/
 						$this->image_infos['breite'] = $temp_infos[0];
 						$this->image_infos['hoehe'] = $temp_infos[1];
+
+						$imageDimensionsHtml = $temp_infos[3] ?? '';
+						$srcset = [];
+
+						// Look for a field of type "picture" that has the same name and the "2x" suffix
+						$image2xResolutionFieldId = array_reduce(
+							array_keys(get_object_vars($result[0])),
+							function ($carry, $item) use ($name, $fieldTypes) {
+								return $carry ?? ($fieldTypes[$item] == 'picture' && explode('_', $item, 2)[0] == $name.'2x' ? $item : $carry);
+							},
+							null
+						);
+
+						if ($image2xResolutionFieldId && $result[0]->$image2xResolutionFieldId
+							&& is_file($image2xResolutionPathname = dirname($imagePathname) . '/' . $result[0]->$image2xResolutionFieldId)
+						) {
+							$srcset[] = $this->image_core->pfad_images_web . $result[0]->$image2xResolutionFieldId . ' 2x';
+						}
+
+						// Prepend original image if multiple versions exist
+						if ($srcset) {
+							array_unshift($srcset, $this->image_core->pfad_images_web . $result[0]->$feldname_feldid);
+						}
+
 						$rel_lightbox_img = '';
 						$value = "";
 						if ($this->mv_show_lightbox_single == 1)
@@ -322,14 +351,11 @@ if (!headers_sent($f, $l) && $this->checked->mv_id)
 										. $rel_lightbox_img
 										. '>';
 						}
-						$value .= '<img src="'
-									. $this->image_core->pfad_images_web
-									. $result[0]->$feldname_feldid
-									. '" title="" alt="" width="'
-									. $this->image_infos['breite']
-									. '" height="'
-									. $this->image_infos['hoehe']
-									. '" class="imagesize"/>';
+						$value .= '<img '
+							. ($srcset ? 'srcset="' . implode(', ', array_map('htmlspecialchars', $srcset)) . '" ' : '')
+							."src=\"{$this->image_core->pfad_images_web}{$result[0]->$feldname_feldid}\" "
+							. ($imageDimensionsHtml ? $imageDimensionsHtml . ' ' : '')
+							. 'title="" alt="" class="imagesize"/>';
 						if ($this->mv_show_lightbox_single == 1) $value .= '</a>';
 						$value .= " ";
 						$dat_array[$name_label] = '<img src="'
