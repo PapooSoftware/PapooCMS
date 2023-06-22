@@ -14,6 +14,10 @@
 /**
  * Class intern_stamm_class
  */
+
+use League\HTMLToMarkdown\HtmlConverter;
+use League\CommonMark\CommonMarkConverter;
+
 #[AllowDynamicProperties]
 class intern_stamm_class {
 
@@ -1127,7 +1131,42 @@ class intern_stamm_class {
 		}
 		if ($_POST and $this->checked->submitecht != "") {
 
-			$inhalt = $this->checked->inhalt_ar['inhalt'];
+			if ($this->user->editor == 1) {
+				$article = $this->checked->inhalt_ar['inhalt'];
+
+				// Platzhalter verbergen
+				if (preg_match_all('/#+([a-z0-9_]+)#+/i', $article, $matches, PREG_PATTERN_ORDER)) {
+					$articelPlaceholders = [];
+					foreach (array_unique($matches[0]) as $match) {
+						$placeholder = uniqid('placeholder-');
+						$article = str_replace($match, $placeholder, $article);
+						$articelPlaceholders[$placeholder] = $match;
+					}
+				}
+
+				$converter = new CommonMarkConverter([
+					'html_input' => 'allow',
+					'allow_unsafe_links' => false,
+				]);
+
+				$article = str_replace('\\', '', $article);
+
+				$article = $converter->convert($article)->getContent();
+
+				// Platzhalter wiederherstellen
+				if (isset($articelPlaceholders)) {
+					foreach ($articelPlaceholders as $placeholder => $match) {
+						$article = str_replace($placeholder, $match, $article);
+						$articelPlaceholders[$placeholder] = $match;
+					}
+				}
+
+				$inhalt = $article;
+			}
+			else {
+				$inhalt = $this->checked->inhalt_ar['inhalt'];
+			}
+
 			$artikel = $this->replace->do_replace($inhalt);
 
 			/**
@@ -1190,8 +1229,44 @@ class intern_stamm_class {
 			// läuft nur einmal
 			if (!empty ($result)) {
 				foreach ($result as $row) {
-					$this->content->template['Beschreibung'] = "nodecode:" . $row->start_text_sans;
-					array_push($menuinput_data, array ('beschreibung' => "nodecode:" . $row->beschreibung, 'Beschreibung' => "nodecode:" . $row->start_text_sans, 'seitentitle' => "nodecode:" . $this->diverse->encode_quote($row->seitentitle)));
+					if ($this->user->editor == 1) {
+						$article = $row->start_text_sans;
+
+						// Platzhalter verbergen
+						if (preg_match_all('/#+([a-z0-9_]+)#+/i', $article, $matches, PREG_PATTERN_ORDER)) {
+							$articelPlaceholders = [];
+							foreach (array_unique($matches[0]) as $match) {
+								$placeholder = uniqid('placeholder-');
+								$article = str_replace($match, $placeholder, $article);
+								$articelPlaceholders[$placeholder] = $match;
+							}
+						}
+
+						$converter = new HtmlConverter([
+							'preserve_comments' => true,
+						]);
+
+						$article = $converter->convert($article);
+
+						// Platzhalter wiederherstellen
+						if (isset($articelPlaceholders)) {
+							foreach ($articelPlaceholders as $placeholder => $match) {
+								$article = str_replace($placeholder, $match, $article);
+								$articelPlaceholders[$placeholder] = $match;
+							}
+						}
+
+						$this->content->template['Beschreibung'] = "nodecode:" . $article;
+					}
+					else {
+						$this->content->template['Beschreibung'] = "nodecode:" . $row->start_text_sans;
+					}
+
+					$menuinput_data[] = [
+						'beschreibung' => "nodecode:" . $row->beschreibung,
+						'Beschreibung' => "nodecode:" . $row->start_text_sans,
+						'seitentitle' => "nodecode:" . $this->diverse->encode_quote($row->seitentitle)
+					];
 				}
 			}
 			// Leer,dann leer zuweisen
