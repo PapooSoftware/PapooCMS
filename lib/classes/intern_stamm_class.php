@@ -502,6 +502,7 @@ class intern_stamm_class {
 							stamm_documents_change_backup='%d',
 							smtp_active='%d',
 							smtp_host='%s',
+							smtp_prefix='%d',
 							smtp_port='%s',
 							smtp_user='%s',
 							smtp_pass='%s',
@@ -583,6 +584,7 @@ class intern_stamm_class {
 
 				$this->db->escape($this->checked->smtp_active),
 				$this->db->escape($this->checked->smtp_host),
+				$this->db->escape($this->checked->smtp_prefix),
 				$this->db->escape($this->checked->smtp_port),
 				$this->db->escape($this->checked->smtp_user),
 				$this->db->escape($this->checked->smtp_pass),
@@ -1106,6 +1108,7 @@ class intern_stamm_class {
 
 					'smtp_active' => $smtp,
 					'smtp_host' => $row->smtp_host,
+					'smtp_prefix' => $row->smtp_prefix,
 					'smtp_port' => $row->smtp_port,
 					'smtp_user' => $row->smtp_user,
 					'smtp_pass' => $row->smtp_pass,

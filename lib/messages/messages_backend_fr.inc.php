@@ -1306,6 +1306,7 @@ $this->content->template['message']['stamm']['smtp'] = [
 	'password' => "Mot de passe",
 	'nosmtp' => "Ne pas utiliser le SMTP",
 	'customsmtp' => "Utiliser des paramètres SMTP personnalisés",
-	'system' => "Utiliser les paramètres du système"
+	'system' => "Utiliser les paramètres du système",
+	'prefix' => "Préfixe",
 ];
 ?>

@@ -51,12 +51,14 @@
 		document.addEventListener('DOMContentLoaded', function() {
 			if (document.forms["formi"].elements["form_manager_mail_settings_type"].value === 'smtp') {
 				document.getElementById('form_manager_smtp_host').readOnly = false;
+				document.getElementById('form_manager_smtp_prefix').disabled = false;
 				document.getElementById('form_manager_smtp_port').readOnly = false;
 				document.getElementById('form_manager_smtp_user').readOnly = false;
 				document.getElementById('form_manager_smtp_pass').readOnly = false;
 			}
 			else {
 				document.getElementById('form_manager_smtp_host').readOnly = true;
+				document.getElementById('form_manager_smtp_prefix').disabled = true;
 				document.getElementById('form_manager_smtp_port').readOnly = true;
 				document.getElementById('form_manager_smtp_user').readOnly = true;
 				document.getElementById('form_manager_smtp_pass').readOnly = true;
@@ -65,12 +67,14 @@
 			document.forms["formi"].elements["form_manager_mail_settings_type"].forEach(element => element.addEventListener('click', function() {
 				if (this.value === 'smtp') {
 					document.getElementById('form_manager_smtp_host').readOnly = false;
+					document.getElementById('form_manager_smtp_prefix').disabled = false;
 					document.getElementById('form_manager_smtp_port').readOnly = false;
 					document.getElementById('form_manager_smtp_user').readOnly = false;
 					document.getElementById('form_manager_smtp_pass').readOnly = false;
 				}
 				else {
 					document.getElementById('form_manager_smtp_host').readOnly = true;
+					document.getElementById('form_manager_smtp_prefix').disabled = true;
 					document.getElementById('form_manager_smtp_port').readOnly = true;
 					document.getElementById('form_manager_smtp_user').readOnly = true;
 					document.getElementById('form_manager_smtp_pass').readOnly = true;
@@ -101,6 +105,13 @@
 
 		<label for="form_manager_smtp_host">{$message.stamm.smtp.host}</label><br />
 		<input type="text" readonly id="form_manager_smtp_host" name="form_manager_smtp_host" value="{$form_manager_smtp_host}" />
+
+		<label for="form_manager_smtp_prefix">{$message.stamm.smtp.prefix}</label>
+		<select disabled name="form_manager_smtp_prefix" id="form_manager_smtp_prefix" title="{$message.stamm.smtp.prefix}" style="width:calc(60% + 14px);" size="1">
+			<option value="0" {if $form_manager_smtp_prefix == 0}selected="selected"{/if}>
+			<option value="1" {if $form_manager_smtp_prefix == 1}selected="selected"{/if}>TLS</option>
+			<option value="2" {if $form_manager_smtp_prefix == 2}selected="selected"{/if}>SSL</option>
+		</select>
 
 		<label for="form_manager_smtp_port">{$message.stamm.smtp.port}</label><br />
 		<input type="number" readonly id="form_manager_smtp_port" name="form_manager_smtp_port" value="{$form_manager_smtp_port}" />

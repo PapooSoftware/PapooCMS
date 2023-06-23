@@ -521,6 +521,7 @@ class cms
 					'sendReplyMail' => (int)$row->send_reply_mail,
 					'settingsType' => $row->smtp_active ? 'smtp' : 'sendmail',
 					'host' => $row->smtp_host,
+					'prefix' => $row->smtp_prefix,
 					'port' => (int)$row->smtp_port,
 					'user' => $row->smtp_user,
 					'password' => $row->smtp_pass,

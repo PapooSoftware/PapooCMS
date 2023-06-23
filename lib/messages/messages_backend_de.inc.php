@@ -2058,6 +2058,7 @@ $this->content->template['message']['stamm']['smtp'] = [
 	'password' => "Passwort",
 	'nosmtp' => "Kein SMTP Verwenden",
 	'customsmtp' => "Benutzerdefinierte SMTP-Einstellungen verwenden",
-	'system' => "System-Einstellungen verwenden"
+	'system' => "System-Einstellungen verwenden",
+	'prefix' => "Präfix",
 ];
 #start#s

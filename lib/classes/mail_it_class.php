@@ -171,6 +171,7 @@ class mail_it
 	 * @param array $settings Optionale eigene SMTP-Einstellungen. Folgende Schlüssel müssen im Array vorhanden sein:
 	 *  settingsType: Welcher Mail-Type verwendet werden soll: system (Systemeinstellungen), smtp (Eigene SMTP-Einstellungen), sendmail (Kein SMTP)
 	 *  smtp_host: Der SMTP Host
+	 *  smtp_prefix: Der SMTP Präfix
 	 *  smtp_port: Der SMTP Port
 	 *  smtp_user: Der SMTP Benutzer
 	 *  smtp_pass: Das SMTP Passwort
@@ -208,7 +209,7 @@ class mail_it
 				$mail->SMTPAuth   = true;
 				$mail->Username   = $settings['user'] ?? '';
 				$mail->Password   = $settings['password'] ?? '';
-				$mail->SMTPSecure = "tls";
+				$mail->SMTPSecure = $settings['prefix'] == 1 ? "tls" : ($settings['prefix'] == 2 ? "ssl" : "");
 				$mail->Port       = $settings['port'] ?? 25;
 			}
 
