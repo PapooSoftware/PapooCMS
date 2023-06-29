@@ -171,6 +171,7 @@ class TwoClickVideo
 			}
 		}
 
+		$this->content->template['plugin']['2_klick_video'] = [];
 		$this->settings = $this->content->template['plugin']['2_klick_video']['settings'] = $settings;
 
 	}
@@ -714,7 +715,7 @@ class TwoClickVideo
  * @package Papoo\Plugins\TwoClickVideo
  */
 #[AllowDynamicProperties]
-class HandlerBase
+abstract class HandlerBase
 {
 	/** @var string */
 	const PROVIDER_ID = '???';
