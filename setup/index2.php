@@ -107,6 +107,7 @@ $verz_array = array( "../lib/site_conf.php",
 					"../images/thumbs/index.html",
 					"../dokumente/index.html",
 					"../dokumente/upload/index.html",
+					"../dokumente/files/index.html",
 					"../dokumente/backup/index.html",
 					"../dokumente/logs/index.html",
 					"../cache/index.html",
@@ -205,14 +206,14 @@ echo $msgn1;
  
 ?>
 <table  class="outside  table table-striped table-hover"><tr><th>Systemeinstellung</th><th>Ihr System</th><th>Mindest.</th><th>Ok</th><th style="width:40%;">Erläuterung</th></tr>
-<tr><td>PHP-Version</td><td><?php echo phpversion(); ?></td><td>7.0.x</td><td style="width:20px;"><?php if (phpversion()>=7){
+<tr><td>PHP-Version</td><td><?php echo phpversion(); ?></td><td>7.4.x</td><td style="width:20px;"><?php if (phpversion()>=7.4){
 ?>  <img src="../interna/bilder/check.png" width="20" height="20" alt="OK"/><?php
 } else {
  ?>
 <img src="../interna/bilder/filleclose.gif" width="20" height="20" alt="NOT OK"/>
 <?php
 }
-?></td><td>Papoo verwendet Funktionen, die die PHP-Version 7.0 benötigen. Die Verwendung älterer Versionen ab 5.6 ist möglich, aber mit Problemen verbunden, für die wir keinen Support übernehmen. Sie können bei jedem Provider Ihren Account auf PHP&nbsp;7.0 oder höher umstellen (lassen).</td></tr>
+?></td><td>Papoo verwendet Funktionen, die die PHP-Version 7.4 benötigen. Die Verwendung älterer Versionen ist nicht möglich. Sie können bei jedem Provider Ihren Account auf PHP&nbsp;7.4 oder höher umstellen (lassen).</td></tr>
 
 <tr><td>MySQL/MariaDB-Version</td><td><?php echo $mysql;?></td><td>5</td><td><?php if ($mysql>"4.2"){ ?>
 <img src="../interna/bilder/check.png" width="20" height="20" alt="OK"/><?php
