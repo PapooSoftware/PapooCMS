@@ -763,10 +763,8 @@ class class_search_front
 			$text2 = $text;
 		}
 
-        if (strlen($text2) > $teaserMaxLength) {
-            $nextWhiteSpace = mb_strpos($text2, ' ', $teaserMaxLength);
-        }
-		
+		$nextWhiteSpace = strlen($text2) > $teaserMaxLength ? mb_strpos($text2, ' ', $teaserMaxLength) : false;
+
 		$text2 = mb_substr($text2, 0, $nextWhiteSpace !== false ? $nextWhiteSpace : $teaserMaxLength, 'UTF-8') . ' [&hellip;]';
 
 		//Highlighting
