@@ -506,7 +506,7 @@ $this->content->template['message_412'] = "Description";
 $this->content->template['message_413'] = "Upload file";
 $this->content->template['message_414'] = "Name  of the style";
 $this->content->template['message_415'] = "Quicktags editor";
-$this->content->template['message_416'] = "Markdown editor";
+$this->content->template['message_416'] = "Markdown editor (Attention: By converting between Markdown and HTML, HTML attributes that Markdown cannot map are lost. HTML elements that cannot be mapped are not lost, but remain).";
 $this->content->template['message_417'] = "Standard";
 $this->content->template['message_418'] = "This table lists all menu items of the Administration for the assignment of rights ";
 $this->content->template['message_419'] = "Input to menu item";
@@ -1572,6 +1572,7 @@ $this->content->template['message']['stamm']['smtp'] = [
 	'password' => "Password",
 	'nosmtp' => "Don't use SMTP",
 	'customsmtp' => "Use custom SMTP-Settings",
-	'system' => "Use System-Settings"
+	'system' => "Use System-Settings",
+	'prefix' => "Prefix",
 ];
 ?>

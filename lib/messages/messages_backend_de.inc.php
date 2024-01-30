@@ -489,7 +489,7 @@ $this->content->template['message_412']='Bezeichnung';
 $this->content->template['message_413']='Datei hochladen';
 $this->content->template['message_414']='Name des Styles';
 $this->content->template['message_415']='Quicktags-Editor';
-$this->content->template['message_416']='Markdown-Editor';
+$this->content->template['message_416']='Markdown-Editor (Achtung: Durch die Konvertierung zwischen Markdown und HTML gehen HTML-Attribute, die Markdown nicht abbilden kann, verloren. HTML-Elemente die nicht abgebildet werden können, gehen nicht verloren, sondern bleiben bestehen.)';
 $this->content->template['message_417']='Standard';
 $this->content->template['message_418']='Diese Tabelle listet Menüpunkte der Administration für die Rechtezuweisung auf ';
 $this->content->template['message_419']='Eintrag zu Menüpunkt';
@@ -2058,6 +2058,7 @@ $this->content->template['message']['stamm']['smtp'] = [
 	'password' => "Passwort",
 	'nosmtp' => "Kein SMTP Verwenden",
 	'customsmtp' => "Benutzerdefinierte SMTP-Einstellungen verwenden",
-	'system' => "System-Einstellungen verwenden"
+	'system' => "System-Einstellungen verwenden",
+	'prefix' => "Präfix",
 ];
 #start#s

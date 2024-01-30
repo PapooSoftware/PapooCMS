@@ -37,7 +37,7 @@ $message3a2='<h2>Weiter zur Installation</h2>
 <p class="weiter">Bitte gehen Sie jetzt zu <a href="install.php">Schritt 1 Ihrer Installation</a>.</p>';
 $message3a2b='<h2>Weiter zur Installation</h2>
 <p class="weiter"><strong>Bitte korrigieren Sie die Rechteeinstellungen der Verzeichnisse.</strong></p>';
-$message3b='<h2>Bitte ändern Sie die Datei und Verzeichnisrechte auf 777!</h2><p>Ändern Sie die Verzeichnisrechte der folgenden Dateien und Verzeichnisse. Weitere <a href="http://www.doku.papoo.de/index.php/Installation#Setup:_Verzeichnis-_und_Dateirechte_setzen" target="blank">Informationen zum Ändern der Dateirechte.</a> und zu <a href="http://de.wikipedia.org/wiki/Unix-Dateirechte"  target="blank">Unix/linux/Server Dateirechten.</a></p>';
+$message3b='<h2>Bitte ändern Sie die Datei und Verzeichnisrechte auf 777!</h2><p>Ändern Sie die Verzeichnisrechte der folgenden Dateien, Verzeichnisse und Unterverzeichnisse. Weitere <a href="http://www.doku.papoo.de/index.php/Installation#Setup:_Verzeichnis-_und_Dateirechte_setzen" target="blank">Informationen zum Ändern der Dateirechte.</a> und zu <a href="http://de.wikipedia.org/wiki/Unix-Dateirechte"  target="blank">Unix/linux/Server Dateirechten.</a></p>';
 
 //Schritt 2 Ihrer Papoo Installation
 $message4="Schritt 2 Ihrer Papoo Installation";

@@ -363,7 +363,7 @@ class class_search_front
                         AND ext_search_wort_id LIKE '" . utf8_encode($value) . "%' " . $sub_sql_text . " " . $einschr;
 				}
 			}
-			$sub = @implode($sub, " OR ");
+            $sub = implode(" OR ", $sub);
 		}
 		$sql = sprintf("SELECT ext_search_id
                 FROM %s
@@ -381,6 +381,7 @@ class class_search_front
 		$sql = sprintf("SELECT ext_search_nzahl_der_uchergebnisse
                     FROM %s", $this->cms->tbname['plugin_ext_search_config']);
 		$anzahl = (int)$this->db->get_var($sql);
+
 		$this->content->template['weiter_array'] = "";
 
 		$this->weiter->result_anzahl = $count;
@@ -743,7 +744,7 @@ class class_search_front
 
 		//if (stristr($text3,$suchwort))
 		$suchwort = utf8_encode($suchwort);
-		error_reporting(0);
+
 		if(stristr($text3, $suchwort)) {
 			$position = stripos($text3, $suchwort);
 			$actualstr = substr($text3, $position, strlen($suchwort));
@@ -762,7 +763,8 @@ class class_search_front
 			$text2 = $text;
 		}
 
-		$nextWhiteSpace = mb_strpos($text2, ' ', $teaserMaxLength);
+		$nextWhiteSpace = strlen($text2) > $teaserMaxLength ? mb_strpos($text2, ' ', $teaserMaxLength) : false;
+
 		$text2 = mb_substr($text2, 0, $nextWhiteSpace !== false ? $nextWhiteSpace : $teaserMaxLength, 'UTF-8') . ' [&hellip;]';
 
 		//Highlighting

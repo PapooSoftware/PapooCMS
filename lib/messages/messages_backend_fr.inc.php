@@ -481,7 +481,7 @@ $this->content->template['message_412'] = "Désignation";
 $this->content->template['message_413'] = "Télécharger le fichier";
 $this->content->template['message_414'] = "Nom de style";
 $this->content->template['message_415'] = "Quicktags Editor";
-$this->content->template['message_416'] = "Markdown Editor";
+$this->content->template['message_416'] = "Markdown Editor (Attention : la conversion entre Markdown et HTML entraîne la perte des attributs HTML que Markdown ne peut pas reproduire. Les éléments HTML qui ne peuvent pas être reproduits ne sont pas perdus, ils sont conservés).";
 $this->content->template['message_417'] = "Standard";
 $this->content->template['message_418'] = "Diese Tabelle listet Menüpunkte der Administrattion auf für die Rechtezuweisung ";
 $this->content->template['message_419'] = "Entrée pour l'élément de menu";
@@ -1306,6 +1306,7 @@ $this->content->template['message']['stamm']['smtp'] = [
 	'password' => "Mot de passe",
 	'nosmtp' => "Ne pas utiliser le SMTP",
 	'customsmtp' => "Utiliser des paramètres SMTP personnalisés",
-	'system' => "Utiliser les paramètres du système"
+	'system' => "Utiliser les paramètres du système",
+	'prefix' => "Préfixe",
 ];
 ?>

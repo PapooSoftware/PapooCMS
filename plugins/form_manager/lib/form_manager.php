@@ -3880,6 +3880,7 @@ class form_manager
 							form_manager_sender_mail='%s',
 							form_manager_mail_settings_type='%s',
 							form_manager_smtp_host='%s',
+							form_manager_smtp_prefix='%d',
 							form_manager_smtp_port='%s',
 							form_manager_smtp_user='%s',
 							form_manager_smtp_pass='%s',
@@ -3903,6 +3904,7 @@ class form_manager
 				$this->db->escape($this->checked->form_manager_sender_mail),
 				$this->db->escape($this->checked->form_manager_mail_settings_type),
 				$this->db->escape($this->checked->form_manager_smtp_host),
+				$this->db->escape($this->checked->form_manager_smtp_prefix),
 				$this->db->escape($this->checked->form_manager_smtp_port),
 				$this->db->escape($this->checked->form_manager_smtp_user),
 				$this->db->escape($this->checked->form_manager_smtp_pass),
@@ -4442,6 +4444,7 @@ class form_manager
 							form_manager_sender_mail='%s',
 							form_manager_mail_settings_type='%s',
 							form_manager_smtp_host='%s',
+							form_manager_smtp_prefix='%d',
 							form_manager_smtp_port='%s',
 							form_manager_smtp_user='%s',
 							form_manager_smtp_pass='%s',
@@ -4464,6 +4467,7 @@ class form_manager
 				$this->db->escape($this->checked->form_manager_sender_mail),
 				$this->db->escape($this->checked->form_manager_mail_settings_type),
 				$this->db->escape($this->checked->form_manager_smtp_host),
+				$this->db->escape($this->checked->form_manager_smtp_prefix),
 				$this->db->escape($this->checked->form_manager_smtp_port),
 				$this->db->escape($this->checked->form_manager_smtp_user),
 				$this->db->escape($this->checked->form_manager_smtp_pass),
@@ -4648,6 +4652,7 @@ class form_manager
 					$this->content->template['form_manager_smtp_active'] = isset($spalte->form_manager_smtp_active) && $spalte->form_manager_smtp_active == 1 ? 'nodecode:checked="checked"' : '';
 					$this->content->template['form_manager_mail_settings_type'] = $spalte->form_manager_mail_settings_type;
 					$this->content->template['form_manager_smtp_host'] = $spalte->form_manager_smtp_host;
+					$this->content->template['form_manager_smtp_prefix'] = $spalte->form_manager_smtp_prefix;
 					$this->content->template['form_manager_smtp_port'] = $spalte->form_manager_smtp_port;
 					$this->content->template['form_manager_smtp_user'] = $spalte->form_manager_smtp_user;
 					$this->content->template['form_manager_smtp_pass'] = $spalte->form_manager_smtp_pass;
@@ -4837,6 +4842,7 @@ class form_manager
 		$sql = sprintf("SELECT
 		 form_manager_mail_settings_type as `settingsType`,
 		 form_manager_smtp_host as `host`,
+		 form_manager_smtp_prefix as `prefix`,
 		 form_manager_smtp_port as `port`,
 		 form_manager_smtp_user as `user`,
 		 form_manager_smtp_pass as `password`,

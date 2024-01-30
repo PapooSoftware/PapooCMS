@@ -15,6 +15,10 @@
  * Das ist die Mega Klasse mit der man
  * Artikel erstellen und bearbeiten kann
  */
+
+use League\HTMLToMarkdown\HtmlConverter;
+use League\CommonMark\CommonMarkConverter;
+
 #[AllowDynamicProperties]
 class intern_artikel
 {
@@ -589,6 +593,57 @@ class intern_artikel
 	 */
 	function make_save($modus)
 	{
+		if ($this->user->editor == 1) {
+			$article = $_SESSION['metadaten'][$this->unique_id][$this->replangid]['inhalt'];
+			$teaser = $_SESSION['metadaten'][$this->unique_id][$this->replangid]['teaser'];
+
+			// Platzhalter verbergen
+			if (preg_match_all('/#+([a-z0-9_]+)#+/i', $article, $matches, PREG_PATTERN_ORDER)) {
+				$articelPlaceholders = [];
+				foreach (array_unique($matches[0]) as $match) {
+					$placeholder = uniqid('placeholder-');
+					$article = str_replace($match, $placeholder, $article);
+					$articelPlaceholders[$placeholder] = $match;
+				}
+			}
+			if (preg_match_all('/#+([a-z0-9_]+)#+/i', $teaser, $matches, PREG_PATTERN_ORDER)) {
+				$teaserPlaceholders = [];
+				foreach (array_unique($matches[0]) as $match) {
+					$placeholder = uniqid('placeholder-');
+					$teaser = str_replace($match, $placeholder, $teaser);
+					$teaserPlaceholders[$placeholder] = $match;
+				}
+			}
+
+			$converter = new CommonMarkConverter([
+				'html_input' => 'allow',
+				'allow_unsafe_links' => false,
+			]);
+
+			$article = str_replace('\\', '', $article);
+			$teaser = str_replace('\\', '', $teaser);
+
+			$article = $converter->convert($article)->getContent();
+			$teaser = $converter->convert($teaser)->getContent();
+
+			// Platzhalter wiederherstellen
+			if (isset($articelPlaceholders)) {
+				foreach ($articelPlaceholders as $placeholder => $match) {
+					$article = str_replace($placeholder, $match, $article);
+					$articelPlaceholders[$placeholder] = $match;
+				}
+			}
+			if (isset($teaserPlaceholders)) {
+				foreach ($teaserPlaceholders as $placeholder => $match) {
+					$teaser = str_replace($placeholder, $match, $teaser);
+					$teaserPlaceholders[$placeholder] = $match;
+				}
+			}
+
+			$_SESSION['metadaten'][$this->unique_id][$this->replangid]['inhalt'] = $article;
+			$_SESSION['metadaten'][$this->unique_id][$this->replangid]['teaser'] = $teaser;
+		}
+
 		$this->make_checked_session_complete();
 		if(empty($_SESSION['metadaten'][$this->unique_id][$this->replangid]['url_header'])) {
 			$_SESSION['metadaten'][$this->unique_id][$this->replangid]['url_header'] =
@@ -3148,6 +3203,53 @@ class intern_artikel
 		}
 		else {
 			$this->content->template['checked_startseite'] = "";
+		}
+
+		if ($this->user->editor == 1) {
+			$article = $_SESSION['metadaten'][$this->unique_id][$this->replangid]['inhalt'];
+			$teaser = $_SESSION['metadaten'][$this->unique_id][$this->replangid]['teaser'];
+
+			// Platzhalter verbergen
+			if (preg_match_all('/#+([a-z0-9_]+)#+/i', $article, $matches, PREG_PATTERN_ORDER)) {
+				$articelPlaceholders = [];
+				foreach (array_unique($matches[0]) as $match) {
+					$placeholder = uniqid('placeholder-');
+					$article = str_replace($match, $placeholder, $article);
+					$articelPlaceholders[$placeholder] = $match;
+				}
+			}
+			if (preg_match_all('/#+([a-z0-9_]+)#+/i', $teaser, $matches, PREG_PATTERN_ORDER)) {
+				$teaserPlaceholders = [];
+				foreach (array_unique($matches[0]) as $match) {
+					$placeholder = uniqid('placeholder-');
+					$teaser = str_replace($match, $placeholder, $teaser);
+					$teaserPlaceholders[$placeholder] = $match;
+				}
+			}
+
+			$converter = new HtmlConverter([
+				'preserve_comments' => true,
+			]);
+
+			$article = $converter->convert($article);
+			$teaser = $converter->convert($teaser);
+
+			// Platzhalter wiederherstellen
+			if (isset($articelPlaceholders)) {
+				foreach ($articelPlaceholders as $placeholder => $match) {
+					$article = str_replace($placeholder, $match, $article);
+					$articelPlaceholders[$placeholder] = $match;
+				}
+			}
+			if (isset($teaserPlaceholders)) {
+				foreach ($teaserPlaceholders as $placeholder => $match) {
+					$teaser = str_replace($placeholder, $match, $teaser);
+					$teaserPlaceholders[$placeholder] = $match;
+				}
+			}
+
+			$this->content->template['Beschreibung'] = "nodecode:" . $article;
+			$this->content->template['teaser'] = "nodecode:" . $teaser;
 		}
 	}
 
