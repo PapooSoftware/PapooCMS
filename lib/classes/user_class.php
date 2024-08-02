@@ -522,7 +522,23 @@ class user_class
 			$this->content->template['user_club_stufe'] = $user_club_stufe;
 		}
 		else {
-			$this->login($username, $password);
+			$success = $this->login($username, $password);
+			if (!$success) {
+
+				// Wenn im Frontend, dann Seite neu laden, da sonst Probs mit Menü
+				if (!defined("admin")) {
+					//header("Location:".$_SERVER['PHP_SELF'] );
+					$location_url = $_SERVER['PHP_SELF'] . "?menuid=" . $this->checked->menuid . "&reporeid=" . $this->checked->reporeid . "&template=" . $this->checked->template . "&false=" . ($this->content->template['loggedin_false_pass'] ?? '') . "&sperre=" . ($this->content->template['sperre'] ?? '');
+					if ($_SESSION['debug_stopallredirect']) {
+						echo '<a href="' . $location_url . '">Weiter</a>';
+					}
+					else {
+						header("Location: $location_url");
+					}
+					exit;
+				}
+
+			}
 		}
 
 	}
