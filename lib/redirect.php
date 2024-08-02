@@ -69,7 +69,7 @@ if(sizeof($requestArr) >= 2 ) {
 		//does request uri contain parameter template
 		if (strcmp(substr($param, 0, 9), "template=") == 0) {
 			//does template contain the string shop
-			if (stristr(substr($param, 9), "shop")) {
+			if (stristr(substr($param, 9), "shop") and substr($param, 9, 5) !== 'shop_') {
 				//is the script shop.php running
 				if (!stristr($_SERVER['REQUEST_URI'], "shop.php")) {
 					//redirect to shop.php
