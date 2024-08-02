@@ -157,6 +157,255 @@ class user_class
 	}
 
 	/**
+	 * Login mit Passwort durchführen. Bei Erfolg wird `true` zurückgegeben.
+	 *
+	 * Es werden ggf. Template-Variablen 'sperre', 'loggedin_false_pass' und/oder 'loggedin'
+	 * gesetzt, die Details zum Loginerfolg angeben.
+	 *
+	 * Der aufrufende Code muss ggf. im Frontend auch bei fehlgeschlagenem Login die Seite
+	 * neu laden, damit das Menü korrekt aufgebaut wird.
+	 *
+	 * @param $username
+	 * @param $password
+	 * @return bool
+	 */
+	function login($username, $password) {
+		// Immer klein casten, damit z.B. "Root", oder "ROOT" bei der Eingabe nicht Probleme verursacht, obwohl das funktionieren sollte.
+		$username = strtolower($username);
+
+		global $webverzeichnis;
+		$server = $_SERVER['SERVER_NAME'] . $webverzeichnis;
+
+		$username_exist = "0";
+		$sperre = "";
+
+		// Datenbankabfrage formulieren
+		$selectuser = "SELECT userid, wie_oft_login, zeitsperre FROM " . $this->cms->papoo_user . " WHERE username COLLATE utf8_bin =  '" . ($this->db->escape($username)) . "'  AND active='1' ";
+
+		$resultuser_ok2 = $resultuser_ok = $this->db->get_results($selectuser);
+		#print_r($resultuser_ok2);
+		#exit();
+		if (is_array($resultuser_ok) and count($resultuser_ok) >= 1) {
+			$username_exist = "1";
+		}
+		if (is_array($resultuser_ok2)) {
+			foreach ($resultuser_ok2 as $row) {
+				//Zeitsperre von 10 Minuten noch nicht abgelaufen
+				if ($row->zeitsperre != 0) {
+					if (time() - 600 < $row->zeitsperre) {
+						$sperre = $this->content->template['sperre'] = "gesperrt";
+					}
+				}
+
+			}
+		}
+
+		// Datenbankabfrage formulieren - User herausholen, ohne Passwort-Check
+		$selectuser = sprintf("SELECT * FROM `%s` WHERE `username` = '%s' AND `active` = 1 LIMIT 1",
+			$this->cms->papoo_user,
+			$this->db->escape($username)
+		);
+		$resultuser = $this->db->get_row($selectuser, ARRAY_A);
+
+		// Passwort verifizieren - ist nicht mehr durch MySQL machbar (Hashing-Algorithmus)
+		$password_verified = false;
+		if ($resultuser !== null && $username != "jeder" && empty($sperre)) {
+			// Hash ist crypt-kompatibel
+			if (substr($resultuser["password"], 0, 1) === '$' && $this->diverse->verify_password($password,
+					$resultuser["password"])
+			) {
+				$password_verified = true;
+			}
+			else {
+				// Passwort neu hashen, sofern es immer noch als MD5 Hash vorliegt
+				if ($resultuser["password"] === md5($password)) {
+					$this->db->query(sprintf("UPDATE `%s` SET `password` = '%s' WHERE `userid` = %d",
+						$this->cms->tbname["papoo_user"],
+						$this->db->escape($this->diverse->hash_password($password)),
+						$resultuser["userid"]
+					));
+					$password_verified = true;
+				}
+			}
+		}
+
+		// es existiert ein User ###
+		if ($password_verified) {
+			//Zähler auf null setzen und Eintrag in Datenbank für Login legen
+			$this->db->query(sprintf(
+				"UPDATE `%s`
+							SET `wie_oft_login` = '0', `zeitsperre` = '0', `user_last_login` = '%d'
+						WHERE `userid` = '%d'",
+				$this->cms->papoo_user,
+				time(),
+				$resultuser["userid"]
+			));
+
+			// Eigenschaften zuweisen
+			$this->userid = $resultuser["userid"];
+			$this->username = strtolower($resultuser["username"]);
+			$this->user_club_stufe = $resultuser["user_club_stufe"];
+			$this->editor = $resultuser["editor"];
+			if ($this->editor == 0) {
+				$this->editor = 3;
+			}
+			$this->board = $resultuser["board"];
+			$this->user_style = $resultuser["user_style_id"];
+
+			$this->get_groups();
+
+			// Ausloggvariable löschen
+			unset ($_SESSION['logoff']);
+			unset ($_SESSION['logfalse']);
+			unset ($_SESSION['meta_gruppe_id']);
+
+			// Einloggzustand übergeben an template
+			$userok = $this->content->template['loggedin'] = "user_ok";
+
+			//TINY MMCE Config einstellen
+			$this->get_user_tiny();
+
+			// Hashwert erstellen
+			$hash = hash('sha256', $server . trim($username) . $this->userid . session_id());
+
+			// Username und Passwort an Session übergeben
+			$_SESSION['sessionusername'] = strtolower($resultuser["username"]);
+			$_SESSION['sessionuserid'] = $resultuser["userid"];
+			$_SESSION['sessionusergruppenid'] = $this->gruppenid;
+			$_SESSION['user_club_stufe'] = $resultuser["user_club_stufe"];
+			$_SESSION['sessionhash'] = $hash;
+			$_SESSION['sessioneditor'] = $this->editor;
+			$_SESSION['board'] = $this->board;
+			$_SESSION['user_content_tree_show_all'] = $resultuser["user_content_tree_show_all"];
+			//$_SESSION['style'] = $this->user_style;
+
+			$this->content->template['username'] = $username;
+
+			// User-Style übernehmen
+			if (!empty($this->user_style) AND ($this->user_style != $this->cms->style_id)) {
+				//echo ".. User-Style initialisieren<br />\n";
+				$this->cms->make_style($this->user_style);
+				if (!defined("admin")) {
+					global $module;
+					$module->make_module();
+				}
+			}
+
+			// Sprach-Daten (wenn vorhanden) an die CMS-Klasse übermitteln
+			// Frontend
+			if (!empty($resultuser["user_lang_front"])) {
+				$sprache = $this->cms->lang_get($resultuser["user_lang_front"]);
+				$this->cms->lang_save("FRONT", $sprache);
+				// CMS-Daten neu einlesen, da sonst Seitentitel etc. falsch ist.
+				$this->cms->data();
+			}
+			// Backend
+			IfNotSetNull($this->checked->language);
+			$sprache = $this->cms->lang_get($this->checked->language, "back");
+
+			$this->cms->lang_save("BACK", $sprache);
+
+			$this->log_user($username, $userok, $username_exist);
+
+		} // etwas stimmt nicht Username oder Passwort falsch oder irgendetwas anderes stimmt nicht
+		else {
+			// LDAP-Synchronisierung
+			if (!empty($this->ldap_server)) {
+				$result = $this->check_ldap($username, $password);
+
+				if ($result === false) {
+					//Username war ok, aber Passwort nicht
+					$this->content->template['loggedin_false_pass'] = "1";
+					$this->password = 0;
+					$this->user_club_stufe = 0;
+				}
+				elseif ($result === true) {
+					//Username und Passwort ok
+					$this->checked_extern = "ok";
+					$this->log_user($username, 'user_ok', 1);
+				}
+			}
+			else {
+				// Externe Synchronisierung
+				$this->check_extern($username, $password);
+				IfNotSetNull($this->checked_extern);
+				if ($this->checked_extern != "ok") {
+					//Username war ok, aber Passwort nicht
+					if ($username_exist == "1") {
+						$zeit = "";
+						foreach ($resultuser_ok as $row) {
+							//Wenn es schon mehr 4 Einloggversuche gab, sperren
+							if ($row->wie_oft_login > 4) {
+								$zeit = time();
+								$sqlx = "UPDATE " . $this->cms->papoo_user . " SET zeitsperre='$zeit', wie_oft_login='0' WHERE username = BINARY '" . ($this->db->escape($username)) . "'";
+								$this->db->query($sqlx);
+							}
+						}
+						//weniger als 4 Versuche, hochzählen
+						if (empty ($zeit)) {
+							$sqlx = "UPDATE " . $this->cms->papoo_user . " SET wie_oft_login=wie_oft_login+1 WHERE username = BINARY '" . ($this->db->escape($username)) . "'";
+							$this->db->query($sqlx);
+						}
+						$this->content->template['loggedin_false_pass'] = "1";
+					}
+					$this->userid = 0;
+					$this->username = 0;
+					$this->password = 0;
+					$this->user_club_stufe = 0;
+					$_SESSION['dbp'] = array();
+					$this->board = $this->cms->forum_board;
+					$_SESSION['sessionusername'] = "";
+					// Kein User, für falsches Login Formular anzeigen
+					$userok = $this->content->template['loggedin_false'] = "user_wrong" . "--";
+					$this->content->template['loggedin'] = "";
+					$_SESSION['logfalse'] = "aaaa";
+
+					$this->log_user($username, $userok, $username_exist);
+
+					return false;
+				}
+			}
+		}
+		if (empty($_SESSION['dbp']['papoo_user_club_stufe'])) {
+			$sql = sprintf("SELECT user_club_stufe FROM %s WHERE username='%s'",
+				$this->cms->papoo_user,
+				$this->db->escape($this->username)
+			);
+			$user_club_stufe = $this->db->get_var($sql);
+			if (empty($user_club_stufe)) {
+				$user_club_stufe = 0;
+			}
+			$_SESSION['dbp']['papoo_user_club_stufe'] = $user_club_stufe;
+		}
+		else {
+			$user_club_stufe = $_SESSION['dbp']['papoo_user_club_stufe'];
+		}
+
+		if ($this->dzvhae == 1 AND $this->cms->tbname['papoo_mv']) {
+			$sql = sprintf("SELECT mv_id FROM %s
+										WHERE mv_art = 2",
+				$this->cms->tbname['papoo_mv']
+			);
+			$mv_id = $this->db->get_var($sql);
+			if ($mv_id) {
+				$sql = sprintf("SELECT mv_content_id
+											FROM %s
+											WHERE mv_content_userid = '%d'
+											LIMIT 1",
+					$this->cms->tbname['papoo_mv_content_' . $mv_id . "_search_1"],
+					$this->userid
+				);
+				$var = $this->db->get_var($sql);
+				$this->content->template['user_dzvhae_id'] = $var;
+			}
+		}
+
+		$this->content->template['user_club_stufe'] = $user_club_stufe;
+
+		return true;
+	}
+
+	/**
 	 * Einloggvorgang duchziehen
 	 * @param $username
 	 * @param $password
@@ -235,247 +484,46 @@ class user_class
 				$this->content->template['loggedin'] = "";
 				$_SESSION['logfalse'] = "aaaa";
 			}
-		}
-		else {
-			/**
-			 * Echte normale Abfrage
-			 */
-			$username_exist = "0";
-			$sperre = "";
 
-			// Datenbankabfrage formulieren
-			$selectuser = "SELECT userid, wie_oft_login, zeitsperre FROM " . $this->cms->papoo_user . " WHERE username COLLATE utf8_bin =  '" . ($this->db->escape($username)) . "'  AND active='1' ";
-
-			$resultuser_ok2 = $resultuser_ok = $this->db->get_results($selectuser);
-			#print_r($resultuser_ok2);
-			#exit();
-			if (is_array($resultuser_ok) and count($resultuser_ok) >= 1) {
-				$username_exist = "1";
-			}
-			if (is_array($resultuser_ok2)) {
-				foreach ($resultuser_ok2 as $row) {
-					//Zeitsperre von 10 Minuten noch nicht abgelaufen
-					if ($row->zeitsperre != 0) {
-						if (time() - 600 < $row->zeitsperre) {
-							$sperre = $this->content->template['sperre'] = "gesperrt";
-						}
-					}
-
-				}
-			}
-
-			// Datenbankabfrage formulieren - User herausholen, ohne Passwort-Check
-			$selectuser = sprintf("SELECT * FROM `%s` WHERE `username` = '%s' AND `active` = 1 LIMIT 1",
-				$this->cms->papoo_user,
-				$this->db->escape($username)
-			);
-			$resultuser = $this->db->get_row($selectuser, ARRAY_A);
-
-			// Passwort verifizieren - ist nicht mehr durch MySQL machbar (Hashing-Algorithmus)
-			$password_verified = false;
-			if ($resultuser !== null && $username != "jeder" && empty($sperre)) {
-				// Hash ist crypt-kompatibel
-				if (substr($resultuser["password"], 0, 1) === '$' && $this->diverse->verify_password($password,
-						$resultuser["password"])
-				) {
-					$password_verified = true;
-				}
-				else {
-					// Passwort neu hashen, sofern es immer noch als MD5 Hash vorliegt
-					if ($resultuser["password"] === md5($password)) {
-						$this->db->query(sprintf("UPDATE `%s` SET `password` = '%s' WHERE `userid` = %d",
-							$this->cms->tbname["papoo_user"],
-							$this->db->escape($this->diverse->hash_password($password)),
-							$resultuser["userid"]
-						));
-						$password_verified = true;
-					}
-				}
-			}
-
-			// es existiert ein User ###
-			if ($password_verified) {
-				//Zähler auf null setzen und Eintrag in Datenbank für Login legen
-				$this->db->query(sprintf(
-					"UPDATE `%s` 
-								SET `wie_oft_login` = '0', `zeitsperre` = '0', `user_last_login` = '%d' 
-							WHERE `userid` = '%d'",
+			if (empty($_SESSION['dbp']['papoo_user_club_stufe'])) {
+				$sql = sprintf("SELECT user_club_stufe FROM %s WHERE username='%s'",
 					$this->cms->papoo_user,
-					time(),
-					$resultuser["userid"]
-				));
-
-				// Eigenschaften zuweisen
-				$this->userid = $resultuser["userid"];
-				$this->username = strtolower($resultuser["username"]);
-				$this->user_club_stufe = $resultuser["user_club_stufe"];
-				$this->editor = $resultuser["editor"];
-				if ($this->editor == 0) {
-					$this->editor = 3;
+					$this->db->escape($this->username)
+				);
+				$user_club_stufe = $this->db->get_var($sql);
+				if (empty($user_club_stufe)) {
+					$user_club_stufe = 0;
 				}
-				$this->board = $resultuser["board"];
-				$this->user_style = $resultuser["user_style_id"];
-
-				$this->get_groups();
-
-				// Ausloggvariable löschen
-				unset ($_SESSION['logoff']);
-				unset ($_SESSION['logfalse']);
-				unset ($_SESSION['meta_gruppe_id']);
-
-				// Einloggzustand übergeben an template
-				$userok = $this->content->template['loggedin'] = "user_ok";
-
-				//TINY MMCE Config einstellen
-				$this->get_user_tiny();
-
-				// Hashwert erstellen
-				$hash = hash('sha256', $server . trim($username) . $this->userid . session_id());
-
-				// Username und Passwort an Session übergeben
-				$_SESSION['sessionusername'] = strtolower($resultuser["username"]);
-				$_SESSION['sessionuserid'] = $resultuser["userid"];
-				$_SESSION['sessionusergruppenid'] = $this->gruppenid;
-				$_SESSION['user_club_stufe'] = $resultuser["user_club_stufe"];
-				$_SESSION['sessionhash'] = $hash;
-				$_SESSION['sessioneditor'] = $this->editor;
-				$_SESSION['board'] = $this->board;
-				$_SESSION['user_content_tree_show_all'] = $resultuser["user_content_tree_show_all"];
-				//$_SESSION['style'] = $this->user_style;
-
-				$this->content->template['username'] = $username;
-
-				// User-Style übernehmen
-				if (!empty($this->user_style) AND ($this->user_style != $this->cms->style_id)) {
-					//echo ".. User-Style initialisieren<br />\n";
-					$this->cms->make_style($this->user_style);
-					if (!defined("admin")) {
-						global $module;
-						$module->make_module();
-					}
-				}
-
-				// Sprach-Daten (wenn vorhanden) an die CMS-Klasse übermitteln
-				// Frontend
-				if (!empty($resultuser["user_lang_front"])) {
-					$sprache = $this->cms->lang_get($resultuser["user_lang_front"]);
-					$this->cms->lang_save("FRONT", $sprache);
-					// CMS-Daten neu einlesen, da sonst Seitentitel etc. falsch ist.
-					$this->cms->data();
-				}
-				// Backend
-				IfNotSetNull($this->checked->language);
-				$sprache = $this->cms->lang_get($this->checked->language, "back");
-
-				$this->cms->lang_save("BACK", $sprache);
-
-				$this->log_user($username, $userok, $username_exist);
-
-			} // etwas stimmt nicht Username oder Passwort falsch oder irgendetwas anderes stimmt nicht
+				$_SESSION['dbp']['papoo_user_club_stufe'] = $user_club_stufe;
+			}
 			else {
-				// LDAP-Synchronisierung
-				if (!empty($this->ldap_server)) {
-					$result = $this->check_ldap($username, $password);
+				$user_club_stufe = $_SESSION['dbp']['papoo_user_club_stufe'];
+			}
 
-					if ($result === false) {
-						//Username war ok, aber Passwort nicht
-						$this->content->template['loggedin_false_pass'] = "1";
-						$this->password = 0;
-						$this->user_club_stufe = 0;
-					}
-					elseif ($result === true) {
-						//Username und Passwort ok
-						$this->checked_extern = "ok";
-						$this->log_user($username, 'user_ok', 1);
-					}
-				}
-				else {
-					// Externe Synchronisierung
-					$this->check_extern($username, $password);
-					IfNotSetNull($this->checked_extern);
-					if ($this->checked_extern != "ok") {
-						//Username war ok, aber Passwort nicht
-						if ($username_exist == "1") {
-							$zeit = "";
-							foreach ($resultuser_ok as $row) {
-								//Wenn es schon mehr 4 Einloggversuche gab, sperren
-								if ($row->wie_oft_login > 4) {
-									$zeit = time();
-									$sqlx = "UPDATE " . $this->cms->papoo_user . " SET zeitsperre='$zeit', wie_oft_login='0' WHERE username = BINARY '" . ($this->db->escape($username)) . "'";
-									$this->db->query($sqlx);
-								}
-							}
-							//weniger als 4 Versuche, hochzählen
-							if (empty ($zeit)) {
-								$sqlx = "UPDATE " . $this->cms->papoo_user . " SET wie_oft_login=wie_oft_login+1 WHERE username = BINARY '" . ($this->db->escape($username)) . "'";
-								$this->db->query($sqlx);
-							}
-							$this->content->template['loggedin_false_pass'] = "1";
-						}
-						$this->userid = 0;
-						$this->username = 0;
-						$this->password = 0;
-						$this->user_club_stufe = 0;
-						$_SESSION['dbp'] = array();
-						$this->board = $this->cms->forum_board;
-						$_SESSION['sessionusername'] = "";
-						// Kein User, für falsches Login Formular anzeigen
-						$userok = $this->content->template['loggedin_false'] = "user_wrong" . "--";
-						$this->content->template['loggedin'] = "";
-						$_SESSION['logfalse'] = "aaaa";
-
-						$this->log_user($username, $userok, $username_exist);
-						// Wenn im Frontend, dann Seite neu laden, da sonst Probs mit Menü
-						if (!defined("admin")) {
-							//header("Location:".$_SERVER['PHP_SELF'] );
-							$location_url = $_SERVER['PHP_SELF'] . "?menuid=" . $this->checked->menuid . "&reporeid=" . $this->checked->reporeid . "&template=" . $this->checked->template . "&false=" . $this->content->template['loggedin_false_pass'] . "&sperre=" . $sperre;
-							if ($_SESSION['debug_stopallredirect']) {
-								echo '<a href="' . $location_url . '">Weiter</a>';
-							}
-							else {
-								header("Location: $location_url");
-							}
-							exit;
-						}
-					}
+			if ($this->dzvhae == 1 AND $this->cms->tbname['papoo_mv']) {
+				$sql = sprintf("SELECT mv_id FROM %s
+											WHERE mv_art = 2",
+					$this->cms->tbname['papoo_mv']
+				);
+				$mv_id = $this->db->get_var($sql);
+				if ($mv_id) {
+					$sql = sprintf("SELECT mv_content_id
+												FROM %s
+												WHERE mv_content_userid = '%d'
+												LIMIT 1",
+						$this->cms->tbname['papoo_mv_content_' . $mv_id . "_search_1"],
+						$this->userid
+					);
+					$var = $this->db->get_var($sql);
+					$this->content->template['user_dzvhae_id'] = $var;
 				}
 			}
-		}
-		if (empty($_SESSION['dbp']['papoo_user_club_stufe'])) {
-			$sql = sprintf("SELECT user_club_stufe FROM %s WHERE username='%s'",
-				$this->cms->papoo_user,
-				$this->db->escape($this->username)
-			);
-			$user_club_stufe = $this->db->get_var($sql);
-			if (empty($user_club_stufe)) {
-				$user_club_stufe = 0;
-			}
-			$_SESSION['dbp']['papoo_user_club_stufe'] = $user_club_stufe;
+
+			$this->content->template['user_club_stufe'] = $user_club_stufe;
 		}
 		else {
-			$user_club_stufe = $_SESSION['dbp']['papoo_user_club_stufe'];
+			$this->login($username, $password);
 		}
-
-		if ($this->dzvhae == 1 AND $this->cms->tbname['papoo_mv']) {
-			$sql = sprintf("SELECT mv_id FROM %s
-										WHERE mv_art = 2",
-				$this->cms->tbname['papoo_mv']
-			);
-			$mv_id = $this->db->get_var($sql);
-			if ($mv_id) {
-				$sql = sprintf("SELECT mv_content_id
-											FROM %s 
-											WHERE mv_content_userid = '%d' 
-											LIMIT 1",
-					$this->cms->tbname['papoo_mv_content_' . $mv_id . "_search_1"],
-					$this->userid
-				);
-				$var = $this->db->get_var($sql);
-				$this->content->template['user_dzvhae_id'] = $var;
-			}
-		}
-
-		$this->content->template['user_club_stufe'] = $user_club_stufe;
 
 	}
 
