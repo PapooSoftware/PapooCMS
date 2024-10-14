@@ -1092,7 +1092,7 @@ class artikel_class
 						// Daten aus der Datenbank holen für den jeweiligen Menupunkt
 						$result = $this->make_artikel();
 						// Url für das Menü etc.
-						$this->content->template['art_url'] = $this->menu->urlencode($this->urlheader) . ".html";
+						$this->content->template['art_url'] = $this->menu->urlencode((string)($this->urlheader ?? '')) . ".html";
 						// Daten zurückgeben
 						return $result;
 					}
