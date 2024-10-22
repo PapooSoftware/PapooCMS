@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS `XXX_bildwechsler`; ##b_dump##
 CREATE TABLE `XXX_bildwechsler` (
-  `bw_id` bigint NOT NULL,
+  `bw_id` bigint NOT NULL AUTO_INCREMENT,
   `bw_menu_id` bigint DEFAULT NULL,
   `bw_order_id` int DEFAULT NULL,
   `bw_bild` text,
@@ -11,6 +11,7 @@ CREATE TABLE `XXX_bildwechsler` (
   `bw_extra_link` text,
   `bw_extra_link_text` text,
   `bw_lang_id` int NOT NULL,
+  PRIMARY KEY (`bw_id`, `bw_lang_id`),
   KEY `bw_menuid` (`bw_menu_id`),
   KEY `bw_order_id` (`bw_order_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 ; ##b_dump##
@@ -6137,7 +6138,7 @@ CREATE TABLE `XXX_plugin_dsgvo_settings` (
 INSERT INTO `XXX_plugin_dsgvo_settings` SET `id`='1', `logfile_autoremove`='1', `logfile_autoremove_interval`='10', `youtube_nocookie`='1', `cookie_lifetime`='1', `formdata_autoremove`='0', `formdata_autoremove_interval`='365'  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_plugin_kalender`; ##b_dump##
 CREATE TABLE `XXX_plugin_kalender` (
-  `kalender_id` int NOT NULL,
+  `kalender_id` int NOT NULL AUTO_INCREMENT,
   `kalender_lang_id` int NOT NULL,
   `kalender_bezeichnung_des_kalenders` text,
   `kalender_eintrge_von_aussen` varchar(255) NOT NULL,
@@ -6164,7 +6165,7 @@ INSERT INTO `XXX_plugin_kalender` SET `kalender_id`='25', `kalender_lang_id`='7'
 INSERT INTO `XXX_plugin_kalender` SET `kalender_id`='25', `kalender_lang_id`='8', `kalender_bezeichnung_des_kalenders`='Календарь 1', `kalender_eintrge_von_aussen`='0', `kalender_direkt_freischalten`='0', `kalender_kalender_benutzt_kategorien`='', `kalender_text_oberhalb`='<p>Календарь 1</p>', `kalender_whlen_sie_hier_den_termin_aus`='', `kalender_kategorien_im_kalender_jede_zeile_eine_kategorie`='Kategorie 1\r\nKategorie 2', `kalender_modul_id`='53', `kalender_email_versenden_bei_neuen_eintrag_von_auen`='0', `kalender_email_adresse_fr_den_versand_dieser_mail`='', `kalender_modul_liste_id`='54', `kalender_anzahl_der_eintrge_im_modul_aktuellste_eintrge`='10', `kalender_xml_google`=''  ; ##b_dump##
 DROP TABLE IF EXISTS `XXX_plugin_kalender_date`; ##b_dump##
 CREATE TABLE `XXX_plugin_kalender_date` (
-  `pkal_date_id` int NOT NULL,
+  `pkal_date_id` int NOT NULL AUTO_INCREMENT,
   `pkal_date_lang_id` int NOT NULL,
   `pkal_date_kalender_id` int NOT NULL,
   `pkal_date_titel_des_termins` text,
