@@ -1492,6 +1492,60 @@ class diverse_class
 	}
 
 	/**
+	 * @param string $filename
+	 * @param string $csv_separator
+	 * @param string $csv_enclosure
+	 * @return Generator<array<string,string>>
+	 */
+	public static function csv_lines(string $filename, string $csv_separator=',', string $csv_enclosure='"'): Generator
+	{
+		// Open the CSV file
+		$handle = fopen($filename, 'r');
+		if ($handle === false) {
+			return;
+		}
+
+		// Acquire shared lock
+		if (!flock($handle, LOCK_SH)) {
+			fclose($handle);
+			return;
+		}
+
+		// Read the column names into an array
+		$columns = fgetcsv($handle, null, $csv_separator, $csv_enclosure);
+
+		try {
+			if ($columns === false) {
+				return;
+			}
+
+			// Read remaining lines
+			while (($data = fgetcsv($handle, null, $csv_separator, $csv_enclosure)) !== false) {
+				if (count($columns) === count($data)) {
+					// Yield an associative array of column names and data
+					yield array_combine($columns, $data);
+				}
+			}
+		}
+		finally {
+			// Release the lock and close the file
+			flock($handle, LOCK_UN);
+			fclose($handle);
+		}
+	}
+
+	/**
+	 * @param string $filename
+	 * @param string $csv_separator
+	 * @param string $csv_enclosure
+	 * @return array<array<string,string>>
+	 */
+	public static function csv_lines_array(string $filename, string $csv_separator=',', string $csv_enclosure='"'): array
+	{
+		return iterator_to_array(self::csv_lines($filename, $csv_separator, $csv_enclosure));
+	}
+
+	/**
 	 * Allen links, die auf den Menüpunkt 1 (Startseite) zeigen, die URL zurechtstutzen,
 	 * um duplicate content zu vermeiden
 	 *
