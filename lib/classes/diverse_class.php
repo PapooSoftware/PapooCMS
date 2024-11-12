@@ -1511,13 +1511,21 @@ class diverse_class
 			return;
 		}
 
-		// Read the column names into an array
-		$columns = fgetcsv($handle, null, $csv_separator, $csv_enclosure);
+		// Read the first line to determine the column names
+		$first_line = fgets($handle);
 
 		try {
-			if ($columns === false) {
+			if ($first_line === false) {
 				return;
 			}
+
+			// Strip the UTF-8 BOM if present
+			if (substr($first_line, 0, 3) === "\xef\xbb\xbf") {
+				$first_line = substr($first_line, 3);
+			}
+
+			// Read the column names into an array
+			$columns = str_getcsv($first_line, $csv_separator, $csv_enclosure);
 
 			// Read remaining lines
 			while (($data = fgetcsv($handle, null, $csv_separator, $csv_enclosure)) !== false) {
