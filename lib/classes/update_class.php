@@ -252,14 +252,14 @@ class update_class
 
 
 			//Update Text anzeigen
-			$dateiarray = @file(PAPOO_ABS_PFAD."/update/update".$nr.".txt");
-			$this->content->template['update_content_text'] =@implode($dateiarray);
+			$dateiarray = @file(PAPOO_ABS_PFAD . "/update/update$nr.txt") ?: [];
+			$this->content->template['update_content_text'] = @implode('', $dateiarray);
 			if (empty($this->content->template['update_content_text'])) {
 				$this->content->template['update_content_text']="Keine Datei vorhanden / No File";
 			}
 			//Update Datei anzeigen
-			$dateiarray = @file(PAPOO_ABS_PFAD."/update/update".$nr.".sql");
-			$this->content->template['update_content'] =(htmlentities(@implode($dateiarray), ENT_COMPAT,'utf-8'));
+			$dateiarray = @file(PAPOO_ABS_PFAD . "/update/update$nr.sql") ?: [];
+			$this->content->template['update_content'] = htmlentities(@implode('', $dateiarray), ENT_COMPAT, 'utf-8');
 			if (empty($this->content->template['update_content'])) {
 				$this->content->template['update_content']="Keine Datei vorhanden / No File";
 			}

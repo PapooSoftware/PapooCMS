@@ -80,12 +80,12 @@ class logfiles {
 	function make_entries()
 	{
 		//Einträge in die Datenbank machen
-		$dateiarray = @file(PAPOO_ABS_PFAD."/dokumente/logs/login_log.log");
-		$this->content->template['daten_log_login'] =htmlentities(@implode($dateiarray));
+		$dateiarray = @file(PAPOO_ABS_PFAD . '/dokumente/logs/login_log.log') ?: [];
+		$this->content->template['daten_log_login'] = htmlentities(@implode('', $dateiarray));
 		$this->content->template['daten_log_login']=str_replace(" ","&nbsp;",$this->content->template['daten_log_login']);
 
-		$dateiarray = @file(PAPOO_ABS_PFAD."//dokumente/logs/email_log.log");
-		$this->content->template['daten_log_email'] =htmlentities(@implode($dateiarray));
+		$dateiarray = @file(PAPOO_ABS_PFAD . '/dokumente/logs/email_log.log') ?: [];
+		$this->content->template['daten_log_email'] = htmlentities(@implode('', $dateiarray));
 		$this->content->template['daten_log_email']=str_replace(" ","&nbsp;",$this->content->template['daten_log_email']);
 	}
 }
